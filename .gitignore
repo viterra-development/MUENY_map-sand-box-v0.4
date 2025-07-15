@@ -390,6 +390,7 @@ __blobstorage__/
 # Sensitive configuration files
 appsettings.*.json
 !appsettings.example.json
+MapSandBox/wwwroot/appsettings.json
 
 # Logs
 logs/

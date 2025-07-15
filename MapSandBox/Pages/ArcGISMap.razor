@@ -1,0 +1,28 @@
+@page "/arcgis-map"
+@inject HttpClient Http
+@using System.Text.Json
+
+<h3>ArcGIS Map</h3>
+<div id="arcgis-map" style="width:100%;height:600px;"></div>
+
+@code {
+    private string? apiKey;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Load API key from config
+            var configJson = await Http.GetStringAsync("appsettings.json");
+            var config = JsonSerializer.Deserialize<AppConfig>(configJson);
+            apiKey = config?.ArcGISApiKey;
+            await JS.InvokeVoidAsync("arcgisInterop.createMap", "arcgis-map", apiKey);
+        }
+    }
+
+    [Inject] IJSRuntime JS { get; set; } = default!;
+
+    public class AppConfig
+    {
+        public string? ArcGISApiKey { get; set; }
+    }
+} 
