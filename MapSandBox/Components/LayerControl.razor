@@ -1,0 +1,19 @@
+@using MapSandBox.Models
+
+<div class="layer-controls">
+    <h3>Layers</h3>
+    @foreach (var layer in Layers)
+    {
+        <label>
+            <input type="checkbox" 
+                   checked="@layer.Visible" 
+                   @onchange="@(e => OnLayerToggle.InvokeAsync(new LayerToggleEventArgs(layer.Id, e.Value)))" />
+            @layer.Name
+        </label>
+    }
+</div>
+
+@code {
+    [Parameter] public List<LayerInfo> Layers { get; set; } = new();
+    [Parameter] public EventCallback<LayerToggleEventArgs> OnLayerToggle { get; set; }
+} 

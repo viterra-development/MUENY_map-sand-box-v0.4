@@ -1,0 +1,35 @@
+{
+	"name": "C# (.NET)",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerFile": "Dockerfile",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {
+			"ppa": true,
+			"version": "os-provided"
+		}
+	},
+
+	"runArgs": ["--env-file",".env"],
+
+	"mounts": ["source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind",
+			   "source=${localEnv:HOME}/.local,target=/home/vscode/.local,type=bind,consistency=cached"],
+
+	"postCreateCommand": "sh .devcontainer/post-create.sh",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"eamodio.gitlens",
+				"ms-mssql.mssql",
+				"github.copilot",
+				"github.copilot-chat",
+				"anysphere.csharp"
+			]
+		}
+	},
+
+	"remoteEnv": {
+		"ASPNETCORE_Kestrel__Certificates__Default__Password": "password",
+    	"ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+	}
+}
