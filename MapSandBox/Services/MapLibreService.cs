@@ -57,7 +57,7 @@ public class MapLibreService
     
     public BaseMapConfig GetDefaultBaseMap()
     {
-        var defaultStyle = _availableStyles.First(s => s.Id == "voyager");
+        var defaultStyle = _availableStyles.First(s => s.Id == GetDefaultStyleId());
         return new BaseMapConfig
         {
             Style = defaultStyle.Url,
@@ -65,6 +65,11 @@ public class MapLibreService
             ShowAttribution = true,
             Name = defaultStyle.Name
         };
+    }
+    
+    public string GetDefaultStyleId()
+    {
+        return "voyager";
     }
     
     public List<BaseMapStyle> GetAvailableBaseMapStyles()

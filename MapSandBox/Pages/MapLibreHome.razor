@@ -88,14 +88,14 @@
     private MapLibreConfig mapConfig = new();
     private List<LayerInfo> layerInfo = new();
     private List<BaseMapStyle> availableStyles = new();
-    private string selectedBaseMapId = "light";
+    private string selectedBaseMapId = "voyager";
     
     protected override void OnInitialized()
     {
         mapConfig = MapLibreService.GetDefaultConfig();
         layerInfo = MapLibreService.GetLayerInfo();
         availableStyles = MapLibreService.GetAvailableBaseMapStyles();
-        selectedBaseMapId = availableStyles.First().Id;
+        selectedBaseMapId = MapLibreService.GetDefaultStyleId();
     }
     
     private async Task HandleLayerToggle(LayerToggleEventArgs args)
