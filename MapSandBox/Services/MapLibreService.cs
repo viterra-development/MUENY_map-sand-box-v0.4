@@ -45,9 +45,9 @@ public class MapLibreService
     {
         return new MapLibreConfig
         {
-            Latitude = 32.78,  // Parker County, TX center latitude
-            Longitude = -97.80, // Parker County, TX center longitude
-            Zoom = 10,          // Zoom level appropriate for county view
+            Latitude = 32.758,  // Parker County, TX center latitude
+            Longitude = -97.65, // Parker County, TX center longitude
+            Zoom = 14,          // Zoom level appropriate for city view
             Bearing = 0,
             Pitch = 0,
             BaseMap = GetDefaultBaseMap(),
@@ -57,7 +57,7 @@ public class MapLibreService
     
     public BaseMapConfig GetDefaultBaseMap()
     {
-        var defaultStyle = _availableStyles.First(s => s.Id == "light");
+        var defaultStyle = _availableStyles.First(s => s.Id == "voyager");
         return new BaseMapConfig
         {
             Style = defaultStyle.Url,
