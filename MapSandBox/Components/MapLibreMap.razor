@@ -1,0 +1,58 @@
+@using Microsoft.JSInterop
+@using MapSandBox.Models
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+<div id="@MapContainerId" style="width: 100%; height: 100%;"></div>
+
+@code {
+    [Parameter] public string MapContainerId { get; set; } = "maplibre-container";
+    [Parameter] public MapLibreConfig Config { get; set; } = new();
+    [Parameter] public EventCallback<MapLibreClickEventArgs> OnMapClick { get; set; }
+    
+    private IJSObjectReference? _module;
+    private IJSObjectReference? _mapInstance;
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitializeMap();
+        }
+    }
+    
+    private async Task InitializeMap()
+    {
+        _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/maplibre-deckgl-integration.js");
+        _mapInstance = await _module.InvokeAsync<IJSObjectReference>("createIntegratedMap", MapContainerId, Config);
+    }
+    
+    public async Task UpdateLayers(List<LayerConfig> layers)
+    {
+        if (_module != null && _mapInstance != null)
+        {
+            await _module.InvokeVoidAsync("updateIntegratedMapLayers", _mapInstance, layers);
+        }
+    }
+    
+    public async Task UpdateBaseMapStyle(string styleUrl)
+    {
+        if (_module != null && _mapInstance != null)
+        {
+            await _module.InvokeVoidAsync("updateBaseMapStyle", _mapInstance, styleUrl);
+        }
+    }
+    
+    public async ValueTask DisposeAsync()
+    {
+        if (_mapInstance != null && _module != null)
+        {
+            await _module.InvokeVoidAsync("disposeIntegratedMap", _mapInstance);
+        }
+        
+        if (_module != null)
+        {
+            await _module.DisposeAsync();
+        }
+    }
+}

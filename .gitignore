@@ -445,3 +445,9 @@ jspm_packages/
 
 # Third-party libraries (Bootstrap, etc.)
 MapSandBox/wwwroot/lib/
+
+# Data files
+data/
+
+# .claude
+.claude/

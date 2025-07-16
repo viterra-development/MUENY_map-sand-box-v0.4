@@ -1,0 +1,153 @@
+@page "/maplibre"
+@using MapSandBox.Components
+@using MapSandBox.Models
+@using MapSandBox.Services
+@inject MapLibreService MapLibreService
+
+<PageTitle>MapLibre + deck.gl</PageTitle>
+
+<div class="map-container">
+    <MapLibreMap @ref="mapComponent" Config="mapConfig" OnMapClick="HandleMapClick" />
+    
+    <div class="maplibre-controls">
+        <div class="control-section">
+            <h3>Base Map</h3>
+            <select @onchange="HandleBaseMapChange" value="@selectedBaseMapId">
+                @foreach (var style in availableStyles)
+                {
+                    <option value="@style.Id">@style.Name</option>
+                }
+            </select>
+        </div>
+        
+        <div class="control-section">
+            <h3>Data Layers</h3>
+            @foreach (var layer in layerInfo)
+            {
+                <label>
+                    <input type="checkbox" 
+                           checked="@layer.Visible" 
+                           @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
+                    @layer.Name
+                </label>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .maplibre-controls {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        min-width: 200px;
+    }
+    
+    .control-section {
+        margin-bottom: 20px;
+    }
+    
+    .control-section:last-child {
+        margin-bottom: 0;
+    }
+    
+    .maplibre-controls h3 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+    }
+    
+    .maplibre-controls label {
+        display: block;
+        margin: 5px 0;
+        cursor: pointer;
+    }
+    
+    .maplibre-controls input[type="checkbox"] {
+        margin-right: 8px;
+    }
+    
+    .maplibre-controls select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+</style>
+
+@code {
+    private MapLibreMap? mapComponent;
+    private MapLibreConfig mapConfig = new();
+    private List<LayerInfo> layerInfo = new();
+    private List<BaseMapStyle> availableStyles = new();
+    private string selectedBaseMapId = "light";
+    
+    protected override void OnInitialized()
+    {
+        mapConfig = MapLibreService.GetDefaultConfig();
+        layerInfo = MapLibreService.GetLayerInfo();
+        availableStyles = MapLibreService.GetAvailableBaseMapStyles();
+        selectedBaseMapId = availableStyles.First().Id;
+    }
+    
+    private async Task HandleLayerToggle(LayerToggleEventArgs args)
+    {
+        Console.WriteLine($"Layer toggled: {args.LayerId} - {args.IsVisible}");
+        
+        // Update the layer visibility in our config
+        var layer = mapConfig.Layers.FirstOrDefault(l => l.Id == args.LayerId);
+        if (layer != null)
+        {
+            layer.Visible = args.IsVisible;
+            
+            // Update the layer info for the UI
+            var layerInfoItem = layerInfo.FirstOrDefault(l => l.Id == args.LayerId);
+            if (layerInfoItem != null)
+            {
+                layerInfoItem.Visible = args.IsVisible;
+            }
+            
+            // Update the map
+            if (mapComponent != null)
+            {
+                await mapComponent.UpdateLayers(mapConfig.Layers);
+            }
+        }
+    }
+    
+    private async Task HandleBaseMapChange(ChangeEventArgs e)
+    {
+        var styleId = e.Value?.ToString();
+        if (string.IsNullOrEmpty(styleId)) return;
+        
+        var selectedStyle = availableStyles.FirstOrDefault(s => s.Id == styleId);
+        if (selectedStyle != null)
+        {
+            selectedBaseMapId = styleId;
+            mapConfig.BaseMap.Style = selectedStyle.Url;
+            mapConfig.BaseMap.Name = selectedStyle.Name;
+            
+            if (mapComponent != null)
+            {
+                await mapComponent.UpdateBaseMapStyle(selectedStyle.Url);
+            }
+        }
+    }
+    
+    private void HandleMapClick(MapLibreClickEventArgs args)
+    {
+        Console.WriteLine($"Map clicked at: {args.Latitude}, {args.Longitude}");
+        if (!string.IsNullOrEmpty(args.LayerId))
+        {
+            Console.WriteLine($"Clicked on layer: {args.LayerId}");
+        }
+    }
+}

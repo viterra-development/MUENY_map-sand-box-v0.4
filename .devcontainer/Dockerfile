@@ -18,7 +18,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
       procps \
       nodejs \
       npm \
-      tar
+      tar \
+      gdal-bin
+
+# Install global npm packages
+RUN npm install -g @anthropic-ai/claude-code
 
 # Install AZ CLI (if needed)
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash

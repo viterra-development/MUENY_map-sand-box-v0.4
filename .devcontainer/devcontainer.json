@@ -23,7 +23,8 @@
 				"ms-mssql.mssql",
 				"github.copilot",
 				"github.copilot-chat",
-				"anysphere.csharp"
+				"anysphere.csharp",
+				"anthropic.claude-code"
 			]
 		}
 	},
