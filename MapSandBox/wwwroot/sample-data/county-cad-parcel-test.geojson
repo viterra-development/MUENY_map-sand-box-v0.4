@@ -1,0 +1,958 @@
+{
+    "type": "FeatureCollection",
+    "properties": {
+        "exceededTransferLimit": true
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.746780064976,
+                            32.7719110934161
+                        ],
+                        [
+                            -97.7490068828394,
+                            32.771926480599
+                        ],
+                        [
+                            -97.7490523709501,
+                            32.7705291174855
+                        ],
+                        [
+                            -97.7490081581087,
+                            32.7703998236771
+                        ],
+                        [
+                            -97.7491538466344,
+                            32.7704120765744
+                        ],
+                        [
+                            -97.7490968727451,
+                            32.7721505219053
+                        ],
+                        [
+                            -97.7490806411403,
+                            32.7726458040226
+                        ],
+                        [
+                            -97.748537796177,
+                            32.7726420583835
+                        ],
+                        [
+                            -97.7474583080592,
+                            32.7726346029397
+                        ],
+                        [
+                            -97.7460223393304,
+                            32.772624670479
+                        ],
+                        [
+                            -97.7460109252908,
+                            32.7723000570086
+                        ],
+                        [
+                            -97.7459970575237,
+                            32.7719056733202
+                        ],
+                        [
+                            -97.746780064976,
+                            32.7719110934161
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "20830.004.012.00",
+                "created_date": "2025-07-22 16:58:53.00000",
+                "last_edited_date": "2025-07-22 17:01:49.00000",
+                "prop_id": null,
+                "owner_tax_yr": null,
+                "file_as_name": null,
+                "legal_acreage": null,
+                "hood_cd": null,
+                "school": null,
+                "city": null,
+                "county": null,
+                "next_appraisal_dt": null,
+                "legal_desc": null,
+                "legal_desc2": null,
+                "legal_desc3": null,
+                "tract_or_lot": null,
+                "abs_subdv_cd": null,
+                "land_val": null,
+                "imprv_val": null,
+                "market": null,
+                "Block": null,
+                "map_id": null,
+                "geo_id": null,
+                "situs_num": null,
+                "situs_street_prefx": null,
+                "situs_street": null,
+                "situs_street_sufix": null,
+                "situs_city": null,
+                "situs_state": null,
+                "situs_zip": null,
+                "addr_line1": null,
+                "addr_line2": null,
+                "addr_line3": null,
+                "addr_city": null,
+                "addr_state": null,
+                "zip": null,
+                "Deed_Seq": null,
+                "Deed_Date": null,
+                "Volume": null,
+                "Page": null,
+                "Number": null,
+                "ObjectID_1": 1,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 264673.5703125,
+                "Shape__Length": 3542.284055840857
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.9365997427456,
+                            32.7101458363682
+                        ],
+                        [
+                            -97.937969738189,
+                            32.7096672603813
+                        ],
+                        [
+                            -97.9380270318462,
+                            32.711084919864
+                        ],
+                        [
+                            -97.9366962548419,
+                            32.7114551317747
+                        ],
+                        [
+                            -97.9365997427456,
+                            32.7101458363682
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "20607.005.001.20",
+                "created_date": "2025-07-22 17:36:18.00000",
+                "last_edited_date": "2025-07-22 17:36:18.00000",
+                "prop_id": 101825,
+                "owner_tax_yr": 2026,
+                "file_as_name": "KMG REAL ESTATE LLC",
+                "legal_acreage": 4.5,
+                "hood_cd": null,
+                "school": "BR",
+                "city": null,
+                "county": "PAR",
+                "next_appraisal_dt": "Jan  1 2025 12:00AM",
+                "legal_desc": "",
+                "legal_desc2": "",
+                "legal_desc3": "",
+                "tract_or_lot": "PT 1",
+                "abs_subdv_cd": "607",
+                "land_val": 392040,
+                "imprv_val": 864200,
+                "market": 1256240,
+                "Block": "",
+                "map_id": "R000101825",
+                "geo_id": "20607.005.001.20",
+                "situs_num": "0",
+                "situs_street_prefx": "",
+                "situs_street": "",
+                "situs_street_sufix": "",
+                "situs_city": "",
+                "situs_state": "TX",
+                "situs_zip": "",
+                "addr_line1": "1308 S NELSON",
+                "addr_line2": "",
+                "addr_line3": "",
+                "addr_city": "MONAHANS",
+                "addr_state": "TX",
+                "zip": "79756",
+                "Deed_Seq": null,
+                "Deed_Date": "07/15/2025",
+                "Volume": "",
+                "Page": "",
+                "Number": "202518924",
+                "ObjectID_1": 2,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 209673.08984375,
+                "Shape__Length": 1880.1107299052865
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.9389589600237,
+                            32.7121324428218
+                        ],
+                        [
+                            -97.9389557493694,
+                            32.7127107624435
+                        ],
+                        [
+                            -97.9382771564248,
+                            32.7127080637999
+                        ],
+                        [
+                            -97.9382803507085,
+                            32.7121343804137
+                        ],
+                        [
+                            -97.9389589600237,
+                            32.7121324428218
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "20607.005.000.00",
+                "created_date": "2025-07-22 17:32:37.00000",
+                "last_edited_date": "2025-07-22 17:32:37.00000",
+                "prop_id": 42987,
+                "owner_tax_yr": 2026,
+                "file_as_name": "KMG REAL ESTATE LLC",
+                "legal_acreage": 1,
+                "hood_cd": null,
+                "school": "BR",
+                "city": null,
+                "county": "PAR",
+                "next_appraisal_dt": "Nov 26 2024 12:00AM",
+                "legal_desc": "",
+                "legal_desc2": "",
+                "legal_desc3": "",
+                "tract_or_lot": "PT 2",
+                "abs_subdv_cd": "607",
+                "land_val": 68450,
+                "imprv_val": 261140,
+                "market": 329590,
+                "Block": "",
+                "map_id": "R000042987",
+                "geo_id": "20607.005.000.00",
+                "situs_num": "200",
+                "situs_street_prefx": "",
+                "situs_street": "PHILLIPS LN",
+                "situs_street_sufix": "BR",
+                "situs_city": "",
+                "situs_state": "TX",
+                "situs_zip": "000000",
+                "addr_line1": "1308 S NELSON",
+                "addr_line2": "",
+                "addr_line3": "",
+                "addr_city": "MONAHANS",
+                "addr_state": "TX",
+                "zip": "79756",
+                "Deed_Seq": null,
+                "Deed_Date": "07/15/2025",
+                "Volume": "",
+                "Page": "",
+                "Number": "202518924",
+                "ObjectID_1": 3,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 43735.75390625,
+                "Shape__Length": 836.53231221634815
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.7459111064447,
+                            32.7694612902793
+                        ],
+                        [
+                            -97.745964321831,
+                            32.7693413790951
+                        ],
+                        [
+                            -97.7466939072305,
+                            32.7694611021695
+                        ],
+                        [
+                            -97.7467800681782,
+                            32.7719110934355
+                        ],
+                        [
+                            -97.7459970575237,
+                            32.7719056733202
+                        ],
+                        [
+                            -97.7459111064447,
+                            32.7694612902793
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "20830.004.011.00",
+                "created_date": "2025-07-22 15:13:59.00000",
+                "last_edited_date": "2025-07-22 16:56:38.00000",
+                "prop_id": null,
+                "owner_tax_yr": null,
+                "file_as_name": null,
+                "legal_acreage": null,
+                "hood_cd": null,
+                "school": null,
+                "city": null,
+                "county": null,
+                "next_appraisal_dt": null,
+                "legal_desc": null,
+                "legal_desc2": null,
+                "legal_desc3": null,
+                "tract_or_lot": null,
+                "abs_subdv_cd": null,
+                "land_val": null,
+                "imprv_val": null,
+                "market": null,
+                "Block": null,
+                "map_id": null,
+                "geo_id": null,
+                "situs_num": null,
+                "situs_street_prefx": null,
+                "situs_street": null,
+                "situs_street_sufix": null,
+                "situs_city": null,
+                "situs_state": null,
+                "situs_zip": null,
+                "addr_line1": null,
+                "addr_line2": null,
+                "addr_line3": null,
+                "addr_city": null,
+                "addr_state": null,
+                "zip": null,
+                "Deed_Seq": null,
+                "Deed_Date": null,
+                "Volume": null,
+                "Page": null,
+                "Number": null,
+                "ObjectID_1": 4,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 219457.3388671875,
+                "Shape__Length": 2297.0759980408311
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.8358758066814,
+                            32.7350224893687
+                        ],
+                        [
+                            -97.8342019008797,
+                            32.7332094064089
+                        ],
+                        [
+                            -97.8349776437841,
+                            32.7328152929726
+                        ],
+                        [
+                            -97.8355360340157,
+                            32.7334411379052
+                        ],
+                        [
+                            -97.8359579268213,
+                            32.7331847004369
+                        ],
+                        [
+                            -97.8376565718684,
+                            32.735047214531
+                        ],
+                        [
+                            -97.8358758066814,
+                            32.7350224893687
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "17198.001.002.00",
+                "created_date": "2025-07-21 14:39:13.00000",
+                "last_edited_date": "2025-07-21 14:40:36.00000",
+                "prop_id": 130699,
+                "owner_tax_yr": 2026,
+                "file_as_name": "REYNOLDS STACY ANN",
+                "legal_acreage": 8.687,
+                "hood_cd": null,
+                "school": "WE",
+                "city": null,
+                "county": "PAR",
+                "next_appraisal_dt": "Jan 16 2025 12:00AM",
+                "legal_desc": "G-132",
+                "legal_desc2": "",
+                "legal_desc3": "",
+                "tract_or_lot": "2",
+                "abs_subdv_cd": "S A REYNOLDS ADDITIO",
+                "land_val": null,
+                "imprv_val": null,
+                "market": null,
+                "Block": "1",
+                "map_id": "R000130699",
+                "geo_id": "17198.001.002.00",
+                "situs_num": "0",
+                "situs_street_prefx": "",
+                "situs_street": "",
+                "situs_street_sufix": "",
+                "situs_city": "",
+                "situs_state": "TX",
+                "situs_zip": "",
+                "addr_line1": "1410 OLD BROCK RD",
+                "addr_line2": "",
+                "addr_line3": "",
+                "addr_city": "WEATHERFORD",
+                "addr_state": "TX",
+                "zip": "76088-8731",
+                "Deed_Seq": null,
+                "Deed_Date": "07/15/2015",
+                "Volume": "",
+                "Page": "",
+                "Number": "201514702",
+                "ObjectID_1": 5,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 378412.3779296875,
+                "Shape__Length": 2963.0840231440993
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.8349776437841,
+                            32.7328152929726
+                        ],
+                        [
+                            -97.8354173145765,
+                            32.7325919136177
+                        ],
+                        [
+                            -97.8359579268213,
+                            32.7331847004369
+                        ],
+                        [
+                            -97.8355360340157,
+                            32.7334411379052
+                        ],
+                        [
+                            -97.8349776437841,
+                            32.7328152929726
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": null,
+                "created_date": "2025-07-21 14:39:13.00000",
+                "last_edited_date": "2025-07-21 14:40:02.00000",
+                "prop_id": null,
+                "owner_tax_yr": null,
+                "file_as_name": null,
+                "legal_acreage": null,
+                "hood_cd": null,
+                "school": null,
+                "city": null,
+                "county": null,
+                "next_appraisal_dt": null,
+                "legal_desc": null,
+                "legal_desc2": null,
+                "legal_desc3": null,
+                "tract_or_lot": null,
+                "abs_subdv_cd": null,
+                "land_val": null,
+                "imprv_val": null,
+                "market": null,
+                "Block": null,
+                "map_id": null,
+                "geo_id": null,
+                "situs_num": null,
+                "situs_street_prefx": null,
+                "situs_street": null,
+                "situs_street_sufix": null,
+                "situs_city": null,
+                "situs_state": null,
+                "situs_zip": null,
+                "addr_line1": null,
+                "addr_line2": null,
+                "addr_line3": null,
+                "addr_city": null,
+                "addr_state": null,
+                "zip": null,
+                "Deed_Seq": null,
+                "Deed_Date": null,
+                "Volume": null,
+                "Page": null,
+                "Number": null,
+                "ObjectID_1": 6,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 44110.0126953125,
+                "Shape__Length": 874.98652998233206
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.5596594799345,
+                            32.8943894865789
+                        ],
+                        [
+                            -97.5596877513564,
+                            32.8943900256422
+                        ],
+                        [
+                            -97.5600685474637,
+                            32.8943918211956
+                        ],
+                        [
+                            -97.560159640213,
+                            32.8943888563319
+                        ],
+                        [
+                            -97.5602501070628,
+                            32.8943793907243
+                        ],
+                        [
+                            -97.5603392983946,
+                            32.8943634943244
+                        ],
+                        [
+                            -97.5604265726736,
+                            32.8943412813374
+                        ],
+                        [
+                            -97.5605113039411,
+                            32.8943129093756
+                        ],
+                        [
+                            -97.5605928806887,
+                            32.8942785848613
+                        ],
+                        [
+                            -97.5611113004091,
+                            32.8940367715036
+                        ],
+                        [
+                            -97.5611615573139,
+                            32.8940172901225
+                        ],
+                        [
+                            -97.5612145697271,
+                            32.8940039863579
+                        ],
+                        [
+                            -97.5612692765762,
+                            32.8939971263661
+                        ],
+                        [
+                            -97.5613245828642,
+                            32.89399684889
+                        ],
+                        [
+                            -97.5613793832608,
+                            32.8940031582225
+                        ],
+                        [
+                            -97.5614325791639,
+                            32.8940159279422
+                        ],
+                        [
+                            -97.5614831075396,
+                            32.8940349029344
+                        ],
+                        [
+                            -97.5615299569058,
+                            32.8940597040209
+                        ],
+                        [
+                            -97.5615721886519,
+                            32.894089833531
+                        ],
+                        [
+                            -97.5616089582625,
+                            32.8941246898903
+                        ],
+                        [
+                            -97.5618736193474,
+                            32.8944111163506
+                        ],
+                        [
+                            -97.5616963947904,
+                            32.894518031548
+                        ],
+                        [
+                            -97.5615150604689,
+                            32.8946199229344
+                        ],
+                        [
+                            -97.5613298142759,
+                            32.8947166783518
+                        ],
+                        [
+                            -97.5611408615521,
+                            32.8948081893066
+                        ],
+                        [
+                            -97.5599719659424,
+                            32.8953534040802
+                        ],
+                        [
+                            -97.5596531019042,
+                            32.8953519001207
+                        ],
+                        [
+                            -97.5596594799345,
+                            32.8943894865789
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "19630.001.001.00",
+                "created_date": "2025-07-21 14:19:22.00000",
+                "last_edited_date": "2025-07-21 14:21:46.00000",
+                "prop_id": 100708,
+                "owner_tax_yr": 2026,
+                "file_as_name": "105 AUSTIN ST LLC",
+                "legal_acreage": 4.182,
+                "hood_cd": null,
+                "school": "AZ",
+                "city": null,
+                "county": "PAR",
+                "next_appraisal_dt": "Jan  1 2025 12:00AM",
+                "legal_desc": "COMMERCIAL LT",
+                "legal_desc2": "",
+                "legal_desc3": "",
+                "tract_or_lot": "1R",
+                "abs_subdv_cd": "WINDING CREEK ESTATE",
+                "land_val": 100000,
+                "imprv_val": 0,
+                "market": 100000,
+                "Block": "1",
+                "map_id": "R000100708",
+                "geo_id": "19630.001.001.00",
+                "situs_num": "13000",
+                "situs_street_prefx": "S",
+                "situs_street": "FM RD 730",
+                "situs_street_sufix": "",
+                "situs_city": "",
+                "situs_state": "TX",
+                "situs_zip": "",
+                "addr_line1": "2017 FLOYD ROAD",
+                "addr_line2": "",
+                "addr_line3": "",
+                "addr_city": "WEATHERFORD",
+                "addr_state": "TX",
+                "zip": "76087",
+                "Deed_Seq": null,
+                "Deed_Date": "08/02/2023",
+                "Volume": "",
+                "Page": "",
+                "Number": "202320330",
+                "ObjectID_1": 7,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 182125.10546875,
+                "Shape__Length": 1902.587340885681
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.8411787085778,
+                            32.5605202989779
+                        ],
+                        [
+                            -97.8414098505778,
+                            32.5586619867987
+                        ],
+                        [
+                            -97.843375529324,
+                            32.5587055194005
+                        ],
+                        [
+                            -97.8433123610636,
+                            32.5607161126457
+                        ],
+                        [
+                            -97.842484989605,
+                            32.5605236187499
+                        ],
+                        [
+                            -97.8411787085778,
+                            32.5605202989779
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "20361.002.003.50",
+                "created_date": "2025-07-16 15:14:09.00000",
+                "last_edited_date": "2025-07-16 15:14:09.00000",
+                "prop_id": 120666,
+                "owner_tax_yr": 2026,
+                "file_as_name": "TIMBERVIEW PRESERVE LLC",
+                "legal_acreage": 10.328,
+                "hood_cd": null,
+                "school": "WE",
+                "city": null,
+                "county": "PAR",
+                "next_appraisal_dt": "Oct  1 2024 12:00AM",
+                "legal_desc": "",
+                "legal_desc2": "",
+                "legal_desc3": "",
+                "tract_or_lot": "",
+                "abs_subdv_cd": "361",
+                "land_val": 0,
+                "imprv_val": 0,
+                "market": 333000,
+                "Block": "",
+                "map_id": "R000120666",
+                "geo_id": "20361.002.003.50",
+                "situs_num": "0",
+                "situs_street_prefx": "",
+                "situs_street": "",
+                "situs_street_sufix": "",
+                "situs_city": "",
+                "situs_state": "TX",
+                "situs_zip": "",
+                "addr_line1": "665 SIMONDS ROAD",
+                "addr_line2": "",
+                "addr_line3": "",
+                "addr_city": "WILLIAMSTOWN",
+                "addr_state": "MA",
+                "zip": "01267",
+                "Deed_Seq": null,
+                "Deed_Date": "06/30/2025",
+                "Volume": "",
+                "Page": "",
+                "Number": "202517734",
+                "ObjectID_1": 8,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 432444.13671875,
+                "Shape__Length": 2684.1260589680387
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.8113553687952,
+                            32.5982000000344
+                        ],
+                        [
+                            -97.8119501390884,
+                            32.5978073248507
+                        ],
+                        [
+                            -97.8122646333923,
+                            32.5982411961593
+                        ],
+                        [
+                            -97.8116162365902,
+                            32.598627268829
+                        ],
+                        [
+                            -97.8113553687952,
+                            32.5982000000344
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "22058.004.000.00",
+                "created_date": "2025-07-16 14:29:59.00000",
+                "last_edited_date": "2025-07-16 14:32:36.00000",
+                "prop_id": 63607,
+                "owner_tax_yr": 2026,
+                "file_as_name": "ANDERSON JOHNNY M & MARY M",
+                "legal_acreage": 1,
+                "hood_cd": null,
+                "school": "WE",
+                "city": null,
+                "county": "PAR",
+                "next_appraisal_dt": "Sep 23 2024 12:00AM",
+                "legal_desc": "",
+                "legal_desc2": "",
+                "legal_desc3": "",
+                "tract_or_lot": "",
+                "abs_subdv_cd": "2058",
+                "land_val": 31590,
+                "imprv_val": 134420,
+                "market": 166010,
+                "Block": "",
+                "map_id": "R000063607",
+                "geo_id": "22058.004.000.00",
+                "situs_num": "5089",
+                "situs_street_prefx": "",
+                "situs_street": "TIN TOP RD",
+                "situs_street_sufix": "",
+                "situs_city": "",
+                "situs_state": "TX",
+                "situs_zip": "000000",
+                "addr_line1": "5089 TIN TOP RD",
+                "addr_line2": "",
+                "addr_line3": "",
+                "addr_city": "WEATHERFORD",
+                "addr_state": "TX",
+                "zip": "76087-8079",
+                "Deed_Seq": null,
+                "Deed_Date": "08/11/2009",
+                "Volume": "2733",
+                "Page": "1426",
+                "Number": "721367",
+                "ObjectID_1": 9,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 42534.123046875,
+                "Shape__Length": 836.574348382183
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -97.8114315635775,
+                            32.5989901751699
+                        ],
+                        [
+                            -97.812096780349,
+                            32.5988804459947
+                        ],
+                        [
+                            -97.8122264080765,
+                            32.5994435499534
+                        ],
+                        [
+                            -97.8115611872806,
+                            32.5995532762148
+                        ],
+                        [
+                            -97.8114315635775,
+                            32.5989901751699
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "prop_id_text": "22058.004.000.10",
+                "created_date": "2025-07-16 14:27:44.00000",
+                "last_edited_date": "2025-07-16 14:27:44.00000",
+                "prop_id": 95560,
+                "owner_tax_yr": 2026,
+                "file_as_name": "TIN TOP 2 LLC",
+                "legal_acreage": 1,
+                "hood_cd": null,
+                "school": "WE",
+                "city": null,
+                "county": "PAR",
+                "next_appraisal_dt": "Jan  1 2025 12:00AM",
+                "legal_desc": "",
+                "legal_desc2": "",
+                "legal_desc3": "",
+                "tract_or_lot": "",
+                "abs_subdv_cd": "2058",
+                "land_val": 31590,
+                "imprv_val": 190220,
+                "market": 221810,
+                "Block": "",
+                "map_id": "R000095560",
+                "geo_id": "22058.004.000.10",
+                "situs_num": "5089",
+                "situs_street_prefx": "",
+                "situs_street": "TIN TOP RD",
+                "situs_street_sufix": "",
+                "situs_city": "",
+                "situs_state": "TX",
+                "situs_zip": "",
+                "addr_line1": "P O BOX 2309",
+                "addr_line2": "",
+                "addr_line3": "",
+                "addr_city": "GRANBURY",
+                "addr_state": "TX",
+                "zip": "76048",
+                "Deed_Seq": null,
+                "Deed_Date": "06/30/2025",
+                "Volume": "",
+                "Page": "",
+                "Number": "202517586",
+                "ObjectID_1": 10,
+                "CreationDate": 1753441625011,
+                "Creator": "bis_parkercad",
+                "EditDate": 1753441625011,
+                "Editor": "bis_parkercad",
+                "Shape__Area": 43559.7744140625,
+                "Shape__Length": 834.83915601850151
+            }
+        }
+    ]
+}

@@ -135,6 +135,22 @@ public class MapLibreService
                     ["pickable"] = true,
                     ["onClick"] = "handleRoadClick"
                 }
+            },
+            new LayerConfig
+            {
+                Id = "county-cad-parcels",
+                Type = "GeoJson",
+                DataUrl = "/sample-data/county-cad-parcel-test.geojson",
+                Visible = true,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getFillColor"] = new int[] { 255, 0, 0, 120 }, // bright red fill, semi-transparent
+                    ["getLineColor"] = new int[] { 255, 0, 0, 255 }, // bright red outline
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
             }
         };
     }
@@ -146,7 +162,8 @@ public class MapLibreService
             new LayerInfo { Id = "rivers", Name = "Rivers", Visible = true },
             new LayerInfo { Id = "airports", Name = "Airports", Visible = true },
             new LayerInfo { Id = "flight-paths", Name = "Flight Paths", Visible = true },
-            new LayerInfo { Id = "parker-roads", Name = "Parker County Roads", Visible = true }
+            new LayerInfo { Id = "parker-roads", Name = "Parker County Roads", Visible = true },
+            new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = true }
         };
     }
 }
