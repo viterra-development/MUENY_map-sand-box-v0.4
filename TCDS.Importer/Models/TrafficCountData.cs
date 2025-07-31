@@ -31,6 +31,9 @@ public class TrafficCountData
 
 public class LocationInfo
 {
+    [JsonPropertyName("locationId")]
+    public string LocationId { get; set; } = string.Empty;
+
     [JsonPropertyName("type")]
     public string Type { get; set; } = string.Empty;
 
@@ -75,6 +78,12 @@ public class LocationInfo
 
     [JsonPropertyName("category")]
     public string Category { get; set; } = string.Empty;
+
+    [JsonPropertyName("latitude")]
+    public decimal? Latitude { get; set; }
+
+    [JsonPropertyName("longitude")]
+    public decimal? Longitude { get; set; }
 }
 
 public class AadtRecord

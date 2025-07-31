@@ -369,7 +369,7 @@ public class TcdsScrapingService : IAsyncDisposable
 
             // Extract location information
             trafficData.LocationInfo = await ExtractLocationInfoAsync(leftFrame);
-            trafficData.LocationId = trafficData.LocationInfo.LocatedOn; // Use located on as ID
+            trafficData.LocationId = trafficData.LocationInfo.LocationId ?? trafficData.LocationInfo.LocatedOn; // Use Location ID if available, otherwise fall back to Located On
 
             // Extract AADT data
             trafficData.AadtData = await ExtractAadtDataAsync(leftFrame);
@@ -439,50 +439,122 @@ public class TcdsScrapingService : IAsyncDisposable
 
         try
         {
-            // Extract location information from the top section
-            var cells = await frame.QuerySelectorAllAsync("td");
+            _logger.LogInformation("Extracting location information from page");
             
-            foreach (var cell in cells)
+            // Look for the main data table that contains location information
+            var rows = await frame.QuerySelectorAllAsync("table.frmDtl tr");
+            _logger.LogDebug("Found {RowCount} rows in frmDtl tables", rows.Count);
+            
+            foreach (var row in rows)
             {
-                var text = await cell.TextContentAsync();
-                if (string.IsNullOrWhiteSpace(text)) continue;
-
-                var nextCell = await cell.EvaluateAsync<string>("el => el.nextElementSibling?.textContent || ''");
+                var cells = await row.QuerySelectorAllAsync("th, td");
                 
-                switch (text.Trim())
+                // Process pairs of th/td elements in each row
+                for (int i = 0; i < cells.Count - 1; i += 2)
                 {
-                    case "Type":
-                        locationInfo.Type = nextCell?.Trim() ?? "";
-                        break;
-                    case "SF Group":
-                        locationInfo.SfGroup = nextCell?.Trim() ?? "";
-                        break;
-                    case "AF Group":
-                        locationInfo.AfGroup = nextCell?.Trim() ?? "";
-                        break;
-                    case "Located On":
-                        locationInfo.LocatedOn = nextCell?.Trim() ?? "";
-                        break;
-                    case "MPO ID":
-                        locationInfo.MpoId = nextCell?.Trim() ?? "";
-                        break;
-                    case "HPMS ID":
-                        locationInfo.HpmsId = nextCell?.Trim() ?? "";
-                        break;
-                    case "Route Type":
-                        locationInfo.RouteType = nextCell?.Trim() ?? "";
-                        break;
-                    case "Route":
-                        locationInfo.Route = nextCell?.Trim() ?? "";
-                        break;
-                    case "Active":
-                        locationInfo.Active = nextCell?.Trim() ?? "";
-                        break;
-                    case "Category":
-                        locationInfo.Category = nextCell?.Trim() ?? "";
-                        break;
+                    var headerCell = cells[i];
+                    var dataCell = cells[i + 1];
+                    
+                    var headerText = await headerCell.TextContentAsync();
+                    var dataText = await dataCell.TextContentAsync();
+                    
+                    if (string.IsNullOrWhiteSpace(headerText)) continue;
+                    
+                    var header = headerText.Trim();
+                    var data = dataText?.Trim() ?? "";
+                    
+                    _logger.LogDebug("Found location field: {Header} = {Data}", header, data);
+                    
+                    switch (header)
+                    {
+                        case "Location ID":
+                        case "Location ID ": // Handle the trailing space
+                            locationInfo.LocationId = data;
+                            break;
+                        case "Type":
+                            locationInfo.Type = data;
+                            break;
+                        case "SF Group":
+                            locationInfo.SfGroup = data;
+                            break;
+                        case "AF Group":
+                            locationInfo.AfGroup = data;
+                            break;
+                        case "GF Group":
+                            locationInfo.GfGroup = data;
+                            break;
+                        case "WIM Group":
+                            locationInfo.WimGroup = data;
+                            break;
+                        case "QC Group":
+                            locationInfo.QcGroup = data;
+                            break;
+                        case "Fnct'l Class":
+                            locationInfo.FnctClass = data;
+                            break;
+                        case "Located On":
+                            locationInfo.LocatedOn = data;
+                            break;
+                        case "Loc On Alias":
+                            locationInfo.LocOnAlias = data;
+                            break;
+                        case "MPO ID":
+                            locationInfo.MpoId = data;
+                            break;
+                        case "HPMS ID":
+                            locationInfo.HpmsId = data;
+                            break;
+                        case "Route Type":
+                            locationInfo.RouteType = data;
+                            break;
+                        case "Route":
+                            locationInfo.Route = data;
+                            break;
+                        case "Active":
+                            locationInfo.Active = data;
+                            break;
+                        case "Category":
+                            locationInfo.Category = data;
+                            break;
+                    }
                 }
             }
+            
+            // If we didn't extract much data, try a more specific approach
+            if (string.IsNullOrEmpty(locationInfo.LocatedOn) && string.IsNullOrEmpty(locationInfo.Type))
+            {
+                _logger.LogWarning("Standard extraction didn't find data, trying alternative selectors...");
+                
+                // Try to find Location ID specifically
+                var locationIdElement = await frame.QuerySelectorAsync("th:has-text('Location ID') + td");
+                if (locationIdElement != null)
+                {
+                    locationInfo.LocationId = (await locationIdElement.TextContentAsync())?.Trim() ?? "";
+                    _logger.LogDebug("Found Location ID via alternative method: {LocationId}", locationInfo.LocationId);
+                }
+                
+                // Try to find Type specifically  
+                var typeElement = await frame.QuerySelectorAsync("th:has-text('Type') + td");
+                if (typeElement != null)
+                {
+                    locationInfo.Type = (await typeElement.TextContentAsync())?.Trim() ?? "";
+                    _logger.LogDebug("Found Type via alternative method: {Type}", locationInfo.Type);
+                }
+                
+                // Try to find Located On specifically
+                var locatedOnElement = await frame.QuerySelectorAsync("th:has-text('Located On') + td");
+                if (locatedOnElement != null)
+                {
+                    locationInfo.LocatedOn = (await locatedOnElement.TextContentAsync())?.Trim() ?? "";
+                    _logger.LogDebug("Found Located On via alternative method: {LocatedOn}", locationInfo.LocatedOn);
+                }
+            }
+            
+            // Try to expand the "More Detail" section to get Latitude and Longitude
+            await ExpandMoreDetailAndExtractCoordinatesAsync(frame, locationInfo);
+            
+            _logger.LogInformation("Extracted location info - Location ID: {LocationId}, Located On: {LocatedOn}, Type: {Type}, Lat: {Latitude}, Lng: {Longitude}", 
+                locationInfo.LocationId, locationInfo.LocatedOn, locationInfo.Type, locationInfo.Latitude, locationInfo.Longitude);
         }
         catch (Exception ex)
         {
@@ -490,6 +562,96 @@ public class TcdsScrapingService : IAsyncDisposable
         }
 
         return locationInfo;
+    }
+
+    private async Task ExpandMoreDetailAndExtractCoordinatesAsync(IFrame frame, LocationInfo locationInfo)
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to expand More Detail section for coordinates");
+            
+            // Look for the "More Detail" expand button (e_detail)
+            var expandButton = await frame.QuerySelectorAsync("#e_detail");
+            if (expandButton == null)
+            {
+                _logger.LogWarning("More Detail expand button not found");
+                return;
+            }
+
+            // Check if the detail section is already expanded
+            var detailTable = await frame.QuerySelectorAsync("#detail");
+            if (detailTable != null)
+            {
+                var displayStyle = await detailTable.GetAttributeAsync("style");
+                if (displayStyle != null && displayStyle.Contains("display:none") || displayStyle != null && displayStyle.Contains("display: none"))
+                {
+                    _logger.LogInformation("Detail section is collapsed, clicking to expand");
+                    await expandButton.ClickAsync();
+                    
+                    // Wait for the section to expand
+                    await Task.Delay(1000);
+                }
+                else
+                {
+                    _logger.LogInformation("Detail section appears to already be expanded");
+                }
+            }
+
+            // Now extract Latitude and Longitude from the expanded detail table
+            var detailRows = await frame.QuerySelectorAllAsync("#detail tr");
+            _logger.LogDebug("Found {RowCount} rows in detail table", detailRows.Count);
+
+            foreach (var row in detailRows)
+            {
+                var cells = await row.QuerySelectorAllAsync("th, td");
+                
+                // Process pairs of th/td elements in each row
+                for (int i = 0; i < cells.Count - 1; i += 2)
+                {
+                    var headerCell = cells[i];
+                    var dataCell = cells[i + 1];
+                    
+                    var headerText = await headerCell.TextContentAsync();
+                    var dataText = await dataCell.TextContentAsync();
+                    
+                    if (string.IsNullOrWhiteSpace(headerText)) continue;
+                    
+                    var header = headerText.Trim();
+                    var data = dataText?.Trim() ?? "";
+                    
+                    switch (header)
+                    {
+                        case "Latitude":
+                            if (decimal.TryParse(data, out decimal latitude))
+                            {
+                                locationInfo.Latitude = latitude;
+                                _logger.LogDebug("Extracted Latitude: {Latitude}", latitude);
+                            }
+                            break;
+                        case "Longitude":
+                            if (decimal.TryParse(data, out decimal longitude))
+                            {
+                                locationInfo.Longitude = longitude;
+                                _logger.LogDebug("Extracted Longitude: {Longitude}", longitude);
+                            }
+                            break;
+                    }
+                }
+            }
+
+            if (locationInfo.Latitude.HasValue && locationInfo.Longitude.HasValue)
+            {
+                _logger.LogInformation("Successfully extracted coordinates: {Latitude}, {Longitude}", locationInfo.Latitude, locationInfo.Longitude);
+            }
+            else
+            {
+                _logger.LogWarning("Could not extract latitude and/or longitude from detail section");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to expand More Detail section or extract coordinates");
+        }
     }
 
     private async Task<List<AadtRecord>> ExtractAadtDataAsync(IFrame frame)
@@ -655,6 +817,85 @@ public class TcdsScrapingService : IAsyncDisposable
         }
 
         return trendData;
+    }
+
+    public async Task<PageData> ClickNextRecordAsync(CancellationToken cancellationToken = default)
+    {
+        if (_page == null)
+        {
+            throw new InvalidOperationException("Browser not initialized");
+        }
+
+        try
+        {
+            _logger.LogInformation("Clicking Next button to navigate to next record");
+
+            var leftFrame = _page.Frame("LeftFrame");
+            if (leftFrame == null)
+            {
+                throw new InvalidOperationException("Could not find LeftFrame iframe");
+            }
+
+            // Look for the Next button - first try to find the td with onclick directly
+            var nextButtonTd = await leftFrame.QuerySelectorAsync("td[onclick*='tdetail.asp?offset=1']");
+            
+            if (nextButtonTd == null)
+            {
+                // Alternative: find the img and click its parent td
+                var nextButtonImg = await leftFrame.QuerySelectorAsync("img[src*='Next.gif']");
+                if (nextButtonImg != null)
+                {
+                    // Get all parent elements and find the td with onclick
+                    var allTds = await leftFrame.QuerySelectorAllAsync("td[onclick*='tdetail.asp']");
+                    foreach (var td in allTds)
+                    {
+                        var onclickValue = await td.GetAttributeAsync("onclick");
+                        if (onclickValue != null && onclickValue.Contains("offset=1"))
+                        {
+                            nextButtonTd = td;
+                            break;
+                        }
+                    }
+                }
+                
+                if (nextButtonTd == null)
+                {
+                    throw new InvalidOperationException("Could not find Next button");
+                }
+            }
+
+            _logger.LogInformation("Found Next button, clicking...");
+            await nextButtonTd.ClickAsync();
+
+            // Wait for the page to navigate to the next record
+            _logger.LogInformation("Waiting for next record to load...");
+            await Task.Delay(5000, cancellationToken); // Wait for navigation
+
+            // Wait for AJAX data to load again on the new page
+            await WaitForAjaxDataToLoad(leftFrame, cancellationToken);
+
+            // Get updated page data
+            var title = await _page.TitleAsync();
+            var content = await _page.ContentAsync();
+
+            return new PageData
+            {
+                Url = _page.Url,
+                Title = title,
+                Content = content,
+                Metadata = new Dictionary<string, string>
+                {
+                    ["NavigationType"] = "NextRecord",
+                    ["NavigationTimestamp"] = DateTime.UtcNow.ToString("O")
+                },
+                Timestamp = DateTime.UtcNow
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to click Next button and navigate to next record");
+            throw;
+        }
     }
 
     public async Task<string> TakeScreenshotAsync(string? selector = null, CancellationToken cancellationToken = default)

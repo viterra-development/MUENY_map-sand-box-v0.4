@@ -65,15 +65,55 @@ try
     var finalScreenshotPath = await scrapingService.TakeScreenshotAsync();
     logger.LogInformation("Final screenshot saved to: {Path}", finalScreenshotPath);
     
-    logger.LogInformation("Extracting structured traffic count data...");
-    var trafficData = await scrapingService.ExtractTrafficDataAsync();
+    logger.LogInformation("Extracting structured traffic count data from first page...");
+    var firstPageTrafficData = await scrapingService.ExtractTrafficDataAsync();
     
+    // Save first page data
+    await SaveTrafficDataAsync(config, firstPageTrafficData, "page_1", logger);
+    
+    logger.LogInformation("First page data summary:");
+    LogTrafficDataSummary(firstPageTrafficData, logger);
+    
+    logger.LogInformation("Navigating to second page...");
+    var secondPageData = await scrapingService.ClickNextRecordAsync();
+    
+    logger.LogInformation("Successfully navigated to second page: {Title}", secondPageData.Title);
+    
+    logger.LogInformation("Taking screenshot of second page...");
+    var secondPageScreenshotPath = await scrapingService.TakeScreenshotAsync();
+    logger.LogInformation("Second page screenshot saved to: {Path}", secondPageScreenshotPath);
+    
+    logger.LogInformation("Extracting structured traffic count data from second page...");
+    var secondPageTrafficData = await scrapingService.ExtractTrafficDataAsync();
+    
+    // Save second page data
+    await SaveTrafficDataAsync(config, secondPageTrafficData, "page_2", logger);
+    
+    logger.LogInformation("Second page data summary:");
+    LogTrafficDataSummary(secondPageTrafficData, logger);
+    
+    logger.LogInformation("TCDS Importer completed successfully - Two pages of Parker County data extracted and saved");
+    
+    return 0;
+}
+catch (Exception ex)
+{
+    logger.LogError(ex, "An error occurred while running TCDS Importer");
+    return 1;
+}
+finally
+{
+    await scrapingService.DisposeAsync();
+}
+
+static async Task SaveTrafficDataAsync(TcdsConfiguration config, TrafficCountData trafficData, string pageIdentifier, ILogger logger)
+{
     // Create data directory if it doesn't exist
     Directory.CreateDirectory(config.DataDirectory);
     
     // Save extracted data as JSON
     var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-    var jsonFileName = $"parker_county_traffic_data_{timestamp}.json";
+    var jsonFileName = $"parker_county_traffic_data_{pageIdentifier}_{timestamp}.json";
     var jsonFilePath = Path.Combine(config.DataDirectory, jsonFileName);
     
     var jsonOptions = new JsonSerializerOptions
@@ -86,7 +126,10 @@ try
     await File.WriteAllTextAsync(jsonFilePath, jsonData);
     
     logger.LogInformation("Traffic data saved to: {Path}", jsonFilePath);
-    logger.LogInformation("Extracted data summary:");
+}
+
+static void LogTrafficDataSummary(TrafficCountData trafficData, ILogger logger)
+{
     logger.LogInformation("- Location: {Location} ({Type})", trafficData.LocationInfo.LocatedOn, trafficData.LocationInfo.Type);
     logger.LogInformation("- AADT Records: {Count}", trafficData.AadtData.Count);
     logger.LogInformation("- Volume Count Records: {Count}", trafficData.VolumeCountData.Count);
@@ -97,17 +140,4 @@ try
         var latestAadt = trafficData.AadtData.OrderByDescending(a => a.Year).First();
         logger.LogInformation("- Latest AADT ({Year}): {Value}", latestAadt.Year, latestAadt.Aadt);
     }
-    
-    logger.LogInformation("TCDS Importer completed successfully - Parker County data extracted and saved");
-    
-    return 0;
-}
-catch (Exception ex)
-{
-    logger.LogError(ex, "An error occurred while running TCDS Importer");
-    return 1;
-}
-finally
-{
-    await scrapingService.DisposeAsync();
 }
