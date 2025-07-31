@@ -159,6 +159,19 @@ function getLayerProperties(config) {
             properties.pickable = true;
             properties.onClick = handleRoadClick;
             break;
+        case 'traffic-counts':
+            properties.stroked = true;
+            properties.filled = true;
+            properties.pointRadiusMinPixels = 3;
+            properties.pointRadiusMaxPixels = 50;
+            properties.opacity = 0.9;
+            properties.getRadius = getTrafficRadius;
+            properties.getFillColor = getTrafficColor;
+            properties.getLineColor = [0, 0, 0, 255]; // black outline
+            properties.getLineWidth = 2;
+            properties.pickable = true;
+            properties.onClick = handleTrafficCountClick;
+            break;
     }
     
     return properties;
@@ -205,6 +218,80 @@ function getRoadTypeName(rttyp) {
         case 'S': return 'State Highway';
         case 'M': return 'Minor Road';
         default: return 'Other';
+    }
+}
+
+// Traffic count styling functions
+function getTrafficRadius(feature) {
+    const aadt = feature.properties.latestAadt;
+    if (!aadt) return 5; // Default size for no data
+    
+    // Scale radius based on AADT value (logarithmic scale)
+    // AADT ranges from ~90 to ~8400 in the data
+    const minRadius = 5;
+    const maxRadius = 25;
+    const logAadt = Math.log(Math.max(aadt, 1));
+    const logMin = Math.log(90);
+    const logMax = Math.log(8400);
+    
+    const normalizedValue = (logAadt - logMin) / (logMax - logMin);
+    return minRadius + (maxRadius - minRadius) * Math.max(0, Math.min(1, normalizedValue));
+}
+
+function getTrafficColor(feature) {
+    const aadt = feature.properties.latestAadt;
+    const active = feature.properties.active;
+    
+    // Different colors for inactive locations
+    if (active === 'No') {
+        return [128, 128, 128, 180]; // Gray for inactive
+    }
+    
+    if (!aadt) {
+        return [200, 200, 200, 180]; // Light gray for no data
+    }
+    
+    // Color scale based on AADT value (traffic volume)
+    if (aadt >= 5000) {
+        return [255, 0, 0, 200];     // Red for high traffic (5000+)
+    } else if (aadt >= 1000) {
+        return [255, 165, 0, 200];   // Orange for medium-high traffic (1000-5000)
+    } else if (aadt >= 500) {
+        return [255, 255, 0, 200];   // Yellow for medium traffic (500-1000)
+    } else if (aadt >= 100) {
+        return [0, 255, 0, 200];     // Green for low traffic (100-500)
+    } else {
+        return [0, 0, 255, 200];     // Blue for very low traffic (<100)
+    }
+}
+
+function handleTrafficCountClick(info) {
+    if (info.object) {
+        const location = info.object.properties;
+        const locationId = location.locationId || 'Unknown';
+        const locatedOn = location.locatedOn || 'Unknown';
+        const aadt = location.latestAadt || 'No data';
+        const aadtYear = location.latestAadtYear || '';
+        const volumeCount = location.latestVolumeCount || 'No data';
+        const volumeDate = location.latestVolumeDate || '';
+        const category = location.category || 'Unknown';
+        const active = location.active || 'Unknown';
+        
+        const message = `Traffic Count Location
+────────────────────────
+Location ID: ${locationId}
+Located On: ${locatedOn}
+Category: ${category}
+Status: ${active}
+
+Latest Traffic Data:
+• AADT (${aadtYear}): ${aadt.toLocaleString()} vehicles/day
+• Volume Count (${volumeDate}): ${volumeCount.toLocaleString()} vehicles
+• Functional Class: ${location.fnctClass || 'Unknown'}
+
+Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
+        
+        alert(message);
     }
 }
 

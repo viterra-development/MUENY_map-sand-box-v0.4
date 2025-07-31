@@ -836,32 +836,38 @@ public class TcdsScrapingService : IAsyncDisposable
                 throw new InvalidOperationException("Could not find LeftFrame iframe");
             }
 
-            // Look for the Next button - first try to find the td with onclick directly
-            var nextButtonTd = await leftFrame.QuerySelectorAsync("td[onclick*='tdetail.asp?offset=1']");
+            // First check if there's a disabled Next button (indicates we're at the end)
+            var disabledNextImg = await leftFrame.QuerySelectorAsync("img[src*='Next-disabled.gif']");
+            if (disabledNextImg != null)
+            {
+                throw new InvalidOperationException("Next button is disabled - reached end of records");
+            }
+            
+            // Look for the Next button by finding the img and its parent td
+            var nextButtonImg = await leftFrame.QuerySelectorAsync("img[src*='Next.gif']");
+            if (nextButtonImg == null)
+            {
+                throw new InvalidOperationException("Could not find Next button image");
+            }
+            
+            // Find the parent td element that contains the onclick event
+            var allTds = await leftFrame.QuerySelectorAllAsync("td[onclick*='tdetail.asp?offset=']");
+            IElementHandle? nextButtonTd = null;
+            
+            foreach (var td in allTds)
+            {
+                // Check if this td contains the Next.gif image
+                var imgInTd = await td.QuerySelectorAsync("img[src*='Next.gif']");
+                if (imgInTd != null)
+                {
+                    nextButtonTd = td;
+                    break;
+                }
+            }
             
             if (nextButtonTd == null)
             {
-                // Alternative: find the img and click its parent td
-                var nextButtonImg = await leftFrame.QuerySelectorAsync("img[src*='Next.gif']");
-                if (nextButtonImg != null)
-                {
-                    // Get all parent elements and find the td with onclick
-                    var allTds = await leftFrame.QuerySelectorAllAsync("td[onclick*='tdetail.asp']");
-                    foreach (var td in allTds)
-                    {
-                        var onclickValue = await td.GetAttributeAsync("onclick");
-                        if (onclickValue != null && onclickValue.Contains("offset=1"))
-                        {
-                            nextButtonTd = td;
-                            break;
-                        }
-                    }
-                }
-                
-                if (nextButtonTd == null)
-                {
-                    throw new InvalidOperationException("Could not find Next button");
-                }
+                throw new InvalidOperationException("Could not find clickable Next button");
             }
 
             _logger.LogInformation("Found Next button, clicking...");

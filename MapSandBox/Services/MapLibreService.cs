@@ -151,6 +151,27 @@ public class MapLibreService
                     ["pickable"] = true,
                     ["autoHighlight"] = true
                 }
+            },
+            new LayerConfig
+            {
+                Id = "traffic-counts",
+                Type = "GeoJson",
+                DataUrl = "/parker_county_traffic_locations_20250731_111008.geojson",
+                Visible = true,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["pointRadiusMinPixels"] = 3,
+                    ["pointRadiusMaxPixels"] = 50,
+                    ["getRadius"] = "getTrafficRadius",
+                    ["getFillColor"] = "getTrafficColor",
+                    ["getLineColor"] = new int[] { 0, 0, 0, 255 }, // black outline
+                    ["getLineWidth"] = 2,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleTrafficCountClick"
+                }
             }
         };
     }
@@ -163,7 +184,8 @@ public class MapLibreService
             new LayerInfo { Id = "airports", Name = "Airports", Visible = true },
             new LayerInfo { Id = "flight-paths", Name = "Flight Paths", Visible = true },
             new LayerInfo { Id = "parker-roads", Name = "Parker County Roads", Visible = true },
-            new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = true }
+            new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = true },
+            new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = true }
         };
     }
 }

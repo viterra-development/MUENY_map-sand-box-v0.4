@@ -1,0 +1,333 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "Parker County Traffic Count Data",
+    "description": "Traffic count locations with latest AADT values from TCDS",
+    "totalFeatures": 10,
+    "exportedAt": "2025-07-31T16:10:08Z",
+    "source": "Texas Department of Transportation TCDS",
+    "county": "Parker County, Texas"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.69712,
+          32.755769
+        ]
+      },
+      "properties": {
+        "locationId": "184CC1",
+        "locatedOn": "GS0000",
+        "locOnAlias": "20010",
+        "type": "SPOT",
+        "category": "RAMP",
+        "routeType": "GS",
+        "route": "0000",
+        "active": "Yes",
+        "fnctClass": "(1)Interstate",
+        "latestAadt": 8388,
+        "latestAadtYear": 2024,
+        "latestDhv30": 660,
+        "latestKPercent": 8,
+        "latestDPercent": null,
+        "latestVolumeCount": 8746,
+        "latestVolumeDate": "2024-04-10",
+        "totalAadtRecords": 5,
+        "totalVolumeRecords": 5,
+        "totalTrendRecords": 6,
+        "extractedAt": "2025-07-31T16:08:28Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.039015,
+          32.668305
+        ]
+      },
+      "properties": {
+        "locationId": "184CR102",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "URBAN ACR",
+        "routeType": "",
+        "route": "",
+        "active": "Yes",
+        "fnctClass": "(7)Local",
+        "latestAadt": 648,
+        "latestAadtYear": 2024,
+        "latestDhv30": 65,
+        "latestKPercent": 10,
+        "latestDPercent": null,
+        "latestVolumeCount": 666,
+        "latestVolumeDate": "2024-05-06",
+        "totalAadtRecords": 4,
+        "totalVolumeRecords": 2,
+        "totalTrendRecords": 3,
+        "extractedAt": "2025-07-31T16:08:39Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.012139,
+          32.696168
+        ]
+      },
+      "properties": {
+        "locationId": "184CR103",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "URBAN ACR",
+        "routeType": "",
+        "route": "",
+        "active": "Yes",
+        "fnctClass": "(7)Local",
+        "latestAadt": 416,
+        "latestAadtYear": 2024,
+        "latestDhv30": 34,
+        "latestKPercent": 8,
+        "latestDPercent": null,
+        "latestVolumeCount": 408,
+        "latestVolumeDate": "2024-05-08",
+        "totalAadtRecords": 4,
+        "totalVolumeRecords": 2,
+        "totalTrendRecords": 3,
+        "extractedAt": "2025-07-31T16:08:50Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.980144,
+          32.697761
+        ]
+      },
+      "properties": {
+        "locationId": "184CR105",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "URBAN ACR",
+        "routeType": "",
+        "route": "",
+        "active": "Yes",
+        "fnctClass": "(7)Local",
+        "latestAadt": 512,
+        "latestAadtYear": 2024,
+        "latestDhv30": 62,
+        "latestKPercent": 12,
+        "latestDPercent": null,
+        "latestVolumeCount": 525,
+        "latestVolumeDate": "2024-05-06",
+        "totalAadtRecords": 4,
+        "totalVolumeRecords": 2,
+        "totalTrendRecords": 3,
+        "extractedAt": "2025-07-31T16:09:01Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.959952,
+          32.706812
+        ]
+      },
+      "properties": {
+        "locationId": "184CR106",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "URBAN ACR",
+        "routeType": "",
+        "route": "",
+        "active": "Yes",
+        "fnctClass": "(7)Local",
+        "latestAadt": 1206,
+        "latestAadtYear": 2024,
+        "latestDhv30": 124,
+        "latestKPercent": 10,
+        "latestDPercent": null,
+        "latestVolumeCount": 1237,
+        "latestVolumeDate": "2024-05-06",
+        "totalAadtRecords": 5,
+        "totalVolumeRecords": 3,
+        "totalTrendRecords": 4,
+        "extractedAt": "2025-07-31T16:09:12Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.962815,
+          32.728547
+        ]
+      },
+      "properties": {
+        "locationId": "184CR106A",
+        "locatedOn": "Fairview Rd",
+        "locOnAlias": "184AA0482",
+        "type": "SPOT",
+        "category": "URBAN ACR",
+        "routeType": "CR",
+        "route": "0000",
+        "active": "Yes",
+        "fnctClass": "(7)Local",
+        "latestAadt": 780,
+        "latestAadtYear": 2009,
+        "latestDhv30": null,
+        "latestKPercent": null,
+        "latestDPercent": null,
+        "latestVolumeCount": null,
+        "latestVolumeDate": null,
+        "totalAadtRecords": 2,
+        "totalVolumeRecords": 0,
+        "totalTrendRecords": 1,
+        "extractedAt": "2025-07-31T16:09:22Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.957383,
+          32.732329
+        ]
+      },
+      "properties": {
+        "locationId": "184CR106B",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "URBAN ACR",
+        "routeType": "",
+        "route": "",
+        "active": "Yes",
+        "fnctClass": "(7)Local",
+        "latestAadt": 267,
+        "latestAadtYear": 2024,
+        "latestDhv30": 26,
+        "latestKPercent": 10,
+        "latestDPercent": null,
+        "latestVolumeCount": 274,
+        "latestVolumeDate": "2024-05-06",
+        "totalAadtRecords": 5,
+        "totalVolumeRecords": 3,
+        "totalTrendRecords": 4,
+        "extractedAt": "2025-07-31T16:09:33Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.953528,
+          32.741822
+        ]
+      },
+      "properties": {
+        "locationId": "184CR107A",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "INACTIVE",
+        "routeType": "",
+        "route": "",
+        "active": "No",
+        "fnctClass": "(7)Local",
+        "latestAadt": 91,
+        "latestAadtYear": 2019,
+        "latestDhv30": 14,
+        "latestKPercent": 15,
+        "latestDPercent": null,
+        "latestVolumeCount": 98,
+        "latestVolumeDate": "2019-05-08",
+        "totalAadtRecords": 3,
+        "totalVolumeRecords": 2,
+        "totalTrendRecords": 2,
+        "extractedAt": "2025-07-31T16:09:44Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.914811,
+          32.756471
+        ]
+      },
+      "properties": {
+        "locationId": "184CR108A",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "INACTIVE",
+        "routeType": "",
+        "route": "",
+        "active": "No",
+        "fnctClass": "(6)Minor Collector",
+        "latestAadt": 154,
+        "latestAadtYear": 2019,
+        "latestDhv30": 24,
+        "latestKPercent": 16,
+        "latestDPercent": null,
+        "latestVolumeCount": 167,
+        "latestVolumeDate": "2019-05-08",
+        "totalAadtRecords": 4,
+        "totalVolumeRecords": 2,
+        "totalTrendRecords": 3,
+        "extractedAt": "2025-07-31T16:09:55Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.922204,
+          32.720696
+        ]
+      },
+      "properties": {
+        "locationId": "184CR108B",
+        "locatedOn": "-",
+        "locOnAlias": "",
+        "type": "SPOT",
+        "category": "INACTIVE",
+        "routeType": "",
+        "route": "",
+        "active": "No",
+        "fnctClass": "(7)Local",
+        "latestAadt": 96,
+        "latestAadtYear": 2019,
+        "latestDhv30": 14,
+        "latestKPercent": 15,
+        "latestDPercent": null,
+        "latestVolumeCount": 104,
+        "latestVolumeDate": "2019-05-15",
+        "totalAadtRecords": 4,
+        "totalVolumeRecords": 2,
+        "totalTrendRecords": 3,
+        "extractedAt": "2025-07-31T16:10:06Z"
+      }
+    }
+  ]
+}
