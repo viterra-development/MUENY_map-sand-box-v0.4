@@ -4,10 +4,22 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TCDS.Importer.Models;
 using TCDS.Importer.Services;
+using System.Text.Json;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+// Look for appsettings.json in the solution root by searching for .sln file
+var currentDir = Directory.GetCurrentDirectory();
+var solutionRoot = currentDir;
+
+// Walk up the directory tree to find the solution root (where .sln file exists)
+while (!File.Exists(Path.Combine(solutionRoot, "MapSandBox.sln")) && Directory.GetParent(solutionRoot) != null)
+{
+    solutionRoot = Directory.GetParent(solutionRoot)!.FullName;
+}
+
+var appSettingsPath = Path.Combine(solutionRoot, "appsettings.json");
+builder.Configuration.AddJsonFile(appSettingsPath, optional: false, reloadOnChange: true);
 
 builder.Services.Configure<TcdsConfiguration>(
     builder.Configuration.GetSection("TcdsConfiguration"));
@@ -51,9 +63,42 @@ try
     
     logger.LogInformation("Taking final screenshot after search...");
     var finalScreenshotPath = await scrapingService.TakeScreenshotAsync();
-    
     logger.LogInformation("Final screenshot saved to: {Path}", finalScreenshotPath);
-    logger.LogInformation("TCDS Importer completed successfully - Parker County search performed");
+    
+    logger.LogInformation("Extracting structured traffic count data...");
+    var trafficData = await scrapingService.ExtractTrafficDataAsync();
+    
+    // Create data directory if it doesn't exist
+    Directory.CreateDirectory(config.DataDirectory);
+    
+    // Save extracted data as JSON
+    var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+    var jsonFileName = $"parker_county_traffic_data_{timestamp}.json";
+    var jsonFilePath = Path.Combine(config.DataDirectory, jsonFileName);
+    
+    var jsonOptions = new JsonSerializerOptions
+    {
+        WriteIndented = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+    
+    var jsonData = JsonSerializer.Serialize(trafficData, jsonOptions);
+    await File.WriteAllTextAsync(jsonFilePath, jsonData);
+    
+    logger.LogInformation("Traffic data saved to: {Path}", jsonFilePath);
+    logger.LogInformation("Extracted data summary:");
+    logger.LogInformation("- Location: {Location} ({Type})", trafficData.LocationInfo.LocatedOn, trafficData.LocationInfo.Type);
+    logger.LogInformation("- AADT Records: {Count}", trafficData.AadtData.Count);
+    logger.LogInformation("- Volume Count Records: {Count}", trafficData.VolumeCountData.Count);
+    logger.LogInformation("- Volume Trend Records: {Count}", trafficData.VolumeTrendData.Count);
+    
+    if (trafficData.AadtData.Any())
+    {
+        var latestAadt = trafficData.AadtData.OrderByDescending(a => a.Year).First();
+        logger.LogInformation("- Latest AADT ({Year}): {Value}", latestAadt.Year, latestAadt.Aadt);
+    }
+    
+    logger.LogInformation("TCDS Importer completed successfully - Parker County data extracted and saved");
     
     return 0;
 }

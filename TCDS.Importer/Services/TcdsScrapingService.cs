@@ -344,6 +344,319 @@ public class TcdsScrapingService : IAsyncDisposable
         }
     }
 
+    public async Task<TrafficCountData> ExtractTrafficDataAsync(CancellationToken cancellationToken = default)
+    {
+        if (_page == null)
+        {
+            throw new InvalidOperationException("Browser not initialized");
+        }
+
+        try
+        {
+            _logger.LogInformation("Extracting traffic count data from current page");
+
+            var leftFrame = _page.Frame("LeftFrame");
+            if (leftFrame == null)
+            {
+                throw new InvalidOperationException("Could not find LeftFrame iframe");
+            }
+
+            // Wait for AJAX data to load - look for actual data instead of "Loading Data..." messages
+            _logger.LogInformation("Waiting for AJAX data to load...");
+            await WaitForAjaxDataToLoad(leftFrame, cancellationToken);
+
+            var trafficData = new TrafficCountData();
+
+            // Extract location information
+            trafficData.LocationInfo = await ExtractLocationInfoAsync(leftFrame);
+            trafficData.LocationId = trafficData.LocationInfo.LocatedOn; // Use located on as ID
+
+            // Extract AADT data
+            trafficData.AadtData = await ExtractAadtDataAsync(leftFrame);
+
+            // Extract Volume Count data
+            trafficData.VolumeCountData = await ExtractVolumeCountDataAsync(leftFrame);
+
+            // Extract Volume Trend data
+            trafficData.VolumeTrendData = await ExtractVolumeTrendDataAsync(leftFrame);
+
+            _logger.LogInformation("Successfully extracted traffic data with {AadtCount} AADT records, {VolumeCount} volume records, {TrendCount} trend records",
+                trafficData.AadtData.Count, trafficData.VolumeCountData.Count, trafficData.VolumeTrendData.Count);
+
+            return trafficData;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to extract traffic data");
+            throw;
+        }
+    }
+
+    private async Task WaitForAjaxDataToLoad(IFrame frame, CancellationToken cancellationToken)
+    {
+        var maxWaitTime = 30000; // 30 seconds max
+        var checkInterval = 1000; // Check every 1 second
+        var elapsed = 0;
+
+        while (elapsed < maxWaitTime)
+        {
+            try 
+            {
+                // Check if "Loading Data..." messages are gone and actual data is present
+                var loadingElements = await frame.QuerySelectorAllAsync("img[src*='icnBusy.gif'], td:has-text('Loading Data...')");
+                
+                if (loadingElements.Count == 0)
+                {
+                    // No loading indicators found, check if we have actual data
+                    var hasAadtData = await frame.QuerySelectorAsync("#TCDS_TDETAIL_AADT_DIV table tr:nth-child(3)") != null;
+                    var hasVolumeData = await frame.QuerySelectorAsync("#TCDS_TDETAIL_VOL_DIV table tr:nth-child(3)") != null;
+                    
+                    if (hasAadtData || hasVolumeData)
+                    {
+                        _logger.LogInformation("AJAX data appears to be loaded after {ElapsedSeconds} seconds", elapsed / 1000);
+                        await Task.Delay(2000, cancellationToken); // Give it a bit more time to fully settle
+                        return;
+                    }
+                }
+
+                await Task.Delay(checkInterval, cancellationToken);
+                elapsed += checkInterval;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug("Error checking for AJAX data load: {Error}", ex.Message);
+                await Task.Delay(checkInterval, cancellationToken);
+                elapsed += checkInterval;
+            }
+        }
+
+        _logger.LogWarning("AJAX data may not have fully loaded after {MaxWaitSeconds} seconds, proceeding anyway", maxWaitTime / 1000);
+    }
+
+    private async Task<LocationInfo> ExtractLocationInfoAsync(IFrame frame)
+    {
+        var locationInfo = new LocationInfo();
+
+        try
+        {
+            // Extract location information from the top section
+            var cells = await frame.QuerySelectorAllAsync("td");
+            
+            foreach (var cell in cells)
+            {
+                var text = await cell.TextContentAsync();
+                if (string.IsNullOrWhiteSpace(text)) continue;
+
+                var nextCell = await cell.EvaluateAsync<string>("el => el.nextElementSibling?.textContent || ''");
+                
+                switch (text.Trim())
+                {
+                    case "Type":
+                        locationInfo.Type = nextCell?.Trim() ?? "";
+                        break;
+                    case "SF Group":
+                        locationInfo.SfGroup = nextCell?.Trim() ?? "";
+                        break;
+                    case "AF Group":
+                        locationInfo.AfGroup = nextCell?.Trim() ?? "";
+                        break;
+                    case "Located On":
+                        locationInfo.LocatedOn = nextCell?.Trim() ?? "";
+                        break;
+                    case "MPO ID":
+                        locationInfo.MpoId = nextCell?.Trim() ?? "";
+                        break;
+                    case "HPMS ID":
+                        locationInfo.HpmsId = nextCell?.Trim() ?? "";
+                        break;
+                    case "Route Type":
+                        locationInfo.RouteType = nextCell?.Trim() ?? "";
+                        break;
+                    case "Route":
+                        locationInfo.Route = nextCell?.Trim() ?? "";
+                        break;
+                    case "Active":
+                        locationInfo.Active = nextCell?.Trim() ?? "";
+                        break;
+                    case "Category":
+                        locationInfo.Category = nextCell?.Trim() ?? "";
+                        break;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to extract some location information");
+        }
+
+        return locationInfo;
+    }
+
+    private async Task<List<AadtRecord>> ExtractAadtDataAsync(IFrame frame)
+    {
+        var aadtData = new List<AadtRecord>();
+
+        try
+        {
+            // Look specifically in the AADT DIV that gets populated by AJAX
+            var aadtDiv = await frame.QuerySelectorAsync("#TCDS_TDETAIL_AADT_DIV");
+            if (aadtDiv == null)
+            {
+                _logger.LogWarning("AADT DIV not found");
+                return aadtData;
+            }
+
+            var rows = await aadtDiv.QuerySelectorAllAsync("table tr");
+            _logger.LogDebug("Found {RowCount} rows in AADT table", rows.Count);
+
+            foreach (var row in rows)
+            {
+                var cells = await row.QuerySelectorAllAsync("td");
+                if (cells.Count >= 3)
+                {
+                    var yearText = await cells[1].TextContentAsync(); // Year is in column 2 (index 1)
+                    var aadtText = await cells[2].TextContentAsync(); // AADT is in column 3 (index 2)
+                    
+                    if (int.TryParse(yearText?.Trim(), out int year) && year > 1900)
+                    {
+                        var record = new AadtRecord { Year = year };
+                        
+                        if (int.TryParse(aadtText?.Trim().Replace(",", ""), out int aadt))
+                            record.Aadt = aadt;
+                        
+                        if (cells.Count > 3)
+                        {
+                            var dhvText = await cells[3].TextContentAsync();
+                            if (int.TryParse(dhvText?.Trim().Replace(",", ""), out int dhv))
+                                record.Dhv30 = dhv;
+                        }
+
+                        if (cells.Count > 4)
+                        {
+                            var kText = await cells[4].TextContentAsync();
+                            if (decimal.TryParse(kText?.Trim(), out decimal k))
+                                record.KPercent = k;
+                        }
+
+                        if (cells.Count > 5)
+                        {
+                            var dText = await cells[5].TextContentAsync();
+                            if (decimal.TryParse(dText?.Trim(), out decimal d))
+                                record.DPercent = d;
+                        }
+
+                        aadtData.Add(record);
+                        _logger.LogDebug("Extracted AADT record: Year={Year}, AADT={Aadt}", year, aadt);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to extract AADT data");
+        }
+
+        return aadtData;
+    }
+
+    private async Task<List<VolumeCountRecord>> ExtractVolumeCountDataAsync(IFrame frame)
+    {
+        var volumeData = new List<VolumeCountRecord>();
+
+        try
+        {
+            // Look specifically in the Volume Count DIV that gets populated by AJAX
+            var volumeDiv = await frame.QuerySelectorAsync("#TCDS_TDETAIL_VOL_DIV");
+            if (volumeDiv == null)
+            {
+                _logger.LogWarning("Volume Count DIV not found");
+                return volumeData;
+            }
+
+            var rows = await volumeDiv.QuerySelectorAllAsync("table tr");
+            _logger.LogDebug("Found {RowCount} rows in Volume Count table", rows.Count);
+
+            foreach (var row in rows)
+            {
+                var cells = await row.QuerySelectorAllAsync("td");
+                if (cells.Count >= 4)
+                {
+                    var dateCell = await cells[1].TextContentAsync(); // Date is in column 2 (index 1)
+                    var intervalCell = await cells[2].TextContentAsync(); // Interval is in column 3 (index 2)
+                    var totalCell = await cells[3].TextContentAsync(); // Total is in column 4 (index 3)
+
+                    if (DateTime.TryParse(dateCell?.Trim(), out DateTime date) &&
+                        int.TryParse(intervalCell?.Trim(), out int interval) &&
+                        int.TryParse(totalCell?.Trim().Replace(",", ""), out int total))
+                    {
+                        volumeData.Add(new VolumeCountRecord
+                        {
+                            Date = date,
+                            Interval = interval,
+                            Total = total
+                        });
+                        _logger.LogDebug("Extracted Volume Count record: Date={Date}, Total={Total}", date.ToShortDateString(), total);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to extract volume count data");
+        }
+
+        return volumeData;
+    }
+
+    private async Task<List<VolumeTrendRecord>> ExtractVolumeTrendDataAsync(IFrame frame)
+    {
+        var trendData = new List<VolumeTrendRecord>();
+
+        try
+        {
+            // Look specifically in the Volume Trend DIV that gets populated by AJAX
+            var trendDiv = await frame.QuerySelectorAsync("#TCDS_TDETAIL_VOLTREND_DIV");
+            if (trendDiv == null)
+            {
+                _logger.LogWarning("Volume Trend DIV not found");
+                return trendData;
+            }
+
+            var rows = await trendDiv.QuerySelectorAllAsync("table tr");
+            _logger.LogDebug("Found {RowCount} rows in Volume Trend table", rows.Count);
+
+            foreach (var row in rows)
+            {
+                var cells = await row.QuerySelectorAllAsync("td");
+                if (cells.Count >= 2)
+                {
+                    var yearCell = await cells[0].TextContentAsync(); // Year is in column 1 (index 0)
+                    var growthCell = await cells[1].TextContentAsync(); // Growth is in column 2 (index 1)
+
+                    if (int.TryParse(yearCell?.Trim(), out int year) && year > 1900)
+                    {
+                        var record = new VolumeTrendRecord { Year = year };
+                        
+                        var growthText = growthCell?.Trim().Replace("%", "");
+                        if (decimal.TryParse(growthText, out decimal growth))
+                        {
+                            record.AnnualGrowth = growth;
+                        }
+
+                        trendData.Add(record);
+                        _logger.LogDebug("Extracted Volume Trend record: Year={Year}, Growth={Growth}%", year, growth);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to extract volume trend data");
+        }
+
+        return trendData;
+    }
+
     public async Task<string> TakeScreenshotAsync(string? selector = null, CancellationToken cancellationToken = default)
     {
         if (_page == null)
