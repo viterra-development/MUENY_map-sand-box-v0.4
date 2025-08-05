@@ -25,12 +25,57 @@ builder.Services.Configure<TcdsConfiguration>(
     builder.Configuration.GetSection("TcdsConfiguration"));
 
 builder.Services.AddTransient<TcdsScrapingService>();
+builder.Services.AddTransient<SimpleTileGenerator>();
 
 builder.Logging.AddConsole();
 
 var host = builder.Build();
 
 var logger = host.Services.GetRequiredService<ILogger<Program>>();
+var tileGenerator = host.Services.GetRequiredService<SimpleTileGenerator>();
+
+// Check if running in tiles-only mode
+var tilesOnlyMode = args.Contains("--tiles-only");
+
+if (tilesOnlyMode)
+{
+    return await RunTilesOnlyMode(host, logger, tileGenerator, builder.Configuration);
+}
+
+// Check if running in meta-runner mode
+var metaRunnerMode = args.Contains("--meta-runner");
+
+if (metaRunnerMode)
+{
+    return await RunMetaRunnerMode(host, logger, tileGenerator, builder.Configuration, args);
+}
+
+// Parse MinPage and MaxPage arguments
+int minPage = 1;
+int maxPages = 100;
+
+for (int i = 0; i < args.Length; i++)
+{
+    if (args[i] == "--min-page" && i + 1 < args.Length && int.TryParse(args[i + 1], out int parsedMinPage))
+    {
+        minPage = Math.Max(1, parsedMinPage);
+    }
+    else if (args[i] == "--max-page" && i + 1 < args.Length && int.TryParse(args[i + 1], out int parsedMaxPage))
+    {
+        maxPages = Math.Max(1, parsedMaxPage);
+    }
+}
+
+// Validate page range
+if (minPage > maxPages)
+{
+    logger.LogError("MinPage ({MinPage}) cannot be greater than MaxPage ({MaxPage})", minPage, maxPages);
+    return 1;
+}
+
+logger.LogInformation("Page range configured: {MinPage} to {MaxPage} (total: {PageCount} pages)", 
+    minPage, maxPages, maxPages - minPage + 1);
+
 var scrapingService = host.Services.GetRequiredService<TcdsScrapingService>();
 
 try
@@ -65,12 +110,28 @@ try
     var finalScreenshotPath = await scrapingService.TakeScreenshotAsync();
     logger.LogInformation("Final screenshot saved to: {Path}", finalScreenshotPath);
     
-    const int maxPages = 10;
     var allTrafficData = new List<TrafficCountData>();
     
-    logger.LogInformation("Starting data extraction loop for up to {MaxPages} pages", maxPages);
+    // Navigate to the starting page using Goto Record if not page 1
+    if (minPage > 1)
+    {
+        logger.LogInformation("Navigating directly to starting record {MinPage} using Goto Record...", minPage);
+        try
+        {
+            await scrapingService.GotoRecordAsync(minPage);
+            logger.LogInformation("Successfully navigated to starting record {MinPage}", minPage);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to navigate to starting record {MinPage} using Goto Record", minPage);
+            return 1;
+        }
+    }
     
-    for (int pageNumber = 1; pageNumber <= maxPages; pageNumber++)
+    logger.LogInformation("Starting data extraction loop for pages {MinPage} to {MaxPages} (total: {PageCount} pages)", 
+        minPage, maxPages, maxPages - minPage + 1);
+    
+    for (int pageNumber = minPage; pageNumber <= maxPages; pageNumber++)
     {
         logger.LogInformation("Processing page {PageNumber} of {MaxPages}...", pageNumber, maxPages);
         
@@ -112,12 +173,15 @@ try
         allTrafficData.Count, allTrafficData.Count);
     
     // Save consolidated data
-    await SaveConsolidatedDataAsync(config, allTrafficData, logger);
+    await SaveConsolidatedDataAsync(config, allTrafficData, logger, minPage, maxPages);
     
     // Export as GeoJSON for mapping applications
-    await ExportGeoJsonAsync(config, allTrafficData, logger);
+    await ExportGeoJsonAsync(config, allTrafficData, logger, minPage, maxPages);
     
-    logger.LogInformation("TCDS Importer completed successfully - {PageCount} pages of Parker County data extracted and saved", allTrafficData.Count);
+    // Generate spatial tiles for progressive loading
+    await ExportTiledGeoJsonAsync(config, allTrafficData, tileGenerator, logger);
+    
+    logger.LogInformation("TCDS Importer completed successfully - {PageCount} pages ({MinPage} to {MaxPages}) of Parker County data extracted and saved", allTrafficData.Count, minPage, maxPages);
     
     return 0;
 }
@@ -153,14 +217,15 @@ static async Task SaveTrafficDataAsync(TcdsConfiguration config, TrafficCountDat
     logger.LogInformation("Traffic data saved to: {Path}", jsonFilePath);
 }
 
-static async Task SaveConsolidatedDataAsync(TcdsConfiguration config, List<TrafficCountData> allTrafficData, ILogger logger)
+static async Task SaveConsolidatedDataAsync(TcdsConfiguration config, List<TrafficCountData> allTrafficData, ILogger logger, int minPage = 1, int maxPage = 100)
 {
     // Create data directory if it doesn't exist
     Directory.CreateDirectory(config.DataDirectory);
     
-    // Save consolidated data as JSON
+    // Save batch-specific consolidated data as JSON
     var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-    var jsonFileName = $"parker_county_traffic_data_consolidated_{timestamp}.json";
+    var pageRangeSuffix = minPage == maxPage ? $"page_{minPage}" : $"pages_{minPage}_to_{maxPage}";
+    var jsonFileName = $"parker_county_traffic_data_consolidated_{pageRangeSuffix}_{timestamp}.json";
     var jsonFilePath = Path.Combine(config.DataDirectory, jsonFileName);
     
     var jsonOptions = new JsonSerializerOptions
@@ -173,6 +238,7 @@ static async Task SaveConsolidatedDataAsync(TcdsConfiguration config, List<Traff
     {
         ExtractedAt = DateTime.UtcNow,
         TotalRecords = allTrafficData.Count,
+        PageRange = new { MinPage = minPage, MaxPage = maxPage },
         Records = allTrafficData
     };
     
@@ -180,9 +246,12 @@ static async Task SaveConsolidatedDataAsync(TcdsConfiguration config, List<Traff
     await File.WriteAllTextAsync(jsonFilePath, jsonData);
     
     logger.LogInformation("Consolidated traffic data saved to: {Path}", jsonFilePath);
+    
+    // Update master consolidated file
+    await UpdateMasterConsolidatedDataAsync(config, allTrafficData, logger, minPage, maxPage);
 }
 
-static async Task ExportGeoJsonAsync(TcdsConfiguration config, List<TrafficCountData> allTrafficData, ILogger logger)
+static async Task ExportGeoJsonAsync(TcdsConfiguration config, List<TrafficCountData> allTrafficData, ILogger logger, int minPage = 1, int maxPage = 100)
 {
     try
     {
@@ -267,6 +336,7 @@ static async Task ExportGeoJsonAsync(TcdsConfiguration config, List<TrafficCount
                 title = "Parker County Traffic Count Data",
                 description = "Traffic count locations with latest AADT values from TCDS",
                 totalFeatures = features.Count,
+                pageRange = new { minPage, maxPage },
                 exportedAt = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"),
                 source = "Texas Department of Transportation TCDS",
                 county = "Parker County, Texas"
@@ -276,7 +346,8 @@ static async Task ExportGeoJsonAsync(TcdsConfiguration config, List<TrafficCount
         
         // Save GeoJSON file
         var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        var geoJsonFileName = $"parker_county_traffic_locations_{timestamp}.geojson";
+        var pageRangeSuffix = minPage == maxPage ? $"page_{minPage}" : $"pages_{minPage}_to_{maxPage}";
+        var geoJsonFileName = $"parker_county_traffic_locations_{pageRangeSuffix}_{timestamp}.geojson";
         var geoJsonFilePath = Path.Combine(config.DataDirectory, geoJsonFileName);
         
         var jsonOptions = new JsonSerializerOptions
@@ -300,6 +371,22 @@ static async Task ExportGeoJsonAsync(TcdsConfiguration config, List<TrafficCount
     }
 }
 
+static async Task ExportTiledGeoJsonAsync(TcdsConfiguration config, List<TrafficCountData> allTrafficData, SimpleTileGenerator tileGenerator, ILogger logger)
+{
+    try
+    {
+        logger.LogInformation("Generating spatial tiles for progressive loading");
+        
+        await tileGenerator.GenerateTiles(allTrafficData, config.DataDirectory);
+        
+        logger.LogInformation("Spatial tiles generated successfully in {Directory}", Path.Combine(config.DataDirectory, "tiles"));
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Failed to generate spatial tiles");
+    }
+}
+
 static void LogTrafficDataSummary(TrafficCountData trafficData, ILogger logger)
 {
     logger.LogInformation("- Location ID: {LocationId}, Located On: {LocatedOn} ({Type})", 
@@ -313,5 +400,475 @@ static void LogTrafficDataSummary(TrafficCountData trafficData, ILogger logger)
     {
         var latestAadt = trafficData.AadtData.OrderByDescending(a => a.Year).First();
         logger.LogInformation("- Latest AADT ({Year}): {Value}", latestAadt.Year, latestAadt.Aadt);
+    }
+}
+
+static async Task<int> RunTilesOnlyMode(IHost host, ILogger logger, SimpleTileGenerator tileGenerator, IConfiguration configuration)
+{
+    try
+    {
+        logger.LogInformation("🔄 Running in tiles-only mode - generating tiles from existing data");
+        
+        var config = configuration.GetSection("TcdsConfiguration").Get<TcdsConfiguration>();
+        if (config == null)
+        {
+            logger.LogError("Failed to load TcdsConfiguration from appsettings.json");
+            return 1;
+        }
+
+        // Try to use master consolidated file first, fall back to most recent batch file
+        var masterDataFile = Path.Combine(config.DataDirectory, "parker_county_traffic_data_MASTER.json");
+        string dataFileToUse;
+        
+        if (File.Exists(masterDataFile))
+        {
+            dataFileToUse = masterDataFile;
+            logger.LogInformation("Using master consolidated data file: {File}", Path.GetFileName(masterDataFile));
+        }
+        else
+        {
+            logger.LogInformation("Master consolidated file not found, searching for batch files...");
+            var dataFiles = Directory.GetFiles(config.DataDirectory, "parker_county_traffic_data_consolidated_*.json")
+                .OrderByDescending(f => f)
+                .ToList();
+
+            if (!dataFiles.Any())
+            {
+                logger.LogError("No consolidated data files found in {Directory}", config.DataDirectory);
+                logger.LogInformation("Available files: {Files}", string.Join(", ", Directory.GetFiles(config.DataDirectory)));
+                return 1;
+            }
+
+            dataFileToUse = dataFiles.First();
+            logger.LogInformation("Using most recent batch consolidated data file: {File}", Path.GetFileName(dataFileToUse));
+        }
+
+        // Read and deserialize the consolidated data
+        var jsonContent = await File.ReadAllTextAsync(dataFileToUse);
+        var jsonDocument = JsonSerializer.Deserialize<JsonElement>(jsonContent);
+        
+        var records = jsonDocument.GetProperty("records");
+        var trafficData = JsonSerializer.Deserialize<List<TrafficCountData>>(records.GetRawText(), new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+
+        if (trafficData == null || !trafficData.Any())
+        {
+            logger.LogError("No traffic data found in consolidated file");
+            return 1;
+        }
+
+        logger.LogInformation("Loaded {Count} traffic records from consolidated data", trafficData.Count);
+
+        // Clean up existing tiles directory to ensure fresh generation
+        var tilesPath = Path.Combine(config.DataDirectory, "tiles");
+        if (Directory.Exists(tilesPath))
+        {
+            logger.LogInformation("Cleaning up existing tiles directory");
+            Directory.Delete(tilesPath, recursive: true);
+        }
+
+        // Generate fresh tiles
+        await tileGenerator.GenerateTiles(trafficData, config.DataDirectory);
+
+        logger.LogInformation("✅ Tile generation completed successfully!");
+        logger.LogInformation("📁 Tiles generated in: {TilesPath}", tilesPath);
+        
+        // Find solution root and copy tiles to MapSandBox wwwroot
+        var currentDir = Directory.GetCurrentDirectory();
+        var solutionRoot = currentDir;
+        while (!File.Exists(Path.Combine(solutionRoot, "MapSandBox.sln")) && Directory.GetParent(solutionRoot) != null)
+        {
+            solutionRoot = Directory.GetParent(solutionRoot)!.FullName;
+        }
+        
+        var mapSandBoxTilesPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "tiles");
+        if (Directory.Exists(Path.GetDirectoryName(mapSandBoxTilesPath)))
+        {
+            if (Directory.Exists(mapSandBoxTilesPath))
+            {
+                Directory.Delete(mapSandBoxTilesPath, recursive: true);
+            }
+            
+            // Copy the tiles directory
+            CopyDirectory(tilesPath, mapSandBoxTilesPath);
+            logger.LogInformation("📁 Tiles copied to MapSandBox wwwroot: {Path}", mapSandBoxTilesPath);
+        }
+        
+        logger.LogInformation("🚀 Ready to test in MapSandBox application!");
+        return 0;
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred while generating tiles");
+        return 1;
+    }
+}
+
+static async Task UpdateMasterConsolidatedDataAsync(TcdsConfiguration config, List<TrafficCountData> newTrafficData, ILogger logger, int minPage, int maxPage)
+{
+    try
+    {
+        var masterFileName = "parker_county_traffic_data_MASTER.json";
+        var masterFilePath = Path.Combine(config.DataDirectory, masterFileName);
+        
+        List<TrafficCountData> masterData = new List<TrafficCountData>();
+        var batchInfo = new List<object>();
+        
+        // Load existing master data if it exists
+        if (File.Exists(masterFilePath))
+        {
+            logger.LogInformation("Loading existing master consolidated data from: {Path}", masterFilePath);
+            var existingContent = await File.ReadAllTextAsync(masterFilePath);
+            var existingDocument = JsonSerializer.Deserialize<JsonElement>(existingContent);
+            
+            if (existingDocument.TryGetProperty("records", out var recordsElement))
+            {
+                masterData = JsonSerializer.Deserialize<List<TrafficCountData>>(recordsElement.GetRawText(), new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }) ?? new List<TrafficCountData>();
+                
+                logger.LogInformation("Loaded {ExistingCount} existing records from master file", masterData.Count);
+            }
+            
+            // Load existing batch info
+            if (existingDocument.TryGetProperty("batches", out var batchesElement))
+            {
+                batchInfo = JsonSerializer.Deserialize<List<object>>(batchesElement.GetRawText()) ?? new List<object>();
+            }
+        }
+        else
+        {
+            logger.LogInformation("No existing master file found, creating new master consolidated data");
+        }
+        
+        // Remove any existing records that match LocationIds from the new batch (to handle re-runs)
+        var newLocationIds = newTrafficData.Select(r => r.LocationId).ToHashSet();
+        var existingNonDuplicateRecords = masterData.Where(r => !newLocationIds.Contains(r.LocationId)).ToList();
+        
+        logger.LogInformation("Removing {DuplicateCount} existing duplicate records", masterData.Count - existingNonDuplicateRecords.Count);
+        
+        // Combine existing non-duplicate records with new records
+        var updatedMasterData = existingNonDuplicateRecords.Concat(newTrafficData).ToList();
+        
+        // Add current batch info
+        batchInfo.Add(new
+        {
+            MinPage = minPage,
+            MaxPage = maxPage,
+            RecordCount = newTrafficData.Count,
+            ExtractedAt = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
+        });
+        
+        // Create updated master data structure
+        var masterConsolidatedData = new
+        {
+            ExtractedAt = DateTime.UtcNow,
+            TotalRecords = updatedMasterData.Count,
+            TotalBatches = batchInfo.Count,
+            Batches = batchInfo,
+            Records = updatedMasterData
+        };
+        
+        var jsonOptions = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        
+        var masterJsonData = JsonSerializer.Serialize(masterConsolidatedData, jsonOptions);
+        await File.WriteAllTextAsync(masterFilePath, masterJsonData);
+        
+        logger.LogInformation("✅ Master consolidated data updated successfully!");
+        logger.LogInformation("📊 Master file: {Path}", masterFilePath);
+        logger.LogInformation("📈 Total records: {TotalRecords} (added {NewRecords} new, removed {RemovedDuplicates} duplicates)", 
+            updatedMasterData.Count, newTrafficData.Count, masterData.Count - existingNonDuplicateRecords.Count);
+        logger.LogInformation("📦 Total batches processed: {BatchCount}", batchInfo.Count);
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Failed to update master consolidated data");
+        // Don't throw - this shouldn't break the main import process
+    }
+}
+
+static async Task<int> RunMetaRunnerMode(IHost host, ILogger logger, SimpleTileGenerator tileGenerator, IConfiguration configuration, string[] args)
+{
+    try
+    {
+        logger.LogInformation("🚀 Starting Meta Runner Mode - Batch Orchestration System");
+        
+        // Parse meta runner parameters
+        int batchSize = 10; // Default batch size
+        int totalBatches = 5; // Default number of batches
+        int waitMinutes = 5; // Default wait time between batches in minutes
+        int startPage = 1; // Starting page number (kept for backward compatibility)
+        int startPropNum = 1; // Starting property number (for resuming meta runs)
+        bool generateTilesAfterEach = false; // Generate tiles after each batch or only at the end
+
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i] == "--batch-size" && i + 1 < args.Length && int.TryParse(args[i + 1], out int parsedBatchSize))
+            {
+                batchSize = Math.Max(1, parsedBatchSize);
+            }
+            else if (args[i] == "--total-batches" && i + 1 < args.Length && int.TryParse(args[i + 1], out int parsedTotalBatches))
+            {
+                totalBatches = Math.Max(1, parsedTotalBatches);
+            }
+            else if (args[i] == "--wait-minutes" && i + 1 < args.Length && int.TryParse(args[i + 1], out int parsedWaitMinutes))
+            {
+                waitMinutes = Math.Max(1, parsedWaitMinutes);
+            }
+            else if (args[i] == "--start-page" && i + 1 < args.Length && int.TryParse(args[i + 1], out int parsedStartPage))
+            {
+                startPage = Math.Max(1, parsedStartPage);
+            }
+            else if (args[i] == "--start-prop-num" && i + 1 < args.Length && int.TryParse(args[i + 1], out int parsedStartPropNum))
+            {
+                startPropNum = Math.Max(1, parsedStartPropNum);
+            }
+            else if (args[i] == "--tiles-after-each")
+            {
+                generateTilesAfterEach = true;
+            }
+        }
+
+        logger.LogInformation("📋 Meta Runner Configuration:");
+        logger.LogInformation("   • Batch Size: {BatchSize} pages per batch", batchSize);
+        logger.LogInformation("   • Total Batches: {TotalBatches}", totalBatches);
+        logger.LogInformation("   • Starting Property: {StartPropNum}", startPropNum);
+        logger.LogInformation("   • Wait Time: {WaitMinutes} minutes between batches", waitMinutes);
+        logger.LogInformation("   • Generate Tiles: After {TileGeneration}", generateTilesAfterEach ? "each batch" : "all batches complete");
+        
+        var endPropNum = startPropNum + (totalBatches * batchSize) - 1;
+        logger.LogInformation("   • Property Range: {StartProp} to {EndProp} ({TotalProps} properties)", startPropNum, endPropNum, totalBatches * batchSize);
+        logger.LogInformation("   • Estimated Total Time: {TotalTime} minutes", (totalBatches - 1) * waitMinutes + (totalBatches * 5)); // Rough estimate
+
+        var startTime = DateTime.UtcNow;
+        var allBatchResults = new List<(int batchNumber, int recordsExtracted, TimeSpan duration, bool success)>();
+
+        // Run each batch as a separate process using existing logic
+        for (int batchIndex = 0; batchIndex < totalBatches; batchIndex++)
+        {
+            var currentBatch = batchIndex + 1;
+            var minPage = startPropNum + (batchIndex * batchSize);
+            var maxPage = minPage + batchSize - 1;
+            
+            logger.LogInformation("🔄 Starting Batch {CurrentBatch}/{TotalBatches}: Pages {MinPage} to {MaxPage}", 
+                currentBatch, totalBatches, minPage, maxPage);
+            
+            var batchStartTime = DateTime.UtcNow;
+            
+            try
+            {
+                // Execute the batch using the existing main logic
+                var batchRecords = await ExecuteBatchRun(host, minPage, maxPage, generateTilesAfterEach);
+                
+                var batchDuration = DateTime.UtcNow - batchStartTime;
+                allBatchResults.Add((currentBatch, batchRecords, batchDuration, true));
+                
+                logger.LogInformation("✅ Batch {CurrentBatch} completed: {Records} records in {Duration}", 
+                    currentBatch, batchRecords, batchDuration.ToString(@"mm\:ss"));
+                
+                // Wait between batches (except after the last batch)
+                if (batchIndex < totalBatches - 1)
+                {
+                    logger.LogInformation("⏳ Waiting {WaitMinutes} minutes before next batch... (ETA for next batch: {NextBatchTime})", 
+                        waitMinutes, DateTime.Now.AddMinutes(waitMinutes).ToString("HH:mm:ss"));
+                    
+                    await Task.Delay(TimeSpan.FromMinutes(waitMinutes));
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "❌ Batch {CurrentBatch} failed: {Error}", currentBatch, ex.Message);
+                allBatchResults.Add((currentBatch, 0, DateTime.UtcNow - batchStartTime, false));
+                
+                logger.LogWarning("Continuing with next batch after failure...");
+                if (batchIndex < totalBatches - 1)
+                {
+                    await Task.Delay(TimeSpan.FromMinutes(Math.Min(5, waitMinutes))); // Shorter wait after failure
+                }
+            }
+        }
+
+        // Generate final tiles if not generated after each batch
+        if (!generateTilesAfterEach)
+        {
+            logger.LogInformation("🔧 Generating final consolidated tiles from all batches...");
+            await RunTilesOnlyMode(host, logger, tileGenerator, configuration);
+        }
+
+        // Report final statistics
+        var totalDuration = DateTime.UtcNow - startTime;
+        var totalRecords = allBatchResults.Sum(r => r.recordsExtracted);
+        var successfulBatches = allBatchResults.Count(r => r.success);
+        
+        logger.LogInformation("🎉 Meta Runner completed successfully!");
+        logger.LogInformation("📊 Final Statistics:");
+        logger.LogInformation("   • Total Duration: {TotalDuration}", totalDuration.ToString(@"hh\:mm\:ss"));
+        logger.LogInformation("   • Successful Batches: {SuccessfulBatches}/{TotalBatches}", successfulBatches, totalBatches);
+        logger.LogInformation("   • Total Records Extracted: {TotalRecords}", totalRecords);
+        logger.LogInformation("   • Average Records per Batch: {AverageRecords:F1}", totalRecords / (double)Math.Max(1, successfulBatches));
+        
+        foreach (var (batchNumber, recordsExtracted, duration, success) in allBatchResults)
+        {
+            var status = success ? "✅" : "❌";
+            logger.LogInformation("   • Batch {BatchNumber}: {Status} {Records} records ({Duration})", 
+                batchNumber, status, recordsExtracted, duration.ToString(@"mm\:ss"));
+        }
+
+        return 0;
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "❌ Meta Runner failed with error: {Error}", ex.Message);
+        return 1;
+    }
+}
+
+static async Task<int> ExecuteBatchRun(IHost host, int minPage, int maxPage, bool generateTiles)
+{
+    var logger = host.Services.GetRequiredService<ILogger<Program>>();
+    var scrapingService = host.Services.GetRequiredService<TcdsScrapingService>();
+    var tileGenerator = host.Services.GetRequiredService<SimpleTileGenerator>();
+    var configuration = host.Services.GetRequiredService<IConfiguration>();
+    
+    var config = configuration.GetSection("TcdsConfiguration").Get<TcdsConfiguration>();
+    if (config == null)
+    {
+        logger.LogError("Failed to load TcdsConfiguration from configuration");
+        throw new InvalidOperationException("TcdsConfiguration not found");
+    }
+
+    try
+    {
+        logger.LogInformation("Starting TCDS Importer batch: pages {MinPage} to {MaxPage}", minPage, maxPage);
+        
+        logger.LogInformation("Navigating to TCDS website: {Url}", config.TargetUrl);
+        
+        var pageData = await scrapingService.NavigateToPageAsync(config.TargetUrl);
+        
+        logger.LogInformation("Successfully loaded page: {Title}", pageData.Title);
+        logger.LogInformation("Page content length: {Length} characters", pageData.Content.Length);
+        
+        logger.LogInformation("Taking initial screenshot...");
+        var initialScreenshotPath = await scrapingService.TakeScreenshotAsync();
+        logger.LogInformation("Initial screenshot saved to: {Path}", initialScreenshotPath);
+        
+        logger.LogInformation("Performing Parker County search...");
+        var searchResults = await scrapingService.SearchParkerCountyAsync();
+        
+        logger.LogInformation("Search completed. Results page title: {Title}", searchResults.Title);
+        logger.LogInformation("Search metadata: {Metadata}", string.Join(", ", searchResults.Metadata.Select(kv => $"{kv.Key}={kv.Value}")));
+        
+        logger.LogInformation("Taking final screenshot after search...");
+        var finalScreenshotPath = await scrapingService.TakeScreenshotAsync();
+        logger.LogInformation("Final screenshot saved to: {Path}", finalScreenshotPath);
+        
+        var allTrafficData = new List<TrafficCountData>();
+        
+        // Navigate to the starting page using Goto Record if not page 1
+        if (minPage > 1)
+        {
+            logger.LogInformation("Navigating directly to starting record {MinPage} using Goto Record...", minPage);
+            try
+            {
+                await scrapingService.GotoRecordAsync(minPage);
+                logger.LogInformation("Successfully navigated to starting record {MinPage}", minPage);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to navigate to starting record {MinPage} using Goto Record", minPage);
+                throw;
+            }
+        }
+        
+        logger.LogInformation("Starting data extraction loop for pages {MinPage} to {MaxPage} (total: {PageCount} pages)", 
+            minPage, maxPage, maxPage - minPage + 1);
+        
+        for (int pageNumber = minPage; pageNumber <= maxPage; pageNumber++)
+        {
+            logger.LogInformation("Processing page {PageNumber} of {MaxPage}...", pageNumber, maxPage);
+            
+            // Extract data from current page
+            logger.LogInformation("Extracting structured traffic count data from page {PageNumber}...", pageNumber);
+            var trafficData = await scrapingService.ExtractTrafficDataAsync();
+            
+            // Save individual page data
+            await SaveTrafficDataAsync(config, trafficData, $"page_{pageNumber}", logger);
+            allTrafficData.Add(trafficData);
+            
+            logger.LogInformation("Page {PageNumber} data summary:", pageNumber);
+            LogTrafficDataSummary(trafficData, logger);
+            
+            // Take screenshot of current page
+            logger.LogInformation("Taking screenshot of page {PageNumber}...", pageNumber);
+            var screenshotPath = await scrapingService.TakeScreenshotAsync();
+            logger.LogInformation("Page {PageNumber} screenshot saved to: {Path}", pageNumber, screenshotPath);
+            
+            // Try to navigate to next page (except on the last allowed page)
+            if (pageNumber < maxPage)
+            {
+                logger.LogInformation("Attempting to navigate to page {NextPage}...", pageNumber + 1);
+                
+                try
+                {
+                    var nextPageData = await scrapingService.ClickNextRecordAsync();
+                    logger.LogInformation("Successfully navigated to page {NextPage}: {Title}", pageNumber + 1, nextPageData.Title);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWarning(ex, "Could not navigate to page {NextPage}. Reached end of available records at page {CurrentPage}", pageNumber + 1, pageNumber);
+                    break;
+                }
+            }
+        }
+        
+        logger.LogInformation("Data extraction completed. Processed {PageCount} pages with {TotalRecords} total records", 
+            allTrafficData.Count, allTrafficData.Count);
+        
+        // Save consolidated data
+        await SaveConsolidatedDataAsync(config, allTrafficData, logger, minPage, maxPage);
+        
+        // Export as GeoJSON for mapping applications
+        await ExportGeoJsonAsync(config, allTrafficData, logger, minPage, maxPage);
+        
+        // Generate spatial tiles for progressive loading if requested
+        if (generateTiles)
+        {
+            await ExportTiledGeoJsonAsync(config, allTrafficData, tileGenerator, logger);
+        }
+        
+        logger.LogInformation("TCDS Importer batch completed successfully - {PageCount} pages ({MinPage} to {MaxPage}) of Parker County data extracted and saved", allTrafficData.Count, minPage, maxPage);
+        
+        return allTrafficData.Count;
+    }
+    finally
+    {
+        await scrapingService.DisposeAsync();
+    }
+}
+
+static void CopyDirectory(string sourceDir, string destinationDir)
+{
+    var dir = new DirectoryInfo(sourceDir);
+    DirectoryInfo[] dirs = dir.GetDirectories();
+
+    Directory.CreateDirectory(destinationDir);
+
+    foreach (FileInfo file in dir.GetFiles())
+    {
+        string targetFilePath = Path.Combine(destinationDir, file.Name);
+        file.CopyTo(targetFilePath);
+    }
+
+    foreach (DirectoryInfo subDir in dirs)
+    {
+        string newDestinationDir = Path.Combine(destinationDir, subDir.Name);
+        CopyDirectory(subDir.FullName, newDestinationDir);
     }
 }

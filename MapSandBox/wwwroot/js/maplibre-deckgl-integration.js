@@ -21,6 +21,22 @@ export function createIntegratedMap(containerId, config) {
     if (config.baseMap?.showControls !== false) {
         maplibreMap.addControl(new maplibregl.NavigationControl());
     }
+    
+    // Update zoom level indicator
+    function updateZoomIndicator() {
+        const zoom = maplibreMap.getZoom().toFixed(1);
+        const zoomElement = document.getElementById(`${containerId}-zoom`);
+        if (zoomElement) {
+            zoomElement.textContent = zoom;
+        }
+    }
+    
+    // Initial zoom update
+    maplibreMap.on('load', updateZoomIndicator);
+    
+    // Update zoom on zoom changes
+    maplibreMap.on('zoom', updateZoomIndicator);
+    maplibreMap.on('zoomend', updateZoomIndicator);
 
     // Wait for map to load before adding deck.gl overlay
     maplibreMap.on('load', () => {
@@ -89,6 +105,12 @@ function createLayersFromConfig(layerConfigs) {
     
     layerConfigs.forEach(config => {
         if (!config.visible) return;
+        
+        // Special handling for traffic-counts layer (uses TileLayer)
+        if (config.id === 'traffic-counts') {
+            layers.push(createTrafficCountsTileLayer(config));
+            return;
+        }
         
         switch (config.type.toLowerCase()) {
             case 'geojson':
@@ -160,21 +182,56 @@ function getLayerProperties(config) {
             properties.onClick = handleRoadClick;
             break;
         case 'traffic-counts':
-            properties.stroked = true;
-            properties.filled = true;
-            properties.pointRadiusMinPixels = 3;
-            properties.pointRadiusMaxPixels = 50;
-            properties.opacity = 0.9;
-            properties.getRadius = getTrafficRadius;
-            properties.getFillColor = getTrafficColor;
-            properties.getLineColor = [0, 0, 0, 255]; // black outline
-            properties.getLineWidth = 2;
-            properties.pickable = true;
-            properties.onClick = handleTrafficCountClick;
+            // Use TileLayer for progressive loading instead of direct GeoJsonLayer
+            return createTrafficCountsTileLayer(config);
             break;
     }
     
     return properties;
+}
+
+// Traffic Counts TileLayer factory
+function createTrafficCountsTileLayer(config) {
+    return new deck.TileLayer({
+        id: config.id,
+        data: '/tiles/traffic-counts/{z}/{x}/{y}.geojson',
+        minZoom: 12,
+        maxZoom: 18,
+        tileSize: 512,
+        maxCacheSize: 10 * 1024 * 1024, // 10MB cache
+        maxCacheByteSize: 50 * 1024 * 1024, // 50MB total
+        refinementStrategy: 'best-available',
+        
+        renderSubLayers: props => {
+            return new deck.GeoJsonLayer({
+                ...props,
+                id: `${props.id}-geojson`,
+                
+                // Styling properties
+                stroked: true,
+                filled: true,
+                pointRadiusMinPixels: 3,
+                pointRadiusMaxPixels: 50,
+                opacity: 0.9,
+                
+                // Dynamic styling functions
+                getRadius: getTrafficRadius,
+                getFillColor: getTrafficColor,
+                getLineColor: [0, 0, 0, 255], // black outline
+                getLineWidth: 2,
+                
+                // Interactions
+                pickable: true,
+                onClick: handleTrafficCountClick,
+                
+                // Performance optimizations
+                updateTriggers: {
+                    getRadius: [],
+                    getFillColor: []
+                }
+            });
+        }
+    });
 }
 
 // Road styling functions

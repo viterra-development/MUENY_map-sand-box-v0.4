@@ -155,8 +155,8 @@ public class MapLibreService
             new LayerConfig
             {
                 Id = "traffic-counts",
-                Type = "GeoJson",
-                DataUrl = "/parker_county_traffic_locations_20250731_111008.geojson",
+                Type = "TileLayer", // Changed to TileLayer type
+                DataUrl = "/tiles/traffic-counts/{z}/{x}/{y}.geojson", // Tile URL template
                 Visible = true,
                 Properties = new Dictionary<string, object>
                 {

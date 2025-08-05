@@ -9,6 +9,7 @@ public class TcdsScrapingService : IAsyncDisposable
 {
     private readonly ILogger<TcdsScrapingService> _logger;
     private readonly TcdsConfiguration _config;
+    private readonly Random _random;
     private IPlaywright? _playwright;
     private IBrowser? _browser;
     private IBrowserContext? _context;
@@ -18,6 +19,36 @@ public class TcdsScrapingService : IAsyncDisposable
     {
         _logger = logger;
         _config = config.Value;
+        _random = new Random();
+    }
+
+    private async Task FuzzyWaitAsync(CancellationToken cancellationToken = default)
+    {
+        if (!_config.UseFuzzyWaits)
+        {
+            await Task.Delay(_config.WaitDelay, cancellationToken);
+            return;
+        }
+
+        var waitTime = _random.Next(_config.MinWaitDelay, _config.MaxWaitDelay);
+        _logger.LogDebug("Fuzzy wait: {WaitTime}ms", waitTime);
+        await Task.Delay(waitTime, cancellationToken);
+    }
+
+    private async Task FuzzyWaitAsync(int baseDelay, CancellationToken cancellationToken = default)
+    {
+        if (!_config.UseFuzzyWaits)
+        {
+            await Task.Delay(baseDelay, cancellationToken);
+            return;
+        }
+
+        var variance = (int)(baseDelay * 0.3); // 30% variance
+        var minWait = Math.Max(1000, baseDelay - variance);
+        var maxWait = baseDelay + variance;
+        var waitTime = _random.Next(minWait, maxWait);
+        _logger.LogDebug("Fuzzy wait (base {BaseDelay}ms): {WaitTime}ms", baseDelay, waitTime);
+        await Task.Delay(waitTime, cancellationToken);
     }
 
     public async Task InitializeAsync()
@@ -136,19 +167,22 @@ public class TcdsScrapingService : IAsyncDisposable
             var response = await _page!.GotoAsync(url, new PageGotoOptions
             {
                 WaitUntil = WaitUntilState.DOMContentLoaded,
-                Timeout = _config.Timeout
+                Timeout = _config.NavigationTimeout
             });
 
             if (response != null && response.Status == 429)
             {
                 _logger.LogInformation("Received 429 response, waiting for redirect process...");
                 
-                await Task.Delay(5000, cancellationToken);
+                await FuzzyWaitAsync(8000, cancellationToken);
                 
-                await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+                await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded, new PageWaitForLoadStateOptions
+                {
+                    Timeout = _config.NavigationTimeout
+                });
             }
 
-            await Task.Delay(_config.WaitDelay, cancellationToken);
+            await FuzzyWaitAsync(cancellationToken);
 
             var title = await _page.TitleAsync();
             var content = await _page.ContentAsync();
@@ -183,7 +217,7 @@ public class TcdsScrapingService : IAsyncDisposable
             // Wait for the left iframe to load
             await _page.WaitForSelectorAsync("iframe[name='LeftFrame']", new PageWaitForSelectorOptions
             {
-                Timeout = _config.Timeout
+                Timeout = _config.NavigationTimeout
             });
 
             // Get the left iframe containing the search form
@@ -196,7 +230,7 @@ public class TcdsScrapingService : IAsyncDisposable
             _logger.LogInformation("Found search frame, waiting for form elements to load");
 
             // Wait a bit for the iframe content to load
-            await Task.Delay(3000, cancellationToken);
+            await FuzzyWaitAsync(4000, cancellationToken);
 
             // Look for the typeahead input field for county
             string[] possibleSelectors = {
@@ -243,7 +277,7 @@ public class TcdsScrapingService : IAsyncDisposable
             await leftFrame.FillAsync(usedSelector, "Parker");
             
             // Wait for typeahead suggestions to appear
-            await Task.Delay(1000, cancellationToken);
+            await FuzzyWaitAsync(1500, cancellationToken);
             
             // Look for and click the Parker suggestion
             _logger.LogInformation("Looking for Parker suggestion in typeahead dropdown");
@@ -251,7 +285,7 @@ public class TcdsScrapingService : IAsyncDisposable
             {
                 await leftFrame.WaitForSelectorAsync(".tt-suggestion, .tt-suggestion p", new FrameWaitForSelectorOptions
                 {
-                    Timeout = 3000
+                    Timeout = 5000
                 });
                 
                 // Click the suggestion
@@ -264,7 +298,7 @@ public class TcdsScrapingService : IAsyncDisposable
             }
 
             // Wait a moment for any dynamic updates
-            await Task.Delay(1000, cancellationToken);
+            await FuzzyWaitAsync(1500, cancellationToken);
 
             // Find and click the Search button
             _logger.LogInformation("Looking for Search button");
@@ -304,20 +338,20 @@ public class TcdsScrapingService : IAsyncDisposable
 
             // Wait for search results to load - this might take a while
             _logger.LogInformation("Waiting for search results to load...");
-            await Task.Delay(5000, cancellationToken); // Fixed 5-second wait
+            await FuzzyWaitAsync(7000, cancellationToken);
 
             // Try to wait for some indication that results have loaded
             try
             {
                 await leftFrame.WaitForSelectorAsync(".station-data, table, .results", new FrameWaitForSelectorOptions
                 {
-                    Timeout = 5000 // 5 second timeout for results
+                    Timeout = 10000 // 10 second timeout for results
                 });
                 _logger.LogInformation("Search results appear to have loaded");
             }
             catch (TimeoutException)
             {
-                _logger.LogWarning("Results selector not found after 5 seconds, proceeding anyway - results may still be visible");
+                _logger.LogWarning("Results selector not found after 10 seconds, proceeding anyway - results may still be visible");
             }
 
             // Get updated page data
@@ -368,7 +402,7 @@ public class TcdsScrapingService : IAsyncDisposable
             var trafficData = new TrafficCountData();
 
             // Extract location information
-            trafficData.LocationInfo = await ExtractLocationInfoAsync(leftFrame);
+            trafficData.LocationInfo = await ExtractLocationInfoAsync(leftFrame, cancellationToken);
             trafficData.LocationId = trafficData.LocationInfo.LocationId ?? trafficData.LocationInfo.LocatedOn; // Use Location ID if available, otherwise fall back to Located On
 
             // Extract AADT data
@@ -394,8 +428,8 @@ public class TcdsScrapingService : IAsyncDisposable
 
     private async Task WaitForAjaxDataToLoad(IFrame frame, CancellationToken cancellationToken)
     {
-        var maxWaitTime = 30000; // 30 seconds max
-        var checkInterval = 1000; // Check every 1 second
+        var maxWaitTime = _config.AjaxWaitTimeout; // Use configurable timeout
+        var baseCheckInterval = 1000; // Base check interval
         var elapsed = 0;
 
         while (elapsed < maxWaitTime)
@@ -414,17 +448,23 @@ public class TcdsScrapingService : IAsyncDisposable
                     if (hasAadtData || hasVolumeData)
                     {
                         _logger.LogInformation("AJAX data appears to be loaded after {ElapsedSeconds} seconds", elapsed / 1000);
-                        await Task.Delay(2000, cancellationToken); // Give it a bit more time to fully settle
+                        await FuzzyWaitAsync(3000, cancellationToken); // Give it a bit more time to fully settle
                         return;
                     }
                 }
 
+                var checkInterval = _config.UseFuzzyWaits ? 
+                    _random.Next((int)(baseCheckInterval * 0.8), (int)(baseCheckInterval * 1.2)) : 
+                    baseCheckInterval;
                 await Task.Delay(checkInterval, cancellationToken);
                 elapsed += checkInterval;
             }
             catch (Exception ex)
             {
                 _logger.LogDebug("Error checking for AJAX data load: {Error}", ex.Message);
+                var checkInterval = _config.UseFuzzyWaits ? 
+                    _random.Next((int)(baseCheckInterval * 0.8), (int)(baseCheckInterval * 1.2)) : 
+                    baseCheckInterval;
                 await Task.Delay(checkInterval, cancellationToken);
                 elapsed += checkInterval;
             }
@@ -433,7 +473,7 @@ public class TcdsScrapingService : IAsyncDisposable
         _logger.LogWarning("AJAX data may not have fully loaded after {MaxWaitSeconds} seconds, proceeding anyway", maxWaitTime / 1000);
     }
 
-    private async Task<LocationInfo> ExtractLocationInfoAsync(IFrame frame)
+    private async Task<LocationInfo> ExtractLocationInfoAsync(IFrame frame, CancellationToken cancellationToken = default)
     {
         var locationInfo = new LocationInfo();
 
@@ -551,7 +591,7 @@ public class TcdsScrapingService : IAsyncDisposable
             }
             
             // Try to expand the "More Detail" section to get Latitude and Longitude
-            await ExpandMoreDetailAndExtractCoordinatesAsync(frame, locationInfo);
+            await ExpandMoreDetailAndExtractCoordinatesAsync(frame, locationInfo, cancellationToken);
             
             _logger.LogInformation("Extracted location info - Location ID: {LocationId}, Located On: {LocatedOn}, Type: {Type}, Lat: {Latitude}, Lng: {Longitude}", 
                 locationInfo.LocationId, locationInfo.LocatedOn, locationInfo.Type, locationInfo.Latitude, locationInfo.Longitude);
@@ -564,7 +604,7 @@ public class TcdsScrapingService : IAsyncDisposable
         return locationInfo;
     }
 
-    private async Task ExpandMoreDetailAndExtractCoordinatesAsync(IFrame frame, LocationInfo locationInfo)
+    private async Task ExpandMoreDetailAndExtractCoordinatesAsync(IFrame frame, LocationInfo locationInfo, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -589,7 +629,7 @@ public class TcdsScrapingService : IAsyncDisposable
                     await expandButton.ClickAsync();
                     
                     // Wait for the section to expand
-                    await Task.Delay(1000);
+                    await FuzzyWaitAsync(1500, cancellationToken);
                 }
                 else
                 {
@@ -819,6 +859,76 @@ public class TcdsScrapingService : IAsyncDisposable
         return trendData;
     }
 
+    public async Task<PageData> GotoRecordAsync(int recordNumber, CancellationToken cancellationToken = default)
+    {
+        if (_page == null)
+        {
+            throw new InvalidOperationException("Browser not initialized");
+        }
+
+        try
+        {
+            _logger.LogInformation("Going to record number {RecordNumber} using Goto Record functionality", recordNumber);
+
+            var leftFrame = _page.Frame("LeftFrame");
+            if (leftFrame == null)
+            {
+                throw new InvalidOperationException("Could not find LeftFrame iframe");
+            }
+
+            // Find the "jump" input field for record number
+            var jumpInput = await leftFrame.QuerySelectorAsync("input[name='jump']");
+            if (jumpInput == null)
+            {
+                throw new InvalidOperationException("Could not find 'jump' input field for Goto Record");
+            }
+
+            // Clear the input and enter the record number
+            _logger.LogInformation("Entering record number {RecordNumber} in Goto Record field", recordNumber);
+            await leftFrame.FillAsync("input[name='jump']", recordNumber.ToString());
+
+            // Find and click the "go" button
+            var goButton = await leftFrame.QuerySelectorAsync("input[name='jump_btn']");
+            if (goButton == null)
+            {
+                throw new InvalidOperationException("Could not find 'go' button for Goto Record");
+            }
+
+            _logger.LogInformation("Clicking 'go' button to navigate to record {RecordNumber}", recordNumber);
+            await goButton.ClickAsync();
+
+            // Wait for the page to navigate to the specified record
+            _logger.LogInformation("Waiting for record {RecordNumber} to load...", recordNumber);
+            await FuzzyWaitAsync(7000, cancellationToken);
+
+            // Wait for AJAX data to load on the new page
+            await WaitForAjaxDataToLoad(leftFrame, cancellationToken);
+
+            // Get updated page data
+            var title = await _page.TitleAsync();
+            var content = await _page.ContentAsync();
+
+            return new PageData
+            {
+                Url = _page.Url,
+                Title = title,
+                Content = content,
+                Metadata = new Dictionary<string, string>
+                {
+                    ["NavigationType"] = "GotoRecord",
+                    ["RecordNumber"] = recordNumber.ToString(),
+                    ["NavigationTimestamp"] = DateTime.UtcNow.ToString("O")
+                },
+                Timestamp = DateTime.UtcNow
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to navigate to record {RecordNumber} using Goto Record", recordNumber);
+            throw;
+        }
+    }
+
     public async Task<PageData> ClickNextRecordAsync(CancellationToken cancellationToken = default)
     {
         if (_page == null)
@@ -875,7 +985,7 @@ public class TcdsScrapingService : IAsyncDisposable
 
             // Wait for the page to navigate to the next record
             _logger.LogInformation("Waiting for next record to load...");
-            await Task.Delay(5000, cancellationToken); // Wait for navigation
+            await FuzzyWaitAsync(7000, cancellationToken); // Wait for navigation
 
             // Wait for AJAX data to load again on the new page
             await WaitForAjaxDataToLoad(leftFrame, cancellationToken);
