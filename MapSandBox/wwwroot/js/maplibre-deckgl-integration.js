@@ -196,13 +196,18 @@ function createTrafficCountsTileLayer(config) {
         id: config.id,
         data: '/tiles/traffic-counts/{z}/{x}/{y}.geojson',
         minZoom: 12,
-        maxZoom: 18,
+        maxZoom: 16,
         tileSize: 512,
         maxCacheSize: 10 * 1024 * 1024, // 10MB cache
         maxCacheByteSize: 50 * 1024 * 1024, // 50MB total
-        refinementStrategy: 'best-available',
+        refinementStrategy: 'never',
         
         renderSubLayers: props => {
+            // Strict zoom enforcement
+            if (props.tile?.z < 12 || props.tile?.z > 16) {
+                return null;
+            }
+            
             return new deck.GeoJsonLayer({
                 ...props,
                 id: `${props.id}-geojson`,
@@ -215,7 +220,7 @@ function createTrafficCountsTileLayer(config) {
                 opacity: 0.9,
                 
                 // Dynamic styling functions
-                getRadius: getTrafficRadius,
+                getPointRadius: getTrafficRadius,
                 getFillColor: getTrafficColor,
                 getLineColor: [0, 0, 0, 255], // black outline
                 getLineWidth: 2,
@@ -226,7 +231,7 @@ function createTrafficCountsTileLayer(config) {
                 
                 // Performance optimizations
                 updateTriggers: {
-                    getRadius: [],
+                    getPointRadius: [],
                     getFillColor: []
                 }
             });

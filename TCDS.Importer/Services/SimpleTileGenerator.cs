@@ -30,11 +30,25 @@ public class SimpleTileGenerator
         await GenerateZoomLevel(validRecords, outputPath, 6, "state-level");
         await GenerateZoomLevel(validRecords, outputPath, 8, "regional-level");
         await GenerateZoomLevel(validRecords, outputPath, 10, "county-level");
-        await GenerateZoomLevel(validRecords, outputPath, 12, "city-level");
-        await GenerateZoomLevel(validRecords, outputPath, 14, "neighborhood-level");
+        
+        // Generate complete coverage for traffic count visibility range (12-16)
+        for (int zoom = 12; zoom <= 16; zoom++)
+        {
+            await GenerateZoomLevel(validRecords, outputPath, zoom, GetZoomDescription(zoom));
+        }
 
         _logger.LogInformation("Tile generation completed successfully");
     }
+
+    private string GetZoomDescription(int zoom) => zoom switch
+    {
+        12 => "city-overview",
+        13 => "city-detail", 
+        14 => "neighborhood",
+        15 => "neighborhood-detail",
+        16 => "street-level",
+        _ => $"zoom-{zoom}"
+    };
 
     private async Task GenerateZoomLevel(List<TrafficCountData> records, string basePath, int zoom, string description)
     {
@@ -61,6 +75,7 @@ public class SimpleTileGenerator
         {
             var tileRecords = GetRecordsInTile(records, tile, zoom);
             
+            // Only generate tiles that contain data (sparse data optimization)
             if (tileRecords.Any())
             {
                 await GenerateTileFile(tileRecords, zoomPath, tile.X, tile.Y);
