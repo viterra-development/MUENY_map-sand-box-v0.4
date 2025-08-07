@@ -26,6 +26,7 @@ builder.Services.Configure<TcdsConfiguration>(
 
 builder.Services.AddTransient<TcdsScrapingService>();
 builder.Services.AddTransient<SimpleTileGenerator>();
+builder.Services.AddTransient<RoadTrafficMerger>();
 
 builder.Logging.AddConsole();
 
@@ -33,6 +34,14 @@ var host = builder.Build();
 
 var logger = host.Services.GetRequiredService<ILogger<Program>>();
 var tileGenerator = host.Services.GetRequiredService<SimpleTileGenerator>();
+
+// Check if running in road-traffic merge mode
+var mergeRoadsMode = args.Contains("--merge-roads");
+
+if (mergeRoadsMode)
+{
+    return await RunRoadTrafficMergeMode(host, logger, solutionRoot);
+}
 
 // Check if running in tiles-only mode
 var tilesOnlyMode = args.Contains("--tiles-only");
@@ -850,6 +859,55 @@ static async Task<int> ExecuteBatchRun(IHost host, int minPage, int maxPage, boo
     finally
     {
         await scrapingService.DisposeAsync();
+    }
+}
+
+static async Task<int> RunRoadTrafficMergeMode(IHost host, ILogger logger, string solutionRoot)
+{
+    try
+    {
+        logger.LogInformation("🛣️ Starting Road-Traffic Merge Mode");
+        
+        var roadTrafficMerger = host.Services.GetRequiredService<RoadTrafficMerger>();
+        
+        // Define input and output paths
+        var roadGeoJsonPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker-county-roads.geojson");
+        var trafficGeoJsonPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker_county_traffic_locations_20250731_111008.geojson");
+        var outputDirectory = Path.Combine(solutionRoot, "MapSandBox", "wwwroot");
+        
+        logger.LogInformation("📍 Input paths:");
+        logger.LogInformation("   • Roads: {RoadPath}", roadGeoJsonPath);
+        logger.LogInformation("   • Traffic: {TrafficPath}", trafficGeoJsonPath);
+        logger.LogInformation("   • Output: {OutputDir}", outputDirectory);
+        
+        // Verify input files exist
+        if (!File.Exists(roadGeoJsonPath))
+        {
+            logger.LogError("❌ Roads file not found: {RoadPath}", roadGeoJsonPath);
+            return 1;
+        }
+        
+        if (!File.Exists(trafficGeoJsonPath))
+        {
+            logger.LogError("❌ Traffic file not found: {TrafficPath}", trafficGeoJsonPath);
+            return 1;
+        }
+        
+        // Perform the merge
+        var outputPath = await roadTrafficMerger.MergeRoadTrafficDataAsync(
+            roadGeoJsonPath, 
+            trafficGeoJsonPath, 
+            outputDirectory);
+        
+        logger.LogInformation("🎉 Road-Traffic merge completed successfully!");
+        logger.LogInformation("📁 Enhanced dataset created: {OutputPath}", outputPath);
+        
+        return 0;
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "❌ Road-Traffic merge failed: {Error}", ex.Message);
+        return 1;
     }
 }
 

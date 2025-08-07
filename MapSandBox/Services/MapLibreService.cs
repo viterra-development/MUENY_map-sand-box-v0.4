@@ -120,7 +120,7 @@ public class MapLibreService
             },
             new LayerConfig
             {
-                Id = "parker-roads",
+                Id = "parker-roads-base",
                 Type = "GeoJson",
                 DataUrl = "/parker-county-roads.geojson",
                 Visible = true,
@@ -128,12 +128,33 @@ public class MapLibreService
                 {
                     ["stroked"] = true,
                     ["filled"] = false,
+                    ["getLineColor"] = new int[] { 120, 120, 120, 128 }, // Gray for base roads
+                    ["getLineWidth"] = 1,
                     ["lineWidthMinPixels"] = 1,
-                    ["lineWidthMaxPixels"] = 4,
-                    ["getLineColor"] = new int[] { 100, 100, 100 },
-                    ["getLineWidth"] = "getRoadWidth",
+                    ["opacity"] = 0.6,
                     ["pickable"] = true,
                     ["onClick"] = "handleRoadClick"
+                }
+            },
+            new LayerConfig
+            {
+                Id = "parker-roads-traffic",
+                Type = "Path",
+                DataUrl = "/parker-roads-with-traffic.geojson",
+                Visible = true,
+                Properties = new Dictionary<string, object>
+                {
+                    ["getPath"] = "getCoordinates",
+                    ["getColor"] = "getTrafficGradientColor",
+                    ["getWidth"] = "getTrafficWidth",
+                    ["widthMinPixels"] = 2,
+                    ["widthMaxPixels"] = 12,
+                    ["capRounded"] = true,
+                    ["jointRounded"] = true,
+                    ["opacity"] = 0.9,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleTrafficRoadClick"
                 }
             },
             new LayerConfig
@@ -183,7 +204,8 @@ public class MapLibreService
             new LayerInfo { Id = "rivers", Name = "Rivers", Visible = true },
             new LayerInfo { Id = "airports", Name = "Airports", Visible = true },
             new LayerInfo { Id = "flight-paths", Name = "Flight Paths", Visible = true },
-            new LayerInfo { Id = "parker-roads", Name = "Parker County Roads", Visible = true },
+            new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = true },
+            new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = true },
             new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = true },
             new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = true }
         };

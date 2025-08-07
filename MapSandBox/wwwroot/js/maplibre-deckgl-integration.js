@@ -120,6 +120,57 @@ function createLayersFromConfig(layerConfigs) {
                     ...getLayerProperties(config)
                 }));
                 break;
+            case 'path':
+                // Special handling for Path layers (like traffic roads)
+                console.log('Creating PathLayer with config:', config);
+                const pathLayer = new deck.PathLayer({
+                    id: config.id,
+                    data: config.dataUrl,
+                    dataTransform: d => {
+                        console.log('PathLayer dataTransform called with:', d);
+                        if (d && d.features) {
+                            console.log('Extracting features array from FeatureCollection');
+                            return d.features; // Extract features from GeoJSON FeatureCollection
+                        }
+                        return d;
+                    },
+                    getPath: d => {
+                        console.log('PathLayer getPath called with feature:', d);
+                        console.log('Feature geometry:', d.geometry);
+                        console.log('Coordinates length:', d.geometry?.coordinates?.length);
+                        console.log('First coordinate:', d.geometry?.coordinates?.[0]);
+                        return d.geometry.coordinates;
+                    },
+                    getColor: d => {
+                        const color = getTrafficGradientColor(d);
+                        console.log('PathLayer getColor called, AADT:', d.properties?.traffic?.aadt, 'Color:', color);
+                        return color;
+                    },
+                    getWidth: d => {
+                        const width = getTrafficWidth(d);
+                        console.log('PathLayer getWidth called, AADT:', d.properties?.traffic?.aadt, 'Width:', width);
+                        return width;
+                    },
+                    // Simplified configuration to match deck.gl docs
+                    widthScale: 1,
+                    widthMinPixels: 2,
+                    widthMaxPixels: 50,
+                    rounded: true,
+                    pickable: true,
+                    autoHighlight: true,
+                    onClick: handleTrafficRoadClick,
+                    onDataLoad: data => {
+                        console.log('PathLayer data loaded:', data);
+                        if (data && data.features) {
+                            console.log('Features count:', data.features.length);
+                            console.log('First feature geometry type:', data.features[0]?.geometry?.type);
+                            console.log('First coordinate pair:', data.features[0]?.geometry?.coordinates?.[0]);
+                        }
+                    }
+                });
+                console.log('PathLayer created:', pathLayer);
+                layers.push(pathLayer);
+                break;
             case 'greatcircle':
                 layers.push(new deck.GreatCircleLayer({
                     id: config.id,
@@ -169,6 +220,19 @@ function getLayerProperties(config) {
             properties.dataTransform = d => d.features.filter(f => f.properties.scalerank < 4);
             properties.getSourcePosition = f => [-0.4531566, 51.4709959]; // London
             properties.getTargetPosition = f => f.geometry.coordinates;
+            break;
+        case 'parker-roads-base':
+            properties.stroked = true;
+            properties.filled = false;
+            properties.lineWidthMinPixels = 1;
+            properties.opacity = 0.6;
+            properties.getLineColor = [120, 120, 120, 128]; // Gray for base roads
+            properties.getLineWidth = 1;
+            properties.pickable = true;
+            properties.onClick = handleRoadClick;
+            break;
+        case 'parker-roads-traffic':
+            // Path layer properties are handled in createLayersFromConfig
             break;
         case 'parker-roads':
             properties.stroked = true;
@@ -354,6 +418,71 @@ Latest Traffic Data:
 Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
         
         alert(message);
+    }
+}
+
+// Traffic gradient styling functions for roads with traffic data
+function getTrafficGradientColor(feature) {
+    const aadt = feature.properties.traffic?.aadt || 0;
+    if (aadt < 10) return [120, 120, 120, 128]; // Gray for very low/no data
+    
+    const logAADT = Math.log10(aadt);
+    const minLog = 1.0;  // log₁₀(10) - practical minimum
+    const maxLog = 5.2;  // log₁₀(158,869) - observed maximum from plan
+    
+    // Normalize to 0-1 range
+    const ratio = Math.min(Math.max((logAADT - minLog) / (maxLog - minLog), 0), 1);
+    
+    // Smooth color interpolation: Green → Yellow → Red
+    const red = Math.floor(255 * ratio);
+    const green = Math.floor(255 * (1 - ratio));
+    
+    return [red, green, 0, 180];
+}
+
+function getTrafficWidth(feature) {
+    const aadt = feature.properties.traffic?.aadt || 0;
+    if (aadt < 10) return 1; // Minimal width for very low traffic
+    
+    const logAADT = Math.log10(aadt);
+    const minLog = 1.0;  // log₁₀(10)
+    const maxLog = 5.2;  // log₁₀(158,869)
+    
+    // Normalize and scale to width range
+    const ratio = Math.min(Math.max((logAADT - minLog) / (maxLog - minLog), 0), 1);
+    return 2 + (ratio * 8); // 2-10 pixel width range
+}
+
+function handleTrafficRoadClick(info) {
+    if (info.object) {
+        const road = info.object;
+        const roadName = road.properties.FULLNAME || 'Unnamed Road';
+        const roadType = road.properties.RTTYP || 'Unknown';
+        const roadTypeName = getRoadTypeName(roadType);
+        
+        const traffic = road.properties.traffic;
+        if (traffic) {
+            const aadt = traffic.aadt || 'No data';
+            const aadtYear = traffic.aadtYear || '';
+            const locationId = traffic.locationId || 'Unknown';
+            const locatedOn = traffic.locatedOn || 'Unknown';
+            
+            const message = `Traffic Road: ${roadName}
+────────────────────────
+Road Type: ${roadTypeName} (${roadType})
+Traffic Location ID: ${locationId}
+Located On: ${locatedOn}
+
+Traffic Data:
+• AADT (${aadtYear}): ${aadt.toLocaleString()} vehicles/day
+
+Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
+            
+            alert(message);
+        } else {
+            // Fallback for roads without traffic data
+            handleRoadClick(info);
+        }
     }
 }
 
