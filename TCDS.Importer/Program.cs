@@ -870,14 +870,14 @@ static async Task<int> RunRoadTrafficMergeMode(IHost host, ILogger logger, strin
         
         var roadTrafficMerger = host.Services.GetRequiredService<RoadTrafficMerger>();
         
-        // Define input and output paths
+        // Define input and output paths - use MASTER data instead of limited GeoJSON
         var roadGeoJsonPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker-county-roads.geojson");
-        var trafficGeoJsonPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker_county_traffic_locations_20250731_111008.geojson");
+        var masterDataPath = Path.Combine(solutionRoot, "TCDS.Importer", "Data", "parker_county_traffic_data_MASTER.json");
         var outputDirectory = Path.Combine(solutionRoot, "MapSandBox", "wwwroot");
         
         logger.LogInformation("📍 Input paths:");
         logger.LogInformation("   • Roads: {RoadPath}", roadGeoJsonPath);
-        logger.LogInformation("   • Traffic: {TrafficPath}", trafficGeoJsonPath);
+        logger.LogInformation("   • Traffic MASTER data: {MasterPath}", masterDataPath);
         logger.LogInformation("   • Output: {OutputDir}", outputDirectory);
         
         // Verify input files exist
@@ -887,16 +887,16 @@ static async Task<int> RunRoadTrafficMergeMode(IHost host, ILogger logger, strin
             return 1;
         }
         
-        if (!File.Exists(trafficGeoJsonPath))
+        if (!File.Exists(masterDataPath))
         {
-            logger.LogError("❌ Traffic file not found: {TrafficPath}", trafficGeoJsonPath);
+            logger.LogError("❌ MASTER traffic data file not found: {MasterPath}", masterDataPath);
             return 1;
         }
         
-        // Perform the merge
-        var outputPath = await roadTrafficMerger.MergeRoadTrafficDataAsync(
+        // Perform the merge using MASTER data
+        var outputPath = await roadTrafficMerger.MergeRoadTrafficDataFromMasterAsync(
             roadGeoJsonPath, 
-            trafficGeoJsonPath, 
+            masterDataPath, 
             outputDirectory);
         
         logger.LogInformation("🎉 Road-Traffic merge completed successfully!");
