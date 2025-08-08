@@ -19,12 +19,7 @@
             // Create the map
             await JS.InvokeVoidAsync("arcgisInterop.createMap", "arcgis-map", apiKey);
             
-            // Wait a moment for map to initialize, then add layers
-            await Task.Delay(1000);
-            
-            // Add data layers
-            await JS.InvokeVoidAsync("arcgisInterop.addRiversLayer");
-            await JS.InvokeVoidAsync("arcgisInterop.addAirportsLayer");
+            // Map created; no demo layers added
         }
     }
 

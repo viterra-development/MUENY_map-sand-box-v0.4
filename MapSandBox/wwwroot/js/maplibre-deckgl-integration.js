@@ -191,23 +191,6 @@ function getLayerProperties(config) {
             properties.getLineColor = [60, 60, 60];
             properties.getFillColor = [200, 200, 200];
             break;
-        case 'rivers':
-            properties.stroked = true;
-            properties.filled = false;
-            properties.lineWidthMinPixels = 1;
-            properties.opacity = 0.6;
-            properties.getLineColor = [100, 150, 255];
-            properties.getFillColor = [100, 150, 255];
-            break;
-        case 'airports':
-            properties.getPointRadius = f => (11 - f.properties.scalerank);
-            properties.onClick = info => info.object && alert(`${info.object.properties.name} (${info.object.properties.abbrev})`);
-            break;
-        case 'flight-paths':
-            properties.dataTransform = d => d.features.filter(f => f.properties.scalerank < 4);
-            properties.getSourcePosition = f => [-0.4531566, 51.4709959]; // London
-            properties.getTargetPosition = f => f.geometry.coordinates;
-            break;
         case 'parker-roads-base':
             properties.stroked = true;
             properties.filled = false;

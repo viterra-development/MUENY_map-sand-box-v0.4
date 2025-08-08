@@ -83,43 +83,6 @@ public class MapLibreService
         {
             new LayerConfig
             {
-                Id = "rivers",
-                Type = "GeoJson",
-                DataUrl = "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_rivers_lake_centerlines.geojson",
-                Visible = true,
-                Properties = new Dictionary<string, object>()
-            },
-            new LayerConfig
-            {
-                Id = "airports",
-                Type = "GeoJson",
-                DataUrl = "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson",
-                Visible = true,
-                Properties = new Dictionary<string, object>
-                {
-                    ["filled"] = true,
-                    ["pointRadiusMinPixels"] = 2,
-                    ["pointRadiusScale"] = 2000,
-                    ["getFillColor"] = new int[] { 200, 0, 80, 180 },
-                    ["pickable"] = true,
-                    ["autoHighlight"] = true
-                }
-            },
-            new LayerConfig
-            {
-                Id = "flight-paths",
-                Type = "GreatCircle",
-                DataUrl = "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson",
-                Visible = true,
-                Properties = new Dictionary<string, object>
-                {
-                    ["getSourceColor"] = new int[] { 0, 128, 200 },
-                    ["getTargetColor"] = new int[] { 200, 0, 80 },
-                    ["getWidth"] = 1
-                }
-            },
-            new LayerConfig
-            {
                 Id = "parker-roads-base",
                 Type = "GeoJson",
                 DataUrl = "/parker-county-roads.geojson",
@@ -201,9 +164,6 @@ public class MapLibreService
     {
         return new List<LayerInfo>
         {
-            new LayerInfo { Id = "rivers", Name = "Rivers", Visible = true },
-            new LayerInfo { Id = "airports", Name = "Airports", Visible = true },
-            new LayerInfo { Id = "flight-paths", Name = "Flight Paths", Visible = true },
             new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = true },
             new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = true },
             new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = true },
