@@ -1,0 +1,13 @@
+@page "/maplibre"
+@page "/maplibre/"
+@inject NavigationManager NavigationManager
+
+<p>Redirecting…</p>
+
+@code {
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("/", replace: true);
+    }
+}
+
