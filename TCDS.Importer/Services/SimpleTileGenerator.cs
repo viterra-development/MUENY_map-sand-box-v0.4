@@ -13,13 +13,14 @@ public class SimpleTileGenerator
         _logger = logger;
     }
 
-    public async Task GenerateTiles(List<TrafficCountData> trafficData, string outputPath)
+    public async Task GenerateTiles(List<TrafficCountData> trafficData, string outputPath, bool excludeInactiveStations = true)
     {
-        _logger.LogInformation("Generating tiles for {RecordCount} traffic records", trafficData.Count);
+        _logger.LogInformation("Generating tiles for {RecordCount} traffic records (excludeInactive: {ExcludeInactive})", trafficData.Count, excludeInactiveStations);
 
-        // Filter records with valid coordinates
+        // Filter records with valid coordinates and optionally exclude inactive stations
         var validRecords = trafficData
             .Where(r => r.LocationInfo.Latitude.HasValue && r.LocationInfo.Longitude.HasValue)
+            .Where(r => !excludeInactiveStations || r.LocationInfo.Active != "No")
             .ToList();
 
         _logger.LogInformation("Found {ValidCount} records with valid coordinates", validRecords.Count);
