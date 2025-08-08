@@ -408,21 +408,22 @@ function getRoadTypeName(rttyp) {
     }
 }
 
+// Unified log scale parameters for consistent station and road styling
+const TRAFFIC_LOG_MIN = 1.0;  // log₁₀(10) - practical minimum
+const TRAFFIC_LOG_MAX = 5.2;  // log₁₀(158,869) - observed maximum
+
 // Traffic count styling functions
 function getTrafficRadius(feature) {
     const aadt = feature.properties.latestAadt;
-    if (!aadt) return 5; // Default size for no data
+    if (!aadt || aadt < 10) return 5; // Default size for no/low data
     
-    // Scale radius based on AADT value (logarithmic scale)
-    // AADT ranges from ~90 to ~8400 in the data
+    // Scale radius using unified log10 scale
     const minRadius = 5;
     const maxRadius = 25;
-    const logAadt = Math.log(Math.max(aadt, 1));
-    const logMin = Math.log(90);
-    const logMax = Math.log(8400);
+    const logAadt = Math.log10(aadt);
     
-    const normalizedValue = (logAadt - logMin) / (logMax - logMin);
-    return minRadius + (maxRadius - minRadius) * Math.max(0, Math.min(1, normalizedValue));
+    const normalizedValue = Math.min(Math.max((logAadt - TRAFFIC_LOG_MIN) / (TRAFFIC_LOG_MAX - TRAFFIC_LOG_MIN), 0), 1);
+    return minRadius + (maxRadius - minRadius) * normalizedValue;
 }
 
 function getTrafficColor(feature) {
@@ -434,22 +435,18 @@ function getTrafficColor(feature) {
         return [128, 128, 128, 180]; // Gray for inactive
     }
     
-    if (!aadt) {
-        return [200, 200, 200, 180]; // Light gray for no data
+    if (!aadt || aadt < 10) {
+        return [200, 200, 200, 180]; // Light gray for no/low data
     }
     
-    // Color scale based on AADT value (traffic volume)
-    if (aadt >= 5000) {
-        return [255, 0, 0, 200];     // Red for high traffic (5000+)
-    } else if (aadt >= 1000) {
-        return [255, 165, 0, 200];   // Orange for medium-high traffic (1000-5000)
-    } else if (aadt >= 500) {
-        return [255, 255, 0, 200];   // Yellow for medium traffic (500-1000)
-    } else if (aadt >= 100) {
-        return [0, 255, 0, 200];     // Green for low traffic (100-500)
-    } else {
-        return [0, 0, 255, 200];     // Blue for very low traffic (<100)
-    }
+    // Continuous log scale color matching road gradient: Green → Yellow → Red
+    const logAadt = Math.log10(aadt);
+    const ratio = Math.min(Math.max((logAadt - TRAFFIC_LOG_MIN) / (TRAFFIC_LOG_MAX - TRAFFIC_LOG_MIN), 0), 1);
+    
+    const red = Math.floor(255 * ratio);
+    const green = Math.floor(255 * (1 - ratio));
+    
+    return [red, green, 0, 200];
 }
 
 function handleTrafficCountClick(info) {
@@ -489,11 +486,9 @@ function getTrafficGradientColor(feature) {
     if (aadt < 10) return [120, 120, 120, 128]; // Gray for very low/no data
     
     const logAADT = Math.log10(aadt);
-    const minLog = 1.0;  // log₁₀(10) - practical minimum
-    const maxLog = 5.2;  // log₁₀(158,869) - observed maximum from plan
     
-    // Normalize to 0-1 range
-    const ratio = Math.min(Math.max((logAADT - minLog) / (maxLog - minLog), 0), 1);
+    // Normalize using unified log scale parameters
+    const ratio = Math.min(Math.max((logAADT - TRAFFIC_LOG_MIN) / (TRAFFIC_LOG_MAX - TRAFFIC_LOG_MIN), 0), 1);
     
     // Smooth color interpolation: Green → Yellow → Red
     const red = Math.floor(255 * ratio);
@@ -507,11 +502,9 @@ function getTrafficWidth(feature) {
     if (aadt < 10) return 1; // Minimal width for very low traffic
     
     const logAADT = Math.log10(aadt);
-    const minLog = 1.0;  // log₁₀(10)
-    const maxLog = 5.2;  // log₁₀(158,869)
     
-    // Normalize and scale to width range
-    const ratio = Math.min(Math.max((logAADT - minLog) / (maxLog - minLog), 0), 1);
+    // Normalize using unified log scale parameters and scale to width range
+    const ratio = Math.min(Math.max((logAADT - TRAFFIC_LOG_MIN) / (TRAFFIC_LOG_MAX - TRAFFIC_LOG_MIN), 0), 1);
     return 2 + (ratio * 8); // 2-10 pixel width range
 }
 

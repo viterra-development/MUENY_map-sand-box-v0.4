@@ -17,7 +17,7 @@ public class RoadTrafficMerger
         _logger = logger;
     }
     
-    public async Task<string> MergeRoadTrafficDataAsync(string roadGeoJsonPath, string trafficGeoJsonPath, string outputDirectory)
+    public async Task<string> MergeRoadTrafficDataAsync(string roadGeoJsonPath, string trafficGeoJsonPath, string outputDirectory, bool excludeInactiveStations = true)
     {
         _logger.LogInformation("🚦 Starting Traffic-Road Data Merger");
         
@@ -60,7 +60,21 @@ public class RoadTrafficMerger
             throw new InvalidOperationException("Failed to parse traffic GeoJSON data");
         }
         
-        _logger.LogInformation("   ✅ Loaded {TrafficCount} traffic count locations", trafficData.Features.Count);
+        // Filter out inactive stations if requested
+        if (excludeInactiveStations && trafficData.Features != null)
+        {
+            var originalCount = trafficData.Features.Count;
+            trafficData.Features = trafficData.Features
+                .Where(f => f.Properties?.TryGetValue("active", out var active) != true || active?.ToString() != "No")
+                .ToList();
+            _logger.LogInformation("   ✅ Loaded {TrafficCount} traffic count locations, filtered to {FilteredCount} active stations (excludeInactive: {ExcludeInactive})", 
+                originalCount, trafficData.Features.Count, excludeInactiveStations);
+        }
+        else
+        {
+            _logger.LogInformation("   ✅ Loaded {TrafficCount} traffic count locations (excludeInactive: {ExcludeInactive})", 
+                trafficData.Features.Count, excludeInactiveStations);
+        }
         
         // 3. Perform spatial intersection
         _logger.LogInformation("🔍 Performing spatial intersection with buffer distance: {BufferDistance} degrees (~100m)", BUFFER_DISTANCE);
@@ -202,7 +216,7 @@ public class RoadTrafficMerger
         return outputPath;
     }
 
-    public async Task<string> MergeRoadTrafficDataFromMasterAsync(string roadGeoJsonPath, string masterDataPath, string outputDirectory)
+    public async Task<string> MergeRoadTrafficDataFromMasterAsync(string roadGeoJsonPath, string masterDataPath, string outputDirectory, bool excludeInactiveStations = true)
     {
         _logger.LogInformation("🚦 Starting Traffic-Road Data Merger (using MASTER data)");
         
@@ -255,15 +269,16 @@ public class RoadTrafficMerger
             throw new InvalidOperationException("Failed to parse MASTER traffic data");
         }
         
-        // Filter records with valid coordinates and latest AADT data
+        // Filter records with valid coordinates, latest AADT data, and optionally exclude inactive stations
         var validTrafficLocations = trafficRecords
             .Where(r => r.LocationInfo?.Latitude.HasValue == true && 
                        r.LocationInfo?.Longitude.HasValue == true &&
                        r.AadtData?.Any() == true)
+            .Where(r => !excludeInactiveStations || r.LocationInfo?.Active != "No")
             .ToList();
         
-        _logger.LogInformation("   ✅ Loaded {TotalRecords} total records, {ValidCount} with valid coordinates and AADT data", 
-            trafficRecords.Count, validTrafficLocations.Count);
+        _logger.LogInformation("   ✅ Loaded {TotalRecords} total records, {ValidCount} with valid coordinates and AADT data (excludeInactive: {ExcludeInactive})", 
+            trafficRecords.Count, validTrafficLocations.Count, excludeInactiveStations);
         
         // 3. Perform spatial intersection
         _logger.LogInformation("🔍 Performing spatial intersection with buffer distance: {BufferDistance} degrees (~100m)", BUFFER_DISTANCE);
