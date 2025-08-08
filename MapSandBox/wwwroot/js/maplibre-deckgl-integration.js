@@ -127,28 +127,20 @@ function createLayersFromConfig(layerConfigs) {
                     id: config.id,
                     data: config.dataUrl,
                     dataTransform: d => {
-                        console.log('PathLayer dataTransform called with:', d);
                         if (d && d.features) {
-                            console.log('Extracting features array from FeatureCollection');
                             return d.features; // Extract features from GeoJSON FeatureCollection
                         }
                         return d;
                     },
                     getPath: d => {
-                        console.log('PathLayer getPath called with feature:', d);
-                        console.log('Feature geometry:', d.geometry);
-                        console.log('Coordinates length:', d.geometry?.coordinates?.length);
-                        console.log('First coordinate:', d.geometry?.coordinates?.[0]);
                         return d.geometry.coordinates;
                     },
                     getColor: d => {
                         const color = getTrafficGradientColor(d);
-                        console.log('PathLayer getColor called, AADT:', d.properties?.traffic?.aadt, 'Color:', color);
                         return color;
                     },
                     getWidth: d => {
                         const width = getTrafficWidth(d);
-                        console.log('PathLayer getWidth called, AADT:', d.properties?.traffic?.aadt, 'Width:', width);
                         return width;
                     },
                     // Simplified configuration to match deck.gl docs
@@ -256,7 +248,8 @@ function getLayerProperties(config) {
 
 // Traffic Counts TileLayer factory
 function createTrafficCountsTileLayer(config) {
-    return new deck.TileLayer({
+    console.log('Creating TileLayer for traffic-counts with config:', config);
+    const tileLayer = new deck.TileLayer({
         id: config.id,
         data: '/tiles/traffic-counts/{z}/{x}/{y}.geojson',
         minZoom: 12,
@@ -266,32 +259,97 @@ function createTrafficCountsTileLayer(config) {
         maxCacheByteSize: 50 * 1024 * 1024, // 50MB total
         refinementStrategy: 'never',
         
+        // Enable picking on the TileLayer itself
+        pickable: true,
+        
+        // TileLayer-level event handlers (deck.gl routes sublayer events here)
+        onHover: (info) => {
+            if (info.object) {
+                console.log('✅ HOVERING OVER TRAFFIC COUNT:', info.object.properties.locationId);
+                console.log('Position:', info.coordinate);
+                // Change cursor to indicate clickable
+                document.body.style.cursor = 'pointer';
+            } else {
+                console.log('❌ NOT HOVERING OVER ANYTHING at:', info.coordinate);
+                document.body.style.cursor = 'default';
+            }
+            return true;
+        },
+        
+        onClick: (info) => {
+            console.log('🖱️ TILELAYER CLICK EVENT DETECTED!');
+            console.log('Click info object:', info);
+            console.log('Has picked object:', !!info.object);
+            if (info.object) {
+                console.log('✅ CLICKED ON TRAFFIC COUNT:', info.object.properties.locationId);
+                console.log('Object properties:', info.object.properties);
+                return handleTrafficCountClick(info);
+            } else {
+                console.log('❌ NO OBJECT PICKED - click missed');
+                return false;
+            }
+        },
+        
+        // Add data loading callbacks for debugging
+        onTileLoad: (tile) => {
+            console.log('Tile loaded:', tile.index, 'data:', tile.data);
+        },
+        onTileError: (error) => {
+            console.error('Tile loading error:', error);
+        },
+        
         renderSubLayers: props => {
-            // Strict zoom enforcement
-            if (props.tile?.z < 12 || props.tile?.z > 16) {
+            console.log('TileLayer renderSubLayers called with props:', props);
+            console.log('Tile info:', props.tile);
+            console.log('Data:', props.data);
+            console.log('Data type:', typeof props.data);
+            console.log('Data is array:', Array.isArray(props.data));
+            
+            // Strict zoom enforcement using correct tile structure
+            const tileZ = props.tile?.index?.z;
+            if (tileZ < 12 || tileZ > 16) {
+                console.log('Zoom level outside range:', tileZ, 'returning null');
                 return null;
             }
+            
+            // Skip rendering if no data is available yet
+            if (!props.data) {
+                console.log('No data available for tile, skipping render');
+                return null;
+            }
+            
+            console.log('Creating GeoJsonLayer sublayer for tile:', props.tile.index?.x, props.tile.index?.y, props.tile.index?.z);
+            console.log('Data features count:', props.data.features ? props.data.features.length : 'No features property');
             
             return new deck.GeoJsonLayer({
                 ...props,
                 id: `${props.id}-geojson`,
                 
-                // Styling properties
+                // Styling properties - Enhanced for debugging
                 stroked: true,
                 filled: true,
-                pointRadiusMinPixels: 3,
+                pointRadiusMinPixels: 8,  // Larger minimum for debugging
                 pointRadiusMaxPixels: 50,
                 opacity: 0.9,
                 
                 // Dynamic styling functions
-                getPointRadius: getTrafficRadius,
-                getFillColor: getTrafficColor,
-                getLineColor: [0, 0, 0, 255], // black outline
-                getLineWidth: 2,
+                getPointRadius: (feature) => {
+                    const radius = getTrafficRadius(feature);
+                    console.log(`Point radius for ${feature.properties.locationId}: ${radius}`);
+                    return Math.max(radius, 12); // Ensure minimum 12px for debugging
+                },
+                getFillColor: (feature) => {
+                    const color = getTrafficColor(feature);
+                    console.log(`Point color for ${feature.properties.locationId}:`, color);
+                    return color;
+                },
+                getLineColor: [255, 0, 255, 255], // Magenta outline for debugging visibility
+                getLineWidth: 3, // Thicker outline for debugging
                 
-                // Interactions
+                // Interactions - Let TileLayer handle events (deck.gl routes them up)
                 pickable: true,
-                onClick: handleTrafficCountClick,
+                autoHighlight: true,
+                highlightColor: [255, 255, 0, 200], // Bright yellow highlight for debugging
                 
                 // Performance optimizations
                 updateTriggers: {
@@ -301,6 +359,9 @@ function createTrafficCountsTileLayer(config) {
             });
         }
     });
+    
+    console.log('TileLayer created:', tileLayer);
+    return tileLayer;
 }
 
 // Road styling functions
@@ -392,6 +453,7 @@ function getTrafficColor(feature) {
 }
 
 function handleTrafficCountClick(info) {
+    console.log('Traffic count clicked:', info);
     if (info.object) {
         const location = info.object.properties;
         const locationId = location.locationId || 'Unknown';
