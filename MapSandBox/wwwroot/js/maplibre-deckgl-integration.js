@@ -152,15 +152,10 @@ function createLayersFromConfig(layerConfigs) {
                     autoHighlight: true,
                     onClick: handleTrafficRoadClick,
                     onDataLoad: data => {
-                        console.log('PathLayer data loaded:', data);
                         if (data && data.features) {
-                            console.log('Features count:', data.features.length);
-                            console.log('First feature geometry type:', data.features[0]?.geometry?.type);
-                            console.log('First coordinate pair:', data.features[0]?.geometry?.coordinates?.[0]);
                         }
                     }
                 });
-                console.log('PathLayer created:', pathLayer);
                 layers.push(pathLayer);
                 break;
             case 'greatcircle':
@@ -265,27 +260,18 @@ function createTrafficCountsTileLayer(config) {
         // TileLayer-level event handlers (deck.gl routes sublayer events here)
         onHover: (info) => {
             if (info.object) {
-                console.log('✅ HOVERING OVER TRAFFIC COUNT:', info.object.properties.locationId);
-                console.log('Position:', info.coordinate);
                 // Change cursor to indicate clickable
                 document.body.style.cursor = 'pointer';
             } else {
-                console.log('❌ NOT HOVERING OVER ANYTHING at:', info.coordinate);
                 document.body.style.cursor = 'default';
             }
             return true;
         },
         
         onClick: (info) => {
-            console.log('🖱️ TILELAYER CLICK EVENT DETECTED!');
-            console.log('Click info object:', info);
-            console.log('Has picked object:', !!info.object);
             if (info.object) {
-                console.log('✅ CLICKED ON TRAFFIC COUNT:', info.object.properties.locationId);
-                console.log('Object properties:', info.object.properties);
                 return handleTrafficCountClick(info);
             } else {
-                console.log('❌ NO OBJECT PICKED - click missed');
                 return false;
             }
         },
@@ -299,27 +285,16 @@ function createTrafficCountsTileLayer(config) {
         },
         
         renderSubLayers: props => {
-            console.log('TileLayer renderSubLayers called with props:', props);
-            console.log('Tile info:', props.tile);
-            console.log('Data:', props.data);
-            console.log('Data type:', typeof props.data);
-            console.log('Data is array:', Array.isArray(props.data));
-            
             // Strict zoom enforcement using correct tile structure
             const tileZ = props.tile?.index?.z;
             if (tileZ < 12 || tileZ > 16) {
-                console.log('Zoom level outside range:', tileZ, 'returning null');
                 return null;
             }
             
             // Skip rendering if no data is available yet
             if (!props.data) {
-                console.log('No data available for tile, skipping render');
                 return null;
             }
-            
-            console.log('Creating GeoJsonLayer sublayer for tile:', props.tile.index?.x, props.tile.index?.y, props.tile.index?.z);
-            console.log('Data features count:', props.data.features ? props.data.features.length : 'No features property');
             
             return new deck.GeoJsonLayer({
                 ...props,
@@ -328,28 +303,23 @@ function createTrafficCountsTileLayer(config) {
                 // Styling properties - Enhanced for debugging
                 stroked: true,
                 filled: true,
-                pointRadiusMinPixels: 8,  // Larger minimum for debugging
+                pointRadiusMinPixels: 4,
                 pointRadiusMaxPixels: 50,
                 opacity: 0.9,
                 
                 // Dynamic styling functions
                 getPointRadius: (feature) => {
                     const radius = getTrafficRadius(feature);
-                    console.log(`Point radius for ${feature.properties.locationId}: ${radius}`);
-                    return Math.max(radius, 12); // Ensure minimum 12px for debugging
+                    return radius;
                 },
                 getFillColor: (feature) => {
                     const color = getTrafficColor(feature);
-                    console.log(`Point color for ${feature.properties.locationId}:`, color);
                     return color;
                 },
-                getLineColor: [255, 0, 255, 255], // Magenta outline for debugging visibility
-                getLineWidth: 3, // Thicker outline for debugging
                 
                 // Interactions - Let TileLayer handle events (deck.gl routes them up)
                 pickable: true,
                 autoHighlight: true,
-                highlightColor: [255, 255, 0, 200], // Bright yellow highlight for debugging
                 
                 // Performance optimizations
                 updateTriggers: {
@@ -360,7 +330,6 @@ function createTrafficCountsTileLayer(config) {
         }
     });
     
-    console.log('TileLayer created:', tileLayer);
     return tileLayer;
 }
 
