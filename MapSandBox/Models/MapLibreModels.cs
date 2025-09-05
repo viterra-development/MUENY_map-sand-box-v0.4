@@ -34,3 +34,25 @@ public class MapLibreClickEventArgs
     public object? Object { get; set; }
     public string LayerId { get; set; } = "";
 }
+
+public class RoadPopupData
+{
+    public required string RoadName { get; set; }
+    public required string RoadType { get; set; }
+    public required string RoadTypeName { get; set; }
+    public int? AADT { get; set; }
+    public string? AADTYear { get; set; }
+    public int? DHV30 { get; set; }
+    public string? LocationId { get; set; }
+    public string? LocatedOn { get; set; }
+    public string? LinearId { get; set; }
+    public string? MTFCC { get; set; }
+    public required double[] Coordinates { get; set; }
+
+    public bool HasTrafficData => AADT.HasValue && AADT.Value > 0;
+    
+    public string FormattedAADT => AADT?.ToString("N0") ?? "No data";
+    
+    public string FormattedCoordinates => 
+        $"{Coordinates[1]:F6}, {Coordinates[0]:F6}";
+}

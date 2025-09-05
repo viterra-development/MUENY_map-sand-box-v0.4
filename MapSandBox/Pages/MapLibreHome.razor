@@ -8,6 +8,7 @@
 
 <div class="map-container">
     <MapLibreMap @ref="mapComponent" Config="mapConfig" OnMapClick="HandleMapClick" />
+    <RoadPopup @ref="roadPopup" />
     
     <div class="maplibre-controls">
         <div class="control-section">
@@ -85,6 +86,7 @@
 
 @code {
     private MapLibreMap? mapComponent;
+    private RoadPopup? roadPopup;
     private MapLibreConfig mapConfig = new();
     private List<LayerInfo> layerInfo = new();
     private List<BaseMapStyle> availableStyles = new();

@@ -469,23 +469,44 @@ function handleTrafficRoadClick(info) {
         
         const traffic = road.properties.traffic;
         if (traffic) {
-            const aadt = traffic.aadt || 'No data';
-            const aadtYear = traffic.aadtYear || '';
-            const locationId = traffic.locationId || 'Unknown';
-            const locatedOn = traffic.locatedOn || 'Unknown';
+            const aadt = traffic.aadt || null;
+            const aadtYear = traffic.aadtYear ? traffic.aadtYear.toString() : null;
+            const dhv30 = traffic.dhv30 || null;
+            const locationId = traffic.locationId || null;
+            const locatedOn = traffic.locatedOn || null;
             
-            const message = `Traffic Road: ${roadName}
+            // Call Blazor component method via DotNet.invokeMethodAsync
+            if (window.roadPopupInstance) {
+                const roadData = {
+                    roadName,
+                    roadType,
+                    roadTypeName,
+                    aadt,
+                    aadtYear,
+                    dhv30,
+                    locationId,
+                    locatedOn,
+                    coordinates: info.coordinate,
+                    linearId: road.properties.LINEARID || null,
+                    mtfcc: road.properties.MTFCC || null
+                };
+                
+                window.roadPopupInstance.invokeMethodAsync('ShowPopupFromJS', roadData);
+            } else {
+                // Fallback to alert if Blazor component not available
+                const message = `Traffic Road: ${roadName}
 ────────────────────────
 Road Type: ${roadTypeName} (${roadType})
 Traffic Location ID: ${locationId}
 Located On: ${locatedOn}
 
 Traffic Data:
-• AADT (${aadtYear}): ${aadt.toLocaleString()} vehicles/day
+• AADT (${aadtYear}): ${aadt ? aadt.toLocaleString() : 'No data'} vehicles/day
 
 Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
-            
-            alert(message);
+                
+                alert(message);
+            }
         } else {
             // Fallback for roads without traffic data
             handleRoadClick(info);

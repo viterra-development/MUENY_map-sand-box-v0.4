@@ -1,0 +1,152 @@
+.road-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.road-popup-card {
+    background: white;
+    border-radius: 12px;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.popup-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f2937;
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.popup-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.popup-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.popup-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.popup-content {
+    padding: 20px 24px;
+}
+
+.popup-section {
+    margin-bottom: 20px;
+}
+
+.popup-section:last-child {
+    margin-bottom: 0;
+}
+
+.popup-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.popup-value {
+    color: #1f2937;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.popup-code {
+    color: #6b7280;
+    font-family: monospace;
+}
+
+.popup-sublabel {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+.traffic-section {
+    background: #f0f9ff;
+    border: 1px solid #0ea5e9;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.traffic-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 12px;
+}
+
+.traffic-stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0ea5e9;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #0369a1;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.technical-info {
+    background: #f9fafb;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.technical-details {
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.technical-details div {
+    color: #4b5563;
+}
+
+.mono {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+}

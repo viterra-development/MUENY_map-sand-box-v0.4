@@ -1,0 +1,118 @@
+@using MapSandBox.Models
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+@if (IsVisible && RoadData != null)
+{
+    <div class="road-popup-overlay" @onclick="Hide">
+        <div class="road-popup-card" @onclick:stopPropagation="true">
+            <div class="popup-header">
+                <h3 class="popup-title">@RoadData.RoadName</h3>
+                <button class="popup-close" @onclick="Hide">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-section">
+                    <div class="popup-label">Road Type</div>
+                    <div class="popup-value">@RoadData.RoadTypeName <span class="popup-code">(@RoadData.RoadType)</span></div>
+                </div>
+                
+                @if (RoadData.HasTrafficData)
+                {
+                    <div class="popup-section traffic-section">
+                        <div class="popup-label">Traffic Data</div>
+                        <div class="traffic-stats">
+                            <div class="traffic-stat">
+                                <div class="stat-value">@RoadData.FormattedAADT</div>
+                                <div class="stat-label">AADT (@RoadData.AADTYear)</div>
+                            </div>
+                            @if (RoadData.DHV30.HasValue)
+                            {
+                                <div class="traffic-stat">
+                                    <div class="stat-value">@RoadData.DHV30.Value.ToString("N0")</div>
+                                    <div class="stat-label">DHV 30th Hour</div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                
+                @if (!string.IsNullOrEmpty(RoadData.LocationId))
+                {
+                    <div class="popup-section">
+                        <div class="popup-label">Traffic Location</div>
+                        <div class="popup-value">@RoadData.LocationId</div>
+                        @if (!string.IsNullOrEmpty(RoadData.LocatedOn) && RoadData.LocatedOn != "-")
+                        {
+                            <div class="popup-sublabel">Located on: @RoadData.LocatedOn</div>
+                        }
+                    </div>
+                }
+                
+                <div class="popup-section technical-info">
+                    <div class="popup-label">Technical Info</div>
+                    <div class="technical-details">
+                        @if (!string.IsNullOrEmpty(RoadData.LinearId))
+                        {
+                            <div>Linear ID: <span class="mono">@RoadData.LinearId</span></div>
+                        }
+                        @if (!string.IsNullOrEmpty(RoadData.MTFCC))
+                        {
+                            <div>MTFCC: <span class="mono">@RoadData.MTFCC</span></div>
+                        }
+                        <div>Coordinates: <span class="mono">@RoadData.FormattedCoordinates</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public RoadPopupData? RoadData { get; set; }
+    [Parameter] public EventCallback OnHide { get; set; }
+
+    private DotNetObjectReference<RoadPopup>? _objectReference;
+    private IJSObjectReference? _jsModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/roadPopup.js");
+            _objectReference = DotNetObjectReference.Create(this);
+            await _jsModule.InvokeVoidAsync("setRoadPopupInstance", _objectReference);
+        }
+    }
+
+    public void Show(RoadPopupData data)
+    {
+        RoadData = data;
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void ShowPopupFromJS(RoadPopupData data)
+    {
+        Show(data);
+    }
+
+    public async Task Hide()
+    {
+        IsVisible = false;
+        await OnHide.InvokeAsync();
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule != null && _objectReference != null)
+        {
+            await _jsModule.InvokeVoidAsync("clearRoadPopupInstance");
+            _objectReference.Dispose();
+            await _jsModule.DisposeAsync();
+        }
+    }
+}
