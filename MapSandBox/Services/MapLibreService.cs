@@ -5,9 +5,13 @@ namespace MapSandBox.Services;
 public class MapLibreService
 {
     private readonly List<BaseMapStyle> _availableStyles;
+    private readonly AzureTileConfig _azureTileConfig;
     
-    public MapLibreService()
+    public MapLibreService(AzureTileConfig azureTileConfig)
     {
+        _azureTileConfig = azureTileConfig;
+    
+        // Initialize available styles
         _availableStyles = new List<BaseMapStyle>
         {
             new BaseMapStyle
@@ -70,6 +74,22 @@ public class MapLibreService
     public string GetDefaultStyleId()
     {
         return "voyager";
+    }
+    
+    private string GetTileBaseUrl()
+    {
+        return _azureTileConfig.UseCdn ? _azureTileConfig.CdnUrl : _azureTileConfig.BaseUrl;
+    }
+    
+    private string GetTileUrl(string layerType)
+    {
+        var baseUrl = GetTileBaseUrl();
+        if (string.IsNullOrEmpty(baseUrl))
+        {
+            // Fallback to local tiles if no Azure configuration
+            return $"/tiles/{layerType}/{"{z}"}/{"{x}"}/{"{y}"}.png";
+        }
+        return $"{baseUrl}/tiles/{layerType}/{"{z}"}/{"{x}"}/{"{y}"}.png";
     }
     
     public List<BaseMapStyle> GetAvailableBaseMapStyles()
@@ -156,6 +176,81 @@ public class MapLibreService
                     ["autoHighlight"] = true,
                     ["onClick"] = "handleTrafficCountClick"
                 }
+            },
+            // Raster TWI tiles generated from DEM workflow (XYZ) - now served from Azure
+            new LayerConfig
+            {
+                Id = "parker-twi",
+                Type = "RasterTile",
+                DataUrl = GetTileUrl("parker-twi"),
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["opacity"] = 0.75,
+                    ["minZoom"] = 8,
+                    ["maxZoom"] = 18,
+                    ["tileSize"] = 256
+                }
+            },
+            // Slope layer (degrees)
+            new LayerConfig
+            {
+                Id = "parker-slope",
+                Type = "RasterTile", 
+                DataUrl = GetTileUrl("parker-slope"),
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["opacity"] = 0.7,
+                    ["minZoom"] = 8,
+                    ["maxZoom"] = 18,
+                    ["tileSize"] = 256
+                }
+            },
+            // Specific Catchment Area layer
+            new LayerConfig  
+            {
+                Id = "parker-sca",
+                Type = "RasterTile",
+                DataUrl = GetTileUrl("parker-sca"), 
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["opacity"] = 0.7,
+                    ["minZoom"] = 8,
+                    ["maxZoom"] = 18,
+                    ["tileSize"] = 256
+                }
+            },
+            // Stream Power Index layer
+            new LayerConfig
+            {
+                Id = "parker-spi", 
+                Type = "RasterTile",
+                DataUrl = GetTileUrl("parker-spi"),
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["opacity"] = 0.7,
+                    ["minZoom"] = 8,
+                    ["maxZoom"] = 18, 
+                    ["tileSize"] = 256
+                }
+            },
+            // Base elevation layer
+            new LayerConfig
+            {
+                Id = "parker-elevation",
+                Type = "RasterTile",
+                DataUrl = GetTileUrl("parker-elevation"),
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["opacity"] = 0.8,
+                    ["minZoom"] = 8,
+                    ["maxZoom"] = 18,
+                    ["tileSize"] = 256
+                }
             }
         };
     }
@@ -167,7 +262,12 @@ public class MapLibreService
             new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = true },
             new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = true },
             new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = true },
-            new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = true }
+            new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = true },
+            new LayerInfo { Id = "parker-twi", Name = "Topographic Wetness Index (TWI)", Visible = false },
+            new LayerInfo { Id = "parker-slope", Name = "Slope (degrees)", Visible = false },
+            new LayerInfo { Id = "parker-sca", Name = "Specific Catchment Area", Visible = false },
+            new LayerInfo { Id = "parker-spi", Name = "Stream Power Index", Visible = false },
+            new LayerInfo { Id = "parker-elevation", Name = "Base Elevation", Visible = false }
         };
     }
 }

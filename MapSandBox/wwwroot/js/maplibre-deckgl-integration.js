@@ -40,13 +40,13 @@ export function createIntegratedMap(containerId, config) {
 
     // Wait for map to load before adding deck.gl overlay
     maplibreMap.on('load', () => {
-        // Create deck.gl layers from config
-        const layers = createLayersFromConfig(config.layers);
+        // Create deck.gl layers from config (MapLibre raster layers are handled automatically)
+        const deckLayers = createLayersFromConfig(config.layers, maplibreMap);
         
         // Create deck.gl overlay using MapboxOverlay (works with MapLibre)
         deckOverlay = new deck.MapboxOverlay({
             interleaved: false, // Overlaid mode for better compatibility
-            layers: layers
+            layers: deckLayers
         });
 
         // Add deck.gl overlay to MapLibre map
@@ -69,14 +69,26 @@ export function createIntegratedMap(containerId, config) {
 
 export function updateIntegratedMapLayers(mapInstance, layers) {
     console.log('updateIntegratedMapLayers called with:', layers);
-    if (!mapInstance || !mapInstance.deckOverlay) {
+    if (!mapInstance || !mapInstance.maplibre) {
         console.warn('No integrated map instance available');
         return;
     }
     
-    const deckLayers = createLayersFromConfig(layers);
+    // Handle MapLibre raster layers and get deck.gl layers
+    const deckLayers = createLayersFromConfig(layers, mapInstance.maplibre);
     console.log('Created deck layers:', deckLayers);
-    mapInstance.deckOverlay.setProps({ layers: deckLayers });
+    
+    // Update deck.gl overlay if it exists
+    if (mapInstance.deckOverlay) {
+        mapInstance.deckOverlay.setProps({ layers: deckLayers });
+    }
+    
+    // Handle layer visibility changes for MapLibre raster layers
+    layers.forEach(layerConfig => {
+        if (layerConfig.type.toLowerCase() === 'rastertile') {
+            updateMapLibreRasterLayerVisibility(mapInstance.maplibre, layerConfig.id, layerConfig.visible);
+        }
+    });
 }
 
 export function updateBaseMapStyle(mapInstance, styleUrl) {
@@ -100,21 +112,28 @@ export function disposeIntegratedMap(mapInstance) {
     deckOverlay = null;
 }
 
-function createLayersFromConfig(layerConfigs) {
-    const layers = [];
+function createLayersFromConfig(layerConfigs, maplibreMap = null) {
+    const deckLayers = [];
+    const maplibreRasterLayers = [];
     
     layerConfigs.forEach(config => {
         if (!config.visible) return;
         
+        // Handle raster tiles through MapLibre GL JS natively
+        if (config.type.toLowerCase() === 'rastertile') {
+            maplibreRasterLayers.push(config);
+            return;
+        }
+        
         // Special handling for traffic-counts layer (uses TileLayer)
         if (config.id === 'traffic-counts') {
-            layers.push(createTrafficCountsTileLayer(config));
+            deckLayers.push(createTrafficCountsTileLayer(config));
             return;
         }
         
         switch (config.type.toLowerCase()) {
             case 'geojson':
-                layers.push(new deck.GeoJsonLayer({
+                deckLayers.push(new deck.GeoJsonLayer({
                     id: config.id,
                     data: config.dataUrl,
                     ...getLayerProperties(config)
@@ -156,17 +175,17 @@ function createLayersFromConfig(layerConfigs) {
                         }
                     }
                 });
-                layers.push(pathLayer);
+                deckLayers.push(pathLayer);
                 break;
             case 'greatcircle':
-                layers.push(new deck.GreatCircleLayer({
+                deckLayers.push(new deck.GreatCircleLayer({
                     id: config.id,
                     data: config.dataUrl,
                     ...getLayerProperties(config)
                 }));
                 break;
             case 'arc':
-                layers.push(new deck.ArcLayer({
+                deckLayers.push(new deck.ArcLayer({
                     id: config.id,
                     data: config.dataUrl,
                     ...getLayerProperties(config)
@@ -175,7 +194,12 @@ function createLayersFromConfig(layerConfigs) {
         }
     });
     
-    return layers;
+    // Add MapLibre raster layers if maplibreMap is provided
+    if (maplibreMap && maplibreRasterLayers.length > 0) {
+        addMapLibreRasterLayers(maplibreMap, maplibreRasterLayers);
+    }
+    
+    return deckLayers;
 }
 
 function getLayerProperties(config) {
@@ -315,6 +339,60 @@ function createTrafficCountsTileLayer(config) {
     
     return tileLayer;
 }
+
+// MapLibre Raster Layer Management
+function addMapLibreRasterLayers(map, rasterLayers) {
+    rasterLayers.forEach(config => {
+        const sourceId = config.id;
+        const layerId = config.id;
+        
+        console.log(`Adding MapLibre raster layer: ${layerId} with URL: ${config.dataUrl}`);
+        
+        // Add source if it doesn't exist
+        if (!map.getSource(sourceId)) {
+            map.addSource(sourceId, {
+                type: 'raster',
+                tiles: [config.dataUrl],
+                tileSize: config.properties.tileSize || 256,
+                minzoom: config.properties.minZoom || 0,
+                maxzoom: config.properties.maxZoom || 18
+            });
+            console.log(`Added MapLibre source: ${sourceId}`);
+        }
+        
+        // Add layer if it doesn't exist
+        if (!map.getLayer(layerId)) {
+            map.addLayer({
+                id: layerId,
+                type: 'raster',
+                source: sourceId,
+                paint: {
+                    'raster-opacity': config.properties.opacity || 0.75
+                }
+            });
+            console.log(`Added MapLibre layer: ${layerId} with opacity: ${config.properties.opacity || 0.75}`);
+        }
+    });
+}
+
+function updateMapLibreRasterLayerVisibility(map, layerId, visible) {
+    if (map.getLayer(layerId)) {
+        map.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none');
+        console.log(`Updated MapLibre layer visibility: ${layerId} = ${visible}`);
+    }
+}
+
+function removeMapLibreRasterLayer(map, layerId) {
+    if (map.getLayer(layerId)) {
+        map.removeLayer(layerId);
+        console.log(`Removed MapLibre layer: ${layerId}`);
+    }
+    if (map.getSource(layerId)) {
+        map.removeSource(layerId);
+        console.log(`Removed MapLibre source: ${layerId}`);
+    }
+}
+
 
 // Road styling functions
 function getRoadColor(feature) {
