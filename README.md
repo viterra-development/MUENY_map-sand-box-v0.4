@@ -2,6 +2,14 @@
 
 A web-based mapping application built with deck.gl for interactive geospatial data visualization.
 
+## Environment Configuration
+
+Create a `.env` file in the repository root (see `.env.example`) and set:
+
+- `AZURE_STORAGE_CONNECTION_STRING` for the tile upload utility.
+- Optional: `UPLOAD_SOURCE_DIR` to override the default upload source directory.
+
+
 ## Technology Stack
 
 ### Mapping Platform

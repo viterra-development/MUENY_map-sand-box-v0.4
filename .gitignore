@@ -449,6 +449,12 @@ MapSandBox/wwwroot/lib/
 # Data files
 data/
 
+# Map tile outputs
+MapSandBox/wwwroot/tiles/
+upload-staging/
+CRIS Exports/
+DEM/
+
 # .claude
 .claude/
 
