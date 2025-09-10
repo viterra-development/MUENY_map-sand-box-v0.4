@@ -387,11 +387,6 @@ __blobstorage__/
 *.key
 *.pem
 
-# Sensitive configuration files
-appsettings.*.json
-!appsettings.example.json
-MapSandBox/wwwroot/appsettings.json
-
 # Logs
 logs/
 *.log

@@ -78,6 +78,11 @@ public class MapLibreService
     
     private string GetTileBaseUrl()
     {
+
+        Console.WriteLine($"UseCdn: {_azureTileConfig.UseCdn}");
+        Console.WriteLine($"CdnUrl: {_azureTileConfig.CdnUrl}");
+        Console.WriteLine($"BaseUrl: {_azureTileConfig.BaseUrl}");
+
         return _azureTileConfig.UseCdn ? _azureTileConfig.CdnUrl : _azureTileConfig.BaseUrl;
     }
     
