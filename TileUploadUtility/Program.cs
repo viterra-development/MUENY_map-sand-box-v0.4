@@ -9,10 +9,14 @@ class Program
     private static async Task Main(string[] args)
     {
         var config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
+            .AddJsonFile("appsettings.json", optional: true)
+            .AddEnvironmentVariables()
             .Build();
 
-        var connectionString = config.GetConnectionString("AzureStorage");
+        var connectionString =
+            Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING")
+            ?? config.GetConnectionString("AzureStorage")
+            ?? Environment.GetEnvironmentVariable("ConnectionStrings__AzureStorage");
         var cliSourceDir = GetSourceDirectoryFromArgs(args);
         var envSourceDir = Environment.GetEnvironmentVariable("UPLOAD_SOURCE_DIR");
         var sourceDirectory = cliSourceDir
@@ -21,9 +25,11 @@ class Program
             ?? "../MapSandBox/wwwroot/tiles";
         var containerName = config["ContainerName"] ?? "$web";
         
-        if (string.IsNullOrEmpty(connectionString))
+        if (string.IsNullOrWhiteSpace(connectionString))
         {
-            Console.WriteLine("ERROR: Azure Storage connection string not found in appsettings.json");
+            Console.WriteLine("ERROR: Azure Storage connection string not found.\n"
+                + "Set AZURE_STORAGE_CONNECTION_STRING in your .env or environment, "
+                + "or provide ConnectionStrings:AzureStorage in appsettings.json.");
             return;
         }
         
