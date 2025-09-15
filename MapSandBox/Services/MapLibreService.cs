@@ -97,6 +97,12 @@ public class MapLibreService
         return $"{baseUrl}/tiles/{layerType}/{"{z}"}/{"{x}"}/{"{y}"}.png";
     }
     
+    private string GetSoilDataUrl(string fileName)
+    {
+        // Static files served directly from wwwroot/soil-data/
+        return $"/soil-data/{fileName}";
+    }
+    
     public List<BaseMapStyle> GetAvailableBaseMapStyles()
     {
         return _availableStyles;
@@ -256,6 +262,48 @@ public class MapLibreService
                     ["maxZoom"] = 18,
                     ["tileSize"] = 256
                 }
+            },
+            
+            // SSURGO Soil Map Units - Vector-based from Azure Blob Storage (Industry Standard)
+            new LayerConfig
+            {
+                Id = "soil-clay-visualization",
+                Type = "GeoJson",
+                DataUrl = GetSoilDataUrl("parker-county-test-clay.geojson"),
+                Visible = true,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getFillColor"] = "getSoilClayColor", // JavaScript function for clay % coloring
+                    ["getLineColor"] = new int[] { 139, 69, 19, 255 }, // Brown soil boundary
+                    ["getLineWidth"] = 2,
+                    ["opacity"] = 0.8,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleSoilUnitClick"
+                }
+            },
+            
+            // Soil permeability visualization layer
+            new LayerConfig
+            {
+                Id = "soil-ksat-visualization", 
+                Type = "GeoJson",
+                DataUrl = GetSoilDataUrl("parker-county-test-ksat.geojson"),
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getFillColor"] = "getSoilKsatColor", // JavaScript function for Ksat coloring
+                    ["getLineColor"] = new int[] { 139, 69, 19, 255 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.7,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleSoilUnitClick"
+                }
             }
         };
     }
@@ -272,7 +320,9 @@ public class MapLibreService
             new LayerInfo { Id = "parker-slope", Name = "Slope (degrees)", Visible = false },
             new LayerInfo { Id = "parker-sca", Name = "Specific Catchment Area", Visible = false },
             new LayerInfo { Id = "parker-spi", Name = "Stream Power Index", Visible = false },
-            new LayerInfo { Id = "parker-elevation", Name = "Base Elevation", Visible = false }
+            new LayerInfo { Id = "parker-elevation", Name = "Base Elevation", Visible = false },
+            new LayerInfo { Id = "soil-clay-visualization", Name = "Soil Clay Content (%)", Visible = true },
+            new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Ksat)", Visible = false }
         };
     }
 }
