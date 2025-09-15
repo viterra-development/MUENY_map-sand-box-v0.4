@@ -56,3 +56,17 @@ public class RoadPopupData
     public string FormattedCoordinates => 
         $"{Coordinates[1]:F6}, {Coordinates[0]:F6}";
 }
+
+public class SoilPopupData
+{
+    public string? MuSym { get; set; }
+    public string? MuName { get; set; }
+    public string? MuKey { get; set; }
+    public double? SoilClayPct { get; set; }
+    public double? SoilKsatUmPerS { get; set; }
+    public required double[] Coordinates { get; set; }
+
+    public string FormattedClayPct => SoilClayPct.HasValue ? SoilClayPct.Value.ToString("F1") + "%" : "N/A";
+    public string FormattedKsat => SoilKsatUmPerS.HasValue ? SoilKsatUmPerS.Value.ToString("F3") + " μm/s" : "N/A";
+    public string FormattedCoordinates => $"{Coordinates[1]:F6}, {Coordinates[0]:F6}";
+}

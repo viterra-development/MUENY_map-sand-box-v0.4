@@ -3,6 +3,7 @@ let integratedMapInstance = null;
 let maplibreMap = null;
 let deckOverlay = null;
 
+
 export function createIntegratedMap(containerId, config) {
     console.log('Creating integrated MapLibre + deck.gl map with config:', config);
     
@@ -74,13 +75,19 @@ export function updateIntegratedMapLayers(mapInstance, layers) {
         return;
     }
     
-    // Handle MapLibre raster layers and get deck.gl layers
-    const deckLayers = createLayersFromConfig(layers, mapInstance.maplibre);
-    console.log('Created deck layers:', deckLayers);
     
-    // Update deck.gl overlay if it exists
-    if (mapInstance.deckOverlay) {
-        mapInstance.deckOverlay.setProps({ layers: deckLayers });
+    try {
+        // Handle MapLibre raster layers and get deck.gl layers
+        const deckLayers = createLayersFromConfig(layers, mapInstance.maplibre);
+        console.log('Created deck layers:', deckLayers);
+        
+        // Update deck.gl overlay if it exists
+        if (mapInstance.deckOverlay) {
+            mapInstance.deckOverlay.setProps({ layers: deckLayers });
+        }
+    } catch (error) {
+        console.error('Error updating integrated map layers:', error);
+        // Continue execution without crashing the app
     }
     
     // Handle layer visibility changes for MapLibre raster layers
@@ -117,7 +124,11 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
     const maplibreRasterLayers = [];
     
     layerConfigs.forEach(config => {
-        if (!config.visible) return;
+        console.log(`Processing layer ${config.id}: visible=${config.visible}, type=${config.type}`);
+        if (!config.visible) {
+            console.log(`Skipping invisible layer: ${config.id}`);
+            return;
+        }
         
         // Handle raster tiles through MapLibre GL JS natively
         if (config.type.toLowerCase() === 'rastertile') {
@@ -133,49 +144,74 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
         
         switch (config.type.toLowerCase()) {
             case 'geojson':
-                deckLayers.push(new deck.GeoJsonLayer({
-                    id: config.id,
-                    data: config.dataUrl,
-                    ...getLayerProperties(config)
-                }));
+                console.log(`Creating GeoJsonLayer for ${config.id} with data URL: ${config.dataUrl}`);
+                
+                try {
+                    deckLayers.push(new deck.GeoJsonLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        ...getLayerProperties(config)
+                    }));
+                } catch (error) {
+                    console.warn(`Failed to create GeoJsonLayer for ${config.id}:`, error);
+                    // Add empty layer to prevent crashes
+                    deckLayers.push(new deck.GeoJsonLayer({
+                        id: config.id,
+                        data: { type: 'FeatureCollection', features: [] },
+                        ...getLayerProperties(config)
+                    }));
+                }
                 break;
             case 'path':
                 // Special handling for Path layers (like traffic roads)
                 console.log('Creating PathLayer with config:', config);
-                const pathLayer = new deck.PathLayer({
-                    id: config.id,
-                    data: config.dataUrl,
-                    dataTransform: d => {
-                        if (d && d.features) {
-                            return d.features; // Extract features from GeoJSON FeatureCollection
+                try {
+                    const pathLayer = new deck.PathLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        dataTransform: d => {
+                            if (d && d.features) {
+                                return d.features; // Extract features from GeoJSON FeatureCollection
+                            }
+                            return d;
+                        },
+                        getPath: d => {
+                            return d.geometry.coordinates;
+                        },
+                        getColor: d => {
+                            const color = getTrafficGradientColor(d);
+                            return color;
+                        },
+                        getWidth: d => {
+                            const width = getTrafficWidth(d);
+                            return width;
+                        },
+                        // Simplified configuration to match deck.gl docs
+                        widthScale: 1,
+                        widthMinPixels: 2,
+                        widthMaxPixels: 50,
+                        rounded: true,
+                        pickable: true,
+                        autoHighlight: true,
+                        onClick: handleTrafficRoadClick,
+                        onDataLoad: data => {
+                            if (data && data.features) {
+                                console.log(`✅ PathLayer ${config.id} loaded ${data.features.length} features`);
+                            }
                         }
-                        return d;
-                    },
-                    getPath: d => {
-                        return d.geometry.coordinates;
-                    },
-                    getColor: d => {
-                        const color = getTrafficGradientColor(d);
-                        return color;
-                    },
-                    getWidth: d => {
-                        const width = getTrafficWidth(d);
-                        return width;
-                    },
-                    // Simplified configuration to match deck.gl docs
-                    widthScale: 1,
-                    widthMinPixels: 2,
-                    widthMaxPixels: 50,
-                    rounded: true,
-                    pickable: true,
-                    autoHighlight: true,
-                    onClick: handleTrafficRoadClick,
-                    onDataLoad: data => {
-                        if (data && data.features) {
-                        }
-                    }
-                });
-                deckLayers.push(pathLayer);
+                    });
+                    deckLayers.push(pathLayer);
+                } catch (error) {
+                    console.warn(`Failed to create PathLayer for ${config.id}:`, error);
+                    // Add empty PathLayer to prevent crashes
+                    deckLayers.push(new deck.PathLayer({
+                        id: config.id,
+                        data: [],
+                        getPath: d => d.geometry?.coordinates || [],
+                        getColor: [128, 128, 128],
+                        getWidth: 1
+                    }));
+                }
                 break;
             case 'greatcircle':
                 deckLayers.push(new deck.GreatCircleLayer({
@@ -242,6 +278,28 @@ function getLayerProperties(config) {
         case 'traffic-counts':
             // Use TileLayer for progressive loading instead of direct GeoJsonLayer
             return createTrafficCountsTileLayer(config);
+            break;
+        case 'soil-clay-visualization':
+            properties.filled = true;
+            properties.stroked = true;
+            properties.getFillColor = getSoilClayColor;
+            properties.getLineColor = [139, 69, 19, 255]; // Brown soil boundary
+            properties.getLineWidth = 2;
+            properties.opacity = 0.8;
+            properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.onClick = handleSoilUnitClick;
+            break;
+        case 'soil-ksat-visualization':
+            properties.filled = true;
+            properties.stroked = true;
+            properties.getFillColor = getSoilKsatColor;
+            properties.getLineColor = [139, 69, 19, 255]; // Brown soil boundary
+            properties.getLineWidth = 1;
+            properties.opacity = 0.7;
+            properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.onClick = handleSoilUnitClick;
             break;
     }
     
@@ -589,6 +647,70 @@ Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`
             // Fallback for roads without traffic data
             handleRoadClick(info);
         }
+    }
+}
+
+// Soil visualization color functions (industry-standard soil color schemes)
+function getSoilClayColor(feature) {
+    const clayPct = feature.properties.soil_clay_pct || 0;
+    
+    // USDA standard clay content color ramp (browns for clay content)
+    if (clayPct < 10) return [245, 222, 179, 200];      // Light wheat (sandy)
+    if (clayPct < 20) return [222, 184, 135, 200];      // Burlywood (sandy loam)
+    if (clayPct < 35) return [205, 133, 63, 200];       // Peru (loam)
+    if (clayPct < 50) return [160, 82, 45, 200];        // Saddle brown (clay loam)
+    return [101, 67, 33, 200];                          // Dark brown (clay)
+}
+
+function getSoilKsatColor(feature) {
+    const ksat = feature.properties.soil_ksat_um_per_s || 0;
+    
+    // Permeability color ramp (blue = high permeability, red = low)
+    if (ksat > 10) return [0, 100, 255, 200];           // High permeability (blue)
+    if (ksat > 5) return [0, 150, 200, 200];            // Moderate-high
+    if (ksat > 1) return [100, 200, 100, 200];          // Moderate (green)
+    if (ksat > 0.1) return [255, 150, 0, 200];          // Low-moderate (orange)
+    return [255, 0, 0, 200];                            // Low permeability (red)
+}
+
+// Handle soil unit clicks (industry standard popup)
+function handleSoilUnitClick(info) {
+    if (info.object) {
+        const props = info.object.properties;
+
+        const clayPctValue = typeof props.soil_clay_pct === 'number' ? props.soil_clay_pct : null;
+        const ksatValue = typeof props.soil_ksat_um_per_s === 'number' ? props.soil_ksat_um_per_s : null;
+
+        // Prefer Blazor interop popup if available
+        if (window.soilPopupInstance && typeof window.soilPopupInstance.invokeMethodAsync === 'function') {
+            const soilData = {
+                musym: props.musym || null,
+                muname: props.muname || null,
+                mukey: props.mukey || null,
+                soilClayPct: clayPctValue,
+                soilKsatUmPerS: ksatValue,
+                coordinates: info.coordinate
+            };
+            window.soilPopupInstance.invokeMethodAsync('ShowPopupFromJS', soilData);
+            return;
+        }
+
+        // Fallback to simple alert
+        const clayPct = clayPctValue !== null ? clayPctValue.toFixed(1) : 'N/A';
+        const ksat = ksatValue !== null ? ksatValue.toFixed(3) : 'N/A';
+
+        const message = `Soil Map Unit: ${props.musym}
+────────────────────────
+${props.muname || 'Unknown soil type'}
+
+Soil Properties:
+• Clay Content: ${clayPct}%
+• Permeability: ${ksat} μm/s
+
+Map Unit Key: ${props.mukey}
+Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
+        
+        alert(message);
     }
 }
 

@@ -1,0 +1,160 @@
+@using MapSandBox.Models
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+@if (IsVisible && SoilData != null)
+{
+    <div class="soil-popup-overlay" @onclick="Hide">
+        <div class="soil-popup-card" @onclick:stopPropagation="true">
+            <div class="popup-header">
+                <h3 class="popup-title">@SoilData.MuSym</h3>
+                <button class="popup-close" @onclick="Hide">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-section">
+                    <div class="popup-label">Soil Map Unit</div>
+                    <div class="popup-value">@(!string.IsNullOrEmpty(SoilData.MuName) ? SoilData.MuName : "Unknown soil type")</div>
+                    @if (!string.IsNullOrEmpty(SoilData.MuKey))
+                    {
+                        <div class="popup-sublabel">Map Unit Key: @SoilData.MuKey</div>
+                    }
+                </div>
+
+                <div class="popup-section">
+                    <div class="popup-label">Clay Content</div>
+                    <div class="popup-value">@SoilData.FormattedClayPct</div>
+                </div>
+
+                <div class="popup-section">
+                    <div class="popup-label">Permeability (Ksat)</div>
+                    <div class="popup-value">@SoilData.FormattedKsat</div>
+                </div>
+
+                <div class="popup-section technical-info">
+                    <div class="popup-label">Coordinates</div>
+                    <div class="technical-details">
+                        <div>Location: <span class="mono">@SoilData.FormattedCoordinates</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public SoilPopupData? SoilData { get; set; }
+    [Parameter] public EventCallback OnHide { get; set; }
+
+    private DotNetObjectReference<SoilPopup>? _objectReference;
+    private IJSObjectReference? _jsModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/soilPopup.js");
+            _objectReference = DotNetObjectReference.Create(this);
+            await _jsModule.InvokeVoidAsync("setSoilPopupInstance", _objectReference);
+        }
+    }
+
+    public void Show(SoilPopupData data)
+    {
+        SoilData = data;
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void ShowPopupFromJS(SoilPopupData data)
+    {
+        Show(data);
+    }
+
+    public async Task Hide()
+    {
+        IsVisible = false;
+        await OnHide.InvokeAsync();
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule != null && _objectReference != null)
+        {
+            await _jsModule.InvokeVoidAsync("clearSoilPopupInstance");
+            _objectReference.Dispose();
+            await _jsModule.DisposeAsync();
+        }
+    }
+}
+
+<style>
+    .soil-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+    }
+    .soil-popup-card {
+        background: #fff;
+        width: 360px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+    .popup-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        border-bottom: 1px solid #eee;
+        background: #fafafa;
+    }
+    .popup-title {
+        margin: 0;
+        font-size: 18px;
+    }
+    .popup-close {
+        background: transparent;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .popup-content {
+        padding: 12px 16px 16px 16px;
+    }
+    .popup-section {
+        margin-bottom: 12px;
+    }
+    .popup-label {
+        font-size: 12px;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        margin-bottom: 4px;
+    }
+    .popup-value {
+        font-size: 16px;
+        color: #222;
+    }
+    .popup-sublabel {
+        font-size: 12px;
+        color: #555;
+        margin-top: 2px;
+    }
+    .technical-info .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+    }
+</style>
+
