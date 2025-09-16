@@ -125,6 +125,7 @@ public class CrisCsvParser
 
         // Parse weather condition (don't default - preserve actual data)
         crash.WeatherCondition = csvRecord.WeatherCondition ?? "";
+        crash.LightCondition = csvRecord.LightCondition ?? "";
         crash.RoadwayCondition = csvRecord.SurfaceCondition ?? "";
 
         // Parse private property flag

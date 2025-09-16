@@ -975,23 +975,23 @@ async function handleCrashClick(info) {
 
         // Create the crash popup data object
         const crashPopupData = {
-            crashId: crash.crash_id || 'Unknown',
-            crashDate: crash.crash_date || 'Unknown',
-            crashTime: crash.crash_time || 'Unknown',
-            crashDateTime: crash.crash_datetime || 'Unknown',
-            severity: crash.severity || 'Unknown',
-            severityCode: crash.severity_code || 'Unknown',
-            latitude: crash.latitude || 0,
-            longitude: crash.longitude || 0,
-            personsInvolved: crash.persons_involved || 0,
-            vehiclesInvolved: crash.vehicles_involved || 0,
-            fatalCount: crash.fatal_count || 0,
-            injuryCount: crash.injury_count || 0,
-            weatherCondition: crash.weather_condition || 'Unknown',
-            lightCondition: crash.light_condition || 'Unknown',
-            surfaceCondition: crash.surface_condition || 'Unknown',
-            roadwayId: crash.roadway_id || '',
-            contributingFactors: Array.isArray(crash.contributing_factors) ? crash.contributing_factors : []
+            crashId: crash.CrashId || 'Unknown',
+            crashDate: crash.CrashDate || 'Unknown',
+            crashTime: crash.CrashTime || 'Unknown',
+            crashDateTime: crash.CrashDateTime || 'Unknown',
+            severity: crash.Severity || 'Unknown',
+            severityCode: crash.SeverityCode || 'Unknown',
+            latitude: crash.Latitude || 0,
+            longitude: crash.Longitude || 0,
+            personsInvolved: crash.PersonsInvolved || 0,
+            vehiclesInvolved: crash.VehiclesInvolved || 0,
+            fatalCount: crash.FatalCount || 0,
+            injuryCount: crash.InjuryCount || 0,
+            weatherCondition: crash.WeatherCondition || 'Unknown',
+            lightCondition: crash.LightCondition || 'Unknown',
+            surfaceCondition: crash.SurfaceCondition || 'Unknown',
+            roadwayId: crash.RoadwayId || '',
+            contributingFactors: Array.isArray(crash.ContributingFactors) ? crash.ContributingFactors : []
         };
 
         // Import and use the crash popup module
@@ -1042,19 +1042,19 @@ Location: ${intersection.latitude?.toFixed(6)}, ${intersection.longitude?.toFixe
 
 function handleRiskSegmentClick(info) {
     if (info.object) {
-        const segment = info.object.properties;
-        const riskScore = typeof segment.risk_score === 'number'
-            ? segment.risk_score.toFixed(3)
+        const segment = info.object; // Direct access to deck.gl data, no .properties
+        const riskScore = typeof segment.RiskScore === 'number'
+            ? segment.RiskScore.toFixed(3)
             : 'N/A';
-        const crashCount = segment.crash_count || 0;
-        const aadt = segment.aadt || 'Unknown';
-        const crashesPerMile = typeof segment.crashes_per_mile === 'number'
-            ? segment.crashes_per_mile.toFixed(2)
+        const crashCount = segment.CrashCount || 0;
+        const aadt = segment.Aadt || 'Unknown';
+        const crashesPerMile = typeof segment.CrashesPerMile === 'number'
+            ? segment.CrashesPerMile.toFixed(2)
             : 'N/A';
 
         const message = `Risk Segment Analysis
 ━━━━━━━━━━━━━━━━━━━
-Risk Level: ${segment.risk_level}
+Risk Level: ${segment.RiskLevel}
 Risk Score: ${riskScore}
 Crash Count: ${crashCount}
 AADT: ${aadt}
@@ -1068,19 +1068,19 @@ Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`
 
 function handleIntersectionRiskClick(info) {
     if (info.object) {
-        const intersection = info.object.properties;
-        const riskScore = typeof intersection.risk_score === 'number'
-            ? intersection.risk_score.toFixed(3)
+        const intersection = info.object; // Direct access to deck.gl data, no .properties
+        const riskScore = typeof intersection.RiskScore === 'number'
+            ? intersection.RiskScore.toFixed(3)
             : 'N/A';
-        const crashCount = intersection.crash_count || 0;
-        const roads = intersection.intersecting_roads || [];
+        const crashCount = intersection.CrashCount || 0;
+        const roads = intersection.IntersectingRoads || [];
         const roadsText = Array.isArray(roads) && roads.length > 0
             ? roads.join(' & ')
             : 'Unknown roads';
 
         const message = `High-Risk Intersection
 ━━━━━━━━━━━━━━━━━━━━
-Risk Level: ${intersection.risk_level}
+Risk Level: ${intersection.RiskLevel}
 Risk Score: ${riskScore}
 Crash Count: ${crashCount}
 Intersecting Roads: ${roadsText}

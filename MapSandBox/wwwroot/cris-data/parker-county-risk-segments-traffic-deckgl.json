@@ -1,6 +1,6 @@
 [
   {
-    "SegmentId": "abbd4fde-1896-4570-8958-1025ec0f140b",
+    "SegmentId": "46546a1a-cb63-4567-ae8c-4d5064a5607f",
     "RiskScore": 0.4525,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -56,7 +56,7 @@
     ]
   },
   {
-    "SegmentId": "d8df7448-7837-41b9-8c63-5694e249e4d6",
+    "SegmentId": "5b0a1665-98b6-4854-8896-a6d09a23a0cb",
     "RiskScore": 0.44,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -112,7 +112,7 @@
     ]
   },
   {
-    "SegmentId": "1cbb32aa-b0a1-440e-bf6d-c57bf83b0538",
+    "SegmentId": "128d579f-57f0-4369-81fb-b64e15b6a493",
     "RiskScore": 0.4370689655172414,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -168,7 +168,7 @@
     ]
   },
   {
-    "SegmentId": "b32e3e20-3e87-4a7d-b878-eb9d7ee57d2b",
+    "SegmentId": "dcaab973-3d12-468c-8af9-a80cebeed704",
     "RiskScore": 0.43411458333333336,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -224,7 +224,7 @@
     ]
   },
   {
-    "SegmentId": "ccadf2e7-a347-4427-87a0-dbf8cd4716bc",
+    "SegmentId": "3d42326f-61da-4bd7-a77d-d07ac01b8179",
     "RiskScore": 0.43289473684210533,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -280,7 +280,7 @@
     ]
   },
   {
-    "SegmentId": "1fcbc6fd-c4ec-4a37-acee-ca5cf896f5c1",
+    "SegmentId": "437233d3-69fe-4639-9eed-7a971dd7baad",
     "RiskScore": 0.4325,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -336,7 +336,7 @@
     ]
   },
   {
-    "SegmentId": "e6c772cb-5f00-4c83-aa42-8746832990be",
+    "SegmentId": "72138149-6f74-4529-9bf6-91b3265abd8c",
     "RiskScore": 0.4323529411764706,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -392,7 +392,7 @@
     ]
   },
   {
-    "SegmentId": "b88ca5a0-d554-49a3-a2bd-6898016613a5",
+    "SegmentId": "c2410488-bd75-4795-8c48-290b9eea13ea",
     "RiskScore": 0.43194444444444446,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -448,7 +448,7 @@
     ]
   },
   {
-    "SegmentId": "7922a246-8ae3-4b24-957e-67edcce1b9e9",
+    "SegmentId": "c015cce6-4fef-487a-81c0-df49cd36421c",
     "RiskScore": 0.426875,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -504,7 +504,7 @@
     ]
   },
   {
-    "SegmentId": "70cd8b5c-1cd0-48b3-9fad-110d0370342a",
+    "SegmentId": "a572bde8-511a-4383-a3f8-9f1d99403ffb",
     "RiskScore": 0.42625,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -560,7 +560,7 @@
     ]
   },
   {
-    "SegmentId": "476441ac-be50-422c-86a6-4f91a1fce14e",
+    "SegmentId": "62d8cc5b-d2a6-4d31-acd0-04554ad2601f",
     "RiskScore": 0.4256410256410256,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -616,7 +616,7 @@
     ]
   },
   {
-    "SegmentId": "5e5c68aa-c5bc-4bad-a64f-cbfdef9f962d",
+    "SegmentId": "b70cdcb9-5a31-4b3a-83af-c87bf18a8bad",
     "RiskScore": 0.425,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -672,7 +672,7 @@
     ]
   },
   {
-    "SegmentId": "19d06f1f-52bc-47d8-80de-edcbf9a219f9",
+    "SegmentId": "48173246-db9a-4b76-bf60-cdfab8845dea",
     "RiskScore": 0.42272727272727273,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -728,7 +728,7 @@
     ]
   },
   {
-    "SegmentId": "6a346916-98c0-4901-9a5e-f7e141df5b90",
+    "SegmentId": "bef5c6cd-0ae6-44d9-9f6a-180ab67bfee2",
     "RiskScore": 0.4225,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -784,7 +784,7 @@
     ]
   },
   {
-    "SegmentId": "dc0713f5-95c4-403b-ab7c-ae521c8f0b21",
+    "SegmentId": "0aa7c39c-2f9b-42fa-9ce0-b72d8a926ae1",
     "RiskScore": 0.421875,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -840,7 +840,7 @@
     ]
   },
   {
-    "SegmentId": "545948ba-39bf-4f2e-9b5f-8ba0d9678843",
+    "SegmentId": "73d7638b-778b-41c3-90df-720ae428bdf8",
     "RiskScore": 0.42115384615384616,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -896,7 +896,7 @@
     ]
   },
   {
-    "SegmentId": "8b3c91ff-9075-4c06-ab37-bc2404114f59",
+    "SegmentId": "df29b111-95b5-4da9-8c19-c2ebbadd9bf2",
     "RiskScore": 0.418801652892562,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -952,7 +952,7 @@
     ]
   },
   {
-    "SegmentId": "8a0ff495-e6a0-41d5-bcf5-fefaac9db4aa",
+    "SegmentId": "1bc83279-5868-4597-afd3-3becd6e1a423",
     "RiskScore": 0.4175,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1008,7 +1008,7 @@
     ]
   },
   {
-    "SegmentId": "14087408-ded3-4ae4-86d2-9b91457cb5ce",
+    "SegmentId": "3a4da45d-b450-4f6f-a05c-d62e497d6df8",
     "RiskScore": 0.4174038461538462,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1064,7 +1064,7 @@
     ]
   },
   {
-    "SegmentId": "f34fda89-30c0-4058-a7ac-d183c23df9e6",
+    "SegmentId": "2a78ff66-d8fd-4e2b-b1a7-dff7039ba247",
     "RiskScore": 0.4166666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1120,7 +1120,7 @@
     ]
   },
   {
-    "SegmentId": "fba81993-c334-442e-aef4-14fb2da3b05b",
+    "SegmentId": "9f86f415-ea93-414c-8552-3e7237e17fa4",
     "RiskScore": 0.415,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1176,7 +1176,7 @@
     ]
   },
   {
-    "SegmentId": "6ae5094c-5472-44eb-9d4f-0289f1f477cd",
+    "SegmentId": "4577aa6f-28e7-4dec-aa7d-645d6e08a0f0",
     "RiskScore": 0.4125,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1232,7 +1232,7 @@
     ]
   },
   {
-    "SegmentId": "0c85a67c-39fe-4e63-a410-000b7c37a83d",
+    "SegmentId": "235e521b-de34-4e97-a5a8-288118d3aa02",
     "RiskScore": 0.41,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1288,7 +1288,7 @@
     ]
   },
   {
-    "SegmentId": "358db6cf-fbc8-48ca-8112-b2528351ab8c",
+    "SegmentId": "17ec9f47-a569-43dd-a9b7-8edac8588cc1",
     "RiskScore": 0.408531746031746,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1344,7 +1344,7 @@
     ]
   },
   {
-    "SegmentId": "9f641055-a978-43a1-a63a-c6bd1e6d3d5b",
+    "SegmentId": "4391bea5-9d3a-4c34-a448-bfb9e22776d8",
     "RiskScore": 0.40303030303030307,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1400,7 +1400,7 @@
     ]
   },
   {
-    "SegmentId": "076fb171-09de-4a56-a1fc-5f1b25843a02",
+    "SegmentId": "9dc09bec-721c-45a7-91ab-18e7f0ad02c0",
     "RiskScore": 0.395625,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1456,7 +1456,7 @@
     ]
   },
   {
-    "SegmentId": "90191266-4d8e-4d62-aa18-bf6f1b019e69",
+    "SegmentId": "7b299e2e-c9bb-42ca-ae11-2a2219684f79",
     "RiskScore": 0.38722222222222225,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1512,7 +1512,7 @@
     ]
   },
   {
-    "SegmentId": "7dc48ae4-00cb-436d-b040-53520abae876",
+    "SegmentId": "a0b36151-5f73-48c5-855e-c4b22de4be17",
     "RiskScore": 0.3854166666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1568,7 +1568,7 @@
     ]
   },
   {
-    "SegmentId": "b8f5fbc2-9bbe-4540-abf5-622178380372",
+    "SegmentId": "5496df5f-71ac-4583-8c2b-18e6bdab657f",
     "RiskScore": 0.3854166666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1624,7 +1624,7 @@
     ]
   },
   {
-    "SegmentId": "0cda4e91-37a0-40d4-a4bc-cd285e07125f",
+    "SegmentId": "ba08cf85-b04c-42a4-81dc-c9aa52afcf68",
     "RiskScore": 0.38333333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1680,7 +1680,7 @@
     ]
   },
   {
-    "SegmentId": "82eda826-c495-4dc7-9ddd-b9b9f219e8da",
+    "SegmentId": "0f4babe2-c75f-4bc2-92f2-926b2bfe0073",
     "RiskScore": 0.3788888888888889,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1736,7 +1736,7 @@
     ]
   },
   {
-    "SegmentId": "1b6a7888-6ca1-47d3-8f0c-25bc1ef98c67",
+    "SegmentId": "e32138ee-7533-4427-8282-1383966e0fb5",
     "RiskScore": 0.37333333333333335,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1792,7 +1792,7 @@
     ]
   },
   {
-    "SegmentId": "7588d389-c21c-4189-b9bc-54a1dfb8ca18",
+    "SegmentId": "270a00de-b2f1-403e-ad97-07eca71742cd",
     "RiskScore": 0.35944444444444446,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1848,7 +1848,7 @@
     ]
   },
   {
-    "SegmentId": "adb628bf-dd5a-4095-8eb2-7af858e84dab",
+    "SegmentId": "3cdd9adb-bf9e-4fec-8aba-1b2c69fb0483",
     "RiskScore": 0.358125,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1904,7 +1904,7 @@
     ]
   },
   {
-    "SegmentId": "94f8a95f-67db-4bd3-910c-c4e5f52b9b2e",
+    "SegmentId": "38c391eb-e690-49a0-86e2-7173fc5c197c",
     "RiskScore": 0.3425,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1960,7 +1960,7 @@
     ]
   },
   {
-    "SegmentId": "0d195444-41d5-4c6d-a663-d4a9a365fc78",
+    "SegmentId": "c4775243-e359-4cda-8396-0f1d69e5689b",
     "RiskScore": 0.3325,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2016,7 +2016,7 @@
     ]
   },
   {
-    "SegmentId": "cf41d3ab-b439-44da-a045-5d4dc4319311",
+    "SegmentId": "51e5a52e-1044-400d-8dc2-37e6b433ed69",
     "RiskScore": 0.32,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2072,7 +2072,7 @@
     ]
   },
   {
-    "SegmentId": "a5c3f0cc-7027-4c23-9f15-d268ba4b5a96",
+    "SegmentId": "cb672e04-2f4f-4aca-8607-e01031375df8",
     "RiskScore": 0.3190625,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2128,7 +2128,7 @@
     ]
   },
   {
-    "SegmentId": "cb9ce9c6-9b18-4817-9f54-b486d864439d",
+    "SegmentId": "e53b28d2-0f3f-46c6-91b8-5c358c831fd7",
     "RiskScore": 0.31642857142857145,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2184,7 +2184,7 @@
     ]
   },
   {
-    "SegmentId": "9b85e013-4709-4de2-9ae4-e195f5c69d89",
+    "SegmentId": "5725339b-bccf-40cd-8473-6a384c29ccd9",
     "RiskScore": 0.3057142857142857,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2240,7 +2240,7 @@
     ]
   },
   {
-    "SegmentId": "29145f80-2c5e-47ba-83e0-f01785feb8dd",
+    "SegmentId": "e5dfde1e-b1f5-4604-905c-c27341aadc60",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2296,7 +2296,7 @@
     ]
   },
   {
-    "SegmentId": "80e778a8-8d1e-40f2-90d3-774eb14655e7",
+    "SegmentId": "026dbc40-b452-4bc7-bbd2-27d0ceb382a4",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2352,7 +2352,7 @@
     ]
   },
   {
-    "SegmentId": "3fccfc31-26bf-4f16-8d59-551379155e19",
+    "SegmentId": "bb6c5530-1b00-4b93-91e7-eb91839f5377",
     "RiskScore": 0.295,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2408,7 +2408,7 @@
     ]
   },
   {
-    "SegmentId": "9dbb564a-6a35-48c8-aba0-5cbc56d2ac50",
+    "SegmentId": "f479b177-52d7-44da-a416-92c337ba96d3",
     "RiskScore": 0.295,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2464,7 +2464,7 @@
     ]
   },
   {
-    "SegmentId": "3a3f2ee9-aae0-4d77-ba02-5605454b46dd",
+    "SegmentId": "36fb0268-4ec1-4c57-afc5-d2439c2c0cd7",
     "RiskScore": 0.295,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2520,7 +2520,7 @@
     ]
   },
   {
-    "SegmentId": "bc26b149-71c4-4689-8a26-8f785fdc0dd8",
+    "SegmentId": "2e7b9a62-b410-41a1-977a-f13b3bfde074",
     "RiskScore": 0.29333333333333333,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2576,7 +2576,7 @@
     ]
   },
   {
-    "SegmentId": "a7c70aed-bf02-499d-af36-e97679e75289",
+    "SegmentId": "b31fe826-df5e-4b35-ac39-f84fe86d1476",
     "RiskScore": 0.28785714285714287,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2632,7 +2632,7 @@
     ]
   },
   {
-    "SegmentId": "275b545d-fe15-45c4-8262-7852394e3388",
+    "SegmentId": "d605d9d2-7b0f-4935-94fd-762fc4ad0ebb",
     "RiskScore": 0.2860714285714286,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2688,7 +2688,7 @@
     ]
   },
   {
-    "SegmentId": "831db658-1c61-459a-999e-20daba606817",
+    "SegmentId": "46597e08-2ec4-4070-900c-bd1103f1bd8d",
     "RiskScore": 0.285,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2744,7 +2744,7 @@
     ]
   },
   {
-    "SegmentId": "21d494fb-9502-4601-94ce-792a6e459e65",
+    "SegmentId": "d7e17798-0503-4928-9cf6-bed25c5452c6",
     "RiskScore": 0.285,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2800,7 +2800,7 @@
     ]
   },
   {
-    "SegmentId": "9fb18af3-5ee9-4fc3-a038-785e23644762",
+    "SegmentId": "6c893a7d-73b5-4b53-818d-5d1209af4f1c",
     "RiskScore": 0.285,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2856,7 +2856,7 @@
     ]
   },
   {
-    "SegmentId": "731d9d1c-1f42-4a65-8294-e1ff97ca6fc6",
+    "SegmentId": "eff68806-1420-47f7-8512-fdcf9cb06b76",
     "RiskScore": 0.285,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2888,7 +2888,7 @@
     ]
   },
   {
-    "SegmentId": "e2f94507-f811-4af5-a511-da2061f434d7",
+    "SegmentId": "dfe64f4f-710b-404b-9e96-5fa57f212727",
     "RiskScore": 0.285,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2920,7 +2920,7 @@
     ]
   },
   {
-    "SegmentId": "5e84b950-6910-4170-964f-9c8f823e74e9",
+    "SegmentId": "ecee78d8-5a0e-4bbb-8d4e-a00782cd95a7",
     "RiskScore": 0.285,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2952,7 +2952,7 @@
     ]
   },
   {
-    "SegmentId": "d7b3f68c-d5fc-459b-b151-c2081b9c9f6a",
+    "SegmentId": "b15dd30b-bfb2-4797-9ac7-3739eecd5909",
     "RiskScore": 0.285,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2984,7 +2984,7 @@
     ]
   },
   {
-    "SegmentId": "91943493-46b1-4255-a640-de84c6eb32db",
+    "SegmentId": "87e69bb7-e59f-473e-8a4a-51060e017626",
     "RiskScore": 0.28375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3034,7 +3034,7 @@
     ]
   },
   {
-    "SegmentId": "17e306a3-1762-4082-b551-81b3f67ec74a",
+    "SegmentId": "e9c94abc-a694-462c-a0b9-2458f25eab82",
     "RiskScore": 0.28375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3084,7 +3084,7 @@
     ]
   },
   {
-    "SegmentId": "304d4571-9e95-4761-b50e-4e696a916840",
+    "SegmentId": "932e58a2-7112-4c70-987e-de1b026765f0",
     "RiskScore": 0.2829166666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3140,7 +3140,7 @@
     ]
   },
   {
-    "SegmentId": "fbbd961f-80f9-4cfc-a316-2e87de9dabe6",
+    "SegmentId": "90ff2ecd-7104-4a4c-b22e-7558a631b620",
     "RiskScore": 0.28,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3184,7 +3184,7 @@
     ]
   },
   {
-    "SegmentId": "22cd5b44-bf08-4212-aa02-395698f51034",
+    "SegmentId": "b1e1641c-68c2-4710-8513-8869a0ae05d1",
     "RiskScore": 0.27166666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3228,7 +3228,7 @@
     ]
   },
   {
-    "SegmentId": "3f21437b-403b-4f13-ae86-7d0d2d286f49",
+    "SegmentId": "a922ada0-cfc0-49e8-ada4-aa068417b60f",
     "RiskScore": 0.265,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3278,7 +3278,7 @@
     ]
   },
   {
-    "SegmentId": "e398b391-b6a0-4e24-91d2-1fc5c24f6b9f",
+    "SegmentId": "70377a79-7358-484c-b6f7-fdf0f540fa82",
     "RiskScore": 0.26416666666666666,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3334,7 +3334,7 @@
     ]
   },
   {
-    "SegmentId": "c3d28535-b63f-4cbe-9df4-bb976a99fba0",
+    "SegmentId": "0bda9587-f706-4394-b888-535422cca995",
     "RiskScore": 0.25583333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3390,7 +3390,7 @@
     ]
   },
   {
-    "SegmentId": "3c375094-d99b-476e-8f4f-7049e59a4910",
+    "SegmentId": "9325706e-45c5-4b5a-8fd4-0860d97f2392",
     "RiskScore": 0.25583333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3446,7 +3446,7 @@
     ]
   },
   {
-    "SegmentId": "80dcfce4-c00c-4b5a-a3a1-4e96db862e41",
+    "SegmentId": "ebd4670f-46ad-49ee-8f35-f96d4cca06bb",
     "RiskScore": 0.245,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3502,7 +3502,7 @@
     ]
   },
   {
-    "SegmentId": "8615b8c2-0a68-477d-b1cd-5581101dd0a1",
+    "SegmentId": "6f264fe6-aa28-4712-a1cb-2b2379eb75f7",
     "RiskScore": 0.245,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3558,7 +3558,7 @@
     ]
   },
   {
-    "SegmentId": "77f06802-a0c7-477e-b081-d0800867c2f8",
+    "SegmentId": "5ce571af-b084-4ed6-958e-7d704e29fe16",
     "RiskScore": 0.24,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3608,7 +3608,7 @@
     ]
   },
   {
-    "SegmentId": "b9f8e970-9bda-4293-9bfd-2edeeb177b7b",
+    "SegmentId": "94e2ac51-5da4-4c3f-8522-164ca51874f2",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3664,7 +3664,7 @@
     ]
   },
   {
-    "SegmentId": "b76ec594-5a26-4aec-9856-233fdd899a65",
+    "SegmentId": "8951b7bf-8c33-4bed-8e73-6252275ef467",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3720,7 +3720,7 @@
     ]
   },
   {
-    "SegmentId": "4ec5fe69-3eb6-48b2-ba43-d9074caec1de",
+    "SegmentId": "6adb9ddb-e4af-48b1-affd-db48e8c80aec",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3776,7 +3776,7 @@
     ]
   },
   {
-    "SegmentId": "7e90ec6b-56b6-48da-a10f-f45fb5af1d46",
+    "SegmentId": "2430e003-db5a-4962-a35d-4e15d11ed8c4",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3832,7 +3832,7 @@
     ]
   },
   {
-    "SegmentId": "7f604eb5-1ff2-454d-adc6-446824fde440",
+    "SegmentId": "a9c6b693-6277-46ea-bb57-b61989c788c0",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3888,7 +3888,7 @@
     ]
   },
   {
-    "SegmentId": "729fc7f6-974c-4e77-b090-40c04c3264a0",
+    "SegmentId": "d9468553-95b4-4aa9-9593-cd313b632424",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3944,7 +3944,7 @@
     ]
   },
   {
-    "SegmentId": "fc1c8983-5eec-46b3-aae8-0635ed44fc45",
+    "SegmentId": "3bc4e341-b811-4ebd-a153-445cd22fe384",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4000,7 +4000,7 @@
     ]
   },
   {
-    "SegmentId": "63fe02b4-4ffc-4077-a74e-497d8d29d667",
+    "SegmentId": "4930c2c3-d74a-4fdd-ad6c-84080653bac3",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4032,7 +4032,7 @@
     ]
   },
   {
-    "SegmentId": "cc8cfd26-4e2b-4688-879d-290b32defc63",
+    "SegmentId": "fbe79f05-f3f1-49fb-9a15-45114abb077d",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4064,7 +4064,7 @@
     ]
   },
   {
-    "SegmentId": "ccee4b45-4ad4-4d0b-92a1-9c7b744183c9",
+    "SegmentId": "bad478dd-e448-40b4-9ff1-5825ca94d7e7",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4096,7 +4096,7 @@
     ]
   },
   {
-    "SegmentId": "f03a0f1f-45e4-4abb-b499-629c489ae4c7",
+    "SegmentId": "69e3ad31-c68c-41e3-9c0d-ea1ff99b3755",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4128,7 +4128,7 @@
     ]
   },
   {
-    "SegmentId": "ebe3bb19-4e9f-450b-85a6-eb86a8df5b66",
+    "SegmentId": "c8ac9d28-380d-4bcd-85c3-114cc4506117",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4160,7 +4160,7 @@
     ]
   },
   {
-    "SegmentId": "ef98c4af-7398-468e-ad13-c185abe247d8",
+    "SegmentId": "f0fe5e9f-fc7c-452a-9c7d-afc36603f578",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4192,7 +4192,7 @@
     ]
   },
   {
-    "SegmentId": "ed59afe4-77a8-44bb-9b70-efa96cd5312a",
+    "SegmentId": "c78f15e1-7ca6-4ab2-afa6-031aa905941e",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4224,7 +4224,7 @@
     ]
   },
   {
-    "SegmentId": "a36b5fe7-dc8e-4bc4-b0b8-a23e10c1ec0a",
+    "SegmentId": "7a9e8bb9-2445-4ad1-93e4-04c686404261",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4256,7 +4256,7 @@
     ]
   },
   {
-    "SegmentId": "6e5eb90a-1911-4053-8d4a-7b8c026f5969",
+    "SegmentId": "7c6c696f-9e51-46b3-8008-45a82e2e77e9",
     "RiskScore": 0.23,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4300,7 +4300,7 @@
     ]
   },
   {
-    "SegmentId": "fae9f525-d03c-4f02-aa1a-ea7ea5899160",
+    "SegmentId": "ddae0ef8-333c-4ae1-b7e9-2eefe61b3195",
     "RiskScore": 0.23,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4344,7 +4344,7 @@
     ]
   },
   {
-    "SegmentId": "4ff66c6e-e550-43b9-9339-cf21740d2089",
+    "SegmentId": "3e284eab-1f88-4b38-9a92-76069ff3e001",
     "RiskScore": 0.225,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4400,7 +4400,7 @@
     ]
   },
   {
-    "SegmentId": "4b521252-1f0e-4190-83d6-6d754d2b7dd1",
+    "SegmentId": "6b68b824-f1f2-466c-bc95-8e7644364369",
     "RiskScore": 0.21333333333333335,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4444,7 +4444,7 @@
     ]
   },
   {
-    "SegmentId": "a476480f-e559-434e-9da8-bbf848638552",
+    "SegmentId": "8153f7f5-d2f2-4272-a339-d45bec69836b",
     "RiskScore": 0.20875,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4494,7 +4494,7 @@
     ]
   },
   {
-    "SegmentId": "9f0f0e6a-5d27-4ee8-a2c6-04b919f141aa",
+    "SegmentId": "e87f5c27-a0b0-4f36-809f-9d4483f8d592",
     "RiskScore": 0.20875,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4544,7 +4544,7 @@
     ]
   },
   {
-    "SegmentId": "33e8814d-405b-44a8-8a21-07c8e9dd369a",
+    "SegmentId": "2255fb55-2a56-4654-a1b5-64fd280d84ee",
     "RiskScore": 0.2075,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4582,7 +4582,7 @@
     ]
   },
   {
-    "SegmentId": "8dd9d6ad-2c5f-4d84-a4bb-b2587c6a736a",
+    "SegmentId": "c45b5c2f-c759-4e3f-92f9-5bd0a91a9ae4",
     "RiskScore": 0.2075,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4620,7 +4620,7 @@
     ]
   },
   {
-    "SegmentId": "a6cbf3a3-42e5-4c44-9e13-d657cbf2bd70",
+    "SegmentId": "8a57e19d-2654-4673-96e5-1ab22307e125",
     "RiskScore": 0.205,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4664,7 +4664,7 @@
     ]
   },
   {
-    "SegmentId": "9de5d1ec-4126-444b-90b4-b9eab9960ffc",
+    "SegmentId": "7d8f9a37-7eff-4605-895f-09e032b845cf",
     "RiskScore": 0.2,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4720,7 +4720,7 @@
     ]
   },
   {
-    "SegmentId": "9d9d1072-fb96-4840-ab1f-ac7b5f4c9e53",
+    "SegmentId": "821313ee-e06b-45c7-8584-ac24d95ec4fd",
     "RiskScore": 0.2,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4776,7 +4776,7 @@
     ]
   },
   {
-    "SegmentId": "44eb0a7b-ea4f-4139-a6b4-f7e478e859cf",
+    "SegmentId": "8a5c9ac7-dfbd-43ba-8229-65ff58042064",
     "RiskScore": 0.2,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4832,7 +4832,7 @@
     ]
   },
   {
-    "SegmentId": "de73eb26-4eec-47e8-b82a-40d6b4d5de9f",
+    "SegmentId": "351d47e1-e870-41de-adb7-99dcf06e1171",
     "RiskScore": 0.2,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4888,7 +4888,7 @@
     ]
   },
   {
-    "SegmentId": "b7749cb7-c79c-452b-962b-fe2817576873",
+    "SegmentId": "0d25fdd7-41b8-4bd2-a863-d09b7f798167",
     "RiskScore": 0.19666666666666666,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -4932,7 +4932,7 @@
     ]
   },
   {
-    "SegmentId": "4c2e5027-5308-4ff6-8cc0-6af4c94a93d9",
+    "SegmentId": "235ca8e8-8731-4222-a850-e09557fd07a1",
     "RiskScore": 0.19625,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -4982,7 +4982,7 @@
     ]
   },
   {
-    "SegmentId": "4da05b8e-ef35-4957-886c-07b1569b58cc",
+    "SegmentId": "83c0b839-807d-486a-bbe5-2b93b4ee37f8",
     "RiskScore": 0.19625,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5032,7 +5032,7 @@
     ]
   },
   {
-    "SegmentId": "c9e5dd32-74fc-4c15-a04b-bd1def723cdd",
+    "SegmentId": "45833dc1-e5a3-43b3-a262-01bbdef29b00",
     "RiskScore": 0.19625,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5082,7 +5082,7 @@
     ]
   },
   {
-    "SegmentId": "bbc48c94-9748-4c11-b697-9dd8382d8fdc",
+    "SegmentId": "23d8b528-6d23-41fc-835d-87e115b2e688",
     "RiskScore": 0.18833333333333332,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5126,7 +5126,7 @@
     ]
   },
   {
-    "SegmentId": "b98d38e5-0d5e-4f02-ac5a-1b4b47488ae8",
+    "SegmentId": "13bd4754-2006-4447-9f82-7e5d344c1de0",
     "RiskScore": 0.18833333333333332,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5170,7 +5170,7 @@
     ]
   },
   {
-    "SegmentId": "cb06fe68-5bd9-4b4a-9d75-dc31cf63202b",
+    "SegmentId": "9cc3c3ab-2275-4251-8bf2-5e533207814d",
     "RiskScore": 0.18833333333333332,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5214,7 +5214,7 @@
     ]
   },
   {
-    "SegmentId": "cb5b709f-727a-4528-bbb8-13efc4fad0a2",
+    "SegmentId": "e5cc1619-e489-45f9-ae56-3c5cccc28f62",
     "RiskScore": 0.18833333333333332,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5258,7 +5258,7 @@
     ]
   },
   {
-    "SegmentId": "e7f1825e-5604-4bae-8cce-d0532c1a1e20",
+    "SegmentId": "b19c1268-2ee5-4b11-a0fc-d916f6567d79",
     "RiskScore": 0.18833333333333332,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5302,7 +5302,7 @@
     ]
   },
   {
-    "SegmentId": "1df56825-429e-4b58-91ee-1d2f628f278d",
+    "SegmentId": "d68d9123-a99a-425b-9d8b-a3028655ba8f",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5334,7 +5334,7 @@
     ]
   },
   {
-    "SegmentId": "3ba6a989-31fa-4a8d-9c29-3f76e6464e08",
+    "SegmentId": "0fdc6a9c-71dd-4f46-896a-fc6374849b70",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5366,7 +5366,7 @@
     ]
   },
   {
-    "SegmentId": "60b12a98-daf0-4397-9e39-3a418421da59",
+    "SegmentId": "ca252ad2-5001-4b2f-8c3f-87ca886f1c9a",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5398,7 +5398,7 @@
     ]
   },
   {
-    "SegmentId": "8fda6dda-7120-4a71-b012-91e4ec3f2519",
+    "SegmentId": "adf8a5c6-2b52-46b7-8823-374263f30974",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5430,7 +5430,7 @@
     ]
   },
   {
-    "SegmentId": "573e8c6b-4d6b-41f7-ab51-9d71d996e224",
+    "SegmentId": "f09f76e0-9407-4b06-a562-e5f35d110520",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5462,7 +5462,7 @@
     ]
   },
   {
-    "SegmentId": "22084fda-75d4-4fe6-b8e6-3dfda8c20fe9",
+    "SegmentId": "f0b52738-6e35-4019-80c2-37938427666c",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5494,7 +5494,7 @@
     ]
   },
   {
-    "SegmentId": "7648515b-41c0-4ba8-8fc8-cac6d2333a60",
+    "SegmentId": "6e2ba753-6216-45bc-a04e-7a966bb8bc34",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5526,7 +5526,7 @@
     ]
   },
   {
-    "SegmentId": "3c29184a-8992-4df6-8194-a36805bb953c",
+    "SegmentId": "0c589e05-a2ef-4218-b986-1dd0bb4d4392",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5558,7 +5558,7 @@
     ]
   },
   {
-    "SegmentId": "7421ec7e-6627-4d4c-b3b1-9b5a431c1e84",
+    "SegmentId": "1626143b-c64d-4237-8610-47ba5908cd5d",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5590,7 +5590,7 @@
     ]
   },
   {
-    "SegmentId": "dc7ca63d-e744-41e5-8980-683d80a6fcec",
+    "SegmentId": "aa38bb10-8bb1-443d-933a-c1dd72009e3f",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5622,7 +5622,7 @@
     ]
   },
   {
-    "SegmentId": "9e225338-3811-4aef-ac0d-6a5ae4bf927a",
+    "SegmentId": "de5dea5c-87b2-4e61-ac78-1bb642566fdd",
     "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5654,7 +5654,7 @@
     ]
   },
   {
-    "SegmentId": "d354ea08-bbbb-47b4-bc2a-3e8b3a58fd8b",
+    "SegmentId": "a85ea1cb-f30d-4a72-a647-80408de3bc71",
     "RiskScore": 0.1825,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5692,7 +5692,7 @@
     ]
   },
   {
-    "SegmentId": "6c94925d-5106-4b9e-8214-c976e0078581",
+    "SegmentId": "df90ad55-cea9-4a4a-9f71-d187f64f879e",
     "RiskScore": 0.1825,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5730,7 +5730,7 @@
     ]
   },
   {
-    "SegmentId": "49743b96-3863-40cb-8b3a-3ce3e61c5825",
+    "SegmentId": "2fdc1e43-0c6f-429f-8e27-354f548ac736",
     "RiskScore": 0.1825,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5768,7 +5768,7 @@
     ]
   },
   {
-    "SegmentId": "e080fa3a-ee6c-49a5-9bb4-68b417dd907f",
+    "SegmentId": "5679ec31-65cf-49ec-a665-3ceff87b3381",
     "RiskScore": 0.1825,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5806,7 +5806,7 @@
     ]
   },
   {
-    "SegmentId": "eb3ca5be-af94-4d4f-a1df-04eb7548a392",
+    "SegmentId": "2e047703-59e4-45d9-be4c-c124cf2fbcb8",
     "RiskScore": 0.17625,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5844,7 +5844,7 @@
     ]
   },
   {
-    "SegmentId": "6ba18e7d-4306-4f61-b45c-dc62fb61897d",
+    "SegmentId": "d9759301-1099-43e5-b436-8b9bef74ec61",
     "RiskScore": 0.17166666666666666,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5888,7 +5888,7 @@
     ]
   },
   {
-    "SegmentId": "f1a61b98-c6a0-427d-ad5c-d0cb712b9998",
+    "SegmentId": "6c03d3ba-01f2-4d17-ae04-9dd8abf3cc34",
     "RiskScore": 0.17166666666666666,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5932,7 +5932,7 @@
     ]
   },
   {
-    "SegmentId": "2bfc0882-cb6f-4515-9005-c3a3559200a8",
+    "SegmentId": "6e417018-7cfb-44ec-8b84-a7ec1d9b0737",
     "RiskScore": 0.165,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -5982,7 +5982,7 @@
     ]
   },
   {
-    "SegmentId": "02c36eaa-eaf1-416a-a4ba-ddab1f63c812",
+    "SegmentId": "2f3c7655-06fb-4e7b-afe8-cff11f9a7fd1",
     "RiskScore": 0.165,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6032,7 +6032,7 @@
     ]
   },
   {
-    "SegmentId": "860a4b15-941a-4eea-b8b2-df75fa6562fb",
+    "SegmentId": "5ad106cf-2164-413a-ad79-f6d7c4e3c45c",
     "RiskScore": 0.165,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6082,7 +6082,7 @@
     ]
   },
   {
-    "SegmentId": "b885978e-82f1-4370-817a-f1b2cf35c143",
+    "SegmentId": "ecf7106e-84fb-4c05-a1b3-4333a87c81ce",
     "RiskScore": 0.165,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6132,7 +6132,7 @@
     ]
   },
   {
-    "SegmentId": "827986c1-acf9-4d24-b735-654e79c77eb9",
+    "SegmentId": "2aa35548-d90e-46ba-9c0b-874f515a9cc2",
     "RiskScore": 0.165,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6182,7 +6182,7 @@
     ]
   },
   {
-    "SegmentId": "95fc7201-966c-4302-8016-be6d115a0523",
+    "SegmentId": "145febfa-501f-419c-b4fb-ee55feb144df",
     "RiskScore": 0.1575,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6220,7 +6220,7 @@
     ]
   },
   {
-    "SegmentId": "bd18f4f4-6d4a-4673-9470-420af4d72521",
+    "SegmentId": "a4a8a9df-86c1-4ae9-9a46-307978e4542c",
     "RiskScore": 0.1575,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6258,7 +6258,7 @@
     ]
   },
   {
-    "SegmentId": "b23e32eb-3e7b-4bfb-8c9c-30488c23598c",
+    "SegmentId": "f66f8cf5-be9b-4aa5-8f13-555cb3955861",
     "RiskScore": 0.135,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6290,7 +6290,7 @@
     ]
   },
   {
-    "SegmentId": "97b39333-122a-46dd-b3b9-2368ec6de68a",
+    "SegmentId": "3369a4cd-8739-4448-97df-47cd387c499a",
     "RiskScore": 0.135,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6322,7 +6322,7 @@
     ]
   },
   {
-    "SegmentId": "efcb339d-1e6e-40b9-81f7-255ff52448dd",
+    "SegmentId": "03633b6b-1a2b-4fb9-9197-98d281c5a778",
     "RiskScore": 0.135,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6354,7 +6354,7 @@
     ]
   },
   {
-    "SegmentId": "7e016a35-a09b-4614-81a5-7fe8c5e7f2cc",
+    "SegmentId": "f552a1e3-840a-4ba9-a97a-96145df294b2",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6398,7 +6398,7 @@
     ]
   },
   {
-    "SegmentId": "1cd5b74e-4374-4725-9930-6881499180c3",
+    "SegmentId": "bfd3f159-16b2-4eca-9e9b-e709b468dc3d",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6442,7 +6442,7 @@
     ]
   },
   {
-    "SegmentId": "a3b93b84-0455-4b40-9c04-7cce89e8baf9",
+    "SegmentId": "2be1eb7a-11e4-40ea-bb54-cf223e68792c",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6486,7 +6486,7 @@
     ]
   },
   {
-    "SegmentId": "d1fd2ab1-36b5-430c-92ff-11b430492cdb",
+    "SegmentId": "db76c77a-b711-4822-9e15-ecb1f20940a7",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6530,7 +6530,7 @@
     ]
   },
   {
-    "SegmentId": "adc5ea60-f44b-44ad-b1cf-53c08bfd3006",
+    "SegmentId": "7be26302-318a-4859-9572-2210b7d92bf6",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6574,7 +6574,7 @@
     ]
   },
   {
-    "SegmentId": "2d5faaf4-0815-4d38-93db-0e78f7e03ed0",
+    "SegmentId": "c0e39b17-806c-4449-a765-25ef75cae72c",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6618,7 +6618,7 @@
     ]
   },
   {
-    "SegmentId": "703e92a4-0eaa-4df0-a91f-281263196631",
+    "SegmentId": "20d10e75-59c9-412c-9a84-368e274055f4",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6662,7 +6662,7 @@
     ]
   },
   {
-    "SegmentId": "78b3e21d-e5f6-4bb4-bc7a-636cc6342516",
+    "SegmentId": "589a460f-9825-4c0d-956a-f14febd6bb84",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6706,7 +6706,7 @@
     ]
   },
   {
-    "SegmentId": "944daf01-171f-45d4-9d22-1d43653f8ebf",
+    "SegmentId": "e8755a08-4521-4fa0-8433-8e5a9b728c00",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6750,7 +6750,7 @@
     ]
   },
   {
-    "SegmentId": "7b6825ed-80db-473d-92b6-08122745aee7",
+    "SegmentId": "3ed08d97-889c-47bd-863a-ea9c72066440",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6794,7 +6794,7 @@
     ]
   },
   {
-    "SegmentId": "b998e4ca-7d96-414f-9022-a801f3c6182c",
+    "SegmentId": "d56e7121-efc4-4f21-ace3-f17f5b2cf69f",
     "RiskScore": 0.12583333333333335,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6838,7 +6838,7 @@
     ]
   },
   {
-    "SegmentId": "baffc9f1-bc24-45e4-b7f2-9a3f3de66a1b",
+    "SegmentId": "95abd380-75e4-46e9-9e7d-da1ed856c747",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6876,7 +6876,7 @@
     ]
   },
   {
-    "SegmentId": "a9c974d4-2f17-4d9a-9fb5-45dd4f50f55c",
+    "SegmentId": "bb3cbc3b-e9a5-4b17-b3d8-4d974b10fad3",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6914,7 +6914,7 @@
     ]
   },
   {
-    "SegmentId": "513e4e9f-540a-4888-b41e-2b3de5e45e2a",
+    "SegmentId": "7d21c9d7-314f-4080-b7e9-02173be22331",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6952,7 +6952,7 @@
     ]
   },
   {
-    "SegmentId": "6335e595-9f44-4aa8-ab51-594804628e0b",
+    "SegmentId": "2724af02-0afe-4086-bbc7-5ca50dee0500",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6990,7 +6990,7 @@
     ]
   },
   {
-    "SegmentId": "640a1a66-3c2b-461d-af82-b5acdfb613e8",
+    "SegmentId": "cfbbd099-06e0-4e20-80e2-c2406b764e2d",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7028,7 +7028,7 @@
     ]
   },
   {
-    "SegmentId": "13a8ee5f-e117-4dd8-9af5-fdcf5ee1b813",
+    "SegmentId": "81f78331-36fa-4559-b671-92e3fe189504",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7066,7 +7066,7 @@
     ]
   },
   {
-    "SegmentId": "6576b470-79bd-4152-bf0d-4b960fc72944",
+    "SegmentId": "c45cafe5-447c-4a1f-90d1-0b28f11a94a5",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7104,7 +7104,7 @@
     ]
   },
   {
-    "SegmentId": "dbbc22ff-44f3-48fd-b6f9-6019d56ee0c7",
+    "SegmentId": "b8c02dea-0437-4cc8-b2ae-8e217512fbaf",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7142,7 +7142,7 @@
     ]
   },
   {
-    "SegmentId": "7b77d343-a648-4eb2-895f-6659691cb8a1",
+    "SegmentId": "be5dffdf-5018-46cc-8984-4713528ca671",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7180,7 +7180,7 @@
     ]
   },
   {
-    "SegmentId": "c969e3ff-5d3c-4144-b23a-57534047b793",
+    "SegmentId": "b48b7162-27a6-4e54-a773-b2b9d51893ef",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7218,7 +7218,7 @@
     ]
   },
   {
-    "SegmentId": "0e08b0d9-240b-446c-96cf-d9697d440cd0",
+    "SegmentId": "9ccc4358-f218-4853-b7d2-710d3447f7c1",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7256,7 +7256,7 @@
     ]
   },
   {
-    "SegmentId": "ddf51058-2319-4e50-be47-70c8aa3e7c0c",
+    "SegmentId": "d5d70b6c-a389-40c5-850d-2629646d0a3a",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7294,7 +7294,7 @@
     ]
   },
   {
-    "SegmentId": "0e0936c2-549f-4f19-b922-2c9708365dd1",
+    "SegmentId": "1cbc2b7e-7632-44e9-abb1-73cd915a10a3",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7332,7 +7332,7 @@
     ]
   },
   {
-    "SegmentId": "1d544b4b-5784-417e-8d9e-1f8d910dbafa",
+    "SegmentId": "17cc3b5d-8206-438c-af54-97889e6bdd23",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7370,7 +7370,7 @@
     ]
   },
   {
-    "SegmentId": "42693402-a6ab-4874-a139-e3705064a1b3",
+    "SegmentId": "265833c1-484e-4713-8293-8cca5bd052ca",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7408,7 +7408,7 @@
     ]
   },
   {
-    "SegmentId": "6b645006-50e3-4ac2-ad88-60638b0fef46",
+    "SegmentId": "715e7ae3-fa92-4169-9df7-58b9ccfc85c6",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7446,7 +7446,7 @@
     ]
   },
   {
-    "SegmentId": "8f33c1d4-25c5-4f2c-90a9-336f88831ea1",
+    "SegmentId": "930d86e4-7a17-41ec-bc89-a984c7b56276",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7484,7 +7484,7 @@
     ]
   },
   {
-    "SegmentId": "cdbf0ac4-a0a4-4566-98f0-e1ad137aef01",
+    "SegmentId": "1220ed22-c8f5-418d-be95-089239670808",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7522,7 +7522,7 @@
     ]
   },
   {
-    "SegmentId": "c7a7617b-0300-4689-a4e3-ce96267db62d",
+    "SegmentId": "6be163ba-f04c-403e-8cde-a93b1c212e72",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7560,7 +7560,7 @@
     ]
   },
   {
-    "SegmentId": "bd26fe08-4dfd-4dc4-a100-d97664c527c6",
+    "SegmentId": "4b58ad42-686f-4717-89ab-e4e4c7d9e72a",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7598,7 +7598,7 @@
     ]
   },
   {
-    "SegmentId": "18d822bb-e421-4a13-abba-1f998b38b15d",
+    "SegmentId": "cd4c355c-50ad-4846-b00a-e4f08b99d62c",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7636,7 +7636,7 @@
     ]
   },
   {
-    "SegmentId": "821caecb-fb5d-4f15-a095-8878bcd229b7",
+    "SegmentId": "2ed201c2-b1d4-4865-a096-0b86e4d6e98d",
     "RiskScore": 0.095,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7674,7 +7674,7 @@
     ]
   },
   {
-    "SegmentId": "ad44895e-39df-4e75-a82b-562b532e8c09",
+    "SegmentId": "91a0236e-a89d-4ccb-bde3-8a678d439b35",
     "RiskScore": 0.08875,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7712,7 +7712,7 @@
     ]
   },
   {
-    "SegmentId": "f50fe5c6-5526-4deb-8a83-98d9a07357d3",
+    "SegmentId": "f72b89f6-e6b2-4c49-926e-506b10922bf9",
     "RiskScore": 0.08875,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7750,7 +7750,7 @@
     ]
   },
   {
-    "SegmentId": "7232a230-e43b-422c-aee3-1da7e2423abf",
+    "SegmentId": "58ee53bb-70d0-4acd-be8b-810e06347e23",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7782,7 +7782,7 @@
     ]
   },
   {
-    "SegmentId": "bfa2156e-fb1f-428b-bb21-dfe7f29c37a7",
+    "SegmentId": "e963ad9e-43ad-429c-a445-f56ce131f764",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7814,7 +7814,7 @@
     ]
   },
   {
-    "SegmentId": "86367a19-b182-496e-bcaa-1454bda21cab",
+    "SegmentId": "ba772716-ef8f-455a-a1f8-6a49e2b2dfbd",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7846,7 +7846,7 @@
     ]
   },
   {
-    "SegmentId": "d98ea1dc-2b79-41c7-bc93-c19a0f9b631b",
+    "SegmentId": "d6a6688b-0d83-41b5-81d1-c0a145f061bf",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7878,7 +7878,7 @@
     ]
   },
   {
-    "SegmentId": "b2ba22de-fb12-4b97-bed1-7b322825941d",
+    "SegmentId": "5f501be0-db28-4e13-bb1a-b89e3f1a7782",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7910,7 +7910,7 @@
     ]
   },
   {
-    "SegmentId": "c79a9f25-4992-45a7-ab59-83647e7ed605",
+    "SegmentId": "2cd43c8c-7e39-496f-97c0-9ebb62db02d9",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7942,7 +7942,7 @@
     ]
   },
   {
-    "SegmentId": "5daed57e-131f-4f5b-a25a-c28b1f4fd4c6",
+    "SegmentId": "d8fc2a87-add4-4b34-8e52-bae8d2ea2dcb",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7974,7 +7974,7 @@
     ]
   },
   {
-    "SegmentId": "75cbde2a-10a1-47f3-b0b8-a2eeeb4c9c28",
+    "SegmentId": "8240cdb3-3cd5-45fc-b432-88ca69e5449a",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8006,7 +8006,7 @@
     ]
   },
   {
-    "SegmentId": "0c580ca3-81ef-41e9-a2c2-1e6120be4b04",
+    "SegmentId": "81b267f9-be64-4d07-85b9-6d4accf2e3bc",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8038,7 +8038,7 @@
     ]
   },
   {
-    "SegmentId": "a0b4da29-4c61-4e30-a363-27083049a894",
+    "SegmentId": "1b547340-4139-41e9-8162-ffddae15bb79",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8070,7 +8070,7 @@
     ]
   },
   {
-    "SegmentId": "d4730de2-5bee-4781-9cb6-55e241dd4db4",
+    "SegmentId": "9baec9fa-4959-43cc-8384-1706c743ecc7",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8102,7 +8102,7 @@
     ]
   },
   {
-    "SegmentId": "f5eab1f4-49ff-4cdb-a322-9e1c1e244190",
+    "SegmentId": "415ea36f-d8b0-4176-a049-bd9c31a9d10a",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8134,7 +8134,7 @@
     ]
   },
   {
-    "SegmentId": "03afedd9-ac7e-47cc-bbb9-8b19d2bbc0c6",
+    "SegmentId": "de087967-69d8-44da-8985-a8b6c7b42951",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8166,7 +8166,7 @@
     ]
   },
   {
-    "SegmentId": "4f3f2fd3-c8d7-434c-b1c4-aea301bea4c5",
+    "SegmentId": "6dedd2ca-23e3-48f0-a55a-df0538e2df72",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8198,7 +8198,7 @@
     ]
   },
   {
-    "SegmentId": "886b0b5e-2dd4-49af-9665-93af939b6ff8",
+    "SegmentId": "fa3498ce-ee62-453b-8fdc-89c7de593e54",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8230,7 +8230,7 @@
     ]
   },
   {
-    "SegmentId": "a7cc68a5-03f1-4ec8-9d59-889132e55985",
+    "SegmentId": "b417f171-c0ed-457b-83a5-5ee2998ef790",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8262,7 +8262,7 @@
     ]
   },
   {
-    "SegmentId": "51b945f2-70d2-4ecb-9d69-fb6e57185aa9",
+    "SegmentId": "7dabd1be-9b85-42cc-98dd-3e7b9482b354",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8294,7 +8294,7 @@
     ]
   },
   {
-    "SegmentId": "647f510b-4cfd-40fb-bbab-e4199514bb1e",
+    "SegmentId": "5f84f2aa-1dc2-4b73-8ae7-83618730a917",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8326,7 +8326,7 @@
     ]
   },
   {
-    "SegmentId": "3f34be03-ff8a-4222-80ce-c663ef6326f9",
+    "SegmentId": "c0883ed9-baba-4f25-b078-0cde6ed757ce",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8358,7 +8358,7 @@
     ]
   },
   {
-    "SegmentId": "176fb49a-ef2e-4f5d-8661-87e9bacd39d0",
+    "SegmentId": "223feca7-1659-4f21-bb6c-42393818941a",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8390,7 +8390,7 @@
     ]
   },
   {
-    "SegmentId": "4146dc65-4bb2-466a-b833-0d413c4ef1a5",
+    "SegmentId": "db6c1788-3d40-4b53-8600-94b8eb4edd55",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8422,7 +8422,7 @@
     ]
   },
   {
-    "SegmentId": "d9d43ea2-18a8-47cd-8c02-bf73ea5309b7",
+    "SegmentId": "0d51bc58-a615-4b22-a6d5-c153e26ae174",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8454,7 +8454,7 @@
     ]
   },
   {
-    "SegmentId": "e948ce47-ac38-4130-9c90-06ed48b39bb5",
+    "SegmentId": "b1a51a3b-4ac5-42d1-bf03-2429292c2d51",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8486,7 +8486,7 @@
     ]
   },
   {
-    "SegmentId": "26284797-0fe5-4916-b286-46d333b19c69",
+    "SegmentId": "41d112d8-d419-48d8-a1bb-7e5d4ded3133",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8518,7 +8518,7 @@
     ]
   },
   {
-    "SegmentId": "22301b32-24dd-4ac8-8a2f-cfa1d1fa2593",
+    "SegmentId": "646b9883-38b0-4aee-8ecd-0e2cc68f2734",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8550,7 +8550,7 @@
     ]
   },
   {
-    "SegmentId": "e3128e42-d748-4d7e-be61-b0f4a4e2a8ae",
+    "SegmentId": "49478868-75b3-4e91-99a6-50b643d0d7fb",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8582,7 +8582,7 @@
     ]
   },
   {
-    "SegmentId": "acef62e2-d096-4435-a346-85ae7d254fca",
+    "SegmentId": "4aad8d2d-4445-4dff-8e36-86e93e98f20e",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8614,7 +8614,7 @@
     ]
   },
   {
-    "SegmentId": "27abbede-75d9-4465-a1ea-04ec5836dead",
+    "SegmentId": "89101f8a-98d0-4209-bd52-dfdddf109701",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8646,7 +8646,7 @@
     ]
   },
   {
-    "SegmentId": "d1c3853a-a5b8-4d09-b13f-6894c031aba6",
+    "SegmentId": "c1185d71-9d48-4eb4-9bba-3e4cbf413f90",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8678,7 +8678,7 @@
     ]
   },
   {
-    "SegmentId": "a2bb63f5-5dc8-4927-9c4a-4a95ea0ac78c",
+    "SegmentId": "0607a548-3069-407e-9533-7b5d7e0f47ef",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8710,7 +8710,7 @@
     ]
   },
   {
-    "SegmentId": "40eb3f2d-0919-409d-b0da-eed76d2d0108",
+    "SegmentId": "50681386-90fd-4e39-81c6-879904265458",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8742,7 +8742,7 @@
     ]
   },
   {
-    "SegmentId": "c8ecc224-d60a-42dc-896b-b45c8d1ede02",
+    "SegmentId": "640f9f15-0294-47ec-81cd-da71767ee602",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8774,7 +8774,7 @@
     ]
   },
   {
-    "SegmentId": "ae6db9d9-2321-400b-b040-778065b6e137",
+    "SegmentId": "ae089c10-9925-4cac-9bdb-3a97c2c3b747",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8806,7 +8806,7 @@
     ]
   },
   {
-    "SegmentId": "04c90c3d-1684-48cf-a081-8c7968176a68",
+    "SegmentId": "6d120c89-26ea-4e17-af6a-9aae7892a556",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8838,7 +8838,7 @@
     ]
   },
   {
-    "SegmentId": "a952ab8e-2b5e-4d5f-bbad-c2f8469aae00",
+    "SegmentId": "e49407b8-9a09-4026-b909-e8aa58c4c732",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8870,7 +8870,7 @@
     ]
   },
   {
-    "SegmentId": "6d5404cc-8dd7-48ac-9772-0deb0ab15970",
+    "SegmentId": "4d9ba408-13b1-4a99-bbca-22b4a1e5da9c",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8902,7 +8902,7 @@
     ]
   },
   {
-    "SegmentId": "2a920b1a-3773-48cd-bd23-25c416ff09c0",
+    "SegmentId": "88ecc2a5-94c7-4869-8420-ae0d9f482a9a",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8934,7 +8934,7 @@
     ]
   },
   {
-    "SegmentId": "4487c880-7b47-49ca-b1b6-9c1590a48d77",
+    "SegmentId": "6d5dec25-c881-4bbc-ac02-f2fc30631603",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8966,7 +8966,7 @@
     ]
   },
   {
-    "SegmentId": "e0838434-1191-438d-88ea-41fd3d8b4c87",
+    "SegmentId": "9875655e-7597-42ba-a0ad-1814b3e8a6cd",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8998,7 +8998,7 @@
     ]
   },
   {
-    "SegmentId": "9830c965-0cc8-4d38-93ce-84619680c7db",
+    "SegmentId": "b5b25dba-fc99-4049-a0cc-7101dd094e90",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9030,7 +9030,7 @@
     ]
   },
   {
-    "SegmentId": "523d7dc1-9515-43c6-8b8e-f228f5cce59b",
+    "SegmentId": "33c77704-f19f-4faa-99a5-e95e607494f3",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9062,7 +9062,7 @@
     ]
   },
   {
-    "SegmentId": "a71a507d-2cfe-408c-a296-1089dd13f84f",
+    "SegmentId": "004b7555-07a5-42fe-9633-f97f65077fb8",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9094,7 +9094,7 @@
     ]
   },
   {
-    "SegmentId": "5be9a949-d338-439c-9811-2912807773e1",
+    "SegmentId": "4ea5d62a-5e79-49f8-9f3d-24de1f434062",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9126,7 +9126,7 @@
     ]
   },
   {
-    "SegmentId": "5f46b3fa-9b48-493d-98f3-acc087c11bd1",
+    "SegmentId": "c26f0b55-c6f4-4e49-9303-fded51191cb1",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9158,7 +9158,7 @@
     ]
   },
   {
-    "SegmentId": "e9960f20-1566-4cd4-810e-016a8ae71439",
+    "SegmentId": "18128790-7206-4833-bd61-bb8b40c1ee8a",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9190,7 +9190,7 @@
     ]
   },
   {
-    "SegmentId": "4889979a-6dc3-418f-a0e0-5460e59e22dc",
+    "SegmentId": "0ecacbc7-6e07-4314-9453-bc4995c0fd92",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9222,7 +9222,7 @@
     ]
   },
   {
-    "SegmentId": "a585d671-2086-4f45-b1cd-34e3fbc8e969",
+    "SegmentId": "ccb47c4e-1643-4d97-bd12-10ece8050817",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9254,7 +9254,7 @@
     ]
   },
   {
-    "SegmentId": "47bae1d8-d8b1-463a-9320-bbbbe00e7d26",
+    "SegmentId": "bcac9540-56f0-439d-a6eb-6558fd6c8a7d",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9286,7 +9286,7 @@
     ]
   },
   {
-    "SegmentId": "da064db0-ffe8-47e4-942e-ab8732ee5b4b",
+    "SegmentId": "86302beb-29f1-4a09-9296-e44a59000459",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9318,7 +9318,7 @@
     ]
   },
   {
-    "SegmentId": "94a28b7f-7b43-4778-aa04-e786294e8785",
+    "SegmentId": "919ddcc4-0b48-49c2-9be8-093e53310599",
     "RiskScore": 0.06,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -9350,7 +9350,7 @@
     ]
   },
   {
-    "SegmentId": "279bd81e-aa48-4cc8-9a02-8bc45f873769",
+    "SegmentId": "58e12faf-d61f-4937-b981-5b07fde83140",
     "RiskScore": 0.0475,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,

@@ -18,6 +18,7 @@ public class CrashRecord
     public decimal? LidarElevation { get; set; }
     public List<ContributingFactor> ContributingFactors { get; set; } = new();
     public string WeatherCondition { get; set; } = "";
+    public string LightCondition { get; set; } = "";
     public string RoadwayCondition { get; set; } = "";
     public List<VehicleInfo> Vehicles { get; set; } = new();
     public List<PersonInfo> Persons { get; set; } = new();
