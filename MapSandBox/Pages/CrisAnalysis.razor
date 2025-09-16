@@ -12,6 +12,7 @@
         <MapLibreMap @ref="mapComponent" Config="mapConfig" OnMapClick="@HandleMapClick" />
         <RoadPopup @ref="roadPopup" />
         <SoilPopup @ref="soilPopup" />
+        <CrashPopup @ref="crashPopup" />
 
         <div class="map-controls">
             <div class="control-section">
@@ -139,6 +140,7 @@
     private MapLibreMap? mapComponent;
     private RoadPopup? roadPopup;
     private SoilPopup? soilPopup;
+    private CrashPopup? crashPopup;
 
     private MapLibreConfig mapConfig = new();
     private List<BaseMapStyle> availableStyles = new();

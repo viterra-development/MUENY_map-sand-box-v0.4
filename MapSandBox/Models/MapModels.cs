@@ -43,4 +43,27 @@ public class MapClickEventArgs
     public double Latitude { get; set; }
     public double Longitude { get; set; }
     public object? Object { get; set; }
+}
+
+public class CrashPopupData
+{
+    public string CrashId { get; set; } = "";
+    public string CrashDate { get; set; } = "";
+    public string CrashTime { get; set; } = "";
+    public string CrashDateTime { get; set; } = "";
+    public string Severity { get; set; } = "";
+    public string SeverityCode { get; set; } = "";
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+    public int PersonsInvolved { get; set; }
+    public int VehiclesInvolved { get; set; }
+    public int FatalCount { get; set; }
+    public int InjuryCount { get; set; }
+    public string WeatherCondition { get; set; } = "";
+    public string LightCondition { get; set; } = "";
+    public string SurfaceCondition { get; set; } = "";
+    public string RoadwayId { get; set; } = "";
+    public List<string> ContributingFactors { get; set; } = new();
+
+    public string FormattedCoordinates => $"{Longitude:F6}, {Latitude:F6}";
 } 

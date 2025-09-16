@@ -289,11 +289,15 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
+                        dataTransform: d => d.features.map(f => ({
+                            ...f.properties,
+                            coordinates: f.geometry.coordinates
+                        })),
                         radiusMinPixels: 6,
                         radiusMaxPixels: 25,
-                        getPosition: d => d.geometry.coordinates,
-                        getRadius: d => Math.sqrt(d.properties.crash_count || 1) * 100,
-                        getFillColor: d => getRiskLevelColor(d.properties.risk_level),
+                        getPosition: d => d.coordinates,
+                        getRadius: d => Math.max(8, Math.min(25, Math.sqrt(d.crash_count || 1) * 8)),
+                        getFillColor: d => getRiskLevelColor(d.risk_level),
                         stroked: true,
                         getLineColor: [0, 0, 0, 255],
                         lineWidthMinPixels: 1,
@@ -326,9 +330,13 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     deckLayers.push(new deck.PathLayer({
                         id: config.id,
                         data: config.dataUrl,
-                        getPath: d => d.geometry.coordinates,
-                        getWidth: d => Math.max(2, (d.properties.aadt || 100) / 1000),
-                        getColor: d => getRiskLevelColor(d.properties.risk_level),
+                        dataTransform: d => d.features.map(f => ({
+                            ...f.properties,
+                            coordinates: f.geometry.coordinates
+                        })),
+                        getPath: d => d.coordinates,
+                        getWidth: d => Math.max(2, (d.aadt || 100) / 1000),
+                        getColor: d => getRiskLevelColor(d.risk_level),
                         widthMinPixels: 2,
                         widthMaxPixels: 20,
                         pickable: true,
@@ -970,30 +978,75 @@ function getIntersectionColor(feature) {
 }
 
 // CRIS click handlers
-function handleCrashClick(info) {
+async function handleCrashClick(info) {
+    console.log('handleCrashClick called with:', info);
+    console.log('info.object:', info.object);
+
     if (info.object) {
-        const crash = info.object.properties;
-        const crashDate = crash.crash_date || 'Unknown';
-        const severity = crash.severity || 'Unknown';
-        const personsInvolved = crash.persons_involved || 0;
-        const vehiclesInvolved = crash.vehicles_involved || 0;
-        const weather = crash.weather_condition || 'Unknown';
-        const factors = crash.contributing_factors || [];
+        const crash = info.object; // Properties are now at root level after dataTransform
 
-        const factorsText = Array.isArray(factors) && factors.length > 0
-            ? factors.join(', ')
-            : 'None specified';
+        // Create the crash popup data object
+        const crashPopupData = {
+            crashId: crash.crash_id || 'Unknown',
+            crashDate: crash.crash_date || 'Unknown',
+            crashTime: crash.crash_time || 'Unknown',
+            crashDateTime: crash.crash_datetime || 'Unknown',
+            severity: crash.severity || 'Unknown',
+            severityCode: crash.severity_code || 'Unknown',
+            latitude: crash.latitude || 0,
+            longitude: crash.longitude || 0,
+            personsInvolved: crash.persons_involved || 0,
+            vehiclesInvolved: crash.vehicles_involved || 0,
+            fatalCount: crash.fatal_count || 0,
+            injuryCount: crash.injury_count || 0,
+            weatherCondition: crash.weather_condition || 'Unknown',
+            lightCondition: crash.light_condition || 'Unknown',
+            surfaceCondition: crash.surface_condition || 'Unknown',
+            roadwayId: crash.roadway_id || '',
+            contributingFactors: Array.isArray(crash.contributing_factors) ? crash.contributing_factors : []
+        };
 
-        const message = `Crash Information
-━━━━━━━━━━━━━━━━━━
-Date: ${crashDate}
-Severity: ${severity}
-Persons Involved: ${personsInvolved}
-Vehicles Involved: ${vehiclesInvolved}
-Weather: ${weather}
-Contributing Factors: ${factorsText}
+        // Import and use the crash popup module
+        try {
+            const crashPopupModule = await import('./crashPopup.js');
+            crashPopupModule.showCrashPopup(crashPopupData);
+        } catch (error) {
+            console.error('Error showing crash popup:', error);
+            // Fallback to alert if popup fails
+            alert(`Crash Report #${crashPopupData.crashId}
+Date: ${crashPopupData.crashDateTime}
+Severity: ${crashPopupData.severity} (${crashPopupData.severityCode})
+Persons: ${crashPopupData.personsInvolved}, Vehicles: ${crashPopupData.vehiclesInvolved}`);
+        }
+    }
+}
 
-Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
+function handleIntersectionClick(info) {
+    console.log('handleIntersectionClick called with:', info);
+
+    if (info.object) {
+        const intersection = info.object; // Properties are now at root level after dataTransform
+
+        const recentCrashes = intersection.recent_crashes || [];
+        const crashesList = recentCrashes.length > 0
+            ? recentCrashes.map(c => `• ${c.crash_date}: ${c.severity} (${c.persons_involved} persons)`).join('\n')
+            : 'No recent crash details available';
+
+        const message = `Intersection Risk Analysis
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Risk Level: ${intersection.risk_level}
+Risk Score: ${intersection.risk_score?.toFixed(3) || 'N/A'}
+Total Crashes: ${intersection.crash_count}
+
+Crash Breakdown:
+• Fatal: ${intersection.fatal_crashes || 0}
+• Injury: ${intersection.injury_crashes || 0}
+• Property Damage: ${intersection.property_damage_crashes || 0}
+
+Recent Crashes:
+${crashesList}
+
+Location: ${intersection.latitude?.toFixed(6)}, ${intersection.longitude?.toFixed(6)}`;
 
         alert(message);
     }
