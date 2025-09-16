@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "767df458-9822-4bdb-9bec-d23175992cd0",
+        "segment_id": "abbd4fde-1896-4570-8958-1025ec0f140b",
         "risk_score": 0.4525,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -61,7 +61,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "695a9fd1-de70-4a39-b27b-c5d5fb9dfd47",
+        "segment_id": "d8df7448-7837-41b9-8c63-5694e249e4d6",
         "risk_score": 0.44,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -118,7 +118,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d8b6c6de-d3ad-48d5-a3a3-23da64f5c2b8",
+        "segment_id": "1cbb32aa-b0a1-440e-bf6d-c57bf83b0538",
         "risk_score": 0.4370689655172414,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -175,7 +175,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "5fbfbe4e-e4aa-41ea-b970-2c0b679c0249",
+        "segment_id": "b32e3e20-3e87-4a7d-b878-eb9d7ee57d2b",
         "risk_score": 0.43411458333333336,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -232,7 +232,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e90fe0c6-d3ca-4325-be54-471c89875351",
+        "segment_id": "ccadf2e7-a347-4427-87a0-dbf8cd4716bc",
         "risk_score": 0.43289473684210533,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -289,7 +289,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d47e4a06-c774-46b7-876c-88ff0f0ba30e",
+        "segment_id": "1fcbc6fd-c4ec-4a37-acee-ca5cf896f5c1",
         "risk_score": 0.4325,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -346,7 +346,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e88a4ac4-95eb-4e3f-a9f3-343e0e06798d",
+        "segment_id": "e6c772cb-5f00-4c83-aa42-8746832990be",
         "risk_score": 0.4323529411764706,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -403,7 +403,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "bfa418c5-935d-431e-a35e-95659c4f5107",
+        "segment_id": "b88ca5a0-d554-49a3-a2bd-6898016613a5",
         "risk_score": 0.43194444444444446,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -460,7 +460,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "0eeae598-a631-494b-9c73-ed3f756a6481",
+        "segment_id": "7922a246-8ae3-4b24-957e-67edcce1b9e9",
         "risk_score": 0.426875,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -517,7 +517,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "5b8d0b6c-bc26-4f53-af48-c7a7cf98f880",
+        "segment_id": "70cd8b5c-1cd0-48b3-9fad-110d0370342a",
         "risk_score": 0.42625,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -574,7 +574,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "0964bb9f-cd72-42cf-a960-099b948ef70b",
+        "segment_id": "476441ac-be50-422c-86a6-4f91a1fce14e",
         "risk_score": 0.4256410256410256,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -631,7 +631,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "2176b2d5-6f34-403e-beec-264c4ecae883",
+        "segment_id": "5e5c68aa-c5bc-4bad-a64f-cbfdef9f962d",
         "risk_score": 0.425,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -688,7 +688,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "eb28f7f5-38d0-4e26-894b-6a4cfd91d5a2",
+        "segment_id": "19d06f1f-52bc-47d8-80de-edcbf9a219f9",
         "risk_score": 0.42272727272727273,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -745,7 +745,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "810f8ed4-6cf8-40c8-a6b5-abfa7868948b",
+        "segment_id": "6a346916-98c0-4901-9a5e-f7e141df5b90",
         "risk_score": 0.4225,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -802,7 +802,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "78bd9eba-21d8-40a2-8632-65edaa8bdbd4",
+        "segment_id": "dc0713f5-95c4-403b-ab7c-ae521c8f0b21",
         "risk_score": 0.421875,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -859,7 +859,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "79cec9bd-285b-4926-9a49-6416a12b271d",
+        "segment_id": "545948ba-39bf-4f2e-9b5f-8ba0d9678843",
         "risk_score": 0.42115384615384616,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -916,7 +916,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "4609228e-a9bb-49be-9dfc-12e000e1047d",
+        "segment_id": "8b3c91ff-9075-4c06-ab37-bc2404114f59",
         "risk_score": 0.418801652892562,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -973,7 +973,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "68d1d8d7-b4fd-429d-8981-4efb77184bed",
+        "segment_id": "8a0ff495-e6a0-41d5-bcf5-fefaac9db4aa",
         "risk_score": 0.4175,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1030,7 +1030,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "fd550236-80df-498f-a6da-b2345ac0992b",
+        "segment_id": "14087408-ded3-4ae4-86d2-9b91457cb5ce",
         "risk_score": 0.4174038461538462,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1087,7 +1087,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "cd79e862-8caf-4326-b152-42f46d93c86e",
+        "segment_id": "f34fda89-30c0-4058-a7ac-d183c23df9e6",
         "risk_score": 0.4166666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1144,7 +1144,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f6b41260-db4f-4fae-92b3-5f5c6d64183f",
+        "segment_id": "fba81993-c334-442e-aef4-14fb2da3b05b",
         "risk_score": 0.415,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1201,7 +1201,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "a8d0ced1-6b1f-4305-a6ec-73667130f27a",
+        "segment_id": "6ae5094c-5472-44eb-9d4f-0289f1f477cd",
         "risk_score": 0.4125,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1258,7 +1258,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "70763576-bac9-47de-bff1-618ae6ecbe09",
+        "segment_id": "0c85a67c-39fe-4e63-a410-000b7c37a83d",
         "risk_score": 0.41,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1315,7 +1315,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "22817eaa-e11a-4620-92b7-e7dcf99ee94e",
+        "segment_id": "358db6cf-fbc8-48ca-8112-b2528351ab8c",
         "risk_score": 0.408531746031746,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1372,7 +1372,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9cb30727-1f4d-4a7b-b0de-6cdb7cb5605c",
+        "segment_id": "9f641055-a978-43a1-a63a-c6bd1e6d3d5b",
         "risk_score": 0.40303030303030307,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1429,7 +1429,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8c668809-6d74-4ef2-b3d5-3d67aaff92ea",
+        "segment_id": "076fb171-09de-4a56-a1fc-5f1b25843a02",
         "risk_score": 0.395625,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1486,7 +1486,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "029e234b-73b5-404a-853e-d3218fccabb8",
+        "segment_id": "90191266-4d8e-4d62-aa18-bf6f1b019e69",
         "risk_score": 0.38722222222222225,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1543,7 +1543,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9acc0ee2-7ef8-47d9-913d-6ae455c34943",
+        "segment_id": "7dc48ae4-00cb-436d-b040-53520abae876",
         "risk_score": 0.3854166666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1600,7 +1600,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7f313924-44fb-446e-90b8-d6a8b7d0f30e",
+        "segment_id": "b8f5fbc2-9bbe-4540-abf5-622178380372",
         "risk_score": 0.3854166666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1657,7 +1657,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f570fb8b-aaaa-4d85-991f-2071e2b5bab2",
+        "segment_id": "0cda4e91-37a0-40d4-a4bc-cd285e07125f",
         "risk_score": 0.38333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1714,7 +1714,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "fb70193f-5ab0-43f5-9070-0657c7578e27",
+        "segment_id": "82eda826-c495-4dc7-9ddd-b9b9f219e8da",
         "risk_score": 0.3788888888888889,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1771,7 +1771,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7abf7651-74ab-4d71-ac2e-23a8852eebeb",
+        "segment_id": "1b6a7888-6ca1-47d3-8f0c-25bc1ef98c67",
         "risk_score": 0.37333333333333335,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1828,7 +1828,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9f6dc7bf-5b04-42ab-80d5-5f65e0f9462d",
+        "segment_id": "7588d389-c21c-4189-b9bc-54a1dfb8ca18",
         "risk_score": 0.35944444444444446,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1885,7 +1885,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "3ee7e920-3562-49ea-ac81-e4f2aedd46a7",
+        "segment_id": "adb628bf-dd5a-4095-8eb2-7af858e84dab",
         "risk_score": 0.358125,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1942,7 +1942,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9039c07b-7cbb-4a61-9926-483b5ebf5d6b",
+        "segment_id": "94f8a95f-67db-4bd3-910c-c4e5f52b9b2e",
         "risk_score": 0.3425,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1999,7 +1999,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b513e6f3-127d-4666-a7e8-8fe7e5540da2",
+        "segment_id": "0d195444-41d5-4c6d-a663-d4a9a365fc78",
         "risk_score": 0.3325,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2056,7 +2056,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8dcfdf68-847d-4347-94c4-29cd00457988",
+        "segment_id": "cf41d3ab-b439-44da-a045-5d4dc4319311",
         "risk_score": 0.32,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2113,7 +2113,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f3de2163-e91b-40dc-b93d-3a734ffb215b",
+        "segment_id": "a5c3f0cc-7027-4c23-9f15-d268ba4b5a96",
         "risk_score": 0.3190625,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2170,7 +2170,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "1ea18b0b-4b1e-4246-bda5-7ae656ccf1c3",
+        "segment_id": "cb9ce9c6-9b18-4817-9f54-b486d864439d",
         "risk_score": 0.31642857142857145,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2227,7 +2227,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "37cb9ef7-9c19-49bf-9d58-fa9999ea963f",
+        "segment_id": "9b85e013-4709-4de2-9ae4-e195f5c69d89",
         "risk_score": 0.3057142857142857,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2284,7 +2284,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "df998b29-7a13-4bae-bd24-c234f75a131b",
+        "segment_id": "29145f80-2c5e-47ba-83e0-f01785feb8dd",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2341,7 +2341,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "1e79af27-762a-4ce1-82b9-91d6c49630ae",
+        "segment_id": "80e778a8-8d1e-40f2-90d3-774eb14655e7",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2398,7 +2398,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8fc69931-bd1a-453e-9ff8-c8d79e75241c",
+        "segment_id": "3fccfc31-26bf-4f16-8d59-551379155e19",
         "risk_score": 0.295,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2455,7 +2455,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "46a987ab-7093-47ae-bc56-20d5670c6f6a",
+        "segment_id": "9dbb564a-6a35-48c8-aba0-5cbc56d2ac50",
         "risk_score": 0.295,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2512,7 +2512,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "adfa2648-b83f-4597-bc4f-49efe8f30a2a",
+        "segment_id": "3a3f2ee9-aae0-4d77-ba02-5605454b46dd",
         "risk_score": 0.295,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2569,7 +2569,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b0d7b23c-4392-4349-bb77-12403a1a0353",
+        "segment_id": "bc26b149-71c4-4689-8a26-8f785fdc0dd8",
         "risk_score": 0.29333333333333333,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2626,7 +2626,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8788d1a0-152b-4102-ac5d-35df8f9b9ca8",
+        "segment_id": "a7c70aed-bf02-499d-af36-e97679e75289",
         "risk_score": 0.28785714285714287,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2683,7 +2683,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "1a87c849-4022-43bc-b98c-c6a751313202",
+        "segment_id": "275b545d-fe15-45c4-8262-7852394e3388",
         "risk_score": 0.2860714285714286,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2740,7 +2740,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "18bc1b16-f4d8-476e-a1d2-f640d2cdf7f9",
+        "segment_id": "831db658-1c61-459a-999e-20daba606817",
         "risk_score": 0.285,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2797,7 +2797,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8f920a89-471d-46e3-914d-cb6ecf4a7cdc",
+        "segment_id": "21d494fb-9502-4601-94ce-792a6e459e65",
         "risk_score": 0.285,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2854,7 +2854,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "1d80c072-e3cf-4908-8051-2475fab9eb6a",
+        "segment_id": "9fb18af3-5ee9-4fc3-a038-785e23644762",
         "risk_score": 0.285,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2911,7 +2911,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f89629e7-4d04-4d1d-9e6d-3ae9d430fe40",
+        "segment_id": "731d9d1c-1f42-4a65-8294-e1ff97ca6fc6",
         "risk_score": 0.285,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2948,7 +2948,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "568dcce4-d614-40b2-b55f-20dbdf11348c",
+        "segment_id": "e2f94507-f811-4af5-a511-da2061f434d7",
         "risk_score": 0.285,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2985,7 +2985,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "1ae16e05-8ab6-48c1-b50b-797ee8c8364f",
+        "segment_id": "5e84b950-6910-4170-964f-9c8f823e74e9",
         "risk_score": 0.285,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3022,7 +3022,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b03b4bb3-05ab-4de5-89ba-b2dbf3fc5cb8",
+        "segment_id": "d7b3f68c-d5fc-459b-b151-c2081b9c9f6a",
         "risk_score": 0.285,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3059,7 +3059,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "232110bc-462c-461e-9161-da0f49050ec1",
+        "segment_id": "91943493-46b1-4255-a640-de84c6eb32db",
         "risk_score": 0.28375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3111,7 +3111,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f6efdc5c-0e82-432d-a027-1bec4bc627a0",
+        "segment_id": "17e306a3-1762-4082-b551-81b3f67ec74a",
         "risk_score": 0.28375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3163,7 +3163,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c9004ee3-59d4-488c-9738-f07bc1029747",
+        "segment_id": "304d4571-9e95-4761-b50e-4e696a916840",
         "risk_score": 0.2829166666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3220,7 +3220,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "950979e6-39af-409e-af6c-441b181615d1",
+        "segment_id": "fbbd961f-80f9-4cfc-a316-2e87de9dabe6",
         "risk_score": 0.28,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3267,7 +3267,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "be36f29a-7055-4519-bf7e-0eb43dafb496",
+        "segment_id": "22cd5b44-bf08-4212-aa02-395698f51034",
         "risk_score": 0.27166666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3314,7 +3314,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "0b72de20-6606-4f3a-b2e3-44f50703df53",
+        "segment_id": "3f21437b-403b-4f13-ae86-7d0d2d286f49",
         "risk_score": 0.265,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3366,7 +3366,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "5b8cf475-749a-4ff9-8144-858eee7e54b8",
+        "segment_id": "e398b391-b6a0-4e24-91d2-1fc5c24f6b9f",
         "risk_score": 0.26416666666666666,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3423,7 +3423,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "a5dd5b9f-c406-42e5-b3cc-54dce29b25f1",
+        "segment_id": "c3d28535-b63f-4cbe-9df4-bb976a99fba0",
         "risk_score": 0.25583333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3480,7 +3480,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "573ce7e4-b1e6-4d91-afd3-43da7693cb32",
+        "segment_id": "3c375094-d99b-476e-8f4f-7049e59a4910",
         "risk_score": 0.25583333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3537,7 +3537,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d07e4a74-e379-4350-a78b-58aa05699d60",
+        "segment_id": "80dcfce4-c00c-4b5a-a3a1-4e96db862e41",
         "risk_score": 0.245,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3594,7 +3594,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "90f70345-1ccd-4129-8ff1-fa8383f0538b",
+        "segment_id": "8615b8c2-0a68-477d-b1cd-5581101dd0a1",
         "risk_score": 0.245,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3651,7 +3651,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "3af9a961-d367-4c6a-92a2-e65c6debeb0f",
+        "segment_id": "77f06802-a0c7-477e-b081-d0800867c2f8",
         "risk_score": 0.24,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3703,7 +3703,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "4c8d92b1-3df2-42af-830b-244aa1cc34f6",
+        "segment_id": "b9f8e970-9bda-4293-9bfd-2edeeb177b7b",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3760,7 +3760,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e4528d8f-cad8-42cc-ba4a-95bade46570a",
+        "segment_id": "b76ec594-5a26-4aec-9856-233fdd899a65",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3817,7 +3817,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "35b4d66f-8428-43a3-a5cf-a5396faa1a7b",
+        "segment_id": "4ec5fe69-3eb6-48b2-ba43-d9074caec1de",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3874,7 +3874,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "49c9ab44-03fb-4bb7-95a0-07d0ba734a7f",
+        "segment_id": "7e90ec6b-56b6-48da-a10f-f45fb5af1d46",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3931,7 +3931,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8a684557-8bd5-469a-b4c6-1b850cdd54ee",
+        "segment_id": "7f604eb5-1ff2-454d-adc6-446824fde440",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3988,7 +3988,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "16726746-4d64-4358-9035-e5073dfc0f4d",
+        "segment_id": "729fc7f6-974c-4e77-b090-40c04c3264a0",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4045,7 +4045,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8ce9ab5f-b8fb-4585-8303-924395e2e8a6",
+        "segment_id": "fc1c8983-5eec-46b3-aae8-0635ed44fc45",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4102,7 +4102,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "ee8c551b-9247-4f28-8400-ce9268d08d52",
+        "segment_id": "63fe02b4-4ffc-4077-a74e-497d8d29d667",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4139,7 +4139,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "66f0fec0-160e-401c-ae11-57d78b9ec47f",
+        "segment_id": "cc8cfd26-4e2b-4688-879d-290b32defc63",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4176,7 +4176,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "6bec9873-c913-4843-9899-3344f63589db",
+        "segment_id": "ccee4b45-4ad4-4d0b-92a1-9c7b744183c9",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4213,7 +4213,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "0e283e61-26fc-4811-bf58-3df6a5642d3f",
+        "segment_id": "f03a0f1f-45e4-4abb-b499-629c489ae4c7",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4250,7 +4250,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8d385f92-6253-47a3-b68c-a126f128576a",
+        "segment_id": "ebe3bb19-4e9f-450b-85a6-eb86a8df5b66",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4287,7 +4287,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9f6369e0-3dba-415b-9227-3abb6b542ab2",
+        "segment_id": "ef98c4af-7398-468e-ad13-c185abe247d8",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4324,7 +4324,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "4cab4d5c-c34a-45a3-8691-957ba4487431",
+        "segment_id": "ed59afe4-77a8-44bb-9b70-efa96cd5312a",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4361,7 +4361,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "4c10d6ab-eaf3-4022-aef1-138a4227d9ec",
+        "segment_id": "a36b5fe7-dc8e-4bc4-b0b8-a23e10c1ec0a",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4398,7 +4398,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "ca677614-6969-4d31-a404-840144a88229",
+        "segment_id": "6e5eb90a-1911-4053-8d4a-7b8c026f5969",
         "risk_score": 0.23,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4445,7 +4445,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "97f356c8-9961-42eb-95d9-d326083a5808",
+        "segment_id": "fae9f525-d03c-4f02-aa1a-ea7ea5899160",
         "risk_score": 0.23,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4492,7 +4492,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "6f12bf33-7fc0-4900-9633-8c8cbc3326ed",
+        "segment_id": "4ff66c6e-e550-43b9-9339-cf21740d2089",
         "risk_score": 0.225,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4549,7 +4549,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b9c373a0-7cda-403e-9360-2be6e2972dfd",
+        "segment_id": "4b521252-1f0e-4190-83d6-6d754d2b7dd1",
         "risk_score": 0.21333333333333335,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4596,7 +4596,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b98130f5-5fb5-47e2-9cb1-d8832026b466",
+        "segment_id": "a476480f-e559-434e-9da8-bbf848638552",
         "risk_score": 0.20875,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4648,7 +4648,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "cb5f2732-d714-4da0-9a5b-fe3a56910b48",
+        "segment_id": "9f0f0e6a-5d27-4ee8-a2c6-04b919f141aa",
         "risk_score": 0.20875,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4700,7 +4700,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "a461260b-b68a-40f5-b7e7-62d7f97bee54",
+        "segment_id": "33e8814d-405b-44a8-8a21-07c8e9dd369a",
         "risk_score": 0.2075,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4742,7 +4742,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "54466ff4-27b6-4cfb-b6a8-5eb63326161e",
+        "segment_id": "8dd9d6ad-2c5f-4d84-a4bb-b2587c6a736a",
         "risk_score": 0.2075,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4784,7 +4784,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8786845c-f68b-4ad0-aff7-bcfaf32f7c3c",
+        "segment_id": "a6cbf3a3-42e5-4c44-9e13-d657cbf2bd70",
         "risk_score": 0.205,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4831,7 +4831,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "48f4ba12-0a3a-4d8a-8950-0d4cd36a2ad3",
+        "segment_id": "9de5d1ec-4126-444b-90b4-b9eab9960ffc",
         "risk_score": 0.2,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4888,7 +4888,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c10d087e-0b2e-4e7f-acd2-dd4964a9b12c",
+        "segment_id": "9d9d1072-fb96-4840-ab1f-ac7b5f4c9e53",
         "risk_score": 0.2,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4945,7 +4945,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "a3ab3a1a-6aac-4319-8622-b449dcbf4857",
+        "segment_id": "44eb0a7b-ea4f-4139-a6b4-f7e478e859cf",
         "risk_score": 0.2,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5002,7 +5002,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9b4369dd-a467-4cfe-89dc-4c244c4dce33",
+        "segment_id": "de73eb26-4eec-47e8-b82a-40d6b4d5de9f",
         "risk_score": 0.2,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5059,7 +5059,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e2b8d351-f3fe-4645-8d9e-c13226a758aa",
+        "segment_id": "b7749cb7-c79c-452b-962b-fe2817576873",
         "risk_score": 0.19666666666666666,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5106,7 +5106,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7bd8bba6-24a0-4c52-a3dd-06e1e22c4aa3",
+        "segment_id": "4c2e5027-5308-4ff6-8cc0-6af4c94a93d9",
         "risk_score": 0.19625,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5158,7 +5158,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "3d1558ec-4e3d-4ddc-bb79-191a88e51b1f",
+        "segment_id": "4da05b8e-ef35-4957-886c-07b1569b58cc",
         "risk_score": 0.19625,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5210,7 +5210,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e91c98c1-2cca-4ec6-b0ba-07b36a5a4b89",
+        "segment_id": "c9e5dd32-74fc-4c15-a04b-bd1def723cdd",
         "risk_score": 0.19625,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5262,7 +5262,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "ac7879b3-9cee-460c-9875-7107a9954da4",
+        "segment_id": "bbc48c94-9748-4c11-b697-9dd8382d8fdc",
         "risk_score": 0.18833333333333332,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5309,7 +5309,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "cb6e6b4a-1605-4f4a-8b68-018ea5b62021",
+        "segment_id": "b98d38e5-0d5e-4f02-ac5a-1b4b47488ae8",
         "risk_score": 0.18833333333333332,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5356,7 +5356,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7e632d5a-e681-4034-aac8-d958860aefb4",
+        "segment_id": "cb06fe68-5bd9-4b4a-9d75-dc31cf63202b",
         "risk_score": 0.18833333333333332,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5403,7 +5403,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "37f8ec06-bb58-40de-b9fd-5ec8731801d5",
+        "segment_id": "cb5b709f-727a-4528-bbb8-13efc4fad0a2",
         "risk_score": 0.18833333333333332,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5450,7 +5450,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "10743f1b-7d57-4bcc-b584-1e6897012797",
+        "segment_id": "e7f1825e-5604-4bae-8cce-d0532c1a1e20",
         "risk_score": 0.18833333333333332,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5497,7 +5497,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f3c7a576-e1e9-4052-90a3-cde1c3678892",
+        "segment_id": "1df56825-429e-4b58-91ee-1d2f628f278d",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5534,7 +5534,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "833f323a-0e89-4789-b91b-2d28770892a5",
+        "segment_id": "3ba6a989-31fa-4a8d-9c29-3f76e6464e08",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5571,7 +5571,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9aaafc16-3dc7-4b6b-8c40-af38e238e76b",
+        "segment_id": "60b12a98-daf0-4397-9e39-3a418421da59",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5608,7 +5608,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c7f8a22a-6e2a-40c4-bafb-3cabf93683df",
+        "segment_id": "8fda6dda-7120-4a71-b012-91e4ec3f2519",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5645,7 +5645,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "54ae4698-04e9-4a49-86bf-ee6a0f337d82",
+        "segment_id": "573e8c6b-4d6b-41f7-ab51-9d71d996e224",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5682,7 +5682,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e24822ba-59b4-4a71-b752-5c01a351d8e3",
+        "segment_id": "22084fda-75d4-4fe6-b8e6-3dfda8c20fe9",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5719,7 +5719,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8720b11d-7833-45be-b456-a4a3fffd5df3",
+        "segment_id": "7648515b-41c0-4ba8-8fc8-cac6d2333a60",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5756,7 +5756,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "cff9e122-7bbe-4fc9-a1a8-2e8c8d3b1285",
+        "segment_id": "3c29184a-8992-4df6-8194-a36805bb953c",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5793,7 +5793,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7d44774b-7e4f-42cd-92ad-6e2d57c29ff6",
+        "segment_id": "7421ec7e-6627-4d4c-b3b1-9b5a431c1e84",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5830,7 +5830,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "fdab7d4d-dcbe-4442-ab65-0a7fba92c972",
+        "segment_id": "dc7ca63d-e744-41e5-8980-683d80a6fcec",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5867,7 +5867,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "1a1e923b-1571-42e0-a08c-0842dd37b45d",
+        "segment_id": "9e225338-3811-4aef-ac0d-6a5ae4bf927a",
         "risk_score": 0.185,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5904,7 +5904,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "a35fcd79-2f2f-49fd-8578-da3c02e6b2aa",
+        "segment_id": "d354ea08-bbbb-47b4-bc2a-3e8b3a58fd8b",
         "risk_score": 0.1825,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5946,7 +5946,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d3235671-8c40-4de8-b479-c86452b62e4d",
+        "segment_id": "6c94925d-5106-4b9e-8214-c976e0078581",
         "risk_score": 0.1825,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -5988,7 +5988,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "157b72ec-d2bf-4229-afe8-273262d2521d",
+        "segment_id": "49743b96-3863-40cb-8b3a-3ce3e61c5825",
         "risk_score": 0.1825,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6030,7 +6030,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7b396644-c13f-44b5-9c0c-af920ce62600",
+        "segment_id": "e080fa3a-ee6c-49a5-9bb4-68b417dd907f",
         "risk_score": 0.1825,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6072,7 +6072,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "41d5c337-fcb4-4219-a3a2-dff803c9e30e",
+        "segment_id": "eb3ca5be-af94-4d4f-a1df-04eb7548a392",
         "risk_score": 0.17625,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6114,7 +6114,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "afc3b636-9be1-4e84-b38d-67000aa3c9d5",
+        "segment_id": "6ba18e7d-4306-4f61-b45c-dc62fb61897d",
         "risk_score": 0.17166666666666666,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6161,7 +6161,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "80a2ba73-c1fc-49a3-bb91-f58f89e54705",
+        "segment_id": "f1a61b98-c6a0-427d-ad5c-d0cb712b9998",
         "risk_score": 0.17166666666666666,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6208,7 +6208,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "ddbe3e4d-7666-4986-a14e-a6b99e3dba05",
+        "segment_id": "2bfc0882-cb6f-4515-9005-c3a3559200a8",
         "risk_score": 0.165,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6260,7 +6260,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b2ccfdc8-c32d-4e0c-849e-2285f9569587",
+        "segment_id": "02c36eaa-eaf1-416a-a4ba-ddab1f63c812",
         "risk_score": 0.165,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6312,7 +6312,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b8e8ee07-fc52-4321-8d71-66c33f0b3654",
+        "segment_id": "860a4b15-941a-4eea-b8b2-df75fa6562fb",
         "risk_score": 0.165,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6364,7 +6364,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "748c5b68-f666-4add-9019-b5a88a03bff7",
+        "segment_id": "b885978e-82f1-4370-817a-f1b2cf35c143",
         "risk_score": 0.165,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6416,7 +6416,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c3c9a793-a483-46e3-9399-7da61c19de77",
+        "segment_id": "827986c1-acf9-4d24-b735-654e79c77eb9",
         "risk_score": 0.165,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6468,7 +6468,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "57e4ef56-0b23-4087-9719-5fae98158b66",
+        "segment_id": "95fc7201-966c-4302-8016-be6d115a0523",
         "risk_score": 0.1575,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6510,7 +6510,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "52df0637-d94b-4eb6-95e1-69e57ed24bf2",
+        "segment_id": "bd18f4f4-6d4a-4673-9470-420af4d72521",
         "risk_score": 0.1575,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6552,7 +6552,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f06fe7b1-0ad3-4b4e-b898-0112b494b989",
+        "segment_id": "b23e32eb-3e7b-4bfb-8c9c-30488c23598c",
         "risk_score": 0.135,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6589,7 +6589,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "031d31d2-ccd6-4ab1-959d-e0471d578ee3",
+        "segment_id": "97b39333-122a-46dd-b3b9-2368ec6de68a",
         "risk_score": 0.135,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6626,7 +6626,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "2456bba2-ef02-4652-9704-ddcc4066bb35",
+        "segment_id": "efcb339d-1e6e-40b9-81f7-255ff52448dd",
         "risk_score": 0.135,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6663,7 +6663,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "56d4cb87-fe92-4a59-a0a5-00217e262987",
+        "segment_id": "7e016a35-a09b-4614-81a5-7fe8c5e7f2cc",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6710,7 +6710,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d45ef609-3273-4494-9155-8bc744f10a55",
+        "segment_id": "1cd5b74e-4374-4725-9930-6881499180c3",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6757,7 +6757,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "6a0f3bc6-5e95-4ab3-aff8-0ce1f5a2957b",
+        "segment_id": "a3b93b84-0455-4b40-9c04-7cce89e8baf9",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6804,7 +6804,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "eade5785-f2be-48bd-8185-451bc506533e",
+        "segment_id": "d1fd2ab1-36b5-430c-92ff-11b430492cdb",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6851,7 +6851,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "72ebf919-10bb-4ca3-9113-44c3125f4d19",
+        "segment_id": "adc5ea60-f44b-44ad-b1cf-53c08bfd3006",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6898,7 +6898,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8e213bd5-072b-4634-bdd1-6d890fc4163c",
+        "segment_id": "2d5faaf4-0815-4d38-93db-0e78f7e03ed0",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6945,7 +6945,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "5c50ff47-60d2-47c1-ab3e-c3e03621642c",
+        "segment_id": "703e92a4-0eaa-4df0-a91f-281263196631",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -6992,7 +6992,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "6d932565-b4dd-4e3a-95a3-affea34fd5af",
+        "segment_id": "78b3e21d-e5f6-4bb4-bc7a-636cc6342516",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7039,7 +7039,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "6de88af1-b9cb-47aa-9ef4-517fa54207d5",
+        "segment_id": "944daf01-171f-45d4-9d22-1d43653f8ebf",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7086,7 +7086,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "04a0eac0-7c59-4a7e-921c-f5320004b99d",
+        "segment_id": "7b6825ed-80db-473d-92b6-08122745aee7",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7133,7 +7133,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f8ea558b-dd23-44a5-af22-6369966f5787",
+        "segment_id": "b998e4ca-7d96-414f-9022-a801f3c6182c",
         "risk_score": 0.12583333333333335,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7180,7 +7180,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "230a6b1b-b411-40b7-abe2-d191a3093832",
+        "segment_id": "baffc9f1-bc24-45e4-b7f2-9a3f3de66a1b",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7222,7 +7222,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f344ae42-7fb8-4744-b698-f80378e7c023",
+        "segment_id": "a9c974d4-2f17-4d9a-9fb5-45dd4f50f55c",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7264,7 +7264,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "59901fc1-57c7-496b-a2bd-858957670acf",
+        "segment_id": "513e4e9f-540a-4888-b41e-2b3de5e45e2a",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7306,7 +7306,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b1e77dd0-a418-47e1-8028-ff98828b4dfb",
+        "segment_id": "6335e595-9f44-4aa8-ab51-594804628e0b",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7348,7 +7348,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "58f228bd-db36-4165-8e7c-2304ec1a7e15",
+        "segment_id": "640a1a66-3c2b-461d-af82-b5acdfb613e8",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7390,7 +7390,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e46b36ae-0074-4a37-a157-19738faab2a9",
+        "segment_id": "13a8ee5f-e117-4dd8-9af5-fdcf5ee1b813",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7432,7 +7432,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c0a856d6-58d4-45f7-b74b-4839c35a4449",
+        "segment_id": "6576b470-79bd-4152-bf0d-4b960fc72944",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7474,7 +7474,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "cae17d51-d310-402d-af76-f7f4dc42f9d4",
+        "segment_id": "dbbc22ff-44f3-48fd-b6f9-6019d56ee0c7",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7516,7 +7516,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "0c772ecf-75fa-4f1b-9cf9-d9a6fde9873e",
+        "segment_id": "7b77d343-a648-4eb2-895f-6659691cb8a1",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7558,7 +7558,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "0915bdb5-27b2-4f8c-8f35-189fa0a1cdfa",
+        "segment_id": "c969e3ff-5d3c-4144-b23a-57534047b793",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7600,7 +7600,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "4311c717-7219-47e9-8c58-827bb77f9ba1",
+        "segment_id": "0e08b0d9-240b-446c-96cf-d9697d440cd0",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7642,7 +7642,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "80703791-98a9-4a59-a7bc-9821c2e7359e",
+        "segment_id": "ddf51058-2319-4e50-be47-70c8aa3e7c0c",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7684,7 +7684,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "521881a2-9ce4-4967-92d7-1e395c4be206",
+        "segment_id": "0e0936c2-549f-4f19-b922-2c9708365dd1",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7726,7 +7726,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "aa2f5e8b-f5f1-4db4-b97f-da8fa728e99e",
+        "segment_id": "1d544b4b-5784-417e-8d9e-1f8d910dbafa",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7768,7 +7768,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8787a891-30c9-4192-a20b-45c63a85a0b6",
+        "segment_id": "42693402-a6ab-4874-a139-e3705064a1b3",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7810,7 +7810,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "5e38074f-e420-4acf-8fe3-e0f274c50f4a",
+        "segment_id": "6b645006-50e3-4ac2-ad88-60638b0fef46",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7852,7 +7852,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7d2dfd1a-7c49-4057-8fce-865bcfe70db9",
+        "segment_id": "8f33c1d4-25c5-4f2c-90a9-336f88831ea1",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7894,7 +7894,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "42db71cd-a5da-4707-8668-840f466715d3",
+        "segment_id": "cdbf0ac4-a0a4-4566-98f0-e1ad137aef01",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7936,7 +7936,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "127b1950-fb71-4edd-8493-554b174dee1a",
+        "segment_id": "c7a7617b-0300-4689-a4e3-ce96267db62d",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7978,7 +7978,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "37df1396-906b-4411-ac01-fd2745c26518",
+        "segment_id": "bd26fe08-4dfd-4dc4-a100-d97664c527c6",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8020,7 +8020,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "07a83278-d372-4dda-93af-aae75665cbb0",
+        "segment_id": "18d822bb-e421-4a13-abba-1f998b38b15d",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8062,7 +8062,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d9b5536c-6e35-4f3d-914c-33c046a0cb5d",
+        "segment_id": "821caecb-fb5d-4f15-a095-8878bcd229b7",
         "risk_score": 0.095,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8104,7 +8104,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "439aa50d-6fa0-4c77-9231-1aec90c65f61",
+        "segment_id": "ad44895e-39df-4e75-a82b-562b532e8c09",
         "risk_score": 0.08875,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8146,7 +8146,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "589760b1-f0a3-469c-94a9-03c47cf6cc65",
+        "segment_id": "f50fe5c6-5526-4deb-8a83-98d9a07357d3",
         "risk_score": 0.08875,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8188,7 +8188,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "73640922-5d61-4d03-b9dd-a53d005ce53d",
+        "segment_id": "7232a230-e43b-422c-aee3-1da7e2423abf",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8225,7 +8225,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b038bae5-259c-4137-ab9c-86d500a17e33",
+        "segment_id": "bfa2156e-fb1f-428b-bb21-dfe7f29c37a7",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8262,7 +8262,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "21959f34-9334-4b0f-bd6d-c95d3b09c6ee",
+        "segment_id": "86367a19-b182-496e-bcaa-1454bda21cab",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8299,7 +8299,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7a5398c7-68e1-4ae7-8f99-f46fec832efb",
+        "segment_id": "d98ea1dc-2b79-41c7-bc93-c19a0f9b631b",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8336,7 +8336,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "013b017f-fb82-4272-bbb7-39956f411125",
+        "segment_id": "b2ba22de-fb12-4b97-bed1-7b322825941d",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8373,7 +8373,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "8346bf24-36a9-4033-9fe0-e33a0137fbcb",
+        "segment_id": "c79a9f25-4992-45a7-ab59-83647e7ed605",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8410,7 +8410,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "3cb15959-f3e3-43d1-9669-e4df936ab175",
+        "segment_id": "5daed57e-131f-4f5b-a25a-c28b1f4fd4c6",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8447,7 +8447,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b9b61a4d-a42d-4803-903b-093e91e907a9",
+        "segment_id": "75cbde2a-10a1-47f3-b0b8-a2eeeb4c9c28",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8484,7 +8484,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f4687040-fe86-4424-8193-60b7e22b78a5",
+        "segment_id": "0c580ca3-81ef-41e9-a2c2-1e6120be4b04",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8521,7 +8521,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "642dedd9-5864-4b53-9e40-65d4c6814f40",
+        "segment_id": "a0b4da29-4c61-4e30-a363-27083049a894",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8558,7 +8558,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "927a01b6-5af2-49f1-a2a9-aa931a963773",
+        "segment_id": "d4730de2-5bee-4781-9cb6-55e241dd4db4",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8595,7 +8595,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9b0e3258-2b36-444b-af25-7c4a2b5bbcd2",
+        "segment_id": "f5eab1f4-49ff-4cdb-a322-9e1c1e244190",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8632,7 +8632,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "94075b2a-9695-4667-a948-8603e2280f69",
+        "segment_id": "03afedd9-ac7e-47cc-bbb9-8b19d2bbc0c6",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8669,7 +8669,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "dab6ffe9-96f0-43b5-9d96-b3d618457b33",
+        "segment_id": "4f3f2fd3-c8d7-434c-b1c4-aea301bea4c5",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8706,7 +8706,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "b91b5422-770e-457a-a034-0168189e2a2b",
+        "segment_id": "886b0b5e-2dd4-49af-9665-93af939b6ff8",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8743,7 +8743,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "31c7c1c6-bee6-48ee-afa2-be3f90f2b3ff",
+        "segment_id": "a7cc68a5-03f1-4ec8-9d59-889132e55985",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8780,7 +8780,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d55cbac5-68d7-4531-a511-96fc1a0e5826",
+        "segment_id": "51b945f2-70d2-4ecb-9d69-fb6e57185aa9",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8817,7 +8817,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "11d31677-4c10-42a7-ac52-b20d44f22882",
+        "segment_id": "647f510b-4cfd-40fb-bbab-e4199514bb1e",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8854,7 +8854,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "edb6d335-2ad0-4dfb-b98a-1bc1592edd4d",
+        "segment_id": "3f34be03-ff8a-4222-80ce-c663ef6326f9",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8891,7 +8891,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "50a70302-78c3-416a-95a7-ad07f9de2fa3",
+        "segment_id": "176fb49a-ef2e-4f5d-8661-87e9bacd39d0",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8928,7 +8928,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "aed2d402-eb1f-4f41-ae00-ba26a0cf24ad",
+        "segment_id": "4146dc65-4bb2-466a-b833-0d413c4ef1a5",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8965,7 +8965,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9c7c52e2-c726-4767-a037-6c5395e6c23c",
+        "segment_id": "d9d43ea2-18a8-47cd-8c02-bf73ea5309b7",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9002,7 +9002,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "618de656-c0fb-494b-a294-25ec1357cad1",
+        "segment_id": "e948ce47-ac38-4130-9c90-06ed48b39bb5",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9039,7 +9039,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "549c852d-7cf4-4854-8669-bb277a7810d1",
+        "segment_id": "26284797-0fe5-4916-b286-46d333b19c69",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9076,7 +9076,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c5414558-b67c-400e-99c2-7f3bf3171a5c",
+        "segment_id": "22301b32-24dd-4ac8-8a2f-cfa1d1fa2593",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9113,7 +9113,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "f3c734b2-5324-4b02-8fe2-00a29aaec5f2",
+        "segment_id": "e3128e42-d748-4d7e-be61-b0f4a4e2a8ae",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9150,7 +9150,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "bbb71646-5173-4a51-bf0d-3ac062da29c2",
+        "segment_id": "acef62e2-d096-4435-a346-85ae7d254fca",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9187,7 +9187,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "410ad8f7-cc3e-47be-9bc5-62bcaf972791",
+        "segment_id": "27abbede-75d9-4465-a1ea-04ec5836dead",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9224,7 +9224,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c293fb9c-587e-4e2c-831a-02e6b8a3be61",
+        "segment_id": "d1c3853a-a5b8-4d09-b13f-6894c031aba6",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9261,7 +9261,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "20c70dfa-cdaa-435a-b034-1a3505c99395",
+        "segment_id": "a2bb63f5-5dc8-4927-9c4a-4a95ea0ac78c",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9298,7 +9298,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "c3614a60-75a2-451d-abc3-e8c68765bbef",
+        "segment_id": "40eb3f2d-0919-409d-b0da-eed76d2d0108",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9335,7 +9335,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "1f8d0fb4-ae3f-424b-b2b6-07206c81dd02",
+        "segment_id": "c8ecc224-d60a-42dc-896b-b45c8d1ede02",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9372,7 +9372,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "bb8e6821-9d68-460b-911c-1bfb897cd4e5",
+        "segment_id": "ae6db9d9-2321-400b-b040-778065b6e137",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9409,7 +9409,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "96b1286c-1aed-460a-b49e-a5d3739b4a6e",
+        "segment_id": "04c90c3d-1684-48cf-a081-8c7968176a68",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9446,7 +9446,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "0fbd1647-cce2-4b40-b160-582db313af6c",
+        "segment_id": "a952ab8e-2b5e-4d5f-bbad-c2f8469aae00",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9483,7 +9483,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "49fc473c-68ae-4f85-82bf-7440dde1e31e",
+        "segment_id": "6d5404cc-8dd7-48ac-9772-0deb0ab15970",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9520,7 +9520,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "906f49c2-5a2f-4311-8f06-1e33beb6e7e1",
+        "segment_id": "2a920b1a-3773-48cd-bd23-25c416ff09c0",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9557,7 +9557,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "183fc4d1-596c-4a90-afcc-c5d7e329ed0c",
+        "segment_id": "4487c880-7b47-49ca-b1b6-9c1590a48d77",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9594,7 +9594,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "29e428b8-c1a3-43c4-abc1-29f621d5b158",
+        "segment_id": "e0838434-1191-438d-88ea-41fd3d8b4c87",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9631,7 +9631,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "58c193fd-b5e8-4d41-b8cf-42359e0ec1bb",
+        "segment_id": "9830c965-0cc8-4d38-93ce-84619680c7db",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9668,7 +9668,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "7dda1ec4-7258-4b34-8492-50a06dbbf0f9",
+        "segment_id": "523d7dc1-9515-43c6-8b8e-f228f5cce59b",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9705,7 +9705,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "47979428-dcee-4011-a5fc-ec1258899fc4",
+        "segment_id": "a71a507d-2cfe-408c-a296-1089dd13f84f",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9742,7 +9742,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "648616d7-3838-4c5a-8e4f-e6c4907302cf",
+        "segment_id": "5be9a949-d338-439c-9811-2912807773e1",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9779,7 +9779,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "41f69408-2ad3-4fe0-a003-81360c822e6f",
+        "segment_id": "5f46b3fa-9b48-493d-98f3-acc087c11bd1",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9816,7 +9816,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "bc3b97c7-f86b-4728-b121-db0d79295681",
+        "segment_id": "e9960f20-1566-4cd4-810e-016a8ae71439",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9853,7 +9853,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "9aa913b0-4936-403d-8b8b-dc01ce37ad60",
+        "segment_id": "4889979a-6dc3-418f-a0e0-5460e59e22dc",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9890,7 +9890,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e576d147-2665-4bad-ac10-d122537bce1f",
+        "segment_id": "a585d671-2086-4f45-b1cd-34e3fbc8e969",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9927,7 +9927,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "803876c8-f768-496a-a5e0-0db86d6e3f48",
+        "segment_id": "47bae1d8-d8b1-463a-9320-bbbbe00e7d26",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9964,7 +9964,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "14b558c8-6e14-4e04-bb25-471c76e8341a",
+        "segment_id": "da064db0-ffe8-47e4-942e-ab8732ee5b4b",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10001,7 +10001,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "e958c7e1-9d8d-4e27-ad33-14a0901fa748",
+        "segment_id": "94a28b7f-7b43-4778-aa04-e786294e8785",
         "risk_score": 0.06,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10038,7 +10038,7 @@
     {
       "type": "Feature",
       "properties": {
-        "segment_id": "d257b9ec-8e10-4278-9510-7b50b0689f58",
+        "segment_id": "279bd81e-aa48-4cc8-9a02-8bc45f873769",
         "risk_score": 0.0475,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10074,7 +10074,7 @@
     }
   ],
   "metadata": {
-    "GeneratedAt": "2025-09-15T21:18:51.8376323Z",
+    "GeneratedAt": "2025-09-16T16:11:41.2942645Z",
     "DataSource": "CRIS Risk Segments",
     "StartDate": "0001-01-01",
     "EndDate": "0001-01-01",

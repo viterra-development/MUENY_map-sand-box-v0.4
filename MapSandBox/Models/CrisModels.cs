@@ -23,6 +23,8 @@ public class CrashRecord
     public List<PersonInfo> Persons { get; set; } = new();
     public int TotalPersons { get; set; }
     public int TotalVehicles { get; set; }
+    public bool IsPrivateProperty { get; set; }
+    public bool IsLocated { get; set; }
 }
 
 public class CrisModelScore
@@ -288,6 +290,12 @@ public class CrashCsvRecord
     [Name("Death_Cnt")]
     public string? PersonsKilled { get; set; }
 
+    [Name("Private_Dr_Fl")]
+    public string? PrivatePropertyFlag { get; set; }
+
+    [Name("Located_Fl")]
+    public string? LocatedFlag { get; set; }
+
     [Name("Sus_Serious_Injry_Cnt")]
     public string? SeriousInjuries { get; set; }
 
@@ -455,4 +463,76 @@ public class CrisFilterEventArgs
         FilterType = filterType;
         FilterValue = filterValue;
     }
+}
+
+// Deck.gl format models - strongly typed objects that match what deck.gl expects
+public class CrashPointDeckGl
+{
+    public string CrashId { get; set; } = "";
+    public string CrashDate { get; set; } = "";
+    public string CrashTime { get; set; } = "";
+    public string CrashDateTime { get; set; } = "";
+    public string Severity { get; set; } = "";
+    public string SeverityCode { get; set; } = "";
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+    public int PersonsInvolved { get; set; }
+    public int VehiclesInvolved { get; set; }
+    public string WeatherCondition { get; set; } = "";
+    public string LightCondition { get; set; } = "";
+    public string SurfaceCondition { get; set; } = "";
+    public string RoadwayId { get; set; } = "";
+    public int? Aadt { get; set; }
+    public int FatalCount { get; set; }
+    public int InjuryCount { get; set; }
+    public string[] ContributingFactors { get; set; } = Array.Empty<string>();
+    public double[] Coordinates { get; set; } = new double[2];
+}
+
+public class RiskSegmentDeckGl
+{
+    public string SegmentId { get; set; } = "";
+    public double RiskScore { get; set; }
+    public string RiskLevel { get; set; } = "";
+    public int RiskLevelNumeric { get; set; }
+    public int CrashCount { get; set; }
+    public int? Aadt { get; set; }
+    public double SegmentLength { get; set; }
+    public double CrashesPerMile { get; set; }
+    public CrashSummaryDeckGl[] RecentCrashes { get; set; } = Array.Empty<CrashSummaryDeckGl>();
+    public double StartLatitude { get; set; }
+    public double StartLongitude { get; set; }
+    public double EndLatitude { get; set; }
+    public double EndLongitude { get; set; }
+    public double[][] Coordinates { get; set; } = Array.Empty<double[]>();
+}
+
+public class IntersectionRiskDeckGl
+{
+    public string IntersectionId { get; set; } = "";
+    public double RiskScore { get; set; }
+    public string RiskLevel { get; set; } = "";
+    public int RiskLevelNumeric { get; set; }
+    public int CrashCount { get; set; }
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+    public string[] IntersectingRoads { get; set; } = Array.Empty<string>();
+    public CrashSummaryDeckGl[] RecentCrashes { get; set; } = Array.Empty<CrashSummaryDeckGl>();
+    public int FatalCrashes { get; set; }
+    public int InjuryCrashes { get; set; }
+    public int PropertyDamageCrashes { get; set; }
+    public double[] Coordinates { get; set; } = new double[2];
+}
+
+public class CrashSummaryDeckGl
+{
+    public string CrashId { get; set; } = "";
+    public string CrashDate { get; set; } = "";
+    public string Severity { get; set; } = "";
+    public int PersonsInvolved { get; set; }
+}
+
+public class DeckGlDataCollection<T>
+{
+    public T[] Data { get; set; } = Array.Empty<T>();
 }

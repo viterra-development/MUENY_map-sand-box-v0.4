@@ -110,20 +110,28 @@ public class CrisCsvParser
             crash.CrashDateTime = crashDateTime;
         }
 
-        // Parse coordinates
-        if (decimal.TryParse(csvRecord.Latitude, out var lat) &&
+        // Parse coordinates (only if both fields have actual values)
+        if (!string.IsNullOrWhiteSpace(csvRecord.Latitude) && !string.IsNullOrWhiteSpace(csvRecord.Longitude) &&
+            decimal.TryParse(csvRecord.Latitude, out var lat) &&
             decimal.TryParse(csvRecord.Longitude, out var lng))
         {
             crash.Latitude = lat;
             crash.Longitude = lng;
         }
+        // If coordinates are missing/empty, leave them as 0 but we'll filter these out in validation
 
         // Parse severity (CRIS uses severity codes like 1=Fatal, 2=Incapacitating, etc.)
         crash.Severity = ParseCrisSeverity(csvRecord.CrashSeverity);
 
-        // Parse weather condition
-        crash.WeatherCondition = csvRecord.WeatherCondition ?? "Clear";
-        crash.RoadwayCondition = csvRecord.SurfaceCondition ?? "Dry";
+        // Parse weather condition (don't default - preserve actual data)
+        crash.WeatherCondition = csvRecord.WeatherCondition ?? "";
+        crash.RoadwayCondition = csvRecord.SurfaceCondition ?? "";
+
+        // Parse private property flag
+        crash.IsPrivateProperty = csvRecord.PrivatePropertyFlag?.ToUpper() == "Y";
+
+        // Parse located flag (whether crash was successfully geocoded)
+        crash.IsLocated = csvRecord.LocatedFlag?.ToUpper() == "Y";
 
         // Add related persons
         crash.Persons = personRecords
@@ -142,6 +150,20 @@ public class CrisCsvParser
 
     public bool ValidateCrashRecord(CrashRecord crash)
     {
+        // Exclude private property crashes (they often have 0,0 coordinates for privacy)
+        if (crash.IsPrivateProperty)
+        {
+            _logger.LogDebug("Excluding crash {CrashId}: Private property crash", crash.CrashId);
+            return false;
+        }
+
+        // Exclude crashes that couldn't be accurately located/geocoded
+        if (!crash.IsLocated)
+        {
+            _logger.LogDebug("Excluding crash {CrashId}: Could not be accurately located (Located_Fl = N)", crash.CrashId);
+            return false;
+        }
+
         var validationErrors = new List<string>();
 
         // Validate required fields
@@ -151,9 +173,18 @@ public class CrisCsvParser
         if (crash.CrashDateTime == default)
             validationErrors.Add("CrashDateTime is required");
 
-        // Validate coordinates are within Parker County bounds
-        if (!IsWithinParkerCounty(crash.Latitude, crash.Longitude))
+        // Validate coordinates exist and are within Parker County bounds
+        if (crash.Latitude == 0 && crash.Longitude == 0)
+            validationErrors.Add("Missing coordinates (0, 0)");
+        else if (!IsWithinParkerCounty(crash.Latitude, crash.Longitude))
             validationErrors.Add($"Coordinates ({crash.Latitude}, {crash.Longitude}) are outside Parker County bounds");
+
+        // Warn about missing environmental data (don't fail, just warn)
+        if (string.IsNullOrWhiteSpace(crash.WeatherCondition))
+            _logger.LogWarning("Crash {CrashId} has missing weather condition data", crash.CrashId);
+
+        if (string.IsNullOrWhiteSpace(crash.RoadwayCondition))
+            _logger.LogWarning("Crash {CrashId} has missing roadway condition data", crash.CrashId);
 
         if (validationErrors.Any())
         {

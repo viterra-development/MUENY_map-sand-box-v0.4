@@ -65,7 +65,7 @@ public class CrisProcessor
                 validCrashes.Count, crashes.Count - validCrashes.Count);
 
             // Step 3: Spatial join crashes to road segments
-            var roadGeoJsonPath = "./MapSandBox/wwwroot/parker-roads-with-traffic.geojson";
+            var roadGeoJsonPath = "/workspaces/map-sand-box/MapSandBox/wwwroot/parker-roads-with-traffic.geojson";
             var spatialJoins = await _spatialAnalyzer.SpatialJoinCrashesToRoadsAsync(validCrashes, roadGeoJsonPath);
             var crashesBySegment = _spatialAnalyzer.GroupCrashesByRoadSegment(spatialJoins);
 
@@ -136,7 +136,7 @@ public class CrisProcessor
         List<IntersectionRisk> intersectionRisks,
         List<SpatialJoinResult> spatialJoins)
     {
-        var outputDir = "./MapSandBox/wwwroot/cris-data";
+        var outputDir = "/workspaces/map-sand-box/MapSandBox/wwwroot/cris-data";
         Directory.CreateDirectory(outputDir);
 
         // Generate crash points GeoJSON (only crashes matched to traffic-enabled roads)
@@ -149,6 +149,15 @@ public class CrisProcessor
         }));
         _logger.LogInformation("Generated crash points GeoJSON: {Path}", crashOutputPath);
 
+        // Generate crash points deck.gl format
+        var crashDeckGlData = _geoJsonGenerator.GenerateCrashPointsDeckGlData(trafficCrashes);
+        var crashDeckGlOutputPath = Path.Combine(outputDir, "parker-county-crashes-traffic-roads-deckgl.json");
+        await File.WriteAllTextAsync(crashDeckGlOutputPath, JsonSerializer.Serialize(crashDeckGlData, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        }));
+        _logger.LogInformation("Generated crash points deck.gl format: {Path}", crashDeckGlOutputPath);
+
         // Generate risk segments GeoJSON
         var riskGeoJson = _geoJsonGenerator.GenerateRiskSegmentsGeoJson(riskSegments);
         var riskOutputPath = Path.Combine(outputDir, "parker-county-risk-segments-traffic.geojson");
@@ -158,6 +167,15 @@ public class CrisProcessor
         }));
         _logger.LogInformation("Generated risk segments GeoJSON: {Path}", riskOutputPath);
 
+        // Generate risk segments deck.gl format
+        var riskDeckGlData = _geoJsonGenerator.GenerateRiskSegmentsDeckGlData(riskSegments);
+        var riskDeckGlOutputPath = Path.Combine(outputDir, "parker-county-risk-segments-traffic-deckgl.json");
+        await File.WriteAllTextAsync(riskDeckGlOutputPath, JsonSerializer.Serialize(riskDeckGlData, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        }));
+        _logger.LogInformation("Generated risk segments deck.gl format: {Path}", riskDeckGlOutputPath);
+
         // Generate intersection risks GeoJSON
         var intersectionGeoJson = _geoJsonGenerator.GenerateIntersectionRisksGeoJson(intersectionRisks);
         var intersectionOutputPath = Path.Combine(outputDir, "parker-county-intersection-risks.geojson");
@@ -166,6 +184,15 @@ public class CrisProcessor
             WriteIndented = true
         }));
         _logger.LogInformation("Generated intersection risks GeoJSON: {Path}", intersectionOutputPath);
+
+        // Generate intersection risks deck.gl format
+        var intersectionDeckGlData = _geoJsonGenerator.GenerateIntersectionRisksDeckGlData(intersectionRisks);
+        var intersectionDeckGlOutputPath = Path.Combine(outputDir, "parker-county-intersection-risks-deckgl.json");
+        await File.WriteAllTextAsync(intersectionDeckGlOutputPath, JsonSerializer.Serialize(intersectionDeckGlData, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        }));
+        _logger.LogInformation("Generated intersection risks deck.gl format: {Path}", intersectionDeckGlOutputPath);
 
         // Generate metadata
         var metadata = new CrisMetadata

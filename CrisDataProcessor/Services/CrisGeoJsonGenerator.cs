@@ -174,4 +174,100 @@ public class CrisGeoJsonGenerator
             _ => "U"
         };
     }
+
+    // Deck.gl format generators using strongly typed models
+    public CrashPointDeckGl[] GenerateCrashPointsDeckGlData(List<CrashRecord> crashes)
+    {
+        _logger.LogInformation("Generating crash points deck.gl data for {Count} crashes", crashes.Count);
+
+        var data = crashes.Select(crash => new CrashPointDeckGl
+        {
+            CrashId = crash.CrashId,
+            CrashDate = crash.CrashDateTime.ToString("yyyy-MM-dd"),
+            CrashTime = crash.CrashDateTime.ToString("HH:mm"),
+            CrashDateTime = crash.CrashDateTime.ToString("yyyy-MM-dd HH:mm"),
+            Severity = crash.Severity.ToString(),
+            SeverityCode = GetSeverityCode(crash.Severity),
+            Latitude = (double)crash.Latitude,
+            Longitude = (double)crash.Longitude,
+            PersonsInvolved = crash.Persons.Count,
+            VehiclesInvolved = crash.Vehicles.Count,
+            WeatherCondition = crash.WeatherCondition ?? "",
+            LightCondition = "",
+            SurfaceCondition = crash.RoadwayCondition ?? "",
+            RoadwayId = crash.RoadwayId,
+            Aadt = crash.Aadt,
+            FatalCount = crash.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
+            InjuryCount = crash.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury),
+            ContributingFactors = crash.ContributingFactors.Select(f => f.Description).ToArray(),
+            Coordinates = new[] { (double)crash.Longitude, (double)crash.Latitude }
+        }).ToArray();
+
+        return data;
+    }
+
+    public RiskSegmentDeckGl[] GenerateRiskSegmentsDeckGlData(List<RiskSegment> riskSegments)
+    {
+        _logger.LogInformation("Generating risk segments deck.gl data for {Count} segments", riskSegments.Count);
+
+        var data = riskSegments.Select(segment => new RiskSegmentDeckGl
+        {
+            SegmentId = segment.SegmentId,
+            RiskScore = (double)segment.RiskScore,
+            RiskLevel = segment.RiskLevel.ToString(),
+            RiskLevelNumeric = (int)segment.RiskLevel,
+            CrashCount = segment.CrashCount,
+            Aadt = segment.Aadt,
+            SegmentLength = (double)segment.SegmentLength,
+            CrashesPerMile = segment.SegmentLength > 0 ? (double)(segment.CrashCount / segment.SegmentLength) : 0,
+            RecentCrashes = segment.RecentCrashes.Select(c => new CrashSummaryDeckGl
+            {
+                CrashId = c.CrashId,
+                CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
+                Severity = c.Severity.ToString(),
+                PersonsInvolved = c.Persons.Count
+            }).ToArray(),
+            StartLatitude = (double)segment.StartLatitude,
+            StartLongitude = (double)segment.StartLongitude,
+            EndLatitude = (double)segment.EndLatitude,
+            EndLongitude = (double)segment.EndLongitude,
+            Coordinates = new[]
+            {
+                new[] { (double)segment.StartLongitude, (double)segment.StartLatitude },
+                new[] { (double)segment.EndLongitude, (double)segment.EndLatitude }
+            }
+        }).ToArray();
+
+        return data;
+    }
+
+    public IntersectionRiskDeckGl[] GenerateIntersectionRisksDeckGlData(List<IntersectionRisk> intersectionRisks)
+    {
+        _logger.LogInformation("Generating intersection risks deck.gl data for {Count} intersections", intersectionRisks.Count);
+
+        var data = intersectionRisks.Select(intersection => new IntersectionRiskDeckGl
+        {
+            IntersectionId = intersection.IntersectionId,
+            RiskScore = (double)intersection.RiskScore,
+            RiskLevel = intersection.RiskLevel.ToString(),
+            RiskLevelNumeric = (int)intersection.RiskLevel,
+            CrashCount = intersection.CrashCount,
+            Latitude = (double)intersection.Latitude,
+            Longitude = (double)intersection.Longitude,
+            IntersectingRoads = intersection.IntersectingRoads.ToArray(),
+            RecentCrashes = intersection.RecentCrashes.Select(c => new CrashSummaryDeckGl
+            {
+                CrashId = c.CrashId,
+                CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
+                Severity = c.Severity.ToString(),
+                PersonsInvolved = c.Persons.Count
+            }).ToArray(),
+            FatalCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity == KabcoSeverity.K_Fatal)),
+            InjuryCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury)),
+            PropertyDamageCrashes = intersection.RecentCrashes.Count(c => c.Persons.All(p => p.InjurySeverity == KabcoSeverity.O_NoInjury)),
+            Coordinates = new[] { (double)intersection.Longitude, (double)intersection.Latitude }
+        }).ToArray();
+
+        return data;
+    }
 }

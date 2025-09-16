@@ -242,17 +242,13 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
-                        dataTransform: d => d.features.map(f => ({
-                            ...f.properties,
-                            coordinates: f.geometry.coordinates
-                        })),
                         radiusMinPixels: 3,
                         radiusMaxPixels: 15,
                         radiusUnits: 'pixels',
                         radiusScale: 1,
-                        getPosition: d => d.coordinates,
-                        getRadius: d => Math.max(3, (d.persons_involved || 1) * 2),
-                        getFillColor: d => getCrashSeverityColor(d.severity),
+                        getPosition: d => d.Coordinates,
+                        getRadius: d => d.PersonsInvolved || 1,
+                        getFillColor: d => getCrashSeverityColor(d.Severity),
                         filled: true,
                         stroked: true,
                         getLineColor: [0, 0, 0, 255], // Black border
@@ -289,15 +285,11 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
-                        dataTransform: d => d.features.map(f => ({
-                            ...f.properties,
-                            coordinates: f.geometry.coordinates
-                        })),
                         radiusMinPixels: 6,
                         radiusMaxPixels: 25,
-                        getPosition: d => d.coordinates,
-                        getRadius: d => Math.max(8, Math.min(25, Math.sqrt(d.crash_count || 1) * 8)),
-                        getFillColor: d => getRiskLevelColor(d.risk_level),
+                        getPosition: d => d.Coordinates,
+                        getRadius: d => Math.max(8, Math.min(25, Math.sqrt(d.CrashCount || 1) * 8)),
+                        getFillColor: d => getRiskLevelColor(d.RiskLevel),
                         stroked: true,
                         getLineColor: [0, 0, 0, 255],
                         lineWidthMinPixels: 1,
@@ -330,13 +322,9 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     deckLayers.push(new deck.PathLayer({
                         id: config.id,
                         data: config.dataUrl,
-                        dataTransform: d => d.features.map(f => ({
-                            ...f.properties,
-                            coordinates: f.geometry.coordinates
-                        })),
-                        getPath: d => d.coordinates,
-                        getWidth: d => Math.max(2, (d.aadt || 100) / 1000),
-                        getColor: d => getRiskLevelColor(d.risk_level),
+                        getPath: d => d.Coordinates,
+                        getWidth: d => Math.max(2, (d.Aadt || 100) / 1000),
+                        getColor: d => getRiskLevelColor(d.RiskLevel),
                         widthMinPixels: 2,
                         widthMaxPixels: 20,
                         pickable: true,
@@ -431,19 +419,19 @@ function getLayerProperties(config) {
             properties.onClick = handleSoilUnitClick;
             break;
         case 'cris-crashes':
-            properties.radiusMinPixels = 10; // Much larger for debugging
-            properties.radiusMaxPixels = 30;
-            properties.radiusScale = 1;
-            properties.getPosition = d => d.geometry.coordinates;
-            properties.getRadius = 15; // Fixed large radius for testing
-            properties.getFillColor = [255, 0, 0, 255]; // Bright red for visibility
+            properties.radiusMinPixels = 4;
+            properties.radiusMaxPixels = 15;
+            properties.radiusScale = 100;
+            properties.getPosition = d => d.Coordinates;
+            properties.getRadius = d => d.PersonsInvolved || 1;
+            properties.getFillColor = d => getCrashSeverityColor(d.Severity);
             properties.pickable = true;
             properties.onClick = handleCrashClick;
             break;
         case 'cris-risk-segments':
-            properties.getPath = d => d.geometry.coordinates;
-            properties.getWidth = d => Math.max(2, (d.properties.aadt || 100) / 1000);
-            properties.getColor = getRiskLevelColor;
+            properties.getPath = d => d.Coordinates;
+            properties.getWidth = d => Math.max(2, (d.Aadt || 100) / 1000);
+            properties.getColor = d => getRiskLevelColor(d.RiskLevel);
             properties.widthMinPixels = 2;
             properties.widthMaxPixels = 20;
             properties.pickable = true;
@@ -452,9 +440,9 @@ function getLayerProperties(config) {
         case 'cris-intersections':
             properties.radiusMinPixels = 6;
             properties.radiusMaxPixels = 25;
-            properties.getPosition = d => d.geometry.coordinates;
-            properties.getRadius = d => Math.sqrt(d.properties.crash_count || 1) * 100;
-            properties.getFillColor = getRiskLevelColor;
+            properties.getPosition = d => d.Coordinates;
+            properties.getRadius = d => Math.sqrt(d.CrashCount || 1) * 100;
+            properties.getFillColor = d => getRiskLevelColor(d.RiskLevel);
             properties.stroked = true;
             properties.getLineColor = [0, 0, 0, 255];
             properties.lineWidthMinPixels = 1;
