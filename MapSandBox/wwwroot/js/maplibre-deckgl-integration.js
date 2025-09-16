@@ -1075,17 +1075,21 @@ function handleRiskSegmentClick(info) {
                 }
             };
 
-            // Convert crash records to have proper enum values
+            // Convert crash records to have proper enum values and DateTime format
             const convertCrashRecords = (crashes) => {
                 if (!crashes || !Array.isArray(crashes)) return [];
                 return crashes.map(crash => ({
                     ...crash,
+                    CrashId: crash.CrashId || '',
+                    CrashDateTime: crash.CrashDate || '', // Map CrashDate to CrashDateTime
                     Severity: convertKabcoSeverity(crash.Severity || crash.severity), // Capital S for C# property
                     // Also convert person injury severities if they exist
                     Persons: crash.Persons ? crash.Persons.map(person => ({
                         ...person,
                         InjurySeverity: convertKabcoSeverity(person.InjurySeverity || person.injurySeverity) // Capital I for C# property
-                    })) : []
+                    })) : [],
+                    // Map Vehicles properly for C# model
+                    Vehicles: crash.Vehicles || []
                 }));
             };
 

@@ -251,7 +251,11 @@ public class CrisGeoJsonGenerator
             RoadLinearId = segment.RoadLinearId,
             RoadName = segment.RoadName,
             RoadType = segment.RoadType,
-            GeometryType = segment.GeometryType
+            GeometryType = segment.GeometryType,
+            // Fatal and injury crash counts for severity analysis
+            FatalCrashes = segment.FatalCrashCount,
+            InjuryCrashes = segment.SeriousInjuryCrashCount,
+            PropertyDamageCrashes = segment.RecentCrashes.Count(c => c.Severity == KabcoSeverity.O_NoInjury)
         }).ToArray();
 
         return data;

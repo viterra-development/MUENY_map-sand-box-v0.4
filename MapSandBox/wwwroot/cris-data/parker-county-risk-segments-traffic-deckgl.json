@@ -935,7 +935,10 @@
     "RoadLinearId": "1104258581140",
     "RoadName": "State Hwy 199",
     "RoadType": "S",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 6,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "110416467091",
@@ -1401,7 +1404,10 @@
     "RoadLinearId": "110416467091",
     "RoadName": "Northwest Pkwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 3,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1104472859275",
@@ -2263,7 +2269,10 @@
     "RoadLinearId": "1104472859275",
     "RoadName": "State Hwy 199",
     "RoadType": "S",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416478912",
@@ -2549,7 +2558,10 @@
     "RoadLinearId": "110416478912",
     "RoadName": "College Park Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1106087632047",
@@ -3203,7 +3215,10 @@
     "RoadLinearId": "1106087632047",
     "RoadName": "Santa Fe Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 6,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1106067279221",
@@ -4797,7 +4812,10 @@
     "RoadLinearId": "1106067279221",
     "RoadName": "E Bankhead Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 3,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416445041",
@@ -5141,7 +5159,10 @@
     "RoadLinearId": "110416445041",
     "RoadName": "FM 5 S",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416479337",
@@ -5281,7 +5302,10 @@
     "RoadLinearId": "110416479337",
     "RoadName": "Westmoreland Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416465513",
@@ -5561,7 +5585,10 @@
     "RoadLinearId": "110416465513",
     "RoadName": "Lution Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416477751",
@@ -6117,7 +6144,10 @@
     "RoadLinearId": "110416477751",
     "RoadName": "W White Dove St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1104468980466",
@@ -6233,7 +6263,10 @@
     "RoadLinearId": "1104468980466",
     "RoadName": "Ridgehill Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416470274",
@@ -6313,7 +6346,10 @@
     "RoadLinearId": "110416470274",
     "RoadName": "Boutwell Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1103234473053",
@@ -6593,7 +6629,10 @@
     "RoadLinearId": "1103234473053",
     "RoadName": "Bay Hill Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416451769",
@@ -7121,7 +7160,10 @@
     "RoadLinearId": "110416451769",
     "RoadName": "Crown Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416466479",
@@ -7233,7 +7275,10 @@
     "RoadLinearId": "110416466479",
     "RoadName": "Browder Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416477667",
@@ -7365,7 +7410,10 @@
     "RoadLinearId": "110416477667",
     "RoadName": "W Timberlake St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416474978",
@@ -9115,7 +9163,10 @@
     "RoadLinearId": "110416474978",
     "RoadName": "Zion Hill Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 3,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1102970398995",
@@ -11057,7 +11108,10 @@
     "RoadLinearId": "1102970398995",
     "RoadName": "Azle Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 3,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1104347014161",
@@ -12999,7 +13053,10 @@
     "RoadLinearId": "1104347014161",
     "RoadName": "Mineral Wells Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 3,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1106087425992",
@@ -14713,7 +14770,10 @@
     "RoadLinearId": "1106087425992",
     "RoadName": "Cleburne Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 14,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1104692117869",
@@ -16131,7 +16191,10 @@
     "RoadLinearId": "1104692117869",
     "RoadName": "N FM 51",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 4,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416478710",
@@ -16705,7 +16768,10 @@
     "RoadLinearId": "110416478710",
     "RoadName": "Wolf Hollow",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "11016954832286",
@@ -17519,7 +17585,10 @@
     "RoadLinearId": "11016954832286",
     "RoadName": "Old Springtown Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 3,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "110416464018",
@@ -19297,7 +19366,10 @@
     "RoadLinearId": "110416464018",
     "RoadName": "Bethel Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 7,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416464489",
@@ -20207,7 +20279,10 @@
     "RoadLinearId": "110416464489",
     "RoadName": "Farmer Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 4,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "1104475062628",
@@ -22153,7 +22228,10 @@
     "RoadLinearId": "1104475062628",
     "RoadName": "I- 20",
     "RoadType": "I",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 4,
+    "InjuryCrashes": 12,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "1102970390166",
@@ -23633,7 +23711,10 @@
     "RoadLinearId": "1102970390166",
     "RoadName": "FM 1189",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 4,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416464240",
@@ -24295,7 +24376,10 @@
     "RoadLinearId": "110416464240",
     "RoadName": "Church Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "1104475062629",
@@ -27285,7 +27369,10 @@
     "RoadLinearId": "1104475062629",
     "RoadName": "I- 20",
     "RoadType": "I",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 14,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1104701882893",
@@ -27983,7 +28070,10 @@
     "RoadLinearId": "1104701882893",
     "RoadName": "Fort Worth Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 5,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "1106087858764",
@@ -28189,7 +28279,10 @@
     "RoadLinearId": "1106087858764",
     "RoadName": "Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "110416470627",
@@ -29535,7 +29628,10 @@
     "RoadLinearId": "110416470627",
     "RoadName": "Granbury Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 8
   },
   {
     "SegmentId": "1104468777882",
@@ -29873,7 +29969,10 @@
     "RoadLinearId": "1104468777882",
     "RoadName": "W Fwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 8
   },
   {
     "SegmentId": "110416465630",
@@ -30955,7 +31054,10 @@
     "RoadLinearId": "110416465630",
     "RoadName": "Midway Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 8
   },
   {
     "SegmentId": "1105319730148",
@@ -32329,7 +32431,10 @@
     "RoadLinearId": "1105319730148",
     "RoadName": "Fort Worth Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 3,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "1104258509693",
@@ -32531,7 +32636,10 @@
     "RoadLinearId": "1104258509693",
     "RoadName": "S Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1104692111084",
@@ -33093,7 +33201,10 @@
     "RoadLinearId": "1104692111084",
     "RoadName": "N Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 8
   },
   {
     "SegmentId": "110416472171",
@@ -33585,7 +33696,10 @@
     "RoadLinearId": "110416472171",
     "RoadName": "Knob Hill Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1104468777881",
@@ -33727,7 +33841,10 @@
     "RoadLinearId": "1104468777881",
     "RoadName": "Svc Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 3,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1102988770822",
@@ -34025,7 +34142,10 @@
     "RoadLinearId": "1102988770822",
     "RoadName": "W Fwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 8
   },
   {
     "SegmentId": "110416469985",
@@ -35529,7 +35649,10 @@
     "RoadLinearId": "110416469985",
     "RoadName": "Tin Top Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "1104475062270",
@@ -36919,7 +37042,10 @@
     "RoadLinearId": "1104475062270",
     "RoadName": "Mineral Wells Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "1105576424401",
@@ -37073,7 +37199,10 @@
     "RoadLinearId": "1105576424401",
     "RoadName": "Ric Williams Memorial Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "110416477217",
@@ -37367,7 +37496,10 @@
     "RoadLinearId": "110416477217",
     "RoadName": "Palo Pinto St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "110416464389",
@@ -37593,7 +37725,10 @@
     "RoadLinearId": "110416464389",
     "RoadName": "N Denton St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "1104258510940",
@@ -38363,7 +38498,10 @@
     "RoadLinearId": "1104258510940",
     "RoadName": "Ranger Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "110416470162",
@@ -39161,7 +39299,10 @@
     "RoadLinearId": "110416470162",
     "RoadName": "E Bankhead Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "1102970398996",
@@ -39549,7 +39690,10 @@
     "RoadLinearId": "1102970398996",
     "RoadName": "Azle Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416478407",
@@ -40009,7 +40153,10 @@
     "RoadLinearId": "110416478407",
     "RoadName": "Quanah Hill Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 2,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "1104472859276",
@@ -41283,7 +41430,10 @@
     "RoadLinearId": "1104472859276",
     "RoadName": "State Hwy 199",
     "RoadType": "S",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 9
   },
   {
     "SegmentId": "1102970391958",
@@ -41649,7 +41799,10 @@
     "RoadLinearId": "1102970391958",
     "RoadName": "Dennis Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1106087924467",
@@ -41781,7 +41934,10 @@
     "RoadLinearId": "1106087924467",
     "RoadName": "Sloan St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1105576286817",
@@ -42069,7 +42225,10 @@
     "RoadLinearId": "1105576286817",
     "RoadName": "Ric Williams Memorial Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416447297",
@@ -44047,7 +44206,10 @@
     "RoadLinearId": "110416447297",
     "RoadName": "Old Agnes Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416479657",
@@ -44139,7 +44301,10 @@
     "RoadLinearId": "110416479657",
     "RoadName": "Mountain View Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416479920",
@@ -44823,7 +44988,10 @@
     "RoadLinearId": "110416479920",
     "RoadName": "Horseshoe Bend Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1102970400381",
@@ -45361,7 +45529,10 @@
     "RoadLinearId": "1102970400381",
     "RoadName": "Kelly Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103690718531",
@@ -46145,7 +46316,10 @@
     "RoadLinearId": "1103690718531",
     "RoadName": "Old Authon Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1103695924553",
@@ -46373,7 +46547,10 @@
     "RoadLinearId": "1103695924553",
     "RoadName": "Creekwood Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416446408",
@@ -46761,7 +46938,10 @@
     "RoadLinearId": "110416446408",
     "RoadName": "W Lake Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416464066",
@@ -47133,7 +47313,10 @@
     "RoadLinearId": "110416464066",
     "RoadName": "Bishop Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416491320",
@@ -47413,7 +47596,10 @@
     "RoadLinearId": "110416491320",
     "RoadName": "Constellation Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416454074",
@@ -47545,7 +47731,10 @@
     "RoadLinearId": "110416454074",
     "RoadName": "S Front St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416463221",
@@ -47685,7 +47874,10 @@
     "RoadLinearId": "110416463221",
     "RoadName": "South Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416466074",
@@ -48001,7 +48193,10 @@
     "RoadLinearId": "110416466074",
     "RoadName": "Thomas Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416464097",
@@ -48125,7 +48320,10 @@
     "RoadLinearId": "110416464097",
     "RoadName": "N Brazos St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1102638238668",
@@ -48209,7 +48407,10 @@
     "RoadLinearId": "1102638238668",
     "RoadName": "Oak Creek Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1102970398984",
@@ -48249,7 +48450,10 @@
     "RoadLinearId": "1102970398984",
     "RoadName": "Oak Crest Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416475034",
@@ -49057,7 +49261,10 @@
     "RoadLinearId": "110416475034",
     "RoadName": "Big Valley Cir",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416464411",
@@ -49189,7 +49396,10 @@
     "RoadLinearId": "110416464411",
     "RoadName": "Duncan Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416464069",
@@ -49257,7 +49467,10 @@
     "RoadLinearId": "110416464069",
     "RoadName": "Bishop St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416467051",
@@ -49481,7 +49694,10 @@
     "RoadLinearId": "110416467051",
     "RoadName": "W N Woody Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416478539",
@@ -49777,7 +49993,10 @@
     "RoadLinearId": "110416478539",
     "RoadName": "Stage Coach Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1102970399677",
@@ -49861,7 +50080,10 @@
     "RoadLinearId": "1102970399677",
     "RoadName": "Taylor Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1106067252221",
@@ -49981,7 +50203,10 @@
     "RoadLinearId": "1106067252221",
     "RoadName": "Green Oaks Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1104468925984",
@@ -50097,7 +50322,10 @@
     "RoadLinearId": "1104468925984",
     "RoadName": "N Oakridge Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416465944",
@@ -50205,7 +50433,10 @@
     "RoadLinearId": "110416465944",
     "RoadName": "Soward Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416479326",
@@ -51429,7 +51660,10 @@
     "RoadLinearId": "110416479326",
     "RoadName": "Veal Station Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416472914",
@@ -51647,7 +51881,10 @@
     "RoadLinearId": "110416472914",
     "RoadName": "S Lakeshore Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "1104473177091",
@@ -52001,7 +52238,10 @@
     "RoadLinearId": "1104473177091",
     "RoadName": "BB Fielder Blvd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "1104475062345",
@@ -52511,7 +52751,10 @@
     "RoadLinearId": "1104475062345",
     "RoadName": "US Hwy 377",
     "RoadType": "U",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416447872",
@@ -54073,7 +54316,10 @@
     "RoadLinearId": "110416447872",
     "RoadName": "Baker Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416470615",
@@ -54323,7 +54569,10 @@
     "RoadLinearId": "110416470615",
     "RoadName": "Franklin St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416445349",
@@ -54449,7 +54698,10 @@
     "RoadLinearId": "110416445349",
     "RoadName": "W 1st St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1106087635069",
@@ -55603,7 +55855,10 @@
     "RoadLinearId": "1106087635069",
     "RoadName": "Old Garner Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1105533832085",
@@ -55875,7 +56130,10 @@
     "RoadLinearId": "1105533832085",
     "RoadName": "Po Jo Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "1104701882561",
@@ -56699,7 +56957,10 @@
     "RoadLinearId": "1104701882561",
     "RoadName": "Clear Lake Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "1105576424403",
@@ -56951,7 +57212,10 @@
     "RoadLinearId": "1105576424403",
     "RoadName": "Ric Williams Memorial Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416464579",
@@ -57651,7 +57915,10 @@
     "RoadLinearId": "110416464579",
     "RoadName": "Goshen Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416470754",
@@ -58571,7 +58838,10 @@
     "RoadLinearId": "110416470754",
     "RoadName": "Jay Bird Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103701318593",
@@ -58671,7 +58941,10 @@
     "RoadLinearId": "1103701318593",
     "RoadName": "Hilltop Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416464112",
@@ -58879,7 +59152,10 @@
     "RoadLinearId": "110416464112",
     "RoadName": "W Bridge St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416464383",
@@ -60453,7 +60729,10 @@
     "RoadLinearId": "110416464383",
     "RoadName": "Old Dennis Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416445407",
@@ -60615,7 +60894,10 @@
     "RoadLinearId": "110416445407",
     "RoadName": "W 4th St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445157",
@@ -60773,7 +61055,10 @@
     "RoadLinearId": "110416445157",
     "RoadName": "I- 30",
     "RoadType": "I",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416479107",
@@ -60987,7 +61272,10 @@
     "RoadLinearId": "110416479107",
     "RoadName": "I- 20 Access Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "1106087632519",
@@ -63237,7 +63525,10 @@
     "RoadLinearId": "1106087632519",
     "RoadName": "Upper Denton Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416445055",
@@ -64291,7 +64582,10 @@
     "RoadLinearId": "110416445055",
     "RoadName": "S FM 5",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416447359",
@@ -64457,7 +64751,10 @@
     "RoadLinearId": "110416447359",
     "RoadName": "S Alamo St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416479110",
@@ -64835,7 +65132,10 @@
     "RoadLinearId": "110416479110",
     "RoadName": "Johnson Bend Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445744",
@@ -66047,7 +66347,10 @@
     "RoadLinearId": "110416445744",
     "RoadName": "FM 1885",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416478902",
@@ -66351,7 +66654,10 @@
     "RoadLinearId": "110416478902",
     "RoadName": "Center Point Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416479156",
@@ -66657,7 +66963,10 @@
     "RoadLinearId": "110416479156",
     "RoadName": "New Highland Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 2,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445505",
@@ -68269,7 +68578,10 @@
     "RoadLinearId": "110416445505",
     "RoadName": "FM 920",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416447146",
@@ -68413,7 +68725,10 @@
     "RoadLinearId": "110416447146",
     "RoadName": "S Waco St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102970391957",
@@ -68685,7 +69000,10 @@
     "RoadLinearId": "1102970391957",
     "RoadName": "Dennis Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416474638",
@@ -69299,7 +69617,10 @@
     "RoadLinearId": "110416474638",
     "RoadName": "Sabathney Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416457378",
@@ -69631,7 +69952,10 @@
     "RoadLinearId": "110416457378",
     "RoadName": "S Lamar St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445752",
@@ -70223,7 +70547,10 @@
     "RoadLinearId": "110416445752",
     "RoadName": "W FM 1885",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416464394",
@@ -70341,7 +70668,10 @@
     "RoadLinearId": "110416464394",
     "RoadName": "S Denton St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416471255",
@@ -70711,7 +71041,10 @@
     "RoadLinearId": "110416471255",
     "RoadName": "Precinct Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104472814296",
@@ -70773,7 +71106,10 @@
     "RoadLinearId": "1104472814296",
     "RoadName": "Bent Creek Ranch Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1106087639566",
@@ -71855,7 +72191,10 @@
     "RoadLinearId": "1106087639566",
     "RoadName": "Old Millsap Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104469114895",
@@ -72549,7 +72888,10 @@
     "RoadLinearId": "1104469114895",
     "RoadName": "Thompson Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102970391558",
@@ -72825,7 +73167,10 @@
     "RoadLinearId": "1102970391558",
     "RoadName": "N Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416466391",
@@ -74133,7 +74478,10 @@
     "RoadLinearId": "110416466391",
     "RoadName": "Old Annetta Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "1104475062344",
@@ -74895,7 +75243,10 @@
     "RoadLinearId": "1104475062344",
     "RoadName": "US Hwy 377",
     "RoadType": "U",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416467126",
@@ -75175,7 +75526,10 @@
     "RoadLinearId": "110416467126",
     "RoadName": "Peaster Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1104692357780",
@@ -75467,7 +75821,10 @@
     "RoadLinearId": "1104692357780",
     "RoadName": "N Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "1104258577110",
@@ -75739,7 +76096,10 @@
     "RoadLinearId": "1104258577110",
     "RoadName": "W Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "110416445576",
@@ -75885,7 +76245,10 @@
     "RoadLinearId": "110416445576",
     "RoadName": "S Elm St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416464094",
@@ -76073,7 +76436,10 @@
     "RoadLinearId": "110416464094",
     "RoadName": "Brazos Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "11016954832535",
@@ -76749,7 +77115,10 @@
     "RoadLinearId": "11016954832535",
     "RoadName": "Sarra Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416472137",
@@ -77053,7 +77422,10 @@
     "RoadLinearId": "110416472137",
     "RoadName": "Ice House Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1103680884207",
@@ -77109,7 +77481,10 @@
     "RoadLinearId": "1103680884207",
     "RoadName": "Timber Cross Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416456787",
@@ -77225,7 +77600,10 @@
     "RoadLinearId": "110416456787",
     "RoadName": "Kelly Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416469166",
@@ -77827,7 +78205,10 @@
     "RoadLinearId": "110416469166",
     "RoadName": "S Stewart St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1104470396916",
@@ -77983,7 +78364,10 @@
     "RoadLinearId": "1104470396916",
     "RoadName": "Big Salty Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 1,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1104699570696",
@@ -78035,7 +78419,10 @@
     "RoadLinearId": "1104699570696",
     "RoadName": "Palo Pinto St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1106087435808",
@@ -78239,7 +78626,10 @@
     "RoadLinearId": "1106087435808",
     "RoadName": "Palo Pinto St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 7
   },
   {
     "SegmentId": "110416468113",
@@ -78399,7 +78789,10 @@
     "RoadLinearId": "110416468113",
     "RoadName": "Skyline Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416466102",
@@ -79027,7 +79420,10 @@
     "RoadLinearId": "110416466102",
     "RoadName": "Tucker Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416464101",
@@ -79079,7 +79475,10 @@
     "RoadLinearId": "110416464101",
     "RoadName": "S Brazos St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416479476",
@@ -79591,7 +79990,10 @@
     "RoadLinearId": "110416479476",
     "RoadName": "Cool Junction",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416479713",
@@ -79759,7 +80161,10 @@
     "RoadLinearId": "110416479713",
     "RoadName": "Sanchez Creek Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1104473233641",
@@ -79831,7 +80236,10 @@
     "RoadLinearId": "1104473233641",
     "RoadName": "Sweetwater Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416464532",
@@ -80015,7 +80423,10 @@
     "RoadLinearId": "110416464532",
     "RoadName": "Foster Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416470182",
@@ -80243,7 +80654,10 @@
     "RoadLinearId": "110416470182",
     "RoadName": "W Bankhead Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416464260",
@@ -80315,7 +80729,10 @@
     "RoadLinearId": "110416464260",
     "RoadName": "W Church St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416479327",
@@ -80643,7 +81060,10 @@
     "RoadLinearId": "110416479327",
     "RoadName": "Veal Station Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1104692117859",
@@ -80819,7 +81239,10 @@
     "RoadLinearId": "1104692117859",
     "RoadName": "Cottondale Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416446597",
@@ -81167,7 +81590,10 @@
     "RoadLinearId": "110416446597",
     "RoadName": "Mill Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416471766",
@@ -81227,7 +81653,10 @@
     "RoadLinearId": "110416471766",
     "RoadName": "Cedarwood St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416477515",
@@ -81727,7 +82156,10 @@
     "RoadLinearId": "110416477515",
     "RoadName": "Old Springtown Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416447247",
@@ -81863,7 +82295,10 @@
     "RoadLinearId": "110416447247",
     "RoadName": "Adams Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416471058",
@@ -82161,7 +82596,10 @@
     "RoadLinearId": "110416471058",
     "RoadName": "New Hope Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470469",
@@ -82311,7 +82749,10 @@
     "RoadLinearId": "110416470469",
     "RoadName": "W Columbia Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416467195",
@@ -82505,7 +82946,10 @@
     "RoadLinearId": "110416467195",
     "RoadName": "Red Bud Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478329",
@@ -82711,7 +83155,10 @@
     "RoadLinearId": "110416478329",
     "RoadName": "New Tin Top Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "11029549951635",
@@ -82805,7 +83252,10 @@
     "RoadLinearId": "11029549951635",
     "RoadName": "Unnamed Road",
     "RoadType": "U",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416449123",
@@ -83255,7 +83705,10 @@
     "RoadLinearId": "110416449123",
     "RoadName": "S Bowie Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416472040",
@@ -84589,7 +85042,10 @@
     "RoadLinearId": "110416472040",
     "RoadName": "Greenwood Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416445255",
@@ -85095,7 +85551,10 @@
     "RoadLinearId": "110416445255",
     "RoadName": "S FM 113",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416445152",
@@ -85325,7 +85784,10 @@
     "RoadLinearId": "110416445152",
     "RoadName": "Quahah Hill Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1102466286822",
@@ -85441,7 +85903,10 @@
     "RoadLinearId": "1102466286822",
     "RoadName": "S Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416466437",
@@ -86329,7 +86794,10 @@
     "RoadLinearId": "110416466437",
     "RoadName": "Bennett Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416446674",
@@ -86917,7 +87385,10 @@
     "RoadLinearId": "110416446674",
     "RoadName": "W Park Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416446726",
@@ -87117,7 +87588,10 @@
     "RoadLinearId": "110416446726",
     "RoadName": "N Plum St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1106067242308",
@@ -87635,7 +88109,10 @@
     "RoadLinearId": "1106067242308",
     "RoadName": "Mikus Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416479162",
@@ -88185,7 +88662,10 @@
     "RoadLinearId": "110416479162",
     "RoadName": "Newsom Mound Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416445245",
@@ -89257,7 +89737,10 @@
     "RoadLinearId": "110416445245",
     "RoadName": "FM 113 N",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1105598223179",
@@ -91309,7 +91792,10 @@
     "RoadLinearId": "1105598223179",
     "RoadName": "Bear Creek Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1105576419841",
@@ -92453,7 +92939,10 @@
     "RoadLinearId": "1105576419841",
     "RoadName": "Old Brock Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445534",
@@ -92603,7 +93092,10 @@
     "RoadLinearId": "110416445534",
     "RoadName": "S Ash St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 6
   },
   {
     "SegmentId": "110416445808",
@@ -93171,7 +93663,10 @@
     "RoadLinearId": "110416445808",
     "RoadName": "FM 3028",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416480205",
@@ -93701,7 +94196,10 @@
     "RoadLinearId": "110416480205",
     "RoadName": "White Settlement Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416460807",
@@ -94103,7 +94601,10 @@
     "RoadLinearId": "110416460807",
     "RoadName": "Ragle Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416445757",
@@ -94969,7 +95470,10 @@
     "RoadLinearId": "110416445757",
     "RoadName": "FM 1886",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416463291",
@@ -95179,7 +95683,10 @@
     "RoadLinearId": "110416463291",
     "RoadName": "Texas Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416445625",
@@ -95365,7 +95872,10 @@
     "RoadLinearId": "110416445625",
     "RoadName": "W Lee Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416446400",
@@ -95877,7 +96387,10 @@
     "RoadLinearId": "110416446400",
     "RoadName": "E Lake Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104699570698",
@@ -95943,7 +96456,10 @@
     "RoadLinearId": "1104699570698",
     "RoadName": "Fort Worth Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416478425",
@@ -96047,7 +96563,10 @@
     "RoadLinearId": "110416478425",
     "RoadName": "S Ranch House Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416471964",
@@ -96691,7 +97210,10 @@
     "RoadLinearId": "110416471964",
     "RoadName": "Flat Rock Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "1106087633818",
@@ -96993,7 +97515,10 @@
     "RoadLinearId": "1106087633818",
     "RoadName": "Highland Cir",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416446670",
@@ -97361,7 +97886,10 @@
     "RoadLinearId": "110416446670",
     "RoadName": "E Park Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "110416479969",
@@ -98039,7 +98567,10 @@
     "RoadLinearId": "110416479969",
     "RoadName": "Hutcheson Hill Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104470135499",
@@ -98603,7 +99134,10 @@
     "RoadLinearId": "1104470135499",
     "RoadName": "J E Woody Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 5
   },
   {
     "SegmentId": "1102970400382",
@@ -98913,7 +99447,10 @@
     "RoadLinearId": "1102970400382",
     "RoadName": "Kelly Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470848",
@@ -99411,7 +99948,10 @@
     "RoadLinearId": "110416470848",
     "RoadName": "Lakeview Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478797",
@@ -99599,7 +100139,10 @@
     "RoadLinearId": "110416478797",
     "RoadName": "Bailey Ranch Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416447278",
@@ -100371,7 +100914,10 @@
     "RoadLinearId": "110416447278",
     "RoadName": "Agnes Cir",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416466854",
@@ -100465,7 +101011,10 @@
     "RoadLinearId": "110416466854",
     "RoadName": "Houston St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104468778994",
@@ -100805,7 +101354,10 @@
     "RoadLinearId": "1104468778994",
     "RoadName": "Northwest Pkwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1102200956532",
@@ -100855,7 +101407,10 @@
     "RoadLinearId": "1102200956532",
     "RoadName": "Wall St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1105576424396",
@@ -100977,7 +101532,10 @@
     "RoadLinearId": "1105576424396",
     "RoadName": "Ric Williams Memorial Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416470689",
@@ -101595,7 +102153,10 @@
     "RoadLinearId": "110416470689",
     "RoadName": "Highland Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416447140",
@@ -101663,7 +102224,10 @@
     "RoadLinearId": "110416447140",
     "RoadName": "N Waco St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1102970399000",
@@ -101853,7 +102417,10 @@
     "RoadLinearId": "1102970399000",
     "RoadName": "Ranch House Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416446053",
@@ -102105,7 +102672,10 @@
     "RoadLinearId": "110416446053",
     "RoadName": "Earp Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416466360",
@@ -103023,7 +103593,10 @@
     "RoadLinearId": "110416466360",
     "RoadName": "Advance Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416466759",
@@ -103099,7 +103672,10 @@
     "RoadLinearId": "110416466759",
     "RoadName": "Garnet Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416448497",
@@ -103181,7 +103757,10 @@
     "RoadLinearId": "110416448497",
     "RoadName": "S Birch St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 4
   },
   {
     "SegmentId": "110416457735",
@@ -103409,7 +103988,10 @@
     "RoadLinearId": "110416457735",
     "RoadName": "Lelon Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1104473118330",
@@ -104137,7 +104719,10 @@
     "RoadLinearId": "1104473118330",
     "RoadName": "I- 20 Svc Rd",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416480235",
@@ -104449,7 +105034,10 @@
     "RoadLinearId": "110416480235",
     "RoadName": "Poolville Cut Off Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1104258409070",
@@ -104625,7 +105213,10 @@
     "RoadLinearId": "1104258409070",
     "RoadName": "I- 20 Svc Rd",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1102970395343",
@@ -105217,7 +105808,10 @@
     "RoadLinearId": "1102970395343",
     "RoadName": "Holbrook Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416467224",
@@ -105461,7 +106055,10 @@
     "RoadLinearId": "110416467224",
     "RoadName": "Rhoades Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1106092740200",
@@ -105629,7 +106226,10 @@
     "RoadLinearId": "1106092740200",
     "RoadName": "E Reno Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416451300",
@@ -105841,7 +106441,10 @@
     "RoadLinearId": "110416451300",
     "RoadName": "W Couts St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416465560",
@@ -106145,7 +106748,10 @@
     "RoadLinearId": "110416465560",
     "RoadName": "Martin Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "110416445574",
@@ -106393,7 +106999,10 @@
     "RoadLinearId": "110416445574",
     "RoadName": "N Elm St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1104258509690",
@@ -106681,7 +107290,10 @@
     "RoadLinearId": "1104258509690",
     "RoadName": "S Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1104258587933",
@@ -107093,7 +107705,10 @@
     "RoadLinearId": "1104258587933",
     "RoadName": "E State Hwy 199",
     "RoadType": "S",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 3
   },
   {
     "SegmentId": "1104475062508",
@@ -107297,7 +107912,10 @@
     "RoadLinearId": "1104475062508",
     "RoadName": "I- 30",
     "RoadType": "I",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445702",
@@ -107879,7 +108497,10 @@
     "RoadLinearId": "110416445702",
     "RoadName": "FM 1187",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445728",
@@ -108149,7 +108770,10 @@
     "RoadLinearId": "110416445728",
     "RoadName": "FM 1708",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416478530",
@@ -108771,7 +109395,10 @@
     "RoadLinearId": "110416478530",
     "RoadName": "Springfield Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1104692117903",
@@ -108953,7 +109580,10 @@
     "RoadLinearId": "1104692117903",
     "RoadName": "S Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1102200931448",
@@ -109055,7 +109685,10 @@
     "RoadLinearId": "1102200931448",
     "RoadName": "NW Parkway St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445715",
@@ -109489,7 +110122,10 @@
     "RoadLinearId": "110416445715",
     "RoadName": "FM 1187 E",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416470586",
@@ -110239,7 +110875,10 @@
     "RoadLinearId": "110416470586",
     "RoadName": "Fairview Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1104701882632",
@@ -110405,7 +111044,10 @@
     "RoadLinearId": "1104701882632",
     "RoadName": "I- 20 Svc Rd",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416464393",
@@ -110463,7 +111105,10 @@
     "RoadLinearId": "110416464393",
     "RoadName": "S Denton St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416490192",
@@ -110601,7 +111246,10 @@
     "RoadLinearId": "110416490192",
     "RoadName": "Unnamed Road",
     "RoadType": "U",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416453546",
@@ -111383,7 +112031,10 @@
     "RoadLinearId": "110416453546",
     "RoadName": "Erwin Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416466372",
@@ -111825,7 +112476,10 @@
     "RoadLinearId": "110416466372",
     "RoadName": "Old Airport Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416471984",
@@ -112211,7 +112865,10 @@
     "RoadLinearId": "110416471984",
     "RoadName": "Gilliland Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416465568",
@@ -112449,7 +113106,10 @@
     "RoadLinearId": "110416465568",
     "RoadName": "McVoid Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416465966",
@@ -112723,7 +113383,10 @@
     "RoadLinearId": "110416465966",
     "RoadName": "W Spring St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1102200935365",
@@ -112841,7 +113504,10 @@
     "RoadLinearId": "1102200935365",
     "RoadName": "Alford Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445137",
@@ -112987,7 +113653,10 @@
     "RoadLinearId": "110416445137",
     "RoadName": "I- 20 Svc Rd",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416478549",
@@ -113249,7 +113918,10 @@
     "RoadLinearId": "110416478549",
     "RoadName": "Stonebridge Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416466566",
@@ -113499,7 +114171,10 @@
     "RoadLinearId": "110416466566",
     "RoadName": "Charles St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416479052",
@@ -113989,7 +114664,10 @@
     "RoadLinearId": "110416479052",
     "RoadName": "Harwell Lake Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416477400",
@@ -114063,7 +114741,10 @@
     "RoadLinearId": "110416477400",
     "RoadName": "Salt Creek Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416480206",
@@ -114497,7 +115178,10 @@
     "RoadLinearId": "110416480206",
     "RoadName": "White Settlement Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416478702",
@@ -114719,7 +115403,10 @@
     "RoadLinearId": "110416478702",
     "RoadName": "Wilson Bend Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416445677",
@@ -114953,7 +115640,10 @@
     "RoadLinearId": "110416445677",
     "RoadName": "W Oak St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "1105598410669",
@@ -115007,7 +115697,10 @@
     "RoadLinearId": "1105598410669",
     "RoadName": "Ridgeline Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416466383",
@@ -115197,7 +115890,10 @@
     "RoadLinearId": "110416466383",
     "RoadName": "Annetta Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416480057",
@@ -115539,7 +116235,10 @@
     "RoadLinearId": "110416480057",
     "RoadName": "Cartwright Park Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416466806",
@@ -115589,7 +116288,10 @@
     "RoadLinearId": "110416466806",
     "RoadName": "Harmony",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416465548",
@@ -115655,7 +116357,10 @@
     "RoadLinearId": "110416465548",
     "RoadName": "Martha Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "11016954150528",
@@ -115709,7 +116414,10 @@
     "RoadLinearId": "11016954150528",
     "RoadName": "Brookhollow Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416467095",
@@ -115863,7 +116571,10 @@
     "RoadLinearId": "110416467095",
     "RoadName": "NW Parkway St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416465525",
@@ -116461,7 +117172,10 @@
     "RoadLinearId": "110416465525",
     "RoadName": "Maddux Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2
   },
   {
     "SegmentId": "110416479090",
@@ -116707,7 +117421,10 @@
     "RoadLinearId": "110416479090",
     "RoadName": "Holland Lake Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103794619923",
@@ -117237,7 +117954,10 @@
     "RoadLinearId": "1103794619923",
     "RoadName": "W Lake Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416477898",
@@ -117299,7 +118019,10 @@
     "RoadLinearId": "110416477898",
     "RoadName": "Bonnie Bell Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102214009227",
@@ -117351,7 +118074,10 @@
     "RoadLinearId": "1102214009227",
     "RoadName": "Versailles Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470949",
@@ -117659,7 +118385,10 @@
     "RoadLinearId": "110416470949",
     "RoadName": "Longhorn Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445052",
@@ -118191,7 +118920,10 @@
     "RoadLinearId": "110416445052",
     "RoadName": "FM 5 W",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416473515",
@@ -119367,7 +120099,10 @@
     "RoadLinearId": "110416473515",
     "RoadName": "Lone Star Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416492306",
@@ -119571,7 +120306,10 @@
     "RoadLinearId": "110416492306",
     "RoadName": "Unnamed Road",
     "RoadType": "U",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445350",
@@ -119687,7 +120425,10 @@
     "RoadLinearId": "110416445350",
     "RoadName": "W 1st St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416474555",
@@ -119851,7 +120592,10 @@
     "RoadLinearId": "110416474555",
     "RoadName": "Quail Run",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416461894",
@@ -119983,7 +120727,10 @@
     "RoadLinearId": "110416461894",
     "RoadName": "E Rentz St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416475857",
@@ -120423,7 +121170,10 @@
     "RoadLinearId": "110416475857",
     "RoadName": "Briar Oaks Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416446786",
@@ -120671,7 +121421,10 @@
     "RoadLinearId": "110416446786",
     "RoadName": "Ross Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416465623",
@@ -121043,7 +121796,10 @@
     "RoadLinearId": "110416465623",
     "RoadName": "Midway Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103671412914",
@@ -121183,7 +121939,10 @@
     "RoadLinearId": "1103671412914",
     "RoadName": "Saddle Ridge Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416469986",
@@ -121375,7 +122134,10 @@
     "RoadLinearId": "110416469986",
     "RoadName": "Tin Top Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470974",
@@ -121439,7 +122201,10 @@
     "RoadLinearId": "110416470974",
     "RoadName": "Maverick St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416446514",
@@ -121563,7 +122328,10 @@
     "RoadLinearId": "110416446514",
     "RoadName": "Lynn St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102970398249",
@@ -121811,7 +122579,10 @@
     "RoadLinearId": "1102970398249",
     "RoadName": "Cabaniss Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103690718118",
@@ -121907,7 +122678,10 @@
     "RoadLinearId": "1103690718118",
     "RoadName": "Barnwell Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416471021",
@@ -122279,7 +123053,10 @@
     "RoadLinearId": "110416471021",
     "RoadName": "Mesquite Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103701322105",
@@ -124491,7 +125268,10 @@
     "RoadLinearId": "1103701322105",
     "RoadName": "S FM 730",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104473135558",
@@ -124631,7 +125411,10 @@
     "RoadLinearId": "1104473135558",
     "RoadName": "Commerce St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416471736",
@@ -124735,7 +125518,10 @@
     "RoadLinearId": "110416471736",
     "RoadName": "Briarwood Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416477721",
@@ -124999,7 +125785,10 @@
     "RoadLinearId": "110416477721",
     "RoadName": "White Bull Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104258509692",
@@ -125059,7 +125848,10 @@
     "RoadLinearId": "1104258509692",
     "RoadName": "S Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416490905",
@@ -125231,7 +126023,10 @@
     "RoadLinearId": "110416490905",
     "RoadName": "I- 20 Svc Rd",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470763",
@@ -125463,7 +126258,10 @@
     "RoadLinearId": "110416470763",
     "RoadName": "Jay Bird Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416467271",
@@ -125559,7 +126357,10 @@
     "RoadLinearId": "110416467271",
     "RoadName": "W Russell St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416479241",
@@ -125903,7 +126704,10 @@
     "RoadLinearId": "110416479241",
     "RoadName": "Soda Springs Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103662767239",
@@ -125955,7 +126759,10 @@
     "RoadLinearId": "1103662767239",
     "RoadName": "Pvt Cemetary Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103700781232",
@@ -126003,7 +126810,10 @@
     "RoadLinearId": "1103700781232",
     "RoadName": "E Sixth St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103690718763",
@@ -126059,7 +126869,10 @@
     "RoadLinearId": "1103690718763",
     "RoadName": "Hilltop Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416472124",
@@ -126147,7 +126960,10 @@
     "RoadLinearId": "110416472124",
     "RoadName": "Horseshoe Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103690717662",
@@ -126527,7 +127343,10 @@
     "RoadLinearId": "1103690717662",
     "RoadName": "Country Brook Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416464100",
@@ -126815,7 +127634,10 @@
     "RoadLinearId": "110416464100",
     "RoadName": "S Brazos St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102466876538",
@@ -126891,7 +127713,10 @@
     "RoadLinearId": "1102466876538",
     "RoadName": "Plantation Oaks Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416465808",
@@ -126979,7 +127804,10 @@
     "RoadLinearId": "110416465808",
     "RoadName": "Redbud Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102200957379",
@@ -127035,7 +127863,10 @@
     "RoadLinearId": "1102200957379",
     "RoadName": "Ranger Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "11016954150467",
@@ -127231,7 +128062,10 @@
     "RoadLinearId": "11016954150467",
     "RoadName": "Green Elm Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102970400743",
@@ -127311,7 +128145,10 @@
     "RoadLinearId": "1102970400743",
     "RoadName": "E Akard Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470331",
@@ -128079,7 +128916,10 @@
     "RoadLinearId": "110416470331",
     "RoadName": "N Cardinal Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104472962298",
@@ -128199,7 +129039,10 @@
     "RoadLinearId": "1104472962298",
     "RoadName": "Unnamed Road",
     "RoadType": "U",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104469124991",
@@ -128255,7 +129098,10 @@
     "RoadLinearId": "1104469124991",
     "RoadName": "Williamsburg Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102970393750",
@@ -128291,7 +129137,10 @@
     "RoadLinearId": "1102970393750",
     "RoadName": "Ft Worth Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416465634",
@@ -128395,7 +129244,10 @@
     "RoadLinearId": "110416465634",
     "RoadName": "Miller Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445718",
@@ -128783,7 +129635,10 @@
     "RoadLinearId": "110416445718",
     "RoadName": "S FM 1187",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416477850",
@@ -129327,7 +130182,10 @@
     "RoadLinearId": "110416477850",
     "RoadName": "W Yucca Vw",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416446033",
@@ -129639,7 +130497,10 @@
     "RoadLinearId": "110416446033",
     "RoadName": "Dude Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416471873",
@@ -129927,7 +130788,10 @@
     "RoadLinearId": "110416471873",
     "RoadName": "E Dry Creek Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416466396",
@@ -130019,7 +130883,10 @@
     "RoadLinearId": "110416466396",
     "RoadName": "Ashwood St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "11016954832285",
@@ -130839,7 +131706,10 @@
     "RoadLinearId": "11016954832285",
     "RoadName": "Old Springtown Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416459394",
@@ -130915,7 +131785,10 @@
     "RoadLinearId": "110416459394",
     "RoadName": "W Owens St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478535",
@@ -131255,7 +132128,10 @@
     "RoadLinearId": "110416478535",
     "RoadName": "Squaw Creek Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416464497",
@@ -131487,7 +132363,10 @@
     "RoadLinearId": "110416464497",
     "RoadName": "Finney Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445572",
@@ -131535,7 +132414,10 @@
     "RoadLinearId": "110416445572",
     "RoadName": "Elm St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1106087440791",
@@ -132275,7 +133157,10 @@
     "RoadLinearId": "1106087440791",
     "RoadName": "Annetta Centerpoint Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104473152790",
@@ -132399,7 +133284,10 @@
     "RoadLinearId": "1104473152790",
     "RoadName": "Unnamed Road",
     "RoadType": "U",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102200940744",
@@ -132447,7 +133335,10 @@
     "RoadLinearId": "1102200940744",
     "RoadName": "S Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416446355",
@@ -132983,7 +133874,10 @@
     "RoadLinearId": "110416446355",
     "RoadName": "Knob Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445419",
@@ -133079,7 +133973,10 @@
     "RoadLinearId": "110416445419",
     "RoadName": "W 5th St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102466624832",
@@ -133247,7 +134144,10 @@
     "RoadLinearId": "1102466624832",
     "RoadName": "McClendon Walker Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478614",
@@ -133295,7 +134195,10 @@
     "RoadLinearId": "110416478614",
     "RoadName": "Valley Lake Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416477538",
@@ -133423,7 +134326,10 @@
     "RoadLinearId": "110416477538",
     "RoadName": "Star Point Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1105598225244",
@@ -133543,7 +134449,10 @@
     "RoadLinearId": "1105598225244",
     "RoadName": "McDaniel Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470061",
@@ -133603,7 +134512,10 @@
     "RoadLinearId": "110416470061",
     "RoadName": "S Weiland",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102200920862",
@@ -133695,7 +134607,10 @@
     "RoadLinearId": "1102200920862",
     "RoadName": "Wellington Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1106087633778",
@@ -133991,7 +134906,10 @@
     "RoadLinearId": "1106087633778",
     "RoadName": "Jameson St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478543",
@@ -134091,7 +135009,10 @@
     "RoadLinearId": "110416478543",
     "RoadName": "Stone Creek Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416471315",
@@ -134231,7 +135152,10 @@
     "RoadLinearId": "110416471315",
     "RoadName": "Rhonda B St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416464502",
@@ -134299,7 +135223,10 @@
     "RoadLinearId": "110416464502",
     "RoadName": "N Flores Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103430657773",
@@ -134375,7 +135302,10 @@
     "RoadLinearId": "1103430657773",
     "RoadName": "Highland Cr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416446926",
@@ -134443,7 +135373,10 @@
     "RoadLinearId": "110416446926",
     "RoadName": "S Rusk St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470900",
@@ -134551,7 +135484,10 @@
     "RoadLinearId": "110416470900",
     "RoadName": "Live Oak Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102466305471",
@@ -134859,7 +135795,10 @@
     "RoadLinearId": "1102466305471",
     "RoadName": "Fossil Rock Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416447209",
@@ -134939,7 +135878,10 @@
     "RoadLinearId": "110416447209",
     "RoadName": "York Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "11016954974746",
@@ -135127,7 +136069,10 @@
     "RoadLinearId": "11016954974746",
     "RoadName": "Lakeway Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416477075",
@@ -135339,7 +136284,10 @@
     "RoadLinearId": "110416477075",
     "RoadName": "Lewis Deas Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416455430",
@@ -135587,7 +136535,10 @@
     "RoadLinearId": "110416455430",
     "RoadName": "Hiner Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416476952",
@@ -135635,7 +136586,10 @@
     "RoadLinearId": "110416476952",
     "RoadName": "Industrial Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104258466870",
@@ -135727,7 +136681,10 @@
     "RoadLinearId": "1104258466870",
     "RoadName": "Ranger Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "11016954007890",
@@ -135831,7 +136788,10 @@
     "RoadLinearId": "11016954007890",
     "RoadName": "Morning Mist Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416465818",
@@ -136599,7 +137559,10 @@
     "RoadLinearId": "110416465818",
     "RoadName": "Remuda Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103690719018",
@@ -136899,7 +137862,10 @@
     "RoadLinearId": "1103690719018",
     "RoadName": "Woodcrest St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416477095",
@@ -137067,7 +138033,10 @@
     "RoadLinearId": "110416477095",
     "RoadName": "Lynch Bend Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416474984",
@@ -137427,7 +138396,10 @@
     "RoadLinearId": "110416474984",
     "RoadName": "Aledo Iona Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416451528",
@@ -137691,7 +138663,10 @@
     "RoadLinearId": "110416451528",
     "RoadName": "Cross Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445846",
@@ -137819,7 +138794,10 @@
     "RoadLinearId": "110416445846",
     "RoadName": "W Ball St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478659",
@@ -138335,7 +139313,10 @@
     "RoadLinearId": "110416478659",
     "RoadName": "Old Weatherford Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102210971058",
@@ -138479,7 +139460,10 @@
     "RoadLinearId": "1102210971058",
     "RoadName": "Queen St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416465650",
@@ -138571,7 +139555,10 @@
     "RoadLinearId": "110416465650",
     "RoadName": "Morrow Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1106081863139",
@@ -138975,7 +139962,10 @@
     "RoadLinearId": "1106081863139",
     "RoadName": "Rim Rock Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416471467",
@@ -139055,7 +140045,10 @@
     "RoadLinearId": "110416471467",
     "RoadName": "Trussell Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103613664543",
@@ -139319,7 +140312,10 @@
     "RoadLinearId": "1103613664543",
     "RoadName": "Fox Point Cir",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416476252",
@@ -140003,7 +140999,10 @@
     "RoadLinearId": "110416476252",
     "RoadName": "Friendship Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470434",
@@ -140235,7 +141234,10 @@
     "RoadLinearId": "110416470434",
     "RoadName": "Cimmaron Trl",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416445618",
@@ -140327,7 +141329,10 @@
     "RoadLinearId": "110416445618",
     "RoadName": "E Lee Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102200928973",
@@ -140455,7 +141460,10 @@
     "RoadLinearId": "1102200928973",
     "RoadName": "McDavid Terrace Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416466703",
@@ -140527,7 +141535,10 @@
     "RoadLinearId": "110416466703",
     "RoadName": "Dorothy Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416466413",
@@ -140571,7 +141582,10 @@
     "RoadLinearId": "110416466413",
     "RoadName": "Baggett Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102210255808",
@@ -140607,7 +141621,10 @@
     "RoadLinearId": "1102210255808",
     "RoadName": "Aledo Glen Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416446757",
@@ -140783,7 +141800,10 @@
     "RoadLinearId": "110416446757",
     "RoadName": "W Reno Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1104470395630",
@@ -140835,7 +141855,10 @@
     "RoadLinearId": "1104470395630",
     "RoadName": "Jennifer Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1106087633103",
@@ -141051,7 +142074,10 @@
     "RoadLinearId": "1106087633103",
     "RoadName": "Twin Creek Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416480196",
@@ -141115,7 +142141,10 @@
     "RoadLinearId": "110416480196",
     "RoadName": "Sunshine Meadows Ct",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416480277",
@@ -141315,7 +142344,10 @@
     "RoadLinearId": "110416480277",
     "RoadName": "N O\u0027Neal Ave",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416472788",
@@ -141583,7 +142615,10 @@
     "RoadLinearId": "110416472788",
     "RoadName": "Lakeshore Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103626833905",
@@ -141835,7 +142870,10 @@
     "RoadLinearId": "1103626833905",
     "RoadName": "Hilltop Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416466475",
@@ -141983,7 +143021,10 @@
     "RoadLinearId": "110416466475",
     "RoadName": "Browder Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102970401957",
@@ -142255,7 +143296,10 @@
     "RoadLinearId": "1102970401957",
     "RoadName": "Greenwood Cut Off Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416470055",
@@ -143083,7 +144127,10 @@
     "RoadLinearId": "110416470055",
     "RoadName": "Weiland Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416466783",
@@ -143335,7 +144382,10 @@
     "RoadLinearId": "110416466783",
     "RoadName": "Goforth Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478016",
@@ -143659,7 +144709,10 @@
     "RoadLinearId": "110416478016",
     "RoadName": "Cattlebaron Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416471584",
@@ -143699,7 +144752,10 @@
     "RoadLinearId": "110416471584",
     "RoadName": "Alexander Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416465644",
@@ -143907,7 +144963,10 @@
     "RoadLinearId": "110416465644",
     "RoadName": "Monroe Hwy",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416466911",
@@ -144067,7 +145126,10 @@
     "RoadLinearId": "110416466911",
     "RoadName": "Joalene Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416479575",
@@ -144739,7 +145801,10 @@
     "RoadLinearId": "110416479575",
     "RoadName": "I- 20 Svc Rd",
     "RoadType": "O",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102466257362",
@@ -145207,7 +146272,10 @@
     "RoadLinearId": "1102466257362",
     "RoadName": "Underwood Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416465626",
@@ -145291,7 +146359,10 @@
     "RoadLinearId": "110416465626",
     "RoadName": "Midway Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1103671412776",
@@ -145359,7 +146430,10 @@
     "RoadLinearId": "1103671412776",
     "RoadName": "Silverstone Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416463462",
@@ -145659,7 +146733,10 @@
     "RoadLinearId": "110416463462",
     "RoadName": "W Water St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "1102970398869",
@@ -145699,7 +146776,10 @@
     "RoadLinearId": "1102970398869",
     "RoadName": "Front St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 1
   },
   {
     "SegmentId": "110416478903",
@@ -145907,7 +146987,10 @@
     "RoadLinearId": "110416478903",
     "RoadName": "Center Point Rd",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "11016954870175",
@@ -146011,7 +147094,10 @@
     "RoadLinearId": "11016954870175",
     "RoadName": "Wrigley Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416463139",
@@ -146331,7 +147417,10 @@
     "RoadLinearId": "110416463139",
     "RoadName": "Sandy Ln",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416479332",
@@ -146587,7 +147676,10 @@
     "RoadLinearId": "110416479332",
     "RoadName": "Walnut Creek Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416471090",
@@ -146735,7 +147827,10 @@
     "RoadLinearId": "110416471090",
     "RoadName": "Oak Hill Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "1106067279320",
@@ -147115,7 +148210,10 @@
     "RoadLinearId": "1106067279320",
     "RoadName": "Main St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416465444",
@@ -147199,7 +148297,10 @@
     "RoadLinearId": "110416465444",
     "RoadName": "Koldin Dr",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   },
   {
     "SegmentId": "110416463459",
@@ -147339,6 +148440,9 @@
     "RoadLinearId": "110416463459",
     "RoadName": "E Water St",
     "RoadType": "M",
-    "GeometryType": "actual_road"
+    "GeometryType": "actual_road",
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 0
   }
 ]

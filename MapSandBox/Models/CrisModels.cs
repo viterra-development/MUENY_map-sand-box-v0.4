@@ -597,6 +597,11 @@ public class RiskSegmentDeckGl
     public string RoadName { get; set; } = "";
     public string RoadType { get; set; } = "";
     public string GeometryType { get; set; } = "straight_line";
+
+    // Fatal and injury crash counts for severity analysis
+    public int FatalCrashes { get; set; }
+    public int InjuryCrashes { get; set; }
+    public int PropertyDamageCrashes { get; set; }
 }
 
 public class IntersectionRiskDeckGl
