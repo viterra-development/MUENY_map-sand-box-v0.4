@@ -106,6 +106,13 @@ public class RiskSegment
     public decimal SegmentLength { get; set; }
     public int? Aadt { get; set; }
     public List<CrashRecord> RecentCrashes { get; set; } = new();
+
+    // Road geometry enhancement properties
+    public List<double[]> RoadGeometry { get; set; } = new(); // Full road coordinates
+    public string RoadLinearId { get; set; } = ""; // TIGER LINEARID
+    public string RoadName { get; set; } = ""; // Road name for display
+    public string RoadType { get; set; } = ""; // TIGER road type (RTTYP)
+    public string GeometryType { get; set; } = "straight_line"; // "actual_road" or "straight_line"
 }
 
 public class IntersectionRisk
@@ -506,6 +513,12 @@ public class RiskSegmentDeckGl
     public double EndLatitude { get; set; }
     public double EndLongitude { get; set; }
     public double[][] Coordinates { get; set; } = Array.Empty<double[]>();
+
+    // Road geometry enhancement properties
+    public string RoadLinearId { get; set; } = "";
+    public string RoadName { get; set; } = "";
+    public string RoadType { get; set; } = "";
+    public string GeometryType { get; set; } = "straight_line";
 }
 
 public class IntersectionRiskDeckGl

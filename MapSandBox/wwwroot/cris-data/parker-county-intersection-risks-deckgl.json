@@ -1,6 +1,6 @@
 [
   {
-    "IntersectionId": "a39eb1df-0cda-42c4-a692-80724932a9cf",
+    "IntersectionId": "10a4e057-e6dc-4504-af10-94a96a2ee42f",
     "RiskScore": 0.65,
     "RiskLevel": "High",
     "RiskLevelNumeric": 4,
@@ -37,7 +37,7 @@
     ]
   },
   {
-    "IntersectionId": "e8a42109-9904-4d14-b402-29e01082ce47",
+    "IntersectionId": "3908375d-cee9-46a7-b3ae-15b106533e11",
     "RiskScore": 0.63,
     "RiskLevel": "High",
     "RiskLevelNumeric": 4,
@@ -116,7 +116,7 @@
     ]
   },
   {
-    "IntersectionId": "062642b6-e126-45d1-a217-14edd1e49afa",
+    "IntersectionId": "f8160dc9-c8a1-4a9b-8a4b-939f88a0618b",
     "RiskScore": 0.62,
     "RiskLevel": "High",
     "RiskLevelNumeric": 4,
@@ -147,7 +147,7 @@
     ]
   },
   {
-    "IntersectionId": "019ae516-91a3-404b-9b8f-4595fc4b509e",
+    "IntersectionId": "b6ee9b3e-b3d8-411f-b72b-4f95306f432d",
     "RiskScore": 0.62,
     "RiskLevel": "High",
     "RiskLevelNumeric": 4,
@@ -178,7 +178,7 @@
     ]
   },
   {
-    "IntersectionId": "a01622e2-8d31-4aa7-a605-89093dbf8bf6",
+    "IntersectionId": "5c712f64-43e9-4381-88c5-82e23ac281e7",
     "RiskScore": 0.56375,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -245,7 +245,7 @@
     ]
   },
   {
-    "IntersectionId": "bc65ad34-72c6-4202-9a30-6eab311e8337",
+    "IntersectionId": "9f817c51-4390-4a23-acde-e07925b6795a",
     "RiskScore": 0.56,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -306,7 +306,7 @@
     ]
   },
   {
-    "IntersectionId": "f0c1b036-3a54-4fbe-af36-e653c4f9ec19",
+    "IntersectionId": "061c79c7-9d6f-4766-b87d-68c283b4abb8",
     "RiskScore": 0.55,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -337,7 +337,7 @@
     ]
   },
   {
-    "IntersectionId": "0fd57b6c-bdd9-428c-8ae7-63e53b6a77a9",
+    "IntersectionId": "1c80ef81-ec6f-47bf-a551-95b157b6f4b8",
     "RiskScore": 0.55,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -368,7 +368,7 @@
     ]
   },
   {
-    "IntersectionId": "ece875ab-2902-46a3-9246-6e0c723784ea",
+    "IntersectionId": "542ab4ab-e08b-4ca7-a763-631104d27eef",
     "RiskScore": 0.55,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -399,7 +399,7 @@
     ]
   },
   {
-    "IntersectionId": "ff48b685-2d16-48d5-afd1-49fe65ee9f82",
+    "IntersectionId": "f253b5ac-caed-45e7-a61f-a1805b605a96",
     "RiskScore": 0.52,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -466,7 +466,7 @@
     ]
   },
   {
-    "IntersectionId": "9df65827-a4a7-4860-b1c4-642df57c2124",
+    "IntersectionId": "c3da6167-b82f-4b73-bbea-c87d8052acd4",
     "RiskScore": 0.5,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -545,7 +545,7 @@
     ]
   },
   {
-    "IntersectionId": "815d3765-4e46-42e3-a495-6f6e554afc06",
+    "IntersectionId": "881f2219-dac9-4f7a-a4cc-53802823a77b",
     "RiskScore": 0.489,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -624,7 +624,7 @@
     ]
   },
   {
-    "IntersectionId": "ecb95abb-cd82-4152-a682-1811c1d51c8e",
+    "IntersectionId": "dd6adf8b-5ac1-4b9f-9c7b-508ff14e1004",
     "RiskScore": 0.4866666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -661,7 +661,7 @@
     ]
   },
   {
-    "IntersectionId": "cd97a925-21b6-4e02-a786-100d7162f740",
+    "IntersectionId": "a930c3ce-b0da-4b2f-bec5-ea2d8fa408f5",
     "RiskScore": 0.4866666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -698,7 +698,7 @@
     ]
   },
   {
-    "IntersectionId": "16c84ad9-0216-488b-940b-d4b1996ffb3a",
+    "IntersectionId": "80d4c753-39a7-4c4c-94c9-625699ed4350",
     "RiskScore": 0.4866666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -735,7 +735,7 @@
     ]
   },
   {
-    "IntersectionId": "c6dd743c-763b-4ad9-8c08-53b30230798c",
+    "IntersectionId": "085fef44-42a1-4145-bb6b-1ead51a88cda",
     "RiskScore": 0.4866666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -772,7 +772,7 @@
     ]
   },
   {
-    "IntersectionId": "e73d6e2f-57fe-4ae4-b3fc-0729d416aca3",
+    "IntersectionId": "d5418ccd-1cc6-4eaf-aca6-2237b2aef4f8",
     "RiskScore": 0.4866666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -809,7 +809,7 @@
     ]
   },
   {
-    "IntersectionId": "b819292f-4fe0-4826-9040-ef51f6d4432a",
+    "IntersectionId": "91b2596e-dca9-4ee9-ab23-3457bae565d5",
     "RiskScore": 0.4866666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -846,7 +846,7 @@
     ]
   },
   {
-    "IntersectionId": "f462d879-9954-4563-8b63-a4d737d88a05",
+    "IntersectionId": "b7f9927f-9874-4642-b1bd-df61a5562104",
     "RiskScore": 0.486,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -895,7 +895,7 @@
     ]
   },
   {
-    "IntersectionId": "1d26c487-b227-4bf5-bd4e-b72d2d7eed13",
+    "IntersectionId": "58065f69-dc19-497a-b149-53842117faac",
     "RiskScore": 0.4716666666666667,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -950,7 +950,7 @@
     ]
   },
   {
-    "IntersectionId": "50105b02-f718-41e7-b878-4bac9269f6b7",
+    "IntersectionId": "2988596e-9d60-4f77-afad-f42d1582f79a",
     "RiskScore": 0.4633333333333334,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1029,7 +1029,7 @@
     ]
   },
   {
-    "IntersectionId": "0853a9bf-e70b-4db0-a401-13ed765f42a2",
+    "IntersectionId": "20dc1e41-47c6-42ce-ac0d-388a60312627",
     "RiskScore": 0.4463636363636364,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1108,7 +1108,7 @@
     ]
   },
   {
-    "IntersectionId": "533993e6-3010-4e4f-be30-d05e40900154",
+    "IntersectionId": "0b82b041-33a8-4dcc-a02c-adc1afacdca2",
     "RiskScore": 0.445,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1139,7 +1139,7 @@
     ]
   },
   {
-    "IntersectionId": "68aa5e02-0e8a-401f-b623-b7c73559c64c",
+    "IntersectionId": "c04959c4-e23c-4afe-b7cb-834de6010eb7",
     "RiskScore": 0.445,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1170,7 +1170,7 @@
     ]
   },
   {
-    "IntersectionId": "9c1fa955-5705-46d9-ae0c-dbd6c7cbe45b",
+    "IntersectionId": "7010d48b-8ec3-47d6-8d3c-e3213d2aebec",
     "RiskScore": 0.445,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1201,7 +1201,7 @@
     ]
   },
   {
-    "IntersectionId": "f4b4f131-2902-49ff-8055-077004a562fd",
+    "IntersectionId": "99d40378-fa07-4570-ab5b-6e339e115dc7",
     "RiskScore": 0.44,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1238,7 +1238,7 @@
     ]
   },
   {
-    "IntersectionId": "1e7d051e-dea8-43b3-b03c-770556b24fd7",
+    "IntersectionId": "b06a6622-48ba-4372-ba40-4007ccbf6667",
     "RiskScore": 0.44,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1275,7 +1275,7 @@
     ]
   },
   {
-    "IntersectionId": "fdb39c48-e9d6-402f-ab0d-d0c317e460d9",
+    "IntersectionId": "aed91d17-8d92-4064-b13a-e5ecbe2144c4",
     "RiskScore": 0.435,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1318,7 +1318,7 @@
     ]
   },
   {
-    "IntersectionId": "37624e8f-d006-492d-8720-8e763a04101b",
+    "IntersectionId": "4bba5bdb-1bb5-4e08-a211-eeaa4ff097c9",
     "RiskScore": 0.43,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1367,7 +1367,7 @@
     ]
   },
   {
-    "IntersectionId": "f94a73f1-92ef-4040-9b0d-e8aa5b6217c7",
+    "IntersectionId": "42cc1733-ad6f-4658-aba9-40bd3cfe7ee0",
     "RiskScore": 0.426,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1446,7 +1446,7 @@
     ]
   },
   {
-    "IntersectionId": "b340fe98-125b-4247-b1ff-d28a35f8d675",
+    "IntersectionId": "d5037d27-fff1-4513-b514-ebced0426634",
     "RiskScore": 0.41375,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1525,7 +1525,7 @@
     ]
   },
   {
-    "IntersectionId": "445da5b9-09ba-4d0e-ac64-fde5660f9d71",
+    "IntersectionId": "6c2cd01b-161f-42e5-b7d3-1256011de777",
     "RiskScore": 0.4133333333333334,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1580,7 +1580,7 @@
     ]
   },
   {
-    "IntersectionId": "196a82d3-6eb5-4ecf-8880-b07d8b98c460",
+    "IntersectionId": "c0fcc03f-11b8-45b0-9976-470b46209004",
     "RiskScore": 0.4133333333333334,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1635,7 +1635,7 @@
     ]
   },
   {
-    "IntersectionId": "e36e7d69-9a4f-43cf-9e69-716db6630527",
+    "IntersectionId": "27cf83a3-2ebd-4165-b72c-a7a85c4c0409",
     "RiskScore": 0.4,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
@@ -1678,7 +1678,7 @@
     ]
   },
   {
-    "IntersectionId": "3a1dc572-0685-45b0-8c3a-17f4b4c9bb52",
+    "IntersectionId": "05ce13a7-c3f7-454f-aa63-bed033e225ac",
     "RiskScore": 0.3975,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1745,7 +1745,7 @@
     ]
   },
   {
-    "IntersectionId": "27f952a8-15a7-4f63-bf3c-3ade132ad73b",
+    "IntersectionId": "147fed85-ca97-4b94-8581-1f9033d8ef95",
     "RiskScore": 0.3933333333333333,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1782,7 +1782,7 @@
     ]
   },
   {
-    "IntersectionId": "11ec46d7-1f98-4bfe-9687-b12906f31e4a",
+    "IntersectionId": "fac810d3-21a5-46ec-9c3c-d9b2126e199a",
     "RiskScore": 0.3933333333333333,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1819,7 +1819,7 @@
     ]
   },
   {
-    "IntersectionId": "c0e8205b-4542-4610-8901-c7b8d4c32f64",
+    "IntersectionId": "c63c814f-94ba-4e84-ab6f-45ca07b9e800",
     "RiskScore": 0.39,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1874,7 +1874,7 @@
     ]
   },
   {
-    "IntersectionId": "ad50704d-829e-4c45-84e0-db3aa4ecd8b3",
+    "IntersectionId": "8926b7f1-ebd4-4c03-b206-264944dcecfb",
     "RiskScore": 0.39,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1929,7 +1929,7 @@
     ]
   },
   {
-    "IntersectionId": "f41492aa-583c-4942-9951-18c0dcb3b828",
+    "IntersectionId": "47b26bd5-e6d0-48da-9190-ad76bfbb001c",
     "RiskScore": 0.388,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -1978,7 +1978,7 @@
     ]
   },
   {
-    "IntersectionId": "808320a1-bddb-4461-bcf3-8fb02db70564",
+    "IntersectionId": "2280c98a-f333-49a8-b826-e6e079bad4a0",
     "RiskScore": 0.388,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2027,7 +2027,7 @@
     ]
   },
   {
-    "IntersectionId": "0cdf81c5-ea71-496e-b6de-dc670efd5367",
+    "IntersectionId": "2961d264-031f-44f9-9cf8-655bbaeef75f",
     "RiskScore": 0.388,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2076,7 +2076,7 @@
     ]
   },
   {
-    "IntersectionId": "0a078dbc-dc7e-4508-ba4b-94b4333b3459",
+    "IntersectionId": "f849dd2e-e73c-49e3-b9f7-48aef23210b9",
     "RiskScore": 0.38000000000000006,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2137,7 +2137,7 @@
     ]
   },
   {
-    "IntersectionId": "9b9e8cee-734d-4bd1-973a-468c790394e2",
+    "IntersectionId": "7371ec88-3b7c-4f37-94c1-46c62e30837a",
     "RiskScore": 0.3788888888888889,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2210,7 +2210,7 @@
     ]
   },
   {
-    "IntersectionId": "8dbd99b6-e278-4bf5-b01a-92b0c1c7dfbc",
+    "IntersectionId": "5dda5e58-6e8b-460a-a57e-ffb1e93307ea",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2241,7 +2241,7 @@
     ]
   },
   {
-    "IntersectionId": "bd5308ab-1291-48f4-923c-2844249ca4db",
+    "IntersectionId": "26509c31-97f6-4432-9e52-9ff2d96fa380",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2272,7 +2272,38 @@
     ]
   },
   {
-    "IntersectionId": "5e85e16b-0a3b-48f0-8146-886591148cdf",
+    "IntersectionId": "66718cbe-b3ea-444d-b902-07f6cc930e11",
+    "RiskScore": 0.375,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
+    "CrashCount": 2,
+    "Latitude": 32.801511105,
+    "Longitude": -98.013044165,
+    "IntersectingRoads": [],
+    "RecentCrashes": [
+      {
+        "CrashId": "20715469",
+        "CrashDate": "2025-03-17",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 0
+      },
+      {
+        "CrashId": "20626125",
+        "CrashDate": "2025-01-23",
+        "Severity": "A_IncapacitatingInjury",
+        "PersonsInvolved": 0
+      }
+    ],
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2,
+    "Coordinates": [
+      -98.013044165,
+      32.801511105
+    ]
+  },
+  {
+    "IntersectionId": "8207c6ef-2a72-42d3-831f-fd8827d816f8",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2303,7 +2334,7 @@
     ]
   },
   {
-    "IntersectionId": "a22667cc-a46b-4525-9131-3c93e414c38d",
+    "IntersectionId": "c2c8f80f-de69-4bb6-b77e-1c13cb1a0c18",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2334,7 +2365,7 @@
     ]
   },
   {
-    "IntersectionId": "29a7f7c9-d4dd-477c-ae41-9d2ab331aece",
+    "IntersectionId": "b89e3722-e213-44a1-811c-d8893a657c85",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2365,7 +2396,7 @@
     ]
   },
   {
-    "IntersectionId": "3963e2a6-5cbf-46a5-a011-8a5cc00cb7d0",
+    "IntersectionId": "fed1a8f7-8d38-487c-bdd1-d518444578ea",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2396,7 +2427,7 @@
     ]
   },
   {
-    "IntersectionId": "c3f295ba-a03f-4b5d-b90e-8d9cdca578f0",
+    "IntersectionId": "d955245c-4c49-4974-8745-2a22fcd20d02",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2427,7 +2458,7 @@
     ]
   },
   {
-    "IntersectionId": "5cc0e39a-0097-4277-887a-097029d3d82b",
+    "IntersectionId": "ab0c4a08-481d-4488-8bd6-262c6310cbc7",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2458,7 +2489,7 @@
     ]
   },
   {
-    "IntersectionId": "7411c4ed-d5b6-4345-83e1-dc9a04d74d03",
+    "IntersectionId": "1cbbe378-7ead-467a-b3c8-13a842708584",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2489,7 +2520,7 @@
     ]
   },
   {
-    "IntersectionId": "83ad0e97-c7b5-42d3-a178-39ada96c013d",
+    "IntersectionId": "16058f96-007a-4fd8-be43-75d1fcf7abe2",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2520,7 +2551,7 @@
     ]
   },
   {
-    "IntersectionId": "e2b8f3e6-47d9-4c20-bb3a-1f7fe03e5092",
+    "IntersectionId": "a742aa49-6a5e-4737-81a8-fa7525dd720c",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2551,7 +2582,7 @@
     ]
   },
   {
-    "IntersectionId": "e06c0f3c-cdfa-4a2d-9ae4-949733eae61a",
+    "IntersectionId": "44b1a0a2-e8ac-419f-9983-6dfe47029f99",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2582,7 +2613,7 @@
     ]
   },
   {
-    "IntersectionId": "7c4e938a-8188-40c6-bb0b-c2305ad1aef9",
+    "IntersectionId": "7bec5e7e-e690-4492-ab71-9065837fc684",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2613,7 +2644,7 @@
     ]
   },
   {
-    "IntersectionId": "cc01b7a2-6022-4196-987a-cfaa2d17ac82",
+    "IntersectionId": "b7fcab79-8e75-4d72-b335-79b99602bafd",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2644,7 +2675,7 @@
     ]
   },
   {
-    "IntersectionId": "2b8920c8-1eaf-42f2-afce-fd24baf3ab22",
+    "IntersectionId": "bcc79619-3454-41d2-a217-e62ffc678f17",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2675,7 +2706,7 @@
     ]
   },
   {
-    "IntersectionId": "ccdf731d-b5a6-4e07-8277-84b65136e435",
+    "IntersectionId": "e3286f03-6c50-4a0d-b98c-6bf94bee3236",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2706,7 +2737,7 @@
     ]
   },
   {
-    "IntersectionId": "8607f123-21de-4ed9-ad21-7c966019e871",
+    "IntersectionId": "1f04d980-0666-449a-bd3d-d46b3e5cb86d",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2737,7 +2768,7 @@
     ]
   },
   {
-    "IntersectionId": "7734dbf8-e9a4-4f33-9b01-cd03e7a86c5b",
+    "IntersectionId": "e5b6de71-8406-4dcf-9cea-8d40d57a4cff",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2768,7 +2799,7 @@
     ]
   },
   {
-    "IntersectionId": "3df560fb-6940-4907-9779-25ab2029544f",
+    "IntersectionId": "cf920bb0-f82c-49cc-b3c1-a9f699fd61b0",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2799,7 +2830,7 @@
     ]
   },
   {
-    "IntersectionId": "6538fc9e-45ec-4fe3-8a12-02ff0961cf37",
+    "IntersectionId": "fade4e7c-4686-4651-a282-ece0590305d1",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2830,7 +2861,7 @@
     ]
   },
   {
-    "IntersectionId": "b0420641-c023-494a-a3ac-c2c92942d3bd",
+    "IntersectionId": "3a659b0a-e455-492c-aa84-ae5ff2cf195b",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2861,7 +2892,7 @@
     ]
   },
   {
-    "IntersectionId": "b6bd024a-7ae5-4aa5-a12e-1d0cee18a4c7",
+    "IntersectionId": "5cdf19d2-e1d9-42a0-868c-f01ef7943efc",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2892,7 +2923,7 @@
     ]
   },
   {
-    "IntersectionId": "e37bfe2d-8aa6-4c26-897c-63cff792813e",
+    "IntersectionId": "8209f79a-b3ca-4b56-8a49-c730f0e5c1c8",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2923,7 +2954,7 @@
     ]
   },
   {
-    "IntersectionId": "f52de199-3bd2-4de5-8f6a-c4dc47fc9daf",
+    "IntersectionId": "3f4d112b-b837-46f3-acc1-7fcddd6b7923",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2954,7 +2985,7 @@
     ]
   },
   {
-    "IntersectionId": "4990cab2-decd-4a3e-8c3b-e7b49a1282ff",
+    "IntersectionId": "28f1823a-7809-4f04-a4cf-3c4f0039a96a",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -2985,7 +3016,7 @@
     ]
   },
   {
-    "IntersectionId": "e8a02c91-204f-4c01-96dd-a02990ee343b",
+    "IntersectionId": "012eb92d-1c7f-497c-8e42-bd1e521b8536",
     "RiskScore": 0.375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3016,7 +3047,7 @@
     ]
   },
   {
-    "IntersectionId": "cb85b698-8ba7-429a-9b26-57420b5248bd",
+    "IntersectionId": "d34bff55-51e1-4bc1-bfff-b7d4d057b672",
     "RiskScore": 0.37,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3095,7 +3126,7 @@
     ]
   },
   {
-    "IntersectionId": "34622777-a76a-4a9e-9278-1127378cbeab",
+    "IntersectionId": "4b13281d-c89c-4697-ae76-50284a4f18e6",
     "RiskScore": 0.37,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3132,7 +3163,7 @@
     ]
   },
   {
-    "IntersectionId": "c0866f58-9ff7-464b-8410-4aa8124005da",
+    "IntersectionId": "ba83cb70-f341-4040-b7ed-7b7f466f206a",
     "RiskScore": 0.37,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3169,7 +3200,7 @@
     ]
   },
   {
-    "IntersectionId": "0466fbc0-849f-43a3-ba19-99f56a13ebd3",
+    "IntersectionId": "a595f2a2-72fd-431b-8afb-7d0a2f65a1bd",
     "RiskScore": 0.37,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3206,7 +3237,7 @@
     ]
   },
   {
-    "IntersectionId": "ef2cedec-86f5-4dd9-96dc-2f69d43d2e58",
+    "IntersectionId": "943f7ca7-b5a3-4cd7-95ea-dea0739d7d79",
     "RiskScore": 0.37,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3243,7 +3274,7 @@
     ]
   },
   {
-    "IntersectionId": "25dc7384-7458-40ba-83e4-095b55b745ff",
+    "IntersectionId": "197127a3-4d66-4d8f-a860-068f7a3f3e14",
     "RiskScore": 0.3666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3298,7 +3329,7 @@
     ]
   },
   {
-    "IntersectionId": "909de9b3-b3b5-4b4a-b26a-1e0722e6593e",
+    "IntersectionId": "5dbc6f0a-1a85-41a0-83ca-509c326ea3d1",
     "RiskScore": 0.35375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3365,7 +3396,7 @@
     ]
   },
   {
-    "IntersectionId": "f85f961c-c1b5-4e5d-8ada-83d22c1fb3ed",
+    "IntersectionId": "0b1be677-0845-47f2-8d4e-a0e613024235",
     "RiskScore": 0.35375,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3432,7 +3463,7 @@
     ]
   },
   {
-    "IntersectionId": "ffb98112-711b-423d-b147-e0eb5422406c",
+    "IntersectionId": "861e6cff-2386-4714-8f60-094afae55395",
     "RiskScore": 0.346,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3481,7 +3512,7 @@
     ]
   },
   {
-    "IntersectionId": "4d1f939b-571e-47bb-87f9-5c2690a0a9bc",
+    "IntersectionId": "409b5ee0-e0e5-4e2b-8065-36eede040daf",
     "RiskScore": 0.33166666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3536,7 +3567,7 @@
     ]
   },
   {
-    "IntersectionId": "712a7f4f-15e7-4699-9e59-9a383b4239dc",
+    "IntersectionId": "8b064999-3b58-4cec-9a66-0a8fb3705d41",
     "RiskScore": 0.32333333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3573,7 +3604,7 @@
     ]
   },
   {
-    "IntersectionId": "255ad767-5cf3-4e40-9543-03e88bce7252",
+    "IntersectionId": "b06bf94d-c8b2-4742-a4c8-5e6d11af9c1f",
     "RiskScore": 0.32333333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3610,7 +3641,7 @@
     ]
   },
   {
-    "IntersectionId": "86d39cb1-d5a7-428b-96d1-804bbdbc8a7f",
+    "IntersectionId": "92d50a67-4188-4e92-b3c5-2a484d4e543c",
     "RiskScore": 0.32333333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3647,7 +3678,7 @@
     ]
   },
   {
-    "IntersectionId": "e666ed78-eacf-424c-a1a2-ffcfa5fcb1ab",
+    "IntersectionId": "42c6e6f6-5aa9-47d7-8acb-81f0eec0c896",
     "RiskScore": 0.32333333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3684,7 +3715,7 @@
     ]
   },
   {
-    "IntersectionId": "2edf2abc-2bc4-44d8-9e10-1d540ed17271",
+    "IntersectionId": "94b5cf40-08dc-48ad-99d8-edcbb2cc53bd",
     "RiskScore": 0.32333333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3721,7 +3752,44 @@
     ]
   },
   {
-    "IntersectionId": "594fa005-26d5-4c10-89ca-ac4d3c49303f",
+    "IntersectionId": "53f175c0-d175-4009-991e-5cf8995752fa",
+    "RiskScore": 0.32333333333333336,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
+    "CrashCount": 3,
+    "Latitude": 32.8000984233333,
+    "Longitude": -98.00210535,
+    "IntersectingRoads": [],
+    "RecentCrashes": [
+      {
+        "CrashId": "20901835",
+        "CrashDate": "2025-06-28",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 0
+      },
+      {
+        "CrashId": "20803800",
+        "CrashDate": "2025-05-07",
+        "Severity": "A_IncapacitatingInjury",
+        "PersonsInvolved": 1
+      },
+      {
+        "CrashId": "20750384",
+        "CrashDate": "2025-04-01",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 1
+      }
+    ],
+    "FatalCrashes": 0,
+    "InjuryCrashes": 1,
+    "PropertyDamageCrashes": 2,
+    "Coordinates": [
+      -98.00210535,
+      32.8000984233333
+    ]
+  },
+  {
+    "IntersectionId": "cf64b79c-7e87-4c70-b491-d09c8756f3bb",
     "RiskScore": 0.32333333333333336,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3758,7 +3826,7 @@
     ]
   },
   {
-    "IntersectionId": "c2401c5d-305d-4c39-a6b7-9500a00d20f9",
+    "IntersectionId": "b6aefe36-ba98-4e84-8f1e-6a9e3aa57a9d",
     "RiskScore": 0.318,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3807,7 +3875,7 @@
     ]
   },
   {
-    "IntersectionId": "8941f0eb-95b5-49f0-aa00-7585a401b682",
+    "IntersectionId": "3090504b-bc17-43be-b457-09f56fd79a68",
     "RiskScore": 0.3125,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3850,7 +3918,7 @@
     ]
   },
   {
-    "IntersectionId": "7d944548-01ab-4f43-a87a-8488b2bfd59a",
+    "IntersectionId": "2f25b479-1910-4693-af80-c85a51fe8bc2",
     "RiskScore": 0.3125,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3893,7 +3961,7 @@
     ]
   },
   {
-    "IntersectionId": "fdb3b647-da8f-460e-b8ea-e423a863ab44",
+    "IntersectionId": "9f94a863-622d-4a07-b2d8-c57212e9d3c9",
     "RiskScore": 0.3125,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -3936,7 +4004,7 @@
     ]
   },
   {
-    "IntersectionId": "7547e867-998a-4581-bb4f-e2fd21c0c91a",
+    "IntersectionId": "b1fb4084-2211-48a4-92c0-038da35dc813",
     "RiskScore": 0.31,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4003,7 +4071,7 @@
     ]
   },
   {
-    "IntersectionId": "6541a4cb-e4ba-4e97-945a-4375941acda9",
+    "IntersectionId": "1078f965-c832-47a7-af66-55e3d67b802b",
     "RiskScore": 0.30833333333333335,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4058,7 +4126,7 @@
     ]
   },
   {
-    "IntersectionId": "d6ba2aad-1857-44c1-97d0-f3f8924da0c7",
+    "IntersectionId": "92d2268d-331c-4dac-94f8-5415a6062206",
     "RiskScore": 0.30833333333333335,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4113,7 +4181,7 @@
     ]
   },
   {
-    "IntersectionId": "87d6368f-5fcc-40bf-80f6-27ad3d269576",
+    "IntersectionId": "cb44691a-1f95-48e0-b819-af4b1d2ee756",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4144,7 +4212,7 @@
     ]
   },
   {
-    "IntersectionId": "e6cfeaa4-9e3f-4c26-a7c8-dc4bc88618a9",
+    "IntersectionId": "4a6f2cd2-737a-4324-9d65-6ebcb631b985",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4175,7 +4243,7 @@
     ]
   },
   {
-    "IntersectionId": "d6edd031-a6e0-45fd-9140-959d020448ea",
+    "IntersectionId": "e2a2a29a-382c-4e6a-8f98-3eb2ed15c202",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4206,7 +4274,7 @@
     ]
   },
   {
-    "IntersectionId": "a2f5cab0-9102-44af-9c51-be6d84cb4ee3",
+    "IntersectionId": "d7a69458-ba50-45b3-9513-e5bdf4f13f1a",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4237,7 +4305,7 @@
     ]
   },
   {
-    "IntersectionId": "a7d77ca2-0ebc-41e3-89fb-43d0414b15a4",
+    "IntersectionId": "d667939c-72f4-4fa5-acc8-9bad2305e8a1",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4268,7 +4336,7 @@
     ]
   },
   {
-    "IntersectionId": "820d80bc-0057-48d6-9ab1-4c1756e65206",
+    "IntersectionId": "939cd288-6a8b-444f-83dc-8066f31f7340",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4299,7 +4367,38 @@
     ]
   },
   {
-    "IntersectionId": "64e81b02-5590-4407-985b-da0f3f80fd88",
+    "IntersectionId": "cf6f6ad4-97ed-4668-a6f8-3804991ec6ad",
+    "RiskScore": 0.305,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
+    "CrashCount": 2,
+    "Latitude": 32.74753858,
+    "Longitude": -98.052709185,
+    "IntersectingRoads": [],
+    "RecentCrashes": [
+      {
+        "CrashId": "20712544",
+        "CrashDate": "2025-03-08",
+        "Severity": "B_NonIncapacitatingInjury",
+        "PersonsInvolved": 0
+      },
+      {
+        "CrashId": "20632216",
+        "CrashDate": "2025-01-26",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 0
+      }
+    ],
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2,
+    "Coordinates": [
+      -98.052709185,
+      32.74753858
+    ]
+  },
+  {
+    "IntersectionId": "056a5b7a-fcc7-4d62-8b45-8ce0b78517d3",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4330,7 +4429,7 @@
     ]
   },
   {
-    "IntersectionId": "15ec7d08-6744-4880-aca0-14d4e723d018",
+    "IntersectionId": "1bd319ac-e733-4dea-9266-1c9ee8aa37fb",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4361,7 +4460,7 @@
     ]
   },
   {
-    "IntersectionId": "6f473a6f-ee9c-470c-9946-9a0b32559868",
+    "IntersectionId": "f6903a4c-368d-44d4-8e72-28cd7e31ffa1",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4392,7 +4491,7 @@
     ]
   },
   {
-    "IntersectionId": "c1800006-4f95-440b-9907-0b7ca37e2181",
+    "IntersectionId": "8d3e5481-1a87-4305-984f-ee4b3baca91b",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4423,7 +4522,7 @@
     ]
   },
   {
-    "IntersectionId": "38b9d633-4ef1-4099-9ab8-9d0c5a18fa63",
+    "IntersectionId": "b0c1fccc-ee34-495b-baac-6ce6f3c83d21",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4454,7 +4553,7 @@
     ]
   },
   {
-    "IntersectionId": "95cc5489-6717-4b86-bf46-cad3af25646e",
+    "IntersectionId": "cbbe430d-2754-4025-aab6-04840ed6b0c0",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4485,7 +4584,7 @@
     ]
   },
   {
-    "IntersectionId": "9fc4f5ce-3c1b-49a4-b0c6-e3455d9101db",
+    "IntersectionId": "631c8804-e183-425a-9570-245a1b503632",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4516,7 +4615,7 @@
     ]
   },
   {
-    "IntersectionId": "029fb545-9877-46e7-a753-83975ae325b9",
+    "IntersectionId": "e0de5d43-5c6d-4609-80db-a12348d4a14a",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4547,7 +4646,7 @@
     ]
   },
   {
-    "IntersectionId": "1078e0fe-a528-4526-b2a4-9eed41f48615",
+    "IntersectionId": "0030c77a-d41e-4e12-a2a6-e98e653d166d",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4578,7 +4677,7 @@
     ]
   },
   {
-    "IntersectionId": "a7cd5679-0b7d-4e26-91d9-9664961f443c",
+    "IntersectionId": "a34228d1-86ee-453d-a95f-35af3693c3c3",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4609,7 +4708,7 @@
     ]
   },
   {
-    "IntersectionId": "3385f00e-0f20-4fb2-b3a2-18b551c2365c",
+    "IntersectionId": "e37d5ba8-eda7-437c-9f81-a0f487793f9e",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4640,7 +4739,7 @@
     ]
   },
   {
-    "IntersectionId": "b686ed5d-b857-4d51-ade5-d2511402039c",
+    "IntersectionId": "6d9b318c-004b-42f5-8345-aea590f27957",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4671,7 +4770,7 @@
     ]
   },
   {
-    "IntersectionId": "f4e59422-537e-4a87-b104-477bb1e56ef6",
+    "IntersectionId": "a7a50a92-14fb-424d-8d0a-41ae142d66b9",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4702,7 +4801,7 @@
     ]
   },
   {
-    "IntersectionId": "f3e168a7-6545-432f-9bd4-7717d4b99c3a",
+    "IntersectionId": "5e13083e-38e5-4852-9f57-34134bf6b14b",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4733,7 +4832,7 @@
     ]
   },
   {
-    "IntersectionId": "5daf0457-aa05-4f97-87c1-b1a71e7c2b08",
+    "IntersectionId": "dfd12a50-500c-4c8e-aead-3e5f9713d121",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4764,7 +4863,7 @@
     ]
   },
   {
-    "IntersectionId": "bdbc0aae-e09d-4afc-9c51-9a5c48185f73",
+    "IntersectionId": "0d5ce8cc-a06a-4c9b-8e14-427f567f304e",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4795,7 +4894,7 @@
     ]
   },
   {
-    "IntersectionId": "089e35f2-e429-4f58-9b22-8e818606ea71",
+    "IntersectionId": "fec723f7-c50a-40d8-a6fc-2f37d1ce3f87",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4826,7 +4925,7 @@
     ]
   },
   {
-    "IntersectionId": "6b3fa2d6-84fa-4538-b5ab-bd6257d3e47b",
+    "IntersectionId": "be922a09-b846-4cb6-a73f-46c4a8cc0b09",
     "RiskScore": 0.305,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4857,7 +4956,7 @@
     ]
   },
   {
-    "IntersectionId": "931b9832-55b1-4f33-8a1b-c719bb4a6666",
+    "IntersectionId": "eb3a17d2-6a51-4520-859b-0f750f7e770a",
     "RiskScore": 0.3025,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4912,7 +5011,7 @@
     ]
   },
   {
-    "IntersectionId": "aa952882-dd3e-4698-8988-563fd1b70592",
+    "IntersectionId": "209d32d6-f143-4f4a-a574-53a367c792d9",
     "RiskScore": 0.29,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -4961,7 +5060,7 @@
     ]
   },
   {
-    "IntersectionId": "37f92ac2-ea22-4323-8936-d99e987aa3b0",
+    "IntersectionId": "e74788a5-b2ec-4aa8-ac88-abf440c95867",
     "RiskScore": 0.29,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5010,7 +5109,7 @@
     ]
   },
   {
-    "IntersectionId": "0d3accf6-d126-4fd2-ba68-f77f3af1b8f8",
+    "IntersectionId": "bcb46cd0-d6db-4a59-b3a1-6ed17514e00d",
     "RiskScore": 0.29,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5059,7 +5158,7 @@
     ]
   },
   {
-    "IntersectionId": "4dda9371-066d-4b32-a3bb-f3cf776cf21e",
+    "IntersectionId": "dd843a4e-80a7-4d9b-9a30-2d91b24f2663",
     "RiskScore": 0.29,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5108,7 +5207,7 @@
     ]
   },
   {
-    "IntersectionId": "a1ba8278-fa96-442d-82f4-2e8ac8bed284",
+    "IntersectionId": "ed464a6a-94f1-47ef-9719-a7797be03340",
     "RiskScore": 0.29,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5157,7 +5256,7 @@
     ]
   },
   {
-    "IntersectionId": "1edaac71-48e6-40f1-a95c-4eb9406858f9",
+    "IntersectionId": "3fdd9613-9bbf-4f01-9af8-6f2bd7928585",
     "RiskScore": 0.2775,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5200,7 +5299,7 @@
     ]
   },
   {
-    "IntersectionId": "04ae2af6-c562-4858-84ae-31e02098e1c1",
+    "IntersectionId": "4bb994d6-4834-46ec-8a7d-905ac6723ef8",
     "RiskScore": 0.2775,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5243,7 +5342,7 @@
     ]
   },
   {
-    "IntersectionId": "ce12bfd3-a4b5-4c56-9430-cb453fac8319",
+    "IntersectionId": "9320f4d5-7381-48e3-ac2d-6b00ccb2c18f",
     "RiskScore": 0.2775,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5286,7 +5385,7 @@
     ]
   },
   {
-    "IntersectionId": "d9ed4dc5-ea5b-47d9-9e42-fcb1466083b9",
+    "IntersectionId": "2ae3cdb9-3495-4465-ab2f-2fafab21eb18",
     "RiskScore": 0.2775,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5329,7 +5428,7 @@
     ]
   },
   {
-    "IntersectionId": "ead66f18-58c3-4016-8777-73628fa4bd50",
+    "IntersectionId": "7c66a17e-cf0c-4fb6-88c5-4a78ea984ccb",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5366,7 +5465,7 @@
     ]
   },
   {
-    "IntersectionId": "86db9b67-7efe-4ee9-8c23-c81730e53c36",
+    "IntersectionId": "12f23e46-cb1c-4001-853a-e82aa057a56e",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5403,7 +5502,7 @@
     ]
   },
   {
-    "IntersectionId": "38ca9373-900b-46fa-86a8-e653ddf5bc18",
+    "IntersectionId": "1d13042a-b352-4b95-856c-3f053ff56daf",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5440,7 +5539,7 @@
     ]
   },
   {
-    "IntersectionId": "950daa39-6873-4686-b852-b395b1aae6ae",
+    "IntersectionId": "31661e1a-4a02-4f59-bd95-2be7d455ffdf",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5477,7 +5576,7 @@
     ]
   },
   {
-    "IntersectionId": "ff8cd427-9939-4f2e-8fa6-952559f47165",
+    "IntersectionId": "f5616953-7c8b-47b9-bb27-8443e1c7a0fd",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5514,7 +5613,7 @@
     ]
   },
   {
-    "IntersectionId": "87cf8611-008b-4afd-9ce1-11253576ffbe",
+    "IntersectionId": "af829022-318b-40ca-9916-8e1bbd092ff5",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5551,7 +5650,7 @@
     ]
   },
   {
-    "IntersectionId": "b33214ed-8c76-4d2f-b7d9-99e7a7a7f5d0",
+    "IntersectionId": "ec6f99e0-85e3-405d-985e-37270a52b67e",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5588,7 +5687,7 @@
     ]
   },
   {
-    "IntersectionId": "f691468b-9799-4a80-b57c-9504d90907a2",
+    "IntersectionId": "8fa9c76e-b52b-4403-9a50-f2bba33cd02a",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5625,7 +5724,7 @@
     ]
   },
   {
-    "IntersectionId": "87640724-dfb2-4e8e-9c27-9ac2cb513910",
+    "IntersectionId": "2c4d43ed-7958-41bb-82aa-650f2a837087",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5662,7 +5761,7 @@
     ]
   },
   {
-    "IntersectionId": "69659c44-3e0d-47a9-b321-294ea89f9ddf",
+    "IntersectionId": "29b0a1ae-0d16-446e-8ce1-bfaabd7e83f8",
     "RiskScore": 0.27666666666666667,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5699,7 +5798,7 @@
     ]
   },
   {
-    "IntersectionId": "83f7e6a8-d279-4e26-b405-9fa5337990b0",
+    "IntersectionId": "6d1c5f91-76ce-4195-a0e3-4fb3c2c52a77",
     "RiskScore": 0.25,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5754,7 +5853,7 @@
     ]
   },
   {
-    "IntersectionId": "00cdb1f7-a226-4908-b130-d6fa6585f388",
+    "IntersectionId": "6eb19700-c5d3-40a7-b88a-667488aad061",
     "RiskScore": 0.25,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5809,7 +5908,7 @@
     ]
   },
   {
-    "IntersectionId": "2443103e-3b11-4cc4-9775-2f5eada08dec",
+    "IntersectionId": "04e42d53-a631-4138-90c0-6fad9a882c1c",
     "RiskScore": 0.235,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5840,7 +5939,38 @@
     ]
   },
   {
-    "IntersectionId": "d6bface4-02d3-4217-a11b-118ce101f780",
+    "IntersectionId": "891e90f5-e653-442e-a413-abc41cfb0a77",
+    "RiskScore": 0.235,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
+    "CrashCount": 2,
+    "Latitude": 32.92031706,
+    "Longitude": -98.056974175,
+    "IntersectingRoads": [],
+    "RecentCrashes": [
+      {
+        "CrashId": "20951957",
+        "CrashDate": "2025-07-27",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 0
+      },
+      {
+        "CrashId": "20863557",
+        "CrashDate": "2025-05-24",
+        "Severity": "C_PossibleInjury",
+        "PersonsInvolved": 0
+      }
+    ],
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2,
+    "Coordinates": [
+      -98.056974175,
+      32.92031706
+    ]
+  },
+  {
+    "IntersectionId": "d45ec9b0-0b21-49f4-9879-7a6ca0856a45",
     "RiskScore": 0.22,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5889,7 +6019,7 @@
     ]
   },
   {
-    "IntersectionId": "b06b4906-1c15-478e-9348-7358c600f70e",
+    "IntersectionId": "e35a422f-7ace-40b5-a3a1-622fe9b901e6",
     "RiskScore": 0.22,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5938,7 +6068,7 @@
     ]
   },
   {
-    "IntersectionId": "5336149b-3a91-40fe-9997-5085c52b6db9",
+    "IntersectionId": "f091e4cf-fe72-476f-83c8-718e34429904",
     "RiskScore": 0.22,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -5987,7 +6117,7 @@
     ]
   },
   {
-    "IntersectionId": "05f8b4f5-4adc-4a00-98c8-ae5fdca84ebf",
+    "IntersectionId": "f554b458-9721-4857-9111-0d3d85fe6330",
     "RiskScore": 0.22,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -6036,7 +6166,7 @@
     ]
   },
   {
-    "IntersectionId": "55b6ae9d-7294-4671-8a7e-4dd8ae4d9885",
+    "IntersectionId": "e1a5618b-618f-4e30-a218-f9b8c356e591",
     "RiskScore": 0.22,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
@@ -6085,7 +6215,7 @@
     ]
   },
   {
-    "IntersectionId": "6e4385bc-8e0e-4681-96a1-26f08692c8ff",
+    "IntersectionId": "9395dc74-0b05-4fe6-b805-0f3129ece1b0",
     "RiskScore": 0.19,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6128,7 +6258,7 @@
     ]
   },
   {
-    "IntersectionId": "8ab7e469-d986-4e42-942b-3f1c02d5bd2a",
+    "IntersectionId": "239cf207-58f8-4105-8af2-923f4c2e696a",
     "RiskScore": 0.19,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6171,7 +6301,7 @@
     ]
   },
   {
-    "IntersectionId": "a8e52cb3-59a8-4c68-a215-d5dd9f8fbea4",
+    "IntersectionId": "da43df0b-0623-40e4-b892-74ddf117f1f3",
     "RiskScore": 0.19,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6214,7 +6344,7 @@
     ]
   },
   {
-    "IntersectionId": "c73fe9a1-314f-4a41-bb62-118a78e9e2ef",
+    "IntersectionId": "9d360554-7151-41bd-81c1-d321e67d8198",
     "RiskScore": 0.19,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6257,7 +6387,7 @@
     ]
   },
   {
-    "IntersectionId": "f2dcbd90-7059-41e8-9fea-3b5e2874f865",
+    "IntersectionId": "6164d439-a8f6-4578-a8f0-1e904ebe29b4",
     "RiskScore": 0.19,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6300,7 +6430,7 @@
     ]
   },
   {
-    "IntersectionId": "329b7b02-cee0-4e2e-9f65-19a23f847b25",
+    "IntersectionId": "3ff45daf-30c9-45e6-aa31-87c83c45f66a",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6337,7 +6467,7 @@
     ]
   },
   {
-    "IntersectionId": "4adaaaee-482d-4da5-ac52-b888b521c48f",
+    "IntersectionId": "40cced01-0425-409d-8dac-2351d0aa83d6",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6374,7 +6504,7 @@
     ]
   },
   {
-    "IntersectionId": "0ffe4e23-c08f-4881-bcad-5b123a4787f3",
+    "IntersectionId": "ed283c9f-b1e1-4f6a-b977-225b58c8ee2d",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6411,7 +6541,7 @@
     ]
   },
   {
-    "IntersectionId": "447be22b-8388-411b-adbc-bc5bd611559d",
+    "IntersectionId": "6d3b184b-dcc5-4851-a4b7-f7c8763530df",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6448,7 +6578,7 @@
     ]
   },
   {
-    "IntersectionId": "5972a16f-37fa-40b5-be49-8b0073786d64",
+    "IntersectionId": "59217b4e-2385-4183-8a88-844d033cfba3",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6485,7 +6615,7 @@
     ]
   },
   {
-    "IntersectionId": "deca5b58-6513-4f51-9686-58349635b8a7",
+    "IntersectionId": "cef3d8e2-4178-4232-80eb-bc96e4fc8fe6",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6522,7 +6652,7 @@
     ]
   },
   {
-    "IntersectionId": "bdddc527-6762-49e2-9a8b-0b4d1776196a",
+    "IntersectionId": "6b8395cd-07ec-4b3d-ada8-82ff1c21ac16",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6559,7 +6689,7 @@
     ]
   },
   {
-    "IntersectionId": "6bc08f1e-5cd1-48ea-b8de-f011020d12f4",
+    "IntersectionId": "8b440d01-058e-458f-ac3e-ffe80cd6ca4a",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6596,7 +6726,7 @@
     ]
   },
   {
-    "IntersectionId": "15a52bda-9052-4109-9177-b5b65e52de7c",
+    "IntersectionId": "77a2d38b-3973-4c09-bbb7-c67cbc97f4cb",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6633,7 +6763,7 @@
     ]
   },
   {
-    "IntersectionId": "591ead17-eac5-41d8-81a8-ae7db0ee5cef",
+    "IntersectionId": "825f01b4-555d-4ca5-880f-b8567f0f66e0",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6670,7 +6800,7 @@
     ]
   },
   {
-    "IntersectionId": "3714bca7-637f-4f28-affc-158602ca4faa",
+    "IntersectionId": "e902b869-70b5-4ed9-b3fd-ada722eabe8d",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6707,7 +6837,7 @@
     ]
   },
   {
-    "IntersectionId": "317cddd1-cc59-44d9-a922-34488f70f978",
+    "IntersectionId": "4b63b1c5-d4b4-4f2c-a71b-bd007ca3b564",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6744,7 +6874,7 @@
     ]
   },
   {
-    "IntersectionId": "928912c3-d7e9-4aea-bdf6-aa1809b65ce3",
+    "IntersectionId": "b8b02bdd-bd3a-40f8-94ab-ddf68b130853",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6781,7 +6911,7 @@
     ]
   },
   {
-    "IntersectionId": "ce24249f-5213-4c2d-8b27-c1c8ccb6ccb9",
+    "IntersectionId": "f88b8870-9714-46b2-a7db-557dd9b286cd",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6818,7 +6948,7 @@
     ]
   },
   {
-    "IntersectionId": "4526c9d2-c2dd-40c4-acee-e6246d82d4ae",
+    "IntersectionId": "26c1775c-ab22-4f5d-ad3e-102ab8d81daa",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6855,7 +6985,7 @@
     ]
   },
   {
-    "IntersectionId": "2896dd27-19dd-411c-b97c-438ea76822a8",
+    "IntersectionId": "8ba5ee30-ebec-412e-b03c-df72822bf030",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6892,7 +7022,7 @@
     ]
   },
   {
-    "IntersectionId": "5b067b40-b0e9-408a-8cbf-6086920e5736",
+    "IntersectionId": "997d432c-3d8a-4de6-9a72-5089ff43e455",
     "RiskScore": 0.16,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6929,7 +7059,7 @@
     ]
   },
   {
-    "IntersectionId": "ae234e38-4d44-4a71-ae08-ed620670c287",
+    "IntersectionId": "e9e3f54c-231d-4c29-8352-d7656b3b4a1b",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6960,7 +7090,7 @@
     ]
   },
   {
-    "IntersectionId": "0da9fb71-7847-41f8-b7db-c744bc4abae0",
+    "IntersectionId": "8e2d55e6-00a7-44eb-a3cf-3ed84e912918",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -6991,7 +7121,7 @@
     ]
   },
   {
-    "IntersectionId": "c01e92c4-9176-4c64-9e39-44515ec5d425",
+    "IntersectionId": "f2e52572-16d4-40ef-940c-db1651c6bfdf",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7022,7 +7152,7 @@
     ]
   },
   {
-    "IntersectionId": "9bc1d23a-3d0a-42a6-b2c3-68437259d1ba",
+    "IntersectionId": "ba5918c3-6370-4731-bd86-4b697308155b",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7053,7 +7183,7 @@
     ]
   },
   {
-    "IntersectionId": "ca40f337-a8f9-4718-8937-7863a50d70b6",
+    "IntersectionId": "80c3e250-143a-49a4-9db1-7b16bffda358",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7084,7 +7214,7 @@
     ]
   },
   {
-    "IntersectionId": "1386eb77-a9ef-4735-a4be-88ff0fc27160",
+    "IntersectionId": "998cfd8e-23e7-41e7-9ca0-20d47996dafe",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7115,7 +7245,7 @@
     ]
   },
   {
-    "IntersectionId": "90c3fe9a-ce1c-41eb-ab1b-a00c15591097",
+    "IntersectionId": "fdc35bf5-eaa0-415f-8392-0808634f94b0",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7146,7 +7276,7 @@
     ]
   },
   {
-    "IntersectionId": "4cefa43c-6aff-4f5b-a844-c444f4f8ee37",
+    "IntersectionId": "96125b8a-1f53-4969-8737-dd9373590b7d",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7177,7 +7307,7 @@
     ]
   },
   {
-    "IntersectionId": "fceffd68-f8da-48ed-bf7c-b4c2b6e33c67",
+    "IntersectionId": "54efdb5d-0049-4d77-b70b-2bd4a6290206",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7208,7 +7338,7 @@
     ]
   },
   {
-    "IntersectionId": "c59a37ae-5274-4217-8f3f-6cee02413cbc",
+    "IntersectionId": "589a7553-96c7-4532-8c51-fe375a71b267",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7239,7 +7369,7 @@
     ]
   },
   {
-    "IntersectionId": "de778b57-e930-4b5b-baf1-b71a2c0fec6f",
+    "IntersectionId": "5790ae4c-6ee8-4930-b183-ba3ce2082284",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7270,7 +7400,7 @@
     ]
   },
   {
-    "IntersectionId": "5ef29946-ce73-4cc3-9c88-7710e9d90791",
+    "IntersectionId": "3bfccebc-7172-4b3f-b7fe-e796d3d30363",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7301,7 +7431,7 @@
     ]
   },
   {
-    "IntersectionId": "d039e618-91c8-407e-85bb-419cbb140a0c",
+    "IntersectionId": "52207b96-8165-4a66-bfba-fa87f04cca71",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7332,7 +7462,7 @@
     ]
   },
   {
-    "IntersectionId": "7645f47b-13ee-448c-9a4c-d52de85c78c8",
+    "IntersectionId": "a47622c9-b589-424a-9eeb-1d93a9db07f0",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7363,7 +7493,7 @@
     ]
   },
   {
-    "IntersectionId": "1354cbaa-b265-4016-b02e-24900d2ccdf8",
+    "IntersectionId": "ea1409aa-0ca5-4ac8-99ea-62894b097bc0",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7394,7 +7524,7 @@
     ]
   },
   {
-    "IntersectionId": "613bedf2-4d8c-4485-8282-63535f02cb82",
+    "IntersectionId": "44aba762-2698-4091-9740-a9beccc5d8a8",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7425,7 +7555,7 @@
     ]
   },
   {
-    "IntersectionId": "087e1046-ae27-4a73-9c65-0729b3656eb1",
+    "IntersectionId": "945604e4-75c7-4313-a428-3c5762a55593",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7456,7 +7586,7 @@
     ]
   },
   {
-    "IntersectionId": "38cac94e-9165-4fc8-a53c-4ef49a664bb1",
+    "IntersectionId": "e1768f0e-4881-442e-a39d-18d58736ae42",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7487,7 +7617,7 @@
     ]
   },
   {
-    "IntersectionId": "59712cb8-f7e6-4d6b-8851-6d79fc53f4aa",
+    "IntersectionId": "096a705c-7b4e-43f4-bd96-4bdee49766b6",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7518,7 +7648,7 @@
     ]
   },
   {
-    "IntersectionId": "e9917a13-177b-44a2-ab1b-0548f4ba976d",
+    "IntersectionId": "77c67e56-fff2-42e4-bdfc-b89f899d9d1a",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7549,7 +7679,7 @@
     ]
   },
   {
-    "IntersectionId": "3035fce1-340f-404b-8f9e-ecb7ba82c56d",
+    "IntersectionId": "4199b3d4-a262-4151-98d1-75346cddb288",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7580,7 +7710,7 @@
     ]
   },
   {
-    "IntersectionId": "95b83700-26bc-4df0-a709-2ff158198826",
+    "IntersectionId": "d5c1b5d4-28a8-4497-911b-0a83ce758997",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7611,7 +7741,7 @@
     ]
   },
   {
-    "IntersectionId": "a69ef0e2-b6fd-4e35-8a72-1efd8db4e1a8",
+    "IntersectionId": "9ab35e9e-d463-4c13-8c3c-843de71f5ab8",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7642,7 +7772,7 @@
     ]
   },
   {
-    "IntersectionId": "bd4fcc55-9136-4cde-b87a-49a0aa7682bc",
+    "IntersectionId": "95bd715b-cf08-44cc-85e5-b050982c7f46",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7673,7 +7803,7 @@
     ]
   },
   {
-    "IntersectionId": "0f76e4b0-b759-4023-9f7a-60e57ea499f5",
+    "IntersectionId": "8f94edc5-71c8-48d4-b8d0-336bdcfa37f1",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7704,7 +7834,7 @@
     ]
   },
   {
-    "IntersectionId": "6f6bc4ab-3984-4a48-a826-dbead6087556",
+    "IntersectionId": "9405964d-5372-4cd7-aa18-29eed569580d",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7735,7 +7865,7 @@
     ]
   },
   {
-    "IntersectionId": "d7e5ba2a-c0b8-45e0-a25a-a6864b6605a1",
+    "IntersectionId": "ed976a36-a9d4-4400-95f1-c90c20b950b4",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7766,7 +7896,7 @@
     ]
   },
   {
-    "IntersectionId": "37841146-b78a-4eb7-af97-626573b9bce9",
+    "IntersectionId": "c20f4574-2af3-41d1-ad5f-3e6ef7149b07",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7797,7 +7927,7 @@
     ]
   },
   {
-    "IntersectionId": "cc2131f5-a238-4f10-b75e-6222e278835d",
+    "IntersectionId": "099c5641-cc83-4718-bb0e-ade968e00ffd",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7828,7 +7958,7 @@
     ]
   },
   {
-    "IntersectionId": "eaeb06ed-c523-4dcb-8baa-faffbc44fafa",
+    "IntersectionId": "9687751e-8341-4820-a97b-57b3ee13a163",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7859,7 +7989,7 @@
     ]
   },
   {
-    "IntersectionId": "e4010f25-febd-4cd4-af9a-33b8a370c926",
+    "IntersectionId": "3b7befe8-dfcd-447b-ad5a-930149815e59",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7890,7 +8020,7 @@
     ]
   },
   {
-    "IntersectionId": "cb119c6d-1437-4a2e-9fde-cae805c457e3",
+    "IntersectionId": "a4d3c5ed-35da-42ae-bec6-59043f221feb",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7921,7 +8051,7 @@
     ]
   },
   {
-    "IntersectionId": "eecd27a2-8d77-4517-a080-18b15a7f5e50",
+    "IntersectionId": "70379296-de40-4450-81cb-e01562811725",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7952,7 +8082,7 @@
     ]
   },
   {
-    "IntersectionId": "86518e6b-2edc-45b8-af0b-f06aaac18576",
+    "IntersectionId": "c9cd9f56-f73b-4086-94a5-10d7d1d02d56",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -7983,7 +8113,7 @@
     ]
   },
   {
-    "IntersectionId": "36dd48bb-06fd-4fa1-8fc6-531721839a98",
+    "IntersectionId": "140a1f36-c7cb-492f-9f97-efa7d54714c7",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8014,7 +8144,7 @@
     ]
   },
   {
-    "IntersectionId": "aa90af0f-8a86-4dbb-9eef-f81691f695b2",
+    "IntersectionId": "f8a79cd3-49a3-40ea-84c6-85ca7b087d94",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8045,7 +8175,7 @@
     ]
   },
   {
-    "IntersectionId": "fdce7502-7cd6-4dd9-981c-6950053f0ba0",
+    "IntersectionId": "7db36c09-523c-4f41-b1d8-0336129320ac",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8076,7 +8206,7 @@
     ]
   },
   {
-    "IntersectionId": "1f2727f2-698d-492c-acde-e649c9c21a16",
+    "IntersectionId": "204226ec-98d1-4311-b4e9-62916a39848a",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8107,7 +8237,7 @@
     ]
   },
   {
-    "IntersectionId": "bf5b84d6-e88b-4b61-8eee-a996f408684b",
+    "IntersectionId": "3ebb9a21-6aba-47be-adbb-2d9a1ca33325",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8138,7 +8268,7 @@
     ]
   },
   {
-    "IntersectionId": "0a2d1910-15b6-4f54-9381-3b4eb15d496d",
+    "IntersectionId": "4cdd8465-24f2-4995-9157-8a735403f407",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8169,7 +8299,7 @@
     ]
   },
   {
-    "IntersectionId": "74a09edb-f1db-43b2-a3bd-c8dced639820",
+    "IntersectionId": "0cb8b394-a6e1-4a9a-9068-bb760b070659",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8200,7 +8330,7 @@
     ]
   },
   {
-    "IntersectionId": "507c00ac-5c6b-4fb7-89fc-42cf9263c677",
+    "IntersectionId": "2dda694a-f0c8-4d19-9ddf-f7dbaeb6a14d",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8231,7 +8361,7 @@
     ]
   },
   {
-    "IntersectionId": "aaacebf6-56ee-4eaa-b594-95569d5a5357",
+    "IntersectionId": "44662eac-3c38-4aa9-be97-fe465a969329",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8262,7 +8392,7 @@
     ]
   },
   {
-    "IntersectionId": "3251e049-9134-41b7-85df-261c5d0226e7",
+    "IntersectionId": "a4621ced-05b3-4503-a6aa-2917fbf780ad",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8293,7 +8423,38 @@
     ]
   },
   {
-    "IntersectionId": "9256a670-a89e-423e-bacc-818766f795eb",
+    "IntersectionId": "1f6df06e-7436-4c93-af8c-950182165015",
+    "RiskScore": 0.13,
+    "RiskLevel": "VeryLow",
+    "RiskLevelNumeric": 1,
+    "CrashCount": 2,
+    "Latitude": 32.80051042,
+    "Longitude": -98.03586647,
+    "IntersectingRoads": [],
+    "RecentCrashes": [
+      {
+        "CrashId": "20806270",
+        "CrashDate": "2025-05-01",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 0
+      },
+      {
+        "CrashId": "20763341",
+        "CrashDate": "2025-04-09",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 0
+      }
+    ],
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2,
+    "Coordinates": [
+      -98.03586647,
+      32.80051042
+    ]
+  },
+  {
+    "IntersectionId": "dcdb93ef-232e-4319-851d-9c3c69d3c93c",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8324,7 +8485,7 @@
     ]
   },
   {
-    "IntersectionId": "b243bea3-902e-45e1-aa8b-a52ac06edbe0",
+    "IntersectionId": "556f85fe-9f2f-4a94-8259-6812a255b4cc",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8355,7 +8516,7 @@
     ]
   },
   {
-    "IntersectionId": "63e70a15-4f96-40a3-b390-5f38a306a8ba",
+    "IntersectionId": "4b6e7c1e-437f-420c-83c8-4b05ea677716",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8386,7 +8547,7 @@
     ]
   },
   {
-    "IntersectionId": "b8bc0d36-b058-4ef2-889c-3db8c5133686",
+    "IntersectionId": "62e2fe2d-3ebe-4c62-a3d6-0fc4cfe1b4cd",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8417,7 +8578,7 @@
     ]
   },
   {
-    "IntersectionId": "dca41de3-3620-47b0-a528-f49aa910e371",
+    "IntersectionId": "6011f803-aafb-4761-a1c4-2c6ddc163a6e",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8448,7 +8609,7 @@
     ]
   },
   {
-    "IntersectionId": "1fee795b-435b-4f60-90ab-5beac92eefd4",
+    "IntersectionId": "d501cde1-9855-44ef-ad44-7f4f8b1279df",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8479,7 +8640,7 @@
     ]
   },
   {
-    "IntersectionId": "bfd33f0d-4568-4538-b5cc-d013c2fea2fa",
+    "IntersectionId": "282e16ea-c7b0-4954-992a-b9e203bfd1ae",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8510,7 +8671,38 @@
     ]
   },
   {
-    "IntersectionId": "0ffef17f-42d4-48fb-9c44-27eea977e54f",
+    "IntersectionId": "b3109797-f98f-4b3a-a054-c062df0b75c0",
+    "RiskScore": 0.13,
+    "RiskLevel": "VeryLow",
+    "RiskLevelNumeric": 1,
+    "CrashCount": 2,
+    "Latitude": 32.749040265,
+    "Longitude": -98.04960524,
+    "IntersectingRoads": [],
+    "RecentCrashes": [
+      {
+        "CrashId": "20865448",
+        "CrashDate": "2025-06-11",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 1
+      },
+      {
+        "CrashId": "20829449",
+        "CrashDate": "2025-05-24",
+        "Severity": "O_NoInjury",
+        "PersonsInvolved": 1
+      }
+    ],
+    "FatalCrashes": 0,
+    "InjuryCrashes": 0,
+    "PropertyDamageCrashes": 2,
+    "Coordinates": [
+      -98.04960524,
+      32.749040265
+    ]
+  },
+  {
+    "IntersectionId": "15d86d5c-2979-494a-a464-8cda4d13f461",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8541,7 +8733,7 @@
     ]
   },
   {
-    "IntersectionId": "32e67a24-291d-4b1e-9a36-e4015525bcf0",
+    "IntersectionId": "2811b098-eee8-4052-a28f-eeefd027e95c",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8572,7 +8764,7 @@
     ]
   },
   {
-    "IntersectionId": "172ba184-2761-46cc-bad5-f59a2df06f03",
+    "IntersectionId": "0e712156-8d09-4862-ac0b-ed946553da98",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8603,7 +8795,7 @@
     ]
   },
   {
-    "IntersectionId": "4d44bbdf-ca9c-41fb-b5e9-6443cee888ff",
+    "IntersectionId": "60bc681c-b073-4b9e-acf6-be33ad676baf",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8634,7 +8826,7 @@
     ]
   },
   {
-    "IntersectionId": "642d8300-1b42-4f05-ba6b-f8bfd021ba2d",
+    "IntersectionId": "f54ed293-066d-402c-831a-ebbe73f897b0",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8665,7 +8857,7 @@
     ]
   },
   {
-    "IntersectionId": "ce95c1bd-3ffd-4615-8c79-9995d05fbcce",
+    "IntersectionId": "8aab7380-fdf9-436f-9414-02c9217102f6",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8696,7 +8888,7 @@
     ]
   },
   {
-    "IntersectionId": "f3409896-bfaa-4d04-8af0-74c5b87fbd52",
+    "IntersectionId": "d917d69c-ec6b-4a49-9a2e-bcc84518eeb1",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8727,7 +8919,7 @@
     ]
   },
   {
-    "IntersectionId": "714c01cc-cf04-4772-83ca-a9ee7523e3d6",
+    "IntersectionId": "15b55e4b-5fff-4a50-8c20-a5e9c450f9ac",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8758,7 +8950,7 @@
     ]
   },
   {
-    "IntersectionId": "01e100d3-5222-4fc5-a91b-05b7b41f3318",
+    "IntersectionId": "d99432ef-ee2e-43e8-acd4-3078279b8411",
     "RiskScore": 0.13,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8789,7 +8981,7 @@
     ]
   },
   {
-    "IntersectionId": "23b80e98-9401-4147-867e-45cb5fad6304",
+    "IntersectionId": "7f5ad6f2-e7c1-4f93-9b63-05d454db36b5",
     "RiskScore": 0.1125,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8820,7 +9012,7 @@
     ]
   },
   {
-    "IntersectionId": "0c267263-e674-48db-a2b5-f3f2f5d7e559",
+    "IntersectionId": "1ce34ff6-c7ac-48b8-b394-fc367aab6fe6",
     "RiskScore": 0.1125,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8851,7 +9043,7 @@
     ]
   },
   {
-    "IntersectionId": "57eee6a9-c942-43cf-8890-0d42e582534f",
+    "IntersectionId": "237643ef-1336-40b0-8293-27fed1994ae1",
     "RiskScore": 0.1125,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
@@ -8882,7 +9074,7 @@
     ]
   },
   {
-    "IntersectionId": "e9ce98a8-7f9b-4cba-8084-f4510602e4e0",
+    "IntersectionId": "5ddc751c-f7b7-42e1-b33d-0c11425f6956",
     "RiskScore": 0.1125,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,

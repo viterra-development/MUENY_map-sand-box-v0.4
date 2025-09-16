@@ -3,24 +3,56 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using MapSandBox.Models;
 using Microsoft.Extensions.Logging;
+using NetTopologySuite.Geometries;
+using NetTopologySuite.IO;
+using NetTopologySuite.Features;
 
 namespace CrisDataProcessor.Services;
 
 public class CrisCsvParser
 {
     private readonly ILogger<CrisCsvParser> _logger;
-    private readonly CrisBounds _parkerCountyBounds;
+    private readonly Polygon _parkerCountyPolygon;
 
     public CrisCsvParser(ILogger<CrisCsvParser> logger)
     {
         _logger = logger;
-        _parkerCountyBounds = new CrisBounds
+        _parkerCountyPolygon = LoadParkerCountyPolygon();
+    }
+
+    private Polygon LoadParkerCountyPolygon()
+    {
+        try
         {
-            MinLatitude = 32.5m,
-            MaxLatitude = 33.0m,
-            MinLongitude = -98.0m,
-            MaxLongitude = -97.0m
-        };
+            var geoJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "parker-county-boundary.geojson");
+            var geoJsonText = File.ReadAllText(geoJsonPath);
+            var reader = new GeoJsonReader();
+            var featureCollection = reader.Read<NetTopologySuite.Features.FeatureCollection>(geoJsonText);
+
+            if (featureCollection.Count > 0 && featureCollection[0].Geometry is Polygon polygon)
+            {
+                _logger.LogInformation("Loaded Parker County polygon with {PointCount} boundary points",
+                    polygon.ExteriorRing.NumPoints);
+                return polygon;
+            }
+
+            throw new InvalidOperationException("Parker County GeoJSON does not contain a valid polygon");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to load Parker County boundary polygon. Falling back to bounding box check.");
+            // Fallback: create a simple rectangular polygon using the original bounds
+            var geometryFactory = new GeometryFactory();
+            var coordinates = new[]
+            {
+                new Coordinate(-98.0, 32.5),
+                new Coordinate(-97.0, 32.5),
+                new Coordinate(-97.0, 33.0),
+                new Coordinate(-98.0, 33.0),
+                new Coordinate(-98.0, 32.5)
+            };
+            return geometryFactory.CreatePolygon(coordinates);
+        }
     }
 
     public async Task<List<CrashCsvRecord>> ParseCrashCsvAsync(string filePath)
@@ -199,10 +231,19 @@ public class CrisCsvParser
 
     private bool IsWithinParkerCounty(decimal latitude, decimal longitude)
     {
-        return latitude >= _parkerCountyBounds.MinLatitude &&
-               latitude <= _parkerCountyBounds.MaxLatitude &&
-               longitude >= _parkerCountyBounds.MinLongitude &&
-               longitude <= _parkerCountyBounds.MaxLongitude;
+        try
+        {
+            var geometryFactory = new GeometryFactory();
+            var point = geometryFactory.CreatePoint(new Coordinate((double)longitude, (double)latitude));
+            return _parkerCountyPolygon.Contains(point);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Error checking if point ({Latitude}, {Longitude}) is within Parker County polygon. Using fallback bounds check.", latitude, longitude);
+            // Fallback to simple bounds check if polygon operation fails
+            return latitude >= 32.5m && latitude <= 33.0m &&
+                   longitude >= -98.0m && longitude <= -97.0m;
+        }
     }
 
     private KabcoSeverity ParseCrisSeverity(string? severity)

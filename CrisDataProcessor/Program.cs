@@ -24,6 +24,9 @@ public class Program
                 services.AddScoped<CrisRiskCalculator>();
                 services.AddScoped<CrisSpatialAnalyzer>();
                 services.AddScoped<CrisGeoJsonGenerator>();
+                services.AddScoped<RoadGeometryService>();
+                services.AddScoped<EnhancedRiskSegmentGenerator>();
+                services.AddScoped<EnhancedCrisSpatialAnalyzer>();
             });
 }
 
@@ -34,19 +37,28 @@ public class CrisProcessor
     private readonly CrisRiskCalculator _riskCalculator;
     private readonly CrisSpatialAnalyzer _spatialAnalyzer;
     private readonly CrisGeoJsonGenerator _geoJsonGenerator;
+    private readonly RoadGeometryService _roadGeometryService;
+    private readonly EnhancedRiskSegmentGenerator _enhancedRiskGenerator;
+    private readonly EnhancedCrisSpatialAnalyzer _enhancedSpatialAnalyzer;
 
     public CrisProcessor(
         ILogger<CrisProcessor> logger,
         CrisCsvParser csvParser,
         CrisRiskCalculator riskCalculator,
         CrisSpatialAnalyzer spatialAnalyzer,
-        CrisGeoJsonGenerator geoJsonGenerator)
+        CrisGeoJsonGenerator geoJsonGenerator,
+        RoadGeometryService roadGeometryService,
+        EnhancedRiskSegmentGenerator enhancedRiskGenerator,
+        EnhancedCrisSpatialAnalyzer enhancedSpatialAnalyzer)
     {
         _logger = logger;
         _csvParser = csvParser;
         _riskCalculator = riskCalculator;
         _spatialAnalyzer = spatialAnalyzer;
         _geoJsonGenerator = geoJsonGenerator;
+        _roadGeometryService = roadGeometryService;
+        _enhancedRiskGenerator = enhancedRiskGenerator;
+        _enhancedSpatialAnalyzer = enhancedSpatialAnalyzer;
     }
 
     public async Task RunAsync()
@@ -64,16 +76,20 @@ public class CrisProcessor
             _logger.LogInformation("Validated {Count} crash records (filtered {Removed})",
                 validCrashes.Count, crashes.Count - validCrashes.Count);
 
-            // Step 3: Spatial join crashes to road segments
-            var roadGeoJsonPath = "/workspaces/map-sand-box/MapSandBox/wwwroot/parker-roads-with-traffic.geojson";
-            var spatialJoins = await _spatialAnalyzer.SpatialJoinCrashesToRoadsAsync(validCrashes, roadGeoJsonPath);
-            var crashesBySegment = _spatialAnalyzer.GroupCrashesByRoadSegment(spatialJoins);
+            // Step 3: Enhanced spatial join crashes to road segments using actual road geometry
+            var roadGeoJsonPath = "/workspaces/map-sand-box/MapSandBox/wwwroot/parker-county-roads.geojson";
+            var trafficRoadGeoJsonPath = "/workspaces/map-sand-box/MapSandBox/wwwroot/parker-roads-with-traffic.geojson";
 
-            // Step 4: Extract AADT data
-            var aadtBySegment = await _spatialAnalyzer.ExtractAadtFromRoadDataAsync(roadGeoJsonPath);
+            // Use enhanced spatial analyzer with road geometry service
+            var spatialJoins = await _enhancedSpatialAnalyzer.SpatialJoinCrashesToRoadsAsync(validCrashes, roadGeoJsonPath);
+            var crashesBySegment = _enhancedSpatialAnalyzer.GroupCrashesByRoadSegment(spatialJoins);
 
-            // Step 5: Calculate risk scores
-            var riskSegments = _riskCalculator.CalculateSegmentRisks(crashesBySegment, aadtBySegment);
+            // Step 4: Extract AADT data from traffic-enabled roads
+            var aadtBySegment = await _spatialAnalyzer.ExtractAadtFromRoadDataAsync(trafficRoadGeoJsonPath);
+
+            // Step 5: Generate enhanced risk segments with actual road geometry
+            var riskSegments = await _enhancedRiskGenerator.GenerateEnhancedRiskSegmentsFromCrashes(
+                validCrashes, spatialJoins, aadtBySegment, roadGeoJsonPath);
 
             // Step 6: Identify high-risk intersections
             var intersectionRisks = _spatialAnalyzer.IdentifyHighRiskIntersections(validCrashes);
@@ -134,7 +150,7 @@ public class CrisProcessor
         List<CrashRecord> crashes,
         List<RiskSegment> riskSegments,
         List<IntersectionRisk> intersectionRisks,
-        List<SpatialJoinResult> spatialJoins)
+        List<EnhancedSpatialJoinResult> spatialJoins)
     {
         var outputDir = "/workspaces/map-sand-box/MapSandBox/wwwroot/cris-data";
         Directory.CreateDirectory(outputDir);

@@ -71,11 +71,14 @@ public class CrisGeoJsonGenerator
             Geometry = new CrisGeoJsonGeometry
             {
                 Type = "LineString",
-                Coordinates = new[]
-                {
-                    new[] { (double)segment.StartLongitude, (double)segment.StartLatitude },
-                    new[] { (double)segment.EndLongitude, (double)segment.EndLatitude }
-                }
+                // Enhanced: Use actual road geometry if available, fallback to straight line
+                Coordinates = segment.RoadGeometry.Any()
+                    ? segment.RoadGeometry.ToArray()  // Use actual road geometry
+                    : new[]  // Fallback to straight line
+                    {
+                        new[] { (double)segment.StartLongitude, (double)segment.StartLatitude },
+                        new[] { (double)segment.EndLongitude, (double)segment.EndLatitude }
+                    }
             },
             Properties = new Dictionary<string, object>
             {
@@ -96,7 +99,12 @@ public class CrisGeoJsonGenerator
                 ["start_latitude"] = (double)segment.StartLatitude,
                 ["start_longitude"] = (double)segment.StartLongitude,
                 ["end_latitude"] = (double)segment.EndLatitude,
-                ["end_longitude"] = (double)segment.EndLongitude
+                ["end_longitude"] = (double)segment.EndLongitude,
+                // Enhanced: Add road geometry properties
+                ["road_linear_id"] = segment.RoadLinearId,
+                ["road_name"] = segment.RoadName,
+                ["road_type"] = segment.RoadType,
+                ["geometry_type"] = segment.GeometryType
             }
         }).ToList();
 
@@ -231,11 +239,19 @@ public class CrisGeoJsonGenerator
             StartLongitude = (double)segment.StartLongitude,
             EndLatitude = (double)segment.EndLatitude,
             EndLongitude = (double)segment.EndLongitude,
-            Coordinates = new[]
-            {
-                new[] { (double)segment.StartLongitude, (double)segment.StartLatitude },
-                new[] { (double)segment.EndLongitude, (double)segment.EndLatitude }
-            }
+            // Enhanced: Use actual road geometry if available, fallback to straight line
+            Coordinates = segment.RoadGeometry.Any()
+                ? segment.RoadGeometry.ToArray()  // Use actual road geometry
+                : new[]  // Fallback to straight line
+                {
+                    new[] { (double)segment.StartLongitude, (double)segment.StartLatitude },
+                    new[] { (double)segment.EndLongitude, (double)segment.EndLatitude }
+                },
+            // Enhanced: Add road geometry properties
+            RoadLinearId = segment.RoadLinearId,
+            RoadName = segment.RoadName,
+            RoadType = segment.RoadType,
+            GeometryType = segment.GeometryType
         }).ToArray();
 
         return data;
