@@ -14,6 +14,9 @@
         <SoilPopup @ref="soilPopup" />
         <CrashPopup @ref="crashPopup" />
 
+        <!-- Add CRIS road segment popup -->
+        <CrisRoadSegmentPopup @ref="roadSegmentPopup" />
+
         <div class="map-controls">
             <div class="control-section">
                 <h3>Base Map</h3>
@@ -53,35 +56,18 @@
         </div>
     </div>
 
-    <div class="dashboard-section">
-        <CrisRiskDashboard
-            ModelWeights="@modelWeights"
-            TopRiskSegments="@topRiskSegments"
-            SeverityBreakdown="@severityBreakdown"
-            TotalCrashes="@totalCrashes"
-            OnModelWeightsChanged="HandleModelWeightsChanged"
-            OnExportData="HandleExportData"
-            OnResetFilters="HandleResetFilters" />
-    </div>
 </div>
 
 <style>
 .cris-container {
-    display: flex;
     height: 100vh;
     overflow: hidden;
 }
 
 .map-section {
-    flex: 1;
+    width: 100%;
+    height: 100%;
     position: relative;
-}
-
-.dashboard-section {
-    width: 450px;
-    background: #f8f9fa;
-    border-left: 1px solid #dee2e6;
-    overflow-y: auto;
 }
 
 .map-controls {
@@ -141,6 +127,7 @@
     private RoadPopup? roadPopup;
     private SoilPopup? soilPopup;
     private CrashPopup? crashPopup;
+    private CrisRoadSegmentPopup? roadSegmentPopup;
 
     private MapLibreConfig mapConfig = new();
     private List<BaseMapStyle> availableStyles = new();
@@ -149,10 +136,6 @@
     private List<LayerInfo> crisLayers = new();
     private List<LayerInfo> backgroundLayers = new();
 
-    private CrisModelWeights? modelWeights;
-    private List<RiskSegment> topRiskSegments = new();
-    private Dictionary<KabcoSeverity, int> severityBreakdown = new();
-    private int totalCrashes = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -164,37 +147,6 @@
         // Separate CRIS layers from background layers
         crisLayers = layerInfo.Where(l => l.Id.StartsWith("cris-")).ToList();
         backgroundLayers = layerInfo.Where(l => !l.Id.StartsWith("cris-")).ToList();
-
-        // Load CRIS data
-        await LoadCrisData();
-    }
-
-    private async Task LoadCrisData()
-    {
-        try
-        {
-            var config = await CrisService.LoadConfigurationAsync();
-            modelWeights = config.ModelWeights;
-
-            var segmentData = await CrisService.LoadRiskSegmentsAsync();
-            topRiskSegments = segmentData.OrderByDescending(s => s.RiskScore).Take(10).ToList();
-
-            var crashData = await CrisService.LoadCrashDataAsync();
-            totalCrashes = crashData.Count;
-
-            severityBreakdown = crashData
-                .GroupBy(c => c.Severity)
-                .ToDictionary(g => g.Key, g => g.Count());
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading CRIS data: {ex.Message}");
-            // Initialize with defaults
-            modelWeights = new CrisModelWeights();
-            topRiskSegments = new List<RiskSegment>();
-            severityBreakdown = new Dictionary<KabcoSeverity, int>();
-            totalCrashes = 0;
-        }
     }
 
     private async Task HandleBaseMapChange(ChangeEventArgs e)
@@ -232,38 +184,6 @@
         }
     }
 
-    private async Task HandleModelWeightsChanged(CrisModelWeights newWeights)
-    {
-        modelWeights = newWeights;
-        // Recalculate risk scores with new weights
-        await LoadCrisData();
-        StateHasChanged();
-    }
-
-    private Task HandleExportData()
-    {
-        // Export current data to CSV/JSON
-        var exportData = new
-        {
-            ModelWeights = modelWeights,
-            TopRiskSegments = topRiskSegments,
-            SeverityBreakdown = severityBreakdown,
-            TotalCrashes = totalCrashes,
-            ExportedAt = DateTime.UtcNow
-        };
-
-        Console.WriteLine("Export data:", System.Text.Json.JsonSerializer.Serialize(exportData));
-        // In a real implementation, this would trigger a file download
-        return Task.CompletedTask;
-    }
-
-    private async Task HandleResetFilters()
-    {
-        // Reset all filters and model weights to defaults
-        modelWeights = new CrisModelWeights();
-        await LoadCrisData();
-        StateHasChanged();
-    }
 
     private void HandleMapClick(MapLibreClickEventArgs e)
     {

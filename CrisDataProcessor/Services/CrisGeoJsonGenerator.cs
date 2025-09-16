@@ -40,7 +40,7 @@ public class CrisGeoJsonGenerator
                 ["light_condition"] = crash.LightCondition,
                 ["surface_condition"] = crash.RoadwayCondition ?? "",
                 ["roadway_id"] = crash.RoadwayId,
-                ["aadt"] = crash.Aadt,
+                ["aadt"] = crash.Aadt ?? 0,
                 ["fatal_count"] = crash.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
                 ["injury_count"] = crash.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury),
                 ["contributing_factors"] = crash.ContributingFactors.Select(f => f.Description).ToArray()
@@ -87,7 +87,7 @@ public class CrisGeoJsonGenerator
                 ["risk_level"] = segment.RiskLevel.ToString(),
                 ["risk_level_numeric"] = (int)segment.RiskLevel,
                 ["crash_count"] = segment.CrashCount,
-                ["aadt"] = segment.Aadt,
+                ["aadt"] = segment.Aadt ?? 0,
                 ["segment_length"] = (double)segment.SegmentLength,
                 ["crashes_per_mile"] = segment.SegmentLength > 0 ? (double)(segment.CrashCount / segment.SegmentLength) : 0,
                 ["recent_crashes"] = segment.RecentCrashes.Select(c => new

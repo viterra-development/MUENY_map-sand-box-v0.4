@@ -6,12 +6,12 @@ namespace CrisDataProcessor.Services;
 public class CrisRiskCalculator
 {
     private readonly ILogger<CrisRiskCalculator> _logger;
-    private readonly CrisModelWeights _modelWeights;
+    private readonly CrisModelConfiguration _config;
 
-    public CrisRiskCalculator(ILogger<CrisRiskCalculator> logger, CrisModelWeights? modelWeights = null)
+    public CrisRiskCalculator(ILogger<CrisRiskCalculator> logger, CrisModelConfiguration config)
     {
         _logger = logger;
-        _modelWeights = modelWeights ?? new CrisModelWeights();
+        _config = config;
     }
 
     public CrisModelScore CalculateRiskScore(string locationId, List<CrashRecord> crashes, int? aadt = null, decimal segmentLength = 1.0m)
@@ -46,6 +46,61 @@ public class CrisRiskCalculator
 
         _logger.LogDebug("Risk score calculated for {LocationId}: {CompositeScore} ({RiskLevel})",
             locationId, score.CompositeRiskScore, score.RiskLevel);
+
+        return score;
+    }
+
+    public DetailedCrisModelScore CalculateDetailedRiskScore(List<CrashRecord> crashes, RiskSegment segment)
+    {
+        _logger.LogDebug("Calculating detailed risk score for segment {SegmentId} with {CrashCount} crashes", segment.SegmentId, crashes.Count);
+
+        var score = new DetailedCrisModelScore
+        {
+            LocationId = segment.SegmentId
+        };
+
+        // 1. Crash Frequency (Weight: configured)
+        score.CrashFrequencyPerMile = CalculateCrashFrequencyPerMile(crashes, segment.SegmentLength);
+        score.CrashFrequencyScore = Math.Min(score.CrashFrequencyPerMile / 10m, 1.0m); // Normalize to 0-1
+
+        // 2. Severity Index (Weight: configured)
+        score.FatalCrashes = crashes.Count(c => c.Severity == KabcoSeverity.K_Fatal);
+        score.IncapacitatingInjuryCrashes = crashes.Count(c => c.Severity == KabcoSeverity.A_IncapacitatingInjury);
+        score.SeverityIndexScore = CalculateWeightedSeverityIndex(crashes);
+
+        // 3. Traffic Volume (Weight: configured)
+        score.TrafficVolumeScore = segment.Aadt.HasValue
+            ? Math.Min((decimal)segment.Aadt.Value / 25000m, 1.0m)
+            : 0.1m;
+
+        // 4. Elevation/Drainage Risk (Weight: configured)
+        score.SlopePercentage = segment.SlopePercentage;
+        score.DrainageRiskScore = CalculateDrainageRiskScore(crashes, segment);
+
+        // 5. Environmental Factors (Weight: configured)
+        score.WeatherRelatedCrashes = CountWeatherRelatedCrashes(crashes);
+        score.CrashBySurfaceCondition = crashes
+            .GroupBy(c => c.RoadwayCondition)
+            .ToDictionary(g => g.Key, g => g.Count());
+        score.CrashByWeatherCondition = crashes
+            .GroupBy(c => c.WeatherCondition)
+            .ToDictionary(g => g.Key, g => g.Count());
+        score.EnvironmentalScore = CalculateEnvironmentalScore(crashes);
+
+        // Calculate composite score using configured weights
+        var weights = _config.ModelWeights;
+        score.CompositeRiskScore =
+            (score.CrashFrequencyScore * weights.CrashFrequency) +
+            (score.SeverityIndexScore * weights.SeverityIndex) +
+            (score.TrafficVolumeScore * weights.TrafficVolume) +
+            (score.DrainageRiskScore * weights.DrainageRisk) +
+            (score.EnvironmentalScore * weights.Environmental);
+
+        score.RiskLevel = DetermineRiskLevel(score.CompositeRiskScore);
+
+        _logger.LogDebug("Detailed risk score calculated for {SegmentId}: CF={CF:F3}, SI={SI:F3}, TV={TV:F3}, DR={DR:F3}, ENV={ENV:F3} = {Composite:F3}",
+            segment.SegmentId, score.CrashFrequencyScore, score.SeverityIndexScore, score.TrafficVolumeScore,
+            score.DrainageRiskScore, score.EnvironmentalScore, score.CompositeRiskScore);
 
         return score;
     }
@@ -147,21 +202,79 @@ public class CrisRiskCalculator
 
     private decimal CalculateCompositeScore(CrisModelScore score)
     {
-        var composite = (score.CrashFrequencyScore * _modelWeights.CrashFrequency) +
-                       (score.SeverityIndexScore * _modelWeights.SeverityIndex) +
-                       (score.TrafficVolumeScore * _modelWeights.TrafficVolume) +
-                       (score.DrainageRiskScore * _modelWeights.DrainageRisk) +
-                       (score.EnvironmentalScore * _modelWeights.Environmental);
+        var weights = _config.ModelWeights;
+        var composite = (score.CrashFrequencyScore * weights.CrashFrequency) +
+                       (score.SeverityIndexScore * weights.SeverityIndex) +
+                       (score.TrafficVolumeScore * weights.TrafficVolume) +
+                       (score.DrainageRiskScore * weights.DrainageRisk) +
+                       (score.EnvironmentalScore * weights.Environmental);
 
         _logger.LogDebug("Composite score: {Frequency}*{FreqWeight} + {Severity}*{SevWeight} + {Traffic}*{TrafficWeight} + {Drainage}*{DrainageWeight} + {Environmental}*{EnvWeight} = {Composite}",
-            score.CrashFrequencyScore, _modelWeights.CrashFrequency,
-            score.SeverityIndexScore, _modelWeights.SeverityIndex,
-            score.TrafficVolumeScore, _modelWeights.TrafficVolume,
-            score.DrainageRiskScore, _modelWeights.DrainageRisk,
-            score.EnvironmentalScore, _modelWeights.Environmental,
+            score.CrashFrequencyScore, weights.CrashFrequency,
+            score.SeverityIndexScore, weights.SeverityIndex,
+            score.TrafficVolumeScore, weights.TrafficVolume,
+            score.DrainageRiskScore, weights.DrainageRisk,
+            score.EnvironmentalScore, weights.Environmental,
             composite);
 
         return composite;
+    }
+
+    private decimal CalculateCrashFrequencyPerMile(List<CrashRecord> crashes, decimal segmentLengthMiles)
+    {
+        if (segmentLengthMiles <= 0) return 0;
+
+        // Assume data covers approximately 1 year (could be calculated from crash date range)
+        var yearsOfData = 1.0m; // Could be: CalculateTimeSpanYears(crashes)
+        return crashes.Count / (segmentLengthMiles * yearsOfData);
+    }
+
+    private decimal CalculateWeightedSeverityIndex(List<CrashRecord> crashes)
+    {
+        if (!crashes.Any()) return 0;
+
+        // KABCO severity weights (higher values for more severe crashes)
+        var severityWeights = new Dictionary<KabcoSeverity, decimal>
+        {
+            { KabcoSeverity.K_Fatal, 1.0m },
+            { KabcoSeverity.A_IncapacitatingInjury, 0.8m },
+            { KabcoSeverity.B_NonIncapacitatingInjury, 0.6m },
+            { KabcoSeverity.C_PossibleInjury, 0.4m },
+            { KabcoSeverity.O_NoInjury, 0.1m },
+            { KabcoSeverity.Unknown, 0.05m }
+        };
+
+        var totalWeight = crashes.Sum(c => severityWeights.GetValueOrDefault(c.Severity, 0.05m));
+        return totalWeight / crashes.Count;
+    }
+
+    private decimal CalculateDrainageRiskScore(List<CrashRecord> crashes, RiskSegment segment)
+    {
+        var drainageRisk = 0m;
+
+        // Slope risk (weight: 0.6)
+        if (segment.SlopePercentage > _config.Thresholds.SlopeThreshold)
+            drainageRisk += 0.6m;
+        else if (segment.SlopePercentage > _config.Thresholds.SlopeThreshold * 0.6m)
+            drainageRisk += 0.3m;
+
+        // Wet surface crashes (weight: 0.4)
+        var wetCrashes = crashes.Count(c =>
+            c.RoadwayCondition.Contains("Wet", StringComparison.OrdinalIgnoreCase) ||
+            c.RoadwayCondition.Contains("Standing Water", StringComparison.OrdinalIgnoreCase) ||
+            c.WeatherCondition.Contains("Rain", StringComparison.OrdinalIgnoreCase));
+        var wetCrashRatio = crashes.Count > 0 ? (decimal)wetCrashes / crashes.Count : 0;
+        drainageRisk += wetCrashRatio * 0.4m;
+
+        return Math.Min(drainageRisk, 1.0m);
+    }
+
+    private int CountWeatherRelatedCrashes(List<CrashRecord> crashes)
+    {
+        return crashes.Count(c =>
+            !string.IsNullOrEmpty(c.WeatherCondition) &&
+            !c.WeatherCondition.Contains("Clear", StringComparison.OrdinalIgnoreCase) &&
+            !c.WeatherCondition.Contains("Cloudy", StringComparison.OrdinalIgnoreCase));
     }
 
     private RiskLevel DetermineRiskLevel(decimal compositeScore)

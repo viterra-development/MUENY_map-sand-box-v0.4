@@ -1,6 +1,7 @@
 using System.Text.Json;
 using CrisDataProcessor.Services;
 using MapSandBox.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -19,6 +20,11 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureServices((context, services) =>
             {
+                // Configure CRIS model configuration from appsettings.json
+                var crisConfig = context.Configuration.GetSection("CrisModelConfiguration").Get<CrisModelConfiguration>()
+                    ?? new CrisModelConfiguration();
+                services.AddSingleton(crisConfig);
+
                 services.AddScoped<CrisProcessor>();
                 services.AddScoped<CrisCsvParser>();
                 services.AddScoped<CrisRiskCalculator>();
@@ -27,6 +33,8 @@ public class Program
                 services.AddScoped<RoadGeometryService>();
                 services.AddScoped<EnhancedRiskSegmentGenerator>();
                 services.AddScoped<EnhancedCrisSpatialAnalyzer>();
+                services.AddScoped<ElevationService>();
+                services.AddScoped<EnvironmentalAnalyzer>();
             });
 }
 
@@ -40,6 +48,9 @@ public class CrisProcessor
     private readonly RoadGeometryService _roadGeometryService;
     private readonly EnhancedRiskSegmentGenerator _enhancedRiskGenerator;
     private readonly EnhancedCrisSpatialAnalyzer _enhancedSpatialAnalyzer;
+    private readonly ElevationService _elevationService;
+    private readonly EnvironmentalAnalyzer _environmentalAnalyzer;
+    private readonly CrisModelConfiguration _config;
 
     public CrisProcessor(
         ILogger<CrisProcessor> logger,
@@ -49,7 +60,10 @@ public class CrisProcessor
         CrisGeoJsonGenerator geoJsonGenerator,
         RoadGeometryService roadGeometryService,
         EnhancedRiskSegmentGenerator enhancedRiskGenerator,
-        EnhancedCrisSpatialAnalyzer enhancedSpatialAnalyzer)
+        EnhancedCrisSpatialAnalyzer enhancedSpatialAnalyzer,
+        ElevationService elevationService,
+        EnvironmentalAnalyzer environmentalAnalyzer,
+        CrisModelConfiguration config)
     {
         _logger = logger;
         _csvParser = csvParser;
@@ -59,15 +73,23 @@ public class CrisProcessor
         _roadGeometryService = roadGeometryService;
         _enhancedRiskGenerator = enhancedRiskGenerator;
         _enhancedSpatialAnalyzer = enhancedSpatialAnalyzer;
+        _elevationService = elevationService;
+        _environmentalAnalyzer = environmentalAnalyzer;
+        _config = config;
     }
 
     public async Task RunAsync()
     {
-        _logger.LogInformation("Starting CRIS data processing...");
+        _logger.LogInformation("Starting CRIS data processing with configuration:");
+        _logger.LogInformation("Model weights: CF={CrashFreq}, SI={SeverityIndex}, TV={TrafficVolume}, DR={DrainageRisk}, ENV={Environmental}",
+            _config.ModelWeights.CrashFrequency, _config.ModelWeights.SeverityIndex,
+            _config.ModelWeights.TrafficVolume, _config.ModelWeights.DrainageRisk, _config.ModelWeights.Environmental);
+        _logger.LogInformation("Thresholds: CrashFreq={CrashFreq}/mile, Traffic={Traffic} AADT, Slope={Slope}%",
+            _config.Thresholds.CrashFrequencyPerMile, _config.Thresholds.TrafficVolumeThreshold, _config.Thresholds.SlopeThreshold);
 
         try
         {
-            // Step 1: Parse CSV files
+            // Step 1: Parse CSV files using configured paths
             var crashes = await ParseCsvDataAsync();
             _logger.LogInformation("Parsed {Count} crash records", crashes.Count);
 
@@ -77,8 +99,8 @@ public class CrisProcessor
                 validCrashes.Count, crashes.Count - validCrashes.Count);
 
             // Step 3: Enhanced spatial join crashes to road segments using actual road geometry
-            var roadGeoJsonPath = "/workspaces/map-sand-box/MapSandBox/wwwroot/parker-county-roads.geojson";
-            var trafficRoadGeoJsonPath = "/workspaces/map-sand-box/MapSandBox/wwwroot/parker-roads-with-traffic.geojson";
+            var roadGeoJsonPath = _config.DataSources.RoadNetworkPath;
+            var trafficRoadGeoJsonPath = _config.DataSources.TrafficRoadsPath;
 
             // Use enhanced spatial analyzer with road geometry service
             var spatialJoins = await _enhancedSpatialAnalyzer.SpatialJoinCrashesToRoadsAsync(validCrashes, roadGeoJsonPath);
@@ -91,13 +113,62 @@ public class CrisProcessor
             var riskSegments = await _enhancedRiskGenerator.GenerateEnhancedRiskSegmentsFromCrashes(
                 validCrashes, spatialJoins, aadtBySegment, roadGeoJsonPath);
 
-            // Step 6: Identify high-risk intersections
+            // Step 6: Enhanced elevation/slope analysis
+            _elevationService.EnhanceRoadSegmentsWithBasicSlope(riskSegments);
+
+            // Step 7: Enhanced environmental analysis
+            _environmentalAnalyzer.EnhanceSegmentsWithEnvironmentalAnalysis(riskSegments, crashesBySegment);
+
+            // Step 8: Calculate detailed risk scores using configured weights and thresholds
+            foreach (var segment in riskSegments)
+            {
+                var segmentCrashes = crashesBySegment.GetValueOrDefault(segment.SegmentId, new List<CrashRecord>());
+                var detailedScore = _riskCalculator.CalculateDetailedRiskScore(segmentCrashes, segment);
+
+                // Update segment with detailed metrics and threshold flags
+                segment.CrashesPerMilePerYear = detailedScore.CrashFrequencyPerMile;
+                segment.FatalCrashCount = detailedScore.FatalCrashes;
+                segment.SeriousInjuryCrashCount = detailedScore.IncapacitatingInjuryCrashes;
+
+                // Store component scores for potential future real-time recalculation
+                segment.CrashFrequencyScore = detailedScore.CrashFrequencyScore;
+                segment.SeverityIndexScore = detailedScore.SeverityIndexScore;
+                segment.TrafficVolumeScore = detailedScore.TrafficVolumeScore;
+                segment.DrainageRiskScore = detailedScore.DrainageRiskScore;
+                segment.EnvironmentalScore = detailedScore.EnvironmentalScore;
+
+                // Update final scores using configured weights
+                segment.RiskScore = detailedScore.CompositeRiskScore;
+                segment.RiskLevel = detailedScore.RiskLevel;
+
+                // Apply configured thresholds
+                segment.MeetsCrashFrequencyThreshold = detailedScore.CrashFrequencyPerMile > _config.Thresholds.CrashFrequencyPerMile;
+                segment.MeetsSeverityThreshold = detailedScore.FatalCrashes >= _config.Thresholds.FatalCrashThreshold ||
+                                               detailedScore.IncapacitatingInjuryCrashes >= _config.Thresholds.IncapacitatingInjuryThreshold;
+                segment.MeetsTrafficVolumeThreshold = segment.Aadt > _config.Thresholds.TrafficVolumeThreshold;
+                segment.HasDrainageRisk = segment.SlopePercentage > _config.Thresholds.SlopeThreshold ||
+                                        segment.EnvironmentalFactors.HydroplaningIncidents > 0;
+                segment.HasEnvironmentalRisk = segment.EnvironmentalFactors.WetSurfaceCrashes +
+                                             segment.EnvironmentalFactors.IcySurfaceCrashes > segmentCrashes.Count * 0.2m;
+            }
+
+            // Step 9: Identify high-risk intersections
             var intersectionRisks = _spatialAnalyzer.IdentifyHighRiskIntersections(validCrashes);
 
-            // Step 7: Generate output files
+            // Step 10: Generate statistics and summaries
+            var elevationStats = _elevationService.CalculateElevationStatistics(riskSegments);
+            var environmentalSummary = _environmentalAnalyzer.GenerateEnvironmentalRiskSummary(riskSegments);
+
+            // Step 11: Generate output files with enhanced data
             await GenerateOutputFilesAsync(validCrashes, riskSegments, intersectionRisks, spatialJoins);
 
+            // Log processing summary
             _logger.LogInformation("CRIS data processing completed successfully!");
+            _logger.LogInformation("Generated {SegmentCount} risk segments using configured weights and thresholds", riskSegments.Count);
+            _logger.LogInformation("High-risk segments: {HighRiskCount}, Drainage issues: {DrainageCount}, Weather-sensitive: {WeatherCount}",
+                riskSegments.Count(s => s.RiskLevel is RiskLevel.High or RiskLevel.VeryHigh),
+                environmentalSummary.SegmentsWithDrainageIssues,
+                environmentalSummary.WeatherSensitiveSegments);
         }
         catch (Exception ex)
         {
@@ -108,7 +179,7 @@ public class CrisProcessor
 
     private async Task<List<CrashRecord>> ParseCsvDataAsync()
     {
-        var inputDir = "/workspaces/map-sand-box/CRIS Exports/extract_public_2023_20250818094137870_115143_20250101-20250818_PARKER";
+        var inputDir = _config.DataSources.InputDirectory;
         var crashes = new List<CrashRecord>();
 
         // CRIS export file names
@@ -152,7 +223,7 @@ public class CrisProcessor
         List<IntersectionRisk> intersectionRisks,
         List<EnhancedSpatialJoinResult> spatialJoins)
     {
-        var outputDir = "/workspaces/map-sand-box/MapSandBox/wwwroot/cris-data";
+        var outputDir = _config.DataSources.OutputDirectory;
         Directory.CreateDirectory(outputDir);
 
         // Generate crash points GeoJSON (only crashes matched to traffic-enabled roads)
@@ -210,7 +281,7 @@ public class CrisProcessor
         }));
         _logger.LogInformation("Generated intersection risks deck.gl format: {Path}", intersectionDeckGlOutputPath);
 
-        // Generate metadata
+        // Generate metadata with configured weights
         var metadata = new CrisMetadata
         {
             GeneratedAt = DateTime.UtcNow,
@@ -219,7 +290,7 @@ public class CrisProcessor
             EndDate = crashes.Any() ? DateOnly.FromDateTime(crashes.Max(c => c.CrashDateTime)) : DateOnly.FromDateTime(DateTime.Now),
             TotalCrashes = crashes.Count,
             TrafficEnabledSegments = riskSegments.Count,
-            ModelWeights = new CrisModelWeights()
+            ModelWeights = _config.ModelWeights
         };
 
         var metadataPath = Path.Combine(outputDir, "cris-model-metadata.json");

@@ -1041,18 +1041,102 @@ Location: ${intersection.latitude?.toFixed(6)}, ${intersection.longitude?.toFixe
 }
 
 function handleRiskSegmentClick(info) {
+    console.log('handleRiskSegmentClick called with:', info);
+
     if (info.object) {
         const segment = info.object; // Direct access to deck.gl data, no .properties
-        const riskScore = typeof segment.RiskScore === 'number'
-            ? segment.RiskScore.toFixed(3)
-            : 'N/A';
-        const crashCount = segment.CrashCount || 0;
-        const aadt = segment.Aadt || 'Unknown';
-        const crashesPerMile = typeof segment.CrashesPerMile === 'number'
-            ? segment.CrashesPerMile.toFixed(2)
-            : 'N/A';
+        console.log('Segment data:', segment);
 
-        const message = `Risk Segment Analysis
+        // Try to use Blazor popup if available
+        console.log('Checking for crisRoadSegmentPopupInstance:', window.crisRoadSegmentPopupInstance);
+        if (window.crisRoadSegmentPopupInstance) {
+            // Convert RiskLevel string to enum integer
+            const convertRiskLevel = (riskLevelStr) => {
+                switch(riskLevelStr) {
+                    case 'VeryLow': return 1;
+                    case 'Low': return 2;
+                    case 'Moderate': return 3;
+                    case 'High': return 4;
+                    case 'VeryHigh': return 5;
+                    default: return 2; // Default to Low
+                }
+            };
+
+            // Convert KabcoSeverity string to enum integer
+            const convertKabcoSeverity = (severityStr) => {
+                switch(severityStr) {
+                    case 'Unknown': return 0;
+                    case 'K_Fatal': case 'K': return 1;
+                    case 'A_IncapacitatingInjury': case 'A': return 2;
+                    case 'B_NonIncapacitatingInjury': case 'B': return 3;
+                    case 'C_PossibleInjury': case 'C': return 4;
+                    case 'O_NoInjury': case 'O': return 5;
+                    default: return 0; // Default to Unknown
+                }
+            };
+
+            // Convert crash records to have proper enum values
+            const convertCrashRecords = (crashes) => {
+                if (!crashes || !Array.isArray(crashes)) return [];
+                return crashes.map(crash => ({
+                    ...crash,
+                    Severity: convertKabcoSeverity(crash.Severity || crash.severity), // Capital S for C# property
+                    // Also convert person injury severities if they exist
+                    Persons: crash.Persons ? crash.Persons.map(person => ({
+                        ...person,
+                        InjurySeverity: convertKabcoSeverity(person.InjurySeverity || person.injurySeverity) // Capital I for C# property
+                    })) : []
+                }));
+            };
+
+            const segmentData = {
+                segmentId: segment.SegmentId || 'unknown',
+                riskScore: segment.RiskScore || 0,
+                riskLevel: convertRiskLevel(segment.RiskLevel),
+                crashCount: segment.CrashCount || 0,
+                aadt: segment.Aadt || null,
+                segmentLength: segment.SegmentLength || 0,
+                startLatitude: segment.StartLatitude || info.coordinate[1],
+                startLongitude: segment.StartLongitude || info.coordinate[0],
+                endLatitude: segment.EndLatitude || info.coordinate[1],
+                endLongitude: segment.EndLongitude || info.coordinate[0],
+                roadName: segment.RoadName || 'Unknown Road',
+                crashesPerMilePerYear: segment.CrashesPerMile || 0,
+                fatalCrashCount: segment.FatalCrashes || 0,
+                seriousInjuryCrashCount: segment.InjuryCrashes || 0,
+                meetsCrashFrequencyThreshold: (segment.CrashesPerMile || 0) > 5.0,
+                meetsSeverityThreshold: (segment.FatalCrashes || 0) >= 1 || (segment.InjuryCrashes || 0) >= 3,
+                meetsTrafficVolumeThreshold: (segment.Aadt || 0) > 15000,
+                hasDrainageRisk: segment.SlopePercentage > 5.0 || false,
+                hasEnvironmentalRisk: false, // Will be populated from enhanced data
+                slopePercentage: segment.SlopePercentage || 0,
+                environmentalFactors: {
+                    slopePercentage: segment.SlopePercentage || 0,
+                    wetSurfaceCrashes: segment.WetSurfaceCrashes || 0,
+                    icySurfaceCrashes: segment.IcySurfaceCrashes || 0,
+                    fogRelatedCrashes: segment.FogRelatedCrashes || 0,
+                    hydroplaningIncidents: segment.HydroplaningIncidents || 0,
+                    hasDrainageIssues: (segment.SlopePercentage || 0) > 5.0 || (segment.HydroplaningIncidents || 0) > 0
+                },
+                recentCrashes: convertCrashRecords(segment.RecentCrashes || [])
+            };
+
+            console.log('Calling Blazor popup with data:', segmentData);
+            window.crisRoadSegmentPopupInstance.invokeMethodAsync('ShowPopupFromJS', segmentData)
+                .then(() => console.log('Blazor popup called successfully'))
+                .catch(error => console.error('Error calling Blazor popup:', error));
+        } else {
+            // Fallback to alert if Blazor popup not available
+            const riskScore = typeof segment.RiskScore === 'number'
+                ? segment.RiskScore.toFixed(3)
+                : 'N/A';
+            const crashCount = segment.CrashCount || 0;
+            const aadt = segment.Aadt || 'Unknown';
+            const crashesPerMile = typeof segment.CrashesPerMile === 'number'
+                ? segment.CrashesPerMile.toFixed(2)
+                : 'N/A';
+
+            const message = `Risk Segment Analysis
 ━━━━━━━━━━━━━━━━━━━
 Risk Level: ${segment.RiskLevel}
 Risk Score: ${riskScore}
@@ -1062,7 +1146,8 @@ Crashes/Mile: ${crashesPerMile}
 
 Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
 
-        alert(message);
+            alert(message);
+        }
     }
 }
 

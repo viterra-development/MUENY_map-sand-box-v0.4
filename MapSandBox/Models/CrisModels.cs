@@ -113,6 +113,50 @@ public class RiskSegment
     public string RoadName { get; set; } = ""; // Road name for display
     public string RoadType { get; set; } = ""; // TIGER road type (RTTYP)
     public string GeometryType { get; set; } = "straight_line"; // "actual_road" or "straight_line"
+
+    // Enhanced data for popup display
+    public EnvironmentalRiskFactors EnvironmentalFactors { get; set; } = new();
+    public decimal SlopePercentage { get; set; }
+
+    // Calculated metrics for popup display
+    public decimal CrashesPerMilePerYear { get; set; }
+    public int FatalCrashCount { get; set; }
+    public int SeriousInjuryCrashCount { get; set; }
+    public bool MeetsCrashFrequencyThreshold { get; set; }  // > 5 crashes/mile-year
+    public bool MeetsSeverityThreshold { get; set; }        // ≥ 1 fatality or ≥ 3 incapacitating
+    public bool MeetsTrafficVolumeThreshold { get; set; }   // > 15,000 AADT
+    public bool HasDrainageRisk { get; set; }               // Slope > 5% or hydroplaning incidents
+    public bool HasEnvironmentalRisk { get; set; }          // Frequent wet/icy crashes
+
+    // Component scores for potential future real-time recalculation
+    public decimal CrashFrequencyScore { get; set; }  // 0-1 normalized
+    public decimal SeverityIndexScore { get; set; }   // 0-1 normalized
+    public decimal TrafficVolumeScore { get; set; }   // 0-1 normalized
+    public decimal DrainageRiskScore { get; set; }    // 0-1 normalized
+    public decimal EnvironmentalScore { get; set; }   // 0-1 normalized
+}
+
+// Enhanced environmental risk tracking
+public class EnvironmentalRiskFactors
+{
+    public decimal SlopePercentage { get; set; }
+    public int WetSurfaceCrashes { get; set; }
+    public int IcySurfaceCrashes { get; set; }
+    public int FogRelatedCrashes { get; set; }
+    public int HydroplaningIncidents { get; set; }
+    public bool HasDrainageIssues { get; set; }
+}
+
+// Detailed scoring model for enhanced risk calculation
+public class DetailedCrisModelScore : CrisModelScore
+{
+    public decimal CrashFrequencyPerMile { get; set; }
+    public int FatalCrashes { get; set; }
+    public int IncapacitatingInjuryCrashes { get; set; }
+    public decimal SlopePercentage { get; set; }
+    public int WeatherRelatedCrashes { get; set; }
+    public Dictionary<string, int> CrashBySurfaceCondition { get; set; } = new();
+    public Dictionary<string, int> CrashByWeatherCondition { get; set; } = new();
 }
 
 public class IntersectionRisk
@@ -176,9 +220,43 @@ public class CrisModelWeights
 {
     public decimal CrashFrequency { get; set; } = 0.35m;
     public decimal SeverityIndex { get; set; } = 0.25m;
-    public decimal TrafficVolume { get; set; } = 0.10m;
-    public decimal DrainageRisk { get; set; } = 0.05m;
-    public decimal Environmental { get; set; } = 0.05m;
+    public decimal TrafficVolume { get; set; } = 0.15m;       // Increased from 0.10m
+    public decimal DrainageRisk { get; set; } = 0.15m;        // Increased from 0.05m
+    public decimal Environmental { get; set; } = 0.10m;       // Increased from 0.05m
+}
+
+// Configuration models for CRIS data processing
+public class CrisModelConfiguration
+{
+    public CrisModelWeights ModelWeights { get; set; } = new();
+    public CrisThresholds Thresholds { get; set; } = new();
+    public CrisDataSources DataSources { get; set; } = new();
+    public CrisProcessingOptions ProcessingOptions { get; set; } = new();
+}
+
+public class CrisThresholds
+{
+    public decimal CrashFrequencyPerMile { get; set; } = 5.0m;
+    public int FatalCrashThreshold { get; set; } = 1;
+    public int IncapacitatingInjuryThreshold { get; set; } = 3;
+    public int TrafficVolumeThreshold { get; set; } = 15000;
+    public decimal SlopeThreshold { get; set; } = 5.0m;
+}
+
+public class CrisDataSources
+{
+    public string InputDirectory { get; set; } = "";
+    public string OutputDirectory { get; set; } = "";
+    public string RoadNetworkPath { get; set; } = "";
+    public string TrafficRoadsPath { get; set; } = "";
+}
+
+public class CrisProcessingOptions
+{
+    public decimal SpatialToleranceMeters { get; set; } = 50.0m;
+    public decimal MinimumSegmentLengthMiles { get; set; } = 0.1m;
+    public bool EnableElevationAnalysis { get; set; } = true;
+    public bool EnableEnvironmentalAnalysis { get; set; } = true;
 }
 
 public class CrisConfiguration
