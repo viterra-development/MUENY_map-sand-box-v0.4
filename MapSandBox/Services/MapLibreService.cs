@@ -288,7 +288,7 @@ public class MapLibreService
             // Soil permeability visualization layer
             new LayerConfig
             {
-                Id = "soil-ksat-visualization", 
+                Id = "soil-ksat-visualization",
                 Type = "GeoJson",
                 DataUrl = GetSoilDataUrl("parker-county-test-ksat.geojson"),
                 Visible = false,
@@ -303,6 +303,55 @@ public class MapLibreService
                     ["pickable"] = true,
                     ["autoHighlight"] = true,
                     ["onClick"] = "handleSoilUnitClick"
+                }
+            },
+            new LayerConfig
+            {
+                Id = "cris-crashes",
+                Type = "ScatterplotLayer",
+                DataUrl = "/cris-data/parker-county-crashes-traffic-roads.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["radiusMinPixels"] = 4,
+                    ["radiusMaxPixels"] = 15,
+                    ["radiusScale"] = 100,
+                    ["getPosition"] = "@@=d.geometry.coordinates",
+                    ["getRadius"] = "@@=d.properties.TotalPersons || 1",
+                    ["getFillColor"] = "@@=getCrashSeverityColor(d.properties.CrashSeverity)"
+                }
+            },
+            new LayerConfig
+            {
+                Id = "cris-risk-segments",
+                Type = "PathLayer",
+                DataUrl = "/cris-data/parker-county-risk-segments-traffic.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["getPath"] = "@@=d.geometry.coordinates",
+                    ["getWidth"] = "@@=Math.max(2, (d.properties.Aadt || 100) / 1000)",
+                    ["getColor"] = "@@=getRiskLevelColor(d.properties.RiskLevel)",
+                    ["widthMinPixels"] = 2,
+                    ["widthMaxPixels"] = 20
+                }
+            },
+            new LayerConfig
+            {
+                Id = "cris-intersections",
+                Type = "ScatterplotLayer",
+                DataUrl = "/cris-data/parker-county-intersection-risks.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["radiusMinPixels"] = 6,
+                    ["radiusMaxPixels"] = 25,
+                    ["getPosition"] = "@@=d.geometry.coordinates",
+                    ["getRadius"] = "@@=Math.sqrt(d.properties.CrashCount) * 100",
+                    ["getFillColor"] = "@@=getRiskLevelColor(d.properties.RiskLevel)",
+                    ["stroked"] = true,
+                    ["getLineColor"] = "[0, 0, 0, 255]",
+                    ["lineWidthMinPixels"] = 1
                 }
             }
         };
@@ -322,7 +371,10 @@ public class MapLibreService
             new LayerInfo { Id = "parker-spi", Name = "Stream Power Index", Visible = false },
             new LayerInfo { Id = "parker-elevation", Name = "Base Elevation", Visible = false },
             new LayerInfo { Id = "soil-clay-visualization", Name = "Soil Clay Content (%)", Visible = true },
-            new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Ksat)", Visible = false }
+            new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Ksat)", Visible = false },
+            new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = false },
+            new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = false },
+            new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false }
         };
     }
 }

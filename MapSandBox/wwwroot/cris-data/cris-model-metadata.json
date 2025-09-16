@@ -1,0 +1,15 @@
+{
+  "GeneratedAt": "2025-09-15T21:18:51.8597645Z",
+  "DataSource": "CRIS",
+  "StartDate": "2025-01-01",
+  "EndDate": "2025-08-14",
+  "TotalCrashes": 1562,
+  "TrafficEnabledSegments": 218,
+  "ModelWeights": {
+    "CrashFrequency": 0.35,
+    "SeverityIndex": 0.25,
+    "TrafficVolume": 0.10,
+    "DrainageRisk": 0.05,
+    "Environmental": 0.05
+  }
+}

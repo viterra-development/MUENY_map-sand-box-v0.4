@@ -21,8 +21,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
       tar \
       gdal-bin
 
-# Install global npm packages
-RUN npm install -g @anthropic-ai/claude-code
+# Install global npm packages and fix permissions for auto-updates
+RUN npm install -g @anthropic-ai/claude-code && \
+    chown -R vscode:vscode $(npm config get prefix) || \
+    chown -R vscode:vscode /usr/local/lib/node_modules /usr/local/bin
 
 # Install AZ CLI (if needed)
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash

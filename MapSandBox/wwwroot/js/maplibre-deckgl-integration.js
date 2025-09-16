@@ -80,10 +80,19 @@ export function updateIntegratedMapLayers(mapInstance, layers) {
         // Handle MapLibre raster layers and get deck.gl layers
         const deckLayers = createLayersFromConfig(layers, mapInstance.maplibre);
         console.log('Created deck layers:', deckLayers);
-        
+        console.log('Layer IDs:', deckLayers.map(l => l.id));
+        console.log('CRIS crash layer:', deckLayers.find(l => l.id === 'cris-crashes'));
+
         // Update deck.gl overlay if it exists
         if (mapInstance.deckOverlay) {
             mapInstance.deckOverlay.setProps({ layers: deckLayers });
+
+            // Force a redraw
+            setTimeout(() => {
+                if (mapInstance.maplibre) {
+                    mapInstance.maplibre.triggerRepaint();
+                }
+            }, 100);
         }
     } catch (error) {
         console.error('Error updating integrated map layers:', error);
@@ -227,6 +236,118 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     ...getLayerProperties(config)
                 }));
                 break;
+            case 'scatterplotlayer':
+                // Handle CRIS crash points specifically
+                if (config.id === 'cris-crashes') {
+                    deckLayers.push(new deck.ScatterplotLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        dataTransform: d => d.features.map(f => ({
+                            ...f.properties,
+                            coordinates: f.geometry.coordinates
+                        })),
+                        radiusMinPixels: 3,
+                        radiusMaxPixels: 15,
+                        radiusUnits: 'pixels',
+                        radiusScale: 1,
+                        getPosition: d => d.coordinates,
+                        getRadius: d => Math.max(3, (d.persons_involved || 1) * 2),
+                        getFillColor: d => getCrashSeverityColor(d.severity),
+                        filled: true,
+                        stroked: true,
+                        getLineColor: [0, 0, 0, 255], // Black border
+                        lineWidthMinPixels: 1,
+                        billboard: true,
+                        pickable: true,
+                        onClick: handleCrashClick,
+                        onDataLoad: data => {
+                            if (data && data.features) {
+                                console.log(`✅ CRIS Crashes loaded ${data.features.length} features`);
+                                console.log('Sample crash:', data.features[0]);
+                                console.log('Position:', data.features[0].geometry.coordinates);
+                                console.log('Properties:', data.features[0].properties);
+
+                                // Check if map viewport includes these coordinates
+                                const bounds = data.features.reduce((acc, f) => {
+                                    const [lng, lat] = f.geometry.coordinates;
+                                    acc.minLng = Math.min(acc.minLng, lng);
+                                    acc.maxLng = Math.max(acc.maxLng, lng);
+                                    acc.minLat = Math.min(acc.minLat, lat);
+                                    acc.maxLat = Math.max(acc.maxLat, lat);
+                                    return acc;
+                                }, { minLng: Infinity, maxLng: -Infinity, minLat: Infinity, maxLat: -Infinity });
+
+                                console.log('Data bounds:', bounds);
+                                console.log('Data center:', {
+                                    lng: (bounds.minLng + bounds.maxLng) / 2,
+                                    lat: (bounds.minLat + bounds.maxLat) / 2
+                                });
+                            }
+                        }
+                    }));
+                } else if (config.id === 'cris-intersections') {
+                    deckLayers.push(new deck.ScatterplotLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        radiusMinPixels: 6,
+                        radiusMaxPixels: 25,
+                        getPosition: d => d.geometry.coordinates,
+                        getRadius: d => Math.sqrt(d.properties.crash_count || 1) * 100,
+                        getFillColor: d => getRiskLevelColor(d.properties.risk_level),
+                        stroked: true,
+                        getLineColor: [0, 0, 0, 255],
+                        lineWidthMinPixels: 1,
+                        pickable: true,
+                        onClick: handleIntersectionClick,
+                        onDataLoad: data => {
+                            if (data && data.features) {
+                                console.log(`✅ CRIS Intersections loaded ${data.features.length} features`);
+                                console.log('Sample intersection:', data.features[0]);
+                            }
+                        }
+                    }));
+                } else {
+                    deckLayers.push(new deck.ScatterplotLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        ...getLayerProperties(config),
+                        onDataLoad: data => {
+                            if (data && data.features) {
+                                console.log(`✅ ScatterplotLayer ${config.id} loaded ${data.features.length} features`);
+                                console.log('Sample feature:', data.features[0]);
+                            }
+                        }
+                    }));
+                }
+                break;
+            case 'pathlayer':
+                // Handle CRIS risk segments specifically
+                if (config.id === 'cris-risk-segments') {
+                    deckLayers.push(new deck.PathLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        getPath: d => d.geometry.coordinates,
+                        getWidth: d => Math.max(2, (d.properties.aadt || 100) / 1000),
+                        getColor: d => getRiskLevelColor(d.properties.risk_level),
+                        widthMinPixels: 2,
+                        widthMaxPixels: 20,
+                        pickable: true,
+                        onClick: handleRiskSegmentClick,
+                        onDataLoad: data => {
+                            if (data && data.features) {
+                                console.log(`✅ CRIS Risk Segments loaded ${data.features.length} features`);
+                                console.log('Sample segment:', data.features[0]);
+                            }
+                        }
+                    }));
+                } else {
+                    deckLayers.push(new deck.PathLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        ...getLayerProperties(config)
+                    }));
+                }
+                break;
         }
     });
     
@@ -300,6 +421,37 @@ function getLayerProperties(config) {
             properties.pickable = true;
             properties.autoHighlight = true;
             properties.onClick = handleSoilUnitClick;
+            break;
+        case 'cris-crashes':
+            properties.radiusMinPixels = 10; // Much larger for debugging
+            properties.radiusMaxPixels = 30;
+            properties.radiusScale = 1;
+            properties.getPosition = d => d.geometry.coordinates;
+            properties.getRadius = 15; // Fixed large radius for testing
+            properties.getFillColor = [255, 0, 0, 255]; // Bright red for visibility
+            properties.pickable = true;
+            properties.onClick = handleCrashClick;
+            break;
+        case 'cris-risk-segments':
+            properties.getPath = d => d.geometry.coordinates;
+            properties.getWidth = d => Math.max(2, (d.properties.aadt || 100) / 1000);
+            properties.getColor = getRiskLevelColor;
+            properties.widthMinPixels = 2;
+            properties.widthMaxPixels = 20;
+            properties.pickable = true;
+            properties.onClick = handleRiskSegmentClick;
+            break;
+        case 'cris-intersections':
+            properties.radiusMinPixels = 6;
+            properties.radiusMaxPixels = 25;
+            properties.getPosition = d => d.geometry.coordinates;
+            properties.getRadius = d => Math.sqrt(d.properties.crash_count || 1) * 100;
+            properties.getFillColor = getRiskLevelColor;
+            properties.stroked = true;
+            properties.getLineColor = [0, 0, 0, 255];
+            properties.lineWidthMinPixels = 1;
+            properties.pickable = true;
+            properties.onClick = handleIntersectionRiskClick;
             break;
     }
     
@@ -710,6 +862,190 @@ Soil Properties:
 Map Unit Key: ${props.mukey}
 Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
         
+        alert(message);
+    }
+}
+
+// CRIS (Crash Risk Information System) layer functions
+// Unified color and severity functions for CRIS layers
+function getCrashSeverityColor(severity) {
+    switch(severity) {
+        case 'K': case 'K_Fatal':
+            return [139, 0, 0, 255];      // Dark red for fatal
+        case 'A': case 'A_IncapacitatingInjury':
+            return [255, 69, 0, 255];     // Red-orange for incapacitating
+        case 'B': case 'B_NonIncapacitatingInjury':
+            return [255, 140, 0, 255];    // Dark orange for non-incapacitating
+        case 'C': case 'C_PossibleInjury':
+            return [255, 215, 0, 255];    // Gold for possible injury
+        case 'O': case 'O_NoInjury':
+            return [50, 205, 50, 255];    // Lime green for no injury
+        default:
+            return [128, 128, 128, 255];  // Gray for unknown
+    }
+}
+
+function getRiskLevelColor(riskLevel) {
+    switch(riskLevel) {
+        case 'VeryHigh': return [139, 0, 0, 255];     // Dark red
+        case 'High': return [255, 69, 0, 255];        // Red-orange
+        case 'Moderate': return [255, 140, 0, 255];   // Dark orange
+        case 'Low': return [255, 215, 0, 255];        // Gold
+        case 'VeryLow': return [50, 205, 50, 255];    // Lime green
+        default: return [128, 128, 128, 255];         // Gray for unknown
+    }
+}
+
+// Crash points visualization functions
+function getCrashPosition(feature) {
+    return [feature.properties.longitude, feature.properties.latitude];
+}
+
+function getCrashRadius(feature) {
+    const personsInvolved = feature.properties.persons_involved || 1;
+    return Math.max(3, Math.min(personsInvolved * 2, 20)); // Scale by persons involved
+}
+
+function getCrashColor(feature) {
+    return getCrashSeverityColor(feature);
+}
+
+function getCrashHeatmapWeight(feature) {
+    const severity = feature.properties.severity_code || feature.properties.severity;
+
+    switch(severity) {
+        case 'K': case 'K_Fatal': return 10;
+        case 'A': case 'A_IncapacitatingInjury': return 8;
+        case 'B': case 'B_NonIncapacitatingInjury': return 6;
+        case 'C': case 'C_PossibleInjury': return 4;
+        case 'O': case 'O_NoInjury': return 1;
+        default: return 1;
+    }
+}
+
+// Risk segments visualization functions
+function getRiskSegmentPath(feature) {
+    return feature.geometry.coordinates;
+}
+
+function getRiskSegmentWidth(feature) {
+    const aadt = feature.properties.aadt || 0;
+    return Math.max(2, Math.min(aadt / 5000, 12)); // Scale by traffic volume
+}
+
+function getRiskSegmentColor(feature) {
+    const riskLevel = feature.properties.risk_level;
+
+    switch(riskLevel) {
+        case 'VeryHigh': return [139, 0, 0, 255];     // Dark red
+        case 'High': return [255, 69, 0, 255];        // Red-orange
+        case 'Moderate': return [255, 140, 0, 255];   // Dark orange
+        case 'Low': return [255, 215, 0, 255];        // Gold
+        case 'VeryLow': return [50, 205, 50, 255];    // Lime green
+        default: return [128, 128, 128, 255];         // Gray for unknown
+    }
+}
+
+// Intersection risks visualization functions
+function getIntersectionPosition(feature) {
+    return [feature.properties.longitude, feature.properties.latitude];
+}
+
+function getIntersectionRadius(feature) {
+    const crashCount = feature.properties.crash_count || 1;
+    return Math.max(5, Math.min(crashCount * 3, 40)); // Scale by crash count
+}
+
+function getIntersectionColor(feature) {
+    const riskLevel = feature.properties.risk_level;
+
+    switch(riskLevel) {
+        case 'VeryHigh': return [139, 0, 0, 255];     // Dark red
+        case 'High': return [255, 69, 0, 255];        // Red-orange
+        case 'Moderate': return [255, 140, 0, 255];   // Dark orange
+        case 'Low': return [255, 215, 0, 255];        // Gold
+        case 'VeryLow': return [50, 205, 50, 255];    // Lime green
+        default: return [128, 128, 128, 255];         // Gray for unknown
+    }
+}
+
+// CRIS click handlers
+function handleCrashClick(info) {
+    if (info.object) {
+        const crash = info.object.properties;
+        const crashDate = crash.crash_date || 'Unknown';
+        const severity = crash.severity || 'Unknown';
+        const personsInvolved = crash.persons_involved || 0;
+        const vehiclesInvolved = crash.vehicles_involved || 0;
+        const weather = crash.weather_condition || 'Unknown';
+        const factors = crash.contributing_factors || [];
+
+        const factorsText = Array.isArray(factors) && factors.length > 0
+            ? factors.join(', ')
+            : 'None specified';
+
+        const message = `Crash Information
+━━━━━━━━━━━━━━━━━━
+Date: ${crashDate}
+Severity: ${severity}
+Persons Involved: ${personsInvolved}
+Vehicles Involved: ${vehiclesInvolved}
+Weather: ${weather}
+Contributing Factors: ${factorsText}
+
+Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
+
+        alert(message);
+    }
+}
+
+function handleRiskSegmentClick(info) {
+    if (info.object) {
+        const segment = info.object.properties;
+        const riskScore = typeof segment.risk_score === 'number'
+            ? segment.risk_score.toFixed(3)
+            : 'N/A';
+        const crashCount = segment.crash_count || 0;
+        const aadt = segment.aadt || 'Unknown';
+        const crashesPerMile = typeof segment.crashes_per_mile === 'number'
+            ? segment.crashes_per_mile.toFixed(2)
+            : 'N/A';
+
+        const message = `Risk Segment Analysis
+━━━━━━━━━━━━━━━━━━━
+Risk Level: ${segment.risk_level}
+Risk Score: ${riskScore}
+Crash Count: ${crashCount}
+AADT: ${aadt}
+Crashes/Mile: ${crashesPerMile}
+
+Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
+
+        alert(message);
+    }
+}
+
+function handleIntersectionRiskClick(info) {
+    if (info.object) {
+        const intersection = info.object.properties;
+        const riskScore = typeof intersection.risk_score === 'number'
+            ? intersection.risk_score.toFixed(3)
+            : 'N/A';
+        const crashCount = intersection.crash_count || 0;
+        const roads = intersection.intersecting_roads || [];
+        const roadsText = Array.isArray(roads) && roads.length > 0
+            ? roads.join(' & ')
+            : 'Unknown roads';
+
+        const message = `High-Risk Intersection
+━━━━━━━━━━━━━━━━━━━━
+Risk Level: ${intersection.risk_level}
+Risk Score: ${riskScore}
+Crash Count: ${crashCount}
+Intersecting Roads: ${roadsText}
+
+Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
+
         alert(message);
     }
 }

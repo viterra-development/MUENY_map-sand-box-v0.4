@@ -1,0 +1,419 @@
+@using MapSandBox.Models
+
+<div class="cris-dashboard">
+    <h3>🎯 CRIS Risk Assessment Dashboard</h3>
+
+    @if (ModelWeights != null)
+    {
+        <div class="model-weights-section">
+            <h4>📊 Model Weights</h4>
+            <div class="weight-controls">
+                <div class="weight-item">
+                    <label>Crash Frequency (currently @ModelWeights.CrashFrequency.ToString("P0")):</label>
+                    <input type="range" min="0" max="1" step="0.05"
+                           value="@ModelWeights.CrashFrequency"
+                           @onchange="@(e => UpdateModelWeight("CrashFrequency", decimal.Parse(e.Value?.ToString() ?? "0")))" />
+                </div>
+                <div class="weight-item">
+                    <label>Severity Index (currently @ModelWeights.SeverityIndex.ToString("P0")):</label>
+                    <input type="range" min="0" max="1" step="0.05"
+                           value="@ModelWeights.SeverityIndex"
+                           @onchange="@(e => UpdateModelWeight("SeverityIndex", decimal.Parse(e.Value?.ToString() ?? "0")))" />
+                </div>
+                <div class="weight-item">
+                    <label>Traffic Volume (currently @ModelWeights.TrafficVolume.ToString("P0")):</label>
+                    <input type="range" min="0" max="1" step="0.05"
+                           value="@ModelWeights.TrafficVolume"
+                           @onchange="@(e => UpdateModelWeight("TrafficVolume", decimal.Parse(e.Value?.ToString() ?? "0")))" />
+                </div>
+                <div class="weight-item">
+                    <label>Drainage Risk (currently @ModelWeights.DrainageRisk.ToString("P0")):</label>
+                    <input type="range" min="0" max="1" step="0.05"
+                           value="@ModelWeights.DrainageRisk"
+                           @onchange="@(e => UpdateModelWeight("DrainageRisk", decimal.Parse(e.Value?.ToString() ?? "0")))" />
+                </div>
+                <div class="weight-item">
+                    <label>Environmental (currently @ModelWeights.Environmental.ToString("P0")):</label>
+                    <input type="range" min="0" max="1" step="0.05"
+                           value="@ModelWeights.Environmental"
+                           @onchange="@(e => UpdateModelWeight("Environmental", decimal.Parse(e.Value?.ToString() ?? "0")))" />
+                </div>
+                <div class="weight-total">
+                    Total Weight: @GetTotalWeight().ToString("P0")
+                    @if (GetTotalWeight() != 1.0m)
+                    {
+                        <span class="weight-warning">⚠️ Should equal 100%</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (TopRiskSegments.Any())
+    {
+        <div class="top-risks-section">
+            <h4>🚨 Top Risk Locations</h4>
+            <div class="risk-list">
+                @foreach (var segment in TopRiskSegments.Take(5))
+                {
+                    <div class="risk-item @GetRiskLevelClass(segment.RiskLevel)">
+                        <div class="risk-header">
+                            <span class="risk-score">@segment.RiskScore.ToString("F3")</span>
+                            <span class="risk-level">@segment.RiskLevel</span>
+                        </div>
+                        <div class="risk-details">
+                            <span>Segment: @segment.SegmentId</span>
+                            <span>Crashes: @segment.CrashCount</span>
+                            @if (segment.Aadt.HasValue)
+                            {
+                                <span>AADT: @segment.Aadt.Value.ToString("N0")</span>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (SeverityBreakdown.Any())
+    {
+        <div class="severity-breakdown-section">
+            <h4>📈 Severity Breakdown</h4>
+            <div class="severity-chart">
+                @foreach (var severity in SeverityBreakdown)
+                {
+                    var percentage = TotalCrashes > 0 ? (decimal)severity.Value / TotalCrashes * 100 : 0;
+                    <div class="severity-bar">
+                        <div class="severity-label">
+                            @GetSeverityDisplayName(severity.Key) (@severity.Value)
+                        </div>
+                        <div class="severity-progress">
+                            <div class="severity-fill @GetSeverityClass(severity.Key)"
+                                 style="width: @percentage.ToString("F1")%"></div>
+                        </div>
+                        <div class="severity-percent">@percentage.ToString("F1")%</div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="dashboard-actions">
+        <button class="btn btn-primary" @onclick="ExportData">📊 Export Data</button>
+        <button class="btn btn-secondary" @onclick="ResetFilters">🔄 Reset Filters</button>
+        <button class="btn btn-info" @onclick="ShowHelp">❓ Help</button>
+    </div>
+</div>
+
+<style>
+.cris-dashboard {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 10px;
+    min-width: 350px;
+    max-width: 450px;
+}
+
+.cris-dashboard h3 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 18px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+}
+
+.cris-dashboard h4 {
+    margin: 15px 0 10px 0;
+    color: #495057;
+    font-size: 14px;
+}
+
+.model-weights-section, .top-risks-section, .severity-breakdown-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+.weight-item {
+    margin-bottom: 12px;
+}
+
+.weight-item label {
+    display: block;
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 4px;
+}
+
+.weight-item input[type="range"] {
+    width: 100%;
+    margin: 4px 0;
+}
+
+.weight-total {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #495057;
+}
+
+.weight-warning {
+    color: #dc3545;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.risk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.risk-item {
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 4px solid;
+}
+
+.risk-item.very-high {
+    background: #f8d7da;
+    border-left-color: #dc3545;
+}
+
+.risk-item.high {
+    background: #fff3cd;
+    border-left-color: #fd7e14;
+}
+
+.risk-item.moderate {
+    background: #fff3cd;
+    border-left-color: #ffc107;
+}
+
+.risk-item.low {
+    background: #d1ecf1;
+    border-left-color: #17a2b8;
+}
+
+.risk-item.very-low {
+    background: #d4edda;
+    border-left-color: #28a745;
+}
+
+.risk-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.risk-score {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.risk-level {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.risk-details {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+    color: #6c757d;
+}
+
+.severity-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.severity-bar {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    align-items: center;
+    gap: 8px;
+}
+
+.severity-label {
+    font-size: 12px;
+    color: #495057;
+}
+
+.severity-progress {
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.severity-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.severity-fill.fatal {
+    background: #dc3545;
+}
+
+.severity-fill.incapacitating {
+    background: #fd7e14;
+}
+
+.severity-fill.non-incapacitating {
+    background: #ffc107;
+}
+
+.severity-fill.possible {
+    background: #17a2b8;
+}
+
+.severity-fill.no-injury {
+    background: #28a745;
+}
+
+.severity-percent {
+    font-size: 11px;
+    color: #6c757d;
+    text-align: right;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+</style>
+
+@code {
+    [Parameter] public CrisModelWeights? ModelWeights { get; set; }
+    [Parameter] public List<RiskSegment> TopRiskSegments { get; set; } = new();
+    [Parameter] public Dictionary<KabcoSeverity, int> SeverityBreakdown { get; set; } = new();
+    [Parameter] public int TotalCrashes { get; set; }
+    [Parameter] public EventCallback<CrisModelWeights> OnModelWeightsChanged { get; set; }
+    [Parameter] public EventCallback OnExportData { get; set; }
+    [Parameter] public EventCallback OnResetFilters { get; set; }
+
+    private async Task UpdateModelWeight(string weightType, decimal value)
+    {
+        if (ModelWeights == null) return;
+
+        switch (weightType)
+        {
+            case "CrashFrequency":
+                ModelWeights.CrashFrequency = value;
+                break;
+            case "SeverityIndex":
+                ModelWeights.SeverityIndex = value;
+                break;
+            case "TrafficVolume":
+                ModelWeights.TrafficVolume = value;
+                break;
+            case "DrainageRisk":
+                ModelWeights.DrainageRisk = value;
+                break;
+            case "Environmental":
+                ModelWeights.Environmental = value;
+                break;
+        }
+
+        await OnModelWeightsChanged.InvokeAsync(ModelWeights);
+    }
+
+    private decimal GetTotalWeight()
+    {
+        if (ModelWeights == null) return 0;
+        return ModelWeights.CrashFrequency + ModelWeights.SeverityIndex +
+               ModelWeights.TrafficVolume + ModelWeights.DrainageRisk +
+               ModelWeights.Environmental;
+    }
+
+    private string GetRiskLevelClass(RiskLevel riskLevel)
+    {
+        return riskLevel.ToString().ToLower().Replace("very", "very-");
+    }
+
+    private string GetSeverityDisplayName(KabcoSeverity severity)
+    {
+        return severity switch
+        {
+            KabcoSeverity.K_Fatal => "Fatal (K)",
+            KabcoSeverity.A_IncapacitatingInjury => "Incapacitating (A)",
+            KabcoSeverity.B_NonIncapacitatingInjury => "Non-Incapacitating (B)",
+            KabcoSeverity.C_PossibleInjury => "Possible Injury (C)",
+            KabcoSeverity.O_NoInjury => "No Injury (O)",
+            _ => "Unknown"
+        };
+    }
+
+    private string GetSeverityClass(KabcoSeverity severity)
+    {
+        return severity switch
+        {
+            KabcoSeverity.K_Fatal => "fatal",
+            KabcoSeverity.A_IncapacitatingInjury => "incapacitating",
+            KabcoSeverity.B_NonIncapacitatingInjury => "non-incapacitating",
+            KabcoSeverity.C_PossibleInjury => "possible",
+            KabcoSeverity.O_NoInjury => "no-injury",
+            _ => "unknown"
+        };
+    }
+
+    private async Task ExportData()
+    {
+        await OnExportData.InvokeAsync();
+    }
+
+    private async Task ResetFilters()
+    {
+        await OnResetFilters.InvokeAsync();
+    }
+
+    private void ShowHelp()
+    {
+        // Could integrate with a modal or documentation system
+        var helpText = "CRIS Risk Assessment Dashboard Help:\n\n" +
+                      "• Adjust model weights to change risk calculations\n" +
+                      "• View top risk locations and detailed statistics\n" +
+                      "• Export data for further analysis\n" +
+                      "• Use layer controls to filter visualization";
+
+        // For now, just log to console - could be replaced with proper modal
+        Console.WriteLine(helpText);
+    }
+}

@@ -1,0 +1,264 @@
+@using MapSandBox.Models
+
+<div class="cris-layer-controls">
+    <h3>📊 CRIS Layers</h3>
+
+    @foreach (var layer in CrisLayers)
+    {
+        <div class="layer-control-item">
+            <label class="layer-checkbox">
+                <input type="checkbox"
+                       checked="@layer.Visible"
+                       @onchange="@(e => OnLayerToggle.InvokeAsync(new LayerToggleEventArgs(layer.Id, e.Value)))" />
+                <span class="layer-name">@GetLayerDisplayName(layer)</span>
+            </label>
+
+            @if (layer.FilterOptions.Any())
+            {
+                <div class="layer-filters" style="@(layer.Visible ? "" : "display: none;")">
+                    @foreach (var filter in layer.FilterOptions)
+                    {
+                        <div class="filter-control">
+                            @RenderFilterControl(layer.Id, filter)
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+
+    @if (Statistics != null)
+    {
+        <div class="cris-statistics">
+            <h4>📈 Statistics</h4>
+            <div class="stat-item">
+                <span class="stat-label">Total Crashes:</span>
+                <span class="stat-value">@Statistics.TotalCrashes</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Fatal:</span>
+                <span class="stat-value fatal">@Statistics.FatalCrashes</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Injury:</span>
+                <span class="stat-value injury">@Statistics.InjuryCrashes</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Property Damage:</span>
+                <span class="stat-value property">@Statistics.PropertyDamageOnlyCrashes</span>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+.cris-layer-controls {
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 10px;
+    min-width: 250px;
+}
+
+.cris-layer-controls h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 16px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.layer-control-item {
+    margin-bottom: 12px;
+    border-left: 3px solid #e9ecef;
+    padding-left: 10px;
+}
+
+.layer-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.layer-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
+.layer-name {
+    color: #495057;
+}
+
+.layer-filters {
+    margin-top: 8px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.filter-control {
+    margin-bottom: 6px;
+}
+
+.filter-control:last-child {
+    margin-bottom: 0;
+}
+
+.filter-control label {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.filter-control select, .filter-control input {
+    width: 100%;
+    padding: 4px 6px;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.cris-statistics {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+}
+
+.cris-statistics h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 3px 0;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.stat-value {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.stat-value.fatal {
+    color: #dc3545;
+}
+
+.stat-value.injury {
+    color: #fd7e14;
+}
+
+.stat-value.property {
+    color: #28a745;
+}
+</style>
+
+@code {
+    [Parameter] public List<CrisLayerConfig> CrisLayers { get; set; } = new();
+    [Parameter] public CrashStatistics? Statistics { get; set; }
+    [Parameter] public EventCallback<LayerToggleEventArgs> OnLayerToggle { get; set; }
+    [Parameter] public EventCallback<CrisFilterEventArgs> OnFilterChange { get; set; }
+
+    private string GetLayerDisplayName(CrisLayerConfig layer)
+    {
+        return layer.LayerType switch
+        {
+            CrisLayerType.CrashPoints => "🔴 Crash Points",
+            CrisLayerType.RiskSegments => "🛣️ Risk Segments",
+            CrisLayerType.RiskHeatmap => "🔥 Risk Heatmap",
+            CrisLayerType.IntersectionRisks => "⚠️ Intersection Risks",
+            CrisLayerType.ModelDashboard => "📊 Model Dashboard",
+            _ => layer.Id
+        };
+    }
+
+    private RenderFragment RenderFilterControl(string layerId, string filterType)
+    {
+        return filterType switch
+        {
+            "severity" => RenderSeverityFilter(layerId),
+            "date_range" => RenderDateRangeFilter(layerId),
+            "weather_condition" => RenderWeatherFilter(layerId),
+            "risk_level" => RenderRiskLevelFilter(layerId),
+            "crash_count_min" => RenderCrashCountFilter(layerId),
+            "aadt_min" => RenderAadtFilter(layerId),
+            _ => @<span>Unknown filter: @filterType</span>
+        };
+    }
+
+    private RenderFragment RenderSeverityFilter(string layerId) =>
+        @<div>
+            <label>Severity Level:</label>
+            <select @onchange="@(e => OnFilterChange.InvokeAsync(new CrisFilterEventArgs(layerId, "severity", e.Value?.ToString())))">
+                <option value="">All Severities</option>
+                <option value="K">Fatal (K)</option>
+                <option value="A">Incapacitating Injury (A)</option>
+                <option value="B">Non-Incapacitating Injury (B)</option>
+                <option value="C">Possible Injury (C)</option>
+                <option value="O">No Injury (O)</option>
+            </select>
+        </div>;
+
+    private RenderFragment RenderDateRangeFilter(string layerId) =>
+        @<div>
+            <label>Date Range:</label>
+            <select @onchange="@(e => OnFilterChange.InvokeAsync(new CrisFilterEventArgs(layerId, "date_range", e.Value?.ToString())))">
+                <option value="">All Dates</option>
+                <option value="last_year">Last Year</option>
+                <option value="last_3_years">Last 3 Years</option>
+                <option value="last_5_years">Last 5 Years</option>
+            </select>
+        </div>;
+
+    private RenderFragment RenderWeatherFilter(string layerId) =>
+        @<div>
+            <label>Weather Condition:</label>
+            <select @onchange="@(e => OnFilterChange.InvokeAsync(new CrisFilterEventArgs(layerId, "weather_condition", e.Value?.ToString())))">
+                <option value="">All Weather</option>
+                <option value="clear">Clear</option>
+                <option value="rain">Rain</option>
+                <option value="fog">Fog</option>
+                <option value="snow">Snow</option>
+            </select>
+        </div>;
+
+    private RenderFragment RenderRiskLevelFilter(string layerId) =>
+        @<div>
+            <label>Risk Level:</label>
+            <select @onchange="@(e => OnFilterChange.InvokeAsync(new CrisFilterEventArgs(layerId, "risk_level", e.Value?.ToString())))">
+                <option value="">All Risk Levels</option>
+                <option value="VeryHigh">Very High</option>
+                <option value="High">High</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Low">Low</option>
+                <option value="VeryLow">Very Low</option>
+            </select>
+        </div>;
+
+    private RenderFragment RenderCrashCountFilter(string layerId) =>
+        @<div>
+            <label>Min Crash Count:</label>
+            <input type="number" min="0" max="50"
+                   @onchange="@(e => OnFilterChange.InvokeAsync(new CrisFilterEventArgs(layerId, "crash_count_min", e.Value?.ToString())))" />
+        </div>;
+
+    private RenderFragment RenderAadtFilter(string layerId) =>
+        @<div>
+            <label>Min AADT:</label>
+            <input type="number" min="0" max="100000" step="1000"
+                   @onchange="@(e => OnFilterChange.InvokeAsync(new CrisFilterEventArgs(layerId, "aadt_min", e.Value?.ToString())))" />
+        </div>;
+}
+

@@ -1,0 +1,270 @@
+@page "/cris"
+@using MapSandBox.Components
+@using MapSandBox.Models
+@using MapSandBox.Services
+@inject MapLibreService MapLibreService
+@inject CrisService CrisService
+
+<PageTitle>CRIS Risk Analysis</PageTitle>
+
+<div class="cris-container">
+    <div class="map-section">
+        <MapLibreMap @ref="mapComponent" Config="mapConfig" OnMapClick="@HandleMapClick" />
+        <RoadPopup @ref="roadPopup" />
+        <SoilPopup @ref="soilPopup" />
+
+        <div class="map-controls">
+            <div class="control-section">
+                <h3>Base Map</h3>
+                <select @onchange="HandleBaseMapChange" value="@selectedBaseMapId">
+                    @foreach (var style in availableStyles)
+                    {
+                        <option value="@style.Id">@style.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="control-section">
+                <h3>CRIS Layers</h3>
+                @foreach (var layer in crisLayers)
+                {
+                    <label class="layer-toggle">
+                        <input type="checkbox"
+                               checked="@layer.Visible"
+                               @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
+                        @layer.Name
+                    </label>
+                }
+            </div>
+
+            <div class="control-section">
+                <h3>Background Layers</h3>
+                @foreach (var layer in backgroundLayers)
+                {
+                    <label class="layer-toggle">
+                        <input type="checkbox"
+                               checked="@layer.Visible"
+                               @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
+                        @layer.Name
+                    </label>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-section">
+        <CrisRiskDashboard
+            ModelWeights="@modelWeights"
+            TopRiskSegments="@topRiskSegments"
+            SeverityBreakdown="@severityBreakdown"
+            TotalCrashes="@totalCrashes"
+            OnModelWeightsChanged="HandleModelWeightsChanged"
+            OnExportData="HandleExportData"
+            OnResetFilters="HandleResetFilters" />
+    </div>
+</div>
+
+<style>
+.cris-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.map-section {
+    flex: 1;
+    position: relative;
+}
+
+.dashboard-section {
+    width: 450px;
+    background: #f8f9fa;
+    border-left: 1px solid #dee2e6;
+    overflow-y: auto;
+}
+
+.map-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    max-width: 250px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.control-section {
+    margin-bottom: 20px;
+}
+
+.control-section h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.control-section select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.layer-toggle {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    color: #555;
+}
+
+.layer-toggle input {
+    margin-right: 6px;
+}
+
+.layer-toggle:hover {
+    color: #333;
+}
+</style>
+
+@code {
+    private MapLibreMap? mapComponent;
+    private RoadPopup? roadPopup;
+    private SoilPopup? soilPopup;
+
+    private MapLibreConfig mapConfig = new();
+    private List<BaseMapStyle> availableStyles = new();
+    private string selectedBaseMapId = "voyager";
+    private List<LayerInfo> layerInfo = new();
+    private List<LayerInfo> crisLayers = new();
+    private List<LayerInfo> backgroundLayers = new();
+
+    private CrisModelWeights? modelWeights;
+    private List<RiskSegment> topRiskSegments = new();
+    private Dictionary<KabcoSeverity, int> severityBreakdown = new();
+    private int totalCrashes = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        mapConfig = MapLibreService.GetDefaultConfig();
+        availableStyles = MapLibreService.GetAvailableBaseMapStyles();
+        selectedBaseMapId = MapLibreService.GetDefaultStyleId();
+        layerInfo = MapLibreService.GetLayerInfo();
+
+        // Separate CRIS layers from background layers
+        crisLayers = layerInfo.Where(l => l.Id.StartsWith("cris-")).ToList();
+        backgroundLayers = layerInfo.Where(l => !l.Id.StartsWith("cris-")).ToList();
+
+        // Load CRIS data
+        await LoadCrisData();
+    }
+
+    private async Task LoadCrisData()
+    {
+        try
+        {
+            var config = await CrisService.LoadConfigurationAsync();
+            modelWeights = config.ModelWeights;
+
+            var segmentData = await CrisService.LoadRiskSegmentsAsync();
+            topRiskSegments = segmentData.OrderByDescending(s => s.RiskScore).Take(10).ToList();
+
+            var crashData = await CrisService.LoadCrashDataAsync();
+            totalCrashes = crashData.Count;
+
+            severityBreakdown = crashData
+                .GroupBy(c => c.Severity)
+                .ToDictionary(g => g.Key, g => g.Count());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading CRIS data: {ex.Message}");
+            // Initialize with defaults
+            modelWeights = new CrisModelWeights();
+            topRiskSegments = new List<RiskSegment>();
+            severityBreakdown = new Dictionary<KabcoSeverity, int>();
+            totalCrashes = 0;
+        }
+    }
+
+    private async Task HandleBaseMapChange(ChangeEventArgs e)
+    {
+        selectedBaseMapId = e.Value?.ToString() ?? "voyager";
+        var selectedStyle = availableStyles.FirstOrDefault(s => s.Id == selectedBaseMapId);
+        if (selectedStyle != null && mapComponent != null)
+        {
+            await mapComponent.UpdateBaseMapStyle(selectedStyle.Url);
+        }
+    }
+
+    private async Task HandleLayerToggle(LayerToggleEventArgs args)
+    {
+        Console.WriteLine($"Layer toggled: {args.LayerId} - {args.IsVisible}");
+
+        // Update the layer visibility in our config
+        var layer = mapConfig.Layers.FirstOrDefault(l => l.Id == args.LayerId);
+        if (layer != null)
+        {
+            layer.Visible = args.IsVisible;
+
+            // Update the layer info for the UI
+            var layerInfoItem = layerInfo.FirstOrDefault(l => l.Id == args.LayerId);
+            if (layerInfoItem != null)
+            {
+                layerInfoItem.Visible = args.IsVisible;
+            }
+
+            // Update the map
+            if (mapComponent != null)
+            {
+                await mapComponent.UpdateLayers(mapConfig.Layers);
+            }
+        }
+    }
+
+    private async Task HandleModelWeightsChanged(CrisModelWeights newWeights)
+    {
+        modelWeights = newWeights;
+        // Recalculate risk scores with new weights
+        await LoadCrisData();
+        StateHasChanged();
+    }
+
+    private Task HandleExportData()
+    {
+        // Export current data to CSV/JSON
+        var exportData = new
+        {
+            ModelWeights = modelWeights,
+            TopRiskSegments = topRiskSegments,
+            SeverityBreakdown = severityBreakdown,
+            TotalCrashes = totalCrashes,
+            ExportedAt = DateTime.UtcNow
+        };
+
+        Console.WriteLine("Export data:", System.Text.Json.JsonSerializer.Serialize(exportData));
+        // In a real implementation, this would trigger a file download
+        return Task.CompletedTask;
+    }
+
+    private async Task HandleResetFilters()
+    {
+        // Reset all filters and model weights to defaults
+        modelWeights = new CrisModelWeights();
+        await LoadCrisData();
+        StateHasChanged();
+    }
+
+    private void HandleMapClick(MapLibreClickEventArgs e)
+    {
+        // Handle map clicks if needed
+    }
+}

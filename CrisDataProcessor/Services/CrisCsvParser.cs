@@ -1,0 +1,286 @@
+using System.Globalization;
+using CsvHelper;
+using CsvHelper.Configuration;
+using MapSandBox.Models;
+using Microsoft.Extensions.Logging;
+
+namespace CrisDataProcessor.Services;
+
+public class CrisCsvParser
+{
+    private readonly ILogger<CrisCsvParser> _logger;
+    private readonly CrisBounds _parkerCountyBounds;
+
+    public CrisCsvParser(ILogger<CrisCsvParser> logger)
+    {
+        _logger = logger;
+        _parkerCountyBounds = new CrisBounds
+        {
+            MinLatitude = 32.5m,
+            MaxLatitude = 33.0m,
+            MinLongitude = -98.0m,
+            MaxLongitude = -97.0m
+        };
+    }
+
+    public async Task<List<CrashCsvRecord>> ParseCrashCsvAsync(string filePath)
+    {
+        _logger.LogInformation("Parsing crash CSV file: {FilePath}", filePath);
+
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            PrepareHeaderForMatch = args => args.Header.ToLower(),
+            HeaderValidated = null,
+            MissingFieldFound = null
+        };
+
+        using var reader = new FileReader(filePath);
+        using var csv = new CsvReader(reader, config);
+
+        var records = new List<CrashCsvRecord>();
+        await foreach (var record in csv.GetRecordsAsync<CrashCsvRecord>())
+        {
+            records.Add(record);
+        }
+
+        _logger.LogInformation("Parsed {Count} crash records from CSV", records.Count);
+        return records;
+    }
+
+    public async Task<List<PersonCsvRecord>> ParsePersonCsvAsync(string filePath)
+    {
+        _logger.LogInformation("Parsing person CSV file: {FilePath}", filePath);
+
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            PrepareHeaderForMatch = args => args.Header.ToLower(),
+            HeaderValidated = null,
+            MissingFieldFound = null
+        };
+
+        using var reader = new FileReader(filePath);
+        using var csv = new CsvReader(reader, config);
+
+        var records = new List<PersonCsvRecord>();
+        await foreach (var record in csv.GetRecordsAsync<PersonCsvRecord>())
+        {
+            records.Add(record);
+        }
+
+        _logger.LogInformation("Parsed {Count} person records from CSV", records.Count);
+        return records;
+    }
+
+    public async Task<List<UnitCsvRecord>> ParseUnitCsvAsync(string filePath)
+    {
+        _logger.LogInformation("Parsing unit CSV file: {FilePath}", filePath);
+
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            PrepareHeaderForMatch = args => args.Header.ToLower(),
+            HeaderValidated = null,
+            MissingFieldFound = null
+        };
+
+        using var reader = new FileReader(filePath);
+        using var csv = new CsvReader(reader, config);
+
+        var records = new List<UnitCsvRecord>();
+        await foreach (var record in csv.GetRecordsAsync<UnitCsvRecord>())
+        {
+            records.Add(record);
+        }
+
+        _logger.LogInformation("Parsed {Count} unit records from CSV", records.Count);
+        return records;
+    }
+
+    public CrashRecord ConvertToCrashRecord(CrashCsvRecord csvRecord,
+        List<PersonCsvRecord> personRecords,
+        List<UnitCsvRecord> unitRecords)
+    {
+        var crash = new CrashRecord
+        {
+            CrashId = csvRecord.CrashId ?? ""
+        };
+
+        // Parse date and time
+        if (DateTime.TryParse($"{csvRecord.CrashDate} {csvRecord.CrashTime}", out var crashDateTime))
+        {
+            crash.CrashDateTime = crashDateTime;
+        }
+
+        // Parse coordinates
+        if (decimal.TryParse(csvRecord.Latitude, out var lat) &&
+            decimal.TryParse(csvRecord.Longitude, out var lng))
+        {
+            crash.Latitude = lat;
+            crash.Longitude = lng;
+        }
+
+        // Parse severity (CRIS uses severity codes like 1=Fatal, 2=Incapacitating, etc.)
+        crash.Severity = ParseCrisSeverity(csvRecord.CrashSeverity);
+
+        // Parse weather condition
+        crash.WeatherCondition = csvRecord.WeatherCondition ?? "Clear";
+        crash.RoadwayCondition = csvRecord.SurfaceCondition ?? "Dry";
+
+        // Add related persons
+        crash.Persons = personRecords
+            .Where(p => p.CrashId == crash.CrashId)
+            .Select(ConvertToPersonInfo)
+            .ToList();
+
+        // Add related vehicles
+        crash.Vehicles = unitRecords
+            .Where(u => u.CrashId == crash.CrashId)
+            .Select(u => ConvertToVehicleInfo(u, personRecords))
+            .ToList();
+
+        return crash;
+    }
+
+    public bool ValidateCrashRecord(CrashRecord crash)
+    {
+        var validationErrors = new List<string>();
+
+        // Validate required fields
+        if (string.IsNullOrWhiteSpace(crash.CrashId))
+            validationErrors.Add("CrashId is required");
+
+        if (crash.CrashDateTime == default)
+            validationErrors.Add("CrashDateTime is required");
+
+        // Validate coordinates are within Parker County bounds
+        if (!IsWithinParkerCounty(crash.Latitude, crash.Longitude))
+            validationErrors.Add($"Coordinates ({crash.Latitude}, {crash.Longitude}) are outside Parker County bounds");
+
+        if (validationErrors.Any())
+        {
+            _logger.LogWarning("Validation failed for crash {CrashId}: {Errors}",
+                crash.CrashId, string.Join(", ", validationErrors));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsWithinParkerCounty(decimal latitude, decimal longitude)
+    {
+        return latitude >= _parkerCountyBounds.MinLatitude &&
+               latitude <= _parkerCountyBounds.MaxLatitude &&
+               longitude >= _parkerCountyBounds.MinLongitude &&
+               longitude <= _parkerCountyBounds.MaxLongitude;
+    }
+
+    private KabcoSeverity ParseCrisSeverity(string? severity)
+    {
+        // CRIS uses numeric severity codes
+        return severity switch
+        {
+            "1" => KabcoSeverity.K_Fatal,
+            "2" => KabcoSeverity.A_IncapacitatingInjury,
+            "3" => KabcoSeverity.B_NonIncapacitatingInjury,
+            "4" => KabcoSeverity.C_PossibleInjury,
+            "5" => KabcoSeverity.O_NoInjury,
+            _ => KabcoSeverity.Unknown
+        };
+    }
+
+    private KabcoSeverity ParseKabcoSeverity(string? severity)
+    {
+        // CRIS person injury severity also uses numeric codes
+        return severity switch
+        {
+            "1" => KabcoSeverity.K_Fatal,
+            "2" => KabcoSeverity.A_IncapacitatingInjury,
+            "3" => KabcoSeverity.B_NonIncapacitatingInjury,
+            "4" => KabcoSeverity.C_PossibleInjury,
+            "5" => KabcoSeverity.O_NoInjury,
+            _ => KabcoSeverity.Unknown
+        };
+    }
+
+    private PersonInfo ConvertToPersonInfo(PersonCsvRecord personRecord)
+    {
+        return new PersonInfo
+        {
+            PersonId = $"{personRecord.CrashId}-{personRecord.PersonNumber}", // Create unique ID
+            PersonNumber = int.TryParse(personRecord.PersonNumber, out var num) ? num : 0,
+            PersonType = personRecord.PersonType ?? "",
+            InjurySeverity = ParseKabcoSeverity(personRecord.InjurySeverity),
+            Age = int.TryParse(personRecord.Age, out var age) ? age : null,
+            Gender = personRecord.Gender ?? "",
+            EthnicStatus = personRecord.EthnicStatus ?? "",
+            AlcoholSuspected = ParseBooleanField(personRecord.AlcoholSuspected),
+            DrugSuspected = ParseBooleanField(personRecord.DrugSuspected)
+        };
+    }
+
+    private VehicleInfo ConvertToVehicleInfo(UnitCsvRecord unitRecord, List<PersonCsvRecord> personRecords)
+    {
+        var vehicle = new VehicleInfo
+        {
+            UnitId = $"{unitRecord.CrashId}-{unitRecord.UnitNumber}", // Create unique ID
+            UnitNumber = int.TryParse(unitRecord.UnitNumber, out var num) ? num : 0,
+            VehicleType = unitRecord.VehicleType ?? "",
+            VehicleModel = unitRecord.VehicleModel ?? "",
+            VehicleYear = int.TryParse(unitRecord.VehicleYear, out var year) ? year : null,
+            TravelDirection = unitRecord.TravelDirection ?? "",
+            MovementPriorToCrash = unitRecord.MovementPriorToCrash ?? ""
+        };
+
+        // Add occupants for this vehicle
+        vehicle.Occupants = personRecords
+            .Where(p => p.CrashId == unitRecord.CrashId) // Simple association - could be enhanced
+            .Select(ConvertToPersonInfo)
+            .ToList();
+
+        return vehicle;
+    }
+
+    private bool ParseBooleanField(string? value)
+    {
+        return value?.ToUpper() switch
+        {
+            "YES" or "Y" or "TRUE" or "1" => true,
+            _ => false
+        };
+    }
+
+    public CrashStatistics CalculateStatistics(List<CrashRecord> crashes)
+    {
+        var stats = new CrashStatistics
+        {
+            TotalCrashes = crashes.Count,
+            FatalCrashes = crashes.Count(c => c.Severity == KabcoSeverity.K_Fatal),
+            InjuryCrashes = crashes.Count(c => c.Severity is KabcoSeverity.A_IncapacitatingInjury
+                or KabcoSeverity.B_NonIncapacitatingInjury
+                or KabcoSeverity.C_PossibleInjury),
+            PropertyDamageOnlyCrashes = crashes.Count(c => c.Severity == KabcoSeverity.O_NoInjury)
+        };
+
+        // Calculate severity breakdown
+        stats.SeverityBreakdown = crashes
+            .GroupBy(c => c.Severity)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        // Calculate contributing factors
+        stats.ContributingFactorCounts = crashes
+            .SelectMany(c => c.ContributingFactors)
+            .GroupBy(f => f.Description)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        _logger.LogInformation("Calculated statistics: {TotalCrashes} total crashes, {FatalCrashes} fatal, {InjuryCrashes} injury",
+            stats.TotalCrashes, stats.FatalCrashes, stats.InjuryCrashes);
+
+        return stats;
+    }
+}
+
+internal class FileReader : StreamReader
+{
+    public FileReader(string path) : base(path)
+    {
+    }
+}
