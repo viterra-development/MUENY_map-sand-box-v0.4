@@ -161,20 +161,24 @@ public class CrisSpatialAnalyzer
         {
             var roadFeature = new RoadFeature
             {
-                Id = feature.Attributes.GetOptionalValue("id")?.ToString() ??
+                Id = feature.Attributes.GetOptionalValue("LINEARID")?.ToString() ??
+                     feature.Attributes.GetOptionalValue("id")?.ToString() ??
                      feature.Attributes.GetOptionalValue("ID")?.ToString() ??
                      Guid.NewGuid().ToString(),
                 Geometry = feature.Geometry
             };
 
-            // Try to extract AADT from various possible field names
-            var aadtValue = feature.Attributes.GetOptionalValue("AADT") ??
-                           feature.Attributes.GetOptionalValue("aadt") ??
-                           feature.Attributes.GetOptionalValue("traffic_volume");
+            // Extract AADT from our TCDS pipeline format: traffic.aadt
+            var trafficData = feature.Attributes.GetOptionalValue("traffic");
 
-            if (aadtValue != null && int.TryParse(aadtValue.ToString(), out var aadt))
+            if (trafficData is IAttributesTable trafficAttributes)
             {
-                roadFeature.Aadt = aadt;
+                var aadtValue = trafficAttributes.GetOptionalValue("aadt");
+                if (aadtValue != null && int.TryParse(aadtValue.ToString(), out var aadt))
+                {
+                    roadFeature.Aadt = aadt;
+                    _logger.LogDebug("Feature {Id}: Successfully parsed AADT = {Aadt}", roadFeature.Id, aadt);
+                }
             }
 
             features.Add(roadFeature);

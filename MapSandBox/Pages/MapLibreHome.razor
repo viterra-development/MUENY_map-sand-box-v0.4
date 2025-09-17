@@ -93,6 +93,8 @@
     private List<LayerInfo> layerInfo = new();
     private List<BaseMapStyle> availableStyles = new();
     private string selectedBaseMapId = "voyager";
+    private DateTime _lastLayerToggle = DateTime.MinValue;
+    private const int LayerToggleDebounceMs = 250;
     
     protected override void OnInitialized()
     {
@@ -104,25 +106,82 @@
     
     private async Task HandleLayerToggle(LayerToggleEventArgs args)
     {
-        Console.WriteLine($"Layer toggled: {args.LayerId} - {args.IsVisible}");
-        
-        // Update the layer visibility in our config
-        var layer = mapConfig.Layers.FirstOrDefault(l => l.Id == args.LayerId);
-        if (layer != null)
+        try
         {
+            Console.WriteLine($"[MapLibreHome] Layer toggle requested: {args.LayerId} -> {args.IsVisible}");
+
+            // Debounce rapid layer toggles to prevent overloading the system
+            var now = DateTime.UtcNow;
+            var timeSinceLastToggle = (now - _lastLayerToggle).TotalMilliseconds;
+
+            if (timeSinceLastToggle < LayerToggleDebounceMs)
+            {
+                Console.WriteLine($"[MapLibreHome] Debouncing layer toggle (only {timeSinceLastToggle:F0}ms since last toggle)");
+                await Task.Delay(LayerToggleDebounceMs - (int)timeSinceLastToggle);
+            }
+
+            _lastLayerToggle = DateTime.UtcNow;
+
+            // Validate inputs
+            if (string.IsNullOrEmpty(args.LayerId))
+            {
+                Console.WriteLine("[MapLibreHome] Error: LayerId is null or empty");
+                return;
+            }
+
+            // Update the layer visibility in our config
+            var layer = mapConfig.Layers.FirstOrDefault(l => l.Id == args.LayerId);
+            if (layer == null)
+            {
+                Console.WriteLine($"[MapLibreHome] Warning: Layer '{args.LayerId}' not found in config");
+                return;
+            }
+
+            Console.WriteLine($"[MapLibreHome] Updating layer '{args.LayerId}' visibility: {layer.Visible} -> {args.IsVisible}");
             layer.Visible = args.IsVisible;
-            
+
             // Update the layer info for the UI
             var layerInfoItem = layerInfo.FirstOrDefault(l => l.Id == args.LayerId);
             if (layerInfoItem != null)
             {
                 layerInfoItem.Visible = args.IsVisible;
+                Console.WriteLine($"[MapLibreHome] Updated UI layer info for '{args.LayerId}'");
             }
-            
-            // Update the map
-            if (mapComponent != null)
+            else
             {
-                await mapComponent.UpdateLayers(mapConfig.Layers);
+                Console.WriteLine($"[MapLibreHome] Warning: Layer info for '{args.LayerId}' not found in UI state");
+            }
+
+            // Update the map
+            if (mapComponent == null)
+            {
+                Console.WriteLine("[MapLibreHome] Warning: Map component is null, cannot update layers");
+                return;
+            }
+
+            Console.WriteLine($"[MapLibreHome] Calling map update with {mapConfig.Layers.Count} total layers");
+            await mapComponent.UpdateLayers(mapConfig.Layers);
+            Console.WriteLine("[MapLibreHome] Layer toggle completed successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[MapLibreHome] Error handling layer toggle: {ex.Message}");
+            Console.WriteLine($"[MapLibreHome] Stack trace: {ex.StackTrace}");
+
+            // Reset UI state in case of error
+            try
+            {
+                var layerInfoItem = layerInfo.FirstOrDefault(l => l.Id == args.LayerId);
+                if (layerInfoItem != null)
+                {
+                    layerInfoItem.Visible = !args.IsVisible; // Revert the change
+                    StateHasChanged(); // Force UI refresh
+                    Console.WriteLine($"[MapLibreHome] Reverted UI state for layer '{args.LayerId}'");
+                }
+            }
+            catch (Exception revertEx)
+            {
+                Console.WriteLine($"[MapLibreHome] Error reverting UI state: {revertEx.Message}");
             }
         }
     }

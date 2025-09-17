@@ -23,15 +23,50 @@
     
     private async Task InitializeMap()
     {
-        _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/map.js");
-        _mapInstance = await _module.InvokeAsync<IJSObjectReference>("createMap", MapContainerId, Config);
+        try
+        {
+            Console.WriteLine("[Map] Initializing map...");
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/map.js");
+            Console.WriteLine("[Map] JavaScript module loaded successfully");
+
+            _mapInstance = await _module.InvokeAsync<IJSObjectReference>("createMap", MapContainerId, Config);
+            Console.WriteLine("[Map] Map instance created successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Map] Error initializing map: {ex.Message}");
+            Console.WriteLine($"[Map] Stack trace: {ex.StackTrace}");
+            throw;
+        }
     }
     
     public async Task UpdateLayers(List<LayerConfig> layers)
     {
-        if (_module != null)
+        try
         {
+            Console.WriteLine($"[Map] UpdateLayers called with {layers?.Count ?? 0} layers");
+
+            if (_module == null)
+            {
+                Console.WriteLine("[Map] Warning: Module not initialized, skipping layer update");
+                return;
+            }
+
+            if (_mapInstance == null)
+            {
+                Console.WriteLine("[Map] Warning: Map instance not initialized, skipping layer update");
+                return;
+            }
+
+            Console.WriteLine($"[Map] Updating layers: {string.Join(", ", layers.Select(l => $"{l.Id}({l.Visible})"))}");
             await _module.InvokeVoidAsync("updateMapLayers", _mapInstance, layers);
+            Console.WriteLine("[Map] Layer update completed successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Map] Error updating layers: {ex.Message}");
+            Console.WriteLine($"[Map] Stack trace: {ex.StackTrace}");
+            throw;
         }
     }
     

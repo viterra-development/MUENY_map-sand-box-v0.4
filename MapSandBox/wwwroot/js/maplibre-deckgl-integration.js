@@ -1,7 +1,12 @@
 // MapLibre + deck.gl integration for Blazor
+import { logError, measurePerformance, initializeErrorTracking } from './error-reporting.js';
+
 let integratedMapInstance = null;
 let maplibreMap = null;
 let deckOverlay = null;
+
+// Initialize error tracking when module loads
+initializeErrorTracking();
 
 
 export function createIntegratedMap(containerId, config) {
@@ -69,40 +74,91 @@ export function createIntegratedMap(containerId, config) {
 }
 
 export function updateIntegratedMapLayers(mapInstance, layers) {
-    console.log('updateIntegratedMapLayers called with:', layers);
-    if (!mapInstance || !mapInstance.maplibre) {
-        console.warn('No integrated map instance available');
-        return;
-    }
-    
-    
-    try {
+    return measurePerformance('updateIntegratedMapLayers', () => {
+        console.log('[MapLibre-JS] updateIntegratedMapLayers called with:', layers);
+
+        try {
+        // Comprehensive validation
+        if (!mapInstance) {
+            console.error('[MapLibre-JS] No map instance provided');
+            return;
+        }
+
+        if (!mapInstance.maplibre) {
+            console.error('[MapLibre-JS] MapLibre instance not available in map instance');
+            return;
+        }
+
+        if (!Array.isArray(layers)) {
+            console.error('[MapLibre-JS] Layers is not an array:', typeof layers);
+            return;
+        }
+
+        console.log(`[MapLibre-JS] Processing ${layers.length} layers for update`);
+
         // Handle MapLibre raster layers and get deck.gl layers
         const deckLayers = createLayersFromConfig(layers, mapInstance.maplibre);
-        console.log('Created deck layers:', deckLayers);
-        console.log('Layer IDs:', deckLayers.map(l => l.id));
-        console.log('CRIS crash layer:', deckLayers.find(l => l.id === 'cris-crashes'));
+        console.log(`[MapLibre-JS] Created ${deckLayers.length} deck.gl layers:`, deckLayers.map(l => `${l.id}(${l.constructor.name})`));
 
         // Update deck.gl overlay if it exists
         if (mapInstance.deckOverlay) {
-            mapInstance.deckOverlay.setProps({ layers: deckLayers });
+            console.log('[MapLibre-JS] Updating deck.gl overlay with new layers');
 
-            // Force a redraw
+            // Validate deck.gl overlay before updating
+            if (typeof mapInstance.deckOverlay.setProps !== 'function') {
+                console.error('[MapLibre-JS] deck.gl overlay setProps method not available');
+                return;
+            }
+
+            mapInstance.deckOverlay.setProps({ layers: deckLayers });
+            console.log('[MapLibre-JS] deck.gl overlay updated successfully');
+
+            // Force a redraw with validation
             setTimeout(() => {
-                if (mapInstance.maplibre) {
-                    mapInstance.maplibre.triggerRepaint();
+                try {
+                    if (mapInstance.maplibre && typeof mapInstance.maplibre.triggerRepaint === 'function') {
+                        mapInstance.maplibre.triggerRepaint();
+                        console.log('[MapLibre-JS] Map repaint triggered');
+                    }
+                } catch (repaintError) {
+                    console.error('[MapLibre-JS] Error triggering map repaint:', repaintError);
                 }
             }, 100);
+        } else {
+            console.warn('[MapLibre-JS] deck.gl overlay not available, skipping deck layer update');
         }
-    } catch (error) {
-        console.error('Error updating integrated map layers:', error);
-        // Continue execution without crashing the app
-    }
-    
-    // Handle layer visibility changes for MapLibre raster layers
-    layers.forEach(layerConfig => {
-        if (layerConfig.type.toLowerCase() === 'rastertile') {
-            updateMapLibreRasterLayerVisibility(mapInstance.maplibre, layerConfig.id, layerConfig.visible);
+
+        // Handle layer visibility changes for MapLibre raster layers
+        console.log('[MapLibre-JS] Processing raster tile layers...');
+        let rasterLayerCount = 0;
+        layers.forEach(layerConfig => {
+            try {
+                if (layerConfig.type && layerConfig.type.toLowerCase() === 'rastertile') {
+                    console.log(`[MapLibre-JS] Updating raster layer '${layerConfig.id}' visibility: ${layerConfig.visible}`);
+                    updateMapLibreRasterLayerVisibility(mapInstance.maplibre, layerConfig.id, layerConfig.visible);
+                    rasterLayerCount++;
+                }
+            } catch (rasterError) {
+                console.error(`[MapLibre-JS] Error updating raster layer '${layerConfig.id}':`, rasterError);
+            }
+        });
+        console.log(`[MapLibre-JS] Processed ${rasterLayerCount} raster tile layers`);
+
+        console.log('[MapLibre-JS] Layer update completed successfully');
+        } catch (error) {
+            console.error('[MapLibre-JS] Critical error updating integrated map layers:', error);
+            console.error('[MapLibre-JS] Error stack:', error.stack);
+
+            // Log structured error for debugging
+            logError('updateIntegratedMapLayers', error, {
+                layerCount: layers?.length,
+                mapInstanceValid: !!mapInstance,
+                maplibreValid: !!(mapInstance?.maplibre),
+                deckOverlayValid: !!(mapInstance?.deckOverlay)
+            });
+
+            // Continue execution without crashing the app
+            console.log('[MapLibre-JS] Continuing execution after error');
         }
     });
 }
@@ -129,29 +185,57 @@ export function disposeIntegratedMap(mapInstance) {
 }
 
 function createLayersFromConfig(layerConfigs, maplibreMap = null) {
+    console.log('[MapLibre-JS] createLayersFromConfig starting...');
+
     const deckLayers = [];
     const maplibreRasterLayers = [];
-    
-    layerConfigs.forEach(config => {
-        console.log(`Processing layer ${config.id}: visible=${config.visible}, type=${config.type}`);
-        if (!config.visible) {
-            console.log(`Skipping invisible layer: ${config.id}`);
-            return;
+
+    try {
+        if (!Array.isArray(layerConfigs)) {
+            console.error('[MapLibre-JS] layerConfigs is not an array:', typeof layerConfigs);
+            return deckLayers;
         }
-        
-        // Handle raster tiles through MapLibre GL JS natively
-        if (config.type.toLowerCase() === 'rastertile') {
-            maplibreRasterLayers.push(config);
-            return;
-        }
-        
-        // Special handling for traffic-counts layer (uses TileLayer)
-        if (config.id === 'traffic-counts') {
-            deckLayers.push(createTrafficCountsTileLayer(config));
-            return;
-        }
-        
-        switch (config.type.toLowerCase()) {
+
+        console.log(`[MapLibre-JS] Processing ${layerConfigs.length} layer configurations`);
+
+        layerConfigs.forEach((config, index) => {
+            try {
+                // Validate layer config
+                if (!config) {
+                    console.warn(`[MapLibre-JS] Layer config at index ${index} is null/undefined`);
+                    return;
+                }
+
+                if (!config.id) {
+                    console.warn(`[MapLibre-JS] Layer config at index ${index} missing ID:`, config);
+                    return;
+                }
+
+                if (!config.type) {
+                    console.warn(`[MapLibre-JS] Layer '${config.id}' missing type:`, config);
+                    return;
+                }
+
+                console.log(`[MapLibre-JS] Processing layer ${config.id}: visible=${config.visible}, type=${config.type}`);
+
+                if (!config.visible) {
+                    console.log(`[MapLibre-JS] Skipping invisible layer: ${config.id}`);
+                    return;
+                }
+
+                // Handle raster tiles through MapLibre GL JS natively
+                if (config.type.toLowerCase() === 'rastertile') {
+                    maplibreRasterLayers.push(config);
+                    return;
+                }
+
+                // Special handling for traffic-counts layer (uses TileLayer)
+                if (config.id === 'traffic-counts') {
+                    deckLayers.push(createTrafficCountsTileLayer(config));
+                    return;
+                }
+
+                switch (config.type.toLowerCase()) {
             case 'geojson':
                 console.log(`Creating GeoJsonLayer for ${config.id} with data URL: ${config.dataUrl}`);
                 
@@ -344,15 +428,25 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     }));
                 }
                 break;
+                }
+            } catch (layerError) {
+                console.error(`[MapLibre-JS] Error processing layer config at index ${index}:`, layerError);
+                console.error(`[MapLibre-JS] Problematic config:`, config);
+            }
+        });
+
+        // Add MapLibre raster layers if maplibreMap is provided
+        if (maplibreMap && maplibreRasterLayers.length > 0) {
+            addMapLibreRasterLayers(maplibreMap, maplibreRasterLayers);
         }
-    });
-    
-    // Add MapLibre raster layers if maplibreMap is provided
-    if (maplibreMap && maplibreRasterLayers.length > 0) {
-        addMapLibreRasterLayers(maplibreMap, maplibreRasterLayers);
+
+        console.log(`[MapLibre-JS] createLayersFromConfig completed: ${deckLayers.length} deck layers, ${maplibreRasterLayers.length} raster layers`);
+        return deckLayers;
+    } catch (error) {
+        console.error('[MapLibre-JS] Critical error in createLayersFromConfig:', error);
+        console.error('[MapLibre-JS] Error stack:', error.stack);
+        return deckLayers; // Return whatever we managed to create
     }
-    
-    return deckLayers;
 }
 
 function getLayerProperties(config) {
