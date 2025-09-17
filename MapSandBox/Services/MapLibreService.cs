@@ -117,7 +117,7 @@ public class MapLibreService
                 Id = "parker-roads-base",
                 Type = "GeoJson",
                 DataUrl = "/parker-county-roads.geojson",
-                Visible = true,
+                Visible = false,
                 Properties = new Dictionary<string, object>
                 {
                     ["stroked"] = true,
@@ -135,7 +135,7 @@ public class MapLibreService
                 Id = "parker-roads-traffic",
                 Type = "Path",
                 DataUrl = "/parker-roads-with-traffic.geojson",
-                Visible = true,
+                Visible = false,
                 Properties = new Dictionary<string, object>
                 {
                     ["getPath"] = "getCoordinates",
@@ -156,7 +156,7 @@ public class MapLibreService
                 Id = "county-cad-parcels",
                 Type = "GeoJson",
                 DataUrl = "/sample-data/county-cad-parcel-test.geojson",
-                Visible = true,
+                Visible = false,
                 Properties = new Dictionary<string, object>
                 {
                     ["filled"] = true,
@@ -172,7 +172,7 @@ public class MapLibreService
                 Id = "traffic-counts",
                 Type = "TileLayer", // Changed to TileLayer type
                 DataUrl = "/tiles/traffic-counts/{z}/{x}/{y}.geojson", // Tile URL template
-                Visible = true,
+                Visible = false,
                 Properties = new Dictionary<string, object>
                 {
                     ["filled"] = true,
@@ -270,7 +270,7 @@ public class MapLibreService
                 Id = "soil-clay-visualization",
                 Type = "GeoJson",
                 DataUrl = GetSoilDataUrl("parker-county-test-clay.geojson"),
-                Visible = true,
+                Visible = false,
                 Properties = new Dictionary<string, object>
                 {
                     ["filled"] = true,
@@ -310,12 +310,14 @@ public class MapLibreService
                 Id = "cris-crashes",
                 Type = "ScatterplotLayer",
                 DataUrl = "/cris-data/parker-county-crashes-traffic-roads-deckgl.json",
-                Visible = false,
+                Visible = true,
                 Properties = new Dictionary<string, object>
                 {
-                    ["radiusMinPixels"] = 4,
-                    ["radiusMaxPixels"] = 15,
-                    ["radiusScale"] = 100
+                    ["radiusMinPixels"] = 5,
+                    ["radiusMaxPixels"] = 20,
+                    ["radiusScale"] = 100,
+                    ["stroked"] = false,
+                    ["filled"] = true
                 }
             },
             new LayerConfig
@@ -323,7 +325,7 @@ public class MapLibreService
                 Id = "cris-risk-segments",
                 Type = "PathLayer",
                 DataUrl = "/cris-data/parker-county-risk-segments-traffic-deckgl.json",
-                Visible = false,
+                Visible = true,
                 Properties = new Dictionary<string, object>
                 {
                     ["widthMinPixels"] = 2,
@@ -352,19 +354,19 @@ public class MapLibreService
     {
         return new List<LayerInfo>
         {
-            new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = true },
-            new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = true },
-            new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = true },
-            new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = true },
+            new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = false },
+            new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = false },
+            new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = false },
+            new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = false },
             new LayerInfo { Id = "parker-twi", Name = "Topographic Wetness Index (TWI)", Visible = false },
             new LayerInfo { Id = "parker-slope", Name = "Slope (degrees)", Visible = false },
             new LayerInfo { Id = "parker-sca", Name = "Specific Catchment Area", Visible = false },
             new LayerInfo { Id = "parker-spi", Name = "Stream Power Index", Visible = false },
             new LayerInfo { Id = "parker-elevation", Name = "Base Elevation", Visible = false },
-            new LayerInfo { Id = "soil-clay-visualization", Name = "Soil Clay Content (%)", Visible = true },
+            new LayerInfo { Id = "soil-clay-visualization", Name = "Soil Clay Content (%)", Visible = false },
             new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Ksat)", Visible = false },
-            new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = false },
-            new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = false },
+            new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = true },
+            new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },
             new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false }
         };
     }

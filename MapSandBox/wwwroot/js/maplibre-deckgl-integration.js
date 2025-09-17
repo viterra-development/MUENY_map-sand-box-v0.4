@@ -326,17 +326,15 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
-                        radiusMinPixels: 3,
-                        radiusMaxPixels: 15,
+                        radiusMinPixels: 5,
+                        radiusMaxPixels: 20,
                         radiusUnits: 'pixels',
                         radiusScale: 1,
                         getPosition: d => d.Coordinates,
                         getRadius: d => d.PersonsInvolved || 1,
                         getFillColor: d => getCrashSeverityColor(d.Severity),
                         filled: true,
-                        stroked: true,
-                        getLineColor: [0, 0, 0, 255], // Black border
-                        lineWidthMinPixels: 1,
+                        stroked: false, // Remove border
                         billboard: true,
                         pickable: true,
                         onClick: handleCrashClick,
@@ -513,12 +511,14 @@ function getLayerProperties(config) {
             properties.onClick = handleSoilUnitClick;
             break;
         case 'cris-crashes':
-            properties.radiusMinPixels = 4;
-            properties.radiusMaxPixels = 15;
+            properties.radiusMinPixels = 5;
+            properties.radiusMaxPixels = 20;
             properties.radiusScale = 100;
             properties.getPosition = d => d.Coordinates;
             properties.getRadius = d => d.PersonsInvolved || 1;
             properties.getFillColor = d => getCrashSeverityColor(d.Severity);
+            properties.filled = true;
+            properties.stroked = false;
             properties.pickable = true;
             properties.onClick = handleCrashClick;
             break;
@@ -1177,6 +1177,8 @@ function handleRiskSegmentClick(info) {
                     CrashId: crash.CrashId || '',
                     CrashDateTime: crash.CrashDate || '', // Map CrashDate to CrashDateTime
                     Severity: convertKabcoSeverity(crash.Severity || crash.severity), // Capital S for C# property
+                    PersonsInvolved: crash.PersonsInvolved || 0, // Ensure PersonsInvolved is mapped
+                    VehiclesInvolved: crash.VehiclesInvolved || 0, // Ensure VehiclesInvolved is mapped (may be 0 if not available)
                     // Also convert person injury severities if they exist
                     Persons: crash.Persons ? crash.Persons.map(person => ({
                         ...person,

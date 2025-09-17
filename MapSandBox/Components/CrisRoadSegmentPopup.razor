@@ -110,7 +110,7 @@
                                 <div class="crash-item @GetSeverityClass(crash.Severity)">
                                     <div class="crash-date">@crash.CrashDateTime.ToString("MM/dd/yyyy")</div>
                                     <div class="crash-severity">@GetSeverityDisplayName(crash.Severity)</div>
-                                    <div class="crash-details">@crash.Persons.Count persons, @crash.Vehicles.Count vehicles</div>
+                                    <div class="crash-details">@crash.PersonsInvolved persons, @crash.VehiclesInvolved vehicles</div>
                                 </div>
                             }
                         </div>
@@ -146,9 +146,9 @@
 
 .cris-popup-card {
     background: white;
-    width: 800px;
-    max-width: 90vw;
-    max-height: 80vh;
+    width: 900px;
+    max-width: 95vw;
+    max-height: 90vh;
     overflow-y: auto;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);

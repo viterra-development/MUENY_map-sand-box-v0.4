@@ -184,7 +184,7 @@ public class CrisProcessor
 
         // CRIS export file names
         var crashCsvPath = Path.Combine(inputDir, "extract_public_2023_20250818094137_crash_20250101-20250818_PARKER.csv");
-        var personCsvPath = Path.Combine(inputDir, "extract_public_2023_20250818094137_person_20250101-20250818_PARKER.csv");
+        var personCsvPath = Path.Combine(inputDir, "extract_public_2023_20250818094137_primaryperson_20250101-20250818_PARKER.csv");
         var unitCsvPath = Path.Combine(inputDir, "extract_public_2023_20250818094137_unit_20250101-20250818_PARKER.csv");
 
         if (!File.Exists(crashCsvPath))
@@ -199,7 +199,7 @@ public class CrisProcessor
         // Parse crash.csv (already checked that it exists)
         var crashRecords = await _csvParser.ParseCrashCsvAsync(crashCsvPath);
 
-        // Parse person.csv
+        // Parse primaryperson.csv (contains complete person records)
         var personRecords = File.Exists(personCsvPath)
             ? await _csvParser.ParsePersonCsvAsync(personCsvPath)
             : new List<PersonCsvRecord>();
@@ -308,13 +308,13 @@ public class CrisProcessor
 Place your CRIS CSV export files in this directory:
 
 - crash.csv: Main crash records
-- person.csv: Person information
+- primaryperson.csv: Primary person information (drivers and key persons)
 - unit.csv: Vehicle/unit information
 - damages.csv: Damage assessments (optional)
 - charges.csv: Legal charges (optional)
 - lookup.csv: Reference data (optional)
 
-The processor will read crash.csv, person.csv, and unit.csv to generate the processed GeoJSON files for the web application.
+The processor will read crash.csv, primaryperson.csv, and unit.csv to generate the processed GeoJSON files for the web application.
 
 Ensure the CSV files contain the following key fields:
 
@@ -325,7 +325,7 @@ Ensure the CSV files contain the following key fields:
 - CrashSeverity
 - WeatherCondition, LightCondition, SurfaceCondition
 
-## person.csv
+## primaryperson.csv
 - CrashId, PersonId
 - InjurySeverity
 - Age, Gender

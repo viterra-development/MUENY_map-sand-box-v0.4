@@ -24,6 +24,8 @@ public class CrashRecord
     public List<PersonInfo> Persons { get; set; } = new();
     public int TotalPersons { get; set; }
     public int TotalVehicles { get; set; }
+    public int PersonsInvolved { get; set; }
+    public int VehiclesInvolved { get; set; }
     public bool IsPrivateProperty { get; set; }
     public bool IsLocated { get; set; }
 }
@@ -636,6 +638,7 @@ public class CrashSummaryDeckGl
     public string CrashDate { get; set; } = "";
     public string Severity { get; set; } = "";
     public int PersonsInvolved { get; set; }
+    public int VehiclesInvolved { get; set; }
 }
 
 public class DeckGlDataCollection<T>

@@ -3,13 +3,13 @@
 Place your CRIS CSV export files in this directory:
 
 - crash.csv: Main crash records
-- person.csv: Person information
+- primaryperson.csv: Primary person information (drivers and key persons)
 - unit.csv: Vehicle/unit information
 - damages.csv: Damage assessments (optional)
 - charges.csv: Legal charges (optional)
 - lookup.csv: Reference data (optional)
 
-The processor will read crash.csv, person.csv, and unit.csv to generate the processed GeoJSON files for the web application.
+The processor will read crash.csv, primaryperson.csv, and unit.csv to generate the processed GeoJSON files for the web application.
 
 Ensure the CSV files contain the following key fields:
 
@@ -20,7 +20,7 @@ Ensure the CSV files contain the following key fields:
 - CrashSeverity
 - WeatherCondition, LightCondition, SurfaceCondition
 
-## person.csv
+## primaryperson.csv
 - CrashId, PersonId
 - InjurySeverity
 - Age, Gender

@@ -253,7 +253,8 @@ public class CrisGeoJsonGenerator
                 CrashId = c.CrashId,
                 CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
                 Severity = c.Severity.ToString(),
-                PersonsInvolved = c.Persons.Count
+                PersonsInvolved = c.Persons.Count,
+                VehiclesInvolved = c.Vehicles.Count
             }).ToArray(),
             StartLatitude = (double)segment.StartLatitude,
             StartLongitude = (double)segment.StartLongitude,
@@ -309,7 +310,8 @@ public class CrisGeoJsonGenerator
                 CrashId = c.CrashId,
                 CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
                 Severity = c.Severity.ToString(),
-                PersonsInvolved = c.Persons.Count
+                PersonsInvolved = c.Persons.Count,
+                VehiclesInvolved = c.Vehicles.Count
             }).ToArray(),
             FatalCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity == KabcoSeverity.K_Fatal)),
             InjuryCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury)),
