@@ -1,7 +1,7 @@
 [
   {
     "SegmentId": "1104258581140",
-    "RiskScore": 0.2501286711180609,
+    "RiskScore": 0.2823508933402831,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 18,
@@ -938,7 +938,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 6,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 3,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445041",
@@ -1285,7 +1292,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479337",
@@ -1428,7 +1442,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477751",
@@ -1987,13 +2008,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104468980466",
-    "RiskScore": 0.25,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.41,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 1,
     "Aadt": 0,
     "SegmentLength": 0,
@@ -2106,13 +2134,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416470274",
-    "RiskScore": 0.25,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.41,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 1,
     "Aadt": 0,
     "SegmentLength": 0,
@@ -2189,7 +2224,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1103234473053",
@@ -2472,13 +2514,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466479",
-    "RiskScore": 0.25,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.41,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 1,
     "Aadt": 0,
     "SegmentLength": 0,
@@ -2587,13 +2636,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416477667",
-    "RiskScore": 0.25,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.41,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 1,
     "Aadt": 0,
     "SegmentLength": 0,
@@ -2722,13 +2778,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416467091",
-    "RiskScore": 0.39411187036727663,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.41937502826201345,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 19,
     "Aadt": 524,
     "SegmentLength": 3.2452442479737846,
@@ -3191,11 +3254,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 3,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 3,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104472859275",
-    "RiskScore": 0.23993698874918515,
+    "RiskScore": 0.27193698874918515,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 10,
@@ -4056,7 +4126,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970390166",
@@ -5539,7 +5616,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 4,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465513",
@@ -5822,11 +5906,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106067279221",
-    "RiskScore": 0.286830424602022,
+    "RiskScore": 0.33046678823838566,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 22,
@@ -7419,11 +7510,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 3,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 6,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416470627",
-    "RiskScore": 0.2335287648586539,
+    "RiskScore": 0.3035287648586539,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 22,
@@ -8768,11 +8866,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 8
+    "PropertyDamageCrashes": 8,
+    "WetSurfaceCrashes": 9,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1104347014161",
-    "RiskScore": 0.22657126921496212,
+    "RiskScore": 0.23323793588162878,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 24,
@@ -10713,11 +10818,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 3,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416474978",
-    "RiskScore": 0.22167547934852808,
+    "RiskScore": 0.2750088126818614,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 15,
@@ -12466,11 +12578,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 3,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 5,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102970398995",
-    "RiskScore": 0.2389208241112635,
+    "RiskScore": 0.2589208241112635,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 24,
@@ -14411,7 +14530,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 3,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 3,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1105576424401",
@@ -14568,7 +14694,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 6.28337999999218,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104692111084",
@@ -15133,7 +15266,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 8
+    "PropertyDamageCrashes": 8,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416472171",
@@ -15628,7 +15768,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104468777881",
@@ -15773,11 +15920,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 3,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 14.543070000002,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104692117869",
-    "RiskScore": 0.25998306939421983,
+    "RiskScore": 0.32067272456663365,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 29,
@@ -17194,7 +17348,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 4,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 11,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1106087924467",
@@ -17329,7 +17490,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1105576286817",
@@ -17620,7 +17788,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479657",
@@ -17715,11 +17890,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479920",
-    "RiskScore": 0.2,
+    "RiskScore": 0.36,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 1,
@@ -18402,7 +18584,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1103695924553",
@@ -18633,11 +18822,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446408",
-    "RiskScore": 0.2,
+    "RiskScore": 0.3,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 1,
@@ -19024,7 +19220,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464066",
@@ -19399,11 +19602,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416491320",
-    "RiskScore": 0.2,
+    "RiskScore": 0.36,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 1,
@@ -19682,7 +19892,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416463221",
@@ -19825,7 +20042,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102638238668",
@@ -19912,7 +20136,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970398984",
@@ -19955,7 +20186,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416475034",
@@ -20766,7 +21004,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464411",
@@ -20901,7 +21146,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416467051",
@@ -21128,7 +21380,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970399677",
@@ -21215,7 +21474,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106067252221",
@@ -21338,11 +21604,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104475062270",
-    "RiskScore": 0.16404797308480018,
+    "RiskScore": 0.19313888217570926,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 11,
@@ -22731,11 +23004,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104472859276",
-    "RiskScore": 0.203691515467265,
+    "RiskScore": 0.24940580118155073,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 14,
@@ -24008,7 +24288,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 4,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416454074",
@@ -24143,11 +24430,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104475062345",
-    "RiskScore": 0.22947116853651248,
+    "RiskScore": 0.2828045018698458,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 6,
@@ -24656,7 +24950,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416447872",
@@ -26221,11 +26522,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470615",
-    "RiskScore": 0.4552930856822492,
+    "RiskScore": 0.5352930856822492,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 2,
@@ -26474,7 +26782,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 5.44771999999227,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1106087635069",
@@ -27631,7 +27946,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416447297",
@@ -29612,7 +29934,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1105576424403",
@@ -29867,7 +30196,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 12.690769999999,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478539",
@@ -30166,11 +30502,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103690718531",
-    "RiskScore": 0.20441,
+    "RiskScore": 0.36441,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 1,
@@ -30953,7 +31296,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416451769",
@@ -31484,11 +31834,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103701318593",
-    "RiskScore": 0.49166666666666664,
+    "RiskScore": 0.545,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 3,
@@ -31587,7 +31944,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.403929999997388,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416466074",
@@ -31906,7 +32270,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465944",
@@ -32017,11 +32388,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445055",
-    "RiskScore": 0.2563655414686182,
+    "RiskScore": 0.3096988748019516,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 6,
@@ -33074,7 +33452,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416447359",
@@ -33243,13 +33628,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 7.38887000000688,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106087632519",
-    "RiskScore": 0.1890183641307136,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.21568503079738027,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 6,
     "Aadt": 296,
     "SegmentLength": 9.4414424098929,
@@ -35496,7 +35888,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479156",
@@ -35805,7 +36204,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 4.41309000001411,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445349",
@@ -35934,7 +36340,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 7.26861999999784,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416474638",
@@ -36551,7 +36964,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 3.60741999999448,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104472814296",
@@ -36616,13 +37036,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.129170000001011,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104469114895",
-    "RiskScore": 0.35841911261723924,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.4384191126172392,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 0,
     "SegmentLength": 0.5346812898484504,
@@ -37313,11 +37740,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 10.3095099999919,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1106087632047",
-    "RiskScore": 0.5585967272727272,
+    "RiskScore": 0.5804149090909091,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 22,
@@ -37970,7 +38404,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 6,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 3,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479107",
@@ -38187,7 +38628,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 7.13005999999439,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970398996",
@@ -38578,13 +39026,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104473177091",
-    "RiskScore": 0.36910692604761847,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.4091069260476184,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 8,
     "Aadt": 1826,
     "SegmentLength": 1.3213722338196785,
@@ -38935,7 +39390,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416479110",
@@ -39316,11 +39778,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104475062344",
-    "RiskScore": 0.21166164015934427,
+    "RiskScore": 0.2649949734926776,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 6,
@@ -40081,7 +40550,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416470754",
@@ -41004,7 +41480,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 10.2406699999875,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478902",
@@ -41311,11 +41794,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 8.06809000000186,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445505",
-    "RiskScore": 0.20549527271862117,
+    "RiskScore": 0.23749527271862117,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 5,
@@ -42926,11 +43416,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104258509693",
-    "RiskScore": 0.5250661081081082,
+    "RiskScore": 0.5380390810810811,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 37,
@@ -43131,13 +43628,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 3,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464579",
-    "RiskScore": 0.3852371765131147,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.40809431937025753,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 7,
     "Aadt": 2041,
     "SegmentLength": 1.13882492619363,
@@ -43834,11 +44338,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102988770822",
-    "RiskScore": 0.5097204780940248,
+    "RiskScore": 0.5554347638083105,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 14,
@@ -44135,7 +44646,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 8
+    "PropertyDamageCrashes": 8,
+    "WetSurfaceCrashes": 4,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416464394",
@@ -44256,11 +44774,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 1.10230000000655,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464112",
-    "RiskScore": 0.42069228571428574,
+    "RiskScore": 0.46640657142857145,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 7,
@@ -44467,7 +44992,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.00991999999655491,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416464094",
@@ -44658,7 +45190,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.77575999999624,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416472137",
@@ -44965,7 +45504,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103680884207",
@@ -45024,7 +45570,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416456787",
@@ -45143,7 +45696,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104470396916",
@@ -45302,7 +45862,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.416369999996391,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416468113",
@@ -45465,13 +46032,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479713",
-    "RiskScore": 0.15,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.31,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 1,
     "Aadt": 0,
     "SegmentLength": 0,
@@ -45636,7 +46210,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1104473233641",
@@ -45711,7 +46292,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479327",
@@ -46042,7 +46630,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104692117859",
@@ -46221,7 +46816,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446597",
@@ -46572,7 +47174,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471766",
@@ -46635,11 +47244,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970391558",
-    "RiskScore": 0.437354,
+    "RiskScore": 0.469354,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 5,
@@ -46914,7 +47530,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.939280000004317,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479476",
@@ -47429,7 +48052,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104258510940",
@@ -48202,7 +48832,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477515",
@@ -48705,11 +49342,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479326",
-    "RiskScore": 0.22682724028712598,
+    "RiskScore": 0.2725415260014117,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 7,
@@ -49932,7 +50576,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102970400381",
@@ -50473,7 +51124,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445407",
@@ -50638,7 +51296,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 2.00350000000782,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416457378",
@@ -50973,7 +51638,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.00881999999080563,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470469",
@@ -51126,13 +51798,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.00580000001093595,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416467195",
-    "RiskScore": 0.3283096957308462,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.4883096957308462,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 0,
     "SegmentLength": 0.5563959088634638,
@@ -51323,7 +52002,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 8.5200000000043,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416478329",
@@ -51532,7 +52218,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "11029549951635",
@@ -51629,11 +52322,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464240",
-    "RiskScore": 0.326578797409378,
+    "RiskScore": 0.35257879740937803,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 10,
@@ -52294,7 +52994,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104258577110",
@@ -52569,11 +53276,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 6.78564999999764,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465630",
-    "RiskScore": 0.3495746105807719,
+    "RiskScore": 0.39224127724743857,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 15,
@@ -53654,13 +54368,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 8
+    "PropertyDamageCrashes": 8,
+    "WetSurfaceCrashes": 4,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "11016954832535",
-    "RiskScore": 0.154116,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.314116,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 1,
     "Aadt": 686,
     "SegmentLength": 0,
@@ -54333,7 +55054,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416467126",
@@ -54616,7 +55344,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445255",
@@ -55125,11 +55860,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102466286822",
-    "RiskScore": 0.445,
+    "RiskScore": 0.465,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 5,
@@ -55244,11 +55986,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 3.53414000001351,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464018",
-    "RiskScore": 0.345571302206534,
+    "RiskScore": 0.36864822528345703,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 39,
@@ -57025,13 +57774,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 7,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 5,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445744",
-    "RiskScore": 0.17847516542157477,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.2241894511358605,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 7,
     "Aadt": 2446,
     "SegmentLength": 10.294478636544918,
@@ -58240,7 +58996,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 2,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416471058",
@@ -58541,11 +59304,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.765770000008104,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466437",
-    "RiskScore": 0.2159850991784832,
+    "RiskScore": 0.2479850991784832,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 5,
@@ -59432,7 +60202,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416460807",
@@ -59837,11 +60614,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 5.77073000000183,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464489",
-    "RiskScore": 0.37966348607975436,
+    "RiskScore": 0.3979492003654686,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 35,
@@ -60750,7 +61534,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 4,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 4,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104701882561",
@@ -61577,11 +62368,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445245",
-    "RiskScore": 0.20029987585181228,
+    "RiskScore": 0.25363320918514565,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 3,
@@ -62652,11 +63450,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1105533832085",
-    "RiskScore": 0.45656121533123106,
+    "RiskScore": 0.4794183581883739,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 7,
@@ -62927,13 +63732,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416480205",
-    "RiskScore": 0.502648,
-    "RiskLevel": "Moderate",
-    "RiskLevelNumeric": 3,
+    "RiskScore": 0.632648,
+    "RiskLevel": "High",
+    "RiskLevelNumeric": 4,
     "CrashCount": 2,
     "Aadt": 233,
     "SegmentLength": 0.17463864058487327,
@@ -63460,11 +64272,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 3.22175000000868,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416445576",
-    "RiskScore": 0.4960093333333334,
+    "RiskScore": 0.522676,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 6,
@@ -63609,7 +64428,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 5.84852000000069,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466102",
@@ -64240,11 +65066,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446400",
-    "RiskScore": 0.27185764442403304,
+    "RiskScore": 0.32519097775736644,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 3,
@@ -64755,11 +65588,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416464389",
-    "RiskScore": 0.465379,
+    "RiskScore": 0.485379,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 8,
@@ -64984,7 +65824,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.00320000000186838,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416469985",
@@ -66491,7 +67338,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464069",
@@ -66562,11 +67416,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104475062628",
-    "RiskScore": 0.31559922254950884,
+    "RiskScore": 0.33597305432520974,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 107,
@@ -68511,7 +69372,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 4,
     "InjuryCrashes": 12,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 13,
+    "IcySurfaceCrashes": 2,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416472040",
@@ -69848,11 +70716,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104475062629",
-    "RiskScore": 0.3009148897960713,
+    "RiskScore": 0.329368498043494,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 97,
@@ -72841,7 +73716,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 14,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 16,
+    "IcySurfaceCrashes": 2,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478912",
@@ -73130,11 +74012,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 12.9667599999976,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970391958",
-    "RiskScore": 0.36903260546959116,
+    "RiskScore": 0.3890326054695912,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 8,
@@ -73499,11 +74388,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1105319730148",
-    "RiskScore": 0.3414241173383549,
+    "RiskScore": 0.35327596919020676,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 27,
@@ -74876,11 +75772,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 3,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1105576419841",
-    "RiskScore": 0.21556624358103055,
+    "RiskScore": 0.2688995769143639,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 3,
@@ -76023,7 +76926,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1106087633818",
@@ -76328,11 +77238,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479969",
-    "RiskScore": 0.2551456800178355,
+    "RiskScore": 0.33514568001783546,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 2,
@@ -77009,7 +77926,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102970400382",
@@ -77322,7 +78246,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470848",
@@ -77823,7 +78754,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0855599999951551,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478797",
@@ -78014,7 +78952,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 2.01325000000452,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102200956532",
@@ -78067,7 +79012,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970391957",
@@ -78342,13 +79294,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1105598223179",
-    "RiskScore": 0.1889100426042208,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.24224337593755416,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 3,
     "Aadt": 1315,
     "SegmentLength": 13.65994163427975,
@@ -80397,11 +81356,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416469166",
-    "RiskScore": 0.28335335577257936,
+    "RiskScore": 0.3233533557725794,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 4,
@@ -81002,7 +81968,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416447278",
@@ -81777,11 +82750,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104468778994",
-    "RiskScore": 0.3354106694196661,
+    "RiskScore": 0.3887440027529994,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 3,
@@ -82120,7 +83100,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 11.4504199999956,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1104468925984",
@@ -82239,11 +83226,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104701882893",
-    "RiskScore": 0.35244390616864774,
+    "RiskScore": 0.36524390616864777,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 25,
@@ -82940,11 +83934,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 5,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470162",
-    "RiskScore": 0.3394647303213899,
+    "RiskScore": 0.3886954995521591,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 13,
@@ -83741,11 +84742,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 4,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "11016954832286",
-    "RiskScore": 0.4026213045994167,
+    "RiskScore": 0.41862130459941665,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 10,
@@ -84558,11 +85566,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 3,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479162",
-    "RiskScore": 0.30676823707451545,
+    "RiskScore": 0.3501015704078488,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 6,
@@ -85111,7 +86126,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1105576424396",
@@ -85236,7 +86258,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0382999999999356,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466759",
@@ -85315,7 +86344,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416448497",
@@ -85400,7 +86436,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.195149999996147,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416457735",
@@ -85631,11 +86674,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466391",
-    "RiskScore": 0.23078507380289923,
+    "RiskScore": 0.27649935951718496,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 7,
@@ -86942,7 +87992,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416470689",
@@ -87563,7 +88620,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446053",
@@ -87818,11 +88882,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445625",
-    "RiskScore": 0.422246,
+    "RiskScore": 0.502246,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 4,
@@ -88007,11 +89078,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 1.87980000000465,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416466360",
-    "RiskScore": 0.14979385977121917,
+    "RiskScore": 0.18979385977121918,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 4,
@@ -88928,11 +90006,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1106087425992",
-    "RiskScore": 0.44464744575438636,
+    "RiskScore": 0.46218169232972883,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 73,
@@ -90645,7 +91730,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 14,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 8,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478407",
@@ -91108,11 +92200,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 2,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471255",
-    "RiskScore": 0.3063243571337645,
+    "RiskScore": 0.38632435713376456,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 2,
@@ -91481,7 +92580,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416472914",
@@ -91702,7 +92808,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 3.99746000000079,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471964",
@@ -92349,11 +93462,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445757",
-    "RiskScore": 0.20628812115428571,
+    "RiskScore": 0.24628812115428575,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 4,
@@ -93218,7 +94338,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416463291",
@@ -93431,13 +94558,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 9.97022999999331,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104470135499",
-    "RiskScore": 0.19697639203837655,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.22897639203837655,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 5,
     "Aadt": 2923,
     "SegmentLength": 2.715772297604478,
@@ -93998,11 +95132,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464383",
-    "RiskScore": 0.21606681842920655,
+    "RiskScore": 0.26856681842920654,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 8,
@@ -95575,13 +96716,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416447140",
-    "RiskScore": 0.109978,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.269978,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 1,
     "Aadt": 1663,
     "SegmentLength": 0,
@@ -95646,11 +96794,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416451300",
-    "RiskScore": 0.300578031053753,
+    "RiskScore": 0.35391136438708637,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 3,
@@ -95861,7 +97016,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 8.20998999999745,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1106092740200",
@@ -96032,7 +97194,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 8.61491000000569,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416449123",
@@ -96485,11 +97654,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416467224",
-    "RiskScore": 0.422814,
+    "RiskScore": 0.47614733333333337,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 3,
@@ -96732,13 +97908,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 4.19755000000777,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102970395343",
-    "RiskScore": 0.15822051583707072,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.21155384917040407,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 3,
     "Aadt": 721,
     "SegmentLength": 2.6996093855453918,
@@ -97327,13 +98510,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416446670",
-    "RiskScore": 0.32311253355375935,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.4191125335537593,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 5,
     "Aadt": 4493,
     "SegmentLength": 0.9660260583435364,
@@ -97698,11 +98888,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 5
+    "PropertyDamageCrashes": 5,
+    "WetSurfaceCrashes": 3,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 14.0645299999917,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416446674",
-    "RiskScore": 0.2711775444715797,
+    "RiskScore": 0.3991775444715797,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 5,
@@ -98289,11 +99486,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 4,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1106067242308",
-    "RiskScore": 0.41719384663503967,
+    "RiskScore": 0.470527179968373,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 6,
@@ -98810,7 +100014,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 12.8945300000041,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416464532",
@@ -98997,13 +100208,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104473118330",
-    "RiskScore": 0.18309817735669695,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.23643151069003027,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 3,
     "Aadt": 1519,
     "SegmentLength": 1.78013841517243,
@@ -99728,7 +100946,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416470182",
@@ -99959,13 +101184,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445728",
-    "RiskScore": 0.375,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.535,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 0,
     "SegmentLength": 0.07529741618423381,
@@ -100232,11 +101464,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 1.45362999998611,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416445715",
-    "RiskScore": 0.208270040382475,
+    "RiskScore": 0.288270040382475,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 2,
@@ -100669,7 +101908,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 14.403779999995,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416490192",
@@ -100810,13 +102056,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 5.31675999999948,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466372",
-    "RiskScore": 0.375,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.455,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 0,
     "SegmentLength": 0.004926112143912273,
@@ -101255,7 +102508,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0784799999919983,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416478549",
@@ -101520,7 +102780,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0558899999987261,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477400",
@@ -101597,7 +102864,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.168999999999642,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478702",
@@ -101822,7 +103096,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1105598410669",
@@ -101879,7 +103160,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.224149999993983,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466383",
@@ -102072,7 +103360,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.190009999997187,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466806",
@@ -102125,7 +103420,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.381819999994093,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465548",
@@ -102194,13 +103496,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.483769999995332,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "11016954150528",
-    "RiskScore": 0.375,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.455,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 0,
     "SegmentLength": 0.016568429482084313,
@@ -102251,7 +103560,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.241139999999973,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416478530",
@@ -102876,13 +104192,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465568",
-    "RiskScore": 0.18029114073065836,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.26029114073065834,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 2,
     "Aadt": 387,
     "SegmentLength": 1.1116556330253127,
@@ -103117,7 +104440,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416480235",
@@ -103432,7 +104762,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416453546",
@@ -104217,7 +105554,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416480057",
@@ -104562,7 +105906,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 6.18661000000031,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465525",
@@ -105163,11 +106514,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478710",
-    "RiskScore": 0.44572655553071555,
+    "RiskScore": 0.45905988886404886,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 12,
@@ -105740,13 +107098,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470586",
-    "RiskScore": 0.29572129183163504,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.4557212918316351,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 1206,
     "SegmentLength": 0.4034924186422326,
@@ -106493,7 +107858,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 6.80127000000397,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416466566",
@@ -106746,7 +108118,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.520850000000905,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104699570696",
@@ -106801,7 +108180,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416447146",
@@ -106948,7 +108334,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 4.38221999999655,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465966",
@@ -107225,7 +108618,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0203200000044035,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477898",
@@ -107290,7 +108690,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0330800000014619,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471984",
@@ -107679,7 +109086,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479090",
@@ -107928,11 +109342,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 6.50854000001289,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445574",
-    "RiskScore": 0.404208,
+    "RiskScore": 0.45754133333333336,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 3,
@@ -108179,13 +109600,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.00438000000713146,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416445157",
-    "RiskScore": 0.581144,
-    "RiskLevel": "Moderate",
-    "RiskLevelNumeric": 3,
+    "RiskScore": 0.6511440000000001,
+    "RiskLevel": "High",
+    "RiskLevelNumeric": 4,
     "CrashCount": 6,
     "Aadt": 18524,
     "SegmentLength": 0.26565024981931135,
@@ -108340,7 +109768,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 3.85528000000335,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102214009227",
@@ -108395,7 +109830,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470949",
@@ -108706,7 +110148,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416461894",
@@ -108841,7 +110290,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416475857",
@@ -109284,7 +110740,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465623",
@@ -109659,7 +111122,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103671412914",
@@ -109802,11 +111272,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470974",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -109869,7 +111346,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416446514",
@@ -109996,7 +111480,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103690718118",
@@ -110095,7 +111586,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471021",
@@ -110470,11 +111968,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471736",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -110577,7 +112082,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416477721",
@@ -110844,7 +112356,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103662767239",
@@ -110899,7 +112418,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103700781232",
@@ -110950,7 +112476,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103690718763",
@@ -111009,7 +112542,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416472124",
@@ -111100,7 +112640,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103690717662",
@@ -111483,7 +113030,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464100",
@@ -111774,7 +113328,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102466876538",
@@ -111853,7 +113414,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970400743",
@@ -111936,11 +113504,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104472962298",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -112059,7 +113634,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1104469124991",
@@ -112118,7 +113700,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445718",
@@ -112509,7 +114098,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446033",
@@ -112824,7 +114420,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466396",
@@ -112919,7 +114522,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "11016954832285",
@@ -113742,7 +115352,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416459394",
@@ -113821,7 +115438,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478535",
@@ -114164,7 +115788,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104473152790",
@@ -114291,11 +115922,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102466624832",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -114462,11 +116100,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416478614",
-    "RiskScore": 0.025,
+    "RiskScore": 0.125,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -114513,11 +116158,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 1,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477538",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -114644,7 +116296,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1105598225244",
@@ -114767,11 +116426,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470061",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -114830,7 +116496,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102200920862",
@@ -114925,7 +116598,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478543",
@@ -115028,7 +116708,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471315",
@@ -115171,7 +116858,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464502",
@@ -115242,7 +116936,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103430657773",
@@ -115321,7 +117022,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446926",
@@ -115392,11 +117100,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470900",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -115503,7 +117218,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102466305471",
@@ -115814,7 +117536,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "11016954974746",
@@ -116005,7 +117734,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477075",
@@ -116220,7 +117956,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416455430",
@@ -116471,7 +118214,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416476952",
@@ -116522,7 +118272,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "11016954007890",
@@ -116629,7 +118386,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465818",
@@ -117400,7 +119164,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103690719018",
@@ -117703,7 +119474,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477095",
@@ -117874,7 +119652,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416474984",
@@ -118237,7 +120022,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445846",
@@ -118368,7 +120160,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102210971058",
@@ -118515,7 +120314,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465650",
@@ -118610,7 +120416,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106081863139",
@@ -119017,7 +120830,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471467",
@@ -119100,7 +120920,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103613664543",
@@ -119367,11 +121194,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470434",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -119602,11 +121436,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102200928973",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -119733,11 +121574,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416466703",
-    "RiskScore": 0.025,
+    "RiskScore": 0.185,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -119808,7 +121656,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416466413",
@@ -119855,7 +121710,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102210255808",
@@ -119894,7 +121756,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104470395630",
@@ -119949,7 +121818,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106087633103",
@@ -120168,7 +122044,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416480196",
@@ -120235,7 +122118,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416480277",
@@ -120438,7 +122328,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103626833905",
@@ -120693,7 +122590,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466475",
@@ -120844,7 +122748,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970401957",
@@ -121119,7 +123030,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470055",
@@ -121950,7 +123868,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466783",
@@ -122205,7 +124130,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478016",
@@ -122532,7 +124464,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471584",
@@ -122575,7 +124514,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465644",
@@ -122786,7 +124732,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466911",
@@ -122949,7 +124902,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465626",
@@ -123036,7 +124996,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970399000",
@@ -123229,7 +125196,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.75929999999147,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477850",
@@ -123776,7 +125750,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416463462",
@@ -124079,13 +126060,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103794619923",
-    "RiskScore": 0.373178,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.453178,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 738,
     "SegmentLength": 0.0018406988660288773,
@@ -124612,13 +126600,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0351200000068275,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416479052",
-    "RiskScore": 0.391104,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.471104,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 2684,
     "SegmentLength": 0.021917145337169285,
@@ -125105,7 +127100,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.321959999993737,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416451528",
@@ -125372,7 +127374,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104475062508",
@@ -125579,7 +127588,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465634",
@@ -125686,11 +127702,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970398249",
-    "RiskScore": 0.026602,
+    "RiskScore": 0.186602,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -125937,7 +127960,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416479575",
@@ -126612,7 +128642,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465560",
@@ -126919,7 +128956,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 9.4871400000045,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471873",
@@ -127210,7 +129254,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416479241",
@@ -127557,7 +129608,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416470763",
@@ -127792,7 +129850,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464260",
@@ -127867,7 +129932,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104699570698",
@@ -127936,7 +130008,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.235319999994488,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446757",
@@ -128115,7 +130194,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445350",
@@ -128234,7 +130320,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102200957379",
@@ -128293,7 +130386,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478425",
@@ -128400,7 +130500,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 6.31357999999693,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445052",
@@ -128935,11 +131042,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106087440791",
-    "RiskScore": 0.02971,
+    "RiskScore": 0.18971,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -129678,7 +131792,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416464497",
@@ -129913,7 +132034,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416476252",
@@ -130600,7 +132728,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446786",
@@ -130851,7 +132986,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416474555",
@@ -131018,7 +133160,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103671412776",
@@ -131089,11 +133238,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446355",
-    "RiskScore": 0.031588,
+    "RiskScore": 0.191588,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -131628,7 +133784,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416470331",
@@ -132399,13 +134562,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416480206",
-    "RiskScore": 0.39834,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.47834,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 2,
     "Aadt": 3890,
     "SegmentLength": 0.04222336534149904,
@@ -132836,7 +135006,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.82487000000242,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102466257362",
@@ -133307,7 +135484,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416447209",
@@ -133390,7 +135574,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445752",
@@ -133985,7 +136176,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478659",
@@ -134504,11 +136702,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416477217",
-    "RiskScore": 0.6281578947368421,
+    "RiskScore": 0.6365789473684211,
     "RiskLevel": "High",
     "RiskLevelNumeric": 4,
     "CrashCount": 19,
@@ -134801,11 +137006,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 9
+    "PropertyDamageCrashes": 9,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445534",
-    "RiskScore": 0.47886,
+    "RiskScore": 0.5321933333333334,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 6,
@@ -134954,7 +137166,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 6
+    "PropertyDamageCrashes": 6,
+    "WetSurfaceCrashes": 2,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.731129999998359,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "11016954150467",
@@ -135153,7 +137372,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106087633778",
@@ -135452,7 +137678,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445677",
@@ -135689,7 +137922,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445618",
@@ -135784,7 +138024,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464097",
@@ -135911,13 +138158,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1103701322105",
-    "RiskScore": 0.041104,
-    "RiskLevel": "VeryLow",
-    "RiskLevelNumeric": 1,
+    "RiskScore": 0.201104,
+    "RiskLevel": "Low",
+    "RiskLevelNumeric": 2,
     "CrashCount": 1,
     "Aadt": 2684,
     "SegmentLength": 0,
@@ -138126,7 +140380,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416467271",
@@ -138225,7 +140486,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464393",
@@ -138286,7 +140554,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416466854",
@@ -138383,7 +140658,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.061539999997251,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102970398869",
@@ -138426,11 +140708,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416447247",
-    "RiskScore": 0.601886,
+    "RiskScore": 0.633886,
     "RiskLevel": "High",
     "RiskLevelNumeric": 4,
     "CrashCount": 5,
@@ -138565,7 +140854,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 3.89976999999675,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416473515",
@@ -139744,7 +142040,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445137",
@@ -139893,7 +142196,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 6.97952999999529,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416469986",
@@ -140088,7 +142398,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416478903",
@@ -140299,7 +142616,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "11016954870175",
@@ -140406,11 +142730,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416463139",
-    "RiskScore": 0.0125,
+    "RiskScore": 0.1725,
     "RiskLevel": "VeryLow",
     "RiskLevelNumeric": 1,
     "CrashCount": 1,
@@ -140729,7 +143060,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416479332",
@@ -140988,7 +143326,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416471090",
@@ -141139,7 +143484,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465444",
@@ -141226,7 +143578,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416463459",
@@ -141369,7 +143728,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104258509690",
@@ -141660,7 +144026,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0838199999932954,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106067279320",
@@ -142043,11 +144416,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106087435808",
-    "RiskScore": 0.5454313363308708,
+    "RiskScore": 0.5682884791880137,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 7,
@@ -142250,13 +144630,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 12.864669999999,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416464101",
-    "RiskScore": 0.3,
-    "RiskLevel": "Low",
-    "RiskLevelNumeric": 2,
+    "RiskScore": 0.46,
+    "RiskLevel": "Moderate",
+    "RiskLevelNumeric": 3,
     "CrashCount": 1,
     "Aadt": 31203,
     "SegmentLength": 0,
@@ -142305,7 +144692,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 0
+    "PropertyDamageCrashes": 0,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1104701882632",
@@ -142474,7 +144868,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 1.34802000000889,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416472788",
@@ -142745,7 +145146,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416465808",
@@ -142836,11 +145244,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106087639566",
-    "RiskScore": 0.41078638334176787,
+    "RiskScore": 0.4907863833417679,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 2,
@@ -143921,7 +146336,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416445419",
@@ -144020,11 +146442,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416446726",
-    "RiskScore": 0.47312737114818115,
+    "RiskScore": 0.5264607044815145,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 3,
@@ -144223,7 +146652,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 12.4175200000067,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "110416445808",
@@ -144794,7 +147230,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 14.8589400000034,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445152",
@@ -145027,7 +147470,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 1,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 10.2244300000081,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104258466870",
@@ -145122,7 +147572,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104258509692",
@@ -145185,7 +147642,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102200940744",
@@ -145236,7 +147700,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416492306",
@@ -145443,13 +147914,20 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416467095",
-    "RiskScore": 0.525,
-    "RiskLevel": "Moderate",
-    "RiskLevelNumeric": 3,
+    "RiskScore": 0.605,
+    "RiskLevel": "High",
+    "RiskLevelNumeric": 4,
     "CrashCount": 2,
     "Aadt": 30036,
     "SegmentLength": 0.002605669502603886,
@@ -145600,7 +148078,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.0467600000035873,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1104258409070",
@@ -145779,11 +148264,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1106087858764",
-    "RiskScore": 0.6095833333333334,
+    "RiskScore": 0.6229166666666667,
     "RiskLevel": "High",
     "RiskLevelNumeric": 4,
     "CrashCount": 12,
@@ -145988,7 +148480,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 7
+    "PropertyDamageCrashes": 7,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 3.92216999999562,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1102200935365",
@@ -146109,7 +148608,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0.473559999996098,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104692357780",
@@ -146404,11 +148910,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 4
+    "PropertyDamageCrashes": 4,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 5.38757999999007,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104468777882",
-    "RiskScore": 0.5241380705673021,
+    "RiskScore": 0.5532289796582112,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 22,
@@ -146745,7 +149258,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 1,
     "InjuryCrashes": 2,
-    "PropertyDamageCrashes": 8
+    "PropertyDamageCrashes": 8,
+    "WetSurfaceCrashes": 4,
+    "IcySurfaceCrashes": 1,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102970393750",
@@ -146784,7 +149304,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445702",
@@ -147369,7 +149896,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 7.72551999999394,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416445572",
@@ -147420,11 +149954,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104258587933",
-    "RiskScore": 0.3168442936156941,
+    "RiskScore": 0.37017762694902745,
     "RiskLevel": "Low",
     "RiskLevelNumeric": 2,
     "CrashCount": 3,
@@ -147835,11 +150376,18 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 3
+    "PropertyDamageCrashes": 3,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 15,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1102200931448",
-    "RiskScore": 0.49761704945563706,
+    "RiskScore": 0.5776170494556371,
     "RiskLevel": "Moderate",
     "RiskLevelNumeric": 3,
     "CrashCount": 2,
@@ -147940,7 +150488,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 1,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 4.46900000000028,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": true
   },
   {
     "SegmentId": "1104692117903",
@@ -148125,7 +150680,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 2
+    "PropertyDamageCrashes": 2,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 5.08881999999034,
+    "HasDrainageIssues": true,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "1104473135558",
@@ -148268,7 +150830,14 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   },
   {
     "SegmentId": "110416490905",
@@ -148443,6 +151012,13 @@
     "GeometryType": "actual_road",
     "FatalCrashes": 0,
     "InjuryCrashes": 0,
-    "PropertyDamageCrashes": 1
+    "PropertyDamageCrashes": 1,
+    "WetSurfaceCrashes": 0,
+    "IcySurfaceCrashes": 0,
+    "FogRelatedCrashes": 0,
+    "HydroplaningIncidents": 0,
+    "SlopePercentage": 0,
+    "HasDrainageIssues": false,
+    "HasEnvironmentalRisk": false
   }
 ]

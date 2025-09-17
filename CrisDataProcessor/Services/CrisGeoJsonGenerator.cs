@@ -104,7 +104,27 @@ public class CrisGeoJsonGenerator
                 ["road_linear_id"] = segment.RoadLinearId,
                 ["road_name"] = segment.RoadName,
                 ["road_type"] = segment.RoadType,
-                ["geometry_type"] = segment.GeometryType
+                ["geometry_type"] = segment.GeometryType,
+
+                // Environmental factors
+                ["environmental_factors"] = new
+                {
+                    wet_surface_crashes = segment.EnvironmentalFactors.WetSurfaceCrashes,
+                    icy_surface_crashes = segment.EnvironmentalFactors.IcySurfaceCrashes,
+                    fog_related_crashes = segment.EnvironmentalFactors.FogRelatedCrashes,
+                    hydroplaning_incidents = segment.EnvironmentalFactors.HydroplaningIncidents,
+                    slope_percentage = (double)segment.EnvironmentalFactors.SlopePercentage,
+                    has_drainage_issues = segment.EnvironmentalFactors.HasDrainageIssues
+                },
+
+                // Flattened environmental data for easier access
+                ["wet_surface_crashes"] = segment.EnvironmentalFactors.WetSurfaceCrashes,
+                ["icy_surface_crashes"] = segment.EnvironmentalFactors.IcySurfaceCrashes,
+                ["fog_related_crashes"] = segment.EnvironmentalFactors.FogRelatedCrashes,
+                ["hydroplaning_incidents"] = segment.EnvironmentalFactors.HydroplaningIncidents,
+                ["slope_percentage"] = (double)segment.EnvironmentalFactors.SlopePercentage,
+                ["has_drainage_issues"] = segment.EnvironmentalFactors.HasDrainageIssues,
+                ["has_environmental_risk"] = segment.HasEnvironmentalRisk
             }
         }).ToList();
 
@@ -255,7 +275,16 @@ public class CrisGeoJsonGenerator
             // Fatal and injury crash counts for severity analysis
             FatalCrashes = segment.FatalCrashCount,
             InjuryCrashes = segment.SeriousInjuryCrashCount,
-            PropertyDamageCrashes = segment.RecentCrashes.Count(c => c.Severity == KabcoSeverity.O_NoInjury)
+            PropertyDamageCrashes = segment.RecentCrashes.Count(c => c.Severity == KabcoSeverity.O_NoInjury),
+
+            // Environmental factors
+            WetSurfaceCrashes = segment.EnvironmentalFactors.WetSurfaceCrashes,
+            IcySurfaceCrashes = segment.EnvironmentalFactors.IcySurfaceCrashes,
+            FogRelatedCrashes = segment.EnvironmentalFactors.FogRelatedCrashes,
+            HydroplaningIncidents = segment.EnvironmentalFactors.HydroplaningIncidents,
+            SlopePercentage = (double)segment.EnvironmentalFactors.SlopePercentage,
+            HasDrainageIssues = segment.EnvironmentalFactors.HasDrainageIssues,
+            HasEnvironmentalRisk = segment.HasEnvironmentalRisk
         }).ToArray();
 
         return data;

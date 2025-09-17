@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5d7f0d3d-6f74-4526-9111-aaaca0a6a0d7",
+        "intersection_id": "e6a81e5a-925b-4bdb-908d-d84065506c2f",
         "risk_score": 0.65,
         "risk_level": "High",
         "risk_level_numeric": 4,
@@ -47,7 +47,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5c8b1197-e82a-44e6-a483-f5a2ac100d75",
+        "intersection_id": "2d8e97be-31df-4ef9-a37e-bb2dd7d7c368",
         "risk_score": 0.63,
         "risk_level": "High",
         "risk_level_numeric": 4,
@@ -132,7 +132,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "15c13a88-23eb-48dd-82b4-64a2e2adc477",
+        "intersection_id": "73cbb9c0-54b4-484f-b297-47076f91e5e3",
         "risk_score": 0.62,
         "risk_level": "High",
         "risk_level_numeric": 4,
@@ -169,7 +169,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "d3865002-4256-4156-b7e3-91e5a928d2e4",
+        "intersection_id": "0d69b8f8-fc89-4d8b-a9b3-c61626bbd7c6",
         "risk_score": 0.62,
         "risk_level": "High",
         "risk_level_numeric": 4,
@@ -206,7 +206,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "11b9c617-1ce9-4635-a4e8-8efde0eed4e9",
+        "intersection_id": "3cab347a-46c8-4c42-a09e-5625ba725f55",
         "risk_score": 0.56375,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -279,7 +279,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6d36efa8-3da2-4607-af3e-142e575f820b",
+        "intersection_id": "175a5ed7-e9d3-41fe-bc95-a48b4072772e",
         "risk_score": 0.56,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -346,7 +346,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "7224bd12-6503-40a3-94af-a3600c33382a",
+        "intersection_id": "298a1560-2533-4e23-9964-f92bb3ea3141",
         "risk_score": 0.55,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -383,7 +383,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "b0c90f0f-e62b-4c8c-8a35-7d32f7ac76a9",
+        "intersection_id": "30a701a0-92be-4139-93ad-b2376c56e6f6",
         "risk_score": 0.55,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -420,7 +420,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "3459f38e-78be-45af-975e-3c4bcbf545a2",
+        "intersection_id": "3d3ee6cb-dbe9-47be-b578-82b6f99a3af0",
         "risk_score": 0.55,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -457,7 +457,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "cfb7fd32-1211-4690-aa17-ce31ecaa25e0",
+        "intersection_id": "b78dca84-c3bf-44af-bca8-b5d7a5e56446",
         "risk_score": 0.52,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -530,7 +530,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4ce1da6a-bdb3-4107-9d6c-bdf4c8a29c8e",
+        "intersection_id": "2bdfb66d-b7e6-4eed-b7cc-a01d545c42c2",
         "risk_score": 0.5,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -615,7 +615,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "12beb548-a7bb-478d-a257-837b46b9560e",
+        "intersection_id": "12494e14-7ec1-4786-a8e2-29e7333650bd",
         "risk_score": 0.489,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -700,7 +700,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "88410d18-e82d-493d-b219-10093dab5138",
+        "intersection_id": "2036fce1-80c5-4558-8586-52812d4f1862",
         "risk_score": 0.4866666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -743,7 +743,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f6f605f0-6a19-444c-b4bb-164364795c3d",
+        "intersection_id": "c55ddb08-7e42-4bf6-9ec6-cfbec6af9c66",
         "risk_score": 0.4866666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -786,7 +786,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "83298522-bef3-499f-9497-fba1143a1f9c",
+        "intersection_id": "372232dc-002c-4791-8192-4461a7331a97",
         "risk_score": 0.4866666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -829,7 +829,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "976fc168-d22f-4f13-ba85-0450a8d8501a",
+        "intersection_id": "0ff8635a-130b-4e89-a8de-03e753302673",
         "risk_score": 0.4866666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -872,7 +872,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "8eb86e16-41f7-49e6-af96-6efbc384293c",
+        "intersection_id": "6f8e6967-d894-4595-8061-d8efa129382b",
         "risk_score": 0.4866666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -915,7 +915,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "a6983256-04f5-400d-932c-b33e82ae9615",
+        "intersection_id": "e18d49bd-d8fa-4431-a401-d9fc8f91ab9a",
         "risk_score": 0.4866666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -958,7 +958,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "041e3a92-047a-426a-b2e1-64a2fe8325a6",
+        "intersection_id": "7646fbf3-1043-4f87-8c69-47a63265fe3e",
         "risk_score": 0.486,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1013,7 +1013,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "487e38c7-4f6b-4cff-ab2a-32ec64303e01",
+        "intersection_id": "29b7c563-bb28-4e12-87d9-b05d2e68679e",
         "risk_score": 0.4716666666666667,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1074,7 +1074,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1767bd01-b9a4-4970-b437-14598f471d78",
+        "intersection_id": "1f396441-5b51-4b5f-b0a5-a3c2446c5c88",
         "risk_score": 0.4633333333333334,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1159,7 +1159,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9f88aa79-01cf-4a75-bc78-90dddee5880b",
+        "intersection_id": "b2a997a3-a6ef-4e85-9875-dfcae4f220dd",
         "risk_score": 0.4463636363636364,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1244,7 +1244,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5bcc82ca-7764-40a8-9eb5-2e48e5e25d1f",
+        "intersection_id": "c52e83fb-ed3d-423d-b27e-bfb53d95019d",
         "risk_score": 0.445,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1281,7 +1281,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "a4c56b36-b5e7-4de2-b1cd-b83196b0a5e0",
+        "intersection_id": "5cfb602d-995a-4018-ae56-c49211f68601",
         "risk_score": 0.445,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1318,7 +1318,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "13cded8f-b4f5-4804-8926-91a50b9612bb",
+        "intersection_id": "1439f1f6-a102-4311-bf27-8a8a97ee7210",
         "risk_score": 0.445,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1355,7 +1355,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "b9c74d6a-702b-454d-b094-156a780397f8",
+        "intersection_id": "1c6a29e2-ac46-438f-a147-18bd5f70e4d0",
         "risk_score": 0.44,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1398,7 +1398,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "cbe239e5-377b-4888-94e9-3b061ba25756",
+        "intersection_id": "f4da1b12-f8d9-4d93-862a-21d67475ffaf",
         "risk_score": 0.44,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1441,7 +1441,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1c4b0d95-0358-4232-9469-906914b32acc",
+        "intersection_id": "055919ed-2a12-4f0c-b898-9058ed73b87a",
         "risk_score": 0.435,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1490,7 +1490,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2e089f7a-7399-4a0b-ae1d-d81708c2c0a7",
+        "intersection_id": "cf0e4531-69d6-4b38-9321-eb3dde9f91d1",
         "risk_score": 0.43,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1545,7 +1545,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "d263597b-ddde-49ee-a2a4-775fd27e3dac",
+        "intersection_id": "04b63681-c291-47c6-b691-085f452ce828",
         "risk_score": 0.426,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1630,7 +1630,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "c1d6114e-1c09-4b1d-9aa9-de0bf4dce15e",
+        "intersection_id": "7cb602e2-3232-40b7-bd28-37512ffdd605",
         "risk_score": 0.41375,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1715,7 +1715,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "14cb45ae-c1c6-4762-8cb7-9d095f08278e",
+        "intersection_id": "7094bb2d-f206-4ea5-b27f-1c8d8d9b2dec",
         "risk_score": 0.4133333333333334,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1776,7 +1776,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2b75c060-3477-4963-b598-eb3a3c5d484d",
+        "intersection_id": "51976f20-1cab-4d09-8069-782597ffd05c",
         "risk_score": 0.4133333333333334,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1837,7 +1837,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "7add7f02-cf9c-448e-bf54-8f98f5d978f5",
+        "intersection_id": "3f4f2c1f-6d81-411f-8a54-8785d67092dd",
         "risk_score": 0.4,
         "risk_level": "Moderate",
         "risk_level_numeric": 3,
@@ -1886,7 +1886,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "e222d74f-9913-45b5-bf01-b80e68c24847",
+        "intersection_id": "3d06d871-3b9a-46ed-9749-a6b3991b5d05",
         "risk_score": 0.3975,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -1959,7 +1959,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9c327ec0-de64-4899-89f7-cc9f7f79ce3a",
+        "intersection_id": "90b2e62b-a446-4578-a9aa-0e2557d1a50c",
         "risk_score": 0.3933333333333333,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2002,7 +2002,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "3d811b7c-67dd-4866-b17a-d881661c071a",
+        "intersection_id": "0ec906f0-1adc-41ca-bf4b-80ff88b8ec8c",
         "risk_score": 0.3933333333333333,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2045,7 +2045,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "101db6b3-e7b7-438d-b63f-3fb07c0444ed",
+        "intersection_id": "46b5dcd3-c126-4eea-afff-16968a8dea74",
         "risk_score": 0.39,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2106,7 +2106,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f345b6c1-983c-4916-8737-bf55932211fe",
+        "intersection_id": "5919cd52-7a86-4cca-9380-7bf904cf6d82",
         "risk_score": 0.39,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2167,7 +2167,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9aef038b-e6bb-4999-b979-42713d132422",
+        "intersection_id": "153d6b48-859f-4452-9fb2-84cc6a47535e",
         "risk_score": 0.388,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2222,7 +2222,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "72fc51c3-4f6b-4122-ad0f-45d8662d25e1",
+        "intersection_id": "071f9d72-805e-4cc6-846e-bfdcc25f0410",
         "risk_score": 0.388,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2277,7 +2277,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "a6fb94f1-6fd0-470f-9650-40b6d5becf65",
+        "intersection_id": "7c4bf5c3-ccc9-42d7-820c-d39c7d695633",
         "risk_score": 0.388,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2332,7 +2332,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9237dbf2-52bd-4a31-900c-f228911b47b7",
+        "intersection_id": "c73b7622-f098-45b0-a0dc-50abc5b53a92",
         "risk_score": 0.38000000000000006,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2399,7 +2399,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "b309e880-24e8-4fa8-ac91-280a31164bcf",
+        "intersection_id": "d419f0fb-1d66-4412-a3ab-f3c7d9f67061",
         "risk_score": 0.3788888888888889,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2478,7 +2478,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "922c556b-fd7c-493e-aec1-e27bf5a37c6c",
+        "intersection_id": "88f9a31e-2dea-4a7e-b28e-cfc78b7a3b44",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2515,7 +2515,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "04799f64-5297-4428-bc97-38c417cdbb3f",
+        "intersection_id": "81f5b1e0-bc4e-43ee-8a52-8b3538905435",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2552,7 +2552,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6dc58866-0ba0-43eb-88b6-da7ea5259df8",
+        "intersection_id": "e613f358-f946-4d98-9fca-f6a9b30d3655",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2589,7 +2589,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "408e9ef7-da7e-4677-9ed5-05c101d8a2a6",
+        "intersection_id": "cdf646c8-2492-45ec-9517-dce815ed5c15",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2626,7 +2626,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "62254c6a-6e98-4425-af54-16ffa62df655",
+        "intersection_id": "7b28a45f-1497-42f1-b331-009728660cff",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2663,7 +2663,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f9254004-660f-4fd1-9d5b-279e2fc94990",
+        "intersection_id": "ae0197c7-8278-41dd-a27b-4b5974eeef96",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2700,7 +2700,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "783924a2-6d36-41d1-8f82-41f53de82d0b",
+        "intersection_id": "2d8dd49c-bf68-473b-a00b-4c87c7e2b89b",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2737,7 +2737,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "94dfc3ca-0d7b-4469-8cf9-65b34de7f2e6",
+        "intersection_id": "5d31f7ea-9e67-4101-80ee-cb46764ac22d",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2774,7 +2774,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9533023c-f370-4c37-8c7c-421a8f3faad3",
+        "intersection_id": "51e70fec-c702-4a06-a996-41458a8fde15",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2811,7 +2811,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "253492ae-b882-42fa-bd00-05ba318d0e0b",
+        "intersection_id": "53e0e5dd-a4ea-4e78-adac-09385900d50b",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2848,7 +2848,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "76dfbd98-c438-4063-b734-fbf50381c1b4",
+        "intersection_id": "fc684be8-bd49-44d2-8a83-b10dff1047f9",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2885,7 +2885,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "e8b840c9-0a4b-436b-b801-151992f358a2",
+        "intersection_id": "e7befa46-9d33-4d34-bdc4-2cff03453f29",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2922,7 +2922,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "29587b28-e678-4528-96ce-ac5677fab2a6",
+        "intersection_id": "4c9093f8-24c3-4619-8d5a-3aa2ac4fcee1",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2959,7 +2959,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0a89e5be-f1b3-4c12-9044-aa520b81b99e",
+        "intersection_id": "25aefd27-27a1-467d-9874-5d2dbc1774fb",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -2996,7 +2996,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "47a3e3ad-bb64-43e0-9f9a-a5f8eec383da",
+        "intersection_id": "e4d02c24-6fa7-48dd-8d0b-0221c22ecac0",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3033,7 +3033,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9fb199b1-938f-4551-b956-df82cb5bf335",
+        "intersection_id": "677f620e-fe11-4f6f-8a6a-0e95abccbc64",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3070,7 +3070,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "16f89036-7e75-44ad-9ba1-ddbb62c697f4",
+        "intersection_id": "2df2be3d-58b7-47a2-898d-faa476279706",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3107,7 +3107,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "585afe6a-9b1f-458a-80ce-fd3d3be35e66",
+        "intersection_id": "8b32aa3d-bb21-4586-9dcd-f55f4b5a5db1",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3144,7 +3144,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "afe68aad-2a75-4d9f-a70c-cb45c08036fa",
+        "intersection_id": "e9fbd45a-643e-481c-a318-48e22a0ceab8",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3181,7 +3181,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "bb0f579c-1117-44bb-b1aa-99f9c30e3468",
+        "intersection_id": "fc5ff3f3-5bd9-4d80-9264-2cf00e9e8929",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3218,7 +3218,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "accaa2ff-6e7a-463a-bc76-da72430cb81a",
+        "intersection_id": "846d7387-241e-479c-bf93-b622e8aae6ba",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3255,7 +3255,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0b352a55-9812-46fd-932c-d713df84868e",
+        "intersection_id": "704dd2e4-d179-452f-ab5a-192dfc1211ca",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3292,7 +3292,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ab4bb462-da1c-445b-969c-67f2a6223a69",
+        "intersection_id": "c1f79c51-f6dc-42a7-bcdf-e7f17fb05d86",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3329,7 +3329,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "c9365abe-11e7-4af1-b470-52db6282a4df",
+        "intersection_id": "8b44620d-2bd4-4093-a85b-c4aa36093530",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3366,7 +3366,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "72260ade-bd37-4451-96d4-50ea9fb24e9a",
+        "intersection_id": "8d43179c-44ac-4205-8203-41864f66a148",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3403,7 +3403,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2c1bec06-a2b7-455f-bca5-97fcd8ba262f",
+        "intersection_id": "a2e558e7-0e5d-4140-acc7-d4a0377e7eb4",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3440,7 +3440,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "91b0d7c0-2480-48b4-b566-2e58b928ad5e",
+        "intersection_id": "c3195ba1-dad0-4d4b-8f10-7af1faaa7922",
         "risk_score": 0.375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3477,7 +3477,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "bcf71d1d-8972-4ae1-94a9-6ba1ed82924d",
+        "intersection_id": "201247d1-05cd-4915-8755-24c69f27ea72",
         "risk_score": 0.37,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3562,7 +3562,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ecca1a68-8b40-4708-9c61-6b1793e9fb7b",
+        "intersection_id": "3318a1fd-d092-482b-8259-acb9121bdc0c",
         "risk_score": 0.37,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3605,7 +3605,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "15124e89-d568-4fe5-a191-52a1aafd88bf",
+        "intersection_id": "f540e7d8-3b64-47c5-bb1f-cec9f7dd02e1",
         "risk_score": 0.37,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3648,7 +3648,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ad6353ac-9f5e-4735-b793-970be85b709f",
+        "intersection_id": "4697f26a-1dbf-4861-a594-e474938fea91",
         "risk_score": 0.37,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3691,7 +3691,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ff326f45-9331-4849-8209-53c77fb197cb",
+        "intersection_id": "91cbb431-7268-4a64-981c-8cdf93eb17b3",
         "risk_score": 0.37,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3734,7 +3734,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "989c73a6-4c9f-473d-ad6c-868c74f0563a",
+        "intersection_id": "4eb4c8cf-a113-4042-9c64-021d23600fec",
         "risk_score": 0.3666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3795,7 +3795,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ef2873b7-8d93-440a-b980-f199f5c91ca9",
+        "intersection_id": "0389cb6b-52eb-42e2-8b61-62ade5664f93",
         "risk_score": 0.35375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3868,7 +3868,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "18aee98e-a78c-453e-9015-93eaf3f95fd2",
+        "intersection_id": "e7663040-5be4-4434-97e9-57cd81b99c34",
         "risk_score": 0.35375,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3941,7 +3941,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "90b9afee-10da-461c-9210-fa56ca81b17b",
+        "intersection_id": "239f5c31-5888-449a-b9d3-ef3c3c3d7c5b",
         "risk_score": 0.346,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -3996,7 +3996,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4392faac-d13f-445e-a132-2fd7e1f18ac4",
+        "intersection_id": "d3bf29c9-e3c3-4d36-a75e-61e55ee05a8d",
         "risk_score": 0.33166666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4057,7 +4057,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "c5f5bcc7-1d65-4f45-8dcb-3e268fb192dd",
+        "intersection_id": "844a9cd5-e4bb-4a37-99bf-cbf280a21a73",
         "risk_score": 0.32333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4100,7 +4100,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0acb646c-81fd-4139-aa56-417e1cf39193",
+        "intersection_id": "8d4d1eb5-2b14-4ab5-a2a0-07bbc56e7022",
         "risk_score": 0.32333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4143,7 +4143,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "071d461d-f43c-43ec-8d30-14d3f642a4b8",
+        "intersection_id": "7a269099-3ca7-47a4-b728-e31ae723cc74",
         "risk_score": 0.32333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4186,7 +4186,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ce03ee44-d7c9-4e0a-9a2d-40019f7d458a",
+        "intersection_id": "b9a61cbc-dbae-4500-81db-60b3f0f54a1d",
         "risk_score": 0.32333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4229,7 +4229,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "dc13294f-1cbe-4e75-8696-137d88df94b7",
+        "intersection_id": "7210ad48-2f78-4255-b364-69977bc87ef9",
         "risk_score": 0.32333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4272,7 +4272,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f2a09d79-80f8-442c-84ba-0b028796cb24",
+        "intersection_id": "86c75f65-9566-4c76-a808-69e4c4a22143",
         "risk_score": 0.32333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4315,7 +4315,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "775fbc48-5e36-4d90-ba7e-2b1760f7360b",
+        "intersection_id": "aeae3570-17b7-4529-a789-0af686ad5dd5",
         "risk_score": 0.32333333333333336,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4358,7 +4358,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "35a36e13-db8d-479c-a57f-df9bc41d3f67",
+        "intersection_id": "8a39ad13-5b7f-4e34-bb6e-e92065d29444",
         "risk_score": 0.318,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4413,7 +4413,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "e6661181-af87-4ad6-97d7-2df26080b4d4",
+        "intersection_id": "735be4ad-d63e-40e6-8aa9-cc312fc2a1c5",
         "risk_score": 0.3125,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4462,7 +4462,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "61f3968d-e978-4f8e-95b0-ae7b69305671",
+        "intersection_id": "a40eead9-0291-4067-af15-02f5de9f4369",
         "risk_score": 0.3125,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4511,7 +4511,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "02a2a45c-bc03-424c-b727-ca7e82a5e51d",
+        "intersection_id": "4368be90-8059-4a1e-ab4e-4ea8f12f0ca5",
         "risk_score": 0.3125,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4560,7 +4560,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "96b373a6-e65b-4434-abc8-91c126e9fb7f",
+        "intersection_id": "64c19f08-f212-4fee-9613-f5e0849a27bc",
         "risk_score": 0.31,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4633,7 +4633,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "d91420f1-3094-4166-8d8f-bf7f7e5cd332",
+        "intersection_id": "2cca050f-1575-4002-a35c-c39c1975f28a",
         "risk_score": 0.30833333333333335,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4694,7 +4694,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "cf8456d1-618c-4239-8a3f-d3fb2024b22e",
+        "intersection_id": "0237a0fb-8c66-456d-b1c1-1981202dc8d4",
         "risk_score": 0.30833333333333335,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4755,7 +4755,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6a320630-0457-437c-9ff3-b7df3e6c91e6",
+        "intersection_id": "8a6a48b8-ea0b-4a4e-95a3-03a52bea6655",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4792,7 +4792,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2530e8f9-02c3-4d20-b805-d060896d3e21",
+        "intersection_id": "76fc6ef1-4935-42a4-9924-f0cbb21effe2",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4829,7 +4829,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "089caa22-e9ff-4a8d-80e7-b329a5e479a6",
+        "intersection_id": "9dd99581-d3ee-47a9-88cc-9813e979dd6d",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4866,7 +4866,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "89d6e152-2e62-42a7-af2d-c4ea784c80fe",
+        "intersection_id": "566d8e35-391c-4126-b0d0-fa6ca29a9a66",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4903,7 +4903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2372b81a-1cd2-4028-ad53-15a22d99aa3a",
+        "intersection_id": "e578cfab-13d2-417a-a480-e7bdcd3f0dd9",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4940,7 +4940,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "d39200fb-e2ec-418d-a1c2-7f8085287276",
+        "intersection_id": "f3912e1a-23f3-413a-ad66-0d50e3ef12ac",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -4977,7 +4977,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2f3e2550-efa9-4255-82a1-e2c56b8bb47c",
+        "intersection_id": "5398e9b0-b1ef-45a2-846f-9e96060bd208",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5014,7 +5014,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6672fc0c-4b1d-49c0-8d99-6297515a564f",
+        "intersection_id": "ca769f83-02b7-4da0-a2bd-26102d96e3a7",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5051,7 +5051,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2a68bef7-2577-46c7-88e2-165221f0d5ae",
+        "intersection_id": "6e860008-a120-4ba7-a5bd-cc0fff1050ff",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5088,7 +5088,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "128b9639-89dd-4dd2-899a-b39f164f5498",
+        "intersection_id": "005eda06-6b07-436c-b977-73ea14d50c80",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5125,7 +5125,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "edcc0abf-09e3-4fa7-8fdd-51e66cbe9201",
+        "intersection_id": "d31422a2-4825-43e5-bc6e-ce0c9f955614",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5162,7 +5162,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "41cadfbb-0fb3-4965-9d10-2a256e369b8b",
+        "intersection_id": "0ee65a54-5c99-4c04-85ac-8759c2ad6a8a",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5199,7 +5199,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "a3385104-a28b-4e50-9683-46bbaf8818b3",
+        "intersection_id": "33375079-5572-4122-8050-f9551070b319",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5236,7 +5236,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "12f9d88d-4908-4b99-88c4-62c4999b4260",
+        "intersection_id": "a8f30f31-d32e-4fdc-8873-1ca96d11b3dd",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5273,7 +5273,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0ee758f9-4daa-4d1c-aaf7-ae2c4d92dc6c",
+        "intersection_id": "0c28f529-c2be-4d55-ac68-ce4f5feab1e1",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5310,7 +5310,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "553e1067-e5d3-4b17-94ec-486452200398",
+        "intersection_id": "1e014e11-0899-409e-a10a-6d38398bd874",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5347,7 +5347,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5ec27037-b092-4ecb-beb9-94b559e011a3",
+        "intersection_id": "ebd4722c-447f-48a8-bdc9-10f6b45b97f6",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5384,7 +5384,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4f13b3f1-99c8-4fdf-8c83-2e1d2e994ee6",
+        "intersection_id": "11b3e1ad-912a-4b10-b1cd-336d1e6827a6",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5421,7 +5421,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "98f2f9c6-4344-4507-9166-22a788af865a",
+        "intersection_id": "02c7cc85-3ac2-4989-a2ae-43d14097299f",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5458,7 +5458,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "bb52f193-380d-4d33-b5c8-649507c29736",
+        "intersection_id": "e7cfa2b0-1197-47f8-8253-a2aa66078610",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5495,7 +5495,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "7c9e19c8-c0a3-4bc5-b0ba-7b4c7570983b",
+        "intersection_id": "6e35c6d0-debc-4a01-bdf8-94d38c967720",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5532,7 +5532,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "68b715d7-10a8-4d9e-b990-88557e4ee7df",
+        "intersection_id": "178c263e-c40f-4985-8d79-679273b8132c",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5569,7 +5569,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "e8fa7587-d5d2-46a1-adab-3212ed23f2db",
+        "intersection_id": "0f1d60ed-8c1a-4dd5-95a3-7c40f628cbf2",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5606,7 +5606,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "620831b8-a178-43a6-87c3-40e4524fdc99",
+        "intersection_id": "32c4cca1-780f-40ea-835b-20fba95e6e40",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5643,7 +5643,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ab3fac94-dbb8-4fb6-82b1-7eca62335b12",
+        "intersection_id": "39485d62-5cd5-4e42-802e-3bbe302bb7d6",
         "risk_score": 0.305,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5680,7 +5680,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4324e5bd-0078-493d-8a65-fb68bbdc53ed",
+        "intersection_id": "8c95afd4-cead-49f2-8a3e-12c4ffb7c08d",
         "risk_score": 0.3025,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5741,7 +5741,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "8c5149c4-39ce-4e77-92fb-2743f57904f8",
+        "intersection_id": "c304a931-b95e-4a95-8346-116c4e5d10da",
         "risk_score": 0.29,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5796,7 +5796,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ced7fe9b-8f51-4b96-a59f-5af6c49b95ff",
+        "intersection_id": "1cf7bff8-304c-4199-86d4-51b2e0563708",
         "risk_score": 0.29,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5851,7 +5851,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "fd63adca-8f66-48a2-8a18-da518cc62440",
+        "intersection_id": "afdfb917-de9c-476f-98f5-dc2837f05461",
         "risk_score": 0.29,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5906,7 +5906,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9c1ec7a6-5f95-4fb1-96a1-806d86131c4a",
+        "intersection_id": "60b3e166-e648-4236-923b-dab45665018e",
         "risk_score": 0.29,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -5961,7 +5961,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "bb5d3753-40d3-44dd-b7cd-e38ab7e54a19",
+        "intersection_id": "2b0269a5-2195-48bb-a34a-2853f1b945b2",
         "risk_score": 0.29,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6016,7 +6016,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1f307af2-9e12-42ac-a8fb-026b1866d760",
+        "intersection_id": "938f924f-b56a-404e-bd36-e5d8292a044b",
         "risk_score": 0.2775,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6065,7 +6065,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "bad8c1a3-ba9e-484e-a801-574bb0325ddf",
+        "intersection_id": "b283b8cc-5c5c-4a1d-bd49-0695537cc521",
         "risk_score": 0.2775,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6114,7 +6114,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1a32fa08-a7dd-49e6-b165-1c952a49e878",
+        "intersection_id": "d0724e50-4739-46f6-87b6-1b16049e1513",
         "risk_score": 0.2775,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6163,7 +6163,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "fa132ff5-3e64-4f9b-800c-e9e73ad78903",
+        "intersection_id": "05f6034f-6e67-4fdb-ab7f-6efbd9276fe3",
         "risk_score": 0.2775,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6212,7 +6212,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "dafabe8d-2da3-493f-842e-b2df62d39dde",
+        "intersection_id": "3415e594-093d-4d30-b325-6a7d10a36d23",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6255,7 +6255,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1d8fc51d-f9f8-42a0-9716-e5200c2efafd",
+        "intersection_id": "41de00ef-6ef8-4d84-91b5-bbc24076ba42",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6298,7 +6298,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "3341d35b-9584-43a0-a5a0-9b0fd09426ef",
+        "intersection_id": "2bac5cca-c497-4580-8eb0-8b44d765470e",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6341,7 +6341,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f88bdead-acf5-43db-99f7-e90a304ae5c7",
+        "intersection_id": "26b97a3c-3f59-4a63-9e9d-8790d039f933",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6384,7 +6384,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "7ba5204c-7069-4b92-95b9-54da0de38faa",
+        "intersection_id": "cfdc0760-5061-4fc1-801e-23e9b634c5a0",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6427,7 +6427,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "293b1415-3752-4964-be40-6acab0efbadf",
+        "intersection_id": "db757208-ff11-4959-8c74-0028024695bb",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6470,7 +6470,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ae4c8fb2-a158-493b-bf3a-071ace14873c",
+        "intersection_id": "d7348c04-6bd6-40b4-8fc5-990422bef186",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6513,7 +6513,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "07e7f904-7d5b-4ad5-84db-f88d342e69af",
+        "intersection_id": "f13d663f-9a7e-4697-ac57-c3bfb92f1009",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6556,7 +6556,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4d8e804e-95d7-4c32-a779-6924208c8c19",
+        "intersection_id": "af5662b7-4bfc-4576-b2b8-3e5601bd6fdc",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6599,7 +6599,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9fb30db9-aed6-4bbd-aa91-9639c2b350d0",
+        "intersection_id": "8a205d54-0c66-4099-9a27-5819a13584ca",
         "risk_score": 0.27666666666666667,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6642,7 +6642,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "e04ecc0a-13e2-44ae-8771-c6a62e519ae5",
+        "intersection_id": "b794f86f-ed6e-4e89-8f5a-54a23b92f650",
         "risk_score": 0.25,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6703,7 +6703,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6b78b082-d9da-47bd-9a4f-32fae0307d2e",
+        "intersection_id": "924ce466-2cef-480a-b617-2a470a2312a3",
         "risk_score": 0.25,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6764,7 +6764,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "7032bf5c-a586-4593-99da-5e276b720dd8",
+        "intersection_id": "3bd0035d-8024-41db-ba44-9f39335c3f79",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6801,7 +6801,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "3fe79e60-b02a-4ec3-8c8c-cb3e25edb952",
+        "intersection_id": "67aa9428-8fe6-4539-ab59-f1523622db09",
         "risk_score": 0.235,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6838,7 +6838,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "feb92a40-efd8-4781-a9df-bf093144104c",
+        "intersection_id": "318a1b72-14f4-454f-a9c9-a2818c1e44d5",
         "risk_score": 0.22,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6893,7 +6893,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "b6b41a84-1c4e-469e-9589-d7a78c12515c",
+        "intersection_id": "0c8a0513-9215-4f74-bb0e-e37ac9f50225",
         "risk_score": 0.22,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -6948,7 +6948,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6f22f3d8-3c4f-4771-9ef9-95171492d576",
+        "intersection_id": "49b16759-fbc6-422e-8307-01cb8b2a9a65",
         "risk_score": 0.22,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -7003,7 +7003,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "60a9a603-9d52-43c8-9986-06b6ebdb3ebf",
+        "intersection_id": "fdaa72d4-67a1-43e1-b2e2-ee61dbdca14f",
         "risk_score": 0.22,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -7058,7 +7058,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5d53109b-cc5a-4b30-9fbe-a2bbed1d4dcc",
+        "intersection_id": "a8ef0efa-fc14-4fe2-9182-eed3a556bec1",
         "risk_score": 0.22,
         "risk_level": "Low",
         "risk_level_numeric": 2,
@@ -7113,7 +7113,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1c20283f-f1eb-4e34-8429-78f717176e5b",
+        "intersection_id": "27b8225c-70e6-48a9-9842-77acb28729cf",
         "risk_score": 0.19,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7162,7 +7162,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f573f50a-5d16-4a7a-9870-7db5ae585fde",
+        "intersection_id": "9f37fe41-77e6-4cb9-a08d-773bffbb2fbf",
         "risk_score": 0.19,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7211,7 +7211,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f2b9c7f0-fb9b-4386-807e-e30254b65b4e",
+        "intersection_id": "b10ab220-0fd6-4068-a75c-c0da59159892",
         "risk_score": 0.19,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7260,7 +7260,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "3bb83bd9-2d31-442d-b159-a2b50ce4610c",
+        "intersection_id": "9d776800-eba4-41f4-bc7c-913fe7c22d37",
         "risk_score": 0.19,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7309,7 +7309,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "e75480d0-828a-4c0c-bc85-d6a3f5e1b35e",
+        "intersection_id": "f0d98e04-ca46-455e-85d1-1a327b31fb05",
         "risk_score": 0.19,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7358,7 +7358,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "df98950c-dc4c-436a-b283-506eead0cfd7",
+        "intersection_id": "32699adc-ee03-43e7-a462-4fb8e40dfc51",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7401,7 +7401,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "363b16ef-b808-48f2-bf8e-10d59d4855fd",
+        "intersection_id": "a0b6c13d-79a9-4a14-95a1-b5e09b7c21c3",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7444,7 +7444,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "64f00f11-2e84-4242-94ab-a73814b978de",
+        "intersection_id": "801b84ae-859f-41b0-badb-8ca6004e1fc0",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7487,7 +7487,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "c7a86dbd-8f5f-4043-a25f-47f2aba0e515",
+        "intersection_id": "9c211809-b32e-4462-8ad5-9e3b46ddea14",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7530,7 +7530,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "10d0b831-e402-44fd-9c12-fdd96d27d018",
+        "intersection_id": "d273241a-6390-4a2e-bf05-9883f0db9ada",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7573,7 +7573,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "96451008-276a-42b7-815e-a6ec5bb66fc0",
+        "intersection_id": "c6983b29-df2c-4323-bb3f-d808c8b79bfc",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7616,7 +7616,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "b64417c5-ee57-48b8-b4b6-7eec27a77103",
+        "intersection_id": "016cbbe7-0df8-4c9e-a4b7-10f6283c9811",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7659,7 +7659,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "959162ee-620b-40d1-bb80-54e35c84cfa8",
+        "intersection_id": "77027710-e4fd-4eed-b42d-cd0b73fb1708",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7702,7 +7702,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "d128128f-c800-45cc-9765-c823970de33f",
+        "intersection_id": "6c3b06b8-b8f0-46e6-98a4-cc6b7a52fec2",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7745,7 +7745,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "57a47596-f269-488c-a474-adb195686cff",
+        "intersection_id": "dfc82bc2-f77e-46ca-baf5-f2a8fe3cd419",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7788,7 +7788,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "24937616-7d3a-43f2-8659-691c5ec26c41",
+        "intersection_id": "08dbd2b0-3922-482c-9b26-70fd8a4aee6f",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7831,7 +7831,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "14d9e6c0-2761-4c6e-92e3-ad6b57f38342",
+        "intersection_id": "2c027f5b-0769-407f-a91b-50c036f7407b",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7874,7 +7874,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ad66eba8-1dbf-401c-af64-6739e3191b97",
+        "intersection_id": "8df01e90-46e5-4ca6-9e31-ab9f1e3f22e9",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7917,7 +7917,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1595f6f5-8e08-4d64-95be-2ad70d2193d3",
+        "intersection_id": "49a28e85-4cfb-45d4-a4c3-52d0e1692eee",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -7960,7 +7960,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "8934120d-5c30-4fa2-b1b7-21998343f8ac",
+        "intersection_id": "155c357d-7c54-4caa-bef4-e7e1b833438f",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8003,7 +8003,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6350086f-5841-461f-ad14-c57b8e3c74e3",
+        "intersection_id": "3fa33ecc-ce95-4bd7-98e9-bd4a7a731079",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8046,7 +8046,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "db8d3a0d-3873-40d1-99b4-6409b174a99a",
+        "intersection_id": "501ad011-b776-4606-aade-0e2fa93121d3",
         "risk_score": 0.16,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8089,7 +8089,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "01f13214-be4f-40b7-8196-d5557913dc73",
+        "intersection_id": "93813047-c757-4469-aa10-24fe4af451d8",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8126,7 +8126,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "338da182-3351-4b16-ad42-64b56c2e83f7",
+        "intersection_id": "0eb734fe-181b-49ab-8811-f528047fda6a",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8163,7 +8163,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ded9a367-f443-4da5-8ac3-494a7866c451",
+        "intersection_id": "1e6cfbac-7386-4666-8b48-132f97bcf384",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8200,7 +8200,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "03766f8a-0d7d-4854-8644-4d9c45670d9f",
+        "intersection_id": "e7793bf3-bba4-4705-b704-d936edaae96e",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8237,7 +8237,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "891dc898-d591-4c92-90ef-171581b2f6a6",
+        "intersection_id": "25c4d7aa-dbe9-4894-8f52-afe99d6ae13e",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8274,7 +8274,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "a292f56e-1742-4919-885a-786cce076940",
+        "intersection_id": "5ad857e2-7101-4f5f-bf0a-5c03dd9aa0bb",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8311,7 +8311,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "94a8b48b-a889-4109-922b-9633ab7d7870",
+        "intersection_id": "2d172d27-78c4-4487-bb7a-5623c2a32f7f",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8348,7 +8348,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "fdb73114-d984-4505-bb12-ebede4bf555e",
+        "intersection_id": "0307e8b4-d73d-4939-af68-d5a8fa7933ec",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8385,7 +8385,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1745905e-48c0-4e6b-b344-9e7aebda99c6",
+        "intersection_id": "0677749f-eefe-4fc0-887d-a439e15ed3c7",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8422,7 +8422,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ce8959ff-9021-4f8c-bb4a-de8360662ed0",
+        "intersection_id": "1d837646-08cc-4cfb-9b99-ceff677d04d8",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8459,7 +8459,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f5357dad-9c88-429a-bb1c-90381cda553a",
+        "intersection_id": "d7e1b3cf-a6e2-47c5-bcd9-72e80239baee",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8496,7 +8496,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4d35ebcc-a1dd-413f-adb1-b578d577224f",
+        "intersection_id": "b2e42460-1368-4acf-81c8-92a0cd39c5a4",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8533,7 +8533,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "07768dae-df5e-4f6d-8da7-8df8512ab21e",
+        "intersection_id": "c4dc8dfe-2700-4005-948a-beffda2c9b2d",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8570,7 +8570,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "43446bb5-5f80-4b9c-ad86-b8da63a55f07",
+        "intersection_id": "77c238fa-a6f2-4da4-a456-0495761fe4a3",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8607,7 +8607,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "85206aca-2dea-491b-ba92-c7a0e96d0fda",
+        "intersection_id": "18c979e6-ff46-4aa4-8e7e-e2fb3f3d609c",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8644,7 +8644,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "7548dd1a-4888-460d-a3c3-009030d649e8",
+        "intersection_id": "da29d3dd-6d2c-4e12-9336-3ad1ec6405d5",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8681,7 +8681,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5fe4bcb5-cddf-4db8-8121-951ae3fed30a",
+        "intersection_id": "bcb4ebac-ebc2-4ff6-92ec-6bd6d3e0b904",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8718,7 +8718,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "a9ce02b1-ae02-4e64-a739-00a10da941c0",
+        "intersection_id": "d3150b62-f6a9-47ae-aa9e-851043354861",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8755,7 +8755,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9a8eed3b-8819-4b28-9190-3215f16c7de8",
+        "intersection_id": "f42cabf3-fb20-44f7-b314-bb3d1f81c1fa",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8792,7 +8792,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "b7a96db0-37ac-4a37-a5d8-40896674d0ab",
+        "intersection_id": "12d7e540-6974-415e-a7c9-2d9d4444eee5",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8829,7 +8829,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0ad73322-965b-45fe-b694-f2f60f7bfd8f",
+        "intersection_id": "fd2e386d-6b40-47f6-adfd-c1b5bb0a5358",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8866,7 +8866,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "47881631-f4c3-42a7-80fd-b56a38368eb3",
+        "intersection_id": "63f7f080-96f1-4cd8-ac5e-54b3fc3db606",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8903,7 +8903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "e01ba4ef-21ac-4bc8-b159-2f6734adf9e6",
+        "intersection_id": "63faeaeb-d04e-462d-926c-d466316e9cb5",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8940,7 +8940,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "07a899ce-30c1-4512-9287-fd17b4177bbf",
+        "intersection_id": "6c2a4ab2-f3a4-4fd3-8f41-91609425e11c",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -8977,7 +8977,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "93275c7e-1c0f-4a0a-903c-ad18ed16a6f9",
+        "intersection_id": "0b748609-14eb-47a5-8401-85806029a5ad",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9014,7 +9014,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "d6bcc20d-7c6a-4ebb-90fa-5a66d4e98637",
+        "intersection_id": "8e98b5bf-38a6-46fe-b608-3a6b1978937f",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9051,7 +9051,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "90920cac-e78e-40f9-871f-44731470c18a",
+        "intersection_id": "d66d4d6c-7727-46b4-8c32-7f1683acb09f",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9088,7 +9088,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "48d25612-5e0d-414a-9ed0-b2c92abc5ca2",
+        "intersection_id": "de1f8760-e35b-4adb-8592-2b1884a96b0d",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9125,7 +9125,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "8c3c0061-568c-489d-8ae5-f50a76f09a93",
+        "intersection_id": "7bede833-dca8-4376-838a-c259cbd58ca7",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9162,7 +9162,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2b41e95a-f730-489c-a805-4e1f712013ed",
+        "intersection_id": "659da634-b01c-49b3-ad94-a323075b6510",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9199,7 +9199,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ad0b4e51-d037-4809-8897-060f70e04a1b",
+        "intersection_id": "5270fcea-389e-43f4-bf0b-a2faa7436e9a",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9236,7 +9236,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "562101f7-0142-4cdc-bb3e-5d6af6ac0133",
+        "intersection_id": "e72be548-76b8-4613-9c5f-bfb094110d40",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9273,7 +9273,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "65c398a6-58c6-4804-9ddc-32401437d667",
+        "intersection_id": "6383af59-7b1e-40c5-86bf-6cdd3544481a",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9310,7 +9310,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "86dd2b27-b508-4f09-81dc-b24f02bf270e",
+        "intersection_id": "49002d86-e79c-42c7-ae94-9ff68a7e4aa7",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9347,7 +9347,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4dbbbc25-273f-409b-a2f5-43c462ea2cac",
+        "intersection_id": "153094b5-685e-499c-a0c1-e6b0dc0236ba",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9384,7 +9384,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ad0e0f91-98bf-4458-8354-d913c424943a",
+        "intersection_id": "14541ded-8cf4-4768-b1ec-890940decaf5",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9421,7 +9421,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1f8fd7fb-cdcd-414a-8ead-83d609572670",
+        "intersection_id": "a453e31b-ac68-4782-8366-fb3da7817c0b",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9458,7 +9458,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5b9e0747-f4bb-4570-9aa5-931410a051a3",
+        "intersection_id": "a6b0a7aa-f0a2-4411-b8c9-7b8d9fd11f12",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9495,7 +9495,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "5212f811-c4e6-45fc-b6cb-4377e7e6c70a",
+        "intersection_id": "e13a8ac0-f239-4e57-b80b-cad7d32350fa",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9532,7 +9532,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "c827bda7-7cbd-433f-9ead-9cc748e5ee49",
+        "intersection_id": "341629a2-c39f-4fe7-a2b1-6f48f00bcd86",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9569,7 +9569,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "9c5f4b32-8d37-45c7-8e63-fa9e661f12eb",
+        "intersection_id": "8e82880b-27f4-4ba7-bc9a-e2499bf77ccd",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9606,7 +9606,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0ec260db-9e61-4e75-a4bf-ec78f754ee0c",
+        "intersection_id": "c32ad23e-971f-4fec-8a97-37e618b7ac8d",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9643,7 +9643,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "ed1104cf-3d17-4bde-ae5e-effcdd590719",
+        "intersection_id": "6dc43f49-6a59-4f95-8bfc-65803a7413d3",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9680,7 +9680,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "74213d12-65cb-4785-b2f6-d39207afdd3f",
+        "intersection_id": "27b28669-7b63-4d22-a7ee-afdccdbb9824",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9717,7 +9717,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "182c96e4-42b6-456d-a6ae-0a1de329998d",
+        "intersection_id": "d18912f7-9d66-47c1-9b1e-d4829005ed89",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9754,7 +9754,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0bc740da-a6ea-4165-9ccf-165c66346025",
+        "intersection_id": "2d6937af-8f6c-4898-ae1e-e59cb07cb7b9",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9791,7 +9791,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6957a654-05d9-417e-93ae-989768b562df",
+        "intersection_id": "7acab502-2475-44f7-9340-64d988a85b5e",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9828,7 +9828,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "27c09d18-2e63-48fb-afad-b33cde708165",
+        "intersection_id": "48088056-1f46-42d9-9dcd-9878b0f9d26d",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9865,7 +9865,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "fd7cd250-15ee-45fa-abac-84a7bd8f7a3f",
+        "intersection_id": "ab0d25f6-f2ba-463b-a025-e34005008cd5",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9902,7 +9902,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "fbbd9b63-0ca1-4fb2-8129-6a075f19c019",
+        "intersection_id": "3dd73207-324d-41f0-a1fe-b9b8e939c549",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9939,7 +9939,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4b95cea8-50a0-447f-b106-e400f0b3e3b7",
+        "intersection_id": "8c95f9c8-2de9-4ac1-900b-9dafe3cb420d",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -9976,7 +9976,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "3eb1ddb2-5711-49e0-8ad8-f25bbefa0fcf",
+        "intersection_id": "e990f8c8-dd10-410a-9af3-b4f791f3d22b",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10013,7 +10013,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "c94c210c-5f46-465f-8bd7-fc4d9d77d866",
+        "intersection_id": "93c516f5-e644-4092-9ded-0349d418ac48",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10050,7 +10050,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f77df0bf-29b4-4715-8036-353dde0fc413",
+        "intersection_id": "2e22d8c9-192e-437b-b56a-352c4737c98b",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10087,7 +10087,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6c00ca3c-8036-4365-b6c9-f774906b1712",
+        "intersection_id": "0da26fa5-3f91-4f64-ba43-5a672a4e59da",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10124,7 +10124,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "6fe9ddae-5660-4d18-aa5c-15cd0c150e07",
+        "intersection_id": "e5a2ad35-745b-4288-8a8b-c8b773a094d1",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10161,7 +10161,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1dec3eb2-d190-4f06-a954-24c191030790",
+        "intersection_id": "1d384dc8-ed60-44f6-9408-8440be0f9c92",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10198,7 +10198,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "4d64ca4b-cdf2-4a91-bc6c-ab3c0a42a041",
+        "intersection_id": "46f197d2-13ab-4549-b823-b99c1b20eee6",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10235,7 +10235,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "0a5b6d2f-79e4-4d91-944d-1ac29a5a3418",
+        "intersection_id": "9dbc0453-640b-433f-9cd8-93b38f36e7fb",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10272,7 +10272,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "f2b9bbc6-4f1d-4e34-930a-d46bf474dd9e",
+        "intersection_id": "23b9e152-a2fd-4955-bd05-061039c4cf3b",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10309,7 +10309,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "b0a44710-a9c6-42d7-b900-85d7281fe8e6",
+        "intersection_id": "bedfae73-c151-4232-996e-61bf04863b79",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10346,7 +10346,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "063aeedf-c107-4b5d-b19f-981318fc4d2f",
+        "intersection_id": "9ed89d04-16aa-4e56-9a8f-e0bda979fa9b",
         "risk_score": 0.13,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10383,7 +10383,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "1cf72efe-3a59-4665-b4ad-963f2aff9364",
+        "intersection_id": "fde58cc1-792f-4cf4-9840-aa21fd8d8291",
         "risk_score": 0.1125,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10420,7 +10420,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "63cb4566-7252-4953-8cfe-77d4ba2dfd3f",
+        "intersection_id": "c45adcb0-1a17-4cff-8aaa-7be848cc5b78",
         "risk_score": 0.1125,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10457,7 +10457,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "31b2a6a3-79d5-432a-8df4-d63faabfbd3b",
+        "intersection_id": "70872b8a-8332-4a6b-a127-7011aaf39cc6",
         "risk_score": 0.1125,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10494,7 +10494,7 @@
     {
       "type": "Feature",
       "properties": {
-        "intersection_id": "2ebf647d-dd55-4af8-903b-554a62471553",
+        "intersection_id": "a012bd4d-fda9-4e54-bb30-782734ed5563",
         "risk_score": 0.1125,
         "risk_level": "VeryLow",
         "risk_level_numeric": 1,
@@ -10530,7 +10530,7 @@
     }
   ],
   "metadata": {
-    "GeneratedAt": "2025-09-17T14:31:28.8700431Z",
+    "GeneratedAt": "2025-09-17T15:21:28.7121603Z",
     "DataSource": "CRIS Intersection Risks",
     "StartDate": "0001-01-01",
     "EndDate": "0001-01-01",

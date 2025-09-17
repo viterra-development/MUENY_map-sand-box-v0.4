@@ -155,10 +155,10 @@ public class CrisCsvParser
         // Parse severity (CRIS uses severity codes like 1=Fatal, 2=Incapacitating, etc.)
         crash.Severity = ParseCrisSeverity(csvRecord.CrashSeverity);
 
-        // Parse weather condition (don't default - preserve actual data)
-        crash.WeatherCondition = csvRecord.WeatherCondition ?? "";
-        crash.LightCondition = csvRecord.LightCondition ?? "";
-        crash.RoadwayCondition = csvRecord.SurfaceCondition ?? "";
+        // Parse weather condition with code mapping
+        crash.WeatherCondition = MapWeatherConditionCode(csvRecord.WeatherCondition ?? "");
+        crash.LightCondition = MapLightConditionCode(csvRecord.LightCondition ?? "");
+        crash.RoadwayCondition = MapSurfaceConditionCode(csvRecord.SurfaceCondition ?? "");
 
         // Parse private property flag
         crash.IsPrivateProperty = csvRecord.PrivatePropertyFlag?.ToUpper() == "Y";
@@ -348,6 +348,73 @@ public class CrisCsvParser
             stats.TotalCrashes, stats.FatalCrashes, stats.InjuryCrashes);
 
         return stats;
+    }
+
+    /// <summary>
+    /// Maps CRIS weather condition codes to descriptive text
+    /// Based on TxDOT CRIS system codes
+    /// </summary>
+    private string MapWeatherConditionCode(string code)
+    {
+        return code switch
+        {
+            "0" => "Not Reported",
+            "1" => "Clear",
+            "2" => "Rain",
+            "3" => "Sleet/Hail",
+            "4" => "Snow",
+            "5" => "Fog/Smoke/Smog",
+            "6" => "Dust/Sand",
+            "7" => "Severe Crosswinds",
+            "8" => "Blowing Sand/Soil/Dirt/Snow",
+            "9" => "Freezing Rain/Drizzle",
+            "10" => "Other",
+            "11" => "Clear", // Most common in our data
+            "12" => "Cloudy", // Second most common
+            _ => code // Return original code if unknown
+        };
+    }
+
+    /// <summary>
+    /// Maps CRIS surface condition codes to descriptive text
+    /// </summary>
+    private string MapSurfaceConditionCode(string code)
+    {
+        return code switch
+        {
+            "0" => "Not Reported",
+            "1" => "Dry", // Most common
+            "2" => "Wet", // Second most common
+            "3" => "Snow",
+            "4" => "Ice",
+            "5" => "Slush",
+            "6" => "Sand/Mud/Dirt/Oil/Gravel",
+            "7" => "Water (Standing/Moving)",
+            "8" => "Debris",
+            "9" => "Other",
+            "10" => "Unknown",
+            _ => code // Return original code if unknown
+        };
+    }
+
+    /// <summary>
+    /// Maps CRIS light condition codes to descriptive text
+    /// </summary>
+    private string MapLightConditionCode(string code)
+    {
+        return code switch
+        {
+            "0" => "Not Reported",
+            "1" => "Daylight", // Most common
+            "2" => "Dusk",
+            "3" => "Dawn",
+            "4" => "Dark (Lighted)",
+            "5" => "Dark (Not Lighted)",
+            "6" => "Dark (Unknown Lighting)",
+            "7" => "Other",
+            "8" => "Unknown",
+            _ => code // Return original code if unknown
+        };
     }
 }
 

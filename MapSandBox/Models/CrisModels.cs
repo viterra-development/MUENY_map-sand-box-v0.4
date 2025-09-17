@@ -602,6 +602,15 @@ public class RiskSegmentDeckGl
     public int FatalCrashes { get; set; }
     public int InjuryCrashes { get; set; }
     public int PropertyDamageCrashes { get; set; }
+
+    // Environmental factors
+    public int WetSurfaceCrashes { get; set; }
+    public int IcySurfaceCrashes { get; set; }
+    public int FogRelatedCrashes { get; set; }
+    public int HydroplaningIncidents { get; set; }
+    public double SlopePercentage { get; set; }
+    public bool HasDrainageIssues { get; set; }
+    public bool HasEnvironmentalRisk { get; set; }
 }
 
 public class IntersectionRiskDeckGl
