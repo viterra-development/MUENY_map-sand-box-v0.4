@@ -98,20 +98,20 @@ public class CrisProcessor
             _logger.LogInformation("Validated {Count} crash records (filtered {Removed})",
                 validCrashes.Count, crashes.Count - validCrashes.Count);
 
-            // Step 3: Enhanced spatial join crashes to road segments using actual road geometry
+            // Step 3: Enhanced spatial join crashes to road segments using enhanced traffic roads
             var roadGeoJsonPath = _config.DataSources.RoadNetworkPath;
             var trafficRoadGeoJsonPath = _config.DataSources.TrafficRoadsPath;
 
-            // Use enhanced spatial analyzer with road geometry service
-            var spatialJoins = await _enhancedSpatialAnalyzer.SpatialJoinCrashesToRoadsAsync(validCrashes, roadGeoJsonPath);
+            // Use enhanced traffic roads for spatial join to ensure matching LINEARID keys
+            var spatialJoins = await _enhancedSpatialAnalyzer.SpatialJoinCrashesToRoadsAsync(validCrashes, trafficRoadGeoJsonPath);
             var crashesBySegment = _enhancedSpatialAnalyzer.GroupCrashesByRoadSegment(spatialJoins);
 
             // Step 4: Extract AADT data from traffic-enabled roads
             var aadtBySegment = await _spatialAnalyzer.ExtractAadtFromRoadDataAsync(trafficRoadGeoJsonPath);
 
-            // Step 5: Generate enhanced risk segments with actual road geometry
+            // Step 5: Generate enhanced risk segments with actual road geometry from traffic roads
             var riskSegments = await _enhancedRiskGenerator.GenerateEnhancedRiskSegmentsFromCrashes(
-                validCrashes, spatialJoins, aadtBySegment, roadGeoJsonPath);
+                validCrashes, spatialJoins, aadtBySegment, trafficRoadGeoJsonPath);
 
             // Step 6: Enhanced elevation/slope analysis
             _elevationService.EnhanceRoadSegmentsWithBasicSlope(riskSegments);

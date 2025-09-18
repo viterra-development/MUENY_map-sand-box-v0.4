@@ -141,8 +141,8 @@ public class MapLibreService
                     ["getPath"] = "getCoordinates",
                     ["getColor"] = "getTrafficGradientColor",
                     ["getWidth"] = "getTrafficWidth",
-                    ["widthMinPixels"] = 2,
-                    ["widthMaxPixels"] = 12,
+                    ["widthMinPixels"] = 1,
+                    ["widthMaxPixels"] = 6,
                     ["capRounded"] = true,
                     ["jointRounded"] = true,
                     ["opacity"] = 0.9,
@@ -313,8 +313,8 @@ public class MapLibreService
                 Visible = true,
                 Properties = new Dictionary<string, object>
                 {
-                    ["widthMinPixels"] = 2,
-                    ["widthMaxPixels"] = 20
+                    ["widthMinPixels"] = 1,
+                    ["widthMaxPixels"] = 8
                 }
             },
             new LayerConfig

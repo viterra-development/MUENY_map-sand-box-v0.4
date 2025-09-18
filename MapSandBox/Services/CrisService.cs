@@ -212,13 +212,28 @@ public class CrisService
                 var json = await response.Content.ReadAsStringAsync();
                 var geoJson = JsonSerializer.Deserialize<CrisGeoJsonCollection>(json);
 
-                return geoJson?.Features?.Select(f => new RiskSegment
-                {
-                    SegmentId = f.Properties?.GetValueOrDefault("segment_id", "unknown")?.ToString() ?? "unknown",
-                    RiskScore = Convert.ToDecimal(f.Properties?.GetValueOrDefault("risk_score", 0) ?? 0),
-                    RiskLevel = Enum.TryParse<RiskLevel>(f.Properties?.GetValueOrDefault("risk_level", "Low")?.ToString(), out var level) ? level : RiskLevel.Low,
-                    CrashCount = Convert.ToInt32(f.Properties?.GetValueOrDefault("crash_count", 0) ?? 0),
-                    Aadt = Convert.ToInt32(f.Properties?.GetValueOrDefault("aadt", 0) ?? 0)
+                return geoJson?.Features?.Select(f => {
+                    var segment = new RiskSegment
+                    {
+                        SegmentId = f.Properties?.GetValueOrDefault("segment_id", "unknown")?.ToString() ?? "unknown",
+                        RiskScore = Convert.ToDecimal(f.Properties?.GetValueOrDefault("risk_score", 0) ?? 0),
+                        RiskLevel = Enum.TryParse<RiskLevel>(f.Properties?.GetValueOrDefault("risk_level", "Low")?.ToString(), out var level) ? level : RiskLevel.Low,
+                        CrashCount = Convert.ToInt32(f.Properties?.GetValueOrDefault("crash_count", 0) ?? 0)
+                    };
+
+                    // Extract AADT from enhanced traffic data structure: traffic.aadt
+                    var trafficData = f.Properties?.GetValueOrDefault("traffic");
+                    if (trafficData is Dictionary<string, object> trafficDict && trafficDict.TryGetValue("aadt", out var aadtValue))
+                    {
+                        segment.Aadt = Convert.ToInt32(aadtValue ?? 0);
+                    }
+                    else
+                    {
+                        // Fallback to old flat structure for backwards compatibility
+                        segment.Aadt = Convert.ToInt32(f.Properties?.GetValueOrDefault("aadt", 0) ?? 0);
+                    }
+
+                    return segment;
                 }).ToList() ?? new List<RiskSegment>();
             }
         }

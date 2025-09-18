@@ -1,8 +1,10 @@
 using MapSandBox.Models;
+using MapSandBox.Shared.Models;
 using Microsoft.Extensions.Logging;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using NetTopologySuite.Features;
+using System.Text.Json;
 
 namespace CrisDataProcessor.Services;
 
@@ -74,12 +76,39 @@ public class CrisSpatialAnalyzer
     {
         _logger.LogInformation("Extracting AADT data from road GeoJSON: {RoadPath}", roadGeoJsonPath);
 
-        var roadFeatures = await LoadRoadFeaturesAsync(roadGeoJsonPath);
-        var aadtBySegment = roadFeatures
-            .Where(f => f.Aadt.HasValue && f.Aadt > 0)
-            .ToDictionary(f => f.Id, f => f.Aadt!.Value);
+        var geoJsonContent = await File.ReadAllTextAsync(roadGeoJsonPath);
+        var aadtBySegment = new Dictionary<string, int>();
+
+        // Try to parse as enhanced road collection first
+        try
+        {
+            var enhancedCollection = JsonSerializer.Deserialize<MapSandBox.Shared.Models.EnhancedRoadFeatureCollection>(geoJsonContent);
+            if (enhancedCollection?.Features != null)
+            {
+                _logger.LogInformation("Loading AADT from enhanced road features with traffic data");
+                foreach (var feature in enhancedCollection.Features)
+                {
+                    if (!string.IsNullOrWhiteSpace(feature.Properties.LinearId) &&
+                        feature.Properties.Traffic?.Aadt != null &&
+                        feature.Properties.Traffic.Aadt > 0)
+                    {
+                        aadtBySegment[feature.Properties.LinearId] = feature.Properties.Traffic.Aadt.Value;
+                    }
+                }
+            }
+        }
+        catch (JsonException)
+        {
+            // Fall back to old method for backwards compatibility
+            _logger.LogInformation("Enhanced format failed, trying legacy AADT extraction");
+            var roadFeatures = await LoadRoadFeaturesAsync(roadGeoJsonPath);
+            aadtBySegment = roadFeatures
+                .Where(f => f.Aadt.HasValue && f.Aadt > 0)
+                .ToDictionary(f => f.Id, f => f.Aadt!.Value);
+        }
 
         _logger.LogInformation("Extracted AADT data for {Count} road segments", aadtBySegment.Count);
+
         return aadtBySegment;
     }
 

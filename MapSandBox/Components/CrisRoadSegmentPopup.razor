@@ -8,7 +8,10 @@
     <div class="cris-popup-overlay" @onclick="Close">
         <div class="cris-popup-card" @onclick:stopPropagation="true">
             <div class="popup-header">
-                <h4>🛣️ @RoadSegment.RoadName</h4>
+                <div class="header-content">
+                    <h4>🛣️ @RoadSegment.RoadName</h4>
+                    <div class="segment-id">Segment ID: @RoadSegment.SegmentId</div>
+                </div>
                 <button class="close-btn" @onclick="Close">×</button>
             </div>
 
@@ -101,11 +104,11 @@
 
                     </div>
                 <div class="recent-crashes-section">
-                    <h5>🚨 Recent Crashes (@RoadSegment.CrashCount total)</h5>
+                    <h5>🚨 All Crashes (@RoadSegment.CrashCount total)</h5>
                     @if (RoadSegment.RecentCrashes.Any())
                     {
-                        <div class="crash-list">
-                            @foreach (var crash in RoadSegment.RecentCrashes.Take(5))
+                        <div class="crash-list-scrollable">
+                            @foreach (var crash in GetSortedCrashes())
                             {
                                 <div class="crash-item @GetSeverityClass(crash.Severity)">
                                     <div class="crash-date">@crash.CrashDateTime.ToString("MM/dd/yyyy")</div>
@@ -114,14 +117,10 @@
                                 </div>
                             }
                         </div>
-                        @if (RoadSegment.RecentCrashes.Count > 5)
-                        {
-                            <div class="more-crashes">... and @(RoadSegment.RecentCrashes.Count - 5) more crashes</div>
-                        }
                     }
                     else
                     {
-                        <div class="no-crashes">No recent crashes recorded</div>
+                        <div class="no-crashes">No crashes recorded</div>
                     }
                 </div>
                 </div>
@@ -165,10 +164,24 @@
     border-radius: 8px 8px 0 0;
 }
 
+.header-content {
+    flex: 1;
+}
+
 .popup-header h4 {
-    margin: 0;
+    margin: 0 0 4px 0;
     color: #333;
     font-size: 16px;
+}
+
+.segment-id {
+    font-size: 12px;
+    color: #666;
+    font-family: monospace;
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .close-btn {
@@ -296,10 +309,17 @@
     /* Side-by-side layout, no top margin needed */
 }
 
-.crash-list {
+.crash-list-scrollable {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-height: 490px;
+    overflow-y: auto;
+    padding-right: 8px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 8px;
+    background: #fafafa;
 }
 
 .crash-item {
@@ -349,7 +369,7 @@
     color: #666;
 }
 
-.more-crashes, .no-crashes {
+.no-crashes {
     font-size: 12px;
     color: #666;
     text-align: center;
@@ -433,6 +453,26 @@
             KabcoSeverity.O_NoInjury => "No Injury (O)",
             _ => "Unknown"
         };
+    }
+
+    private IEnumerable<CrashRecord> GetSortedCrashes()
+    {
+        if (RoadSegment?.RecentCrashes == null) return Enumerable.Empty<CrashRecord>();
+
+        // Sort by date (most recent first), then by severity (most severe first)
+        var severityOrder = new Dictionary<KabcoSeverity, int>
+        {
+            { KabcoSeverity.K_Fatal, 0 },
+            { KabcoSeverity.A_IncapacitatingInjury, 1 },
+            { KabcoSeverity.B_NonIncapacitatingInjury, 2 },
+            { KabcoSeverity.C_PossibleInjury, 3 },
+            { KabcoSeverity.O_NoInjury, 4 },
+            { KabcoSeverity.Unknown, 5 }
+        };
+
+        return RoadSegment.RecentCrashes
+            .OrderByDescending(c => c.CrashDateTime)
+            .ThenBy(c => severityOrder.GetValueOrDefault(c.Severity, 5));
     }
 
     public async ValueTask DisposeAsync()

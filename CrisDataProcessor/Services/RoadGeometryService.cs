@@ -3,6 +3,7 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite.Index.Strtree;
 using NetTopologySuite.IO;
 using MapSandBox.Models;
+using MapSandBox.Shared.Models;
 using Microsoft.Extensions.Logging;
 
 namespace CrisDataProcessor.Services;
@@ -38,41 +39,90 @@ public class RoadGeometryService
         }
 
         var geoJsonContent = await File.ReadAllTextAsync(roadGeoJsonPath);
-        var geoJsonDoc = JsonDocument.Parse(geoJsonContent);
 
         _spatialIndex = new STRtree<RoadFeature>();
         _roadFeatures = new List<RoadFeature>();
 
-        var featuresArray = geoJsonDoc.RootElement.GetProperty("features");
         int totalFeatures = 0;
         int discardedFeatures = 0;
         int unnamedRoads = 0;
         int unknownTypes = 0;
 
-        foreach (var featureElement in featuresArray.EnumerateArray())
+        // Try to deserialize as enhanced road collection first, fall back to basic if needed
+        try
         {
-            totalFeatures++;
-            try
+            var enhancedCollection = JsonSerializer.Deserialize<EnhancedRoadFeatureCollection>(geoJsonContent);
+            if (enhancedCollection?.Features != null)
             {
-                var roadFeature = ParseRoadFeature(featureElement);
-                if (roadFeature != null)
+                _logger.LogInformation("Loading enhanced road features with traffic data");
+                foreach (var feature in enhancedCollection.Features)
                 {
-                    _roadFeatures.Add(roadFeature);
-                    _spatialIndex.Insert(roadFeature.Geometry.EnvelopeInternal, roadFeature);
+                    totalFeatures++;
+                    try
+                    {
+                        var roadFeature = ConvertFromEnhancedFeature(feature);
+                        if (roadFeature != null)
+                        {
+                            _roadFeatures.Add(roadFeature);
+                            _spatialIndex.Insert(roadFeature.Geometry.EnvelopeInternal, roadFeature);
 
-                    // Track quality metrics
-                    if (roadFeature.FullName == "Unnamed Road") unnamedRoads++;
-                    if (roadFeature.RoadType == "U") unknownTypes++;
-                }
-                else
-                {
-                    discardedFeatures++;
+                            // Track quality metrics
+                            if (roadFeature.FullName == "Unnamed Road") unnamedRoads++;
+                            if (roadFeature.RoadType == "U") unknownTypes++;
+                        }
+                        else
+                        {
+                            discardedFeatures++;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning(ex, "Failed to parse enhanced road feature");
+                        discardedFeatures++;
+                    }
                 }
             }
-            catch (Exception ex)
+        }
+        catch (JsonException)
+        {
+            // Fall back to basic road collection
+            _logger.LogInformation("Enhanced format failed, trying basic road format");
+            try
             {
-                _logger.LogWarning(ex, "Failed to parse road feature");
-                discardedFeatures++;
+                var basicCollection = JsonSerializer.Deserialize<BasicRoadFeatureCollection>(geoJsonContent);
+                if (basicCollection?.Features != null)
+                {
+                    foreach (var feature in basicCollection.Features)
+                    {
+                        totalFeatures++;
+                        try
+                        {
+                            var roadFeature = ConvertFromBasicFeature(feature);
+                            if (roadFeature != null)
+                            {
+                                _roadFeatures.Add(roadFeature);
+                                _spatialIndex.Insert(roadFeature.Geometry.EnvelopeInternal, roadFeature);
+
+                                // Track quality metrics
+                                if (roadFeature.FullName == "Unnamed Road") unnamedRoads++;
+                                if (roadFeature.RoadType == "U") unknownTypes++;
+                            }
+                            else
+                            {
+                                discardedFeatures++;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogWarning(ex, "Failed to parse basic road feature");
+                            discardedFeatures++;
+                        }
+                    }
+                }
+            }
+            catch (JsonException ex)
+            {
+                throw new InvalidOperationException($"Failed to parse road data as either enhanced or basic format: {ex.Message}", ex);
             }
         }
 
@@ -235,6 +285,94 @@ public class RoadGeometryService
     public RoadGeometryQualityMetrics GetQualityMetrics()
     {
         return _qualityMetrics;
+    }
+
+    private RoadFeature? ConvertFromEnhancedFeature(GeoJsonFeature<EnhancedRoadProperties> feature)
+    {
+        // Validate required properties
+        if (string.IsNullOrWhiteSpace(feature.Properties.LinearId))
+        {
+            return null; // DISCARD: No unique identifier
+        }
+
+        if (feature.Geometry is not LineStringGeometry lineStringGeometry)
+        {
+            return null; // DISCARD: We only work with LineString geometries for roads
+        }
+
+        // Convert GeoJSON coordinates to NetTopologySuite geometry
+        var coordinates = lineStringGeometry.Coordinates
+            .Select(coord => new Coordinate(coord[0], coord[1]))
+            .ToArray();
+
+        var lineString = new LineString(coordinates);
+
+        // Use strongly typed properties with defaults
+        var fullName = !string.IsNullOrWhiteSpace(feature.Properties.FullName)
+            ? feature.Properties.FullName
+            : "Unnamed Road";
+
+        var roadType = !string.IsNullOrWhiteSpace(feature.Properties.RoadType)
+            ? feature.Properties.RoadType
+            : "U";
+
+        var mtfccCode = !string.IsNullOrWhiteSpace(feature.Properties.Mtfcc)
+            ? feature.Properties.Mtfcc
+            : "S9999";
+
+        return new RoadFeature
+        {
+            LinearId = feature.Properties.LinearId,
+            FullName = fullName,
+            RoadType = roadType,
+            MtfccCode = mtfccCode,
+            Geometry = lineString,
+            Coordinates = lineStringGeometry.Coordinates.Select(coord => new double[] { coord[0], coord[1] }).ToList()
+        };
+    }
+
+    private RoadFeature? ConvertFromBasicFeature(GeoJsonFeature<BasicRoadProperties> feature)
+    {
+        // Validate required properties
+        if (string.IsNullOrWhiteSpace(feature.Properties.LinearId))
+        {
+            return null; // DISCARD: No unique identifier
+        }
+
+        if (feature.Geometry is not LineStringGeometry lineStringGeometry)
+        {
+            return null; // DISCARD: We only work with LineString geometries for roads
+        }
+
+        // Convert GeoJSON coordinates to NetTopologySuite geometry
+        var coordinates = lineStringGeometry.Coordinates
+            .Select(coord => new Coordinate(coord[0], coord[1]))
+            .ToArray();
+
+        var lineString = new LineString(coordinates);
+
+        // Use strongly typed properties with defaults
+        var fullName = !string.IsNullOrWhiteSpace(feature.Properties.FullName)
+            ? feature.Properties.FullName
+            : "Unnamed Road";
+
+        var roadType = !string.IsNullOrWhiteSpace(feature.Properties.RoadType)
+            ? feature.Properties.RoadType
+            : "U";
+
+        var mtfccCode = !string.IsNullOrWhiteSpace(feature.Properties.Mtfcc)
+            ? feature.Properties.Mtfcc
+            : "S9999";
+
+        return new RoadFeature
+        {
+            LinearId = feature.Properties.LinearId,
+            FullName = fullName,
+            RoadType = roadType,
+            MtfccCode = mtfccCode,
+            Geometry = lineString,
+            Coordinates = lineStringGeometry.Coordinates.Select(coord => new double[] { coord[0], coord[1] }).ToList()
+        };
     }
 }
 

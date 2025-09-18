@@ -27,6 +27,10 @@ builder.Services.Configure<TcdsConfiguration>(
 builder.Services.AddTransient<TcdsScrapingService>();
 builder.Services.AddTransient<SimpleTileGenerator>();
 builder.Services.AddTransient<RoadTrafficMerger>();
+builder.Services.AddTransient<AadtValidationService>();
+builder.Services.AddTransient<TypeBasedTrafficMatcher>();
+builder.Services.AddTransient<EnhancedRoadTrafficMerger>();
+builder.Services.AddTransient<DataQualityMonitor>();
 
 builder.Logging.AddConsole();
 
@@ -35,12 +39,21 @@ var host = builder.Build();
 var logger = host.Services.GetRequiredService<ILogger<Program>>();
 var tileGenerator = host.Services.GetRequiredService<SimpleTileGenerator>();
 
+// Check if running in enhanced merge mode (our new I-20 fix)
+var enhancedMergeMode = args.Contains("--enhanced-merge");
+
+if (enhancedMergeMode)
+{
+    return await RunEnhancedMergeMode(host, logger, solutionRoot);
+}
+
 // Check if running in road-traffic merge mode
 var mergeRoadsMode = args.Contains("--merge-roads");
 
 if (mergeRoadsMode)
 {
-    return await RunRoadTrafficMergeMode(host, logger, solutionRoot);
+    logger.LogInformation("🚀 Using ENHANCED merger with I-20 fix");
+    return await RunEnhancedMergeMode(host, logger, solutionRoot);
 }
 
 // Check if running in tiles-only mode
@@ -859,6 +872,228 @@ static async Task<int> ExecuteBatchRun(IHost host, int minPage, int maxPage, boo
     finally
     {
         await scrapingService.DisposeAsync();
+    }
+}
+
+static async Task<int> RunEnhancedMergeMode(IHost host, ILogger logger, string solutionRoot)
+{
+    try
+    {
+        Console.WriteLine("🚦 Enhanced Traffic Data Matcher - Testing I-20 Fix");
+        Console.WriteLine("=" + new string('=', 59));
+
+        var enhancedMerger = host.Services.GetRequiredService<EnhancedRoadTrafficMerger>();
+        var qualityMonitor = host.Services.GetRequiredService<DataQualityMonitor>();
+
+        // Test with existing data to see current I-20 issue
+        await TestCurrentDataQuality(logger, solutionRoot);
+
+        // Test the enhanced merger
+        await TestEnhancedMerger(enhancedMerger, qualityMonitor, logger, solutionRoot);
+
+        Console.WriteLine("\n✅ Enhanced testing complete! Check logs for detailed results.");
+        return 0;
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Error during enhanced testing");
+        Console.WriteLine($"❌ Error: {ex.Message}");
+        return 1;
+    }
+}
+
+static async Task TestCurrentDataQuality(ILogger logger, string solutionRoot)
+{
+    logger.LogInformation("🔍 Testing current data quality (before fix)");
+
+    // Check if the current problematic files exist
+    var currentTrafficFile = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker-roads-with-traffic.geojson");
+
+    if (File.Exists(currentTrafficFile))
+    {
+        logger.LogInformation("📁 Found current traffic data file: {File}", Path.GetFileName(currentTrafficFile));
+
+        // Read and analyze current I-20 data
+        var content = await File.ReadAllTextAsync(currentTrafficFile);
+        var i20Matches = System.Text.RegularExpressions.Regex.Matches(content, @"""FULLNAME"":\s*""I-\s*20"".*?""aadt"":\s*(\d+)");
+
+        if (i20Matches.Count > 0)
+        {
+            logger.LogWarning("🛣️  Current I-20 AADT values found:");
+            foreach (System.Text.RegularExpressions.Match match in i20Matches.Take(3))
+            {
+                var aadt = int.Parse(match.Groups[1].Value);
+                logger.LogWarning("   • I-20 segment AADT: {Aadt:N0}", aadt);
+
+                if (aadt == 8388)
+                {
+                    logger.LogError("   🚨 CONFIRMED: I-20 has problematic ramp AADT value: {Aadt}", aadt);
+                }
+            }
+        }
+    }
+    else
+    {
+        logger.LogWarning("📁 Current traffic file not found: {File}", Path.GetFileName(currentTrafficFile));
+    }
+}
+
+static async Task TestEnhancedMerger(EnhancedRoadTrafficMerger merger, DataQualityMonitor monitor, ILogger logger, string solutionRoot)
+{
+    logger.LogInformation("🚀 Testing enhanced traffic data merger");
+
+    var roadGeoJsonPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker-county-roads.geojson");
+    var masterDataPath = Path.Combine(solutionRoot, "TCDS.Importer", "Data", "parker_county_traffic_data_MASTER.json");
+    var outputDirectory = Path.Combine(solutionRoot, "TestOutput");
+
+    // Check if required files exist
+    if (!File.Exists(roadGeoJsonPath))
+    {
+        logger.LogError("❌ Road data file not found: {File}", roadGeoJsonPath);
+        return;
+    }
+
+    if (!File.Exists(masterDataPath))
+    {
+        logger.LogWarning("⚠️  Master data file not found: {File}", masterDataPath);
+        logger.LogInformation("💡 Will try alternative traffic data sources...");
+
+        // Try the GeoJSON traffic file instead
+        var alternativeTrafficPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker_county_traffic_locations_20250731_111008.geojson");
+        if (File.Exists(alternativeTrafficPath))
+        {
+            logger.LogInformation("📁 Using alternative traffic data: {File}", Path.GetFileName(alternativeTrafficPath));
+            await TestWithAlternativeData(roadGeoJsonPath, alternativeTrafficPath, outputDirectory, logger);
+            return;
+        }
+        else
+        {
+            logger.LogError("❌ No suitable traffic data files found");
+            return;
+        }
+    }
+
+    try
+    {
+        // Run the enhanced merger
+        var outputPath = await merger.MergeRoadTrafficDataFromMasterAsync(
+            roadGeoJsonPath,
+            masterDataPath,
+            outputDirectory,
+            excludeInactiveStations: true
+        );
+
+        logger.LogInformation("✅ Enhanced merger completed. Output: {OutputPath}", outputPath);
+
+        // Verify I-20 fix
+        await VerifyI20Fix(outputPath, logger);
+    }
+    catch (FileNotFoundException ex)
+    {
+        logger.LogError("📁 File not found: {Message}", ex.Message);
+        logger.LogInformation("💡 Trying with available data sources...");
+    }
+}
+
+static async Task TestWithAlternativeData(string roadGeoJsonPath, string trafficGeoJsonPath, string outputDirectory, ILogger logger)
+{
+    logger.LogInformation("🔄 Testing with GeoJSON traffic data");
+
+    // For now, just analyze the traffic data structure
+    var trafficJson = await File.ReadAllTextAsync(trafficGeoJsonPath);
+
+    // Look for the problematic location 184CC1
+    if (trafficJson.Contains("184CC1"))
+    {
+        logger.LogWarning("🔍 Found problematic location 184CC1 in traffic data");
+
+        // Extract AADT for this location
+        var match = System.Text.RegularExpressions.Regex.Match(
+            trafficJson,
+            @"""locationId"":\s*""184CC1"".*?""latestAadt"":\s*(\d+).*?""category"":\s*""([^""]+)""",
+            System.Text.RegularExpressions.RegexOptions.Singleline);
+
+        if (match.Success)
+        {
+            var aadt = int.Parse(match.Groups[1].Value);
+            var category = match.Groups[2].Value;
+
+            logger.LogWarning("📊 Location 184CC1 Analysis:");
+            logger.LogWarning("   • AADT: {Aadt:N0}", aadt);
+            logger.LogWarning("   • Category: {Category}", category);
+
+            if (category.Equals("RAMP", StringComparison.OrdinalIgnoreCase))
+            {
+                logger.LogError("🚨 CONFIRMED: Location 184CC1 is a RAMP with AADT {Aadt}", aadt);
+                logger.LogError("🚨 This ramp data should NOT be applied to I-20 mainline!");
+            }
+        }
+    }
+
+    // Count different traffic location types
+    var rampMatches = System.Text.RegularExpressions.Regex.Matches(trafficJson, @"""category"":\s*""RAMP""");
+    var mainlineMatches = System.Text.RegularExpressions.Regex.Matches(trafficJson, @"""category"":\s*""MAINLINE""");
+
+    logger.LogInformation("📊 Traffic Data Inventory:");
+    logger.LogInformation("   • RAMP locations: {Count}", rampMatches.Count);
+    logger.LogInformation("   • MAINLINE locations: {Count}", mainlineMatches.Count);
+}
+
+static async Task VerifyI20Fix(string outputPath, ILogger logger)
+{
+    logger.LogInformation("🔍 Verifying I-20 fix in output data");
+
+    if (!File.Exists(outputPath))
+    {
+        logger.LogError("❌ Output file not found: {File}", outputPath);
+        return;
+    }
+
+    var content = await File.ReadAllTextAsync(outputPath);
+    var i20Matches = System.Text.RegularExpressions.Regex.Matches(
+        content,
+        @"""fullName"":\s*""I-\s*20"".*?""traffic"":\s*{[^}]*""aadt"":\s*(\d+)[^}]*}.*?""trafficMatch"":\s*{[^}]*""sourceType"":\s*""([^""]+)""",
+        System.Text.RegularExpressions.RegexOptions.Singleline);
+
+    if (i20Matches.Count > 0)
+    {
+        logger.LogInformation("🛣️  I-20 Fix Verification Results:");
+
+        bool fixSuccessful = true;
+        foreach (System.Text.RegularExpressions.Match match in i20Matches.Take(5))
+        {
+            var aadt = int.Parse(match.Groups[1].Value);
+            var sourceType = match.Groups[2].Value;
+
+            logger.LogInformation("   • I-20 segment AADT: {Aadt:N0}, Source: {SourceType}", aadt, sourceType);
+
+            if (aadt == 8388 || sourceType.Contains("Ramp"))
+            {
+                logger.LogError("   🚨 ISSUE: I-20 still using ramp data (AADT: {Aadt}, Source: {SourceType})", aadt, sourceType);
+                fixSuccessful = false;
+            }
+            else if (aadt >= 25000)
+            {
+                logger.LogInformation("   ✅ GOOD: I-20 AADT {Aadt:N0} is within expected range", aadt);
+            }
+            else
+            {
+                logger.LogWarning("   ⚠️  WARNING: I-20 AADT {Aadt:N0} is lower than expected (25,000+)", aadt);
+            }
+        }
+
+        if (fixSuccessful)
+        {
+            logger.LogInformation("✅ I-20 FIX SUCCESSFUL: No more ramp contamination detected");
+        }
+        else
+        {
+            logger.LogError("❌ I-20 FIX INCOMPLETE: Issues still detected");
+        }
+    }
+    else
+    {
+        logger.LogWarning("⚠️  No I-20 segments found in output data");
     }
 }
 

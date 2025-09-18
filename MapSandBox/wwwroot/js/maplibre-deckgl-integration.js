@@ -305,8 +305,8 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         },
                         // Simplified configuration to match deck.gl docs
                         widthScale: 1,
-                        widthMinPixels: 2,
-                        widthMaxPixels: 75, // Increased to accommodate hover width
+                        widthMinPixels: 1,
+                        widthMaxPixels: 6, // Reduced for less prominent display
                         rounded: true,
                         pickable: true,
                         onClick: handleTrafficRoadClick,
@@ -352,8 +352,8 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         getPath: d => d.Coordinates,
                         getWidth: d => Math.max(2, (d.Aadt || 100) / 1000),
                         getColor: d => getRiskLevelColor(d.RiskLevel),
-                        widthMinPixels: 2,
-                        widthMaxPixels: 20,
+                        widthMinPixels: 1,
+                        widthMaxPixels: 8,
                         pickable: true,
                         autoHighlight: true,
                         highlightColor: [255, 255, 255, 128],
@@ -569,8 +569,8 @@ function getLayerProperties(config) {
             properties.getPath = d => d.Coordinates;
             properties.getWidth = d => Math.max(2, (d.Aadt || 100) / 1000);
             properties.getColor = d => getRiskLevelColor(d.RiskLevel);
-            properties.widthMinPixels = 2;
-            properties.widthMaxPixels = 20;
+            properties.widthMinPixels = 1;
+            properties.widthMaxPixels = 8;
             properties.pickable = true;
             properties.onClick = handleRiskSegmentClick;
             break;
@@ -871,7 +871,7 @@ function getTrafficWidth(feature) {
     
     // Normalize using unified log scale parameters and scale to width range
     const ratio = Math.min(Math.max((logAADT - TRAFFIC_LOG_MIN) / (TRAFFIC_LOG_MAX - TRAFFIC_LOG_MIN), 0), 1);
-    return 2 + (ratio * 8); // 2-10 pixel width range
+    return 1 + (ratio * 5); // 1-6 pixel width range
 }
 
 function handleTrafficRoadClick(info) {

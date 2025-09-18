@@ -1,5 +1,6 @@
 using MapSandBox.Models;
 using Microsoft.Extensions.Logging;
+using NetTopologySuite.Geometries;
 
 namespace CrisDataProcessor.Services;
 
@@ -130,6 +131,24 @@ public class EnhancedRiskSegmentGenerator
             // Get road match for this segment
             var roadMatch = GetRoadMatchForSegmentId(segmentId, roadFeaturesBySegment, minLat, minLon, maxLat, maxLon, segmentCounter);
 
+            // Get AADT for this segment - try both segmentId and roadMatch.LinearId
+            var aadtValue = aadtBySegment.GetValueOrDefault(segmentId);
+            if (aadtValue == 0 && !string.IsNullOrEmpty(roadMatch.LinearId))
+            {
+                aadtValue = aadtBySegment.GetValueOrDefault(roadMatch.LinearId);
+                if (aadtValue > 0)
+                {
+                    _logger.LogDebug("Found AADT {Aadt} for segment {SegmentId} using LinearId {LinearId}",
+                        aadtValue, segmentId, roadMatch.LinearId);
+                }
+            }
+
+            if (aadtValue == 0)
+            {
+                _logger.LogDebug("No AADT found for segment {SegmentId} (LinearId: {LinearId})",
+                    segmentId, roadMatch.LinearId);
+            }
+
             var enhancedSegment = new RiskSegment
             {
                 SegmentId = segmentId,
@@ -140,9 +159,9 @@ public class EnhancedRiskSegmentGenerator
                 RiskScore = riskScore,
                 RiskLevel = riskLevel,
                 CrashCount = segmentCrashes.Count,
-                SegmentLength = CalculateSegmentLength(minLat, minLon, maxLat, maxLon),
-                Aadt = aadtBySegment.GetValueOrDefault(segmentId),
-                RecentCrashes = segmentCrashes.OrderByDescending(c => c.CrashDateTime).Take(10).ToList(),
+                SegmentLength = CalculateSegmentLength(roadMatch),
+                Aadt = aadtValue,
+                RecentCrashes = segmentCrashes.ToList(),
 
                 // Enhanced properties from road matching
                 RoadGeometry = roadMatch.Coordinates,
@@ -270,15 +289,35 @@ public class EnhancedRiskSegmentGenerator
         };
     }
 
-    private decimal CalculateSegmentLength(decimal lat1, decimal lon1, decimal lat2, decimal lon2)
+    private decimal CalculateSegmentLength(RoadMatchInfo roadMatch)
     {
-        // Simple Euclidean distance in degrees (rough approximation)
-        var deltaLat = lat2 - lat1;
-        var deltaLon = lon2 - lon1;
-        var distance = (decimal)Math.Sqrt((double)(deltaLat * deltaLat + deltaLon * deltaLon));
+        if (roadMatch.Coordinates == null || roadMatch.Coordinates.Count < 2)
+        {
+            // If no coordinates or single point, use minimum segment length
+            return 0.1m; // 0.1 miles minimum
+        }
 
-        // Convert degrees to miles (very rough approximation: 1 degree ≈ 69 miles)
-        return distance * 69m;
+        try
+        {
+            // Create LineString geometry from coordinates
+            var coordinates = roadMatch.Coordinates
+                .Select(coord => new Coordinate(coord[0], coord[1])) // lon, lat
+                .ToArray();
+
+            var lineString = new LineString(coordinates);
+
+            // Get length in degrees, then convert to miles
+            var lengthDegrees = lineString.Length;
+            var lengthMiles = lengthDegrees * 69.0; // Rough conversion: 1 degree ≈ 69 miles
+
+            return Math.Max((decimal)lengthMiles, 0.01m); // Ensure minimum 0.01 miles
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning("Failed to calculate segment length for {LinearId}: {Error}. Using fallback.",
+                roadMatch.LinearId, ex.Message);
+            return 0.1m; // Fallback minimum length
+        }
     }
 }
 

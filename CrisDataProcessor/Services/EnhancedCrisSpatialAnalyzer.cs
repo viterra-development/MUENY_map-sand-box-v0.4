@@ -46,6 +46,7 @@ public class EnhancedCrisSpatialAnalyzer
             if (roadMatch != null)
             {
                 matchedCount++;
+
                 results.Add(new EnhancedSpatialJoinResult
                 {
                     Crash = crash,
