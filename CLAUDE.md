@@ -127,3 +127,4 @@ The application supports three mapping backends:
 - ArcGIS API is loaded using AMD module pattern
 - All mapping systems share similar layer configuration patterns but handle rendering differently
 - MapLibre integration uses `MapboxOverlay` from deck.gl for compatibility
+- We are using deck.gl v9.1.14

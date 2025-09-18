@@ -52,7 +52,31 @@ export function createIntegratedMap(containerId, config) {
         // Create deck.gl overlay using MapboxOverlay (works with MapLibre)
         deckOverlay = new deck.MapboxOverlay({
             interleaved: false, // Overlaid mode for better compatibility
-            layers: deckLayers
+            layers: deckLayers,
+            getCursor: ({isDragging, isHovering}) => {
+                console.log('getCursor called:', {isDragging, isHovering});
+                let cursor;
+                if (isDragging) {
+                    cursor = 'grabbing';
+                    console.log('Setting grabbing cursor');
+                } else if (isHovering) {
+                    cursor = 'pointer';
+                    console.log('Setting pointer cursor');
+                } else {
+                    cursor = 'grab';
+                    console.log('Setting grab cursor');
+                }
+
+                // Manually set cursor on MapLibre canvas (Solution from GitHub discussion #5893)
+                if (maplibreMap && maplibreMap.getCanvas) {
+                    maplibreMap.getCanvas().style.cursor = cursor;
+                    console.log('Applied cursor to MapLibre canvas:', cursor);
+                } else {
+                    console.warn('MapLibre map not available for cursor setting');
+                }
+
+                return cursor;
+            }
         });
 
         // Add deck.gl overlay to MapLibre map
@@ -275,17 +299,16 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                             const color = getTrafficGradientColor(d);
                             return color;
                         },
-                        getWidth: d => {
-                            const width = getTrafficWidth(d);
-                            return width;
+                        getWidth: (d, {hovered}) => {
+                            const baseWidth = getTrafficWidth(d);
+                            return hovered ? baseWidth * 1.5 : baseWidth;
                         },
                         // Simplified configuration to match deck.gl docs
                         widthScale: 1,
                         widthMinPixels: 2,
-                        widthMaxPixels: 50,
+                        widthMaxPixels: 75, // Increased to accommodate hover width
                         rounded: true,
                         pickable: true,
-                        autoHighlight: true,
                         onClick: handleTrafficRoadClick,
                         onDataLoad: data => {
                             if (data && data.features) {
@@ -320,8 +343,42 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     ...getLayerProperties(config)
                 }));
                 break;
+            case 'pathlayer':
+                // Handle CRIS risk segments specifically
+                if (config.id === 'cris-risk-segments') {
+                    deckLayers.push(new deck.PathLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        getPath: d => d.Coordinates,
+                        getWidth: d => Math.max(2, (d.Aadt || 100) / 1000),
+                        getColor: d => getRiskLevelColor(d.RiskLevel),
+                        widthMinPixels: 2,
+                        widthMaxPixels: 20,
+                        pickable: true,
+                        autoHighlight: true,
+                        highlightColor: [255, 255, 255, 128],
+                        onHover: (info) => {
+                            console.log('CRIS risk segments hover:', !!info.object);
+                            return true;
+                        },
+                        onClick: handleRiskSegmentClick,
+                        onDataLoad: data => {
+                            if (data && data.features) {
+                                console.log(`✅ CRIS Risk Segments loaded ${data.features.length} features`);
+                                console.log('Sample segment:', data.features[0]);
+                            }
+                        }
+                    }));
+                } else {
+                    deckLayers.push(new deck.PathLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        ...getLayerProperties(config)
+                    }));
+                }
+                break;
             case 'scatterplotlayer':
-                // Handle CRIS crash points specifically
+                // Handle CRIS crash points specifically (moved after pathlayer to render on top)
                 if (config.id === 'cris-crashes') {
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
@@ -337,6 +394,12 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         stroked: false, // Remove border
                         billboard: true,
                         pickable: true,
+                        autoHighlight: true,
+                        highlightColor: [255, 255, 255, 128], // White highlight on hover
+                        onHover: (info) => {
+                            console.log('CRIS crashes hover:', !!info.object);
+                            return true;
+                        },
                         onClick: handleCrashClick,
                         onDataLoad: data => {
                             if (data && data.features) {
@@ -376,6 +439,8 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         getLineColor: [0, 0, 0, 255],
                         lineWidthMinPixels: 1,
                         pickable: true,
+                        autoHighlight: true,
+                        highlightColor: [255, 255, 255, 128],
                         onClick: handleIntersectionClick,
                         onDataLoad: data => {
                             if (data && data.features) {
@@ -395,34 +460,6 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                                 console.log('Sample feature:', data.features[0]);
                             }
                         }
-                    }));
-                }
-                break;
-            case 'pathlayer':
-                // Handle CRIS risk segments specifically
-                if (config.id === 'cris-risk-segments') {
-                    deckLayers.push(new deck.PathLayer({
-                        id: config.id,
-                        data: config.dataUrl,
-                        getPath: d => d.Coordinates,
-                        getWidth: d => Math.max(2, (d.Aadt || 100) / 1000),
-                        getColor: d => getRiskLevelColor(d.RiskLevel),
-                        widthMinPixels: 2,
-                        widthMaxPixels: 20,
-                        pickable: true,
-                        onClick: handleRiskSegmentClick,
-                        onDataLoad: data => {
-                            if (data && data.features) {
-                                console.log(`✅ CRIS Risk Segments loaded ${data.features.length} features`);
-                                console.log('Sample segment:', data.features[0]);
-                            }
-                        }
-                    }));
-                } else {
-                    deckLayers.push(new deck.PathLayer({
-                        id: config.id,
-                        data: config.dataUrl,
-                        ...getLayerProperties(config)
                     }));
                 }
                 break;
@@ -468,6 +505,8 @@ function getLayerProperties(config) {
             properties.getLineColor = [120, 120, 120, 128]; // Gray for base roads
             properties.getLineWidth = 1;
             properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.highlightColor = [255, 255, 255, 150];
             properties.onClick = handleRoadClick;
             break;
         case 'parker-roads-traffic':
@@ -482,6 +521,8 @@ function getLayerProperties(config) {
             properties.getLineColor = getRoadColor;
             properties.getLineWidth = getRoadWidth;
             properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.highlightColor = [255, 255, 255, 150];
             properties.onClick = handleRoadClick;
             break;
         case 'traffic-counts':
@@ -497,6 +538,7 @@ function getLayerProperties(config) {
             properties.opacity = 0.8;
             properties.pickable = true;
             properties.autoHighlight = true;
+            properties.highlightColor = [255, 255, 255, 100];
             properties.onClick = handleSoilUnitClick;
             break;
         case 'soil-ksat-visualization':
@@ -508,6 +550,7 @@ function getLayerProperties(config) {
             properties.opacity = 0.7;
             properties.pickable = true;
             properties.autoHighlight = true;
+            properties.highlightColor = [255, 255, 255, 100];
             properties.onClick = handleSoilUnitClick;
             break;
         case 'cris-crashes':
@@ -541,6 +584,8 @@ function getLayerProperties(config) {
             properties.getLineColor = [0, 0, 0, 255];
             properties.lineWidthMinPixels = 1;
             properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.highlightColor = [255, 255, 255, 128];
             properties.onClick = handleIntersectionRiskClick;
             break;
     }
@@ -565,15 +610,6 @@ function createTrafficCountsTileLayer(config) {
         pickable: true,
         
         // TileLayer-level event handlers (deck.gl routes sublayer events here)
-        onHover: (info) => {
-            if (info.object) {
-                // Change cursor to indicate clickable
-                document.body.style.cursor = 'pointer';
-            } else {
-                document.body.style.cursor = 'default';
-            }
-            return true;
-        },
         
         onClick: (info) => {
             if (info.object) {

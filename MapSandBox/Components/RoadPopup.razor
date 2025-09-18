@@ -5,22 +5,29 @@
 
 @if (IsVisible && RoadData != null)
 {
-    <div class="road-popup-overlay" @onclick="Hide">
-        <div class="road-popup-card" @onclick:stopPropagation="true">
+    <div class="cris-popup-overlay" @onclick="Hide">
+        <div class="cris-popup-card" @onclick:stopPropagation="true">
             <div class="popup-header">
-                <h3 class="popup-title">@RoadData.RoadName</h3>
-                <button class="popup-close" @onclick="Hide">&times;</button>
+                <h4>🛣️ @RoadData.RoadName</h4>
+                <button class="close-btn" @onclick="Hide">×</button>
             </div>
-            <div class="popup-content">
-                <div class="popup-section">
-                    <div class="popup-label">Road Type</div>
-                    <div class="popup-value">@RoadData.RoadTypeName <span class="popup-code">(@RoadData.RoadType)</span></div>
+
+            <div class="road-overview">
+                <div class="road-type-display">
+                    <span class="road-type">@RoadData.RoadTypeName</span>
+                    <span class="road-code">@RoadData.RoadType</span>
                 </div>
-                
+            </div>
+
+            <div class="road-breakdown">
+                <h5>🚦 Road Information</h5>
                 @if (RoadData.HasTrafficData)
                 {
-                    <div class="popup-section traffic-section">
-                        <div class="popup-label">Traffic Data</div>
+                    <div class="detail-item">
+                        <div class="detail-header">
+                            <span class="detail-icon">🚦</span>
+                            <span class="detail-label">Traffic Data</span>
+                        </div>
                         <div class="traffic-stats">
                             <div class="traffic-stat">
                                 <div class="stat-value">@RoadData.FormattedAADT</div>
@@ -36,31 +43,46 @@
                         </div>
                     </div>
                 }
-                
+
                 @if (!string.IsNullOrEmpty(RoadData.LocationId))
                 {
-                    <div class="popup-section">
-                        <div class="popup-label">Traffic Location</div>
-                        <div class="popup-value">@RoadData.LocationId</div>
+                    <div class="detail-item">
+                        <div class="detail-header">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-label">Traffic Location</span>
+                        </div>
+                        <div class="detail-value">@RoadData.LocationId</div>
                         @if (!string.IsNullOrEmpty(RoadData.LocatedOn) && RoadData.LocatedOn != "-")
                         {
-                            <div class="popup-sublabel">Located on: @RoadData.LocatedOn</div>
+                            <div class="location-sublabel">Located on: @RoadData.LocatedOn</div>
                         }
                     </div>
                 }
-                
-                <div class="popup-section technical-info">
-                    <div class="popup-label">Technical Info</div>
+
+                <div class="detail-item">
+                    <div class="detail-header">
+                        <span class="detail-icon">🔧</span>
+                        <span class="detail-label">Technical Information</span>
+                    </div>
                     <div class="technical-details">
                         @if (!string.IsNullOrEmpty(RoadData.LinearId))
                         {
-                            <div>Linear ID: <span class="mono">@RoadData.LinearId</span></div>
+                            <div class="technical-item">
+                                <span class="technical-label">Linear ID:</span>
+                                <span class="technical-value mono">@RoadData.LinearId</span>
+                            </div>
                         }
                         @if (!string.IsNullOrEmpty(RoadData.MTFCC))
                         {
-                            <div>MTFCC: <span class="mono">@RoadData.MTFCC</span></div>
+                            <div class="technical-item">
+                                <span class="technical-label">MTFCC:</span>
+                                <span class="technical-value mono">@RoadData.MTFCC</span>
+                            </div>
                         }
-                        <div>Coordinates: <span class="mono">@RoadData.FormattedCoordinates</span></div>
+                        <div class="technical-item">
+                            <span class="technical-label">Coordinates:</span>
+                            <span class="technical-value mono">@RoadData.FormattedCoordinates</span>
+                        </div>
                     </div>
                 </div>
             </div>

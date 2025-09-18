@@ -100,6 +100,6 @@ function getLayerProperties(config) {
 
 function loadDeckGL() {
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/deck.gl@^9.0.0-beta.2/dist.min.js';
+    script.src = 'https://unpkg.com/deck.gl@^9.1.14/dist.min.js';
     document.head.appendChild(script);
 } 

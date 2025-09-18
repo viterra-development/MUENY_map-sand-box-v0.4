@@ -307,6 +307,18 @@ public class MapLibreService
             },
             new LayerConfig
             {
+                Id = "cris-risk-segments",
+                Type = "PathLayer",
+                DataUrl = "/cris-data/parker-county-risk-segments-traffic-deckgl.json",
+                Visible = true,
+                Properties = new Dictionary<string, object>
+                {
+                    ["widthMinPixels"] = 2,
+                    ["widthMaxPixels"] = 20
+                }
+            },
+            new LayerConfig
+            {
                 Id = "cris-crashes",
                 Type = "ScatterplotLayer",
                 DataUrl = "/cris-data/parker-county-crashes-traffic-roads-deckgl.json",
@@ -318,18 +330,6 @@ public class MapLibreService
                     ["radiusScale"] = 100,
                     ["stroked"] = false,
                     ["filled"] = true
-                }
-            },
-            new LayerConfig
-            {
-                Id = "cris-risk-segments",
-                Type = "PathLayer",
-                DataUrl = "/cris-data/parker-county-risk-segments-traffic-deckgl.json",
-                Visible = true,
-                Properties = new Dictionary<string, object>
-                {
-                    ["widthMinPixels"] = 2,
-                    ["widthMaxPixels"] = 20
                 }
             },
             new LayerConfig
