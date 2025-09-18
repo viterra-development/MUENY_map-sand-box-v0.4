@@ -5,274 +5,107 @@
 
 @if (IsVisible && CrashData != null)
 {
-    <div class="crash-popup-overlay" @onclick="Hide">
-        <div class="crash-popup-card" @onclick:stopPropagation="true">
+    <div class="cris-popup-overlay" @onclick="Hide">
+        <div class="cris-popup-card" @onclick:stopPropagation="true">
             <div class="popup-header">
-                <h3 class="popup-title">Crash Report #@CrashData.CrashId</h3>
-                <button class="popup-close" @onclick="Hide">&times;</button>
+                <h4>🚗 Crash Report #@CrashData.CrashId</h4>
+                <button class="close-btn" @onclick="Hide">×</button>
             </div>
-            <div class="popup-content">
-                <div class="popup-section">
-                    <div class="popup-label">Date & Time</div>
-                    <div class="popup-value">@CrashData.CrashDateTime</div>
-                </div>
 
-                <div class="popup-section">
-                    <div class="popup-label">Severity</div>
-                    <div class="popup-value severity-@CrashData.SeverityCode.ToLower()">
-                        @CrashData.Severity
-                        <span class="severity-badge">@CrashData.SeverityCode</span>
-                    </div>
+            <div class="crash-overview">
+                <div class="crash-summary-display">
+                    <span class="crash-date">@CrashData.CrashDateTime</span>
+                    <span class="severity-level severity-@CrashData.SeverityCode.ToLower()">@CrashData.Severity (@CrashData.SeverityCode)</span>
                 </div>
+            </div>
 
-                <div class="popup-section">
-                    <div class="popup-label">People & Vehicles</div>
-                    <div class="crash-stats">
-                        <div class="crash-stat">
-                            <div class="stat-value">@CrashData.PersonsInvolved</div>
-                            <div class="stat-label">Persons</div>
-                        </div>
-                        <div class="crash-stat">
-                            <div class="stat-value">@CrashData.VehiclesInvolved</div>
-                            <div class="stat-label">Vehicles</div>
-                        </div>
-                        @if (CrashData.FatalCount > 0)
-                        {
-                            <div class="crash-stat fatal">
-                                <div class="stat-value">@CrashData.FatalCount</div>
-                                <div class="stat-label">Fatalities</div>
+            <div class="crash-breakdown">
+                <h5>📊 Crash Details</h5>
+
+                        <div class="detail-item">
+                            <div class="detail-header">
+                                <span class="detail-icon">👥</span>
+                                <span class="detail-label">People & Vehicles</span>
                             </div>
-                        }
-                        @if (CrashData.InjuryCount > 0)
-                        {
-                            <div class="crash-stat injury">
-                                <div class="stat-value">@CrashData.InjuryCount</div>
-                                <div class="stat-label">Injuries</div>
+                            <div class="detail-value">
+                                @CrashData.PersonsInvolved persons, @CrashData.VehiclesInvolved vehicles
                             </div>
-                        }
-                    </div>
-                </div>
-
-                <div class="popup-section">
-                    <div class="popup-label">Conditions</div>
-                    <div class="condition-details">
-                        <div>Weather: <span>@CrashData.WeatherCondition</span></div>
-                        <div>Lighting: <span>@CrashData.LightCondition</span></div>
-                        <div>Surface: <span>@CrashData.SurfaceCondition</span></div>
-                    </div>
-                </div>
-
-                @if (CrashData.ContributingFactors?.Any() == true)
-                {
-                    <div class="popup-section">
-                        <div class="popup-label">Contributing Factors</div>
-                        <ul class="factors-list">
-                            @foreach (var factor in CrashData.ContributingFactors)
+                            @if (CrashData.FatalCount > 0 || CrashData.InjuryCount > 0)
                             {
-                                <li>@factor</li>
+                                <div class="detail-casualties">
+                                    @if (CrashData.FatalCount > 0)
+                                    {
+                                        <span class="casualty-count fatal">@CrashData.FatalCount fatalities</span>
+                                    }
+                                    @if (CrashData.InjuryCount > 0)
+                                    {
+                                        <span class="casualty-count injury">@CrashData.InjuryCount injuries</span>
+                                    }
+                                </div>
                             }
-                        </ul>
-                    </div>
-                }
+                        </div>
 
-                <div class="popup-section technical-info">
-                    <div class="popup-label">Location</div>
-                    <div class="technical-details">
-                        <div>Coordinates: <span class="mono">@CrashData.FormattedCoordinates</span></div>
-                        @if (!string.IsNullOrEmpty(CrashData.RoadwayId))
+                        <div class="detail-item">
+                            <div class="detail-header">
+                                <span class="detail-icon">🌦️</span>
+                                <span class="detail-label">Conditions</span>
+                            </div>
+                            <div class="condition-grid">
+                                <div class="condition-item">
+                                    <span class="condition-type">Weather:</span>
+                                    <span class="condition-value">@CrashData.WeatherCondition</span>
+                                </div>
+                                <div class="condition-item">
+                                    <span class="condition-type">Lighting:</span>
+                                    <span class="condition-value">@CrashData.LightCondition</span>
+                                </div>
+                                <div class="condition-item">
+                                    <span class="condition-type">Surface:</span>
+                                    <span class="condition-value">@CrashData.SurfaceCondition</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (CrashData.ContributingFactors?.Any() == true)
                         {
-                            <div>Roadway ID: <span class="mono">@CrashData.RoadwayId</span></div>
+                            <div class="detail-item">
+                                <div class="detail-header">
+                                    <span class="detail-icon">⚠️</span>
+                                    <span class="detail-label">Contributing Factors</span>
+                                </div>
+                                <div class="factors-list">
+                                    @foreach (var factor in CrashData.ContributingFactors)
+                                    {
+                                        <div class="factor-item">@factor</div>
+                                    }
+                                </div>
+                            </div>
                         }
-                    </div>
-                </div>
+
+                        <div class="detail-item">
+                            <div class="detail-header">
+                                <span class="detail-icon">📍</span>
+                                <span class="detail-label">Location</span>
+                            </div>
+                            <div class="location-details">
+                                <div class="location-item">
+                                    <span class="location-label">Coordinates:</span>
+                                    <span class="location-value mono">@CrashData.FormattedCoordinates</span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(CrashData.RoadwayId))
+                                {
+                                    <div class="location-item">
+                                        <span class="location-label">Roadway ID:</span>
+                                        <span class="location-value mono">@CrashData.RoadwayId</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
             </div>
         </div>
     </div>
 }
 
-<style>
-.crash-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-}
-
-.crash-popup-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    max-width: 480px;
-    max-height: 80vh;
-    overflow-y: auto;
-    margin: 20px;
-}
-
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #eee;
-    background: linear-gradient(135deg, #dc3545, #c82333);
-    color: white;
-    border-radius: 12px 12px 0 0;
-}
-
-.popup-title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.popup-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background-color 0.2s;
-}
-
-.popup-close:hover {
-    background-color: rgba(255,255,255,0.2);
-}
-
-.popup-content {
-    padding: 20px;
-}
-
-.popup-section {
-    margin-bottom: 16px;
-}
-
-.popup-section:last-child {
-    margin-bottom: 0;
-}
-
-.popup-label {
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 4px;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.popup-value {
-    color: #666;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.severity-badge {
-    background: #6c757d;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.severity-k .severity-badge { background: #dc3545; }
-.severity-a .severity-badge { background: #fd7e14; }
-.severity-b .severity-badge { background: #ffc107; color: #000; }
-.severity-c .severity-badge { background: #20c997; }
-.severity-o .severity-badge { background: #28a745; }
-
-.crash-stats {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.crash-stat {
-    text-align: center;
-    min-width: 60px;
-}
-
-.stat-value {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-}
-
-.crash-stat.fatal .stat-value { color: #dc3545; }
-.crash-stat.injury .stat-value { color: #fd7e14; }
-
-.stat-label {
-    font-size: 11px;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.condition-details {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 13px;
-}
-
-.condition-details > div {
-    display: flex;
-    justify-content: space-between;
-}
-
-.condition-details span {
-    font-weight: 500;
-    color: #333;
-}
-
-.factors-list {
-    margin: 0;
-    padding-left: 16px;
-    font-size: 13px;
-    color: #666;
-}
-
-.factors-list li {
-    margin-bottom: 4px;
-}
-
-.technical-info {
-    border-top: 1px solid #eee;
-    padding-top: 16px;
-    margin-top: 16px;
-}
-
-.technical-details {
-    font-size: 12px;
-    color: #666;
-}
-
-.technical-details > div {
-    margin-bottom: 4px;
-}
-
-.mono {
-    font-family: 'Courier New', monospace;
-    background: #f8f9fa;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-size: 11px;
-}
-</style>
 
 @code {
     [Parameter] public bool IsVisible { get; set; }
