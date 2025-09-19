@@ -2,10 +2,63 @@ using System.Text.Json.Serialization;
 
 namespace SoilDataProcessor;
 
+// Strongly-typed soil properties for GeoJSON features
+public class SoilProperties
+{
+    [JsonPropertyName("mukey")]
+    public string MuKey { get; set; } = "";
+
+    [JsonPropertyName("musym")]
+    public string MuSym { get; set; } = "";
+
+    [JsonPropertyName("muname")]
+    public string MuName { get; set; } = "";
+
+    [JsonPropertyName("soil_clay_pct")]
+    public double SoilClayPct { get; set; }
+
+    [JsonPropertyName("soil_ksat_um_per_s")]
+    public double SoilKsatUmPerS { get; set; }
+
+    [JsonPropertyName("polygon_count")]
+    public int? PolygonCount { get; set; }
+
+    [JsonPropertyName("note")]
+    public string Note { get; set; } = "";
+}
+
+// Specialized properties for visualization layers
+public class SoilVisualizationProperties
+{
+    [JsonPropertyName("mukey")]
+    public string MuKey { get; set; } = "";
+
+    [JsonPropertyName("musym")]
+    public string MuSym { get; set; } = "";
+
+    [JsonPropertyName("muname")]
+    public string MuName { get; set; } = "";
+
+    [JsonPropertyName("visualization")]
+    public string Visualization { get; set; } = "";
+}
+
+public class ClayVisualizationProperties : SoilVisualizationProperties
+{
+    [JsonPropertyName("soil_clay_pct")]
+    public double SoilClayPct { get; set; }
+}
+
+public class KsatVisualizationProperties : SoilVisualizationProperties
+{
+    [JsonPropertyName("soil_ksat_um_per_s")]
+    public double SoilKsatUmPerS { get; set; }
+}
+
 public class SsurgoApiResponse
 {
     [JsonPropertyName("Table")]
-    public List<SsurgoTableRow> Table { get; set; } = new();
+    public List<string[]> Table { get; set; } = new();
 }
 
 public class SsurgoTableRow

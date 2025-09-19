@@ -1,6 +1,7 @@
 using System.Text.Json;
 using NetTopologySuite.IO;
 using SoilDataProcessor;
+using MapSandBox.Shared.Models;
 
 class Program
 {
@@ -14,11 +15,26 @@ class Program
         
         try
         {
-            Console.WriteLine("1. Creating sample soil data for testing...");
-            Console.WriteLine("   (Using synthetic data for demonstration purposes)");
-            
-            // For testing, create sample soil map units with representative data
-            var geoJsonFeatures = CreateSampleSoilData();
+            Console.WriteLine("1. Testing real SSURGO API with small sample area...");
+            Console.WriteLine("   (Querying actual USDA data)");
+
+            // Create small test area in Parker County (approximately 1 km²)
+            var testAreaWkt = "POLYGON((-97.800 32.750, -97.790 32.750, -97.790 32.760, -97.800 32.760, -97.800 32.750))";
+
+            // Query real SSURGO data
+            var ssurgoResponse = await QuerySSURGOApiAsync(testAreaWkt);
+
+            // Debug: Show what we got from the API
+            Console.WriteLine($"   API Response: {ssurgoResponse.Substring(0, Math.Min(200, ssurgoResponse.Length))}...");
+
+            var geoJsonFeatures = await ConvertSSURGOToGeoJSONWithGeometry(ssurgoResponse);
+
+            // Fallback to sample data if API fails
+            if (geoJsonFeatures.Count == 0)
+            {
+                Console.WriteLine("   No data returned from API, falling back to sample data...");
+                geoJsonFeatures = CreateSampleSoilData();
+            }
             
             Console.WriteLine($"2. Created {geoJsonFeatures.Count} sample soil map units");
             
@@ -47,8 +63,8 @@ class Program
             foreach (var feature in geoJsonFeatures.Take(3))
             {
                 var props = feature.Properties;
-                Console.WriteLine($"   Map Unit: {props["musym"]} - {props["muname"]}");
-                Console.WriteLine($"   Clay: {props["soil_clay_pct"]}%, Ksat: {props["soil_ksat_um_per_s"]} μm/s");
+                Console.WriteLine($"   Map Unit: {props.MuSym} - {props.MuName}");
+                Console.WriteLine($"   Clay: {props.SoilClayPct}%, Ksat: {props.SoilKsatUmPerS} μm/s");
             }
             if (geoJsonFeatures.Count > 3)
             {
@@ -85,13 +101,134 @@ class Program
         
         return responseContent;
     }
-    
+
+    private static async Task<string> GetSoilGeometriesAsync(List<string> mukeys)
+    {
+        if (mukeys.Count == 0)
+        {
+            return "{\"Table\":[]}";
+        }
+
+        var mukeyList = string.Join("','", mukeys);
+        var geometryQuery = $@"
+            SELECT
+                mapunit.mukey,
+                G.MupolygonWktWgs84 as geom
+            FROM mapunit
+            CROSS APPLY SDA_Get_MupolygonWktWgs84_from_Mukey(mapunit.mukey) as G
+            WHERE mapunit.mukey IN ('{mukeyList}')";
+
+        var requestBody = new { query = geometryQuery, format = "json" };
+        var json = JsonSerializer.Serialize(requestBody);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+        Console.WriteLine($"   Querying SSURGO geometry API for {mukeys.Count} map units...");
+
+        var response = await _httpClient.PostAsync(SSURGO_API_BASE, content);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"   Geometry API Error ({response.StatusCode}): {errorContent}");
+            throw new HttpRequestException($"SSURGO Geometry API returned {response.StatusCode}: {errorContent}");
+        }
+
+        var responseContent = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"   Received {responseContent.Length} characters from geometry API");
+
+        return responseContent;
+    }
+
+    private static double CalculateWeightedAverage<T>(IGrouping<string, T> group,
+        Func<T, double?> valueSelector, Func<T, double?> weightSelector)
+    {
+        var validData = group.Where(r => valueSelector(r).HasValue && weightSelector(r).HasValue).ToList();
+        if (!validData.Any()) return 0;
+
+        var weightedSum = validData.Sum(r => valueSelector(r)!.Value * weightSelector(r)!.Value);
+        var totalWeight = validData.Sum(r => weightSelector(r)!.Value);
+
+        return totalWeight > 0 ? weightedSum / totalWeight : 0;
+    }
+
+    private static async Task<List<GeoJsonFeature<SoilProperties>>> ConvertSSURGOToGeoJSONWithGeometry(string ssurgoResponse)
+    {
+        // First, get soil properties using existing method
+        var propertiesFeatures = ConvertSSURGOToGeoJSON(ssurgoResponse);
+
+        if (propertiesFeatures.Count == 0)
+        {
+            return propertiesFeatures;
+        }
+
+        // Extract the mukeys to get geometries for
+        var mukeys = propertiesFeatures.Select(f => f.Properties.MuKey).ToList();
+
+        try
+        {
+            // Get real geometries for these mukeys
+            var geometryResponse = await GetSoilGeometriesAsync(mukeys);
+            var geometryData = JsonSerializer.Deserialize<SsurgoApiResponse>(geometryResponse);
+
+            if (geometryData?.Table != null && geometryData.Table.Count > 0)
+            {
+                Console.WriteLine($"   Retrieved geometry for {geometryData.Table.Count} map units");
+
+                // Group geometries by mukey (each mukey can have multiple polygons)
+                var geometryGroups = geometryData.Table
+                    .Where(row => row.Length >= 2)
+                    .GroupBy(row => row[0]) // Group by mukey
+                    .ToDictionary(g => g.Key, g => g.Select(row => row[1]).ToList()); // mukey -> List<WKT>
+
+                // Update features with real geometries
+                foreach (var feature in propertiesFeatures)
+                {
+                    var mukey = feature.Properties.MuKey;
+                    if (geometryGroups.TryGetValue(mukey, out var wktGeometries) && wktGeometries.Count > 0)
+                    {
+                        try
+                        {
+                            if (wktGeometries.Count == 1)
+                            {
+                                // Single polygon - convert directly
+                                feature.Geometry = ConvertWktToGeoJsonGeometry(wktGeometries[0]);
+                            }
+                            else
+                            {
+                                // Multiple polygons - create MultiPolygon or use first one for now
+                                Console.WriteLine($"   Note: Map unit {mukey} has {wktGeometries.Count} polygons, using first one");
+                                feature.Geometry = ConvertWktToGeoJsonGeometry(wktGeometries[0]);
+                            }
+                            feature.Properties.Note = "Real SSURGO data with actual geometry";
+                            feature.Properties.PolygonCount = wktGeometries.Count;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"   Warning: Failed to convert geometry for mukey {mukey}: {ex.Message}");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("   Warning: No geometry data returned, keeping placeholder geometry");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"   Warning: Failed to retrieve geometries: {ex.Message}");
+            Console.WriteLine("   Continuing with placeholder geometry...");
+        }
+
+        return propertiesFeatures;
+    }
+
     private static string BuildVectorSoilDataQuery(string areaGeometry)
     {
         // SSURGO doesn't directly provide geometry in tabular queries
         // We need to get the data and then fetch geometry separately
         return $@"
-            SELECT 
+            SELECT
                 mu.mukey,
                 mu.musym,
                 mu.muname,
@@ -111,138 +248,186 @@ class Program
             ORDER BY mu.mukey, co.comppct_r DESC";
     }
     
-    private static List<SoilGeoJsonFeature> ConvertSSURGOToGeoJSON(string ssurgoResponse)
+    private static List<GeoJsonFeature<SoilProperties>> ConvertSSURGOToGeoJSON(string ssurgoResponse)
     {
         var ssurgoData = JsonSerializer.Deserialize<SsurgoApiResponse>(ssurgoResponse);
-        if (ssurgoData?.Table == null)
+        if (ssurgoData?.Table == null || ssurgoData.Table.Count == 0)
         {
-            return new List<SoilGeoJsonFeature>();
+            return new List<GeoJsonFeature<SoilProperties>>();
         }
-        
-        var features = new List<SoilGeoJsonFeature>();
-        
-        // Group by map unit key and aggregate component data
-        var groupedData = ssurgoData.Table
+
+        Console.WriteLine($"   Received {ssurgoData.Table.Count} soil component records");
+
+        // Convert array data to structured records
+        // Array format: [mukey, musym, muname, cokey, compname, component_pct, soil_clay_pct, soil_ksat_um_per_s]
+        var records = ssurgoData.Table
+            .Where(row => row.Length >= 8)
+            .Select(row => new
+            {
+                MuKey = row[0],
+                MuSym = row[1],
+                MuName = row[2],
+                CoKey = row[3],
+                CompName = row[4],
+                ComponentPct = double.TryParse(row[5], out var pct) ? (double?)pct : null,
+                ClayPct = double.TryParse(row[6], out var clay) ? (double?)clay : null,
+                Ksat = double.TryParse(row[7], out var ksat) ? (double?)ksat : null
+            })
+            .ToList();
+
+        Console.WriteLine($"   Parsed {records.Count} valid records");
+
+        // Group by map unit and aggregate component data
+        var groupedData = records
             .GroupBy(r => r.MuKey)
             .Select(g => new
             {
                 MuKey = g.Key,
                 MuSym = g.First().MuSym,
                 MuName = g.First().MuName,
-                Geom = g.First().Geom,
                 // Weight-averaged soil properties by component percentage
-                ClayPct = g.Where(r => r.SoilClayPct.HasValue && r.ComponentPct.HasValue).Any() ?
-                          g.Where(r => r.SoilClayPct.HasValue && r.ComponentPct.HasValue)
-                          .Sum(r => r.SoilClayPct!.Value * r.ComponentPct!.Value) /
-                          g.Where(r => r.SoilClayPct.HasValue && r.ComponentPct.HasValue)
-                          .Sum(r => r.ComponentPct!.Value) : 0,
-                Ksat = g.Where(r => r.SoilKsatUmPerS.HasValue && r.ComponentPct.HasValue).Any() ?
-                      g.Where(r => r.SoilKsatUmPerS.HasValue && r.ComponentPct.HasValue)
-                      .Sum(r => r.SoilKsatUmPerS!.Value * r.ComponentPct!.Value) /
-                      g.Where(r => r.SoilKsatUmPerS.HasValue && r.ComponentPct.HasValue)
-                      .Sum(r => r.ComponentPct!.Value) : 0
+                ClayPct = CalculateWeightedAverage(g, r => r.ClayPct, r => r.ComponentPct),
+                Ksat = CalculateWeightedAverage(g, r => r.Ksat, r => r.ComponentPct)
             })
-            .Where(g => !string.IsNullOrEmpty(g.Geom))
             .ToList();
-        
-        Console.WriteLine($"   Processing {groupedData.Count} unique map units...");
-        
+
+        Console.WriteLine($"   Grouped into {groupedData.Count} unique map units");
+
+        // Note: SSURGO tabular API doesn't return geometry directly
+        // For now, create simple polygon features that will need geometry from spatial API
+        var features = new List<GeoJsonFeature<SoilProperties>>();
+
         foreach (var mapUnit in groupedData)
         {
-            try
+            // Create a placeholder polygon geometry
+            var placeholderGeometry = new PolygonGeometry
             {
-                // Convert WKT geometry to GeoJSON geometry using NetTopologySuite
-                var geoJsonGeometry = ConvertWktToGeoJsonGeometry(mapUnit.Geom);
-                
-                features.Add(new SoilGeoJsonFeature
+                Coordinates = new List<List<List<double>>>
                 {
-                    Type = "Feature",
-                    Properties = new Dictionary<string, object>
+                    new List<List<double>>
                     {
-                        ["mukey"] = mapUnit.MuKey,
-                        ["musym"] = mapUnit.MuSym,
-                        ["muname"] = mapUnit.MuName ?? "",
-                        ["soil_clay_pct"] = Math.Round(mapUnit.ClayPct, 1),
-                        ["soil_ksat_um_per_s"] = Math.Round(mapUnit.Ksat, 3)
-                    },
-                    Geometry = geoJsonGeometry
-                });
-            }
-            catch (Exception ex)
+                        new List<double> { -97.795, 32.755 },
+                        new List<double> { -97.790, 32.755 },
+                        new List<double> { -97.790, 32.760 },
+                        new List<double> { -97.795, 32.760 },
+                        new List<double> { -97.795, 32.755 }
+                    }
+                }
+            };
+
+            features.Add(new GeoJsonFeature<SoilProperties>
             {
-                Console.WriteLine($"   Warning: Failed to convert map unit {mapUnit.MuKey}: {ex.Message}");
-            }
+                Properties = new SoilProperties
+                {
+                    MuKey = mapUnit.MuKey,
+                    MuSym = mapUnit.MuSym,
+                    MuName = mapUnit.MuName ?? "",
+                    SoilClayPct = Math.Round(mapUnit.ClayPct, 1),
+                    SoilKsatUmPerS = Math.Round(mapUnit.Ksat, 3),
+                    Note = "Real SSURGO data with placeholder geometry"
+                },
+                Geometry = placeholderGeometry
+            });
         }
-        
+
         return features;
     }
     
-    private static object ConvertWktToGeoJsonGeometry(string wkt)
+    private static GeoJsonGeometry ConvertWktToGeoJsonGeometry(string wkt)
     {
-        // Use NetTopologySuite for robust WKT to GeoJSON conversion
-        var wktReader = new WKTReader();
-        var geometry = wktReader.Read(wkt);
-        
-        // Convert to GeoJSON format
-        var geoJsonWriter = new GeoJsonWriter();
-        var geoJsonString = geoJsonWriter.Write(geometry);
-        
-        // Parse the geometry portion of the GeoJSON
-        var geoJsonObject = JsonSerializer.Deserialize<JsonElement>(geoJsonString);
-        return geoJsonObject.GetProperty("geometry").Deserialize<object>()!;
+        try
+        {
+            // Use NetTopologySuite for robust WKT to GeoJSON conversion
+            var wktReader = new WKTReader();
+            var geometry = wktReader.Read(wkt);
+
+            // Convert to GeoJSON format
+            var geoJsonWriter = new GeoJsonWriter();
+            var geoJsonString = geoJsonWriter.Write(geometry);
+
+            // Parse the geometry and deserialize to the correct type
+            var geoJsonObject = JsonSerializer.Deserialize<JsonElement>(geoJsonString);
+
+            // Extract the geometry part if it's wrapped in a feature
+            JsonElement geometryElement = geoJsonObject.TryGetProperty("geometry", out var geomProp)
+                ? geomProp
+                : geoJsonObject;
+
+            // Check the geometry type and deserialize accordingly
+            if (geometryElement.TryGetProperty("type", out var typeProperty))
+            {
+                string geometryType = typeProperty.GetString()!;
+                return geometryType switch
+                {
+                    "Polygon" => geometryElement.Deserialize<PolygonGeometry>()!,
+                    "MultiPolygon" => geometryElement.Deserialize<MultiPolygonGeometry>()!,
+                    "Point" => geometryElement.Deserialize<PointGeometry>()!,
+                    "LineString" => geometryElement.Deserialize<LineStringGeometry>()!,
+                    "MultiLineString" => geometryElement.Deserialize<MultiLineStringGeometry>()!,
+                    _ => throw new NotSupportedException($"Geometry type '{geometryType}' is not supported")
+                };
+            }
+
+            throw new InvalidOperationException("Geometry does not have a 'type' property");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"   Error converting WKT to GeoJSON: {ex.Message}");
+            throw;
+        }
     }
     
-    private static string CreateGeoJsonCollection(List<SoilGeoJsonFeature> features)
+    private static string CreateGeoJsonCollection(List<GeoJsonFeature<SoilProperties>> features)
     {
-        var collection = new SoilGeoJsonCollection { Features = features };
+        var collection = new GeoJsonFeatureCollection<SoilProperties> { Features = features };
         return JsonSerializer.Serialize(collection, new JsonSerializerOptions { WriteIndented = false });
     }
     
-    private static string CreateClayVisualizationGeoJson(List<SoilGeoJsonFeature> features)
+    private static string CreateClayVisualizationGeoJson(List<GeoJsonFeature<SoilProperties>> features)
     {
         // Create version optimized for clay percentage visualization
-        var clayFeatures = features.Select(f => new SoilGeoJsonFeature
+        var clayFeatures = features.Select(f => new GeoJsonFeature<ClayVisualizationProperties>
         {
-            Type = f.Type,
             Geometry = f.Geometry,
-            Properties = new Dictionary<string, object>
+            Properties = new ClayVisualizationProperties
             {
-                ["mukey"] = f.Properties["mukey"],
-                ["musym"] = f.Properties["musym"],
-                ["muname"] = f.Properties["muname"],
-                ["soil_clay_pct"] = f.Properties["soil_clay_pct"],
-                ["visualization"] = "clay"
+                MuKey = f.Properties.MuKey,
+                MuSym = f.Properties.MuSym,
+                MuName = f.Properties.MuName,
+                SoilClayPct = f.Properties.SoilClayPct,
+                Visualization = "clay"
             }
         }).ToList();
-        
-        return CreateGeoJsonCollection(clayFeatures);
+
+        var collection = new GeoJsonFeatureCollection<ClayVisualizationProperties> { Features = clayFeatures };
+        return JsonSerializer.Serialize(collection, new JsonSerializerOptions { WriteIndented = false });
     }
     
-    private static string CreateKsatVisualizationGeoJson(List<SoilGeoJsonFeature> features)
+    private static string CreateKsatVisualizationGeoJson(List<GeoJsonFeature<SoilProperties>> features)
     {
         // Create version optimized for permeability visualization
-        var ksatFeatures = features.Select(f => new SoilGeoJsonFeature
+        var ksatFeatures = features.Select(f => new GeoJsonFeature<KsatVisualizationProperties>
         {
-            Type = f.Type,
             Geometry = f.Geometry,
-            Properties = new Dictionary<string, object>
+            Properties = new KsatVisualizationProperties
             {
-                ["mukey"] = f.Properties["mukey"],
-                ["musym"] = f.Properties["musym"],
-                ["muname"] = f.Properties["muname"],
-                ["soil_ksat_um_per_s"] = f.Properties["soil_ksat_um_per_s"],
-                ["visualization"] = "ksat"
+                MuKey = f.Properties.MuKey,
+                MuSym = f.Properties.MuSym,
+                MuName = f.Properties.MuName,
+                SoilKsatUmPerS = f.Properties.SoilKsatUmPerS,
+                Visualization = "ksat"
             }
         }).ToList();
-        
-        return CreateGeoJsonCollection(ksatFeatures);
+
+        var collection = new GeoJsonFeatureCollection<KsatVisualizationProperties> { Features = ksatFeatures };
+        return JsonSerializer.Serialize(collection, new JsonSerializerOptions { WriteIndented = false });
     }
     
-    private static List<SoilGeoJsonFeature> CreateSampleSoilData()
+    private static List<GeoJsonFeature<SoilProperties>> CreateSampleSoilData()
     {
         // Create representative soil map units for Parker County, TX area
         // Using realistic soil types and properties found in North Texas
-        var features = new List<SoilGeoJsonFeature>();
+        var features = new List<GeoJsonFeature<SoilProperties>>();
         
         // Sample area coordinates around Parker County
         var sampleUnits = new[]
@@ -256,32 +441,29 @@ class Program
         
         foreach (var unit in sampleUnits)
         {
-            // Create polygon geometry
-            var coordinates = new List<List<double[]>>();
-            var ring = new List<double[]>();
-            
+            // Create polygon geometry coordinates
+            var ring = new List<List<double>>();
+
             for (int i = 0; i < unit.coords.Length; i += 2)
             {
-                ring.Add(new double[] { unit.coords[i], unit.coords[i + 1] });
+                ring.Add(new List<double> { unit.coords[i], unit.coords[i + 1] });
             }
-            coordinates.Add(ring);
-            
-            var geometry = new
+
+            var geometry = new PolygonGeometry
             {
-                type = "Polygon",
-                coordinates = coordinates
+                Coordinates = new List<List<List<double>>> { ring }
             };
-            
-            features.Add(new SoilGeoJsonFeature
+
+            features.Add(new GeoJsonFeature<SoilProperties>
             {
-                Type = "Feature",
-                Properties = new Dictionary<string, object>
+                Properties = new SoilProperties
                 {
-                    ["mukey"] = $"sample_{unit.musym}",
-                    ["musym"] = unit.musym,
-                    ["muname"] = unit.muname,
-                    ["soil_clay_pct"] = unit.clay,
-                    ["soil_ksat_um_per_s"] = unit.ksat
+                    MuKey = $"sample_{unit.musym}",
+                    MuSym = unit.musym,
+                    MuName = unit.muname,
+                    SoilClayPct = unit.clay,
+                    SoilKsatUmPerS = unit.ksat,
+                    Note = "Synthetic test data"
                 },
                 Geometry = geometry
             });

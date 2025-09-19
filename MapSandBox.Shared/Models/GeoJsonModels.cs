@@ -7,6 +7,8 @@ namespace MapSandBox.Shared.Models;
 [JsonDerivedType(typeof(PointGeometry), "Point")]
 [JsonDerivedType(typeof(LineStringGeometry), "LineString")]
 [JsonDerivedType(typeof(MultiLineStringGeometry), "MultiLineString")]
+[JsonDerivedType(typeof(PolygonGeometry), "Polygon")]
+[JsonDerivedType(typeof(MultiPolygonGeometry), "MultiPolygon")]
 public abstract class GeoJsonGeometry
 {
 }
@@ -27,6 +29,18 @@ public class MultiLineStringGeometry : GeoJsonGeometry
 {
     [JsonPropertyName("coordinates")]
     public List<List<List<double>>> Coordinates { get; set; } = new(); // [[[lon, lat], ...], [[lon, lat], ...]
+}
+
+public class PolygonGeometry : GeoJsonGeometry
+{
+    [JsonPropertyName("coordinates")]
+    public List<List<List<double>>> Coordinates { get; set; } = new(); // [[[lon, lat], [lon, lat], ...]]
+}
+
+public class MultiPolygonGeometry : GeoJsonGeometry
+{
+    [JsonPropertyName("coordinates")]
+    public List<List<List<List<double>>>> Coordinates { get; set; } = new(); // [[[[lon, lat], ...]], [[[lon, lat], ...]]]
 }
 
 // Base GeoJSON feature models
