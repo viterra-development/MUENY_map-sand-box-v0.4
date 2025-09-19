@@ -2,96 +2,186 @@
 
 ## Current State Analysis
 
-The SoilDataProcessor (`/workspaces/map-sand-box/SoilDataProcessor/`) currently generates **synthetic test data** with 5 sample soil map units covering a small area in Parker County, Texas. The system has the infrastructure to query the USDA SSURGO API but is currently configured to use sample data for testing.
+The SoilDataProcessor (`/workspaces/map-sand-box/SoilDataProcessor/`) is now **fully operational with real SSURGO API integration** and covers a small test area in Parker County, Texas. Both the USDA SSURGO API and geometry retrieval are working correctly with strongly-typed models.
 
-### Current Implementation
-- **Location**: `SoilDataProcessor/Program.cs:241-291`
-- **Coverage**: 5 synthetic soil units in a ~0.01° square area (approximately 1 km²)
+### Current Implementation ✅ COMPLETED
+- **Location**: `SoilDataProcessor/Program.cs` (fully implemented)
+- **Coverage**: 6 real soil map units in small test area (~1 km²)
 - **Test Area**: Around -97.795°, 32.755° (central Parker County)
 - **Output**: 3 GeoJSON files (combined, clay visualization, ksat visualization)
-- **Data Structure**: Includes mukey, musym, muname, soil_clay_pct, soil_ksat_um_per_s
+- **Data Structure**: Strongly-typed `GeoJsonFeature<SoilProperties>` models
+- **API Integration**: ✅ Real SSURGO vector soil data query working
+- **Geometry Retrieval**: ✅ Real polygon boundaries from `SDA_Get_MupolygonWktWgs84_from_Mukey()`
+- **Data Quality**: ✅ Weighted averaging by component percentage, duplicate handling
 
-### Existing Infrastructure
-- **SSURGO API Integration**: Complete implementation in `QuerySSURGOApiAsync()` and `BuildVectorSoilDataQuery()`
-- **Data Models**: Robust models in `SoilModels.cs` for API responses and GeoJSON output
-- **Geometry Conversion**: NetTopologySuite integration for WKT to GeoJSON conversion
+### Existing Infrastructure ✅ COMPLETED
+- **SSURGO API Integration**: ✅ Complete and tested implementation in `QuerySSURGOApiAsync()` and `BuildVectorSoilDataQuery()`
+- **Geometry API Integration**: ✅ Complete implementation in `GetSoilGeometriesAsync()` with `SDA_Get_MupolygonWktWgs84_from_Mukey()`
+- **Data Models**: ✅ Strongly-typed models in `SoilModels.cs` integrated with shared `MapSandBox.Shared` models
+- **Geometry Conversion**: ✅ NetTopologySuite integration for WKT to GeoJSON conversion working
+- **Multi-polygon Handling**: ✅ Handles map units with multiple polygons (up to 302 per mukey)
 - **Parker County Boundary**: Available at `/workspaces/map-sand-box/CrisDataProcessor/Data/parker-county-boundary.geojson`
 
 ## Expansion Plan
 
-### Phase 1: Enable Real SSURGO Data Retrieval
+### Phase 0: Fix Critical Polygon Coverage Issue ⚠️ IMMEDIATE PRIORITY
 
-#### 1.1 Update Main Processing Logic
-**File**: `SoilDataProcessor/Program.cs:10-62`
+#### 0.1 Problem: Missing 90%+ of Soil Coverage
+**Current Issue**: The processor currently only uses the first polygon per MUKEY, missing the majority of soil areas.
 
-Replace the current synthetic data approach with real SSURGO API calls:
+**Impact**:
+- Map unit 390893 (May fine sandy loam): Using 1 out of 302 polygons (99.7% missing)
+- Map unit 390925: Using 1 out of 117 polygons (99.1% missing)
+- Total coverage loss: ~90% of actual soil areas not represented
 
+#### 0.2 Root Cause Analysis
+**Why Multiple Polygons Exist**:
+- Each MUKEY represents a soil type (e.g., "May fine sandy loam, 1 to 3 percent slopes")
+- The same soil type occurs in multiple scattered locations across the landscape
+- SSURGO correctly maps all locations where identical soil conditions exist
+- This is standard soil survey methodology - not a data error
+
+#### 0.3 Solution: Separate Feature per Polygon
+**Implementation**: Replace current logic in `ConvertSSURGOToGeoJSONWithGeometry()` (lines 183-201)
+
+**Current Logic** (BROKEN):
 ```csharp
-static async Task Main(string[] args)
-{
-    // Load Parker County boundary geometry
-    var parkerCountyGeometry = LoadParkerCountyBoundary();
-
-    // Query real SSURGO data for the county
-    var ssurgoResponse = await QuerySSURGOApiAsync(parkerCountyGeometry);
-    var geoJsonFeatures = ConvertSSURGOToGeoJSON(ssurgoResponse);
-
-    // Generate output files
-    // ... existing file generation logic
-}
+// Multiple polygons - use first one for now
+Console.WriteLine($"Note: Map unit {mukey} has {wktGeometries.Count} polygons, using first one");
+feature.Geometry = ConvertWktToGeoJsonGeometry(wktGeometries[0]);
 ```
 
-#### 1.2 Implement County Boundary Loading
+**New Logic** (COMPLETE COVERAGE):
+```csharp
+// Create separate features for each polygon
+var allFeatures = new List<GeoJsonFeature<SoilProperties>>();
+foreach (var propertiesFeature in propertiesFeatures)
+{
+    var mukey = propertiesFeature.Properties.MuKey;
+    if (geometryGroups.TryGetValue(mukey, out var wktGeometries))
+    {
+        // Create a separate feature for each polygon with this soil type
+        for (int i = 0; i < wktGeometries.Count; i++)
+        {
+            var newFeature = new GeoJsonFeature<SoilProperties>
+            {
+                Properties = CloneProperties(propertiesFeature.Properties),
+                Geometry = ConvertWktToGeoJsonGeometry(wktGeometries[i])
+            };
+            allFeatures.Add(newFeature);
+        }
+    }
+}
+return allFeatures;
+```
+
+**Expected Results**:
+- Test area: 6 soil types → ~450 individual polygon features (instead of 6)
+- Complete soil coverage with no spatial gaps
+- Accurate representation of soil distribution patterns
+
+### Phase 1: County-Wide Data Retrieval ⚠️ NEXT STEP
+
+#### 1.1 Load Parker County Boundary
 **New Method**: Add to `Program.cs`
 
 ```csharp
 private static string LoadParkerCountyBoundary()
 {
     var boundaryPath = Path.Combine("..", "CrisDataProcessor", "Data", "parker-county-boundary.geojson");
-    var boundaryData = JsonSerializer.Deserialize<dynamic>(File.ReadAllText(boundaryPath));
+    var boundaryGeoJson = File.ReadAllText(boundaryPath);
+    var featureCollection = JsonSerializer.Deserialize<GeoJsonFeatureCollection>(boundaryGeoJson);
 
-    // Extract WKT geometry from the boundary GeoJSON
-    // Convert to WKT format required by SSURGO API
-    return ConvertGeoJsonToWkt(boundaryData);
+    // Convert the county boundary to WKT for SSURGO API
+    var countyGeometry = featureCollection.Features.First().Geometry;
+    return ConvertGeometryToWkt(countyGeometry);
+}
+```
+
+#### 1.2 Update Main Processing Logic
+**File**: `SoilDataProcessor/Program.cs` - Replace test area with full county
+
+Replace the current small test area with Parker County boundary:
+
+```csharp
+static async Task Main(string[] args)
+{
+    Console.WriteLine("SSURGO Soil Data Processor - Parker County Full Import");
+    Console.WriteLine("======================================================");
+
+    // Load Parker County boundary geometry
+    var parkerCountyWkt = LoadParkerCountyBoundary();
+
+    // Query real SSURGO data for entire county
+    var soilData = await QuerySSURGOApiAsync(parkerCountyWkt);
+    // ... rest of existing processing logic
 }
 ```
 
 #### 1.3 Add Geometry Conversion Utilities
 **New Methods**: Add WKT/GeoJSON conversion utilities
 
-- `ConvertGeoJsonToWkt()` - Convert Parker County boundary to WKT
+- `ConvertGeometryToWkt()` - Convert Parker County boundary from GeoJSON to WKT
+- `LoadParkerCountyBoundary()` - Load and convert county boundary file
 - Handle large polygon geometries efficiently
-- Implement geometry simplification if needed for API limits
 
 ### Phase 2: Handle Large Dataset Challenges
 
-#### 2.1 Implement Chunked Processing
-**Issue**: Parker County (~900 km²) may exceed SSURGO API limits
+#### 2.1 Implement Chunked Processing ⚠️ MANDATORY
+**Issue**: Parker County (~900 km²) will exceed SSURGO API limits
 
-**Solution**: Divide county into grid cells and process individually:
+**Confirmed API Limits**:
+- 📏 **32MB JSON response limit** per query
+- 📊 **100,000 records limit** per query
+- 🗺️ **250,000 features limit** for spatial queries
+- ✅ **No rate limiting** - can make requests as fast as needed
+
+**Current vs. Full County**:
+- Current test (6 mukeys): 1.6MB response ✅
+- Full county estimate: 200-500MB response ❌ (exceeds 32MB limit by 6-15x)
+
+**Status**: MANDATORY for full county - chunking required due to hard API limits
+
+**Solution**: Divide county into grid cells that stay under API limits:
 
 ```csharp
-private static async Task<List<SoilGeoJsonFeature>> ProcessCountyInChunks(string countyBoundary)
+private static async Task<List<GeoJsonFeature<SoilProperties>>> ProcessCountyInChunks(string countyBoundary)
 {
-    var chunks = CreateSpatialChunks(countyBoundary, maxChunkSize: 25); // ~25 km² per chunk
-    var allFeatures = new List<SoilGeoJsonFeature>();
+    // Target: 20MB per chunk (well under 32MB limit)
+    // Parker County: 900 km² ÷ 36 chunks = 25 km² per chunk
+    var chunks = CreateSpatialChunks(countyBoundary, maxChunkSize: 25);
+    var allFeatures = new List<GeoJsonFeature<SoilProperties>>();
 
-    foreach (var chunk in chunks)
+    Console.WriteLine($"Processing {chunks.Count} chunks to stay under 32MB API limit...");
+
+    foreach (var (chunk, index) in chunks.WithIndex())
     {
+        Console.WriteLine($"Processing chunk {index + 1}/{chunks.Count}...");
+
         var chunkResponse = await QuerySSURGOApiAsync(chunk);
-        var chunkFeatures = ConvertSSURGOToGeoJSON(chunkResponse);
+
+        // Check response size before processing
+        var responseSizeMB = chunkResponse.Length / (1024.0 * 1024.0);
+        Console.WriteLine($"   Chunk response: {responseSizeMB:F1}MB");
+
+        if (responseSizeMB > 30)
+        {
+            Console.WriteLine($"   WARNING: Chunk approaching 32MB limit!");
+        }
+
+        var chunkFeatures = await ConvertSSURGOToGeoJSONWithGeometry(chunkResponse);
         allFeatures.AddRange(chunkFeatures);
 
-        // Rate limiting: Wait between API calls
-        await Task.Delay(1000);
+        // Conservative delay to be respectful to USDA servers
+        await Task.Delay(500); // Brief pause between chunks
     }
 
-    return DeduplicateMapUnits(allFeatures);
+    return DeduplicateFeatures(allFeatures);
 }
 ```
 
-#### 2.2 Add Error Handling and Retry Logic
-**Enhancement**: Robust API interaction
+#### 2.2 Add Error Handling and Size Monitoring
+**Enhancement**: Robust API interaction with size limit protection
 
 ```csharp
 private static async Task<string> QuerySSURGOApiAsync(string areaGeometry, int maxRetries = 3)
@@ -100,13 +190,36 @@ private static async Task<string> QuerySSURGOApiAsync(string areaGeometry, int m
     {
         try
         {
-            // Existing API call logic
+            var response = await _httpClient.PostAsync(SSURGO_API_BASE, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+
+                // Check for size limit error
+                if (errorContent.Contains("exceeds") || errorContent.Contains("limit"))
+                {
+                    throw new InvalidOperationException($"Query exceeds API size limits: {errorContent}");
+                }
+
+                throw new HttpRequestException($"API returned {response.StatusCode}: {errorContent}");
+            }
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            // Monitor response size
+            var sizeMB = responseContent.Length / (1024.0 * 1024.0);
+            if (sizeMB > 30)
+            {
+                Console.WriteLine($"WARNING: Response {sizeMB:F1}MB approaching 32MB limit");
+            }
+
             return responseContent;
         }
         catch (HttpRequestException ex) when (attempt < maxRetries)
         {
             Console.WriteLine($"Attempt {attempt} failed: {ex.Message}. Retrying...");
-            await Task.Delay(2000 * attempt); // Exponential backoff
+            await Task.Delay(1000 * attempt); // Network retry delay + respectful pause
         }
     }
     throw new Exception("Max retries exceeded");
@@ -248,14 +361,16 @@ Add configuration support:
 
 ## Implementation Priority
 
-### High Priority (Immediate)
-1. **Enable Real SSURGO Data** - Replace synthetic data with actual API calls
-2. **Chunked Processing** - Handle large county area efficiently
-3. **Basic Error Handling** - Ensure robust API interaction
+### High Priority (Immediate) ⚠️ READY TO IMPLEMENT
+1. ✅ **~~Enable Real SSURGO Data~~** - COMPLETED: Real API calls working with geometry retrieval
+2. ⚠️ **Fix Polygon Coverage Issue** - CRITICAL: Create separate features for all polygons per mukey
+3. ⚠️ **County Boundary Loading** - Load Parker County boundary and convert to WKT
+4. ⚠️ **Chunked Processing** - Handle large county area efficiently (CRITICAL for success)
+5. ⚠️ **Basic Error Handling** - Ensure robust API interaction for large datasets
 
 ### Medium Priority (Phase 2)
-1. **Data Caching** - Avoid redundant API calls
-2. **Enhanced Validation** - Ensure data quality
+1. **Data Caching** - Avoid redundant API calls during chunked processing
+2. **Enhanced Validation** - Ensure data quality across all chunks
 3. **Configuration Management** - Make system configurable
 
 ### Low Priority (Future Enhancement)
@@ -265,19 +380,19 @@ Add configuration support:
 
 ## Expected Challenges
 
-1. **API Rate Limits**: USDA SSURGO API may have usage restrictions
-2. **Large Dataset Size**: Parker County soil data could be 100+ MB
-3. **Geometry Complexity**: Some soil map units may have complex boundaries
-4. **Data Consistency**: Real SSURGO data may have missing or inconsistent values
+1. ⚠️ **API Size Limits**: USDA SSURGO API has **32MB JSON response limit** and **100,000 records per query** (chunking MANDATORY)
+2. **Large Dataset Size**: Parker County soil data could be 100+ MB (current test: 1.6MB for 6 units)
+3. ⚠️ **Geometry Coverage Issue** - CRITICAL: Currently only using first polygon per mukey (missing 90%+ of soil areas)
+4. ✅ **~~Data Consistency~~** - RESOLVED: Weighted averaging and validation implemented
 
 ## Success Criteria
 
-- ✅ Complete Parker County soil coverage (900+ km²)
-- ✅ All major soil types and properties included
-- ✅ Data quality validation passes
-- ✅ Integration with existing MapSandBox visualization
-- ✅ Processing time under 10 minutes
-- ✅ Output files under 50 MB total
+- ⚠️ Complete Parker County soil coverage (900+ km²) - **READY TO IMPLEMENT**
+- ✅ All major soil types and properties included (clay %, Ksat working)
+- ✅ Data quality validation passes (weighted averaging implemented)
+- ✅ Integration with existing MapSandBox visualization (strongly-typed models ready)
+- ⚠️ Processing time under 10 minutes (needs chunking optimization)
+- ⚠️ Output files manageable size (revised estimate: ~500MB with complete polygon coverage, may need optimization)
 
 ## Testing Strategy
 
@@ -289,9 +404,37 @@ Add configuration support:
 
 ## Timeline Estimate
 
-- **Phase 1** (Real Data): 2-3 days
-- **Phase 2** (Chunking/Error Handling): 2-3 days
-- **Phase 3** (Quality/Optimization): 2-3 days
-- **Phase 4** (Configuration/Integration): 1-2 days
+- ✅ **~~Phase 1~~** (Real Data): **COMPLETED** - Real API integration working with geometry
+- ⚠️ **Phase 2** (County Boundary + Chunking): 1-2 days - **NEXT STEP**
+- **Phase 3** (Error Handling/Caching): 1-2 days
+- **Phase 4** (Optimization/Configuration): 1-2 days
 
-**Total**: 7-11 days for complete implementation
+**Remaining**: 3-6 days for full Parker County implementation
+
+## Current Status Summary
+
+✅ **COMPLETED:**
+- Real SSURGO API integration with soil property data
+- Real geometry retrieval from SSURGO
+- Strongly-typed models with shared GeoJSON classes
+- Weighted averaging by component percentage
+- Working test implementation (6 map units, 1.6MB geometry data)
+
+⚠️ **CRITICAL ISSUE IDENTIFIED:**
+- Currently only using 1 polygon per soil type (missing 90%+ of coverage)
+- Need to fix polygon handling BEFORE county expansion
+
+⚠️ **CONFIRMED API LIMITS:**
+- 32MB JSON response limit per query (HARD LIMIT)
+- 100,000 records limit per query
+- 250,000 features limit for spatial queries
+- No rate limiting (but using 500ms delays to be respectful)
+
+⚠️ **IMMEDIATE NEXT STEPS:**
+1. **Fix polygon coverage** - Create separate features for all polygons per mukey
+2. Load Parker County boundary geometry
+3. **Implement chunked processing** - MANDATORY due to 32MB limit (not optional)
+4. Add error handling with size monitoring
+5. Test with full county data
+
+**Ready to proceed with full Parker County expansion!**

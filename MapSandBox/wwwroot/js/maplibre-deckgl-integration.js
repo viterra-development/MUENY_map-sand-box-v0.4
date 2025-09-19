@@ -54,25 +54,18 @@ export function createIntegratedMap(containerId, config) {
             interleaved: false, // Overlaid mode for better compatibility
             layers: deckLayers,
             getCursor: ({isDragging, isHovering}) => {
-                console.log('getCursor called:', {isDragging, isHovering});
                 let cursor;
                 if (isDragging) {
                     cursor = 'grabbing';
-                    console.log('Setting grabbing cursor');
                 } else if (isHovering) {
                     cursor = 'pointer';
-                    console.log('Setting pointer cursor');
                 } else {
                     cursor = 'grab';
-                    console.log('Setting grab cursor');
                 }
 
                 // Manually set cursor on MapLibre canvas (Solution from GitHub discussion #5893)
                 if (maplibreMap && maplibreMap.getCanvas) {
                     maplibreMap.getCanvas().style.cursor = cursor;
-                    console.log('Applied cursor to MapLibre canvas:', cursor);
-                } else {
-                    console.warn('MapLibre map not available for cursor setting');
                 }
 
                 return cursor;

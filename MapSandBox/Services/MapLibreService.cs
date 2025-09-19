@@ -6,10 +6,12 @@ public class MapLibreService
 {
     private readonly List<BaseMapStyle> _availableStyles;
     private readonly AzureTileConfig _azureTileConfig;
-    
-    public MapLibreService(AzureTileConfig azureTileConfig)
+    private readonly SoilDataConfig _soilDataConfig;
+
+    public MapLibreService(AzureTileConfig azureTileConfig, SoilDataConfig soilDataConfig)
     {
         _azureTileConfig = azureTileConfig;
+        _soilDataConfig = soilDataConfig;
     
         // Initialize available styles
         _availableStyles = new List<BaseMapStyle>
@@ -99,8 +101,7 @@ public class MapLibreService
     
     private string GetSoilDataUrl(string fileName)
     {
-        // Static files served directly from wwwroot/soil-data/
-        return $"/soil-data/{fileName}";
+        return _soilDataConfig.GetSoilDataUrl(fileName);
     }
     
     public List<BaseMapStyle> GetAvailableBaseMapStyles()
@@ -269,7 +270,7 @@ public class MapLibreService
             {
                 Id = "soil-clay-visualization",
                 Type = "GeoJson",
-                DataUrl = GetSoilDataUrl("parker-county-test-clay.geojson"),
+                DataUrl = GetSoilDataUrl("parker-county-clay.geojson"),
                 Visible = false,
                 Properties = new Dictionary<string, object>
                 {
@@ -290,7 +291,7 @@ public class MapLibreService
             {
                 Id = "soil-ksat-visualization",
                 Type = "GeoJson",
-                DataUrl = GetSoilDataUrl("parker-county-test-ksat.geojson"),
+                DataUrl = GetSoilDataUrl("parker-county-ksat.geojson"),
                 Visible = false,
                 Properties = new Dictionary<string, object>
                 {

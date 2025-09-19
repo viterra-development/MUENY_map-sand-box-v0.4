@@ -450,6 +450,9 @@ upload-staging/
 CRIS Exports/
 DEM/
 
+# Soil data files (now served from Azure CDN)
+MapSandBox/wwwroot/soil-data/
+
 # .claude
 .claude/
 

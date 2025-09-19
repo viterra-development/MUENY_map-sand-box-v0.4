@@ -17,8 +17,9 @@ builder.Services.AddScoped<CrisService>();
 var azureTileConfig = builder.Configuration.GetSection("AzureTiles").Get<AzureTileConfig>() ?? new AzureTileConfig();
 builder.Services.AddSingleton(azureTileConfig);
 
-// Soil data will be served as static files from wwwroot/soil-data/
-// No additional services needed for static file approach
+// Configure Soil Data URLs
+var soilDataConfig = builder.Configuration.GetSection("SoilData").Get<SoilDataConfig>() ?? new SoilDataConfig();
+builder.Services.AddSingleton(soilDataConfig);
 
 // Enable console logging
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
