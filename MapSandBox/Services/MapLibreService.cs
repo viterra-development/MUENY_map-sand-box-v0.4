@@ -322,15 +322,15 @@ public class MapLibreService
             {
                 Id = "cris-crashes",
                 Type = "ScatterplotLayer",
-                DataUrl = "/cris-data/parker-county-crashes-traffic-roads-deckgl.json",
+                DataUrl = "/cris-data/parker-county-crashes-clustered-deckgl.json",
                 Visible = true,
                 Properties = new Dictionary<string, object>
                 {
-                    ["radiusMinPixels"] = 5,
-                    ["radiusMaxPixels"] = 20,
-                    ["radiusScale"] = 100,
+                    ["radiusMinPixels"] = 4,
+                    ["radiusMaxPixels"] = 25,
                     ["stroked"] = false,
-                    ["filled"] = true
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
                 }
             },
             new LayerConfig

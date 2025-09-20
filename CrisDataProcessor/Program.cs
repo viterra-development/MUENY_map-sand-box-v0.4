@@ -102,9 +102,13 @@ public class CrisProcessor
             var roadGeoJsonPath = _config.DataSources.RoadNetworkPath;
             var trafficRoadGeoJsonPath = _config.DataSources.TrafficRoadsPath;
 
-            // Use enhanced traffic roads for spatial join to ensure matching LINEARID keys
-            var spatialJoins = await _enhancedSpatialAnalyzer.SpatialJoinCrashesToRoadsAsync(validCrashes, trafficRoadGeoJsonPath);
+            // Use enhanced traffic roads for MULTI-ASSOCIATION spatial join to ensure matching LINEARID keys
+            var spatialJoins = await _enhancedSpatialAnalyzer.SpatialJoinCrashesToRoadsMultiAsync(validCrashes, trafficRoadGeoJsonPath);
             var crashesBySegment = _enhancedSpatialAnalyzer.GroupCrashesByRoadSegment(spatialJoins);
+            var enhancedCrashesBySegment = _enhancedSpatialAnalyzer.GroupCrashesByRoadSegmentEnhanced(spatialJoins);
+
+            // Log multi-association statistics
+            LogMultiAssociationStatistics(enhancedCrashesBySegment);
 
             // Step 4: Extract AADT data from traffic-enabled roads
             var aadtBySegment = await _spatialAnalyzer.ExtractAadtFromRoadDataAsync(trafficRoadGeoJsonPath);
@@ -245,6 +249,81 @@ public class CrisProcessor
         }));
         _logger.LogInformation("Generated crash points deck.gl format: {Path}", crashDeckGlOutputPath);
 
+        // Generate UNIQUE crash points deck.gl format (deduplicated for spatial visualization)
+        var uniqueTrafficCrashes = trafficCrashes
+            .GroupBy(c => c.CrashId)
+            .Select(g => g.First()) // Take first occurrence of each unique crash ID
+            .ToList();
+        var uniqueCrashDeckGlData = _geoJsonGenerator.GenerateCrashPointsDeckGlData(uniqueTrafficCrashes);
+        var uniqueCrashDeckGlOutputPath = Path.Combine(outputDir, "parker-county-crashes-unique-deckgl.json");
+        await File.WriteAllTextAsync(uniqueCrashDeckGlOutputPath, JsonSerializer.Serialize(uniqueCrashDeckGlData, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        }));
+        _logger.LogInformation("Generated UNIQUE crash points deck.gl format: {Path} ({UniqueCount} unique from {TotalCount} total)",
+            uniqueCrashDeckGlOutputPath, uniqueTrafficCrashes.Count, trafficCrashes.Count);
+
+        // Generate TOLERANCE-BASED CLUSTERED crash points (cluster crashes within ~5 meters of each other)
+        const decimal tolerance = 0.00005m; // Roughly 5 meter tolerance
+        var clusteredCrashes = new List<object>();
+        var processedCrashes = new HashSet<string>();
+
+        foreach (var crash in uniqueTrafficCrashes)
+        {
+            if (processedCrashes.Contains(crash.CrashId))
+                continue;
+
+            // Find all crashes within tolerance of this crash
+            var nearbyCluster = uniqueTrafficCrashes
+                .Where(c => !processedCrashes.Contains(c.CrashId) &&
+                           Math.Abs(c.Longitude - crash.Longitude) <= tolerance &&
+                           Math.Abs(c.Latitude - crash.Latitude) <= tolerance)
+                .ToList();
+
+            // Mark all crashes in this cluster as processed
+            foreach (var clusterCrash in nearbyCluster)
+            {
+                processedCrashes.Add(clusterCrash.CrashId);
+            }
+
+            var maxSeverityWeight = nearbyCluster.Max(c => GetSeverityWeight(c.Severity));
+            var maxSeverityCode = ConvertSeverityToCode(nearbyCluster.First(c => GetSeverityWeight(c.Severity) == maxSeverityWeight).Severity);
+
+            // Use centroid of cluster for position
+            var avgLongitude = nearbyCluster.Average(c => c.Longitude);
+            var avgLatitude = nearbyCluster.Average(c => c.Latitude);
+
+            var cluster = new
+            {
+                ClusterId = $"cluster_{avgLongitude:F6}_{avgLatitude:F6}".Replace(".", "").Replace("-", "neg"),
+                Position = new[] { avgLongitude, avgLatitude },
+                CrashCount = nearbyCluster.Count,
+                MaxSeverity = maxSeverityCode,
+                TotalPersonsInvolved = nearbyCluster.Sum(c => c.PersonsInvolved),
+                TotalVehiclesInvolved = nearbyCluster.Sum(c => c.VehiclesInvolved),
+                Crashes = nearbyCluster.Select(c => new
+                {
+                    CrashId = c.CrashId,
+                    CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
+                    SeverityCode = ConvertSeverityToCode(c.Severity),
+                    PersonsInvolved = c.PersonsInvolved,
+                    VehiclesInvolved = c.VehiclesInvolved,
+                    FatalCount = c.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
+                    InjuryCount = c.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury)
+                }).ToList()
+            };
+
+            clusteredCrashes.Add(cluster);
+        }
+
+        var clusteredCrashOutputPath = Path.Combine(outputDir, "parker-county-crashes-clustered-deckgl.json");
+        await File.WriteAllTextAsync(clusteredCrashOutputPath, JsonSerializer.Serialize(clusteredCrashes, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        }));
+        _logger.LogInformation("Generated CLUSTERED crash points (exact coordinates): {Path} ({ClusterCount} clusters from {UniqueCount} unique crashes)",
+            clusteredCrashOutputPath, clusteredCrashes.Count, uniqueTrafficCrashes.Count);
+
         // Generate risk segments GeoJSON
         var riskGeoJson = _geoJsonGenerator.GenerateRiskSegmentsGeoJson(riskSegments);
         var riskOutputPath = Path.Combine(outputDir, "parker-county-risk-segments-traffic.geojson");
@@ -301,6 +380,32 @@ public class CrisProcessor
         _logger.LogInformation("Generated metadata: {Path}", metadataPath);
     }
 
+    private static int GetSeverityWeight(KabcoSeverity severity)
+    {
+        return severity switch
+        {
+            KabcoSeverity.K_Fatal => 5,
+            KabcoSeverity.A_IncapacitatingInjury => 4,
+            KabcoSeverity.B_NonIncapacitatingInjury => 3,
+            KabcoSeverity.C_PossibleInjury => 2,
+            KabcoSeverity.O_NoInjury => 1,
+            _ => 1 // Default to lowest severity
+        };
+    }
+
+    private static string ConvertSeverityToCode(KabcoSeverity severity)
+    {
+        return severity switch
+        {
+            KabcoSeverity.K_Fatal => "K",
+            KabcoSeverity.A_IncapacitatingInjury => "A",
+            KabcoSeverity.B_NonIncapacitatingInjury => "B",
+            KabcoSeverity.C_PossibleInjury => "C",
+            KabcoSeverity.O_NoInjury => "O",
+            _ => "O" // Default to no injury
+        };
+    }
+
     private async Task CreateSampleInputStructure(string inputDir)
     {
         var sampleReadme = @"# CRIS Data Input Directory
@@ -338,5 +443,42 @@ Ensure the CSV files contain the following key fields:
 
         await File.WriteAllTextAsync(Path.Combine(inputDir, "README.md"), sampleReadme);
         _logger.LogInformation("Created sample input structure at {InputDir}", inputDir);
+    }
+
+    private void LogMultiAssociationStatistics(Dictionary<string, SegmentCrashSummary> enhancedCrashesBySegment)
+    {
+        _logger.LogInformation("=== MULTI-ASSOCIATION STATISTICS ===");
+
+        var segmentsWithMultiAssoc = enhancedCrashesBySegment.Values.Where(s => s.HasMultiAssociations).ToList();
+        var totalCrashAssociations = enhancedCrashesBySegment.Values.Sum(s => s.CrashCount);
+        var totalUniqueCrashes = enhancedCrashesBySegment.Values.Sum(s => s.UniqueCrashCount);
+
+        _logger.LogInformation("Road segments with crashes: {TotalSegments}", enhancedCrashesBySegment.Count);
+        _logger.LogInformation("Segments with multi-associations: {MultiSegments}", segmentsWithMultiAssoc.Count);
+        _logger.LogInformation("Total crash-to-segment associations: {TotalAssociations}", totalCrashAssociations);
+        _logger.LogInformation("Total unique crashes: {UniqueCrashes}", totalUniqueCrashes);
+        _logger.LogInformation("Multi-association ratio: {Ratio:F2}x", totalUniqueCrashes > 0 ? (double)totalCrashAssociations / totalUniqueCrashes : 0);
+
+        // Log target segments specifically
+        var targetSegments = enhancedCrashesBySegment.Where(kvp =>
+            kvp.Key == "1103701322105" || kvp.Key == "1102970398995").ToList();
+
+        if (targetSegments.Any())
+        {
+            _logger.LogInformation("=== TARGET SEGMENTS (1103701322105 & 1102970398995) ===");
+            foreach (var (segmentId, summary) in targetSegments)
+            {
+                _logger.LogInformation("Segment {SegmentId} ({RoadName}):", segmentId, summary.RoadName);
+                _logger.LogInformation("  - Total crash associations: {CrashCount}", summary.CrashCount);
+                _logger.LogInformation("  - Unique crashes: {UniqueCrashes}", summary.UniqueCrashCount);
+                _logger.LogInformation("  - Has multi-associations: {HasMulti}", summary.HasMultiAssociations);
+                _logger.LogInformation("  - Road type: {RoadType}", summary.RoadType);
+
+                if (summary.HasMultiAssociations)
+                {
+                    _logger.LogInformation("  - Multi-associated crashes: {MultiCount}", summary.MultiAssociationCount);
+                }
+            }
+        }
     }
 }

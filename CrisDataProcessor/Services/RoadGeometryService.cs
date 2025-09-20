@@ -266,6 +266,92 @@ public class RoadGeometryService
         return matches.FirstOrDefault();
     }
 
+    public List<RoadMatchResult> FindAllEligibleRoadMatches(
+        double latitude,
+        double longitude,
+        double toleranceMeters = 50.0,
+        double overlapThreshold = 0.8)
+    {
+        var nearbyRoads = FindNearestRoads(latitude, longitude, toleranceMeters);
+
+        if (nearbyRoads.Count <= 1)
+        {
+            return nearbyRoads;
+        }
+
+        var eligibleRoads = new List<RoadMatchResult>();
+
+        foreach (var road in nearbyRoads.OrderBy(r => r.DistanceMeters))
+        {
+            bool shouldInclude = false;
+
+            if (eligibleRoads.Count == 0)
+            {
+                // Always include the closest road
+                shouldInclude = true;
+            }
+            else
+            {
+                // Check if this road overlaps significantly with any already selected roads
+                foreach (var selectedRoad in eligibleRoads)
+                {
+                    var overlapPercentage = CalculateOverlapPercentage(road.Road.Geometry, selectedRoad.Road.Geometry);
+                    if (overlapPercentage >= overlapThreshold)
+                    {
+                        shouldInclude = true;
+                        _logger.LogDebug("Including overlapping road: {RoadId1} ({Name1}) overlaps {Percentage:F1}% with {RoadId2} ({Name2})",
+                            road.Road.LinearId, road.Road.FullName, overlapPercentage,
+                            selectedRoad.Road.LinearId, selectedRoad.Road.FullName);
+                        break;
+                    }
+                }
+            }
+
+            if (shouldInclude)
+            {
+                eligibleRoads.Add(road);
+            }
+        }
+
+        return eligibleRoads;
+    }
+
+    private double CalculateOverlapPercentage(LineString geom1, LineString geom2)
+    {
+        try
+        {
+            // Use a small buffer to account for minor coordinate differences
+            const double bufferDistance = 0.00005; // ~5 meters in decimal degrees
+
+            var length1 = geom1.Length;
+            var length2 = geom2.Length;
+
+            if (length1 == 0 || length2 == 0)
+                return 0.0;
+
+            // Create buffers around both lines
+            var buffer1 = geom1.Buffer(bufferDistance);
+            var buffer2 = geom2.Buffer(bufferDistance);
+
+            // Calculate intersection
+            var intersection = buffer1.Intersection(buffer2);
+
+            // Estimate overlap length by calculating intersection area and dividing by buffer width
+            var overlapLength = intersection.Area / (bufferDistance * 2);
+
+            // Calculate overlap percentage based on the shorter segment
+            var shorterLength = Math.Min(length1, length2);
+            var overlapPercentage = shorterLength > 0 ? (overlapLength / shorterLength) * 100.0 : 0.0;
+
+            return Math.Min(overlapPercentage, 100.0); // Cap at 100%
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Error calculating overlap between road segments");
+            return 0.0;
+        }
+    }
+
     public List<RoadMatchResult> FindNearestRoadsBatch(List<(double Latitude, double Longitude)> locations, double toleranceMeters = 50.0)
     {
         var results = new List<RoadMatchResult>();

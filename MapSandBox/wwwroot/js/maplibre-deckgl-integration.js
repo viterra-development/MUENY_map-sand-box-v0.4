@@ -371,51 +371,178 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                 }
                 break;
             case 'scatterplotlayer':
-                // Handle CRIS crash points specifically (moved after pathlayer to render on top)
+                // Handle CRIS crash clusters with ScatterplotLayer
                 if (config.id === 'cris-crashes') {
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
-                        radiusMinPixels: 5,
-                        radiusMaxPixels: 20,
-                        radiusUnits: 'pixels',
-                        radiusScale: 1,
-                        getPosition: d => d.Coordinates,
-                        getRadius: d => d.PersonsInvolved || 1,
-                        getFillColor: d => getCrashSeverityColor(d.Severity),
-                        filled: true,
-                        stroked: false, // Remove border
-                        billboard: true,
+                        dataTransform: (data) => {
+                            try {
+                                console.log('Processing clustered crash data for ScatterplotLayer...');
+
+                                // Data is already in cluster format
+                                const clusters = data.map(cluster => ({
+                                    ...cluster,
+                                    position: cluster.Position,
+                                    crashCount: cluster.CrashCount,
+                                    maxSeverity: cluster.MaxSeverity,
+                                    totalPersonsInvolved: cluster.TotalPersonsInvolved
+                                }));
+
+                                console.log(`Processed ${clusters.length} crash clusters for ScatterplotLayer`);
+                                return clusters;
+                            } catch (error) {
+                                console.error('Error processing clustered crash data:', error);
+                                return [];
+                            }
+                        },
+                        getPosition: d => d.position,
+                        getRadius: d => Math.max(4, Math.sqrt(d.crashCount) * 4), // Size based on crash count
+                        getFillColor: d => getSeverityColor(d.maxSeverity), // Color based on max severity
+                        getLineColor: [0, 0, 0, 255], // Black outline
+                        getLineWidth: 1,
+                        radiusMinPixels: 4,
+                        radiusMaxPixels: 25,
+                        stroked: true,
                         pickable: true,
                         autoHighlight: true,
-                        highlightColor: [255, 255, 255, 128], // White highlight on hover
+
+                        // Click handling for clusters
+                        onClick: handleCrashClusterClick
+                    }));
+                } else {
+                    deckLayers.push(new deck.ScatterplotLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        ...getLayerProperties(config)
+                    }));
+                }
+                break;
+            case 'gridlayer':
+                // Handle CRIS crash points with GridLayer aggregation
+                if (config.id === 'cris-crashes') {
+                    deckLayers.push(new deck.HexagonLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        dataTransform: (data) => {
+                            try {
+                                console.log('Processing unique crash data for grid aggregation...');
+
+                                // Data is already unique and in deck.gl JSON format - just add position field
+                                const crashes = data.map(crash => ({
+                                    ...crash,
+                                    position: crash.Coordinates, // deck.gl format already has Coordinates
+                                    persons_involved: crash.PersonsInvolved || 1
+                                }));
+
+                                console.log(`✅ CRIS Unique Crashes processed for grid: ${crashes.length} crashes`);
+                                return crashes;
+                            } catch (error) {
+                                console.error('Error processing unique crash data for grid:', error);
+                                return [];
+                            }
+                        },
+                        getPosition: d => d.position,
+                        radius: 25, // Half the size of previous grid cells (25 meters)
+                        gpuAggregation: false, // Use CPU aggregation to get source points
+                        extruded: true,
+                        pickable: true,
+                        autoHighlight: true,
+
+                        // Aggregation settings
+                        getColorWeight: d => {
+                            // Assign severity weights: K=5, A=4, B=3, C=2, O=1
+                            const severityWeights = { 'K': 5, 'A': 4, 'B': 3, 'C': 2, 'O': 1 };
+                            const weight = severityWeights[d.SeverityCode] || 1;
+                            console.log(`Crash ${d.CrashId}: Severity ${d.SeverityCode} → Weight ${weight}`);
+                            return weight;
+                        },
+                        getElevationWeight: d => d.persons_involved || 1, // Height based on persons involved
+                        colorAggregation: 'MAX', // Use highest severity in cell
+                        elevationAggregation: 'SUM', // Sum persons involved per cell
+
+                        // Styling - use quantize for discrete severity levels
+                        elevationRange: [0, 10], // Cap maximum height at 10 units
+                        colorScale: 'quantize',
+                        colorDomain: [1, 5], // Map severity weights 1-5
+                        colorRange: [
+                            [40, 167, 69],    // Green - O (No injury) = 1 (#28a745)
+                            [23, 162, 184],   // Teal - C (Possible) = 2 (#17a2b8)
+                            [255, 193, 7],    // Yellow - B (Non-incap) = 3 (#ffc107)
+                            [253, 126, 20],   // Orange - A (Incap) = 4 (#fd7e14)
+                            [220, 53, 69]     // Red - K (Fatal) = 5 (#dc3545)
+                        ],
+
                         onHover: (info) => {
-                            console.log('CRIS crashes hover:', !!info.object);
+                            if (info.object) {
+                                const severityNames = { 1: 'No Injury', 2: 'Possible', 3: 'Non-Incap', 4: 'Incapacitating', 5: 'Fatal' };
+                                console.log('Grid cell hover:', {
+                                    crashCount: info.object.points?.length || 0,
+                                    highestSeverity: severityNames[info.object.colorValue] || 'Unknown',
+                                    severityValue: info.object.colorValue,
+                                    personsInvolved: info.object.elevationValue,
+                                    position: info.object.position
+                                });
+                            }
                             return true;
                         },
-                        onClick: handleCrashClick,
-                        onDataLoad: data => {
-                            if (data && data.features) {
-                                console.log(`✅ CRIS Crashes loaded ${data.features.length} features`);
-                                console.log('Sample crash:', data.features[0]);
-                                console.log('Position:', data.features[0].geometry.coordinates);
-                                console.log('Properties:', data.features[0].properties);
 
-                                // Check if map viewport includes these coordinates
-                                const bounds = data.features.reduce((acc, f) => {
-                                    const [lng, lat] = f.geometry.coordinates;
-                                    acc.minLng = Math.min(acc.minLng, lng);
-                                    acc.maxLng = Math.max(acc.maxLng, lng);
-                                    acc.minLat = Math.min(acc.minLat, lat);
-                                    acc.maxLat = Math.max(acc.maxLat, lat);
-                                    return acc;
-                                }, { minLng: Infinity, maxLng: -Infinity, minLat: Infinity, maxLat: -Infinity });
+                        onClick: (info) => {
+                            if (info.object && info.object.colorValue > 0) {
+                                console.log('Grid cell clicked - full object:', info.object);
+                                console.log('Points in cell:', info.object.points);
+                                console.log('Point indices:', info.object.pointIndices);
 
-                                console.log('Data bounds:', bounds);
-                                console.log('Data center:', {
-                                    lng: (bounds.minLng + bounds.maxLng) / 2,
-                                    lat: (bounds.minLat + bounds.maxLat) / 2
-                                });
+                                // With CPU aggregation, we get the source points directly!
+                                const crashesInCell = info.object.points || [];
+
+                                if (crashesInCell.length > 0) {
+                                    console.log('Sample crash object:', crashesInCell[0]);
+                                    console.log('All crash IDs:', crashesInCell.map(c => c.CrashId || c.crash_id));
+
+                                    // Calculate cell center from the first point or use centroid
+                                    const cellCenter = info.object.position || [
+                                        crashesInCell.reduce((sum, p) => sum + p.position[0], 0) / crashesInCell.length,
+                                        crashesInCell.reduce((sum, p) => sum + p.position[1], 0) / crashesInCell.length
+                                    ];
+
+                                    console.log(`Found ${crashesInCell.length} crashes in grid cell`);
+
+                                    // Convert to cluster popup format - data is already processed
+                                    const clusterData = {
+                                        crashes: crashesInCell.map((crash, index) => {
+                                            console.log(`Processing crash ${index}:`, crash);
+                                            return {
+                                                crashId: crash.CrashId || crash.crash_id || `unknown-${index}`,
+                                                crashDate: crash.CrashDate || crash.crash_date || '',
+                                                crashTime: crash.CrashTime || crash.crash_time || '',
+                                                crashDateTime: crash.CrashDateTime || crash.crash_datetime || '',
+                                                severity: crash.Severity || crash.severity || '',
+                                                severityCode: crash.SeverityCode || crash.severity_code || '',
+                                                latitude: crash.position[1],
+                                                longitude: crash.position[0],
+                                                personsInvolved: crash.PersonsInvolved || crash.persons_involved || 0,
+                                                vehiclesInvolved: crash.VehiclesInvolved || crash.vehicles_involved || 0,
+                                                fatalCount: crash.FatalCount || crash.fatal_count || 0,
+                                                injuryCount: crash.InjuryCount || crash.injury_count || 0,
+                                                weatherCondition: crash.WeatherCondition || crash.weather_condition || '',
+                                                lightCondition: crash.LightCondition || crash.light_condition || '',
+                                                surfaceCondition: crash.SurfaceCondition || crash.surface_condition || '',
+                                                roadwayId: crash.RoadwayId || crash.roadway_id || '',
+                                                contributingFactors: crash.ContributingFactors || crash.contributing_factors || []
+                                            };
+                                        }),
+                                        latitude: cellCenter[1],
+                                        longitude: cellCenter[0]
+                                    };
+
+                                    console.log('Final cluster data:', clusterData);
+
+                                    // Show the crash cluster popup
+                                    if (window.showCrashCluster) {
+                                        window.showCrashCluster(clusterData);
+                                    }
+                                }
                             }
                         }
                     }));
@@ -944,6 +1071,18 @@ function getSoilKsatColor(feature) {
     return [255, 0, 0, 200];                            // Low permeability (red)
 }
 
+// Get severity color for crash clusters
+function getSeverityColor(severityCode) {
+    switch(severityCode?.toUpperCase()) {
+        case 'K': return [220, 53, 69];     // Red - Fatal (#dc3545)
+        case 'A': return [253, 126, 20];    // Orange - Incapacitating (#fd7e14)
+        case 'B': return [255, 193, 7];     // Yellow - Non-incapacitating (#ffc107)
+        case 'C': return [23, 162, 184];    // Teal - Possible injury (#17a2b8)
+        case 'O': return [40, 167, 69];     // Green - No injury (#28a745)
+        default: return [40, 167, 69];      // Default to green
+    }
+}
+
 // Handle soil unit clicks (industry standard popup)
 function handleSoilUnitClick(info) {
     if (info.object) {
@@ -1089,6 +1228,7 @@ function getIntersectionColor(feature) {
 }
 
 // CRIS click handlers
+
 async function handleCrashClick(info) {
     console.log('handleCrashClick called with:', info);
     console.log('info.object:', info.object);
@@ -1302,6 +1442,47 @@ Intersecting Roads: ${roadsText}
 Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
 
         alert(message);
+    }
+}
+
+function handleCrashClusterClick(info) {
+    console.log('handleCrashClusterClick called with:', info);
+
+    if (info.object) {
+        const cluster = info.object; // Direct access to cluster data
+        console.log('Cluster data:', cluster);
+
+        // Try to use Blazor popup if available
+        console.log('Checking for crashClusterPopupInstance:', window.crashClusterPopupInstance);
+        if (window.crashClusterPopupInstance) {
+            // Create cluster data for popup - match CrashClusterData format
+            const clusterData = {
+                Latitude: cluster.position[1],
+                Longitude: cluster.position[0],
+                Crashes: cluster.Crashes.map(crash => ({
+                    CrashId: crash.CrashId,
+                    CrashDate: crash.CrashDate,
+                    SeverityCode: crash.SeverityCode,
+                    PersonsInvolved: crash.PersonsInvolved,
+                    VehiclesInvolved: crash.VehiclesInvolved,
+                    FatalCount: crash.FatalCount,
+                    InjuryCount: crash.InjuryCount
+                }))
+            };
+
+            console.log('Calling Blazor popup with cluster data:', clusterData);
+            window.crashClusterPopupInstance.invokeMethodAsync('ShowClusterPopupFromJS', clusterData)
+                .then(() => console.log('Blazor cluster popup called successfully'))
+                .catch(error => console.error('Error calling Blazor cluster popup:', error));
+        } else {
+            // Fallback to alert if Blazor popup not available
+            const crashCount = cluster.crashCount || cluster.Crashes?.length || 1;
+            const message = `Crash Cluster
+Count: ${crashCount} crashes
+Max Severity: ${cluster.maxSeverity}
+Location: ${cluster.position[1].toFixed(6)}, ${cluster.position[0].toFixed(6)}`;
+            alert(message);
+        }
     }
 }
 

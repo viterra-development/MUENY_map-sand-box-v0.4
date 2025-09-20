@@ -1,0 +1,151 @@
+@using MapSandBox.Models
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+@if (IsVisible && ClusterData != null && ClusterData.Crashes.Any())
+{
+    <div class="cris-popup-overlay" @onclick="Hide">
+        <div class="cris-popup-card" @onclick:stopPropagation="true">
+            <div class="popup-header">
+                <div class="header-content">
+                    <h4>🚗 @ClusterData.Crashes.Count Crashes at this Location</h4>
+                    <div class="location-coordinates">@ClusterData.FormattedCoordinates</div>
+                </div>
+                <button class="close-btn" @onclick="Hide">×</button>
+            </div>
+
+            <div class="cluster-overview">
+                <div class="crash-summary">
+                    <span class="crash-count">@ClusterData.TotalCrashes</span>
+                    <span class="crash-label">Total Crashes</span>
+                </div>
+            </div>
+
+            <div class="feature-breakdown">
+                <div class="recent-crashes-section">
+                    <h5>🚨 All Crashes (@ClusterData.TotalCrashes total)</h5>
+                    <div class="crash-list-scrollable">
+                        @foreach (var crash in GetSortedCrashes())
+                        {
+                            <div class="crash-item @GetSeverityClass(crash.SeverityCode)">
+                                <div class="crash-date">@crash.CrashDate</div>
+                                <div class="crash-severity">@GetSeverityDisplayName(crash.SeverityCode)</div>
+                                <div class="crash-details">@crash.PersonsInvolved persons, @crash.VehiclesInvolved vehicles</div>
+                                @if (crash.FatalCount > 0 || crash.InjuryCount > 0)
+                                {
+                                    <div class="crash-casualties">
+                                        @if (crash.FatalCount > 0)
+                                        {
+                                            <span class="casualty-count fatal">@crash.FatalCount fatalities</span>
+                                        }
+                                        @if (crash.InjuryCount > 0)
+                                        {
+                                            <span class="casualty-count injury">@crash.InjuryCount injuries</span>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter] public EventCallback OnHide { get; set; }
+
+    public bool IsVisible { get; private set; }
+    public CrashClusterData? ClusterData { get; private set; }
+
+    private IJSObjectReference? _jsModule;
+    private DotNetObjectReference<CrashClusterPopup>? _objectReference;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/crashClusterPopup.js");
+            _objectReference = DotNetObjectReference.Create(this);
+            await _jsModule.InvokeVoidAsync("setCrashClusterPopupInstance", _objectReference);
+        }
+    }
+
+    public void Show(CrashClusterData data)
+    {
+        ClusterData = data;
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void ShowClusterPopupFromJS(CrashClusterData data)
+    {
+        Show(data);
+    }
+
+    public async Task Hide()
+    {
+        IsVisible = false;
+        await OnHide.InvokeAsync();
+        StateHasChanged();
+    }
+
+    private string GetSeverityClass(string severityCode)
+    {
+        return severityCode?.ToLower() switch
+        {
+            "k" => "fatal",
+            "a" => "incapacitating",
+            "b" => "non-incapacitating",
+            "c" => "possible",
+            "o" => "no-injury",
+            _ => "no-injury"
+        };
+    }
+
+    private string GetSeverityDisplayName(string severityCode)
+    {
+        return severityCode?.ToLower() switch
+        {
+            "k" => "Fatal (K)",
+            "a" => "Incapacitating (A)",
+            "b" => "Non-Incapacitating (B)",
+            "c" => "Possible Injury (C)",
+            "o" => "No Injury (O)",
+            _ => "Unknown"
+        };
+    }
+
+    private IEnumerable<CrashPopupData> GetSortedCrashes()
+    {
+        if (ClusterData?.Crashes == null) return Enumerable.Empty<CrashPopupData>();
+
+        // Sort by date (most recent first), then by severity (most severe first)
+        var severityOrder = new Dictionary<string, int>
+        {
+            { "k", 0 },
+            { "a", 1 },
+            { "b", 2 },
+            { "c", 3 },
+            { "o", 4 }
+        };
+
+        return ClusterData.Crashes
+            .OrderByDescending(c => DateTime.TryParse(c.CrashDate, out var date) ? date : DateTime.MinValue)
+            .ThenBy(c => severityOrder.GetValueOrDefault(c.SeverityCode?.ToLower() ?? "o", 5));
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule != null && _objectReference != null)
+        {
+            await _jsModule.InvokeVoidAsync("clearCrashClusterPopupInstance");
+            _objectReference.Dispose();
+            await _jsModule.DisposeAsync();
+        }
+    }
+}

@@ -66,4 +66,13 @@ public class CrashPopupData
     public List<string> ContributingFactors { get; set; } = new();
 
     public string FormattedCoordinates => $"{Longitude:F6}, {Latitude:F6}";
+}
+
+public class CrashClusterData
+{
+    public List<CrashPopupData> Crashes { get; set; } = new();
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+    public int TotalCrashes => Crashes.Count;
+    public string FormattedCoordinates => $"{Longitude:F6}, {Latitude:F6}";
 } 
