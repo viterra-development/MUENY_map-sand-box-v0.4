@@ -58,10 +58,7 @@ dotnet run --project MapSandBox --launch-profile https
 ```
 
 ### Configuration Setup
-```bash
-# Generate appsettings.json with API keys from .env file
-./generate-appsettings.sh
-```
+Configuration files are already present in the repository. No additional setup required for basic functionality.
 
 ### Development Server
 - **HTTP**: http://localhost:5214
@@ -71,12 +68,7 @@ dotnet run --project MapSandBox --launch-profile https
 ## Configuration
 
 ### Environment Setup
-1. Create `.env` file in root directory with:
-   ```
-   ARCGIS_API_KEY=your_arcgis_api_key_here
-   ```
-
-2. Run `./generate-appsettings.sh` to generate `MapSandBox/wwwroot/appsettings.json`
+Configuration files are already present in the repository - no additional setup required.
 
 ### Map Configuration
 **deck.gl Configuration (MapService):**
@@ -94,11 +86,10 @@ dotnet run --project MapSandBox --launch-profile https
 
 ## Key Implementation Details
 
-### Triple Mapping System
-The application supports three mapping backends:
+### Dual Mapping System
+The application supports two mapping backends:
 1. **deck.gl** - Pure WebGL implementation for high-performance data visualization
 2. **MapLibre + deck.gl** - Hybrid approach combining vector tile base maps with deck.gl overlays
-3. **ArcGIS** - Enterprise mapping implementation with advanced GIS features
 
 ### JavaScript Interop Pattern
 - C# components use `IJSObjectReference` for calling JavaScript functions
@@ -112,19 +103,43 @@ The application supports three mapping backends:
 
 ## Project Structure Notes
 
-- `Pages/` - Blazor pages including both deck.gl and ArcGIS implementations
+- `Pages/` - Blazor pages for deck.gl and MapLibre implementations
 - `Components/` - Reusable Blazor components for mapping functionality
 - `Services/` - Business logic and configuration services
 - `Models/` - Data models and DTOs
 - `wwwroot/js/` - JavaScript modules for mapping integration
 - `wwwroot/` - Static assets and configuration files
 
+## Documentation Structure
+
+The project maintains organized documentation to track development evolution and current state:
+
+### `/Documentation/` - Current Documentation
+- **`DATA_PROCESSING_README.md`** - Comprehensive data processing pipeline documentation
+- Contains up-to-date documentation that should be referenced AND updated when making changes
+- This is the authoritative source for current system architecture and processes
+
+### `/Documentation/Future Enhancements/` - Unimplemented Plans
+- Contains planning documents for features **not yet implemented**
+- Use these to understand planned future work and architectural directions
+- Example: `Soil-Data-Viewport-Optimization.md` - viewport-based soil data loading optimization
+
+### `/Documentation/Incremental Plans/` - Implementation History
+- Contains ~27 planning documents for features that **have been executed**
+- Shows the iterative evolution of the codebase over time
+- Reference only to understand historical development decisions and implementation approaches
+- Examples include TCDS implementation, CRIS processing, DEM integration, traffic data matching
+
+**Documentation Usage Guidelines:**
+- **For current system understanding**: Use `/Documentation/` root files
+- **For future planning**: Reference `/Documentation/Future Enhancements/`
+- **For development history**: Reference `/Documentation/Incremental Plans/` (read-only)
+
 ## Development Notes
 
 - The application uses JavaScript ES6 modules loaded dynamically
 - deck.gl is loaded from CDN (unpkg.com) in the browser
 - MapLibre GL JS is loaded from CDN with deck.gl overlay integration
-- ArcGIS API is loaded using AMD module pattern
 - All mapping systems share similar layer configuration patterns but handle rendering differently
 - MapLibre integration uses `MapboxOverlay` from deck.gl for compatibility
 - We are using deck.gl v9.1.14

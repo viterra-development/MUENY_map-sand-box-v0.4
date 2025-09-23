@@ -214,6 +214,7 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
         }
 
         console.log(`[MapLibre-JS] Processing ${layerConfigs.length} layer configurations`);
+        console.log(`[MapLibre-JS] Layer IDs:`, layerConfigs.map(l => l.id));
 
         layerConfigs.forEach((config, index) => {
             try {
@@ -235,6 +236,11 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
 
                 console.log(`[MapLibre-JS] Processing layer ${config.id}: visible=${config.visible}, type=${config.type}`);
 
+                // Special debug for NOAA layers
+                if (config.id.includes('noaa-rainfall')) {
+                    console.log(`[MapLibre-JS] NOAA layer found: ${config.id}, visible: ${config.visible}, type: ${config.type}`);
+                }
+
                 if (!config.visible) {
                     console.log(`[MapLibre-JS] Skipping invisible layer: ${config.id}`);
                     return;
@@ -252,7 +258,10 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                     return;
                 }
 
-                switch (config.type.toLowerCase()) {
+                const layerType = config.type.toLowerCase();
+                console.log(`[MapLibre-JS] Processing visible layer ${config.id} with type: ${layerType}`);
+
+                switch (layerType) {
             case 'geojson':
                 console.log(`Creating GeoJsonLayer for ${config.id} with data URL: ${config.dataUrl}`);
                 
@@ -569,17 +578,109 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                             }
                         }
                     }));
+                } else if (config.id === 'noaa-rainfall-parker-points') {
+                    console.log(`⚡ ENTERING NOAA ScatterplotLayer case for: ${config.id}`);
+                    console.log(`🔍 NOAA ScatterplotLayer config.dataUrl: ${config.dataUrl}`);
+                    deckLayers.push(new deck.ScatterplotLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        getPosition: d => d.geometry.coordinates,
+                        getRadius: d => Math.max(3, (d.properties.rainfall - 458) * 2), // Scale 458-473 to 0-30
+                        getFillColor: d => {
+                            // Blue gradient based on rainfall
+                            const rainfall = d.properties.rainfall;
+                            if (rainfall < 463) return [0, 100, 255, 180]; // Dark blue - low
+                            if (rainfall < 467) return [0, 150, 255, 180]; // Medium blue
+                            if (rainfall < 470) return [50, 200, 255, 180]; // Light blue
+                            return [100, 220, 255, 180]; // Very light blue - high
+                        },
+                        radiusMinPixels: 2,
+                        radiusMaxPixels: 8,
+                        pickable: true,
+                        stroked: true,
+                        getLineColor: [0, 0, 0, 128],
+                        lineWidthMinPixels: 1,
+                        onDataLoad: data => {
+                            console.log(`📊 NOAA ScatterplotLayer data load event:`, typeof data, data);
+                            if (data && data.features) {
+                                console.log(`✅ ScatterplotLayer ${config.id} loaded ${data.features.length} features`);
+                                console.log('Sample rainfall point:', data.features[0]);
+                                const minRainfall = Math.min(...data.features.map(f => f.properties.rainfall));
+                                const maxRainfall = Math.max(...data.features.map(f => f.properties.rainfall));
+                                console.log(`Rainfall range: ${minRainfall} - ${maxRainfall}`);
+                            } else {
+                                console.error(`❌ ScatterplotLayer ${config.id} data load failed or no features:`, data);
+                            }
+                        },
+                        onError: error => {
+                            console.error(`❌ ScatterplotLayer ${config.id} error:`, error);
+                        }
+                    }));
                 } else {
+                    console.log(`⚡ ENTERING Generic ScatterplotLayer case for: ${config.id}`);
+                    console.log(`🔍 Generic ScatterplotLayer case hit for: ${config.id}, dataUrl: ${config.dataUrl}`);
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
                         ...getLayerProperties(config),
                         onDataLoad: data => {
+                            console.log(`📊 Generic ScatterplotLayer data load event for ${config.id}:`, typeof data, data);
                             if (data && data.features) {
                                 console.log(`✅ ScatterplotLayer ${config.id} loaded ${data.features.length} features`);
                                 console.log('Sample feature:', data.features[0]);
+                            } else {
+                                console.error(`❌ Generic ScatterplotLayer ${config.id} data load failed:`, data);
                             }
+                        },
+                        onError: error => {
+                            console.error(`❌ Generic ScatterplotLayer ${config.id} error:`, error);
                         }
+                    }));
+                }
+                break;
+            case 'heatmaplayer':
+                // Handle NOAA rainfall heatmap
+                if (config.id === 'noaa-rainfall-parker-heatmap') {
+                    console.log(`🔍 NOAA HeatmapLayer config.dataUrl: ${config.dataUrl}`);
+                    deckLayers.push(new deck.HeatmapLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        getPosition: d => d.geometry.coordinates,
+                        getWeight: d => (d.properties.rainfall - 450) / 50, // Normalize 450-500 to 0-1
+                        radiusMeters: 1000, // Use world-space radius (1km) for consistent heatmap at all zoom levels
+                        intensity: 2,
+                        threshold: 0.01,
+                        colorRange: [
+                            [0, 162, 255, 255],   // Blue
+                            [0, 200, 255, 255],   // Light blue
+                            [30, 230, 255, 255],  // Cyan
+                            [80, 255, 220, 255],  // Light cyan
+                            [150, 255, 180, 255], // Light green
+                            [255, 255, 150, 255]  // Light yellow
+                        ],
+                        pickable: false,
+                        opacity: 0.8,
+                        onDataLoad: data => {
+                            console.log(`🔥 NOAA HeatmapLayer data load event:`, typeof data, data);
+                            if (data && data.features) {
+                                console.log(`✅ HeatmapLayer ${config.id} loaded ${data.features.length} features`);
+                                console.log('Sample rainfall point:', data.features[0]);
+                                const sample = data.features[0];
+                                const weight = (sample.properties.rainfall - 450) / 50;
+                                console.log(`Weight calculation: ${sample.properties.rainfall} → ${weight}`);
+                            } else {
+                                console.error(`❌ HeatmapLayer ${config.id} data load failed or no features:`, data);
+                            }
+                        },
+                        onError: error => {
+                            console.error(`❌ HeatmapLayer ${config.id} error:`, error);
+                        }
+                    }));
+                } else {
+                    deckLayers.push(new deck.HeatmapLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        ...getLayerProperties(config)
                     }));
                 }
                 break;

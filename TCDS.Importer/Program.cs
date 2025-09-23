@@ -26,7 +26,6 @@ builder.Services.Configure<TcdsConfiguration>(
 
 builder.Services.AddTransient<TcdsScrapingService>();
 builder.Services.AddTransient<SimpleTileGenerator>();
-builder.Services.AddTransient<RoadTrafficMerger>();
 builder.Services.AddTransient<AadtValidationService>();
 builder.Services.AddTransient<TypeBasedTrafficMatcher>();
 builder.Services.AddTransient<EnhancedRoadTrafficMerger>();
@@ -39,20 +38,11 @@ var host = builder.Build();
 var logger = host.Services.GetRequiredService<ILogger<Program>>();
 var tileGenerator = host.Services.GetRequiredService<SimpleTileGenerator>();
 
-// Check if running in enhanced merge mode (our new I-20 fix)
-var enhancedMergeMode = args.Contains("--enhanced-merge");
+// Check if running in merge mode (road-traffic merge with enhanced algorithms)
+var mergeMode = args.Contains("--merge") || args.Contains("--enhanced-merge") || args.Contains("--merge-roads");
 
-if (enhancedMergeMode)
+if (mergeMode)
 {
-    return await RunEnhancedMergeMode(host, logger, solutionRoot);
-}
-
-// Check if running in road-traffic merge mode
-var mergeRoadsMode = args.Contains("--merge-roads");
-
-if (mergeRoadsMode)
-{
-    logger.LogInformation("🚀 Using ENHANCED merger with I-20 fix");
     return await RunEnhancedMergeMode(host, logger, solutionRoot);
 }
 
@@ -1097,54 +1087,6 @@ static async Task VerifyI20Fix(string outputPath, ILogger logger)
     }
 }
 
-static async Task<int> RunRoadTrafficMergeMode(IHost host, ILogger logger, string solutionRoot)
-{
-    try
-    {
-        logger.LogInformation("🛣️ Starting Road-Traffic Merge Mode");
-        
-        var roadTrafficMerger = host.Services.GetRequiredService<RoadTrafficMerger>();
-        
-        // Define input and output paths - use MASTER data instead of limited GeoJSON
-        var roadGeoJsonPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker-county-roads.geojson");
-        var masterDataPath = Path.Combine(solutionRoot, "TCDS.Importer", "Data", "parker_county_traffic_data_MASTER.json");
-        var outputDirectory = Path.Combine(solutionRoot, "MapSandBox", "wwwroot");
-        
-        logger.LogInformation("📍 Input paths:");
-        logger.LogInformation("   • Roads: {RoadPath}", roadGeoJsonPath);
-        logger.LogInformation("   • Traffic MASTER data: {MasterPath}", masterDataPath);
-        logger.LogInformation("   • Output: {OutputDir}", outputDirectory);
-        
-        // Verify input files exist
-        if (!File.Exists(roadGeoJsonPath))
-        {
-            logger.LogError("❌ Roads file not found: {RoadPath}", roadGeoJsonPath);
-            return 1;
-        }
-        
-        if (!File.Exists(masterDataPath))
-        {
-            logger.LogError("❌ MASTER traffic data file not found: {MasterPath}", masterDataPath);
-            return 1;
-        }
-        
-        // Perform the merge using MASTER data
-        var outputPath = await roadTrafficMerger.MergeRoadTrafficDataFromMasterAsync(
-            roadGeoJsonPath, 
-            masterDataPath, 
-            outputDirectory);
-        
-        logger.LogInformation("🎉 Road-Traffic merge completed successfully!");
-        logger.LogInformation("📁 Enhanced dataset created: {OutputPath}", outputPath);
-        
-        return 0;
-    }
-    catch (Exception ex)
-    {
-        logger.LogError(ex, "❌ Road-Traffic merge failed: {Error}", ex.Message);
-        return 1;
-    }
-}
 
 static void CopyDirectory(string sourceDir, string destinationDir)
 {

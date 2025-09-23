@@ -78,6 +78,23 @@ public class MapService
                     ["lineWidthMinPixels"] = 1
                 }
             }
+            // Commented out until scaling issues are resolved
+            // new LayerConfig
+            // {
+            //     Id = "noaa-rainfall-parker",
+            //     Type = "HeatmapLayer",
+            //     DataUrl = "/noaa-rainfall-parker-county.geojson",
+            //     Visible = false,
+            //     Properties = new Dictionary<string, object>
+            //     {
+            //         ["getPosition"] = "@@=d.geometry.coordinates",
+            //         ["getWeight"] = "@@=d.properties.rainfall",
+            //         ["radiusPixels"] = 60,
+            //         ["intensity"] = 1,
+            //         ["threshold"] = 0.03,
+            //         ["colorRange"] = "@@=[[0, 162, 255, 255], [0, 200, 255, 255], [30, 230, 255, 255], [80, 255, 220, 255], [150, 255, 180, 255], [255, 255, 150, 255]]"
+            //     }
+            // }
         };
     }
     
@@ -89,6 +106,7 @@ public class MapService
             new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = false },
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = false },
             new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false }
+            // new LayerInfo { Id = "noaa-rainfall-parker", Name = "NOAA Rainfall (Parker County)", Visible = false }
         };
     }
 } 

@@ -348,6 +348,42 @@ public class MapLibreService
                     ["lineWidthMinPixels"] = 1
                 }
             }
+            // Commented out until scaling issues are resolved
+            // new LayerConfig
+            // {
+            //     Id = "noaa-rainfall-parker-points",
+            //     Type = "ScatterplotLayer",
+            //     DataUrl = "/noaa-rainfall-parker-county.geojson",
+            //     Visible = false,
+            //     Properties = new Dictionary<string, object>
+            //     {
+            //         ["getPosition"] = "getCoordinates",
+            //         ["getRadius"] = "getRainfallRadius",
+            //         ["getFillColor"] = "getRainfallColor",
+            //         ["radiusMinPixels"] = 2,
+            //         ["radiusMaxPixels"] = 8,
+            //         ["pickable"] = true,
+            //         ["stroked"] = true,
+            //         ["getLineColor"] = "[0, 0, 0, 128]",
+            //         ["lineWidthMinPixels"] = 1
+            //     }
+            // },
+            // new LayerConfig
+            // {
+            //     Id = "noaa-rainfall-parker-heatmap",
+            //     Type = "HeatmapLayer",
+            //     DataUrl = "/noaa-rainfall-parker-county.geojson",
+            //     Visible = false,
+            //     Properties = new Dictionary<string, object>
+            //     {
+            //         ["getPosition"] = "getCoordinates",
+            //         ["getWeight"] = "getRainfallWeight",
+            //         ["radiusPixels"] = 60,
+            //         ["intensity"] = 2,
+            //         ["threshold"] = 0.01,
+            //         ["colorRange"] = "getRainfallColorRange"
+            //     }
+            // }
         };
     }
     
@@ -369,6 +405,8 @@ public class MapLibreService
             new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = true },
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },
             new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false }
+            // new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "NOAA Rainfall Points", Visible = false },
+            // new LayerInfo { Id = "noaa-rainfall-parker-heatmap", Name = "NOAA Rainfall Heatmap", Visible = false }
         };
     }
 }
