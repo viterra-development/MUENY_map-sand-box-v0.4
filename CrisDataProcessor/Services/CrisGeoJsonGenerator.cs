@@ -43,7 +43,12 @@ public class CrisGeoJsonGenerator
                 ["aadt"] = crash.Aadt ?? 0,
                 ["fatal_count"] = crash.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
                 ["injury_count"] = crash.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury),
-                ["contributing_factors"] = crash.ContributingFactors.Select(f => f.Description).ToArray()
+                ["contributing_factors"] = crash.ContributingFactors.Select(f => f.Description).ToArray(),
+
+                // DEM-derived slope information
+                ["slope_at_location"] = (double)crash.SlopeAtLocation,
+                ["slope_percentage"] = (double)crash.SlopePercentage,
+                ["slope_category"] = crash.SlopeCategory
             }
         }).ToList();
 
@@ -228,7 +233,12 @@ public class CrisGeoJsonGenerator
             FatalCount = crash.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
             InjuryCount = crash.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury),
             ContributingFactors = crash.ContributingFactors.Select(f => f.Description).ToArray(),
-            Coordinates = new[] { (double)crash.Longitude, (double)crash.Latitude }
+            Coordinates = new[] { (double)crash.Longitude, (double)crash.Latitude },
+
+            // DEM-derived slope information
+            SlopeAtLocation = (double)crash.SlopeAtLocation,
+            SlopePercentage = (double)crash.SlopePercentage,
+            SlopeCategory = crash.SlopeCategory
         }).ToArray();
 
         return data;
@@ -253,8 +263,14 @@ public class CrisGeoJsonGenerator
                 CrashId = c.CrashId,
                 CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
                 Severity = c.Severity.ToString(),
+                SeverityCode = GetSeverityCode(c.Severity),
                 PersonsInvolved = c.Persons.Count,
-                VehiclesInvolved = c.Vehicles.Count
+                VehiclesInvolved = c.Vehicles.Count,
+                FatalCount = c.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
+                InjuryCount = c.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury),
+                SlopeAtLocation = c.SlopeAtLocation,
+                SlopePercentage = c.SlopePercentage,
+                SlopeCategory = c.SlopeCategory
             }).ToArray(),
             StartLatitude = (double)segment.StartLatitude,
             StartLongitude = (double)segment.StartLongitude,
@@ -310,8 +326,14 @@ public class CrisGeoJsonGenerator
                 CrashId = c.CrashId,
                 CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
                 Severity = c.Severity.ToString(),
+                SeverityCode = GetSeverityCode(c.Severity),
                 PersonsInvolved = c.Persons.Count,
-                VehiclesInvolved = c.Vehicles.Count
+                VehiclesInvolved = c.Vehicles.Count,
+                FatalCount = c.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
+                InjuryCount = c.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury),
+                SlopeAtLocation = c.SlopeAtLocation,
+                SlopePercentage = c.SlopePercentage,
+                SlopeCategory = c.SlopeCategory
             }).ToArray(),
             FatalCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity == KabcoSeverity.K_Fatal)),
             InjuryCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury)),

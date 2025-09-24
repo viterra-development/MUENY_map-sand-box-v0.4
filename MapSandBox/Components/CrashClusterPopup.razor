@@ -32,6 +32,12 @@
                                 <div class="crash-date">@crash.CrashDate</div>
                                 <div class="crash-severity">@GetSeverityDisplayName(crash.SeverityCode)</div>
                                 <div class="crash-details">@crash.PersonsInvolved persons, @crash.VehiclesInvolved vehicles</div>
+                                @if (crash.SlopeAtLocation > 0)
+                                {
+                                    <div class="crash-slope">
+                                        🏔️ @crash.SlopeAtLocation.ToString("F1")° (@crash.SlopePercentage.ToString("F1")%) - @crash.SlopeCategory
+                                    </div>
+                                }
                                 @if (crash.FatalCount > 0 || crash.InjuryCount > 0)
                                 {
                                     <div class="crash-casualties">

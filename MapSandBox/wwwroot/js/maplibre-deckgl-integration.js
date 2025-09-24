@@ -1355,7 +1355,10 @@ async function handleCrashClick(info) {
             lightCondition: crash.LightCondition || 'Unknown',
             surfaceCondition: crash.SurfaceCondition || 'Unknown',
             roadwayId: crash.RoadwayId || '',
-            contributingFactors: Array.isArray(crash.ContributingFactors) ? crash.ContributingFactors : []
+            contributingFactors: Array.isArray(crash.ContributingFactors) ? crash.ContributingFactors : [],
+            slopeAtLocation: crash.SlopeAtLocation || 0,
+            slopePercentage: crash.SlopePercentage || 0,
+            slopeCategory: crash.SlopeCategory || ''
         };
 
         // Import and use the crash popup module
@@ -1567,7 +1570,10 @@ function handleCrashClusterClick(info) {
                     PersonsInvolved: crash.PersonsInvolved,
                     VehiclesInvolved: crash.VehiclesInvolved,
                     FatalCount: crash.FatalCount,
-                    InjuryCount: crash.InjuryCount
+                    InjuryCount: crash.InjuryCount,
+                    SlopeAtLocation: crash.SlopeAtLocation || 0,
+                    SlopePercentage: crash.SlopePercentage || 0,
+                    SlopeCategory: crash.SlopeCategory || ''
                 }))
             };
 
@@ -1590,4 +1596,27 @@ Location: ${cluster.position[1].toFixed(6)}, ${cluster.position[0].toFixed(6)}`;
 // Export for debugging
 export function getIntegratedMapInstance() {
     return integratedMapInstance;
+}
+
+// Fly to specific coordinates
+export function flyToLocation(mapInstance, latitude, longitude, zoom = 16) {
+    console.log(`[MapLibre] Flying to: ${latitude}, ${longitude}, zoom: ${zoom}`);
+
+    if (!mapInstance || !mapInstance.maplibre) {
+        console.error("[MapLibre] MapLibre instance not available for flyTo");
+        return;
+    }
+
+    try {
+        mapInstance.maplibre.flyTo({
+            center: [longitude, latitude], // MapLibre expects [lon, lat]
+            zoom: zoom,
+            essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+            duration: 2000 // Animation duration in milliseconds
+        });
+        console.log(`[MapLibre] Successfully initiated fly to ${latitude}, ${longitude}`);
+    } catch (error) {
+        console.error("[MapLibre] Error in flyTo:", error);
+        throw error;
+    }
 }

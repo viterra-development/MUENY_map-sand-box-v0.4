@@ -28,6 +28,11 @@ public class CrashRecord
     public int VehiclesInvolved { get; set; }
     public bool IsPrivateProperty { get; set; }
     public bool IsLocated { get; set; }
+
+    // DEM-derived slope information
+    public decimal SlopeAtLocation { get; set; }  // Degrees from DEM
+    public decimal SlopePercentage { get; set; }  // Percentage grade
+    public string SlopeCategory { get; set; } = ""; // Flat/Moderate/Steep
 }
 
 public class CrisModelScore
@@ -234,6 +239,7 @@ public class CrisModelConfiguration
     public CrisThresholds Thresholds { get; set; } = new();
     public CrisDataSources DataSources { get; set; } = new();
     public CrisProcessingOptions ProcessingOptions { get; set; } = new();
+    public DEMConfiguration DEMConfiguration { get; set; } = new();
 }
 
 public class CrisThresholds
@@ -259,6 +265,12 @@ public class CrisProcessingOptions
     public decimal MinimumSegmentLengthMiles { get; set; } = 0.1m;
     public bool EnableElevationAnalysis { get; set; } = true;
     public bool EnableEnvironmentalAnalysis { get; set; } = true;
+}
+
+public class DEMConfiguration
+{
+    public string SlopeRasterPath { get; set; } = "";
+    public bool EnableDEMSampling { get; set; } = true;
 }
 
 public class CrisConfiguration
@@ -575,6 +587,11 @@ public class CrashPointDeckGl
     public int InjuryCount { get; set; }
     public string[] ContributingFactors { get; set; } = Array.Empty<string>();
     public double[] Coordinates { get; set; } = new double[2];
+
+    // DEM-derived slope information
+    public double SlopeAtLocation { get; set; }  // Degrees from DEM
+    public double SlopePercentage { get; set; }  // Percentage grade
+    public string SlopeCategory { get; set; } = ""; // Flat/Moderate/Steep
 }
 
 public class RiskSegmentDeckGl
@@ -637,8 +654,16 @@ public class CrashSummaryDeckGl
     public string CrashId { get; set; } = "";
     public string CrashDate { get; set; } = "";
     public string Severity { get; set; } = "";
+    public string SeverityCode { get; set; } = "";
     public int PersonsInvolved { get; set; }
     public int VehiclesInvolved { get; set; }
+    public int FatalCount { get; set; }
+    public int InjuryCount { get; set; }
+
+    // DEM-derived slope information
+    public decimal SlopeAtLocation { get; set; }  // Degrees from DEM
+    public decimal SlopePercentage { get; set; }  // Percentage grade
+    public string SlopeCategory { get; set; } = ""; // Flat/Moderate/Steep
 }
 
 public class DeckGlDataCollection<T>

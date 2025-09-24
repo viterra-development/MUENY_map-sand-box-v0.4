@@ -54,74 +54,35 @@
                     </label>
                 }
             </div>
+
+            <div class="control-section">
+                <h3>Search Location</h3>
+                <div class="search-inputs">
+                    <input type="number" step="any" placeholder="Latitude (32.758237)"
+                           @bind="searchLatitude" class="coord-input" />
+                    <input type="number" step="any" placeholder="Longitude (-97.673080)"
+                           @bind="searchLongitude" class="coord-input" />
+                    <button @onclick="SearchCoordinates" class="search-btn" disabled="@isSearching">
+                        @if (isSearching)
+                        {
+                            <span>🔍 Searching...</span>
+                        }
+                        else
+                        {
+                            <span>📍 Go to Location</span>
+                        }
+                    </button>
+                </div>
+                @if (!string.IsNullOrEmpty(searchMessage))
+                {
+                    <div class="search-message @searchMessageClass">@searchMessage</div>
+                }
+            </div>
         </div>
     </div>
 
 </div>
 
-<style>
-.cris-container {
-    height: 100vh;
-    overflow: hidden;
-}
-
-.map-section {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.map-controls {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
-    font-family: Arial, sans-serif;
-    max-width: 250px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-.control-section {
-    margin-bottom: 20px;
-}
-
-.control-section h3 {
-    margin: 0 0 10px 0;
-    font-size: 14px;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-
-.control-section select {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 12px;
-}
-
-.layer-toggle {
-    display: block;
-    font-size: 12px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    color: #555;
-}
-
-.layer-toggle input {
-    margin-right: 6px;
-}
-
-.layer-toggle:hover {
-    color: #333;
-}
-</style>
 
 @code {
     private MapLibreMap? mapComponent;
@@ -137,6 +98,13 @@
     private List<LayerInfo> layerInfo = new();
     private List<LayerInfo> crisLayers = new();
     private List<LayerInfo> backgroundLayers = new();
+
+    // Search functionality
+    private double? searchLatitude;
+    private double? searchLongitude;
+    private bool isSearching = false;
+    private string searchMessage = "";
+    private string searchMessageClass = "";
 
 
     protected override async Task OnInitializedAsync()
@@ -190,5 +158,49 @@
     private void HandleMapClick(MapLibreClickEventArgs e)
     {
         // Handle map clicks if needed
+    }
+
+    private async Task SearchCoordinates()
+    {
+        if (!searchLatitude.HasValue || !searchLongitude.HasValue)
+        {
+            searchMessage = "Please enter both latitude and longitude";
+            searchMessageClass = "error";
+            return;
+        }
+
+        // Basic validation for Parker County area (rough bounds)
+        if (searchLatitude < 32.0 || searchLatitude > 33.5 || searchLongitude < -98.5 || searchLongitude > -97.0)
+        {
+            searchMessage = "Coordinates appear to be outside Parker County, TX area";
+            searchMessageClass = "error";
+            return;
+        }
+
+        isSearching = true;
+        searchMessage = "";
+        StateHasChanged();
+
+        try
+        {
+            if (mapComponent != null)
+            {
+                // Fly to the coordinates with appropriate zoom level
+                await mapComponent.FlyTo(searchLatitude.Value, searchLongitude.Value, zoom: 16);
+
+                searchMessage = $"📍 Navigated to {searchLatitude:F6}, {searchLongitude:F6}";
+                searchMessageClass = "success";
+            }
+        }
+        catch (Exception ex)
+        {
+            searchMessage = $"Error navigating: {ex.Message}";
+            searchMessageClass = "error";
+        }
+        finally
+        {
+            isSearching = false;
+            StateHasChanged();
+        }
     }
 }

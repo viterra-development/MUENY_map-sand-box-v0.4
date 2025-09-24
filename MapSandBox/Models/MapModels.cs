@@ -65,6 +65,11 @@ public class CrashPopupData
     public string RoadwayId { get; set; } = "";
     public List<string> ContributingFactors { get; set; } = new();
 
+    // DEM-derived slope information
+    public decimal SlopeAtLocation { get; set; }  // Degrees from DEM
+    public decimal SlopePercentage { get; set; }  // Percentage grade
+    public string SlopeCategory { get; set; } = ""; // Flat/Moderate/Steep
+
     public string FormattedCoordinates => $"{Longitude:F6}, {Latitude:F6}";
 }
 

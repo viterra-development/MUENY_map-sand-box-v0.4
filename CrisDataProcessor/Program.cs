@@ -33,6 +33,7 @@ public class Program
                 services.AddScoped<RoadGeometryService>();
                 services.AddScoped<EnhancedRiskSegmentGenerator>();
                 services.AddScoped<EnhancedCrisSpatialAnalyzer>();
+                services.AddScoped<GdalCommandLineService>();
                 services.AddScoped<ElevationService>();
                 services.AddScoped<EnvironmentalAnalyzer>();
             });
@@ -117,8 +118,11 @@ public class CrisProcessor
             var riskSegments = await _enhancedRiskGenerator.GenerateEnhancedRiskSegmentsFromCrashes(
                 validCrashes, spatialJoins, aadtBySegment, trafficRoadGeoJsonPath);
 
-            // Step 6: Enhanced elevation/slope analysis
-            _elevationService.EnhanceRoadSegmentsWithBasicSlope(riskSegments);
+            // Step 6: Enhanced crash records with DEM slope data (first - needed for crash-based segment analysis)
+            await _elevationService.EnhanceCrashRecordsWithDEMSlope(validCrashes);
+
+            // Step 6.1: Enhanced elevation/slope analysis using crash-based slope data
+            await _elevationService.EnhanceRoadSegmentsWithCrashBasedSlope(riskSegments, validCrashes, crashesBySegment);
 
             // Step 7: Enhanced environmental analysis
             _environmentalAnalyzer.EnhanceSegmentsWithEnvironmentalAnalysis(riskSegments, crashesBySegment);
@@ -299,17 +303,21 @@ public class CrisProcessor
                 Position = new[] { avgLongitude, avgLatitude },
                 CrashCount = nearbyCluster.Count,
                 MaxSeverity = maxSeverityCode,
-                TotalPersonsInvolved = nearbyCluster.Sum(c => c.PersonsInvolved),
-                TotalVehiclesInvolved = nearbyCluster.Sum(c => c.VehiclesInvolved),
-                Crashes = nearbyCluster.Select(c => new
+                TotalPersonsInvolved = nearbyCluster.Sum(c => c.Persons.Count),
+                TotalVehiclesInvolved = nearbyCluster.Sum(c => c.Vehicles.Count),
+                Crashes = nearbyCluster.Select(c => new CrashSummaryDeckGl
                 {
                     CrashId = c.CrashId,
                     CrashDate = c.CrashDateTime.ToString("yyyy-MM-dd"),
+                    Severity = c.Severity.ToString(),
                     SeverityCode = ConvertSeverityToCode(c.Severity),
-                    PersonsInvolved = c.PersonsInvolved,
-                    VehiclesInvolved = c.VehiclesInvolved,
+                    PersonsInvolved = c.Persons.Count,
+                    VehiclesInvolved = c.Vehicles.Count,
                     FatalCount = c.Persons.Count(p => p.InjurySeverity == KabcoSeverity.K_Fatal),
-                    InjuryCount = c.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury)
+                    InjuryCount = c.Persons.Count(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury),
+                    SlopeAtLocation = c.SlopeAtLocation,
+                    SlopePercentage = c.SlopePercentage,
+                    SlopeCategory = c.SlopeCategory
                 }).ToList()
             };
 

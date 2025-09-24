@@ -123,7 +123,36 @@
             Console.WriteLine("[MapLibre] Continuing execution after base map update error");
         }
     }
-    
+
+    public async Task FlyTo(double latitude, double longitude, int zoom = 16)
+    {
+        try
+        {
+            Console.WriteLine($"[MapLibre] FlyTo called: {latitude}, {longitude}, zoom: {zoom}");
+
+            if (_module == null)
+            {
+                Console.WriteLine("[MapLibre] Warning: Module not initialized, skipping fly to");
+                return;
+            }
+
+            if (_mapInstance == null)
+            {
+                Console.WriteLine("[MapLibre] Warning: Map instance not initialized, skipping fly to");
+                return;
+            }
+
+            await _module.InvokeVoidAsync("flyToLocation", _mapInstance, latitude, longitude, zoom);
+            Console.WriteLine("[MapLibre] Fly to completed successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[MapLibre] Error flying to location: {ex.Message}");
+            Console.WriteLine($"[MapLibre] Stack trace: {ex.StackTrace}");
+            throw; // Re-throw so the caller can handle the error
+        }
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (_mapInstance != null && _module != null)

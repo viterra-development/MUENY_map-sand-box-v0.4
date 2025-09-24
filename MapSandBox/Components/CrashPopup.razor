@@ -82,6 +82,27 @@
                             </div>
                         }
 
+                        @if (CrashData.SlopeAtLocation > 0)
+                        {
+                            <div class="detail-item">
+                                <div class="detail-header">
+                                    <span class="detail-icon">🏔️</span>
+                                    <span class="detail-label">Road Slope</span>
+                                </div>
+                                <div class="slope-details">
+                                    <div class="slope-item">
+                                        <span class="slope-label">Grade:</span>
+                                        <span class="slope-value">@CrashData.SlopeAtLocation.ToString("F1")°</span>
+                                        <span class="slope-percentage">(@CrashData.SlopePercentage.ToString("F1")%)</span>
+                                    </div>
+                                    <div class="slope-item">
+                                        <span class="slope-label">Category:</span>
+                                        <span class="slope-category slope-@CrashData.SlopeCategory.ToLower()">@CrashData.SlopeCategory</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
                         <div class="detail-item">
                             <div class="detail-header">
                                 <span class="detail-icon">📍</span>
