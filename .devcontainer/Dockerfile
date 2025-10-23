@@ -6,20 +6,24 @@ FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:${VARIANT}
 RUN groupadd -g 1000 vscode && \
     useradd -u 1000 -g vscode -s /bin/bash -m vscode
 
-# Install essential development tools
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
+# Install Node.js 20 LTS from NodeSource
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get update && export DEBIAN_FRONTEND=noninteractive && \
     apt-get -y install --no-install-recommends \
       curl \
-      wget \
-      unzip \
-      ca-certificates \
       gnupg \
       lsb-release \
+      wget \
+      unzip \
+      zip \
       procps \
       nodejs \
-      npm \
+      jq \
       tar \
-      gdal-bin
+      gdal-bin \
+      wget \
+      unzip \
+      ca-certificates
 
 # Install global npm packages and fix permissions for auto-updates
 RUN npm install -g @anthropic-ai/claude-code && \

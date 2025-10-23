@@ -347,6 +347,27 @@ public class MapLibreService
                     ["getLineColor"] = "[0, 0, 0, 255]",
                     ["lineWidthMinPixels"] = 1
                 }
+            },
+            new LayerConfig
+            {
+                Id = "txdot-city-boundaries",
+                Type = "GeoJson",
+                DataUrl = "/txdot-city-boundaries.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getFillColor"] = new int[] { 100, 150, 200, 30 },  // Light blue, semi-transparent
+                    ["getLineColor"] = new int[] { 0, 100, 200, 255 },   // Darker blue border
+                    ["getLineWidth"] = 2,
+                    ["lineWidthMinPixels"] = 1,
+                    ["lineWidthMaxPixels"] = 3,
+                    ["opacity"] = 0.6,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleCityBoundaryClick"
+                }
             }
             // Commented out until scaling issues are resolved
             // new LayerConfig
@@ -404,7 +425,8 @@ public class MapLibreService
             new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Ksat)", Visible = false },
             new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = true },
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },
-            new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false }
+            new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false },
+            new LayerInfo { Id = "txdot-city-boundaries", Name = "City Boundaries (TxDOT)", Visible = false }
             // new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "NOAA Rainfall Points", Visible = false },
             // new LayerInfo { Id = "noaa-rainfall-parker-heatmap", Name = "NOAA Rainfall Heatmap", Visible = false }
         };

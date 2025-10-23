@@ -80,4 +80,12 @@ public class CrashClusterData
     public double Longitude { get; set; }
     public int TotalCrashes => Crashes.Count;
     public string FormattedCoordinates => $"{Longitude:F6}, {Latitude:F6}";
+}
+
+public class CityBoundaryData
+{
+    public string CityName { get; set; } = "";
+    public int TxDotCityNumber { get; set; }
+    public string CityFips { get; set; } = "";
+    public bool IsCountySeat { get; set; }
 } 

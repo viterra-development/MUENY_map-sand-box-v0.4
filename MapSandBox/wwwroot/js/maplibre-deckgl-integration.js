@@ -809,8 +809,21 @@ function getLayerProperties(config) {
             properties.highlightColor = [255, 255, 255, 128];
             properties.onClick = handleIntersectionRiskClick;
             break;
+        case 'txdot-city-boundaries':
+            properties.filled = true;
+            properties.stroked = true;
+            properties.getFillColor = [100, 150, 200, 30]; // Light blue, semi-transparent
+            properties.getLineColor = [0, 100, 200, 255];  // Darker blue border
+            properties.getLineWidth = 2;
+            properties.lineWidthMinPixels = 1;
+            properties.lineWidthMaxPixels = 3;
+            properties.opacity = 0.6;
+            properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.onClick = handleCityBoundaryClick;
+            break;
     }
-    
+
     return properties;
 }
 
@@ -1372,6 +1385,34 @@ async function handleCrashClick(info) {
 Date: ${crashPopupData.crashDateTime}
 Severity: ${crashPopupData.severity} (${crashPopupData.severityCode})
 Persons: ${crashPopupData.personsInvolved}, Vehicles: ${crashPopupData.vehiclesInvolved}`);
+        }
+    }
+}
+
+async function handleCityBoundaryClick(info) {
+    console.log('handleCityBoundaryClick called with:', info);
+
+    if (info.object && info.object.properties) {
+        const city = info.object.properties;
+
+        // Create the city boundary popup data object
+        const cityBoundaryData = {
+            cityName: city.CITY_NM || 'Unknown',
+            txDotCityNumber: city.TXDOT_CITY_NBR || 0,
+            cityFips: city.CITY_FIPS || '',
+            isCountySeat: city.CNTY_SEAT_FLAG === 'Y'
+        };
+
+        // Import and use the city boundary popup module
+        try {
+            const cityBoundaryPopupModule = await import('./cityBoundaryPopup.js');
+            cityBoundaryPopupModule.showCityBoundaryPopup(cityBoundaryData);
+        } catch (error) {
+            console.error('Error showing city boundary popup:', error);
+            // Fallback to alert if popup fails
+            alert(`City: ${cityBoundaryData.cityName}
+County Seat: ${cityBoundaryData.isCountySeat ? 'Yes' : 'No'}
+TxDOT City #: ${cityBoundaryData.txDotCityNumber}`);
         }
     }
 }

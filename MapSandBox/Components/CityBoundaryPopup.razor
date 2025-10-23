@@ -1,0 +1,93 @@
+@using MapSandBox.Models
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+@if (IsVisible && CityData != null)
+{
+    <div class="cris-popup-overlay" @onclick="Hide">
+        <div class="cris-popup-card" @onclick:stopPropagation="true">
+            <div class="popup-header">
+                <h4>🏙️ @CityData.CityName</h4>
+                <button class="close-btn" @onclick="Hide">×</button>
+            </div>
+
+            <div class="crash-breakdown">
+                <h5>📊 City Information</h5>
+
+                <div class="detail-item">
+                    <div class="detail-header">
+                        <span class="detail-icon">🏛️</span>
+                        <span class="detail-label">County Seat</span>
+                    </div>
+                    <div class="detail-value">@(CityData.IsCountySeat ? "Yes" : "No")</div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-header">
+                        <span class="detail-icon">🔢</span>
+                        <span class="detail-label">TxDOT City Number</span>
+                    </div>
+                    <div class="detail-value mono">@CityData.TxDotCityNumber</div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-header">
+                        <span class="detail-icon">📋</span>
+                        <span class="detail-label">FIPS Code</span>
+                    </div>
+                    <div class="detail-value mono">@CityData.CityFips</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public CityBoundaryData? CityData { get; set; }
+    [Parameter] public EventCallback OnHide { get; set; }
+
+    private DotNetObjectReference<CityBoundaryPopup>? _objectReference;
+    private IJSObjectReference? _jsModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/cityBoundaryPopup.js");
+            _objectReference = DotNetObjectReference.Create(this);
+            await _jsModule.InvokeVoidAsync("setCityBoundaryPopupInstance", _objectReference);
+        }
+    }
+
+    public void Show(CityBoundaryData data)
+    {
+        CityData = data;
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void ShowPopupFromJS(CityBoundaryData data)
+    {
+        Show(data);
+    }
+
+    public async Task Hide()
+    {
+        IsVisible = false;
+        await OnHide.InvokeAsync();
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule != null && _objectReference != null)
+        {
+            await _jsModule.InvokeVoidAsync("clearCityBoundaryPopupInstance");
+            _objectReference.Dispose();
+            await _jsModule.DisposeAsync();
+        }
+    }
+}
