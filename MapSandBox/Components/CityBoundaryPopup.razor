@@ -3,50 +3,18 @@
 @inject IJSRuntime JSRuntime
 @implements IAsyncDisposable
 
-@if (IsVisible && CityData != null)
+@if (IsVisible && !string.IsNullOrEmpty(CityName))
 {
-    <div class="cris-popup-overlay" @onclick="Hide">
-        <div class="cris-popup-card" @onclick:stopPropagation="true">
-            <div class="popup-header">
-                <h4>🏙️ @CityData.CityName</h4>
-                <button class="close-btn" @onclick="Hide">×</button>
-            </div>
-
-            <div class="crash-breakdown">
-                <h5>📊 City Information</h5>
-
-                <div class="detail-item">
-                    <div class="detail-header">
-                        <span class="detail-icon">🏛️</span>
-                        <span class="detail-label">County Seat</span>
-                    </div>
-                    <div class="detail-value">@(CityData.IsCountySeat ? "Yes" : "No")</div>
-                </div>
-
-                <div class="detail-item">
-                    <div class="detail-header">
-                        <span class="detail-icon">🔢</span>
-                        <span class="detail-label">TxDOT City Number</span>
-                    </div>
-                    <div class="detail-value mono">@CityData.TxDotCityNumber</div>
-                </div>
-
-                <div class="detail-item">
-                    <div class="detail-header">
-                        <span class="detail-icon">📋</span>
-                        <span class="detail-label">FIPS Code</span>
-                    </div>
-                    <div class="detail-value mono">@CityData.CityFips</div>
-                </div>
-            </div>
-        </div>
+    <div class="city-tooltip" style="left: @(X)px; top: @(Y)px;">
+        @CityName
     </div>
 }
 
 @code {
-    [Parameter] public bool IsVisible { get; set; }
-    [Parameter] public CityBoundaryData? CityData { get; set; }
-    [Parameter] public EventCallback OnHide { get; set; }
+    private string? CityName { get; set; }
+    private double X { get; set; }
+    private double Y { get; set; }
+    private bool IsVisible { get; set; }
 
     private DotNetObjectReference<CityBoundaryPopup>? _objectReference;
     private IJSObjectReference? _jsModule;
@@ -57,27 +25,24 @@
         {
             _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/cityBoundaryPopup.js");
             _objectReference = DotNetObjectReference.Create(this);
-            await _jsModule.InvokeVoidAsync("setCityBoundaryPopupInstance", _objectReference);
+            await _jsModule.InvokeVoidAsync("setCityBoundaryTooltipInstance", _objectReference);
         }
     }
 
-    public void Show(CityBoundaryData data)
+    [JSInvokable]
+    public void ShowTooltip(string cityName, double x, double y)
     {
-        CityData = data;
+        CityName = cityName;
+        X = x + 15; // Offset from cursor
+        Y = y + 15;
         IsVisible = true;
         StateHasChanged();
     }
 
     [JSInvokable]
-    public void ShowPopupFromJS(CityBoundaryData data)
-    {
-        Show(data);
-    }
-
-    public async Task Hide()
+    public void HideTooltip()
     {
         IsVisible = false;
-        await OnHide.InvokeAsync();
         StateHasChanged();
     }
 
@@ -85,7 +50,7 @@
     {
         if (_jsModule != null && _objectReference != null)
         {
-            await _jsModule.InvokeVoidAsync("clearCityBoundaryPopupInstance");
+            await _jsModule.InvokeVoidAsync("clearCityBoundaryTooltipInstance");
             _objectReference.Dispose();
             await _jsModule.DisposeAsync();
         }

@@ -820,7 +820,7 @@ function getLayerProperties(config) {
             properties.opacity = 0.6;
             properties.pickable = true;
             properties.autoHighlight = true;
-            properties.onClick = handleCityBoundaryClick;
+            properties.onHover = handleCityBoundaryHover;
             break;
     }
 
@@ -1389,30 +1389,25 @@ Persons: ${crashPopupData.personsInvolved}, Vehicles: ${crashPopupData.vehiclesI
     }
 }
 
-async function handleCityBoundaryClick(info) {
-    console.log('handleCityBoundaryClick called with:', info);
-
+async function handleCityBoundaryHover(info) {
     if (info.object && info.object.properties) {
         const city = info.object.properties;
+        const cityName = city.CITY_NM || 'Unknown City';
 
-        // Create the city boundary popup data object
-        const cityBoundaryData = {
-            cityName: city.CITY_NM || 'Unknown',
-            txDotCityNumber: city.TXDOT_CITY_NBR || 0,
-            cityFips: city.CITY_FIPS || '',
-            isCountySeat: city.CNTY_SEAT_FLAG === 'Y'
-        };
-
-        // Import and use the city boundary popup module
+        // Show tooltip at cursor position
         try {
             const cityBoundaryPopupModule = await import('./cityBoundaryPopup.js');
-            cityBoundaryPopupModule.showCityBoundaryPopup(cityBoundaryData);
+            cityBoundaryPopupModule.showCityBoundaryTooltip(cityName, info.x, info.y);
         } catch (error) {
-            console.error('Error showing city boundary popup:', error);
-            // Fallback to alert if popup fails
-            alert(`City: ${cityBoundaryData.cityName}
-County Seat: ${cityBoundaryData.isCountySeat ? 'Yes' : 'No'}
-TxDOT City #: ${cityBoundaryData.txDotCityNumber}`);
+            console.error('Error showing city boundary tooltip:', error);
+        }
+    } else {
+        // Hide tooltip when not hovering over a city
+        try {
+            const cityBoundaryPopupModule = await import('./cityBoundaryPopup.js');
+            cityBoundaryPopupModule.hideCityBoundaryTooltip();
+        } catch (error) {
+            console.error('Error hiding city boundary tooltip:', error);
         }
     }
 }

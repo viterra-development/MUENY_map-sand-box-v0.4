@@ -1,15 +1,21 @@
-let cityBoundaryPopupInstance = null;
+let cityBoundaryTooltipInstance = null;
 
-export function setCityBoundaryPopupInstance(dotNetObjectReference) {
-    cityBoundaryPopupInstance = dotNetObjectReference;
+export function setCityBoundaryTooltipInstance(dotNetObjectReference) {
+    cityBoundaryTooltipInstance = dotNetObjectReference;
 }
 
-export function clearCityBoundaryPopupInstance() {
-    cityBoundaryPopupInstance = null;
+export function clearCityBoundaryTooltipInstance() {
+    cityBoundaryTooltipInstance = null;
 }
 
-export function showCityBoundaryPopup(cityData) {
-    if (cityBoundaryPopupInstance) {
-        cityBoundaryPopupInstance.invokeMethodAsync('ShowPopupFromJS', cityData);
+export function showCityBoundaryTooltip(cityName, x, y) {
+    if (cityBoundaryTooltipInstance) {
+        cityBoundaryTooltipInstance.invokeMethodAsync('ShowTooltip', cityName, x, y);
+    }
+}
+
+export function hideCityBoundaryTooltip() {
+    if (cityBoundaryTooltipInstance) {
+        cityBoundaryTooltipInstance.invokeMethodAsync('HideTooltip');
     }
 }
