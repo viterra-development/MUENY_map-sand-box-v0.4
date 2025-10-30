@@ -154,6 +154,27 @@ public class MapLibreService
             },
             new LayerConfig
             {
+                Id = "parker-roads-traffic-phase1",
+                Type = "Path",
+                DataUrl = "/parker-roads-with-traffic-phase1.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["getPath"] = "getCoordinates",
+                    ["getColor"] = "getTrafficGradientColor",
+                    ["getWidth"] = "getTrafficWidth",
+                    ["widthMinPixels"] = 1,
+                    ["widthMaxPixels"] = 6,
+                    ["capRounded"] = true,
+                    ["jointRounded"] = true,
+                    ["opacity"] = 0.9,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleTrafficRoadClick"
+                }
+            },
+            new LayerConfig
+            {
                 Id = "county-cad-parcels",
                 Type = "GeoJson",
                 DataUrl = "/sample-data/county-cad-parcel-test.geojson",
@@ -414,6 +435,7 @@ public class MapLibreService
         {
             new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = false },
             new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = false },
+            new LayerInfo { Id = "parker-roads-traffic-phase1", Name = "Traffic - Phase 1 (Interpolation IDW)", Visible = false },
             new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = false },
             new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = false },
             new LayerInfo { Id = "parker-twi", Name = "Topographic Wetness Index (TWI)", Visible = false },

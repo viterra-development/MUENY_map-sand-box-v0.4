@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MapSandBox.Shared.Services;
 using TCDS.Importer.Models;
 using TCDS.Importer.Services;
 using System.Text.Json;
@@ -31,12 +32,36 @@ builder.Services.AddTransient<TypeBasedTrafficMatcher>();
 builder.Services.AddTransient<EnhancedRoadTrafficMerger>();
 builder.Services.AddTransient<DataQualityMonitor>();
 
+// Traffic estimation services
+builder.Services.AddSingleton(new InterpolationConfig
+{
+    MaxNeighbors = 10,
+    DecayLambda = 2000.0,      // Increased from 750m to 2km for rural areas
+    MaxSearchRadius = 15000.0,  // Increased from 5km to 15km for sparse data
+    RequireSameHierarchy = false, // Allow compatible hierarchies
+    MinConfidence = 0.2        // Lowered from 0.3 to 0.2 for better coverage
+});
+builder.Services.AddTransient<SpatialInterpolationEstimator>();
+builder.Services.AddTransient<TrafficEstimationService>();
+builder.Services.AddTransient<TrafficEstimationValidationService>();
+builder.Services.AddTransient<RoadGeometryService>(); // Shared service for duplicate detection
+builder.Services.AddTransient<NetworkTopologyValidator>(); // Phase 1.5
+builder.Services.AddTransient<Phase1EstimationProcessor>();
+
 builder.Logging.AddConsole();
 
 var host = builder.Build();
 
 var logger = host.Services.GetRequiredService<ILogger<Program>>();
 var tileGenerator = host.Services.GetRequiredService<SimpleTileGenerator>();
+
+// Check if running in traffic estimation mode (Phase 1)
+var estimateTrafficMode = args.Contains("--estimate-traffic") || args.Contains("--phase1");
+
+if (estimateTrafficMode)
+{
+    return await RunTrafficEstimationMode(host, logger, solutionRoot);
+}
 
 // Check if running in merge mode (road-traffic merge with enhanced algorithms)
 var mergeMode = args.Contains("--merge") || args.Contains("--enhanced-merge") || args.Contains("--merge-roads");
@@ -1105,5 +1130,47 @@ static void CopyDirectory(string sourceDir, string destinationDir)
     {
         string newDestinationDir = Path.Combine(destinationDir, subDir.Name);
         CopyDirectory(subDir.FullName, newDestinationDir);
+    }
+}
+
+static async Task<int> RunTrafficEstimationMode(IHost host, ILogger logger, string solutionRoot)
+{
+    try
+    {
+        logger.LogInformation("🚦 Starting Traffic Estimation Mode (Phase 1)");
+
+        var processor = host.Services.GetRequiredService<Phase1EstimationProcessor>();
+
+        // Input: existing parker-roads-with-traffic.geojson
+        var inputPath = Path.Combine(solutionRoot, "MapSandBox", "wwwroot", "parker-roads-with-traffic.geojson");
+
+        // Output: same wwwroot directory
+        var outputDirectory = Path.Combine(solutionRoot, "MapSandBox", "wwwroot");
+
+        if (!File.Exists(inputPath))
+        {
+            logger.LogError("❌ Input file not found: {Path}", inputPath);
+            logger.LogError("💡 Please ensure parker-roads-with-traffic.geojson exists in MapSandBox/wwwroot/");
+            return 1;
+        }
+
+        logger.LogInformation("📁 Input file: {Path}", Path.GetFileName(inputPath));
+        logger.LogInformation("📁 Output directory: {Path}", outputDirectory);
+
+        // Run Phase 1 estimation
+        var outputPath = await processor.RunPhase1EstimationAsync(
+            inputPath,
+            outputDirectory,
+            performCrossValidation: true);
+
+        logger.LogInformation("\n✅ Traffic estimation completed successfully!");
+        logger.LogInformation("📄 Output file: {Path}", Path.GetFileName(outputPath));
+
+        return 0;
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "❌ Traffic estimation failed");
+        return 1;
     }
 }

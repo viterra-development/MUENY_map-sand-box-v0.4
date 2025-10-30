@@ -834,7 +834,7 @@ function createTrafficCountsTileLayer(config) {
         id: config.id,
         data: '/tiles/traffic-counts/{z}/{x}/{y}.geojson',
         minZoom: 12,
-        maxZoom: 16,
+        maxZoom: 14,  // Match actual tile coverage (tiles exist for zoom 12-14 only)
         tileSize: 512,
         maxCacheSize: 10 * 1024 * 1024, // 10MB cache
         maxCacheByteSize: 50 * 1024 * 1024, // 50MB total
@@ -864,7 +864,7 @@ function createTrafficCountsTileLayer(config) {
         renderSubLayers: props => {
             // Strict zoom enforcement using correct tile structure
             const tileZ = props.tile?.index?.z;
-            if (tileZ < 12 || tileZ > 16) {
+            if (tileZ < 12 || tileZ > 14) {  // Match actual tile coverage
                 return null;
             }
             

@@ -1,0 +1,192 @@
+{
+  "phase": "Phase 1 \u002B 1.5: Spatial Interpolation (IDW) with Network Topology Validation",
+  "generatedAt": "2025-10-30T20:09:33.4518567Z",
+  "summary": {
+    "totalRoads": 6345,
+    "roadsWithExistingData": 877,
+    "roadsEstimated": 5424,
+    "roadsUnableToEstimate": 44,
+    "averageConfidence": 0.705,
+    "estimationRate": 99.2
+  },
+  "estimatedByHierarchy": {
+    "Interstate": {
+      "count": 7,
+      "percentage": 0.1
+    },
+    "USHighway": {
+      "count": 17,
+      "percentage": 0.3
+    },
+    "StateHighway": {
+      "count": 28,
+      "percentage": 0.5
+    },
+    "Arterial": {
+      "count": 4968,
+      "percentage": 91.6
+    },
+    "LocalRoad": {
+      "count": 243,
+      "percentage": 4.5
+    },
+    "Ramp": {
+      "count": 161,
+      "percentage": 3
+    }
+  },
+  "estimationMethods": {
+    "SpatialInterpolation_IDW": 5424
+  },
+  "networkTopology": {
+    "totalRoadsAnalyzed": 6271,
+    "deadEndRoads": 2434,
+    "isolatedRoads": 113,
+    "topologyCorrectionsApplied": 4064,
+    "deadEndViolationsFixed": 0,
+    "lowConnectivityCorrections": 0,
+    "averageConnectivity": 2.06,
+    "medianConnectivity": 2,
+    "topViolations": [
+      {
+        "roadName": "Prairie Ridge Dr",
+        "violationType": "PendantCluster",
+        "originalEstimate": 976871,
+        "correctedEstimate": 242,
+        "difference": 976629,
+        "percentChange": 100,
+        "reason": "Nested pendant cluster (depth 8): Capped to 242 AADT (17% of 2 entry roads (Aledo Pointe Dr, Prarie Ridge Dr): 1,446)"
+      },
+      {
+        "roadName": "Prairie Ridge Dr",
+        "violationType": "PendantCluster",
+        "originalEstimate": 976006,
+        "correctedEstimate": 723,
+        "difference": 975283,
+        "percentChange": 99.9,
+        "reason": "Nested pendant cluster (depth 6): Capped to 723 AADT (26% of entry road \u0027Prarie Ridge Dr\u0027: 2,760)"
+      },
+      {
+        "roadName": "Cypress Point Ct",
+        "violationType": "PendantCluster",
+        "originalEstimate": 974630,
+        "correctedEstimate": 1343,
+        "difference": 973287,
+        "percentChange": 99.9,
+        "reason": "Nested pendant cluster (depth 6): Capped to 1,343 AADT (26% of entry road \u0027Crooked Stick Ln\u0027: 5,125)"
+      },
+      {
+        "roadName": "Valhalla Ct",
+        "violationType": "PendantCluster",
+        "originalEstimate": 975214,
+        "correctedEstimate": 2099,
+        "difference": 973115,
+        "percentChange": 99.8,
+        "reason": "Nested pendant cluster (depth 4): Capped to 2,099 AADT (41% of entry road \u0027Crooked Stick Ln\u0027: 5,125)"
+      },
+      {
+        "roadName": "Shadow Creek Ln",
+        "violationType": "PendantCluster",
+        "originalEstimate": 975772,
+        "correctedEstimate": 5125,
+        "difference": 970647,
+        "percentChange": 99.5,
+        "reason": "Nested pendant cluster (depth 2): Capped to 5,125 AADT (64% of entry road \u0027E Bankhead Hwy\u0027: 8,008)"
+      },
+      {
+        "roadName": "Crooked Stick Ln",
+        "violationType": "PendantCluster",
+        "originalEstimate": 974794,
+        "correctedEstimate": 5125,
+        "difference": 969669,
+        "percentChange": 99.5,
+        "reason": "Nested pendant cluster (depth 2): Capped to 5,125 AADT (64% of entry road \u0027E Bankhead Hwy\u0027: 8,008)"
+      },
+      {
+        "roadName": "Prairie Ridge Dr",
+        "violationType": "PendantCluster",
+        "originalEstimate": 974877,
+        "correctedEstimate": 6739,
+        "difference": 968138,
+        "percentChange": 99.3,
+        "reason": "Nested pendant cluster (depth 2): Capped to 6,739 AADT (64% of 2 entry roads (E Bankhead Hwy, Champions Dr): 10,530)"
+      },
+      {
+        "roadName": "Yeary Ln",
+        "violationType": "PendantCluster",
+        "originalEstimate": 944429,
+        "correctedEstimate": 4404,
+        "difference": 940025,
+        "percentChange": 99.5,
+        "reason": "Nested pendant cluster (depth 2): Capped to 4,404 AADT (64% of 2 entry roads (FM 1187 E, E FM 1187): 6,882)"
+      },
+      {
+        "roadName": "Trinity Bluffs Rd",
+        "violationType": "PendantCluster",
+        "originalEstimate": 918705,
+        "correctedEstimate": 3387,
+        "difference": 915318,
+        "percentChange": 99.6,
+        "reason": "Nested pendant cluster (depth 4): Capped to 3,387 AADT (41% of 2 entry roads (Trinity Bluffs Rd, Unknown Road): 8,270)"
+      },
+      {
+        "roadName": "Oaklawn Ln",
+        "violationType": "PendantCluster",
+        "originalEstimate": 864442,
+        "correctedEstimate": 3,
+        "difference": 864439,
+        "percentChange": 100,
+        "reason": "Nested pendant cluster (depth 10): Capped to 3 AADT (11% of entry road \u0027Claiborne Ln\u0027: 34)"
+      }
+    ]
+  },
+  "functionalClassCompliance": {
+    "Interstate": {
+      "expectedRange": {
+        "min": 20000,
+        "max": 200000
+      },
+      "violations": 5
+    },
+    "USHighway": {
+      "expectedRange": {
+        "min": 10000,
+        "max": 50000
+      },
+      "violations": 8
+    },
+    "StateHighway": {
+      "expectedRange": {
+        "min": 5000,
+        "max": 25000
+      },
+      "violations": 21
+    },
+    "Arterial": {
+      "expectedRange": {
+        "min": 1000,
+        "max": 8000
+      },
+      "violations": 2544
+    },
+    "LocalRoad": {
+      "expectedRange": {
+        "min": 50,
+        "max": 2000
+      },
+      "violations": 110
+    },
+    "Ramp": {
+      "expectedRange": {
+        "min": 5000,
+        "max": 30000
+      },
+      "violations": 133
+    }
+  },
+  "recommendations": [
+    "2821 functional class compliance violations detected. Review estimation parameters and reference data quality.",
+    "Phase 1.5 network topology validation corrected 4064 violations (0 dead-end, 0 low-connectivity).",
+    "Identified 2434 dead-end roads in the network. These were constrained to 80% of connector road traffic."
+  ]
+}
