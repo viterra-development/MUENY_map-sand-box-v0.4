@@ -26,7 +26,19 @@ public class TypeBasedTrafficMatcher
         _logger.LogDebug("Matching traffic for road: {RoadName} (hierarchy: {Hierarchy}, route: {Route})",
             GetRoadName(road), roadHierarchy, roadRoute);
 
-        // Step 1: Exact route + type match (highest priority)
+        // Step 0: Explicit LocatedOn match (HIGHEST PRIORITY - if location explicitly names this road, use it)
+        if (!string.IsNullOrEmpty(roadRoute))
+        {
+            var locatedOnMatch = FindExplicitLocatedOnMatch(road, trafficLocations, roadRoute, roadHierarchy);
+            if (locatedOnMatch != null)
+            {
+                _logger.LogDebug("Found explicit LocatedOn match for {RoadName}: {LocationId} (LocatedOn: {LocatedOn})",
+                    GetRoadName(road), locatedOnMatch.MatchedLocation?.LocationId, locatedOnMatch.MatchedLocation?.LocatedOn);
+                return locatedOnMatch;
+            }
+        }
+
+        // Step 1: Exact route + type match
         var exactMatch = FindExactRouteAndTypeMatch(road, trafficLocations, roadRoute, roadHierarchy);
         if (exactMatch != null)
         {
@@ -35,8 +47,8 @@ public class TypeBasedTrafficMatcher
             return exactMatch;
         }
 
-        // Step 2: Same road type, nearby location
-        var typeMatch = FindSameTypeMatch(road, trafficLocations, roadHierarchy, LOOSE_BUFFER);
+        // Step 2: Same road type, nearby location (exclude locations with conflicting LocatedOn)
+        var typeMatch = FindSameTypeMatch(road, trafficLocations, roadHierarchy, LOOSE_BUFFER, roadRoute);
         if (typeMatch != null)
         {
             _logger.LogDebug("Found same type match for {RoadName}: {LocationId}",
@@ -44,8 +56,8 @@ public class TypeBasedTrafficMatcher
             return typeMatch;
         }
 
-        // Step 3: Compatible type with warnings
-        var compatibleMatch = FindCompatibleTypeMatch(road, trafficLocations, roadHierarchy);
+        // Step 3: Compatible type with warnings (exclude locations with conflicting LocatedOn)
+        var compatibleMatch = FindCompatibleTypeMatch(road, trafficLocations, roadHierarchy, roadRoute);
         if (compatibleMatch != null)
         {
             compatibleMatch.AddWarning($"Using {compatibleMatch.SourceType} data for {roadHierarchy} road");
@@ -89,11 +101,12 @@ public class TypeBasedTrafficMatcher
     }
 
     private TrafficMatchResult FindSameTypeMatch(GeoJsonFeature road,
-        List<EnhancedTrafficLocation> locations, RoadHierarchy roadHierarchy, double bufferDistance)
+        List<EnhancedTrafficLocation> locations, RoadHierarchy roadHierarchy, double bufferDistance, string? roadRoute = null)
     {
         var matches = locations
             .Where(l => l.TargetRoadHierarchy == roadHierarchy &&
-                       l.IsMainlineLocation == IsMainlineRoad(roadHierarchy))
+                       l.IsMainlineLocation == IsMainlineRoad(roadHierarchy) &&
+                       !HasConflictingLocatedOn(l, roadRoute)) // Exclude locations that explicitly name a different road
             .Select(l => new { Location = l, Distance = CalculateDistance(road, l) })
             .Where(m => m.Distance <= bufferDistance)
             .OrderBy(m => m.Distance)
@@ -122,13 +135,14 @@ public class TypeBasedTrafficMatcher
     }
 
     private TrafficMatchResult FindCompatibleTypeMatch(GeoJsonFeature road,
-        List<EnhancedTrafficLocation> locations, RoadHierarchy roadHierarchy)
+        List<EnhancedTrafficLocation> locations, RoadHierarchy roadHierarchy, string? roadRoute = null)
     {
         // Define compatibility rules
         var compatibleTypes = GetCompatibleHierarchies(roadHierarchy);
 
         var matches = locations
-            .Where(l => compatibleTypes.Contains(l.TargetRoadHierarchy))
+            .Where(l => compatibleTypes.Contains(l.TargetRoadHierarchy) &&
+                       !HasConflictingLocatedOn(l, roadRoute)) // Exclude locations that explicitly name a different road
             .Select(l => new { Location = l, Distance = CalculateDistance(road, l) })
             .Where(m => m.Distance <= LOOSE_BUFFER)
             .OrderBy(m => m.Distance)
@@ -402,7 +416,7 @@ public class TypeBasedTrafficMatcher
         if (string.IsNullOrEmpty(locatedOn))
             return null;
 
-        // Parse route from TxDOT format (e.g., "I020", "US0180", "FM0005")
+        // Parse route from TxDOT format (e.g., "I020", "US0180", "FM0005", "FM0920")
         var routeMatch = Regex.Match(locatedOn, @"([A-Z]+)(\d+)");
         if (routeMatch.Success)
         {
@@ -420,5 +434,73 @@ public class TypeBasedTrafficMatcher
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Finds traffic locations where LocatedOn explicitly matches the target road's route.
+    /// This is the highest priority match - if a location explicitly names a road, it should only match that road.
+    /// </summary>
+    private TrafficMatchResult? FindExplicitLocatedOnMatch(GeoJsonFeature road,
+        List<EnhancedTrafficLocation> locations, string roadRoute, RoadHierarchy roadHierarchy)
+    {
+        // Find locations where LocatedOn explicitly matches this road's route
+        var matches = locations
+            .Where(l => !string.IsNullOrEmpty(l.LocatedOn))
+            .Select(l => new
+            {
+                Location = l,
+                LocatedOnRoute = ExtractRouteFromLocation(l),
+                Distance = CalculateDistance(road, l)
+            })
+            .Where(m => m.LocatedOnRoute == roadRoute) // LocatedOn must match target road's route
+            .Where(m => m.Distance <= LOOSE_BUFFER) // Must be within reasonable distance
+            .OrderBy(m => m.Distance)
+            .ToList();
+
+        if (!matches.Any())
+            return null;
+
+        var bestMatch = matches.First();
+        return new TrafficMatchResult
+        {
+            IsMatch = true,
+            MatchedLocation = bestMatch.Location,
+            Distance = bestMatch.Distance,
+            MatchType = "ExplicitLocatedOn",
+            SourceType = bestMatch.Location.LocationType
+        };
+    }
+
+    /// <summary>
+    /// Checks if a location's LocatedOn value conflicts with the target road's route.
+    /// Returns true if the location explicitly names a different road (conflict).
+    /// Returns false if LocatedOn is empty, matches the target, or doesn't contain a parseable route.
+    /// 
+    /// KEY RULE: If a location has LocatedOn that parses to a specific route (e.g., "FM0920" → "FM-920"),
+    /// it should ONLY match roads with that exact route designation. Roads without route designations
+    /// are considered a conflict (they're not the explicitly named road).
+    /// </summary>
+    private bool HasConflictingLocatedOn(EnhancedTrafficLocation location, string? targetRoadRoute)
+    {
+        // If no LocatedOn specified, no conflict
+        if (string.IsNullOrEmpty(location.LocatedOn))
+            return false;
+
+        // Parse route from LocatedOn
+        var locatedOnRoute = ExtractRouteFromLocation(location);
+        
+        // If can't parse LocatedOn, no conflict (might be a street name, not a route)
+        if (string.IsNullOrEmpty(locatedOnRoute))
+            return false;
+
+        // CRITICAL: If location has a route-specific LocatedOn, it must match exactly
+        // If target road has no route designation, it's a conflict (location names a specific route)
+        if (string.IsNullOrEmpty(targetRoadRoute))
+        {
+            return true; // Conflict: location names specific route, but target road has no route
+        }
+
+        // Conflict if LocatedOn route doesn't match target road route
+        return locatedOnRoute != targetRoadRoute;
     }
 }

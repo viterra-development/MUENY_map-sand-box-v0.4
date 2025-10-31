@@ -47,16 +47,19 @@ public class TrafficEstimationService
         {
             var props = feature.Properties ?? new Dictionary<string, object?>();
 
+            // Normalize property keys to camelCase for consistency
+            var normalizedProps = NormalizePropertyKeys(props);
+
             var segment = new RoadSegment
             {
-                LinearId = GetPropertyValue<string>(props, "linearId") ?? string.Empty,
-                FullName = GetPropertyValue<string>(props, "fullName") ?? "Unknown Road",
+                LinearId = GetPropertyValue<string>(normalizedProps, "linearId") ?? string.Empty,
+                FullName = GetPropertyValue<string>(normalizedProps, "fullName") ?? "Unknown Road",
                 Geometry = feature.Geometry,
-                OriginalProperties = props
+                OriginalProperties = normalizedProps
             };
 
             // Try to get hierarchy from existing classification first
-            var classificationObj = props.TryGetValue("classification", out var classVal) ? classVal : null;
+            var classificationObj = normalizedProps.TryGetValue("classification", out var classVal) ? classVal : null;
             if (classificationObj != null)
             {
                 try
@@ -78,13 +81,13 @@ public class TrafficEstimationService
             // If no classification found, determine hierarchy manually
             if (segment.Hierarchy == 0)
             {
-                var roadType = GetPropertyValue<string>(props, "roadType");
-                var mtfcc = GetPropertyValue<string>(props, "mtfcc");
+                var roadType = GetPropertyValue<string>(normalizedProps, "roadType");
+                var mtfcc = GetPropertyValue<string>(normalizedProps, "mtfcc");
                 segment.Hierarchy = DetermineHierarchy(roadType, mtfcc, segment.FullName);
             }
 
             // Extract existing traffic data if present
-            ExtractExistingTraffic(segment, props);
+            ExtractExistingTraffic(segment, normalizedProps);
 
             // Calculate centroid for distance calculations
             CalculateCentroid(segment);
@@ -357,6 +360,35 @@ public class TrafficEstimationService
         if (rttyp == "M") return RoadHierarchy.Arterial;
 
         return RoadHierarchy.LocalRoad;
+    }
+
+    /// <summary>
+    /// Normalizes property keys to camelCase for consistency across all GeoJSON files.
+    /// Converts UPPERCASE keys (from TIGER/Line) to camelCase (standard JSON convention).
+    /// </summary>
+    private Dictionary<string, object?> NormalizePropertyKeys(Dictionary<string, object?> props)
+    {
+        var normalized = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var kvp in props)
+        {
+            // Convert key to camelCase
+            var camelCaseKey = ToCamelCase(kvp.Key);
+            normalized[camelCaseKey] = kvp.Value;
+        }
+
+        return normalized;
+    }
+
+    /// <summary>
+    /// Converts a string to camelCase (first letter lowercase, rest as-is)
+    /// </summary>
+    private string ToCamelCase(string str)
+    {
+        if (string.IsNullOrEmpty(str) || char.IsLower(str[0]))
+            return str;
+
+        return char.ToLowerInvariant(str[0]) + str.Substring(1);
     }
 
     private T? GetPropertyValue<T>(Dictionary<string, object?> props, string key)

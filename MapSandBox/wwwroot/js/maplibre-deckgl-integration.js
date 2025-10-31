@@ -990,10 +990,11 @@ function getRoadWidth(feature) {
 function handleRoadClick(info) {
     if (info.object) {
         const road = info.object;
-        const name = road.properties.FULLNAME || 'Unnamed Road';
-        const type = road.properties.RTTYP || 'Unknown';
+        // All GeoJSON files now use camelCase properties
+        const name = road.properties.fullName;
+        const type = road.properties.roadType;
         const roadType = getRoadTypeName(type);
-        
+
         alert(`Road: ${name}\nType: ${roadType}\nRoute Type Code: ${type}`);
     }
 }
@@ -1111,10 +1112,13 @@ function getTrafficWidth(feature) {
 function handleTrafficRoadClick(info) {
     if (info.object) {
         const road = info.object;
-        const roadName = road.properties.FULLNAME || 'Unnamed Road';
-        const roadType = road.properties.RTTYP || 'Unknown';
+        // All GeoJSON files now use camelCase properties
+        const roadName = road.properties.fullName;
+        const roadType = road.properties.roadType;
+        const linearId = road.properties.linearId;
+        const mtfcc = road.properties.mtfcc;
         const roadTypeName = getRoadTypeName(roadType);
-        
+
         const traffic = road.properties.traffic;
         if (traffic) {
             const aadt = traffic.aadt || null;
@@ -1122,7 +1126,7 @@ function handleTrafficRoadClick(info) {
             const dhv30 = traffic.dhv30 || null;
             const locationId = traffic.locationId || null;
             const locatedOn = traffic.locatedOn || null;
-            
+
             // Call Blazor component method via DotNet.invokeMethodAsync
             if (window.roadPopupInstance) {
                 const roadData = {
@@ -1135,8 +1139,8 @@ function handleTrafficRoadClick(info) {
                     locationId,
                     locatedOn,
                     coordinates: info.coordinate,
-                    linearId: road.properties.LINEARID || null,
-                    mtfcc: road.properties.MTFCC || null
+                    linearId,
+                    mtfcc
                 };
                 
                 window.roadPopupInstance.invokeMethodAsync('ShowPopupFromJS', roadData);

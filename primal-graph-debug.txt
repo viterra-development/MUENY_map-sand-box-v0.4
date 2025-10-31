@@ -355,7 +355,7 @@ ID: Int_32.556965_-97.759242
   Connected split segments: 1
   Adjacent intersections: 1
   Split segment details:
-    - 110416470627_Split_0: 110416470627 (Int_32.556965_-97.759242 -> Int_32.561146_-97.757796)
+    - 1106067273756_Split_0: 1106067273756 (Int_32.556965_-97.759242 -> Int_32.561146_-97.757796)
 
 ID: Int_32.556970_-97.768222
   Lat: 32.55697000, Lon: -97.76822200
@@ -1458,6 +1458,11 @@ Segment: 110416445534 - S Ash St
   End:   [32.96319600, -97.68406100] -> Intersection: Int_32.963196_-97.684061
   Total coordinates in geometry: 23
 
+Segment: 1104258509691 - S Main St
+  Start: [32.73651100, -97.79617300] -> Intersection: Int_32.736511_-97.796173
+  End:   [32.74032200, -97.79768100] -> Intersection: Int_32.740322_-97.797681
+  Total coordinates in geometry: 17
+
 Segment: 1102970394234 - S Hill Dr
   Start: [32.74182800, -97.80310100] -> Intersection: Int_32.741828_-97.803101
   End:   [32.74310700, -97.80518400] -> Intersection: Int_32.743107_-97.805184
@@ -1543,6 +1548,11 @@ Segment: 110416457378 - S Lamar St
   End:   [32.75905200, -97.80386100] -> Intersection: Int_32.759052_-97.803861
   Total coordinates in geometry: 73
 
+Segment: 1104258509690 - S Main St
+  Start: [32.71639000, -97.78146700] -> Intersection: Int_32.716390_-97.781467
+  End:   [32.73651100, -97.79617300] -> Intersection: Int_32.736511_-97.796173
+  Total coordinates in geometry: 62
+
 Segment: 1106087635120 - S E Front St
   Start: [32.74727800, -98.00949800] -> Intersection: Int_32.747278_-98.009498
   End:   [32.75729700, -97.97976100] -> Intersection: Int_32.757297_-97.979761
@@ -1557,6 +1567,11 @@ Segment: 110416464394 - S Denton St
   Start: [32.75081800, -97.78603500] -> Intersection: Int_32.750818_-97.786035
   End:   [32.75865700, -97.78426000] -> Intersection: Int_32.758657_-97.784260
   Total coordinates in geometry: 21
+
+Segment: 110416445055 - S FM 5
+  Start: [32.67609300, -97.61047500] -> Intersection: Int_32.676093_-97.610475
+  End:   [32.68141100, -97.68096300] -> Intersection: Int_32.681411_-97.680963
+  Total coordinates in geometry: 249
 
 Segment: 1102338870362 - S Skyline Ct
   Start: [32.55772800, -97.59925800] -> Intersection: Int_32.557728_-97.599258
@@ -1638,6 +1653,11 @@ Segment: 1106087631325 - S Cardinal Rd
   End:   [32.93891900, -97.55362200] -> Intersection: Int_32.938919_-97.553622
   Total coordinates in geometry: 39
 
+Segment: 110416446743 - S Reno Rd
+  Start: [32.94539500, -97.58638500] -> Intersection: Int_32.945395_-97.586385
+  End:   [32.91819400, -97.59547400] -> Intersection: Int_32.918194_-97.595474
+  Total coordinates in geometry: 99
+
 Segment: 110416445535 - S Ash St
   Start: [32.96480900, -97.68441000] -> Intersection: Int_32.964809_-97.684410
   End:   [32.96559100, -97.68470000] -> Intersection: Int_32.965591_-97.684700
@@ -1718,6 +1738,11 @@ Segment: 110416469166 - S Stewart St
   End:   [32.88200500, -97.57710200] -> Intersection: Int_32.882005_-97.577102
   Total coordinates in geometry: 139
 
+Segment: 1102466286822 - S Main St
+  Start: [32.73651100, -97.79617300] -> Intersection: Int_32.736511_-97.796173
+  End:   [32.74032200, -97.79768100] -> Intersection: Int_32.740322_-97.797681
+  Total coordinates in geometry: 16
+
 Segment: 110416446613 - S Mill St
   Start: [32.74419200, -97.78951400] -> Intersection: Int_32.744192_-97.789514
   End:   [32.74744000, -97.78979500] -> Intersection: Int_32.747440_-97.789795
@@ -1763,10 +1788,20 @@ Segment: 1104475405988 - S Boyce Ln
   End:   [32.81980800, -97.58452500] -> Intersection: Int_32.819808_-97.584525
   Total coordinates in geometry: 44
 
+Segment: 1106067273756 - S FM 51
+  Start: [32.55696500, -97.75924200] -> Intersection: Int_32.556965_-97.759242
+  End:   [32.70243000, -97.77164600] -> Intersection: Int_32.702430_-97.771646
+  Total coordinates in geometry: 316
+
 Segment: 110416447147 - S Waco St
   Start: [32.74210300, -97.79939000] -> Intersection: Int_32.742103_-97.799390
   End:   [32.74413700, -97.79940900] -> Intersection: Int_32.744137_-97.799409
   Total coordinates in geometry: 8
+
+Segment: 1104258509693 - S Main St
+  Start: [32.74032200, -97.79768100] -> Intersection: Int_32.740322_-97.797681
+  End:   [32.75738100, -97.79737500] -> Intersection: Int_32.757381_-97.797375
+  Total coordinates in geometry: 30
 
 Segment: 110416446926 - S Rusk St
   Start: [32.74260100, -97.79264600] -> Intersection: Int_32.742601_-97.792646
@@ -1822,6 +1857,11 @@ Segment: 1102200940744 - S Main St
   Start: [32.75872500, -97.79748700] -> Intersection: Int_32.758725_-97.797487
   End:   [32.75738100, -97.79737500] -> Intersection: Int_32.757381_-97.797375
   Total coordinates in geometry: 5
+
+Segment: 1104258509692 - S Main St
+  Start: [32.75738100, -97.79737500] -> Intersection: Int_32.757381_-97.797375
+  End:   [32.75872700, -97.79721200] -> Intersection: Int_32.758727_-97.797212
+  Total coordinates in geometry: 8
 
 Segment: 1106067268761 - S Sloan St
   Start: [32.74995400, -97.79376400] -> Intersection: Int_32.749954_-97.793764
@@ -2517,6 +2557,11 @@ Segment: 110416469964 - W Terrace Ct
   Start: [32.68113200, -97.62971100] -> Intersection: Int_32.681132_-97.629711
   End:   [32.68300400, -97.63001500] -> Intersection: Int_32.683004_-97.630015
   Total coordinates in geometry: 15
+
+Segment: 1104469554733 - W Forty Est
+  Start: [32.83739100, -97.63645500] -> Intersection: Int_32.837391_-97.636455
+  End:   [32.83445700, -97.63310900] -> Intersection: Int_32.834457_-97.633109
+  Total coordinates in geometry: 19
 
 Segment: 110416474613 - W Rio Rdg
   Start: [32.84674900, -97.56847000] -> Intersection: Int_32.846749_-97.568470
@@ -3898,6 +3943,11 @@ Segment: 110416469985 - Tin Top Rd
   End:   [32.72677700, -97.79789300] -> Intersection: Int_32.726777_-97.797893
   Total coordinates in geometry: 357
 
+Segment: 110416453909 - Floyd Rd
+  Start: [32.64945700, -97.74540000] -> Intersection: Int_32.649457_-97.745400
+  End:   [32.63876500, -97.77659100] -> Intersection: Int_32.638765_-97.776591
+  Total coordinates in geometry: 123
+
 Segment: 110416445738 - FM 1884
   Start: [32.57686200, -97.82186400] -> Intersection: Int_32.576862_-97.821864
   End:   [32.59050100, -97.80766600] -> Intersection: Int_32.590501_-97.807666
@@ -3932,11 +3982,6 @@ Segment: 110416469956 - Terrace Dr
   Start: [32.74359800, -97.78788800] -> Intersection: Int_32.743598_-97.787888
   End:   [32.74429900, -97.78376600] -> Intersection: Int_32.744299_-97.783766
   Total coordinates in geometry: 22
-
-Segment: 1104258516608 - FM 51
-  Start: [32.74032200, -97.79768100] -> Intersection: Int_32.740322_-97.797681
-  End:   [32.75738100, -97.79737500] -> Intersection: Int_32.757381_-97.797375
-  Total coordinates in geometry: 30
 
 Segment: 110416466076 - Thrush St
   Start: [32.74257800, -97.81034100] -> Intersection: Int_32.742578_-97.810341
@@ -4658,6 +4703,11 @@ Segment: 110416478160 - Gilbert Pit Rd
   End:   [32.59895000, -98.04401800] -> Intersection: Int_32.598950_-98.044018
   Total coordinates in geometry: 98
 
+Segment: 1104258510941 - Ranger Hwy
+  Start: [32.72466500, -97.88996600] -> Intersection: Int_32.724665_-97.889966
+  End:   [32.72828800, -97.87727500] -> Intersection: Int_32.728288_-97.877275
+  Total coordinates in geometry: 49
+
 Segment: 110416478851 - Canyon Creek Ct
   Start: [32.70733500, -97.88496900] -> Intersection: Int_32.707335_-97.884969
   End:   [32.71197300, -97.88294800] -> Intersection: Int_32.711973_-97.882948
@@ -5117,6 +5167,11 @@ Segment: 1103690718230 - Judd
   Start: [32.97079100, -97.85902600] -> Intersection: Int_32.970791_-97.859026
   End:   [32.97078800, -97.86199500] -> Intersection: Int_32.970788_-97.861995
   Total coordinates in geometry: 10
+
+Segment: 1103456721992 - Ross Ln
+  Start: [32.96520100, -97.86010700] -> Intersection: Int_32.965201_-97.860107
+  End:   [32.96524800, -97.86192100] -> Intersection: Int_32.965248_-97.861921
+  Total coordinates in geometry: 7
 
 Segment: 110416489560 - Unknown Road
   Start: [32.93588000, -97.86866700] -> Intersection: Int_32.935880_-97.868667
@@ -6418,6 +6473,11 @@ Segment: 110416445898 - Brim St
   End:   [32.73841100, -97.74604300] -> Intersection: Int_32.738411_-97.746043
   Total coordinates in geometry: 5
 
+Segment: 110416464004 - Becaco Rd
+  Start: [32.74438800, -97.60015000] -> Intersection: Int_32.744388_-97.600150
+  End:   [32.74638600, -97.60271000] -> Intersection: Int_32.746386_-97.602710
+  Total coordinates in geometry: 14
+
 Segment: 110416477277 - Raven Bend
   Start: [32.75289800, -97.69915900] -> Intersection: Int_32.752898_-97.699159
   End:   [32.75170600, -97.69923300] -> Intersection: Int_32.751706_-97.699233
@@ -7213,6 +7273,11 @@ Segment: 110416477189 - Murls Lake Cir
   End:   [32.77623900, -97.75173800] -> Intersection: Int_32.776239_-97.751738
   Total coordinates in geometry: 15
 
+Segment: 1103690718697 - Smokey Branch Ln
+  Start: [32.78495100, -97.76448000] -> Intersection: Int_32.784951_-97.764480
+  End:   [32.78030400, -97.76307300] -> Intersection: Int_32.780304_-97.763073
+  Total coordinates in geometry: 15
+
 Segment: 110416459985 - Peden Rd
   Start: [32.95299100, -97.54470100] -> Intersection: Int_32.952991_-97.544701
   End:   [32.95204000, -97.55677300] -> Intersection: Int_32.952040_-97.556773
@@ -7282,6 +7347,11 @@ Segment: 110416480105 - Roaring Springs Ct
   Start: [32.84731000, -97.60698700] -> Intersection: Int_32.847310_-97.606987
   End:   [32.84924900, -97.60643200] -> Intersection: Int_32.849249_-97.606432
   Total coordinates in geometry: 17
+
+Segment: 1103444461457 - Your Road Ct
+  Start: [32.85810100, -97.61053600] -> Intersection: Int_32.858101_-97.610536
+  End:   [32.85488300, -97.61039400] -> Intersection: Int_32.854883_-97.610394
+  Total coordinates in geometry: 15
 
 Segment: 1104467497015 - Bluebird Ln
   Start: [32.96421800, -97.57625900] -> Intersection: Int_32.964218_-97.576259
@@ -7648,6 +7718,11 @@ Segment: 1104467721219 - Clemmer Ct
   End:   [32.98598400, -97.60214700] -> Intersection: Int_32.985984_-97.602147
   Total coordinates in geometry: 25
 
+Segment: 1103580098722 - Lozier Ln
+  Start: [32.98720200, -97.59180200] -> Intersection: Int_32.987202_-97.591802
+  End:   [32.98716900, -97.58796600] -> Intersection: Int_32.987169_-97.587966
+  Total coordinates in geometry: 13
+
 Segment: 1103371024870 - Casey Ln
   Start: [32.92472000, -97.69394100] -> Intersection: Int_32.924720_-97.693941
   End:   [32.92474200, -97.69536800] -> Intersection: Int_32.924742_-97.695368
@@ -7828,11 +7903,6 @@ Segment: 110416492421 - Unknown Road
   End:   [32.65812200, -97.79506200] -> Intersection: Int_32.658122_-97.795062
   Total coordinates in geometry: 4
 
-Segment: 110416470627 - Granbury Hwy
-  Start: [32.55696500, -97.75924200] -> Intersection: Int_32.556965_-97.759242
-  End:   [32.70243000, -97.77164600] -> Intersection: Int_32.702430_-97.771646
-  Total coordinates in geometry: 316
-
 Segment: 110416478329 - New Tin Top Rd
   Start: [32.57493900, -97.82190600] -> Intersection: Int_32.574939_-97.821906
   End:   [32.59763700, -97.81308200] -> Intersection: Int_32.597637_-97.813082
@@ -7842,11 +7912,6 @@ Segment: 110416464018 - Bethel Rd
   Start: [32.59763700, -97.81308200] -> Intersection: Int_32.597637_-97.813082
   End:   [32.73896900, -97.79735600] -> Intersection: Int_32.738969_-97.797356
   Total coordinates in geometry: 424
-
-Segment: 1104699581162 - FM 51
-  Start: [32.73651100, -97.79617300] -> Intersection: Int_32.736511_-97.796173
-  End:   [32.74032200, -97.79768100] -> Intersection: Int_32.740322_-97.797681
-  Total coordinates in geometry: 17
 
 Segment: 11033373595282 - Yukon Ct
   Start: [32.57296400, -97.78649000] -> Intersection: Int_32.572964_-97.786490
@@ -7907,11 +7972,6 @@ Segment: 1105576419784 - Unknown Road
   Start: [32.73756200, -97.76370100] -> Intersection: Int_32.737562_-97.763701
   End:   [32.73860600, -97.75931700] -> Intersection: Int_32.738606_-97.759317
   Total coordinates in geometry: 4
-
-Segment: 1104258528984 - FM 51
-  Start: [32.71639000, -97.78146700] -> Intersection: Int_32.716390_-97.781467
-  End:   [32.73651100, -97.79617300] -> Intersection: Int_32.736511_-97.796173
-  Total coordinates in geometry: 62
 
 Segment: 1106087425992 - Cleburne Hwy
   Start: [32.55601800, -97.66424600] -> Intersection: Int_32.556018_-97.664246
@@ -8307,6 +8367,11 @@ Segment: 1106087435808 - Palo Pinto St
   Start: [32.75835000, -97.81453600] -> Intersection: Int_32.758350_-97.814536
   End:   [32.75872700, -97.79721200] -> Intersection: Int_32.758727_-97.797212
   Total coordinates in geometry: 35
+
+Segment: 1104258528556 - State Spur 312
+  Start: [32.75757100, -97.81684700] -> Intersection: Int_32.757571_-97.816847
+  End:   [32.75871200, -97.81403900] -> Intersection: Int_32.758712_-97.814039
+  Total coordinates in geometry: 20
 
 Segment: 110416492135 - Unknown Road
   Start: [32.76120900, -97.79114700] -> Intersection: Int_32.761209_-97.791147
@@ -9813,6 +9878,11 @@ Segment: 11033373595629 - Buena Vista Ln
   End:   [32.69300300, -97.67831500] -> Intersection: Int_32.693003_-97.678315
   Total coordinates in geometry: 14
 
+Segment: 1103677582933 - Oak Creek Trl
+  Start: [32.67879000, -97.67532300] -> Intersection: Int_32.678790_-97.675323
+  End:   [32.67888200, -97.67162800] -> Intersection: Int_32.678882_-97.671628
+  Total coordinates in geometry: 17
+
 Segment: 1102988770841 - Unknown Road
   Start: [32.64638800, -97.67641900] -> Intersection: Int_32.646388_-97.676419
   End:   [32.65421900, -97.66540200] -> Intersection: Int_32.654219_-97.665402
@@ -10468,6 +10538,11 @@ Segment: 110416479804 - Chisholm Hills Rd
   End:   [32.78432600, -97.62720900] -> Intersection: Int_32.784326_-97.627209
   Total coordinates in geometry: 18
 
+Segment: 1103680691132 - Walkers Pl
+  Start: [32.73683100, -97.68710800] -> Intersection: Int_32.736831_-97.687108
+  End:   [32.73927500, -97.68488800] -> Intersection: Int_32.739275_-97.684888
+  Total coordinates in geometry: 26
+
 Segment: 110416489495 - Unknown Road
   Start: [32.75793900, -97.65898300] -> Intersection: Int_32.757939_-97.658983
   End:   [32.75834700, -97.65871100] -> Intersection: Int_32.758347_-97.658711
@@ -10913,20 +10988,10 @@ Segment: 1102200930345 - Unknown Road
   End:   [32.83462500, -97.60710200] -> Intersection: Int_32.834625_-97.607102
   Total coordinates in geometry: 3
 
-Segment: 1104469115279 - Ridgeview Dr
-  Start: [32.83739100, -97.63645500] -> Intersection: Int_32.837391_-97.636455
-  End:   [32.83445700, -97.63310900] -> Intersection: Int_32.834457_-97.633109
-  Total coordinates in geometry: 19
-
 Segment: 1103701328298 - Smokey Branch
   Start: [32.78342200, -97.76484600] -> Intersection: Int_32.783422_-97.764846
   End:   [32.78495100, -97.76448000] -> Intersection: Int_32.784951_-97.764480
   Total coordinates in geometry: 23
-
-Segment: 1103690719688 - Smokey Terrace Ln
-  Start: [32.78495100, -97.76448000] -> Intersection: Int_32.784951_-97.764480
-  End:   [32.78030400, -97.76307300] -> Intersection: Int_32.780304_-97.763073
-  Total coordinates in geometry: 15
 
 Segment: 1102200932728 - Unknown Road
   Start: [32.95208800, -97.59543500] -> Intersection: Int_32.952088_-97.595435
@@ -11377,6 +11442,11 @@ Segment: 1105598223387 - Classic Country Ct
   Start: [32.92004000, -97.63223400] -> Intersection: Int_32.920040_-97.632234
   End:   [32.91580500, -97.62854900] -> Intersection: Int_32.915805_-97.628549
   Total coordinates in geometry: 31
+
+Segment: 1103678118665 - Golden Oak Ct
+  Start: [32.80700800, -97.57717800] -> Intersection: Int_32.807008_-97.577178
+  End:   [32.80781200, -97.57648100] -> Intersection: Int_32.807812_-97.576481
+  Total coordinates in geometry: 10
 
 Segment: 1102200931786 - Crested Oak Ct
   Start: [32.80354100, -97.57862200] -> Intersection: Int_32.803541_-97.578622
@@ -11863,11 +11933,6 @@ Segment: 1102970398869 - Front St
   End:   [32.76410500, -97.79538100] -> Intersection: Int_32.764105_-97.795381
   Total coordinates in geometry: 3
 
-Segment: 1104258510939 - Ranger Hwy
-  Start: [32.75757100, -97.81684700] -> Intersection: Int_32.757571_-97.816847
-  End:   [32.75871200, -97.81403900] -> Intersection: Int_32.758712_-97.814039
-  Total coordinates in geometry: 20
-
 Segment: 110416470541 - Eastview Dr
   Start: [32.76165800, -97.82344100] -> Intersection: Int_32.761658_-97.823441
   End:   [32.76307600, -97.81938300] -> Intersection: Int_32.763076_-97.819383
@@ -11983,10 +12048,10 @@ Segment: 1102466254724 - Unknown Road
   End:   [32.75881100, -97.80725500] -> Intersection: Int_32.758811_-97.807255
   Total coordinates in geometry: 4
 
-Segment: 1104258462233 - FM 51
+Segment: 1104258512876 - State Hwy 171
   Start: [32.75738100, -97.79737500] -> Intersection: Int_32.757381_-97.797375
-  End:   [32.75872700, -97.79721200] -> Intersection: Int_32.758727_-97.797212
-  Total coordinates in geometry: 8
+  End:   [32.75872500, -97.79748700] -> Intersection: Int_32.758725_-97.797487
+  Total coordinates in geometry: 5
 
 Segment: 110416476997 - Industrial St
   Start: [32.75800000, -97.77161400] -> Intersection: Int_32.758000_-97.771614
@@ -12007,6 +12072,11 @@ Segment: 110416466062 - Teresa Ct
   Start: [32.56330800, -97.77625300] -> Intersection: Int_32.563308_-97.776253
   End:   [32.56460400, -97.77708000] -> Intersection: Int_32.564604_-97.777080
   Total coordinates in geometry: 6
+
+Segment: 1103606070201 - Maria Dr
+  Start: [32.56419300, -97.77335500] -> Intersection: Int_32.564193_-97.773355
+  End:   [32.56549200, -97.77423500] -> Intersection: Int_32.565492_-97.774235
+  Total coordinates in geometry: 7
 
 Segment: 110416479362 - Baker Cut Off Rd
   Start: [32.56490600, -97.75775800] -> Intersection: Int_32.564906_-97.757758
@@ -12487,6 +12557,11 @@ Segment: 110416491918 - Unknown Road
   Start: [32.63554400, -97.80528700] -> Intersection: Int_32.635544_-97.805287
   End:   [32.63802400, -97.79753000] -> Intersection: Int_32.638024_-97.797530
   Total coordinates in geometry: 40
+
+Segment: 1104347014333 - Mineral Wells Hwy
+  Start: [32.81068000, -98.06033800] -> Intersection: Int_32.810680_-98.060338
+  End:   [32.81066400, -98.05749200] -> Intersection: Int_32.810664_-98.057492
+  Total coordinates in geometry: 7
 
 Segment: 110416477816 - Wood River Rd
   Start: [32.76306400, -98.01415200] -> Intersection: Int_32.763064_-98.014152
@@ -13487,6 +13562,11 @@ Segment: 110416489789 - Unknown Road
   Start: [32.73326900, -97.63527300] -> Intersection: Int_32.733269_-97.635273
   End:   [32.73349900, -97.63641700] -> Intersection: Int_32.733499_-97.636417
   Total coordinates in geometry: 6
+
+Segment: 1104469115740 - Wallis Rd
+  Start: [32.70345400, -97.66485100] -> Intersection: Int_32.703454_-97.664851
+  End:   [32.70926500, -97.66460500] -> Intersection: Int_32.709265_-97.664605
+  Total coordinates in geometry: 23
 
 Segment: 1106081863271 - Meadow Park Dr
   Start: [32.67014300, -97.64707900] -> Intersection: Int_32.670143_-97.647079
@@ -14858,11 +14938,6 @@ Segment: 110416446349 - King St
   End:   [32.77612100, -97.78801500] -> Intersection: Int_32.776121_-97.788015
   Total coordinates in geometry: 24
 
-Segment: 1104699581161 - FM 51
-  Start: [32.73651100, -97.79617300] -> Intersection: Int_32.736511_-97.796173
-  End:   [32.74032200, -97.79768100] -> Intersection: Int_32.740322_-97.797681
-  Total coordinates in geometry: 16
-
 Segment: 110416466824 - Hickory Ln
   Start: [32.74680600, -97.76905800] -> Intersection: Int_32.746806_-97.769058
   End:   [32.75437900, -97.76930700] -> Intersection: Int_32.754379_-97.769307
@@ -15603,6 +15678,11 @@ Segment: 110416453392 - Ellen Ln
   End:   [32.72789000, -97.96940200] -> Intersection: Int_32.727890_-97.969402
   Total coordinates in geometry: 10
 
+Segment: 1104258466870 - Ranger Hwy
+  Start: [32.72649900, -97.88492600] -> Intersection: Int_32.726499_-97.884926
+  End:   [32.72828800, -97.87727500] -> Intersection: Int_32.728288_-97.877275
+  Total coordinates in geometry: 16
+
 Segment: 110416478848 - Canyon Creek Cir
   Start: [32.71102100, -97.88681300] -> Intersection: Int_32.711021_-97.886813
   End:   [32.70863400, -97.88627500] -> Intersection: Int_32.708634_-97.886275
@@ -15937,11 +16017,6 @@ Segment: 110416489430 - Unknown Road
   Start: [32.58319300, -97.88977000] -> Intersection: Int_32.583193_-97.889770
   End:   [32.58157500, -97.88976100] -> Intersection: Int_32.581575_-97.889761
   Total coordinates in geometry: 5
-
-Segment: 1104258491321 - US Hwy 180
-  Start: [32.81068000, -98.06033800] -> Intersection: Int_32.810680_-98.060338
-  End:   [32.81066400, -98.05749200] -> Intersection: Int_32.810664_-98.057492
-  Total coordinates in geometry: 7
 
 Segment: 1105598410669 - Ridgeline Dr
   Start: [32.73194700, -97.78760000] -> Intersection: Int_32.731947_-97.787600
@@ -17538,11 +17613,6 @@ Segment: 110416463870 - Arroyo Ct
   End:   [32.75759000, -97.67685000] -> Intersection: Int_32.757590_-97.676850
   Total coordinates in geometry: 4
 
-Segment: 1103680691136 - Forest Bend Ln
-  Start: [32.73683100, -97.68710800] -> Intersection: Int_32.736831_-97.687108
-  End:   [32.73927500, -97.68488800] -> Intersection: Int_32.739275_-97.684888
-  Total coordinates in geometry: 26
-
 Segment: 110416480030 - Stone Mountain Ct
   Start: [32.57118700, -97.61524800] -> Intersection: Int_32.571187_-97.615248
   End:   [32.57114200, -97.60751100] -> Intersection: Int_32.571142_-97.607511
@@ -17733,11 +17803,6 @@ Segment: 1103226196547 - Unknown Road
   End:   [32.89968200, -97.72680100] -> Intersection: Int_32.899682_-97.726801
   Total coordinates in geometry: 30
 
-Segment: 110416445726 - FM 1542
-  Start: [32.94539500, -97.58638500] -> Intersection: Int_32.945395_-97.586385
-  End:   [32.91819400, -97.59547400] -> Intersection: Int_32.918194_-97.595474
-  Total coordinates in geometry: 99
-
 Segment: 110416465661 - Murray Rd
   Start: [32.87594200, -97.74142600] -> Intersection: Int_32.875942_-97.741426
   End:   [32.90107400, -97.73933100] -> Intersection: Int_32.901074_-97.739331
@@ -17802,6 +17867,11 @@ Segment: 110416450961 - Comer Ln
   Start: [32.87653700, -97.63399600] -> Intersection: Int_32.876537_-97.633996
   End:   [32.89163800, -97.63295400] -> Intersection: Int_32.891638_-97.632954
   Total coordinates in geometry: 33
+
+Segment: 1103529584770 - Summertree Ct
+  Start: [32.97258600, -97.67932300] -> Intersection: Int_32.972586_-97.679323
+  End:   [32.97280600, -97.67931000] -> Intersection: Int_32.972806_-97.679310
+  Total coordinates in geometry: 2
 
 Segment: 110416478409 - Railey Cv
   Start: [32.97173600, -97.68023400] -> Intersection: Int_32.971736_-97.680234
@@ -19153,15 +19223,15 @@ Segment: 1104699570698 - Fort Worth Hwy
   End:   [32.75882800, -97.79691700] -> Intersection: Int_32.758828_-97.796917
   Total coordinates in geometry: 5
 
+Segment: 1104258466383 - State Spur 312
+  Start: [32.75835500, -97.81439700] -> Intersection: Int_32.758355_-97.814397
+  End:   [32.75757100, -97.81684700] -> Intersection: Int_32.757571_-97.816847
+  Total coordinates in geometry: 7
+
 Segment: 110416465841 - Rickey Ln
   Start: [32.75626900, -97.77300100] -> Intersection: Int_32.756269_-97.773001
   End:   [32.75627200, -97.76474100] -> Intersection: Int_32.756272_-97.764741
   Total coordinates in geometry: 18
-
-Segment: 1103606070230 - Virginia Dr
-  Start: [32.56419300, -97.77335500] -> Intersection: Int_32.564193_-97.773355
-  End:   [32.56549200, -97.77423500] -> Intersection: Int_32.565492_-97.774235
-  Total coordinates in geometry: 7
 
 Segment: 1102200933810 - Unknown Road
   Start: [32.58683400, -97.68658600] -> Intersection: Int_32.586834_-97.686586
@@ -19287,6 +19357,11 @@ Segment: 110416492256 - Unknown Road
   Start: [32.59713300, -97.97593400] -> Intersection: Int_32.597133_-97.975934
   End:   [32.60262500, -97.96605600] -> Intersection: Int_32.602625_-97.966056
   Total coordinates in geometry: 121
+
+Segment: 1103690717688 - Mooty Hill
+  Start: [32.79348400, -98.00734200] -> Intersection: Int_32.793484_-98.007342
+  End:   [32.79569100, -98.00745000] -> Intersection: Int_32.795691_-98.007450
+  Total coordinates in geometry: 9
 
 Segment: 1102200931101 - Unknown Road
   Start: [32.80132700, -98.01460600] -> Intersection: Int_32.801327_-98.014606
@@ -22063,11 +22138,6 @@ Segment: 1102200936156 - Unknown Road
   End:   [32.99046800, -97.61012800] -> Intersection: Int_32.990468_-97.610128
   Total coordinates in geometry: 10
 
-Segment: 1103580098785 - Dove Meadow Ln
-  Start: [32.98720200, -97.59180200] -> Intersection: Int_32.987202_-97.591802
-  End:   [32.98716900, -97.58796600] -> Intersection: Int_32.987169_-97.587966
-  Total coordinates in geometry: 13
-
 Segment: 110416469236 - Summers Cir
   Start: [32.97855700, -97.56666100] -> Intersection: Int_32.978557_-97.566661
   End:   [32.97650300, -97.56679400] -> Intersection: Int_32.976503_-97.566794
@@ -22863,11 +22933,6 @@ Segment: 110416455843 - Jakes Ln
   End:   [32.71885300, -97.97705400] -> Intersection: Int_32.718853_-97.977054
   Total coordinates in geometry: 41
 
-Segment: 1104258528558 - State Spur 312
-  Start: [32.72466500, -97.88996600] -> Intersection: Int_32.724665_-97.889966
-  End:   [32.72828800, -97.87727500] -> Intersection: Int_32.728288_-97.877275
-  Total coordinates in geometry: 49
-
 Segment: 110416490385 - Unknown Road
   Start: [32.70424400, -97.88775700] -> Intersection: Int_32.704244_-97.887757
   End:   [32.71162900, -97.89529100] -> Intersection: Int_32.711629_-97.895291
@@ -23638,6 +23703,11 @@ Segment: 110416466791 - Granada Dr
   End:   [32.84525100, -97.82106800] -> Intersection: Int_32.845251_-97.821068
   Total coordinates in geometry: 3
 
+Segment: 110416472113 - Highpoint Rd
+  Start: [32.80070400, -98.03636900] -> Intersection: Int_32.800704_-98.036369
+  End:   [32.81020800, -98.03572800] -> Intersection: Int_32.810208_-98.035728
+  Total coordinates in geometry: 63
+
 Segment: 110416492223 - Unknown Road
   Start: [32.85973600, -98.04021100] -> Intersection: Int_32.859736_-98.040211
   End:   [32.86224500, -98.04088200] -> Intersection: Int_32.862245_-98.040882
@@ -24132,11 +24202,6 @@ Segment: 110416464411 - Duncan Rd
   Start: [32.70897900, -97.68507400] -> Intersection: Int_32.708979_-97.685074
   End:   [32.71881400, -97.68496800] -> Intersection: Int_32.718814_-97.684968
   Total coordinates in geometry: 26
-
-Segment: 1104469069452 - The Lakes Dr
-  Start: [32.70345400, -97.66485100] -> Intersection: Int_32.703454_-97.664851
-  End:   [32.70926500, -97.66460500] -> Intersection: Int_32.709265_-97.664605
-  Total coordinates in geometry: 23
 
 Segment: 1103690716887 - Portales Dr
   Start: [32.67953400, -97.64041800] -> Intersection: Int_32.679534_-97.640418
@@ -24898,11 +24963,6 @@ Segment: 110416464497 - Finney Dr
   End:   [32.87744600, -97.62248600] -> Intersection: Int_32.877446_-97.622486
   Total coordinates in geometry: 51
 
-Segment: 1103529584696 - Summer Tree Ct
-  Start: [32.97258600, -97.67932300] -> Intersection: Int_32.972586_-97.679323
-  End:   [32.97280600, -97.67931000] -> Intersection: Int_32.972806_-97.679310
-  Total coordinates in geometry: 2
-
 Segment: 110416471880 - Eastridge Dr
   Start: [32.96556000, -97.67094100] -> Intersection: Int_32.965560_-97.670941
   End:   [32.96885900, -97.67095800] -> Intersection: Int_32.968859_-97.670958
@@ -25202,6 +25262,11 @@ Segment: 1102200927062 - Boling Ranch Rd
   Start: [32.83810800, -97.56518200] -> Intersection: Int_32.838108_-97.565182
   End:   [32.83786100, -97.56502700] -> Intersection: Int_32.837861_-97.565027
   Total coordinates in geometry: 3
+
+Segment: 110416474620 - River Run Dr
+  Start: [32.84666200, -97.56308500] -> Intersection: Int_32.846662_-97.563085
+  End:   [32.85143700, -97.56403100] -> Intersection: Int_32.851437_-97.564031
+  Total coordinates in geometry: 16
 
 Segment: 110416479390 - Branding Iron Ct
   Start: [32.84180100, -97.57141900] -> Intersection: Int_32.841801_-97.571419
@@ -25632,11 +25697,6 @@ Segment: 110416466991 - Matador Ct
   Start: [32.81838200, -97.55439100] -> Intersection: Int_32.818382_-97.554391
   End:   [32.81956800, -97.55478300] -> Intersection: Int_32.819568_-97.554783
   Total coordinates in geometry: 13
-
-Segment: 1103678118666 - Covered Bridge Dr
-  Start: [32.80700800, -97.57717800] -> Intersection: Int_32.807008_-97.577178
-  End:   [32.80781200, -97.57648100] -> Intersection: Int_32.807812_-97.576481
-  Total coordinates in geometry: 10
 
 Segment: 1102200922113 - Arroyo Ct
   Start: [32.79646100, -97.56646100] -> Intersection: Int_32.796461_-97.566461
@@ -26247,11 +26307,6 @@ Segment: 1102200932010 - Unknown Road
   Start: [32.75930700, -97.81943000] -> Intersection: Int_32.759307_-97.819430
   End:   [32.75941000, -97.81940400] -> Intersection: Int_32.759410_-97.819404
   Total coordinates in geometry: 2
-
-Segment: 1102200957379 - Ranger Hwy
-  Start: [32.75835500, -97.81439700] -> Intersection: Int_32.758355_-97.814397
-  End:   [32.75757100, -97.81684700] -> Intersection: Int_32.757571_-97.816847
-  Total coordinates in geometry: 7
 
 Segment: 110416446705 - Pine St
   Start: [32.75839800, -97.77522500] -> Intersection: Int_32.758398_-97.775225
@@ -27458,11 +27513,6 @@ Segment: 110416470891 - Live Oak Dr
   End:   [32.68433200, -97.64270000] -> Intersection: Int_32.684332_-97.642700
   Total coordinates in geometry: 7
 
-Segment: 110416445026 - FM 5
-  Start: [32.67609300, -97.61047500] -> Intersection: Int_32.676093_-97.610475
-  End:   [32.68141100, -97.68096300] -> Intersection: Int_32.681411_-97.680963
-  Total coordinates in geometry: 249
-
 Segment: 1106092755864 - Ridge Hill Dr
   Start: [32.67350600, -97.70004700] -> Intersection: Int_32.673506_-97.700047
   End:   [32.67874400, -97.69897400] -> Intersection: Int_32.678744_-97.698974
@@ -27627,11 +27677,6 @@ Segment: 110416491498 - Unknown Road
   Start: [32.69591900, -97.72707100] -> Intersection: Int_32.695919_-97.727071
   End:   [32.69608300, -97.72832900] -> Intersection: Int_32.696083_-97.728329
   Total coordinates in geometry: 10
-
-Segment: 1103677582936 - Canyon Lake Cir
-  Start: [32.67879000, -97.67532300] -> Intersection: Int_32.678790_-97.675323
-  End:   [32.67888200, -97.67162800] -> Intersection: Int_32.678882_-97.671628
-  Total coordinates in geometry: 17
 
 Segment: 110416479180 - Pebble Ridge Ln
   Start: [32.57315400, -97.61071800] -> Intersection: Int_32.573154_-97.610718
@@ -27887,11 +27932,6 @@ Segment: 1103661579771 - Gray Wolf Trl
   Start: [32.77250400, -97.70911100] -> Intersection: Int_32.772504_-97.709111
   End:   [32.76868700, -97.70859800] -> Intersection: Int_32.768687_-97.708598
   Total coordinates in geometry: 63
-
-Segment: 110416477867 - Beggs Ranch Rd
-  Start: [32.74438800, -97.60015000] -> Intersection: Int_32.744388_-97.600150
-  End:   [32.74638600, -97.60271000] -> Intersection: Int_32.746386_-97.602710
-  Total coordinates in geometry: 14
 
 Segment: 110416469439 - Suzanne Trl
   Start: [32.76347600, -97.71886200] -> Intersection: Int_32.763476_-97.718862
@@ -28598,11 +28638,6 @@ Segment: 110416463077 - Robyn Rd
   End:   [32.85600700, -97.60881600] -> Intersection: Int_32.856007_-97.608816
   Total coordinates in geometry: 49
 
-Segment: 1103444461244 - Spring Valley Cir
-  Start: [32.85810100, -97.61053600] -> Intersection: Int_32.858101_-97.610536
-  End:   [32.85488300, -97.61039400] -> Intersection: Int_32.854883_-97.610394
-  Total coordinates in geometry: 15
-
 Segment: 110416491688 - Unknown Road
   Start: [32.85335300, -97.60653700] -> Intersection: Int_32.853353_-97.606537
   End:   [32.85409700, -97.60718600] -> Intersection: Int_32.854097_-97.607186
@@ -28632,11 +28667,6 @@ Segment: 1102200922942 - Unknown Road
   Start: [32.82778000, -97.60418800] -> Intersection: Int_32.827780_-97.604188
   End:   [32.82695400, -97.60497300] -> Intersection: Int_32.826954_-97.604973
   Total coordinates in geometry: 15
-
-Segment: 110416477156 - Mill Creek Ln
-  Start: [32.84666200, -97.56308500] -> Intersection: Int_32.846662_-97.563085
-  End:   [32.85143700, -97.56403100] -> Intersection: Int_32.851437_-97.564031
-  Total coordinates in geometry: 16
 
 Segment: 110416477006 - Iron Horse Ct
   Start: [32.84008500, -97.57136600] -> Intersection: Int_32.840085_-97.571366
@@ -29042,11 +29072,6 @@ Segment: 110416489592 - Unknown Road
   Start: [32.79307600, -97.75460300] -> Intersection: Int_32.793076_-97.754603
   End:   [32.79228400, -97.75388200] -> Intersection: Int_32.792284_-97.753882
   Total coordinates in geometry: 6
-
-Segment: 110416447225 - Co Rd 2047A
-  Start: [32.64945700, -97.74540000] -> Intersection: Int_32.649457_-97.745400
-  End:   [32.63876500, -97.77659100] -> Intersection: Int_32.638765_-97.776591
-  Total coordinates in geometry: 123
 
 Segment: 110416491842 - Unknown Road
   Start: [32.58091800, -97.82754600] -> Intersection: Int_32.580918_-97.827546
@@ -29688,11 +29713,6 @@ Segment: 1102200930747 - Unknown Road
   End:   [32.76077600, -97.79544400] -> Intersection: Int_32.760776_-97.795444
   Total coordinates in geometry: 4
 
-Segment: 1104258516607 - FM 51
-  Start: [32.75738100, -97.79737500] -> Intersection: Int_32.757381_-97.797375
-  End:   [32.75872500, -97.79748700] -> Intersection: Int_32.758725_-97.797487
-  Total coordinates in geometry: 5
-
 Segment: 110416447155 - Ward St
   Start: [32.75815900, -97.77306000] -> Intersection: Int_32.758159_-97.773060
   End:   [32.76107500, -97.77299700] -> Intersection: Int_32.761075_-97.772997
@@ -29843,11 +29863,6 @@ Segment: 110416472005 - Golf View Dr
   End:   [32.73971400, -97.80917300] -> Intersection: Int_32.739714_-97.809173
   Total coordinates in geometry: 4
 
-Segment: 1103508299877 - Mooty Hill Rd
-  Start: [32.79348400, -98.00734200] -> Intersection: Int_32.793484_-98.007342
-  End:   [32.79569100, -98.00745000] -> Intersection: Int_32.795691_-98.007450
-  Total coordinates in geometry: 9
-
 Segment: 1103690717619 - Unknown Road
   Start: [32.79558400, -98.00561400] -> Intersection: Int_32.795584_-98.005614
   End:   [32.79569100, -98.00745000] -> Intersection: Int_32.795691_-98.007450
@@ -29947,11 +29962,6 @@ Segment: 110416490158 - Unknown Road
   Start: [32.56202700, -98.04930100] -> Intersection: Int_32.562027_-98.049301
   End:   [32.56561600, -98.04684600] -> Intersection: Int_32.565616_-98.046846
   Total coordinates in geometry: 34
-
-Segment: 1104258466872 - State Spur 312
-  Start: [32.72649900, -97.88492600] -> Intersection: Int_32.726499_-97.884926
-  End:   [32.72828800, -97.87727500] -> Intersection: Int_32.728288_-97.877275
-  Total coordinates in geometry: 16
 
 Segment: 110416478873 - Canyon Creek Ln
   Start: [32.71361900, -97.88553900] -> Intersection: Int_32.713619_-97.885539
@@ -30321,11 +30331,6 @@ Segment: 110416465950 - Sparks
 Segment: 1103662203676 - Seaberry
   Start: [32.97499800, -97.86955300] -> Intersection: Int_32.974998_-97.869553
   End:   [32.97492200, -97.87080600] -> Intersection: Int_32.974922_-97.870806
-  Total coordinates in geometry: 7
-
-Segment: 1103456722057 - Ross Ave
-  Start: [32.96520100, -97.86010700] -> Intersection: Int_32.965201_-97.860107
-  End:   [32.96524800, -97.86192100] -> Intersection: Int_32.965248_-97.861921
   Total coordinates in geometry: 7
 
 Segment: 110416465882 - Shadle Rd
@@ -30707,11 +30712,6 @@ Segment: 110416466053 - Taylor St
   Start: [32.84301900, -98.05096600] -> Intersection: Int_32.843019_-98.050966
   End:   [32.84102900, -98.05953500] -> Intersection: Int_32.841029_-98.059535
   Total coordinates in geometry: 14
-
-Segment: 110416476581 - High Point Rd
-  Start: [32.80070400, -98.03636900] -> Intersection: Int_32.800704_-98.036369
-  End:   [32.81020800, -98.03572800] -> Intersection: Int_32.810208_-98.035728
-  Total coordinates in geometry: 63
 
 Segment: 110416490717 - Unknown Road
   Start: [32.81425500, -98.05496100] -> Intersection: Int_32.814255_-98.054961

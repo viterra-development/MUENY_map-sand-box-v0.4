@@ -1,7 +1,7 @@
 {
   "interstateAnomalies": 0,
   "rampContamination": 0,
-  "aadtOutliers": 87,
-  "totalWarnings": 48,
-  "dataQualityScore": 13
+  "aadtOutliers": 68,
+  "totalWarnings": 24,
+  "dataQualityScore": 32
 }
