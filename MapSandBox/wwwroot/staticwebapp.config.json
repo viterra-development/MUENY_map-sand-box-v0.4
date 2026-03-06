@@ -1,0 +1,24 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/images/*",
+      "/css/*",
+      "/js/*",
+      "/lib/*",
+      "/cris-data/*",
+      "/sample-data/*",
+      "/soil-data/*",
+      "/tiles/*",
+      "/_framework/*",
+      "*.json",
+      "*.geojson",
+      "*.csv",
+      "*.png",
+      "*.css",
+      "*.js",
+      "*.wasm",
+      "*.dll"
+    ]
+  }
+}
