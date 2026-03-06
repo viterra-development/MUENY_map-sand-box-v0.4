@@ -29,10 +29,25 @@ html, body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.header-brand {
+/* Header left group: toggle + logo */
+.header-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+}
+
+.sidebar-toggle {
+    display: none; /* hidden on desktop by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 0;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .header-logo {
@@ -347,4 +362,95 @@ a, .btn-link {
 
 code {
     color: #c02d76;
+}
+
+/* ---- Sidebar overlay backdrop (mobile) ---- */
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.sidebar-backdrop.visible {
+    display: block;
+}
+
+/* ============================================
+   MOBILE / TABLET RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    /* Show hamburger toggle */
+    .sidebar-toggle {
+        display: block;
+    }
+
+    /* Header adjustments */
+    #terravex-header {
+        padding: 0 12px;
+        height: 44px;
+    }
+
+    .header-logo {
+        font-size: 20px;
+        letter-spacing: 0.25em;
+    }
+
+    .header-subtitle {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+    }
+
+    /* App container */
+    #app {
+        height: calc(100vh - 44px);
+    }
+
+    /* JS fallback sidebar — off-screen by default on mobile */
+    .layer-sidebar {
+        position: fixed;
+        top: 44px;
+        left: -280px;
+        width: 270px;
+        min-width: 270px;
+        height: calc(100vh - 44px);
+        z-index: 1000;
+        transition: left 0.25s ease;
+        box-shadow: none;
+    }
+
+    .layer-sidebar.open {
+        left: 0;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Map fills full width on mobile */
+    #map-wrapper {
+        width: 100%;
+    }
+
+    /* Blazor path sidebar */
+    .cris-container .layer-sidebar {
+        position: fixed;
+        top: 44px;
+        left: -280px;
+        width: 270px;
+        min-width: 270px;
+        height: calc(100vh - 44px);
+        z-index: 1000;
+        transition: left 0.25s ease;
+    }
+
+    .cris-container .layer-sidebar.open {
+        left: 0;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .zoom-indicator {
+        bottom: 8px;
+        left: 8px;
+        font-size: 12px;
+        padding: 5px 8px;
+    }
 }

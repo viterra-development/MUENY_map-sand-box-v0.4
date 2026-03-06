@@ -24,7 +24,10 @@
   <body>
     <!-- TERRAVEX Header Bar -->
     <header id="terravex-header">
-      <div class="header-brand">
+      <div class="header-left">
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle layers panel">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="white"/><rect y="9" width="20" height="2" rx="1" fill="white"/><rect y="15" width="20" height="2" rx="1" fill="white"/></svg>
+        </button>
         <span class="header-logo">TERRAVEX</span>
       </div>
       <div class="header-subtitle">Municipal Intelligence Platform</div>
@@ -37,6 +40,9 @@
         <div class="loader-subtext">Initializing map layers...</div>
       </div>
     </div>
+
+    <!-- Sidebar backdrop for mobile overlay -->
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
 
     <!-- Hidden — JS fallback suppresses this before it ever shows -->
     <div id="blazor-error-ui" style="display:none !important;"></div>
@@ -245,6 +251,30 @@
       }
 
       tryBlazorThenFallback();
+
+      // Sidebar toggle for mobile (works for both JS fallback and Blazor paths)
+      function getActiveSidebar() {
+        return document.getElementById('layer-sidebar') ||
+               document.querySelector('.layer-sidebar');
+      }
+
+      document.getElementById('sidebar-toggle').addEventListener('click', () => {
+        const sidebar = getActiveSidebar();
+        const backdrop = document.getElementById('sidebar-backdrop');
+        if (sidebar) {
+          const isOpen = sidebar.classList.toggle('open');
+          backdrop.classList.toggle('visible', isOpen);
+        }
+      });
+
+      document.getElementById('sidebar-backdrop').addEventListener('click', () => {
+        const sidebar = getActiveSidebar();
+        const backdrop = document.getElementById('sidebar-backdrop');
+        if (sidebar) {
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('visible');
+        }
+      });
     </script>
   </body>
 </html>
