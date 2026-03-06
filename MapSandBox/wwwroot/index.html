@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MapSandBox</title>
+    <title>TERRAVEX</title>
     <base href="/" />
     <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="css/app.css" rel="stylesheet" />
     <link href="MapSandBox.styles.css" rel="stylesheet" />
     <link href="css/parcelTripUI.css" rel="stylesheet" />
     <!-- MapLibre GL JS -->
@@ -15,40 +16,20 @@
     <script src="https://unpkg.com/deck.gl@^9.0.0-beta.2/dist.min.js"></script>
     <!-- Custom JS for parcel trip UI -->
     <script src="js/parcelTripUI.js" defer></script>
-    <style type="text/css">
-      body {margin: 0; padding: 0;}
-      .map-container {width: 100vw; height: 100vh;}
-      
-      .layer-controls {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: white;
-        padding: 15px;
-        border-radius: 5px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-      }
-      
-      .layer-controls h3 {
-        margin: 0 0 10px 0;
-        font-size: 16px;
-      }
-      
-      .layer-controls label {
-        display: block;
-        margin: 5px 0;
-        cursor: pointer;
-      }
-      
-      .layer-controls input[type="checkbox"] {
-        margin-right: 8px;
-      }
-    </style>
+    <!-- Google Fonts for TERRAVEX header -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- TERRAVEX Header Bar -->
+    <header id="terravex-header">
+      <div class="header-brand">
+        <span class="header-logo">TERRAVEX</span>
+      </div>
+      <div class="header-subtitle">Municipal Intelligence Platform</div>
+    </header>
+
     <div id="app">
       <div class="loading-progress">
         <label>Loading...</label>
@@ -61,6 +42,209 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+
+    <!-- Try Blazor WASM first -->
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+
+    <!-- Fallback: if Blazor fails to load, initialize map directly via JS -->
+    <script type="module">
+      const BLAZOR_TIMEOUT_MS = 6000;
+      let blazorStarted = false;
+      let mapInitialized = false;
+
+      // Layer config mirrored from MapLibreService.cs
+      const defaultConfig = {
+        latitude: 32.758,
+        longitude: -97.65,
+        zoom: 14,
+        bearing: 0,
+        pitch: 0,
+        baseMap: {
+          style: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+          showControls: true,
+          showAttribution: true,
+          name: 'Voyager'
+        },
+        layers: [
+          { id: 'parker-roads-base', type: 'GeoJson', dataUrl: '/parker-county-roads.geojson', visible: false,
+            properties: { stroked: true, filled: false, getLineColor: [120,120,120,128], getLineWidth: 1, lineWidthMinPixels: 1, opacity: 0.6, pickable: true, onClick: 'handleRoadClick' }},
+          { id: 'parker-roads-traffic', type: 'Path', dataUrl: '/parker-roads-with-traffic.geojson', visible: false,
+            properties: { getPath: 'getCoordinates', getColor: 'getTrafficGradientColor', getWidth: 'getTrafficWidth', widthMinPixels: 1, widthMaxPixels: 6, capRounded: true, jointRounded: true, opacity: 0.9, pickable: true, autoHighlight: true, onClick: 'handleTrafficRoadClick' }},
+          { id: 'parker-roads-traffic-phase1', type: 'Path', dataUrl: '/parker-roads-with-traffic-phase1.geojson', visible: false,
+            properties: { getPath: 'getCoordinates', getColor: 'getTrafficGradientColor', getWidth: 'getTrafficWidth', widthMinPixels: 1, widthMaxPixels: 6, capRounded: true, jointRounded: true, opacity: 0.9, pickable: true, autoHighlight: true, onClick: 'handleTrafficRoadClick' }},
+          { id: 'cris-risk-segments', type: 'PathLayer', dataUrl: '/cris-data/parker-county-risk-segments-traffic-deckgl.json', visible: true,
+            properties: { widthMinPixels: 1, widthMaxPixels: 8 }},
+          { id: 'cris-crashes', type: 'ScatterplotLayer', dataUrl: '/cris-data/parker-county-crashes-clustered-deckgl.json', visible: true,
+            properties: { radiusMinPixels: 4, radiusMaxPixels: 25, stroked: false, pickable: true, autoHighlight: true }},
+          { id: 'cris-intersections', type: 'ScatterplotLayer', dataUrl: '/cris-data/parker-county-intersection-risks-deckgl.json', visible: false,
+            properties: { radiusMinPixels: 6, radiusMaxPixels: 25, stroked: true, getLineColor: '[0, 0, 0, 255]', lineWidthMinPixels: 1 }},
+          { id: 'txdot-city-boundaries', type: 'GeoJson', dataUrl: '/txdot-city-boundaries.geojson', visible: false,
+            properties: { filled: true, stroked: true, getFillColor: [100,150,200,30], getLineColor: [0,100,200,255], getLineWidth: 2, lineWidthMinPixels: 1, lineWidthMaxPixels: 3, opacity: 0.6, pickable: true, autoHighlight: true, onClick: 'handleCityBoundaryClick' }},
+          { id: 'wp-parcels-trips', type: 'GeoJson', dataUrl: '/willow-park-parcels-with-trips.geojson', visible: false,
+            properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
+          { id: 'soil-clay-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-clay.geojson', visible: false,
+            properties: { filled: true, stroked: true, getFillColor: 'getSoilClayColor', getLineColor: [139,69,19,255], getLineWidth: 2, opacity: 0.8, pickable: true, autoHighlight: true, onClick: 'handleSoilUnitClick' }},
+          { id: 'soil-ksat-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-ksat.geojson', visible: false,
+            properties: { filled: true, stroked: true, getFillColor: 'getSoilKsatColor', getLineColor: [139,69,19,255], getLineWidth: 1, opacity: 0.7, pickable: true, autoHighlight: true, onClick: 'handleSoilUnitClick' }}
+        ]
+      };
+
+      // Layer display names for the controls panel
+      const layerNames = {
+        'cris-risk-segments': 'CRIS Risk Segments',
+        'cris-crashes': 'CRIS Crash Points',
+        'cris-intersections': 'CRIS Intersection Risks',
+        'parker-roads-base': 'Parker County Roads (Base)',
+        'parker-roads-traffic': 'Parker County Roads (Traffic)',
+        'parker-roads-traffic-phase1': 'Traffic - Phase 1 (IDW Interpolation)',
+        'txdot-city-boundaries': 'City Boundaries (TxDOT)',
+        'wp-parcels-trips': 'Trip Generation (Willow Park Parcels)',
+        'soil-clay-visualization': 'Soil Clay Content (%)',
+        'soil-ksat-visualization': 'Soil Permeability (Ksat)'
+      };
+
+      const baseMapStyles = [
+        { id: 'voyager', name: 'Voyager', url: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json' },
+        { id: 'light', name: 'Light', url: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json' },
+        { id: 'dark', name: 'Dark', url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json' },
+        { id: 'osm', name: 'OpenStreetMap', url: 'https://tiles.openfreemap.org/styles/liberty' }
+      ];
+
+      async function initMapDirectly() {
+        if (mapInitialized) return;
+        mapInitialized = true;
+
+        console.log('[TERRAVEX] Blazor unavailable — initializing map directly via JS fallback');
+
+        // Hide the loading spinner and error UI
+        const appDiv = document.getElementById('app');
+        const errorUi = document.getElementById('blazor-error-ui');
+        if (errorUi) errorUi.style.display = 'none';
+
+        // Replace app div content with map container and controls
+        appDiv.innerHTML = `
+          <div id="map-wrapper" style="position: relative; width: 100%; height: 100%;">
+            <div id="maplibre-container" style="width: 100%; height: 100%;"></div>
+            <div style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 8px 12px; border-radius: 4px; font-family: monospace; font-size: 14px; z-index: 1000;">
+              Zoom: <span id="maplibre-container-zoom">--</span>
+            </div>
+            <div class="map-controls" id="map-controls-panel"></div>
+          </div>
+        `;
+
+        // Build layer controls
+        buildLayerControls();
+
+        // Import the map module and create the map
+        try {
+          const mapModule = await import('./js/maplibre-deckgl-integration.js');
+          const mapInstance = mapModule.createIntegratedMap('maplibre-container', defaultConfig);
+          window._terravexMapModule = mapModule;
+          window._terravexMapInstance = mapInstance;
+          console.log('[TERRAVEX] Map initialized successfully via JS fallback');
+        } catch (err) {
+          console.error('[TERRAVEX] Failed to initialize map:', err);
+          appDiv.innerHTML = '<div style="color:white;padding:40px;text-align:center;">Failed to load map. Please reload the page.</div>';
+        }
+      }
+
+      function buildLayerControls() {
+        const panel = document.getElementById('map-controls-panel');
+        if (!panel) return;
+
+        const crisLayerIds = defaultConfig.layers.filter(l => l.id.startsWith('cris-'));
+        const bgLayerIds = defaultConfig.layers.filter(l => !l.id.startsWith('cris-'));
+
+        let html = '';
+
+        // Base map selector
+        html += '<div class="control-section"><h3>Base Map</h3><select id="basemap-select">';
+        baseMapStyles.forEach(s => {
+          const sel = s.id === 'voyager' ? ' selected' : '';
+          html += `<option value="${s.id}"${sel}>${s.name}</option>`;
+        });
+        html += '</select></div>';
+
+        // CRIS Layers
+        html += '<div class="control-section"><h3>CRIS Layers</h3>';
+        crisLayerIds.forEach(l => {
+          const checked = l.visible ? ' checked' : '';
+          html += `<label class="layer-toggle"><input type="checkbox" data-layer-id="${l.id}"${checked} /> ${layerNames[l.id] || l.id}</label>`;
+        });
+        html += '</div>';
+
+        // Background Layers
+        html += '<div class="control-section"><h3>Background Layers</h3>';
+        bgLayerIds.forEach(l => {
+          const checked = l.visible ? ' checked' : '';
+          html += `<label class="layer-toggle"><input type="checkbox" data-layer-id="${l.id}"${checked} /> ${layerNames[l.id] || l.id}</label>`;
+        });
+        html += '</div>';
+
+        // Search Location
+        html += `<div class="control-section">
+          <h3>Search Location</h3>
+          <div class="search-inputs">
+            <input type="number" step="any" placeholder="Latitude (32.758237)" id="search-lat" class="coord-input" />
+            <input type="number" step="any" placeholder="Longitude (-97.673080)" id="search-lng" class="coord-input" />
+            <button id="search-btn" class="search-btn">📍 Go to Location</button>
+          </div>
+        </div>`;
+
+        panel.innerHTML = html;
+
+        // Wire up event listeners
+        panel.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.addEventListener('change', (e) => {
+            const layerId = e.target.dataset.layerId;
+            const visible = e.target.checked;
+            const layer = defaultConfig.layers.find(l => l.id === layerId);
+            if (layer) {
+              layer.visible = visible;
+              if (window._terravexMapModule && window._terravexMapInstance) {
+                window._terravexMapModule.updateIntegratedMapLayers(window._terravexMapInstance, defaultConfig.layers);
+              }
+            }
+          });
+        });
+
+        document.getElementById('basemap-select').addEventListener('change', (e) => {
+          const style = baseMapStyles.find(s => s.id === e.target.value);
+          if (style && window._terravexMapModule && window._terravexMapInstance) {
+            window._terravexMapModule.updateBaseMapStyle(window._terravexMapInstance, style.url);
+          }
+        });
+
+        document.getElementById('search-btn').addEventListener('click', () => {
+          const lat = parseFloat(document.getElementById('search-lat').value);
+          const lng = parseFloat(document.getElementById('search-lng').value);
+          if (!isNaN(lat) && !isNaN(lng) && window._terravexMapModule && window._terravexMapInstance) {
+            window._terravexMapModule.flyToLocation(window._terravexMapInstance, lat, lng, 16);
+          }
+        });
+      }
+
+      // Try to start Blazor, fall back to direct JS init
+      async function tryBlazorThenFallback() {
+        try {
+          if (typeof Blazor !== 'undefined' && Blazor.start) {
+            const blazorPromise = Blazor.start();
+            const timeoutPromise = new Promise((_, reject) =>
+              setTimeout(() => reject(new Error('Blazor timeout')), BLAZOR_TIMEOUT_MS)
+            );
+            await Promise.race([blazorPromise, timeoutPromise]);
+            blazorStarted = true;
+            console.log('[TERRAVEX] Blazor started successfully');
+          } else {
+            throw new Error('Blazor not available');
+          }
+        } catch (err) {
+          console.warn('[TERRAVEX] Blazor failed or timed out:', err.message, '— using JS fallback');
+          await initMapDirectly();
+        }
+      }
+
+      tryBlazorThenFallback();
+    </script>
   </body>
 </html>
