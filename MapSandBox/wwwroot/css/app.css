@@ -413,8 +413,10 @@ code {
         height: calc(100vh - 44px);
     }
 
-    /* Sidebar becomes a dropdown from header on mobile */
-    .layer-sidebar {
+    /* Hide sidebar completely on mobile — toggle via hamburger */
+    .layer-sidebar,
+    .cris-container .layer-sidebar {
+        display: none !important;
         position: fixed;
         top: 44px;
         left: 0;
@@ -422,45 +424,23 @@ code {
         width: 100%;
         min-width: unset;
         height: auto;
-        max-height: 0;
-        overflow: hidden;
-        z-index: 1000;
-        transition: max-height 0.3s ease;
-        box-shadow: none;
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .layer-sidebar.open {
         max-height: 70vh;
         overflow-y: auto;
+        z-index: 1000;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Show when toggled open */
+    .layer-sidebar.open,
+    .cris-container .layer-sidebar.open {
+        display: block !important;
     }
 
     /* Map fills full width on mobile */
     #map-wrapper {
         width: 100%;
-    }
-
-    /* Blazor path uses same dropdown */
-    .cris-container .layer-sidebar {
-        position: fixed;
-        top: 44px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        min-width: unset;
-        height: auto;
-        max-height: 0;
-        overflow: hidden;
-        z-index: 1000;
-        transition: max-height 0.3s ease;
-    }
-
-    .cris-container .layer-sidebar.open {
-        max-height: 70vh;
-        overflow-y: auto;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     .zoom-indicator {

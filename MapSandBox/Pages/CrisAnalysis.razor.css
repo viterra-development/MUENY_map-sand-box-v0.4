@@ -143,20 +143,11 @@
 /* ---- Mobile responsive ---- */
 @media (max-width: 768px) {
     .layer-sidebar {
-        position: fixed;
-        top: 44px;
-        left: -280px;
-        width: 270px;
-        min-width: 270px;
-        height: calc(100vh - 44px);
-        z-index: 1000;
-        transition: left 0.25s ease;
-        box-shadow: none;
+        display: none !important;
     }
 
     .layer-sidebar.open {
-        left: 0;
-        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.4);
+        display: block !important;
     }
 
     .map-section {
