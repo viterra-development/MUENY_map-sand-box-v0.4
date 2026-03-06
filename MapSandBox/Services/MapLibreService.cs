@@ -389,6 +389,23 @@ public class MapLibreService
                     ["autoHighlight"] = true,
                     ["onClick"] = "handleCityBoundaryClick"
                 }
+            },
+            new LayerConfig
+            {
+                Id = "wp-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/willow-park-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
             }
             // Commented out until scaling issues are resolved
             // new LayerConfig
@@ -448,7 +465,8 @@ public class MapLibreService
             new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = true },
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },
             new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false },
-            new LayerInfo { Id = "txdot-city-boundaries", Name = "City Boundaries (TxDOT)", Visible = false }
+            new LayerInfo { Id = "txdot-city-boundaries", Name = "City Boundaries (TxDOT)", Visible = false },
+            new LayerInfo { Id = "wp-parcels-trips", Name = "Trip Generation (Willow Park Parcels)", Visible = false }
             // new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "NOAA Rainfall Points", Visible = false },
             // new LayerInfo { Id = "noaa-rainfall-parker-heatmap", Name = "NOAA Rainfall Heatmap", Visible = false }
         };

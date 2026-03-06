@@ -822,6 +822,26 @@ function getLayerProperties(config) {
             properties.autoHighlight = true;
             properties.onHover = handleCityBoundaryHover;
             break;
+        case 'wp-parcels-trips':
+            properties.filled = true;
+            properties.stroked = true;
+            properties.getFillColor = d => {
+                const trips = (d.properties && d.properties.daily_trips) || 0;
+                if (trips === 0) return [200, 200, 200, 80];      // Gray - no trips
+                if (trips < 10) return [65, 182, 196, 160];       // Teal - residential
+                if (trips < 50) return [255, 183, 77, 180];       // Orange - moderate
+                if (trips < 200) return [255, 112, 67, 200];      // Red-Orange - high
+                return [211, 47, 47, 220];                         // Red - very high
+            };
+            properties.getLineColor = [50, 50, 50, 200];
+            properties.getLineWidth = 1;
+            properties.lineWidthMinPixels = 1;
+            properties.opacity = 0.75;
+            properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.highlightColor = [255, 255, 255, 150];
+            properties.onClick = handleParcelTripClick;
+            break;
     }
 
     return properties;
@@ -996,6 +1016,37 @@ function handleRoadClick(info) {
         const roadType = getRoadTypeName(type);
 
         alert(`Road: ${name}\nType: ${roadType}\nRoute Type Code: ${type}`);
+    }
+}
+
+function handleParcelTripClick(info) {
+    if (info.object) {
+        const p = info.object.properties;
+        const addr = p.address || 'No address';
+        const landUse = p.ite_land_use || 'Unknown';
+        const iteCode = p.ite_code || 'N/A';
+        const daily = p.daily_trips || 0;
+        const am = p.am_peak_trips || 0;
+        const pm = p.pm_peak_trips || 0;
+        const acres = p.legal_acres || 'N/A';
+        const mkt = p.mkt_value ? '$' + p.mkt_value.toLocaleString() : 'N/A';
+        const owner = p.owner || 'Unknown';
+        const stateCd = p.state_cd || 'N/A';
+
+        alert(
+            `PARCEL TRIP GENERATION\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━\n` +
+            `Address: ${addr}\n` +
+            `Owner: ${owner}\n` +
+            `Land Use: ${landUse} (ITE ${iteCode})\n` +
+            `State Code: ${stateCd}\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━\n` +
+            `Daily Trips: ${daily}\n` +
+            `AM Peak: ${am} | PM Peak: ${pm}\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━\n` +
+            `Acreage: ${acres}\n` +
+            `Market Value: ${mkt}`
+        );
     }
 }
 
