@@ -255,6 +255,7 @@
       // Sidebar toggle for mobile (works for both JS fallback and Blazor paths)
       function getActiveSidebar() {
         return document.getElementById('layer-sidebar') ||
+               document.getElementById('blazor-layer-sidebar') ||
                document.querySelector('.layer-sidebar');
       }
 
