@@ -119,14 +119,16 @@
         const errorUi = document.getElementById('blazor-error-ui');
         if (errorUi) errorUi.style.display = 'none';
 
-        // Replace app div content with map container and controls
+        // Replace app div content with sidebar + map layout
         appDiv.innerHTML = `
-          <div id="map-wrapper" style="position: relative; width: 100%; height: 100%;">
+          <aside id="layer-sidebar" class="layer-sidebar">
+            <div class="sidebar-content" id="map-controls-panel"></div>
+          </aside>
+          <div id="map-wrapper">
             <div id="maplibre-container" style="width: 100%; height: 100%;"></div>
-            <div style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 8px 12px; border-radius: 4px; font-family: monospace; font-size: 14px; z-index: 1000;">
+            <div class="zoom-indicator">
               Zoom: <span id="maplibre-container-zoom">--</span>
             </div>
-            <div class="map-controls" id="map-controls-panel"></div>
           </div>
         `;
 

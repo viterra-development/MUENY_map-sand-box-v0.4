@@ -8,18 +8,8 @@
 <PageTitle>TERRAVEX — CRIS Risk Analysis</PageTitle>
 
 <div class="cris-container">
-    <div class="map-section">
-        <MapLibreMap @ref="mapComponent" Config="mapConfig" OnMapClick="@HandleMapClick" />
-        <RoadPopup @ref="roadPopup" />
-        <SoilPopup @ref="soilPopup" />
-        <CrashPopup @ref="crashPopup" />
-        <CrashClusterPopup @ref="crashClusterPopup" />
-        <CityBoundaryPopup @ref="cityBoundaryPopup" />
-
-        <!-- Add CRIS road segment popup -->
-        <CrisRoadSegmentPopup @ref="roadSegmentPopup" />
-
-        <div class="map-controls">
+    <aside class="layer-sidebar">
+        <div class="sidebar-content">
             <div class="control-section">
                 <h3>Base Map</h3>
                 <select @onchange="HandleBaseMapChange" value="@selectedBaseMapId">
@@ -80,8 +70,17 @@
                 }
             </div>
         </div>
-    </div>
+    </aside>
 
+    <div class="map-section">
+        <MapLibreMap @ref="mapComponent" Config="mapConfig" OnMapClick="@HandleMapClick" />
+        <RoadPopup @ref="roadPopup" />
+        <SoilPopup @ref="soilPopup" />
+        <CrashPopup @ref="crashPopup" />
+        <CrashClusterPopup @ref="crashClusterPopup" />
+        <CityBoundaryPopup @ref="cityBoundaryPopup" />
+        <CrisRoadSegmentPopup @ref="roadSegmentPopup" />
+    </div>
 </div>
 
 
