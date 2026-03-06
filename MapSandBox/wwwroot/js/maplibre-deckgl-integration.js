@@ -1027,15 +1027,40 @@ function getRoadWidth(feature) {
     }
 }
 
+function firstDefined(obj, keys) {
+    if (!obj) return undefined;
+    for (const key of keys) {
+        const val = obj[key];
+        if (val !== undefined && val !== null && val !== '') return val;
+    }
+    return undefined;
+}
+
 function handleRoadClick(info) {
     if (info.object) {
         const road = info.object;
-        const props = road.properties;
-        const name = props.fullName || props.FULLNAME || 'Unknown';
-        const type = props.roadType || props.RTTYP || 'Unknown';
-        const roadType = getRoadTypeName(type);
+        const props = road.properties || road;
+        const name = firstDefined(props, ['fullName', 'FULLNAME', 'FullName', 'road_name', 'ROAD_NAME', 'RoadName', 'NAME', 'name']) || 'Unknown';
+        const typeCode = firstDefined(props, ['roadType', 'RTTYP', 'RoadType', 'rttyp', 'RTE_TYPE_C', 'FCLASS', 'route_type_code']) || '';
+        const mtfcc = firstDefined(props, ['mtfcc', 'MTFCC', 'Mtfcc']) || '';
+        const roadType = getRoadTypeName(typeCode);
 
-        alert(`Road: ${name}\nType: ${roadType}\nRoute Type Code: ${type}`);
+        // Use MapLibre popup instead of alert
+        if (maplibreMap && info.coordinate) {
+            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '280px' })
+                .setLngLat(info.coordinate)
+                .setHTML(`
+                    <div style="font-family: Arial, sans-serif; padding: 4px;">
+                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${name}</div>
+                        <div style="font-size: 12px; color: #555;">
+                            <div><strong>Type:</strong> ${roadType}</div>
+                            ${typeCode ? `<div><strong>Route Type Code:</strong> ${typeCode}</div>` : ''}
+                            ${mtfcc ? `<div><strong>MTFCC:</strong> ${mtfcc}</div>` : ''}
+                        </div>
+                    </div>
+                `)
+                .addTo(maplibreMap);
+        }
     }
 }
 
@@ -1159,14 +1184,14 @@ function getTrafficWidth(feature) {
 function handleTrafficRoadClick(info) {
     if (info.object) {
         const road = info.object;
-        // All GeoJSON files now use camelCase properties
-        const roadName = road.properties.fullName;
-        const roadType = road.properties.roadType;
-        const linearId = road.properties.linearId;
-        const mtfcc = road.properties.mtfcc;
+        const props = road.properties || road;
+        const roadName = firstDefined(props, ['fullName', 'FULLNAME', 'FullName', 'RoadName']) || 'Unknown';
+        const roadType = firstDefined(props, ['roadType', 'RTTYP', 'RoadType']) || '';
+        const linearId = firstDefined(props, ['linearId', 'LINEARID', 'LinearId']) || '';
+        const mtfcc = firstDefined(props, ['mtfcc', 'MTFCC', 'Mtfcc']) || '';
         const roadTypeName = getRoadTypeName(roadType);
 
-        const traffic = road.properties.traffic;
+        const traffic = props.traffic;
         if (traffic) {
             const aadt = traffic.aadt || null;
             const aadtYear = traffic.aadtYear ? traffic.aadtYear.toString() : null;
@@ -1189,22 +1214,26 @@ function handleTrafficRoadClick(info) {
                     linearId,
                     mtfcc
                 };
-                
+
                 window.roadPopupInstance.invokeMethodAsync('ShowPopupFromJS', roadData);
-            } else {
-                // Fallback to alert if Blazor component not available
-                const message = `Traffic Road: ${roadName}
-────────────────────────
-Road Type: ${roadTypeName} (${roadType})
-Traffic Location ID: ${locationId}
-Located On: ${locatedOn}
-
-Traffic Data:
-• AADT (${aadtYear}): ${aadt ? aadt.toLocaleString() : 'No data'} vehicles/day
-
-Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
-                
-                alert(message);
+            } else if (maplibreMap && info.coordinate) {
+                // Fallback to MapLibre popup
+                const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '320px' })
+                    .setLngLat(info.coordinate)
+                    .setHTML(`
+                        <div style="font-family: Arial, sans-serif; padding: 4px;">
+                            <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${roadName}</div>
+                            <div style="font-size: 12px; color: #555;">
+                                <div><strong>Type:</strong> ${roadTypeName} (${roadType})</div>
+                                ${locationId ? `<div><strong>Traffic Location:</strong> ${locationId}</div>` : ''}
+                                ${locatedOn ? `<div><strong>Located On:</strong> ${locatedOn}</div>` : ''}
+                                <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #eee;">
+                                    <strong>AADT${aadtYear ? ` (${aadtYear})` : ''}:</strong> ${aadt ? aadt.toLocaleString() + ' vehicles/day' : 'No data'}
+                                </div>
+                            </div>
+                        </div>
+                    `)
+                    .addTo(maplibreMap);
             }
         } else {
             // Fallback for roads without traffic data
@@ -1270,22 +1299,26 @@ function handleSoilUnitClick(info) {
             return;
         }
 
-        // Fallback to simple alert
+        // Fallback to MapLibre popup
         const clayPct = clayPctValue !== null ? clayPctValue.toFixed(1) : 'N/A';
         const ksat = ksatValue !== null ? ksatValue.toFixed(3) : 'N/A';
 
-        const message = `Soil Map Unit: ${props.musym}
-────────────────────────
-${props.muname || 'Unknown soil type'}
-
-Soil Properties:
-• Clay Content: ${clayPct}%
-• Permeability: ${ksat} μm/s
-
-Map Unit Key: ${props.mukey}
-Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
-        
-        alert(message);
+        if (maplibreMap && info.coordinate) {
+            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '280px' })
+                .setLngLat(info.coordinate)
+                .setHTML(`
+                    <div style="font-family: Arial, sans-serif; padding: 4px;">
+                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">${props.musym || 'Unknown'}</div>
+                        <div style="font-size: 12px; color: #666; margin-bottom: 6px;">${props.muname || 'Unknown soil type'}</div>
+                        <div style="font-size: 12px; color: #555;">
+                            <div><strong>Clay Content:</strong> ${clayPct}%</div>
+                            <div><strong>Permeability:</strong> ${ksat} μm/s</div>
+                            <div style="color: #999; margin-top: 4px;">Map Unit Key: ${props.mukey || 'N/A'}</div>
+                        </div>
+                    </div>
+                `)
+                .addTo(maplibreMap);
+        }
     }
 }
 
@@ -1585,8 +1618,8 @@ function handleRiskSegmentClick(info) {
             window.crisRoadSegmentPopupInstance.invokeMethodAsync('ShowPopupFromJS', segmentData)
                 .then(() => console.log('Blazor popup called successfully'))
                 .catch(error => console.error('Error calling Blazor popup:', error));
-        } else {
-            // Fallback to alert if Blazor popup not available
+        } else if (maplibreMap && info.coordinate) {
+            // Fallback to MapLibre popup
             const riskScore = typeof segment.RiskScore === 'number'
                 ? segment.RiskScore.toFixed(3)
                 : 'N/A';
@@ -1595,25 +1628,37 @@ function handleRiskSegmentClick(info) {
             const crashesPerMile = typeof segment.CrashesPerMile === 'number'
                 ? segment.CrashesPerMile.toFixed(2)
                 : 'N/A';
+            const roadName = segment.RoadName || 'Unknown Road';
+            const riskLevel = segment.RiskLevel || 'Unknown';
 
-            const message = `Risk Segment Analysis
-━━━━━━━━━━━━━━━━━━━
-Risk Level: ${segment.RiskLevel}
-Risk Score: ${riskScore}
-Crash Count: ${crashCount}
-AADT: ${aadt}
-Crashes/Mile: ${crashesPerMile}
+            const riskColors = {
+                'VeryLow': '#2ecc71', 'Low': '#27ae60',
+                'Moderate': '#f39c12', 'High': '#e74c3c', 'VeryHigh': '#c0392b'
+            };
+            const riskColor = riskColors[riskLevel] || '#95a5a6';
 
-Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
-
-            alert(message);
+            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '320px' })
+                .setLngLat(info.coordinate)
+                .setHTML(`
+                    <div style="font-family: Arial, sans-serif; padding: 4px;">
+                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${roadName}</div>
+                        <div style="display: inline-block; padding: 2px 8px; border-radius: 3px; background: ${riskColor}; color: white; font-size: 11px; font-weight: bold; margin-bottom: 6px;">${riskLevel}</div>
+                        <div style="font-size: 12px; color: #555;">
+                            <div><strong>Risk Score:</strong> ${riskScore}</div>
+                            <div><strong>Crashes:</strong> ${crashCount}</div>
+                            <div><strong>Crashes/Mile:</strong> ${crashesPerMile}</div>
+                            <div><strong>AADT:</strong> ${typeof aadt === 'number' ? aadt.toLocaleString() : aadt}</div>
+                        </div>
+                    </div>
+                `)
+                .addTo(maplibreMap);
         }
     }
 }
 
 function handleIntersectionRiskClick(info) {
     if (info.object) {
-        const intersection = info.object; // Direct access to deck.gl data, no .properties
+        const intersection = info.object;
         const riskScore = typeof intersection.RiskScore === 'number'
             ? intersection.RiskScore.toFixed(3)
             : 'N/A';
@@ -1622,17 +1667,29 @@ function handleIntersectionRiskClick(info) {
         const roadsText = Array.isArray(roads) && roads.length > 0
             ? roads.join(' & ')
             : 'Unknown roads';
+        const riskLevel = intersection.RiskLevel || 'Unknown';
 
-        const message = `High-Risk Intersection
-━━━━━━━━━━━━━━━━━━━━
-Risk Level: ${intersection.RiskLevel}
-Risk Score: ${riskScore}
-Crash Count: ${crashCount}
-Intersecting Roads: ${roadsText}
+        const riskColors = {
+            'VeryLow': '#2ecc71', 'Low': '#27ae60',
+            'Moderate': '#f39c12', 'High': '#e74c3c', 'VeryHigh': '#c0392b'
+        };
+        const riskColor = riskColors[riskLevel] || '#95a5a6';
 
-Coordinates: ${info.coordinate[1].toFixed(6)}, ${info.coordinate[0].toFixed(6)}`;
-
-        alert(message);
+        if (maplibreMap && info.coordinate) {
+            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '300px' })
+                .setLngLat(info.coordinate)
+                .setHTML(`
+                    <div style="font-family: Arial, sans-serif; padding: 4px;">
+                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${roadsText}</div>
+                        <div style="display: inline-block; padding: 2px 8px; border-radius: 3px; background: ${riskColor}; color: white; font-size: 11px; font-weight: bold; margin-bottom: 6px;">${riskLevel}</div>
+                        <div style="font-size: 12px; color: #555;">
+                            <div><strong>Risk Score:</strong> ${riskScore}</div>
+                            <div><strong>Crashes:</strong> ${crashCount}</div>
+                        </div>
+                    </div>
+                `)
+                .addTo(maplibreMap);
+        }
     }
 }
 
@@ -1668,14 +1725,28 @@ function handleCrashClusterClick(info) {
             window.crashClusterPopupInstance.invokeMethodAsync('ShowClusterPopupFromJS', clusterData)
                 .then(() => console.log('Blazor cluster popup called successfully'))
                 .catch(error => console.error('Error calling Blazor cluster popup:', error));
-        } else {
-            // Fallback to alert if Blazor popup not available
+        } else if (maplibreMap && cluster.position) {
+            // Fallback to MapLibre popup
             const crashCount = cluster.crashCount || cluster.Crashes?.length || 1;
-            const message = `Crash Cluster
-Count: ${crashCount} crashes
-Max Severity: ${cluster.maxSeverity}
-Location: ${cluster.position[1].toFixed(6)}, ${cluster.position[0].toFixed(6)}`;
-            alert(message);
+            const severityColors = {
+                'K_Fatal': '#8b0000', 'A_IncapacitatingInjury': '#ff4500',
+                'B_NonIncapacitatingInjury': '#ff8c00', 'C_PossibleInjury': '#ffd700',
+                'O_NoInjury': '#32cd32'
+            };
+            const sevColor = severityColors[cluster.maxSeverity] || '#95a5a6';
+
+            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '260px' })
+                .setLngLat([cluster.position[0], cluster.position[1]])
+                .setHTML(`
+                    <div style="font-family: Arial, sans-serif; padding: 4px;">
+                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">Crash Cluster</div>
+                        <div style="font-size: 12px; color: #555;">
+                            <div><strong>Crashes:</strong> ${crashCount}</div>
+                            <div><strong>Max Severity:</strong> <span style="color: ${sevColor}; font-weight: bold;">${cluster.maxSeverity || 'Unknown'}</span></div>
+                        </div>
+                    </div>
+                `)
+                .addTo(maplibreMap);
         }
     }
 }
