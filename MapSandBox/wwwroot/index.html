@@ -31,17 +31,15 @@
     </header>
 
     <div id="app">
-      <div class="loading-progress">
-        <label>Loading...</label>
-        <div class="loading-progress-text"></div>
+      <div id="terravex-loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">TERRAVEX</div>
+        <div class="loader-subtext">Initializing map layers...</div>
       </div>
     </div>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
+    <!-- Hidden — JS fallback suppresses this before it ever shows -->
+    <div id="blazor-error-ui" style="display:none !important;"></div>
 
     <!-- Try Blazor WASM first -->
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
