@@ -1,6 +1,6 @@
 // MapLibre + deck.gl integration for Blazor
 import { logError, measurePerformance, initializeErrorTracking } from './error-reporting.js';
-import { createLegend, removeLegend, showParcelTooltip, hideParcelTooltip, createStatsPanel, removeStatsPanel } from './parcelTripUI.js';
+import { createLegend, removeLegend, showParcelTooltip, hideParcelTooltip, markTooltipShown, createStatsPanel, removeStatsPanel } from './parcelTripUI.js';
 
 let integratedMapInstance = null;
 let maplibreMap = null;
@@ -1041,6 +1041,7 @@ function handleRoadClick(info) {
 
 function handleParcelTripClick(info) {
     if (info.object) {
+        markTooltipShown();
         showParcelTooltip(info.object.properties, info.x, info.y);
     }
 }

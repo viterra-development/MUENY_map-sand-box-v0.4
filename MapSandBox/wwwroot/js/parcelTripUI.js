@@ -126,9 +126,16 @@ export function hideParcelTooltip() {
     }
 }
 
-// Close tooltip on map click elsewhere
+// Close tooltip on map click elsewhere.
+// Use a timestamp guard so the same click that opens the tooltip doesn't close it.
+let tooltipShownAt = 0;
+
+export function markTooltipShown() {
+    tooltipShownAt = Date.now();
+}
+
 document.addEventListener('click', (e) => {
-    if (tooltipElement && !tooltipElement.contains(e.target)) {
+    if (tooltipElement && !tooltipElement.contains(e.target) && Date.now() - tooltipShownAt > 100) {
         hideParcelTooltip();
     }
 });
