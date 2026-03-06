@@ -10,6 +10,10 @@
     <MapLibreMap @ref="mapComponent" Config="mapConfig" OnMapClick="HandleMapClick" />
     <RoadPopup @ref="roadPopup" />
     <SoilPopup @ref="soilPopup" />
+    <CrashPopup @ref="crashPopup" />
+    <CrashClusterPopup @ref="crashClusterPopup" />
+    <CityBoundaryPopup @ref="cityBoundaryPopup" />
+    <CrisRoadSegmentPopup @ref="roadSegmentPopup" />
     
     <div class="maplibre-controls">
         <div class="control-section">
@@ -89,6 +93,10 @@
     private MapLibreMap? mapComponent;
     private RoadPopup? roadPopup;
     private SoilPopup? soilPopup;
+    private CrashPopup? crashPopup;
+    private CrashClusterPopup? crashClusterPopup;
+    private CityBoundaryPopup? cityBoundaryPopup;
+    private CrisRoadSegmentPopup? roadSegmentPopup;
     private MapLibreConfig mapConfig = new();
     private List<LayerInfo> layerInfo = new();
     private List<BaseMapStyle> availableStyles = new();
