@@ -1030,9 +1030,9 @@ function getRoadWidth(feature) {
 function handleRoadClick(info) {
     if (info.object) {
         const road = info.object;
-        // All GeoJSON files now use camelCase properties
-        const name = road.properties.fullName;
-        const type = road.properties.roadType;
+        const props = road.properties;
+        const name = props.fullName || props.FULLNAME || 'Unknown';
+        const type = props.roadType || props.RTTYP || 'Unknown';
         const roadType = getRoadTypeName(type);
 
         alert(`Road: ${name}\nType: ${roadType}\nRoute Type Code: ${type}`);
