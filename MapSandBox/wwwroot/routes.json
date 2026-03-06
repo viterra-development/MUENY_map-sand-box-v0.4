@@ -1,13 +1,23 @@
 {
-  "routes": [
-    {
-      "route": "/*",
-      "serve": "/index.html",
-      "statusCode": 200
-    }
-  ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/images/{*}", "/css/{*}", "/js/{*}", "/lib/{*}", "/icon-192.png", "/favicon.png", "/manifest.json", "/_framework/{*}", "/MapSandBox.styles.css"]
+    "exclude": [
+      "/images/{*}",
+      "/css/{*}",
+      "/js/{*}",
+      "/lib/{*}",
+      "/cris-data/{*}",
+      "/sample-data/{*}",
+      "/tiles/{*}",
+      "/_framework/{*}",
+      "/*.json",
+      "/*.geojson",
+      "/*.csv",
+      "/*.png",
+      "/icon-192.png",
+      "/favicon.png",
+      "/manifest.json",
+      "/MapSandBox.styles.css"
+    ]
   }
-} 
+}
