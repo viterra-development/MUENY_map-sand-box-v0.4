@@ -1,0 +1,269 @@
+/* ============================================
+   Parcel Trip Generation UI Components
+   ============================================ */
+
+/* ---------- COLOR LEGEND ---------- */
+#trip-legend {
+    position: fixed;
+    bottom: 32px;
+    left: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1500;
+    min-width: 130px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.trip-legend-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.trip-legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 0;
+    color: #444;
+    font-size: 12px;
+}
+
+.trip-swatch {
+    display: inline-block;
+    width: 16px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+/* ---------- TOOLTIP ---------- */
+#trip-tooltip {
+    position: fixed;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    z-index: 2000;
+    width: 300px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    pointer-events: auto;
+}
+
+.trip-tip-header {
+    background: #1a2332;
+    color: #fff;
+    padding: 12px 16px;
+}
+
+.trip-tip-addr {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.trip-tip-owner {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 2px;
+}
+
+.trip-tip-body {
+    padding: 12px 16px;
+}
+
+.trip-tip-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+    font-size: 13px;
+    color: #333;
+}
+
+.trip-tip-label {
+    color: #888;
+    font-size: 12px;
+}
+
+.trip-tip-divider {
+    height: 1px;
+    background: #eee;
+    margin: 8px 0;
+}
+
+.trip-tip-trips {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.trip-tip-daily {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-tip-big {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a2332;
+    line-height: 1;
+}
+
+.trip-tip-small {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.trip-tip-peaks {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.trip-tip-peak-val {
+    font-weight: 700;
+    font-size: 15px;
+    color: #333;
+}
+
+/* ---------- STATS PANEL ---------- */
+#trip-stats-panel {
+    position: fixed;
+    bottom: 32px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1500;
+    width: 340px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.trip-stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #1a2332;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+    user-select: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.trip-stats-arrow {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.trip-stats-content {
+    padding: 16px;
+}
+
+.trip-stats-totals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.trip-stats-total-item {
+    text-align: center;
+    padding: 8px;
+    background: #f7f8fa;
+    border-radius: 8px;
+}
+
+.trip-stats-total-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a2332;
+    line-height: 1.2;
+}
+
+.trip-stats-total-label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+}
+
+.trip-stats-divider {
+    height: 1px;
+    background: #eee;
+    margin: 14px 0;
+}
+
+.trip-stats-section-title {
+    font-weight: 700;
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.trip-stats-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.trip-stats-breakdown-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 8px;
+    align-items: center;
+    padding: 4px 0;
+    font-size: 12px;
+    color: #444;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.trip-stats-lu-name {
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.trip-stats-lu-count {
+    color: #888;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.trip-stats-lu-trips {
+    font-weight: 600;
+    color: #1a2332;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.trip-stats-lu-pct {
+    color: #888;
+    font-size: 11px;
+    min-width: 36px;
+    text-align: right;
+}

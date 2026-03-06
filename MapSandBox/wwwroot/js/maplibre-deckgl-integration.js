@@ -1,5 +1,6 @@
 // MapLibre + deck.gl integration for Blazor
 import { logError, measurePerformance, initializeErrorTracking } from './error-reporting.js';
+import { createLegend, removeLegend, showParcelTooltip, hideParcelTooltip, createStatsPanel, removeStatsPanel } from './parcelTripUI.js';
 
 let integratedMapInstance = null;
 let maplibreMap = null;
@@ -160,6 +161,25 @@ export function updateIntegratedMapLayers(mapInstance, layers) {
             }
         });
         console.log(`[MapLibre-JS] Processed ${rasterLayerCount} raster tile layers`);
+
+        // Toggle trip generation UI components based on layer visibility
+        const tripLayer = layers.find(l => l.id === 'wp-parcels-trips');
+        if (tripLayer) {
+            if (tripLayer.visible) {
+                createLegend();
+                // Fetch GeoJSON and create stats panel if not already showing
+                if (!document.getElementById('trip-stats-panel')) {
+                    fetch(tripLayer.dataUrl || '/willow-park-parcels-with-trips.geojson')
+                        .then(r => r.json())
+                        .then(data => createStatsPanel(data))
+                        .catch(err => console.error('Failed to load trip stats:', err));
+                }
+            } else {
+                removeLegend();
+                removeStatsPanel();
+                hideParcelTooltip();
+            }
+        }
 
         console.log('[MapLibre-JS] Layer update completed successfully');
         } catch (error) {
@@ -1021,32 +1041,7 @@ function handleRoadClick(info) {
 
 function handleParcelTripClick(info) {
     if (info.object) {
-        const p = info.object.properties;
-        const addr = p.address || 'No address';
-        const landUse = p.ite_land_use || 'Unknown';
-        const iteCode = p.ite_code || 'N/A';
-        const daily = p.daily_trips || 0;
-        const am = p.am_peak_trips || 0;
-        const pm = p.pm_peak_trips || 0;
-        const acres = p.legal_acres || 'N/A';
-        const mkt = p.mkt_value ? '$' + p.mkt_value.toLocaleString() : 'N/A';
-        const owner = p.owner || 'Unknown';
-        const stateCd = p.state_cd || 'N/A';
-
-        alert(
-            `PARCEL TRIP GENERATION\n` +
-            `━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `Address: ${addr}\n` +
-            `Owner: ${owner}\n` +
-            `Land Use: ${landUse} (ITE ${iteCode})\n` +
-            `State Code: ${stateCd}\n` +
-            `━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `Daily Trips: ${daily}\n` +
-            `AM Peak: ${am} | PM Peak: ${pm}\n` +
-            `━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `Acreage: ${acres}\n` +
-            `Market Value: ${mkt}`
-        );
+        showParcelTooltip(info.object.properties, info.x, info.y);
     }
 }
 
