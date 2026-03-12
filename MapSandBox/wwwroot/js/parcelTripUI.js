@@ -23,7 +23,10 @@ export function createLegend() {
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(65,182,196)"></span> 1–9</div>
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(200,200,200)"></span> 0 / Unknown</div>
     `;
-    document.body.appendChild(legendElement);
+    const mapContainer = document.getElementById('map-wrapper')
+        || document.querySelector('.map-section')
+        || document.body;
+    mapContainer.appendChild(legendElement);
 }
 
 export function removeLegend() {
