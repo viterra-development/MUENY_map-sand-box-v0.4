@@ -45,36 +45,51 @@
     flex-shrink: 0;
 }
 
-/* ---------- TOOLTIP ---------- */
-#trip-tooltip {
-    position: fixed;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
-    z-index: 2000;
-    width: 300px;
+/* ---------- PARCEL DETAIL (inside right panel) ---------- */
+#trip-parcel-detail {
+    width: 100%;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    pointer-events: auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .trip-tip-header {
-    background: #1a2332;
+    background: rgba(46, 74, 107, 0.35);
     color: #fff;
     padding: 12px 16px;
+    position: relative;
 }
 
 .trip-tip-addr {
     font-weight: 700;
     font-size: 14px;
     line-height: 1.3;
+    padding-right: 24px;
 }
 
 .trip-tip-owner {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.5);
     margin-top: 2px;
+}
+
+.trip-detail-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 3px;
+    line-height: 1;
+}
+
+.trip-detail-close:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .trip-tip-body {
@@ -87,17 +102,21 @@
     align-items: center;
     padding: 3px 0;
     font-size: 13px;
-    color: #333;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .trip-tip-label {
-    color: #888;
+    color: rgba(255, 255, 255, 0.45);
     font-size: 12px;
+}
+
+.trip-tip-ite {
+    color: rgba(255, 255, 255, 0.35);
 }
 
 .trip-tip-divider {
     height: 1px;
-    background: #eee;
+    background: rgba(255, 255, 255, 0.06);
     margin: 8px 0;
 }
 
@@ -116,13 +135,13 @@
 .trip-tip-big {
     font-size: 28px;
     font-weight: 800;
-    color: #1a2332;
+    color: #ffffff;
     line-height: 1;
 }
 
 .trip-tip-small {
     font-size: 11px;
-    color: #888;
+    color: rgba(255, 255, 255, 0.45);
     text-transform: uppercase;
     letter-spacing: 0.3px;
 }
@@ -136,7 +155,7 @@
 .trip-tip-peak-val {
     font-weight: 700;
     font-size: 15px;
-    color: #333;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* ---------- STATS PANEL (inside right panel) ---------- */

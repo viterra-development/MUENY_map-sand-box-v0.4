@@ -37,21 +37,22 @@ export function removeLegend() {
 }
 
 // ============================================
-// 2. TOOLTIP (replaces alert popup)
+// 2. PARCEL DETAIL (renders into #trip-panel, above stats)
 // ============================================
-let tooltipElement = null;
+let parcelDetailElement = null;
 
-function ensureTooltip() {
-    if (tooltipElement) return tooltipElement;
-    tooltipElement = document.createElement('div');
-    tooltipElement.id = 'trip-tooltip';
-    tooltipElement.style.display = 'none';
-    document.body.appendChild(tooltipElement);
-    return tooltipElement;
+function ensureParcelDetail() {
+    if (parcelDetailElement) return parcelDetailElement;
+    parcelDetailElement = document.createElement('div');
+    parcelDetailElement.id = 'trip-parcel-detail';
+    return parcelDetailElement;
 }
 
 export function showParcelTooltip(properties, x, y) {
-    const tip = ensureTooltip();
+    const container = document.getElementById('trip-panel');
+    if (!container) return;
+
+    const detail = ensureParcelDetail();
     const p = properties;
     const addr = p.address || 'No address';
     const landUse = p.ite_land_use || 'Unknown';
@@ -64,22 +65,22 @@ export function showParcelTooltip(properties, x, y) {
     const owner = p.owner || 'Unknown';
     const stateCd = p.state_cd || 'N/A';
 
-    // Color badge based on trip count
     let tripColor = '#c8c8c8';
     if (daily >= 200) tripColor = '#d32f2f';
     else if (daily >= 50) tripColor = '#ff7043';
     else if (daily >= 10) tripColor = '#ffb74d';
     else if (daily > 0) tripColor = '#41b6c4';
 
-    tip.innerHTML = `
+    detail.innerHTML = `
         <div class="trip-tip-header">
             <div class="trip-tip-addr">${addr}</div>
             <div class="trip-tip-owner">${owner}</div>
+            <button class="trip-detail-close" aria-label="Close">&times;</button>
         </div>
         <div class="trip-tip-body">
             <div class="trip-tip-row">
                 <span class="trip-tip-label">Land Use</span>
-                <span>${landUse} <span style="color:#888">(ITE ${iteCode})</span></span>
+                <span>${landUse} <span class="trip-tip-ite">(ITE ${iteCode})</span></span>
             </div>
             <div class="trip-tip-row">
                 <span class="trip-tip-label">CAD Code</span>
@@ -108,40 +109,30 @@ export function showParcelTooltip(properties, x, y) {
         </div>
     `;
 
-    // Position tooltip near click, but keep it on screen
-    const pad = 16;
-    let left = x + pad;
-    let top = y + pad;
-    tip.style.display = 'block';
+    // Insert at the top of the panel (before stats)
+    if (!detail.parentElement) {
+        container.insertBefore(detail, container.firstChild);
+    }
+    detail.style.display = 'block';
 
-    // Adjust if it would go offscreen
-    const rect = tip.getBoundingClientRect();
-    if (left + 320 > window.innerWidth) left = x - 320 - pad;
-    if (top + rect.height > window.innerHeight) top = y - rect.height - pad;
+    // Close button
+    detail.querySelector('.trip-detail-close').addEventListener('click', () => {
+        hideParcelTooltip();
+    });
 
-    tip.style.left = left + 'px';
-    tip.style.top = top + 'px';
+    // Scroll panel to top to show the detail
+    container.scrollTop = 0;
 }
 
 export function hideParcelTooltip() {
-    if (tooltipElement) {
-        tooltipElement.style.display = 'none';
+    if (parcelDetailElement) {
+        parcelDetailElement.style.display = 'none';
     }
 }
-
-// Close tooltip on map click elsewhere.
-// Use a timestamp guard so the same click that opens the tooltip doesn't close it.
-let tooltipShownAt = 0;
 
 export function markTooltipShown() {
-    tooltipShownAt = Date.now();
+    // No-op — kept for API compatibility
 }
-
-document.addEventListener('click', (e) => {
-    if (tooltipElement && !tooltipElement.contains(e.target) && Date.now() - tooltipShownAt > 100) {
-        hideParcelTooltip();
-    }
-});
 
 // ============================================
 // 3. SUMMARY STATS PANEL (renders into #trip-panel right panel)
