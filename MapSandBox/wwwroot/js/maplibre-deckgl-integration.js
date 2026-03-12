@@ -585,12 +585,9 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         id: config.id,
                         data: config.dataUrl,
                         getPosition: d => d.Coordinates,
-                        getIcon: d => ({
-                            url: getIntersectionIconUrl(d.RiskLevel),
-                            width: 64,
-                            height: 64,
-                            anchorY: 32
-                        }),
+                        iconAtlas: buildIntersectionIconAtlas(),
+                        iconMapping: buildIntersectionIconMapping(),
+                        getIcon: d => `risk-${d.RiskLevel || 'Unknown'}`,
                         getSize: d => Math.min(28, 18 + (d.CrashCount || 1) * 2),
                         sizeScale: 1,
                         sizeMinPixels: 16,
@@ -826,12 +823,9 @@ function getLayerProperties(config) {
             break;
         case 'cris-intersections':
             properties.getPosition = d => d.Coordinates;
-            properties.getIcon = d => ({
-                url: getIntersectionIconUrl(d.RiskLevel),
-                width: 64,
-                height: 64,
-                anchorY: 32
-            });
+            properties.iconAtlas = buildIntersectionIconAtlas();
+            properties.iconMapping = buildIntersectionIconMapping();
+            properties.getIcon = d => `risk-${d.RiskLevel || 'Unknown'}`;
             properties.getSize = d => Math.min(28, 18 + (d.CrashCount || 1) * 2);
             properties.sizeScale = 1;
             properties.sizeMinPixels = 16;
@@ -1373,28 +1367,76 @@ function getRiskLevelColor(riskLevel) {
 // ============================================
 let _intersectionData = null;
 let _riskSegmentData = null;
-const _iconUrlCache = {};
+let _intersectionIconAtlas = null;
+let _intersectionIconMapping = null;
 
-function getIntersectionIconUrl(riskLevel) {
-    if (_iconUrlCache[riskLevel]) return _iconUrlCache[riskLevel];
+const ICON_SIZE = 64;
+const RISK_LEVELS = ['VeryHigh', 'High', 'Moderate', 'Low', 'VeryLow', 'Unknown'];
+const RISK_COLORS = {
+    'VeryHigh': '#8B0000',
+    'High': '#FF4500',
+    'Moderate': '#FF8C00',
+    'Low': '#FFD700',
+    'VeryLow': '#32CD32',
+    'Unknown': '#808080'
+};
 
-    const colorMap = {
-        'VeryHigh': '#8B0000',
-        'High': '#FF4500',
-        'Moderate': '#FF8C00',
-        'Low': '#FFD700',
-        'VeryLow': '#32CD32'
-    };
-    const fill = colorMap[riskLevel] || '#808080';
+function buildIntersectionIconAtlas() {
+    if (_intersectionIconAtlas) return _intersectionIconAtlas;
 
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-        <path d="M32 4 L60 56 L4 56 Z" fill="${fill}" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-        <text x="32" y="46" text-anchor="middle" font-size="26" font-weight="bold" fill="#fff" font-family="Arial">!</text>
-    </svg>`;
+    const cols = RISK_LEVELS.length;
+    const canvas = document.createElement('canvas');
+    canvas.width = ICON_SIZE * cols;
+    canvas.height = ICON_SIZE;
+    const ctx = canvas.getContext('2d');
 
-    const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-    _iconUrlCache[riskLevel] = url;
-    return url;
+    RISK_LEVELS.forEach((level, i) => {
+        const x = i * ICON_SIZE;
+        const cx = x + ICON_SIZE / 2;
+        const fill = RISK_COLORS[level];
+
+        // Draw warning triangle
+        ctx.beginPath();
+        ctx.moveTo(cx, x ? 4 : 4);    // top
+        ctx.moveTo(cx, 4);
+        ctx.lineTo(x + ICON_SIZE - 4, ICON_SIZE - 4);
+        ctx.lineTo(x + 4, ICON_SIZE - 4);
+        ctx.closePath();
+        ctx.fillStyle = fill;
+        ctx.fill();
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+
+        // Draw exclamation mark
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 28px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('!', cx, ICON_SIZE / 2 + 6);
+    });
+
+    _intersectionIconAtlas = canvas;
+    return canvas;
+}
+
+function buildIntersectionIconMapping() {
+    if (_intersectionIconMapping) return _intersectionIconMapping;
+
+    const mapping = {};
+    RISK_LEVELS.forEach((level, i) => {
+        mapping[`risk-${level}`] = {
+            x: i * ICON_SIZE,
+            y: 0,
+            width: ICON_SIZE,
+            height: ICON_SIZE,
+            anchorY: ICON_SIZE / 2
+        };
+    });
+
+    _intersectionIconMapping = mapping;
+    return mapping;
 }
 
 function resolveIntersectionRoads() {
