@@ -105,7 +105,7 @@ public class MapService
             new LayerInfo { Id = "countries", Name = "Countries", Visible = true },
             new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = false },
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = false },
-            new LayerInfo { Id = "cris-intersections", Name = "CRIS Intersection Risks", Visible = false }
+            new LayerInfo { Id = "cris-intersections", Name = "⚠️ CRIS Intersection Risks", Visible = false }
             // new LayerInfo { Id = "noaa-rainfall-parker", Name = "NOAA Rainfall (Parker County)", Visible = false }
         };
     }
