@@ -140,6 +140,23 @@
     border: 1px solid rgba(198, 40, 40, 0.25);
 }
 
+/* ---- Right Panel (Trip Stats) ---- */
+.trip-panel {
+    width: 0;
+    overflow: hidden;
+    height: 100%;
+    background: #0f1a24;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    transition: width 0.2s ease;
+}
+
+.trip-panel.trip-panel-visible {
+    width: 320px;
+    min-width: 320px;
+    overflow-y: auto;
+}
+
 /* ---- Mobile responsive ---- */
 @media (max-width: 768px) {
     .layer-sidebar {
@@ -152,5 +169,27 @@
 
     .map-section {
         width: 100%;
+    }
+
+    .trip-panel,
+    .trip-panel.trip-panel-visible {
+        display: none !important;
+        position: fixed;
+        top: 44px;
+        right: 0;
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 1000;
+        border-left: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        transition: none;
+    }
+
+    .trip-panel.trip-panel-visible.mobile-open {
+        display: block !important;
     }
 }

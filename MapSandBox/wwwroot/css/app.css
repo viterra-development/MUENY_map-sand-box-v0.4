@@ -370,6 +370,38 @@ code {
     color: #c02d76;
 }
 
+/* ---- Right Panel (Trip Stats) ---- */
+.trip-panel {
+    width: 0;
+    overflow: hidden;
+    height: 100%;
+    background: #0f1a24;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    transition: width 0.2s ease;
+}
+
+.trip-panel.trip-panel-visible {
+    width: 320px;
+    min-width: 320px;
+    overflow-y: auto;
+}
+
+/* Mobile toggle button for trip panel (hidden on desktop) */
+.trip-panel-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 0;
+}
+
+.trip-panel-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 /* ---- Sidebar overlay backdrop (mobile) ---- */
 .sidebar-backdrop {
     display: none;
@@ -448,5 +480,39 @@ code {
         left: 8px;
         font-size: 12px;
         padding: 5px 8px;
+    }
+
+    /* Show trip panel mobile toggle when panel has content */
+    .trip-panel-toggle {
+        display: none;
+    }
+
+    .trip-panel.trip-panel-visible ~ .trip-panel-toggle,
+    body:has(.trip-panel.trip-panel-visible) .trip-panel-toggle {
+        display: block;
+    }
+
+    /* Hide right panel on mobile by default */
+    .trip-panel,
+    .trip-panel.trip-panel-visible {
+        display: none !important;
+        position: fixed;
+        top: 44px;
+        right: 0;
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 1000;
+        border-left: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        transition: none;
+    }
+
+    /* Show when mobile-toggled open */
+    .trip-panel.trip-panel-visible.mobile-open {
+        display: block !important;
     }
 }

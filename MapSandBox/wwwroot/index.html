@@ -31,6 +31,9 @@
         <span class="header-logo">TERRAVEX</span>
       </div>
       <div class="header-subtitle">Municipal Intelligence Platform</div>
+      <button id="trip-panel-toggle" class="trip-panel-toggle" aria-label="Toggle trip summary">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="6" height="5" rx="1" fill="white"/><rect x="2" y="10" width="6" height="7" rx="1" fill="white"/><rect x="10" y="3" width="8" height="14" rx="1" fill="white" opacity="0.5"/></svg>
+      </button>
     </header>
 
     <div id="app">
@@ -136,6 +139,7 @@
               Zoom: <span id="maplibre-container-zoom">--</span>
             </div>
           </div>
+          <aside id="trip-panel" class="trip-panel"></aside>
         `;
 
         // Build layer controls
@@ -274,6 +278,19 @@
         if (sidebar) {
           sidebar.classList.remove('open');
           backdrop.classList.remove('visible');
+        }
+        // Also close trip panel mobile overlay
+        const tripPanel = document.getElementById('trip-panel');
+        if (tripPanel) tripPanel.classList.remove('mobile-open');
+      });
+
+      // Trip panel mobile toggle
+      document.getElementById('trip-panel-toggle').addEventListener('click', () => {
+        const tripPanel = document.getElementById('trip-panel');
+        const backdrop = document.getElementById('sidebar-backdrop');
+        if (tripPanel && tripPanel.classList.contains('trip-panel-visible')) {
+          const isOpen = tripPanel.classList.toggle('mobile-open');
+          backdrop.classList.toggle('visible', isOpen);
         }
       });
     </script>

@@ -139,41 +139,32 @@
     color: #333;
 }
 
-/* ---------- STATS PANEL ---------- */
+/* ---------- STATS PANEL (inside right panel) ---------- */
 #trip-stats-panel {
-    position: fixed;
-    bottom: 32px;
-    right: 16px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
-    z-index: 1500;
-    width: 340px;
+    position: static;
+    width: 100%;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    max-height: 70vh;
-    overflow-y: auto;
+    border: none;
+    max-height: none;
+    overflow-y: visible;
 }
 
 .trip-stats-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
-    background: #1a2332;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.04);
     color: #fff;
     font-weight: 700;
     font-size: 13px;
-    cursor: pointer;
-    border-radius: 10px 10px 0 0;
     user-select: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.trip-stats-arrow {
-    font-size: 11px;
-    opacity: 0.7;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .trip-stats-content {
@@ -183,26 +174,27 @@
 .trip-stats-totals {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
 }
 
 .trip-stats-total-item {
     text-align: center;
-    padding: 8px;
-    background: #f7f8fa;
+    padding: 10px 8px;
+    background: rgba(255, 255, 255, 0.06);
     border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .trip-stats-total-val {
     font-size: 22px;
     font-weight: 800;
-    color: #1a2332;
+    color: #ffffff;
     line-height: 1.2;
 }
 
 .trip-stats-total-label {
     font-size: 11px;
-    color: #888;
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.3px;
     margin-top: 2px;
@@ -210,14 +202,14 @@
 
 .trip-stats-divider {
     height: 1px;
-    background: #eee;
+    background: rgba(255, 255, 255, 0.06);
     margin: 14px 0;
 }
 
 .trip-stats-section-title {
     font-weight: 700;
     font-size: 12px;
-    color: #888;
+    color: rgba(255, 255, 255, 0.45);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
@@ -236,33 +228,33 @@
     align-items: center;
     padding: 4px 0;
     font-size: 12px;
-    color: #444;
-    border-bottom: 1px solid #f4f4f4;
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .trip-stats-lu-name {
     font-weight: 600;
-    color: #333;
+    color: rgba(255, 255, 255, 0.85);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .trip-stats-lu-count {
-    color: #888;
+    color: rgba(255, 255, 255, 0.4);
     font-size: 11px;
     white-space: nowrap;
 }
 
 .trip-stats-lu-trips {
     font-weight: 600;
-    color: #1a2332;
+    color: #ffffff;
     white-space: nowrap;
     text-align: right;
 }
 
 .trip-stats-lu-pct {
-    color: #888;
+    color: rgba(255, 255, 255, 0.4);
     font-size: 11px;
     min-width: 36px;
     text-align: right;

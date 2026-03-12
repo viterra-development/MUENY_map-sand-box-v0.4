@@ -141,13 +141,16 @@ document.addEventListener('click', (e) => {
 });
 
 // ============================================
-// 3. SUMMARY STATS PANEL
+// 3. SUMMARY STATS PANEL (renders into #trip-panel right panel)
 // ============================================
 let statsElement = null;
-let statsCollapsed = false;
 
 export function createStatsPanel(geojsonData) {
-    if (statsElement) statsElement.remove();
+    const container = document.getElementById('trip-panel');
+    if (!container) {
+        console.warn('[parcelTripUI] #trip-panel container not found');
+        return;
+    }
 
     // Compute summary stats from the GeoJSON
     const features = geojsonData.features || [];
@@ -195,11 +198,10 @@ export function createStatsPanel(geojsonData) {
     statsElement = document.createElement('div');
     statsElement.id = 'trip-stats-panel';
     statsElement.innerHTML = `
-        <div class="trip-stats-header" id="trip-stats-toggle">
+        <div class="trip-stats-header">
             <span>Trip Generation Summary</span>
-            <span class="trip-stats-arrow">▼</span>
         </div>
-        <div class="trip-stats-content" id="trip-stats-content">
+        <div class="trip-stats-content">
             <div class="trip-stats-totals">
                 <div class="trip-stats-total-item">
                     <div class="trip-stats-total-val">${totalParcels.toLocaleString()}</div>
@@ -225,21 +227,18 @@ export function createStatsPanel(geojsonData) {
             </div>
         </div>
     `;
-    document.body.appendChild(statsElement);
 
-    // Toggle collapse
-    document.getElementById('trip-stats-toggle').addEventListener('click', () => {
-        statsCollapsed = !statsCollapsed;
-        const content = document.getElementById('trip-stats-content');
-        const arrow = statsElement.querySelector('.trip-stats-arrow');
-        content.style.display = statsCollapsed ? 'none' : 'block';
-        arrow.textContent = statsCollapsed ? '▲' : '▼';
-    });
+    container.innerHTML = '';
+    container.appendChild(statsElement);
+    container.classList.add('trip-panel-visible');
 }
 
 export function removeStatsPanel() {
-    if (statsElement) {
-        statsElement.remove();
-        statsElement = null;
+    const container = document.getElementById('trip-panel');
+    if (container) {
+        container.classList.remove('trip-panel-visible');
+        container.classList.remove('mobile-open');
+        container.innerHTML = '';
     }
+    statsElement = null;
 }
