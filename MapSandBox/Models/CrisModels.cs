@@ -666,6 +666,21 @@ public class CrashSummaryDeckGl
     public string SlopeCategory { get; set; } = ""; // Flat/Moderate/Steep
 }
 
+public class IntersectionPopupData
+{
+    public string IntersectionId { get; set; } = "";
+    public double RiskScore { get; set; }
+    public RiskLevel RiskLevel { get; set; }
+    public int CrashCount { get; set; }
+    public int FatalCrashes { get; set; }
+    public int InjuryCrashes { get; set; }
+    public int PropertyDamageCrashes { get; set; }
+    public List<string> ResolvedRoads { get; set; } = new();
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+    public List<CrashRecord> RecentCrashes { get; set; } = new();
+}
+
 public class DeckGlDataCollection<T>
 {
     public T[] Data { get; set; } = Array.Empty<T>();

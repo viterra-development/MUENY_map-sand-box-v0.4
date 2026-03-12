@@ -362,11 +362,8 @@ public class MapLibreService
                 Visible = false,
                 Properties = new Dictionary<string, object>
                 {
-                    ["radiusMinPixels"] = 6,
-                    ["radiusMaxPixels"] = 25,
-                    ["stroked"] = true,
-                    ["getLineColor"] = "[0, 0, 0, 255]",
-                    ["lineWidthMinPixels"] = 1
+                    ["sizeMinPixels"] = 16,
+                    ["sizeMaxPixels"] = 32
                 }
             },
             new LayerConfig

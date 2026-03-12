@@ -80,6 +80,7 @@
         <CrashClusterPopup @ref="crashClusterPopup" />
         <CityBoundaryPopup @ref="cityBoundaryPopup" />
         <CrisRoadSegmentPopup @ref="roadSegmentPopup" />
+        <CrisIntersectionPopup @ref="intersectionPopup" />
     </div>
 
     <aside id="trip-panel" class="trip-panel"></aside>
@@ -94,6 +95,7 @@
     private CrashClusterPopup? crashClusterPopup;
     private CityBoundaryPopup? cityBoundaryPopup;
     private CrisRoadSegmentPopup? roadSegmentPopup;
+    private CrisIntersectionPopup? intersectionPopup;
 
     private MapLibreConfig mapConfig = new();
     private List<BaseMapStyle> availableStyles = new();

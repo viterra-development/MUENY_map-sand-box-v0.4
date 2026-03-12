@@ -1,0 +1,380 @@
+@using MapSandBox.Models
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+@if (IsVisible && Intersection != null)
+{
+    <div class="cris-popup-overlay" @onclick="Close">
+        <div class="cris-intersection-card" @onclick:stopPropagation="true">
+            <div class="popup-header">
+                <div class="header-content">
+                    <h4>⚠️ @RoadsDisplay</h4>
+                    <div class="intersection-id">@($"{Intersection.Latitude:F5}, {Intersection.Longitude:F5}")</div>
+                </div>
+                <button class="close-btn" @onclick="Close">×</button>
+            </div>
+
+            <div class="risk-overview">
+                <div class="risk-score-display">
+                    <span class="risk-score">@Intersection.RiskScore.ToString("F3")</span>
+                    <span class="risk-level @GetRiskLevelClass()">@Intersection.RiskLevel</span>
+                </div>
+            </div>
+
+            <div class="crash-overview">
+                <div class="crash-total">
+                    <span class="crash-total-num">@Intersection.CrashCount</span>
+                    <span class="crash-total-label">Total Crashes</span>
+                </div>
+                <div class="crash-breakdown">
+                    <div class="breakdown-item fatal">
+                        <span class="breakdown-num">@Intersection.FatalCrashes</span>
+                        <span class="breakdown-label">Fatal</span>
+                    </div>
+                    <div class="breakdown-item injury">
+                        <span class="breakdown-num">@Intersection.InjuryCrashes</span>
+                        <span class="breakdown-label">Injury</span>
+                    </div>
+                    <div class="breakdown-item pdo">
+                        <span class="breakdown-num">@Intersection.PropertyDamageCrashes</span>
+                        <span class="breakdown-label">PDO</span>
+                    </div>
+                </div>
+            </div>
+
+            @if (Intersection.RecentCrashes.Any())
+            {
+                <div class="recent-crashes-section">
+                    <h5>🚨 Recent Crashes</h5>
+                    <div class="crash-list-scrollable">
+                        @foreach (var crash in GetSortedCrashes())
+                        {
+                            <div class="crash-item @GetSeverityClass(crash.Severity)">
+                                <div class="crash-date">@crash.CrashDateTime.ToString("MM/dd/yyyy")</div>
+                                <div class="crash-severity">@GetSeverityDisplayName(crash.Severity)</div>
+                                <div class="crash-details">@crash.PersonsInvolved persons, @crash.VehiclesInvolved vehicles</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<style>
+.cris-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.cris-intersection-card {
+    background: white;
+    width: 480px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    font-family: Arial, sans-serif;
+}
+
+.cris-intersection-card .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.cris-intersection-card .header-content {
+    flex: 1;
+}
+
+.cris-intersection-card .popup-header h4 {
+    margin: 0 0 4px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.cris-intersection-card .intersection-id {
+    font-size: 12px;
+    color: #666;
+    font-family: monospace;
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.cris-intersection-card .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cris-intersection-card .close-btn:hover {
+    color: #333;
+}
+
+.cris-intersection-card .risk-overview {
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.cris-intersection-card .risk-score-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cris-intersection-card .risk-score {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.cris-intersection-card .risk-level {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cris-intersection-card .risk-level.very-high { background: #dc3545; color: white; }
+.cris-intersection-card .risk-level.high { background: #fd7e14; color: white; }
+.cris-intersection-card .risk-level.moderate { background: #ffc107; color: #333; }
+.cris-intersection-card .risk-level.low { background: #17a2b8; color: white; }
+.cris-intersection-card .risk-level.very-low { background: #28a745; color: white; }
+
+.crash-overview {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.crash-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.crash-total-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: #333;
+    line-height: 1;
+}
+
+.crash-total-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+.crash-breakdown {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+}
+
+.breakdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    flex: 1;
+}
+
+.breakdown-item.fatal { background: #f8d7da; }
+.breakdown-item.injury { background: #fff3cd; }
+.breakdown-item.pdo { background: #d1ecf1; }
+
+.breakdown-num {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.breakdown-item.fatal .breakdown-num { color: #dc3545; }
+.breakdown-item.injury .breakdown-num { color: #fd7e14; }
+.breakdown-item.pdo .breakdown-num { color: #17a2b8; }
+
+.breakdown-label {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+}
+
+.cris-intersection-card .recent-crashes-section {
+    padding: 15px;
+}
+
+.cris-intersection-card .recent-crashes-section h5 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.cris-intersection-card .crash-list-scrollable {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.cris-intersection-card .crash-item {
+    padding: 8px;
+    border-radius: 4px;
+    border-left: 3px solid;
+    font-size: 12px;
+}
+
+.cris-intersection-card .crash-item.fatal { background: #f8d7da; border-left-color: #dc3545; }
+.cris-intersection-card .crash-item.incapacitating { background: #fff3cd; border-left-color: #fd7e14; }
+.cris-intersection-card .crash-item.non-incapacitating { background: #fff3cd; border-left-color: #ffc107; }
+.cris-intersection-card .crash-item.possible { background: #d1ecf1; border-left-color: #17a2b8; }
+.cris-intersection-card .crash-item.no-injury { background: #d4edda; border-left-color: #28a745; }
+
+.cris-intersection-card .crash-date { font-weight: 600; margin-bottom: 2px; }
+.cris-intersection-card .crash-severity { color: #666; margin-bottom: 2px; }
+.cris-intersection-card .crash-details { font-size: 11px; color: #666; }
+</style>
+
+@code {
+    [Parameter] public IntersectionPopupData? Intersection { get; set; }
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private DotNetObjectReference<CrisIntersectionPopup>? _objectReference;
+    private IJSObjectReference? _jsModule;
+
+    private string RoadsDisplay =>
+        Intersection?.ResolvedRoads != null && Intersection.ResolvedRoads.Any()
+            ? string.Join(" & ", Intersection.ResolvedRoads)
+            : "Unknown roads";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/crisIntersectionPopup.js");
+            _objectReference = DotNetObjectReference.Create(this);
+            await _jsModule.InvokeVoidAsync("setCrisIntersectionPopupInstance", _objectReference);
+        }
+    }
+
+    public void Show(IntersectionPopupData data)
+    {
+        Intersection = data;
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void ShowPopupFromJS(IntersectionPopupData data)
+    {
+        Console.WriteLine($"ShowPopupFromJS called for intersection: {data?.IntersectionId}");
+        Show(data);
+    }
+
+    private async Task Close()
+    {
+        IsVisible = false;
+        await OnClose.InvokeAsync();
+        StateHasChanged();
+    }
+
+    private string GetRiskLevelClass()
+    {
+        return Intersection?.RiskLevel.ToString().ToLower().Replace("very", "very-") ?? "low";
+    }
+
+    private string GetSeverityClass(KabcoSeverity severity)
+    {
+        return severity switch
+        {
+            KabcoSeverity.K_Fatal => "fatal",
+            KabcoSeverity.A_IncapacitatingInjury => "incapacitating",
+            KabcoSeverity.B_NonIncapacitatingInjury => "non-incapacitating",
+            KabcoSeverity.C_PossibleInjury => "possible",
+            KabcoSeverity.O_NoInjury => "no-injury",
+            _ => "unknown"
+        };
+    }
+
+    private string GetSeverityDisplayName(KabcoSeverity severity)
+    {
+        return severity switch
+        {
+            KabcoSeverity.K_Fatal => "Fatal (K)",
+            KabcoSeverity.A_IncapacitatingInjury => "Incapacitating (A)",
+            KabcoSeverity.B_NonIncapacitatingInjury => "Non-Incapacitating (B)",
+            KabcoSeverity.C_PossibleInjury => "Possible Injury (C)",
+            KabcoSeverity.O_NoInjury => "No Injury (O)",
+            _ => "Unknown"
+        };
+    }
+
+    private IEnumerable<CrashRecord> GetSortedCrashes()
+    {
+        if (Intersection?.RecentCrashes == null) return Enumerable.Empty<CrashRecord>();
+
+        var severityOrder = new Dictionary<KabcoSeverity, int>
+        {
+            { KabcoSeverity.K_Fatal, 0 },
+            { KabcoSeverity.A_IncapacitatingInjury, 1 },
+            { KabcoSeverity.B_NonIncapacitatingInjury, 2 },
+            { KabcoSeverity.C_PossibleInjury, 3 },
+            { KabcoSeverity.O_NoInjury, 4 },
+            { KabcoSeverity.Unknown, 5 }
+        };
+
+        return Intersection.RecentCrashes
+            .OrderByDescending(c => c.CrashDateTime)
+            .ThenBy(c => severityOrder.GetValueOrDefault(c.Severity, 5));
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule != null && _objectReference != null)
+        {
+            await _jsModule.InvokeVoidAsync("clearCrisIntersectionPopupInstance");
+            _objectReference.Dispose();
+            await _jsModule.DisposeAsync();
+        }
+    }
+}

@@ -84,7 +84,7 @@
           { id: 'cris-crashes', type: 'ScatterplotLayer', dataUrl: '/cris-data/parker-county-crashes-clustered-deckgl.json', visible: true,
             properties: { radiusMinPixels: 4, radiusMaxPixels: 25, stroked: false, pickable: true, autoHighlight: true }},
           { id: 'cris-intersections', type: 'ScatterplotLayer', dataUrl: '/cris-data/parker-county-intersection-risks-deckgl.json', visible: false,
-            properties: { radiusMinPixels: 6, radiusMaxPixels: 25, stroked: true, getLineColor: '[0, 0, 0, 255]', lineWidthMinPixels: 1 }},
+            properties: { sizeMinPixels: 16, sizeMaxPixels: 32 }},
           { id: 'txdot-city-boundaries', type: 'GeoJson', dataUrl: '/txdot-city-boundaries.geojson', visible: false,
             properties: { filled: true, stroked: true, getFillColor: [100,150,200,30], getLineColor: [0,100,200,255], getLineWidth: 2, lineWidthMinPixels: 1, lineWidthMaxPixels: 3, opacity: 0.6, pickable: true, autoHighlight: true, onClick: 'handleCityBoundaryClick' }},
           { id: 'wp-parcels-trips', type: 'GeoJson', dataUrl: '/willow-park-parcels-with-trips.geojson', visible: false,

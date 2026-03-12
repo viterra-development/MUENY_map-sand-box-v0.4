@@ -385,9 +385,14 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         },
                         onClick: handleRiskSegmentClick,
                         onDataLoad: data => {
-                            if (data && data.features) {
+                            if (Array.isArray(data)) {
+                                console.log(`✅ CRIS Risk Segments loaded ${data.length} features`);
+                                _riskSegmentData = data;
+                                resolveIntersectionRoads();
+                            } else if (data && data.features) {
                                 console.log(`✅ CRIS Risk Segments loaded ${data.features.length} features`);
-                                console.log('Sample segment:', data.features[0]);
+                                _riskSegmentData = data.features;
+                                resolveIntersectionRoads();
                             }
                         }
                     }));
@@ -576,25 +581,29 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         }
                     }));
                 } else if (config.id === 'cris-intersections') {
-                    deckLayers.push(new deck.ScatterplotLayer({
+                    deckLayers.push(new deck.IconLayer({
                         id: config.id,
                         data: config.dataUrl,
-                        radiusMinPixels: 6,
-                        radiusMaxPixels: 25,
                         getPosition: d => d.Coordinates,
-                        getRadius: d => Math.max(8, Math.min(25, Math.sqrt(d.CrashCount || 1) * 8)),
-                        getFillColor: d => getRiskLevelColor(d.RiskLevel),
-                        stroked: true,
-                        getLineColor: [0, 0, 0, 255],
-                        lineWidthMinPixels: 1,
+                        getIcon: d => ({
+                            url: getIntersectionIconUrl(d.RiskLevel),
+                            width: 64,
+                            height: 64,
+                            anchorY: 32
+                        }),
+                        getSize: d => Math.min(28, 18 + (d.CrashCount || 1) * 2),
+                        sizeScale: 1,
+                        sizeMinPixels: 16,
+                        sizeMaxPixels: 32,
                         pickable: true,
                         autoHighlight: true,
                         highlightColor: [255, 255, 255, 128],
-                        onClick: handleIntersectionClick,
+                        onClick: handleIntersectionRiskClick,
                         onDataLoad: data => {
-                            if (data && data.features) {
-                                console.log(`✅ CRIS Intersections loaded ${data.features.length} features`);
-                                console.log('Sample intersection:', data.features[0]);
+                            if (Array.isArray(data)) {
+                                console.log(`✅ CRIS Intersections loaded ${data.length} features`);
+                                _intersectionData = data;
+                                resolveIntersectionRoads();
                             }
                         }
                     }));
@@ -816,14 +825,17 @@ function getLayerProperties(config) {
             properties.onClick = handleRiskSegmentClick;
             break;
         case 'cris-intersections':
-            properties.radiusMinPixels = 6;
-            properties.radiusMaxPixels = 25;
             properties.getPosition = d => d.Coordinates;
-            properties.getRadius = d => Math.sqrt(d.CrashCount || 1) * 100;
-            properties.getFillColor = d => getRiskLevelColor(d.RiskLevel);
-            properties.stroked = true;
-            properties.getLineColor = [0, 0, 0, 255];
-            properties.lineWidthMinPixels = 1;
+            properties.getIcon = d => ({
+                url: getIntersectionIconUrl(d.RiskLevel),
+                width: 64,
+                height: 64,
+                anchorY: 32
+            });
+            properties.getSize = d => Math.min(28, 18 + (d.CrashCount || 1) * 2);
+            properties.sizeScale = 1;
+            properties.sizeMinPixels = 16;
+            properties.sizeMaxPixels = 32;
             properties.pickable = true;
             properties.autoHighlight = true;
             properties.highlightColor = [255, 255, 255, 128];
@@ -1356,6 +1368,69 @@ function getRiskLevelColor(riskLevel) {
     }
 }
 
+// ============================================
+// CRIS Intersection Icon + Road Resolution
+// ============================================
+let _intersectionData = null;
+let _riskSegmentData = null;
+const _iconUrlCache = {};
+
+function getIntersectionIconUrl(riskLevel) {
+    if (_iconUrlCache[riskLevel]) return _iconUrlCache[riskLevel];
+
+    const colorMap = {
+        'VeryHigh': '#8B0000',
+        'High': '#FF4500',
+        'Moderate': '#FF8C00',
+        'Low': '#FFD700',
+        'VeryLow': '#32CD32'
+    };
+    const fill = colorMap[riskLevel] || '#808080';
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+        <path d="M32 4 L60 56 L4 56 Z" fill="${fill}" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+        <text x="32" y="46" text-anchor="middle" font-size="26" font-weight="bold" fill="#fff" font-family="Arial">!</text>
+    </svg>`;
+
+    const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    _iconUrlCache[riskLevel] = url;
+    return url;
+}
+
+function resolveIntersectionRoads() {
+    if (!_intersectionData || !_riskSegmentData) return;
+    console.log(`🔍 Resolving road names for ${_intersectionData.length} intersections from ${_riskSegmentData.length} segments`);
+
+    const THRESHOLD_DEG = 0.0005; // ~50 meters
+
+    _intersectionData.forEach(intersection => {
+        const iLng = intersection.Coordinates[0];
+        const iLat = intersection.Coordinates[1];
+        const roadNames = new Set();
+
+        for (const seg of _riskSegmentData) {
+            const name = seg.RoadName;
+            if (!name || name === 'Unnamed Road') continue;
+
+            // Check segment start/end points
+            const sLat = seg.StartLatitude;
+            const sLng = seg.StartLongitude;
+            const eLat = seg.EndLatitude;
+            const eLng = seg.EndLongitude;
+
+            if ((Math.abs(sLat - iLat) < THRESHOLD_DEG && Math.abs(sLng - iLng) < THRESHOLD_DEG) ||
+                (Math.abs(eLat - iLat) < THRESHOLD_DEG && Math.abs(eLng - iLng) < THRESHOLD_DEG)) {
+                roadNames.add(name);
+            }
+        }
+
+        intersection.ResolvedRoads = Array.from(roadNames);
+    });
+
+    const resolved = _intersectionData.filter(i => i.ResolvedRoads && i.ResolvedRoads.length > 0).length;
+    console.log(`✅ Resolved road names for ${resolved}/${_intersectionData.length} intersections`);
+}
+
 // Crash points visualization functions
 function getCrashPosition(feature) {
     return [feature.properties.longitude, feature.properties.latitude];
@@ -1500,37 +1575,6 @@ async function handleCityBoundaryHover(info) {
     }
 }
 
-function handleIntersectionClick(info) {
-    console.log('handleIntersectionClick called with:', info);
-
-    if (info.object) {
-        const intersection = info.object; // Properties are now at root level after dataTransform
-
-        const recentCrashes = intersection.recent_crashes || [];
-        const crashesList = recentCrashes.length > 0
-            ? recentCrashes.map(c => `• ${c.crash_date}: ${c.severity} (${c.persons_involved} persons)`).join('\n')
-            : 'No recent crash details available';
-
-        const message = `Intersection Risk Analysis
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Risk Level: ${intersection.risk_level}
-Risk Score: ${intersection.risk_score?.toFixed(3) || 'N/A'}
-Total Crashes: ${intersection.crash_count}
-
-Crash Breakdown:
-• Fatal: ${intersection.fatal_crashes || 0}
-• Injury: ${intersection.injury_crashes || 0}
-• Property Damage: ${intersection.property_damage_crashes || 0}
-
-Recent Crashes:
-${crashesList}
-
-Location: ${intersection.latitude?.toFixed(6)}, ${intersection.longitude?.toFixed(6)}`;
-
-        alert(message);
-    }
-}
-
 function handleRiskSegmentClick(info) {
     console.log('handleRiskSegmentClick called with:', info);
 
@@ -1661,39 +1705,92 @@ function handleRiskSegmentClick(info) {
 }
 
 function handleIntersectionRiskClick(info) {
-    if (info.object) {
-        const intersection = info.object;
-        const riskScore = typeof intersection.RiskScore === 'number'
-            ? intersection.RiskScore.toFixed(3)
-            : 'N/A';
-        const crashCount = intersection.CrashCount || 0;
-        const roads = intersection.IntersectingRoads || [];
-        const roadsText = Array.isArray(roads) && roads.length > 0
-            ? roads.join(' & ')
-            : 'Unknown roads';
-        const riskLevel = intersection.RiskLevel || 'Unknown';
+    if (!info.object) return;
 
-        const riskColors = {
-            'VeryLow': '#2ecc71', 'Low': '#27ae60',
-            'Moderate': '#f39c12', 'High': '#e74c3c', 'VeryHigh': '#c0392b'
+    const intersection = info.object;
+    const riskScore = typeof intersection.RiskScore === 'number' ? intersection.RiskScore.toFixed(3) : 'N/A';
+    const crashCount = intersection.CrashCount || 0;
+    const riskLevel = intersection.RiskLevel || 'Unknown';
+    const fatal = intersection.FatalCrashes || 0;
+    const injury = intersection.InjuryCrashes || 0;
+    const pdo = intersection.PropertyDamageCrashes || 0;
+    const recentCrashes = (intersection.RecentCrashes || []).slice(0, 3);
+
+    // Use resolved roads or fall back to IntersectingRoads
+    const roads = (intersection.ResolvedRoads && intersection.ResolvedRoads.length > 0)
+        ? intersection.ResolvedRoads
+        : (intersection.IntersectingRoads || []);
+    const roadsText = roads.length > 0 ? roads.join(' & ') : 'Unknown roads';
+
+    // Try Blazor popup first
+    if (window.crisIntersectionPopupInstance) {
+        const convertSeverity = (s) => {
+            const map = { 'K_Fatal': 0, 'A_IncapacitatingInjury': 1, 'B_NonIncapacitatingInjury': 2, 'C_PossibleInjury': 3, 'O_NoInjury': 4 };
+            return map[s] ?? 5;
         };
-        const riskColor = riskColors[riskLevel] || '#95a5a6';
+        const popupData = {
+            intersectionId: intersection.IntersectionId || '',
+            riskScore: intersection.RiskScore || 0,
+            riskLevel: ({ 'VeryLow': 1, 'Low': 2, 'Moderate': 3, 'High': 4, 'VeryHigh': 5 })[riskLevel] ?? 3,
+            crashCount: crashCount,
+            fatalCrashes: fatal,
+            injuryCrashes: injury,
+            propertyDamageCrashes: pdo,
+            resolvedRoads: roads,
+            latitude: intersection.Latitude || 0,
+            longitude: intersection.Longitude || 0,
+            recentCrashes: (intersection.RecentCrashes || []).map(c => ({
+                crashId: c.CrashId || '',
+                crashDateTime: c.CrashDate || '',
+                severity: convertSeverity(c.Severity),
+                personsInvolved: c.PersonsInvolved || 0,
+                vehiclesInvolved: c.VehiclesInvolved || 0,
+                fatalCount: c.FatalCount || 0,
+                injuryCount: c.InjuryCount || 0
+            }))
+        };
+        window.crisIntersectionPopupInstance.invokeMethodAsync('ShowPopupFromJS', popupData)
+            .then(() => console.log('✅ Intersection popup opened via Blazor'))
+            .catch(err => {
+                console.error('Blazor intersection popup error:', err);
+                showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, crashCount, fatal, injury, pdo, recentCrashes);
+            });
+    } else {
+        showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, crashCount, fatal, injury, pdo, recentCrashes);
+    }
+}
 
-        if (maplibreMap && info.coordinate) {
-            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '300px' })
-                .setLngLat(info.coordinate)
-                .setHTML(`
-                    <div style="font-family: Arial, sans-serif; padding: 4px;">
-                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${roadsText}</div>
-                        <div style="display: inline-block; padding: 2px 8px; border-radius: 3px; background: ${riskColor}; color: white; font-size: 11px; font-weight: bold; margin-bottom: 6px;">${riskLevel}</div>
-                        <div style="font-size: 12px; color: #555;">
-                            <div><strong>Risk Score:</strong> ${riskScore}</div>
-                            <div><strong>Crashes:</strong> ${crashCount}</div>
-                        </div>
+function showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, crashCount, fatal, injury, pdo, recentCrashes) {
+    const riskColors = {
+        'VeryLow': '#28a745', 'Low': '#27ae60',
+        'Moderate': '#f39c12', 'High': '#e74c3c', 'VeryHigh': '#c0392b'
+    };
+    const riskColor = riskColors[riskLevel] || '#95a5a6';
+
+    const crashRows = recentCrashes.map(c =>
+        `<div style="padding:3px 0;border-bottom:1px solid #eee;font-size:11px;">
+            <span style="font-weight:600">${c.CrashDate || 'N/A'}</span>
+            <span style="margin-left:6px;color:#666">${c.Severity || ''}</span>
+            <span style="margin-left:6px;color:#999">${c.PersonsInvolved || 0} persons</span>
+        </div>`
+    ).join('');
+
+    if (maplibreMap && info.coordinate) {
+        new maplibregl.Popup({ closeOnClick: true, maxWidth: '320px', className: 'cris-intersection-popup' })
+            .setLngLat(info.coordinate)
+            .setHTML(`
+                <div style="font-family:Arial,sans-serif;padding:6px;">
+                    <div style="font-weight:bold;font-size:14px;margin-bottom:6px;">⚠️ ${roadsText}</div>
+                    <div style="display:inline-block;padding:2px 10px;border-radius:3px;background:${riskColor};color:#fff;font-size:11px;font-weight:bold;margin-bottom:8px;">${riskLevel}</div>
+                    <span style="margin-left:8px;font-size:12px;color:#555;">Score: ${riskScore}</span>
+                    <div style="margin-top:8px;font-size:12px;color:#333;">
+                        <strong>Crashes:</strong> ${crashCount}
+                        &nbsp;|&nbsp; Fatal: ${fatal} &nbsp;|&nbsp; Injury: ${injury} &nbsp;|&nbsp; PDO: ${pdo}
                     </div>
-                `)
-                .addTo(maplibreMap);
-        }
+                    ${recentCrashes.length > 0 ? `<div style="margin-top:8px;"><div style="font-size:11px;font-weight:600;color:#555;margin-bottom:4px;">Recent Crashes</div>${crashRows}</div>` : ''}
+                </div>
+            `)
+            .addTo(maplibreMap);
     }
 }
 
