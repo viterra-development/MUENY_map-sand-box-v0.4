@@ -581,17 +581,17 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         }
                     }));
                 } else if (config.id === 'cris-intersections') {
-                    deckLayers.push(new deck.IconLayer({
+                    deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
                         getPosition: d => d.Coordinates,
-                        iconAtlas: buildIntersectionIconAtlas(),
-                        iconMapping: buildIntersectionIconMapping(),
-                        getIcon: d => `risk-${d.RiskLevel || 'Unknown'}`,
-                        getSize: d => Math.min(28, 18 + (d.CrashCount || 1) * 2),
-                        sizeScale: 1,
-                        sizeMinPixels: 16,
-                        sizeMaxPixels: 32,
+                        getRadius: 6,
+                        radiusMinPixels: 5,
+                        radiusMaxPixels: 12,
+                        getFillColor: d => getRiskLevelColor(d.RiskLevel),
+                        stroked: true,
+                        getLineColor: [255, 255, 255, 220],
+                        lineWidthMinPixels: 2,
                         pickable: true,
                         autoHighlight: true,
                         highlightColor: [255, 255, 255, 128],
@@ -602,6 +602,25 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                                 _intersectionData = data;
                                 resolveIntersectionRoads();
                             }
+                        }
+                    }));
+                    // Add text overlay for the ⚠ symbol
+                    deckLayers.push(new deck.TextLayer({
+                        id: config.id + '-labels',
+                        data: config.dataUrl,
+                        getPosition: d => d.Coordinates,
+                        getText: () => '⚠',
+                        getSize: 14,
+                        sizeMinPixels: 12,
+                        sizeMaxPixels: 18,
+                        getColor: [255, 255, 255, 240],
+                        fontFamily: 'Arial',
+                        fontWeight: 'bold',
+                        getTextAnchor: 'middle',
+                        getAlignmentBaseline: 'center',
+                        pickable: false,
+                        onDataLoad: data => {
+                            console.log(`✅ CRIS Intersection labels loaded`);
                         }
                     }));
                 } else if (config.id === 'noaa-rainfall-parker-points') {
@@ -823,13 +842,13 @@ function getLayerProperties(config) {
             break;
         case 'cris-intersections':
             properties.getPosition = d => d.Coordinates;
-            properties.iconAtlas = buildIntersectionIconAtlas();
-            properties.iconMapping = buildIntersectionIconMapping();
-            properties.getIcon = d => `risk-${d.RiskLevel || 'Unknown'}`;
-            properties.getSize = d => Math.min(28, 18 + (d.CrashCount || 1) * 2);
-            properties.sizeScale = 1;
-            properties.sizeMinPixels = 16;
-            properties.sizeMaxPixels = 32;
+            properties.getRadius = 6;
+            properties.radiusMinPixels = 5;
+            properties.radiusMaxPixels = 12;
+            properties.getFillColor = d => getRiskLevelColor(d.RiskLevel);
+            properties.stroked = true;
+            properties.getLineColor = [255, 255, 255, 220];
+            properties.lineWidthMinPixels = 2;
             properties.pickable = true;
             properties.autoHighlight = true;
             properties.highlightColor = [255, 255, 255, 128];
@@ -1367,77 +1386,6 @@ function getRiskLevelColor(riskLevel) {
 // ============================================
 let _intersectionData = null;
 let _riskSegmentData = null;
-let _intersectionIconAtlas = null;
-let _intersectionIconMapping = null;
-
-const ICON_SIZE = 64;
-const RISK_LEVELS = ['VeryHigh', 'High', 'Moderate', 'Low', 'VeryLow', 'Unknown'];
-const RISK_COLORS = {
-    'VeryHigh': '#8B0000',
-    'High': '#FF4500',
-    'Moderate': '#FF8C00',
-    'Low': '#FFD700',
-    'VeryLow': '#32CD32',
-    'Unknown': '#808080'
-};
-
-function buildIntersectionIconAtlas() {
-    if (_intersectionIconAtlas) return _intersectionIconAtlas;
-
-    const cols = RISK_LEVELS.length;
-    const canvas = document.createElement('canvas');
-    canvas.width = ICON_SIZE * cols;
-    canvas.height = ICON_SIZE;
-    const ctx = canvas.getContext('2d');
-
-    RISK_LEVELS.forEach((level, i) => {
-        const x = i * ICON_SIZE;
-        const cx = x + ICON_SIZE / 2;
-        const fill = RISK_COLORS[level];
-
-        // Draw warning triangle
-        ctx.beginPath();
-        ctx.moveTo(cx, x ? 4 : 4);    // top
-        ctx.moveTo(cx, 4);
-        ctx.lineTo(x + ICON_SIZE - 4, ICON_SIZE - 4);
-        ctx.lineTo(x + 4, ICON_SIZE - 4);
-        ctx.closePath();
-        ctx.fillStyle = fill;
-        ctx.fill();
-        ctx.strokeStyle = '#000';
-        ctx.lineWidth = 2;
-        ctx.lineJoin = 'round';
-        ctx.stroke();
-
-        // Draw exclamation mark
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 28px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('!', cx, ICON_SIZE / 2 + 6);
-    });
-
-    _intersectionIconAtlas = canvas;
-    return canvas;
-}
-
-function buildIntersectionIconMapping() {
-    if (_intersectionIconMapping) return _intersectionIconMapping;
-
-    const mapping = {};
-    RISK_LEVELS.forEach((level, i) => {
-        mapping[`risk-${level}`] = {
-            x: i * ICON_SIZE,
-            y: 0,
-            width: ICON_SIZE,
-            height: ICON_SIZE,
-            anchorY: ICON_SIZE / 2
-        };
-    });
-
-    _intersectionIconMapping = mapping;
-    return mapping;
-}
 
 function resolveIntersectionRoads() {
     if (!_intersectionData || !_riskSegmentData) return;
