@@ -22,6 +22,7 @@ export function createLegend() {
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(255,183,77)"></span> 10–49</div>
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(65,182,196)"></span> 1–9</div>
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(200,200,200)"></span> 0 / Unknown</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(34,139,34)"></span> City-Owned</div>
     `;
     const mapContainer = document.getElementById('map-wrapper')
         || document.querySelector('.map-section')

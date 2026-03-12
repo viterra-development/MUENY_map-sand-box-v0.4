@@ -846,6 +846,10 @@ function getLayerProperties(config) {
             properties.filled = true;
             properties.stroked = true;
             properties.getFillColor = d => {
+                const owner = (d.properties && d.properties.owner) || '';
+                if (owner.includes('CITY OF WILLOW PARK') || owner.includes('WILLOW PARK CITY OF')) {
+                    return [34, 139, 34, 200];                     // Green - city-owned
+                }
                 const trips = (d.properties && d.properties.daily_trips) || 0;
                 if (trips === 0) return [200, 200, 200, 80];      // Gray - no trips
                 if (trips < 10) return [65, 182, 196, 160];       // Teal - residential
