@@ -1422,7 +1422,7 @@ function resolveIntersectionRoads() {
     if (!_intersectionData || !_riskSegmentData) return;
     console.log(`🔍 Resolving road names for ${_intersectionData.length} intersections from ${_riskSegmentData.length} segments`);
 
-    const THRESHOLD_DEG = 0.0005; // ~50 meters
+    const THRESHOLD_DEG = 0.0003; // ~33 meters (tighter threshold since we check all vertices)
 
     _intersectionData.forEach(intersection => {
         const iLng = intersection.Coordinates[0];
@@ -1433,15 +1433,15 @@ function resolveIntersectionRoads() {
             const name = seg.RoadName;
             if (!name || name === 'Unnamed Road') continue;
 
-            // Check segment start/end points
-            const sLat = seg.StartLatitude;
-            const sLng = seg.StartLongitude;
-            const eLat = seg.EndLatitude;
-            const eLng = seg.EndLongitude;
-
-            if ((Math.abs(sLat - iLat) < THRESHOLD_DEG && Math.abs(sLng - iLng) < THRESHOLD_DEG) ||
-                (Math.abs(eLat - iLat) < THRESHOLD_DEG && Math.abs(eLng - iLng) < THRESHOLD_DEG)) {
-                roadNames.add(name);
+            // Check all coordinate vertices along the segment path
+            const coords = seg.Coordinates;
+            if (coords && coords.length > 0) {
+                for (const coord of coords) {
+                    if (Math.abs(coord[1] - iLat) < THRESHOLD_DEG && Math.abs(coord[0] - iLng) < THRESHOLD_DEG) {
+                        roadNames.add(name);
+                        break;
+                    }
+                }
             }
         }
 
