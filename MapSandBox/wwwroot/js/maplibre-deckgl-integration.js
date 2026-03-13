@@ -891,6 +891,37 @@ function getLayerProperties(config) {
             properties.highlightColor = [255, 255, 255, 150];
             properties.onClick = handleParcelTripClick;
             break;
+        case 'cris-road-stress':
+            properties.filled = false;
+            properties.stroked = true;
+            properties.getLineColor = d => {
+                const tier = d.properties && d.properties.stress_tier;
+                switch (tier) {
+                    case 'CRITICAL': return [239, 68, 68, 217];   // #ef4444
+                    case 'HIGH':     return [249, 115, 22, 217];  // #f97316
+                    case 'MODERATE': return [234, 179, 8, 217];   // #eab308
+                    case 'LOW':
+                    default:         return [34, 197, 94, 217];   // #22c55e
+                }
+            };
+            properties.getLineWidth = d => {
+                const tier = d.properties && d.properties.stress_tier;
+                switch (tier) {
+                    case 'CRITICAL': return 5;
+                    case 'HIGH':     return 4;
+                    case 'MODERATE': return 3;
+                    case 'LOW':
+                    default:         return 2;
+                }
+            };
+            properties.lineWidthMinPixels = 1;
+            properties.lineWidthMaxPixels = 8;
+            properties.opacity = 0.85;
+            properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.highlightColor = [255, 255, 255, 128];
+            properties.onClick = handleRoadStressClick;
+            break;
     }
 
     return properties;
@@ -1781,6 +1812,34 @@ function showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, cr
                 </div>
             `)
             .addTo(maplibreMap);
+    }
+}
+
+function handleRoadStressClick(info) {
+    if (!info.object) return;
+
+    const props = info.object.properties || info.object;
+    console.log('handleRoadStressClick:', props);
+
+    if (window.roadStressPopupInstance) {
+        const popupData = {
+            fullName: props.fullName || props.FullName || null,
+            roadStressIndex: parseFloat(props.road_stress_index) || 0,
+            stressTier: props.stress_tier || 'LOW',
+            recV2: parseFloat(props.rec_v2) || 0,
+            trafficDominanceType: props.traffic_dominance_type || 'UNKNOWN',
+            structuralClassScore: parseInt(props.structural_class_score) || 3,
+            measuredAadt: props.measured_aadt != null ? parseFloat(props.measured_aadt) : null,
+            totalDailyTrips: parseFloat(props.total_daily_trips) || 0,
+            parcelCount: parseInt(props.parcel_count) || 0,
+            peakToAverageRatio: parseFloat(props.peak_to_average_ratio) || 0,
+            landUseEntropy: parseFloat(props.land_use_entropy) || 0
+        };
+        window.roadStressPopupInstance.invokeMethodAsync('ShowPopupFromJS', popupData)
+            .then(() => console.log('Road stress popup opened via Blazor'))
+            .catch(err => console.error('Road stress popup error:', err));
+    } else {
+        console.warn('roadStressPopupInstance not available');
     }
 }
 

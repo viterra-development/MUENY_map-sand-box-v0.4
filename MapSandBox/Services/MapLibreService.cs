@@ -403,6 +403,22 @@ public class MapLibreService
                     ["pickable"] = true,
                     ["autoHighlight"] = true
                 }
+            },
+            new LayerConfig
+            {
+                Id = "cris-road-stress",
+                Type = "GeoJson",
+                DataUrl = "/cris-data/willow-park-road-stress-map.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = false,
+                    ["stroked"] = true,
+                    ["opacity"] = 0.85,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleRoadStressClick"
+                }
             }
             // Commented out until scaling issues are resolved
             // new LayerConfig
@@ -463,7 +479,8 @@ public class MapLibreService
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },
             new LayerInfo { Id = "cris-intersections", Name = "⚠️ CRIS Intersection Risks", Visible = false },
             new LayerInfo { Id = "txdot-city-boundaries", Name = "City Boundaries (TxDOT)", Visible = false },
-            new LayerInfo { Id = "wp-parcels-trips", Name = "Trip Generation (Willow Park Parcels)", Visible = false }
+            new LayerInfo { Id = "wp-parcels-trips", Name = "Trip Generation (Willow Park Parcels)", Visible = false },
+            new LayerInfo { Id = "cris-road-stress", Name = "Road Stress Index", Visible = false }
             // new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "NOAA Rainfall Points", Visible = false },
             // new LayerInfo { Id = "noaa-rainfall-parker-heatmap", Name = "NOAA Rainfall Heatmap", Visible = false }
         };

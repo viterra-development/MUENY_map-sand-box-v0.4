@@ -1,0 +1,323 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+@if (IsVisible && StressData != null)
+{
+    <div class="stress-popup-overlay" @onclick="Close">
+        <div class="stress-popup-card" @onclick:stopPropagation="true">
+            <div class="popup-header">
+                <div class="header-content">
+                    <h4>@(StressData.FullName ?? "Unknown Road")</h4>
+                    <div class="stress-subtitle">Road Stress Assessment</div>
+                </div>
+                <button class="close-btn" @onclick="Close">×</button>
+            </div>
+
+            <div class="stress-overview">
+                <div class="stress-score-display">
+                    <span class="stress-score">@StressData.RoadStressIndex.ToString("F1")</span>
+                    <span class="stress-tier @GetTierClass()">@StressData.StressTier</span>
+                </div>
+            </div>
+
+            <div class="stress-details">
+                <div class="detail-section">
+                    <h5>Volatility</h5>
+                    <div class="detail-row">
+                        <span class="detail-label">REC Score</span>
+                        <span class="detail-value">@StressData.RecV2.ToString("F3")</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Peak/Avg Ratio</span>
+                        <span class="detail-value">@StressData.PeakToAverageRatio.ToString("F1")</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Land Use Entropy</span>
+                        <span class="detail-value">@StressData.LandUseEntropy.ToString("F2")</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h5>Traffic</h5>
+                    <div class="detail-row">
+                        <span class="detail-label">Traffic Type</span>
+                        <span class="detail-value dominance-tag @GetDominanceClass()">@FormatDominance()</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Measured AADT</span>
+                        <span class="detail-value">@FormatAadt()</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Modeled Daily Trips</span>
+                        <span class="detail-value">@StressData.TotalDailyTrips.ToString("N0")</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h5>Road Profile</h5>
+                    <div class="detail-row">
+                        <span class="detail-label">Structural Class</span>
+                        <span class="detail-value">@StressData.StructuralClassScore / 6</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Parcel Count</span>
+                        <span class="detail-value">@StressData.ParcelCount</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+.stress-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.stress-popup-card {
+    background: white;
+    width: 420px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    font-family: Arial, sans-serif;
+}
+
+.stress-popup-card .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.stress-popup-card .header-content {
+    flex: 1;
+}
+
+.stress-popup-card .popup-header h4 {
+    margin: 0 0 4px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.stress-popup-card .stress-subtitle {
+    font-size: 12px;
+    color: #666;
+}
+
+.stress-popup-card .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stress-popup-card .close-btn:hover {
+    color: #333;
+}
+
+.stress-overview {
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.stress-score-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stress-score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.stress-tier {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.stress-tier.critical { background: #ef4444; color: white; }
+.stress-tier.high { background: #f97316; color: white; }
+.stress-tier.moderate { background: #eab308; color: #333; }
+.stress-tier.low { background: #22c55e; color: white; }
+
+.stress-details {
+    padding: 15px;
+}
+
+.stress-details .detail-section {
+    margin-bottom: 16px;
+}
+
+.stress-details .detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.stress-details h5 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 13px;
+}
+
+.detail-label {
+    color: #666;
+}
+
+.detail-value {
+    color: #333;
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.dominance-tag {
+    font-family: Arial, sans-serif !important;
+    font-size: 11px !important;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.dominance-tag.local { background: #dbeafe; color: #1e40af; }
+.dominance-tag.mixed { background: #fef3c7; color: #92400e; }
+.dominance-tag.through { background: #fce7f3; color: #9d174d; }
+.dominance-tag.unknown { background: #e5e7eb; color: #374151; }
+</style>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    public RoadStressData? StressData { get; set; }
+
+    private DotNetObjectReference<RoadStressPopup>? _objectReference;
+    private IJSObjectReference? _jsModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/roadStressPopup.js");
+            _objectReference = DotNetObjectReference.Create(this);
+            await _jsModule.InvokeVoidAsync("setRoadStressPopupInstance", _objectReference);
+        }
+    }
+
+    public void Show(RoadStressData data)
+    {
+        StressData = data;
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void ShowPopupFromJS(RoadStressData data)
+    {
+        Console.WriteLine($"RoadStressPopup ShowPopupFromJS called: {data?.FullName}");
+        Show(data);
+    }
+
+    private async Task Close()
+    {
+        IsVisible = false;
+        await OnClose.InvokeAsync();
+        StateHasChanged();
+    }
+
+    private string GetTierClass()
+    {
+        return StressData?.StressTier?.ToLower() ?? "low";
+    }
+
+    private string GetDominanceClass()
+    {
+        return StressData?.TrafficDominanceType switch
+        {
+            "LOCAL_DOMINATED" => "local",
+            "MIXED" => "mixed",
+            "THROUGH_DOMINATED" => "through",
+            _ => "unknown"
+        };
+    }
+
+    private string FormatDominance()
+    {
+        return StressData?.TrafficDominanceType switch
+        {
+            "LOCAL_DOMINATED" => "Local",
+            "MIXED" => "Mixed",
+            "THROUGH_DOMINATED" => "Through",
+            _ => "Unknown"
+        };
+    }
+
+    private string FormatAadt()
+    {
+        if (StressData?.MeasuredAadt == null || StressData.MeasuredAadt <= 0)
+            return "\u2014";
+        return StressData.MeasuredAadt.Value.ToString("N0");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule != null && _objectReference != null)
+        {
+            await _jsModule.InvokeVoidAsync("clearRoadStressPopupInstance");
+            _objectReference.Dispose();
+            await _jsModule.DisposeAsync();
+        }
+    }
+
+    public class RoadStressData
+    {
+        public string? FullName { get; set; }
+        public double RoadStressIndex { get; set; }
+        public string? StressTier { get; set; }
+        public double RecV2 { get; set; }
+        public string? TrafficDominanceType { get; set; }
+        public int StructuralClassScore { get; set; }
+        public double? MeasuredAadt { get; set; }
+        public double TotalDailyTrips { get; set; }
+        public int ParcelCount { get; set; }
+        public double PeakToAverageRatio { get; set; }
+        public double LandUseEntropy { get; set; }
+    }
+}
