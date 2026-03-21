@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TERRAVEX</title>
+    <title>MUENY</title>
     <base href="/" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="css/app.css" rel="stylesheet" />
@@ -16,19 +16,19 @@
     <script src="https://unpkg.com/deck.gl@^9.0.0-beta.2/dist.min.js"></script>
     <!-- Custom JS for parcel trip UI -->
     <script src="js/parcelTripUI.js" defer></script>
-    <!-- Google Fonts for TERRAVEX header -->
+    <!-- Google Fonts for MUENY header -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- TERRAVEX Header Bar -->
+    <!-- MUENY Header Bar -->
     <header id="terravex-header">
       <div class="header-left">
         <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle layers panel">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="white"/><rect y="9" width="20" height="2" rx="1" fill="white"/><rect y="15" width="20" height="2" rx="1" fill="white"/></svg>
         </button>
-        <span class="header-logo">TERRAVEX</span>
+        <span class="header-logo">MUENY</span>
       </div>
       <div class="header-subtitle">Municipal Intelligence Platform</div>
       <button id="trip-panel-toggle" class="trip-panel-toggle" aria-label="Toggle trip summary">
@@ -39,8 +39,8 @@
     <div id="app">
       <div id="terravex-loader">
         <div class="loader-spinner"></div>
-        <div class="loader-text">TERRAVEX</div>
-        <div class="loader-subtext">Initializing map layers...</div>
+        <div class="loader-text">MUENY</div>
+        <div class="loader-subtext">Loading municipal data...</div>
       </div>
     </div>
 
@@ -61,9 +61,9 @@
 
       // Layer config mirrored from MapLibreService.cs
       const defaultConfig = {
-        latitude: 32.758,
-        longitude: -97.65,
-        zoom: 14,
+        latitude: 32.7365,
+        longitude: -97.6506,
+        zoom: 13,
         bearing: 0,
         pitch: 0,
         baseMap: {
@@ -85,9 +85,13 @@
             properties: { radiusMinPixels: 4, radiusMaxPixels: 25, stroked: false, pickable: true, autoHighlight: true }},
           { id: 'cris-intersections', type: 'ScatterplotLayer', dataUrl: '/cris-data/parker-county-intersection-risks-deckgl.json', visible: false,
             properties: { sizeMinPixels: 16, sizeMaxPixels: 32 }},
-          { id: 'txdot-city-boundaries', type: 'GeoJson', dataUrl: '/txdot-city-boundaries.geojson', visible: false,
+          { id: 'txdot-city-boundaries', type: 'GeoJson', dataUrl: '/txdot-city-boundaries.geojson', visible: true,
             properties: { filled: true, stroked: true, getFillColor: [100,150,200,30], getLineColor: [0,100,200,255], getLineWidth: 2, lineWidthMinPixels: 1, lineWidthMaxPixels: 3, opacity: 0.6, pickable: true, autoHighlight: true, onClick: 'handleCityBoundaryClick' }},
           { id: 'wp-parcels-trips', type: 'GeoJson', dataUrl: '/willow-park-parcels-with-trips.geojson', visible: false,
+            properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
+          { id: 'aledo-parcels-trips', type: 'GeoJson', dataUrl: '/aledo-parcels-with-trips.geojson', visible: false,
+            properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
+          { id: 'midlothian-parcels-trips', type: 'GeoJson', dataUrl: '/midlothian-parcels-with-trips.geojson', visible: false,
             properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
           { id: 'soil-clay-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-clay.geojson', visible: false,
             properties: { filled: true, stroked: true, getFillColor: 'getSoilClayColor', getLineColor: [139,69,19,255], getLineWidth: 2, opacity: 0.8, pickable: true, autoHighlight: true, onClick: 'handleSoilUnitClick' }},
@@ -98,17 +102,39 @@
 
       // Layer display names for the controls panel
       const layerNames = {
-        'cris-risk-segments': 'CRIS Risk Segments',
-        'cris-crashes': 'CRIS Crash Points',
-        'cris-intersections': '⚠️ CRIS Intersection Risks',
-        'parker-roads-base': 'Parker County Roads (Base)',
-        'parker-roads-traffic': 'Parker County Roads (Traffic)',
-        'parker-roads-traffic-phase1': 'Traffic - Phase 1 (IDW Interpolation)',
-        'txdot-city-boundaries': 'City Boundaries (TxDOT)',
-        'wp-parcels-trips': 'Trip Generation (Willow Park Parcels)',
+        'cris-risk-segments': 'Crash Risk Segments',
+        'cris-crashes': 'Crash Points',
+        'cris-intersections': 'High-Risk Intersections',
+        'parker-roads-base': 'Road Network (Base)',
+        'parker-roads-traffic': 'Road Traffic Volumes',
+        'parker-roads-traffic-phase1': 'Road Traffic Volumes (IDW)',
+        'txdot-city-boundaries': 'City Boundaries',
+        'wp-parcels-trips': 'Trip Generation — Willow Park',
+        'aledo-parcels-trips': 'Trip Generation — Aledo',
+        'midlothian-parcels-trips': 'Trip Generation — Midlothian',
         'soil-clay-visualization': 'Soil Clay Content (%)',
         'soil-ksat-visualization': 'Soil Permeability (Ksat)'
       };
+
+      // Layer group definitions for organized sidebar
+      const layerGroups = [
+        {
+          id: 'safety', title: 'Safety', icon: '🔴',
+          layerIds: ['cris-risk-segments', 'cris-crashes', 'cris-intersections']
+        },
+        {
+          id: 'traffic', title: 'Traffic', icon: '🚗',
+          layerIds: ['wp-parcels-trips', 'aledo-parcels-trips', 'midlothian-parcels-trips', 'parker-roads-traffic-phase1', 'parker-roads-traffic', 'parker-roads-base']
+        },
+        {
+          id: 'boundaries', title: 'Boundaries', icon: '🗺',
+          layerIds: ['txdot-city-boundaries']
+        },
+        {
+          id: 'environment', title: 'Environment', icon: '🌱',
+          layerIds: ['soil-clay-visualization', 'soil-ksat-visualization']
+        }
+      ];
 
       const baseMapStyles = [
         { id: 'voyager', name: 'Voyager', url: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json' },
@@ -121,7 +147,7 @@
         if (mapInitialized) return;
         mapInitialized = true;
 
-        console.log('[TERRAVEX] Blazor unavailable — initializing map directly via JS fallback');
+        console.log('[MUENY] Blazor unavailable — initializing map directly via JS fallback');
 
         // Hide the loading spinner and error UI
         const appDiv = document.getElementById('app');
@@ -149,11 +175,11 @@
         try {
           const mapModule = await import('./js/maplibre-deckgl-integration.js');
           const mapInstance = mapModule.createIntegratedMap('maplibre-container', defaultConfig);
-          window._terravexMapModule = mapModule;
-          window._terravexMapInstance = mapInstance;
-          console.log('[TERRAVEX] Map initialized successfully via JS fallback');
+          window._muenyMapModule = mapModule;
+          window._muenyMapInstance = mapInstance;
+          console.log('[MUENY] Map initialized successfully via JS fallback');
         } catch (err) {
-          console.error('[TERRAVEX] Failed to initialize map:', err);
+          console.error('[MUENY] Failed to initialize map:', err);
           appDiv.innerHTML = '<div style="color:white;padding:40px;text-align:center;">Failed to load map. Please reload the page.</div>';
         }
       }
@@ -162,10 +188,24 @@
         const panel = document.getElementById('map-controls-panel');
         if (!panel) return;
 
-        const crisLayerIds = defaultConfig.layers.filter(l => l.id.startsWith('cris-'));
-        const bgLayerIds = defaultConfig.layers.filter(l => !l.id.startsWith('cris-'));
-
         let html = '';
+
+        // Willow Park Stats Banner
+        html += `<div class="wp-stats-banner">
+          <div class="stats-title">Willow Park</div>
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-value" id="stat-crashes">--</div><div class="stat-label">Crashes (5yr)</div></div>
+            <div class="stat-card"><div class="stat-value" id="stat-parcels">--</div><div class="stat-label">Parcels</div></div>
+            <div class="stat-card"><div class="stat-value" id="stat-trips">--</div><div class="stat-label">Daily Trips Est.</div></div>
+            <div class="stat-card"><div class="stat-value" id="stat-roads">--</div><div class="stat-label">Roads w/ AADT</div></div>
+          </div>
+        </div>`;
+
+        // Generate Report button
+        html += `<button class="report-btn" id="generate-report-btn">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 2h7l3 3v9H3V2z" stroke="white" stroke-width="1.2" fill="none"/><path d="M9 2v4h4" stroke="white" stroke-width="1.2" fill="none"/><line x1="5" y1="8" x2="11" y2="8" stroke="white" stroke-width="1.2"/><line x1="5" y1="11" x2="9" y2="11" stroke="white" stroke-width="1.2"/></svg>
+          Generate Report
+        </button>`;
 
         // Base map selector
         html += '<div class="control-section"><h3>Base Map</h3><select id="basemap-select">';
@@ -175,35 +215,39 @@
         });
         html += '</select></div>';
 
-        // CRIS Layers
-        html += '<div class="control-section"><h3>CRIS Layers</h3>';
-        crisLayerIds.forEach(l => {
-          const checked = l.visible ? ' checked' : '';
-          html += `<label class="layer-toggle"><input type="checkbox" data-layer-id="${l.id}"${checked} /> ${layerNames[l.id] || l.id}</label>`;
-        });
-        html += '</div>';
+        // Grouped layer controls
+        layerGroups.forEach(group => {
+          const groupLayers = group.layerIds
+            .map(id => defaultConfig.layers.find(l => l.id === id))
+            .filter(Boolean);
+          if (!groupLayers.length) return;
 
-        // Background Layers
-        html += '<div class="control-section"><h3>Background Layers</h3>';
-        bgLayerIds.forEach(l => {
-          const checked = l.visible ? ' checked' : '';
-          html += `<label class="layer-toggle"><input type="checkbox" data-layer-id="${l.id}"${checked} /> ${layerNames[l.id] || l.id}</label>`;
+          html += `<div class="layer-group" id="group-${group.id}">
+            <div class="layer-group-header" data-group="${group.id}">
+              <span class="layer-group-title">${group.icon} ${group.title}</span>
+              <span class="layer-group-chevron" id="chevron-${group.id}">▾</span>
+            </div>
+            <div class="layer-group-content" id="content-${group.id}">`;
+          groupLayers.forEach(l => {
+            const checked = l.visible ? ' checked' : '';
+            html += `<label class="layer-toggle"><input type="checkbox" data-layer-id="${l.id}"${checked} /> ${layerNames[l.id] || l.id}</label>`;
+          });
+          html += `</div></div>`;
         });
-        html += '</div>';
 
         // Search Location
         html += `<div class="control-section">
           <h3>Search Location</h3>
           <div class="search-inputs">
-            <input type="number" step="any" placeholder="Latitude (32.758237)" id="search-lat" class="coord-input" />
-            <input type="number" step="any" placeholder="Longitude (-97.673080)" id="search-lng" class="coord-input" />
+            <input type="number" step="any" placeholder="Latitude (32.7365)" id="search-lat" class="coord-input" />
+            <input type="number" step="any" placeholder="Longitude (-97.6506)" id="search-lng" class="coord-input" />
             <button id="search-btn" class="search-btn">📍 Go to Location</button>
           </div>
         </div>`;
 
         panel.innerHTML = html;
 
-        // Wire up event listeners
+        // Wire layer toggle checkboxes
         panel.querySelectorAll('input[type="checkbox"]').forEach(cb => {
           cb.addEventListener('change', (e) => {
             const layerId = e.target.dataset.layerId;
@@ -211,27 +255,227 @@
             const layer = defaultConfig.layers.find(l => l.id === layerId);
             if (layer) {
               layer.visible = visible;
-              if (window._terravexMapModule && window._terravexMapInstance) {
-                window._terravexMapModule.updateIntegratedMapLayers(window._terravexMapInstance, defaultConfig.layers);
+              if (window._muenyMapModule && window._muenyMapInstance) {
+                window._muenyMapModule.updateIntegratedMapLayers(window._muenyMapInstance, defaultConfig.layers);
               }
             }
           });
         });
 
+        // Wire basemap selector
         document.getElementById('basemap-select').addEventListener('change', (e) => {
           const style = baseMapStyles.find(s => s.id === e.target.value);
-          if (style && window._terravexMapModule && window._terravexMapInstance) {
-            window._terravexMapModule.updateBaseMapStyle(window._terravexMapInstance, style.url);
+          if (style && window._muenyMapModule && window._muenyMapInstance) {
+            window._muenyMapModule.updateBaseMapStyle(window._muenyMapInstance, style.url);
           }
         });
 
+        // Wire search
         document.getElementById('search-btn').addEventListener('click', () => {
           const lat = parseFloat(document.getElementById('search-lat').value);
           const lng = parseFloat(document.getElementById('search-lng').value);
-          if (!isNaN(lat) && !isNaN(lng) && window._terravexMapModule && window._terravexMapInstance) {
-            window._terravexMapModule.flyToLocation(window._terravexMapInstance, lat, lng, 16);
+          if (!isNaN(lat) && !isNaN(lng) && window._muenyMapModule && window._muenyMapInstance) {
+            window._muenyMapModule.flyToLocation(window._muenyMapInstance, lat, lng, 16);
           }
         });
+
+        // Wire collapsible group headers
+        panel.querySelectorAll('.layer-group-header').forEach(header => {
+          header.addEventListener('click', () => {
+            const groupId = header.dataset.group;
+            const content = document.getElementById(`content-${groupId}`);
+            const chevron = document.getElementById(`chevron-${groupId}`);
+            if (!content) return;
+            const isCollapsed = content.classList.contains('collapsed');
+            if (isCollapsed) {
+              content.classList.remove('collapsed');
+              content.style.maxHeight = content.scrollHeight + 'px';
+              chevron.classList.remove('collapsed');
+            } else {
+              content.style.maxHeight = content.scrollHeight + 'px';
+              requestAnimationFrame(() => {
+                content.classList.add('collapsed');
+                chevron.classList.add('collapsed');
+              });
+            }
+          });
+          // Set initial maxHeight for open groups
+          const groupId = header.dataset.group;
+          const content = document.getElementById(`content-${groupId}`);
+          if (content) {
+            requestAnimationFrame(() => { content.style.maxHeight = content.scrollHeight + 'px'; });
+          }
+        });
+
+        // Wire report button
+        document.getElementById('generate-report-btn').addEventListener('click', showReportModal);
+
+        // Load stats asynchronously
+        loadWillowParkStats();
+      }
+
+      // Load Willow Park stats from GeoJSON files
+      async function loadWillowParkStats() {
+        try {
+          // Crashes count
+          const crashRes = await fetch('/cris-data/parker-county-crashes-clustered-deckgl.json');
+          if (crashRes.ok) {
+            const crashData = await crashRes.json();
+            const count = crashData.features ? crashData.features.length : (Array.isArray(crashData) ? crashData.length : '?');
+            const el = document.getElementById('stat-crashes');
+            if (el) el.textContent = count.toLocaleString();
+          }
+        } catch(e) { console.warn('[MUENY] Could not load crash stats'); }
+
+        try {
+          // Parcel + trip stats
+          const parcelRes = await fetch('/willow-park-parcels-with-trips.geojson');
+          if (parcelRes.ok) {
+            const parcelData = await parcelRes.json();
+            const features = parcelData.features || [];
+            const parcelCount = features.length;
+            const totalTrips = features.reduce((sum, f) => sum + (f.properties?.daily_trips || 0), 0);
+            const parcelEl = document.getElementById('stat-parcels');
+            const tripEl = document.getElementById('stat-trips');
+            if (parcelEl) parcelEl.textContent = parcelCount.toLocaleString();
+            if (tripEl) tripEl.textContent = Math.round(totalTrips).toLocaleString();
+          }
+        } catch(e) { console.warn('[MUENY] Could not load parcel stats'); }
+
+        try {
+          // Roads with AADT
+          const roadRes = await fetch('/parker-roads-with-traffic-phase1.geojson');
+          if (roadRes.ok) {
+            const roadData = await roadRes.json();
+            const features = roadData.features || [];
+            const withAadt = features.filter(f => f.properties?.aadt > 0 || f.properties?.AADT > 0).length;
+            const el = document.getElementById('stat-roads');
+            if (el) el.textContent = withAadt.toLocaleString();
+          }
+        } catch(e) { console.warn('[MUENY] Could not load road stats'); }
+      }
+
+      // Report generation modal + PDF export
+      function showReportModal() {
+        const overlay = document.createElement('div');
+        overlay.className = 'report-overlay';
+        overlay.id = 'report-overlay';
+        overlay.innerHTML = `
+          <div class="report-modal">
+            <h3>Generate Report</h3>
+            <p>Select a report type for Willow Park</p>
+            <div class="report-options">
+              <button class="report-option-btn" data-report="safety">📊 Safety Summary Report</button>
+              <button class="report-option-btn" data-report="traffic">🚗 Traffic Estimation Report</button>
+              <button class="report-option-btn" data-report="full">📋 Full Municipal Intelligence Report</button>
+            </div>
+            <button class="report-cancel" id="report-cancel-btn">Cancel</button>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+
+        document.getElementById('report-cancel-btn').addEventListener('click', () => {
+          overlay.remove();
+        });
+
+        overlay.querySelectorAll('.report-option-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const reportType = btn.dataset.report;
+            overlay.remove();
+            await generateReport(reportType);
+          });
+        });
+      }
+
+      async function generateReport(reportType) {
+        const reportTitles = {
+          safety: 'Willow Park — Safety Summary',
+          traffic: 'Willow Park — Traffic Estimation',
+          full: 'Willow Park — Municipal Intelligence Summary'
+        };
+
+        const title = reportTitles[reportType] || 'MUENY Report';
+        const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        // Collect current stats
+        const crashes = document.getElementById('stat-crashes')?.textContent || '--';
+        const parcels = document.getElementById('stat-parcels')?.textContent || '--';
+        const trips = document.getElementById('stat-trips')?.textContent || '--';
+        const roads = document.getElementById('stat-roads')?.textContent || '--';
+
+        // Take map screenshot via canvas
+        let mapImageDataUrl = null;
+        try {
+          const canvas = document.querySelector('#maplibre-container canvas');
+          if (canvas) mapImageDataUrl = canvas.toDataURL('image/png');
+        } catch(e) { console.warn('[MUENY] Could not capture map screenshot'); }
+
+        // Build HTML report for printing
+        const reportHTML = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${title}</title>
+<style>
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 32px; background: #fff; color: #1a1a2e; }
+  .report-header { border-bottom: 3px solid #2E4A6B; padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .report-brand { font-size: 24px; font-weight: 700; letter-spacing: 0.15em; color: #0B1F2E; }
+  .report-brand span { color: #2E4A6B; }
+  .report-meta { font-size: 11px; color: #888; text-align: right; }
+  .report-title { font-size: 18px; font-weight: 700; color: #0B1F2E; margin-bottom: 4px; }
+  .report-subtitle { font-size: 12px; color: #666; }
+  .stats-row { display: flex; gap: 16px; margin: 24px 0; }
+  .stat-box { flex: 1; background: #f0f4f8; border-radius: 6px; padding: 16px; text-align: center; }
+  .stat-box .val { font-size: 28px; font-weight: 700; color: #2E4A6B; }
+  .stat-box .lbl { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+  .map-section { margin: 24px 0; }
+  .map-section h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #444; margin-bottom: 12px; }
+  .map-img { width: 100%; border-radius: 6px; border: 1px solid #ddd; }
+  .notes { margin-top: 24px; padding: 16px; background: #f8f9fa; border-radius: 6px; font-size: 11px; color: #666; line-height: 1.6; }
+  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 10px; color: #aaa; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+  <div class="report-header">
+    <div>
+      <div class="report-brand">MUENY <span>Municipal Intelligence</span></div>
+      <div style="font-size:11px; color:#888; margin-top:4px;">Viterra Group</div>
+    </div>
+    <div class="report-meta">
+      <div class="report-title">${title}</div>
+      <div>Generated: ${date}</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="val">${crashes}</div><div class="lbl">Crashes (5yr)</div></div>
+    <div class="stat-box"><div class="val">${parcels}</div><div class="lbl">Parcels Analyzed</div></div>
+    <div class="stat-box"><div class="val">${trips}</div><div class="lbl">Est. Daily Trips</div></div>
+    <div class="stat-box"><div class="val">${roads}</div><div class="lbl">Roads w/ AADT</div></div>
+  </div>
+
+  ${mapImageDataUrl ? `<div class="map-section"><h3>Map View — Willow Park</h3><img class="map-img" src="${mapImageDataUrl}" /></div>` : ''}
+
+  <div class="notes">
+    <strong>Data Sources:</strong> TxDOT CRIS crash records · Parker County Appraisal District parcel data · ITE Trip Generation Manual (11th Edition) · TxDOT AADT traffic counts · TIGER/Line road network<br><br>
+    <strong>Methodology:</strong> Trip generation uses ITE land use codes mapped from Parker County CAD state property type codes. Crash risk segments derived from CRIS crash point spatial analysis. Traffic volumes estimated via IDW interpolation from observed TxDOT counts.<br><br>
+    <em>This report is a screening tool, not a final engineering assessment. Data is provided for planning and grant support purposes. Field verification recommended for engineering decisions.</em>
+  </div>
+
+  <div class="footer">
+    <div>MUENY Municipal Intelligence Platform · Viterra Group</div>
+    <div>${date}</div>
+  </div>
+</body>
+</html>`;
+
+        // Open in new window and trigger print dialog
+        const reportWindow = window.open('', '_blank', 'width=900,height=700');
+        reportWindow.document.write(reportHTML);
+        reportWindow.document.close();
+        reportWindow.onload = () => {
+          setTimeout(() => reportWindow.print(), 500);
+        };
       }
 
       // Try to start Blazor, fall back to direct JS init
@@ -244,12 +488,12 @@
             );
             await Promise.race([blazorPromise, timeoutPromise]);
             blazorStarted = true;
-            console.log('[TERRAVEX] Blazor started successfully');
+            console.log('[MUENY] Blazor started successfully');
           } else {
             throw new Error('Blazor not available');
           }
         } catch (err) {
-          console.warn('[TERRAVEX] Blazor failed or timed out:', err.message, '— using JS fallback');
+          console.warn('[MUENY] Blazor failed or timed out:', err.message, '— using JS fallback');
           await initMapDirectly();
         }
       }

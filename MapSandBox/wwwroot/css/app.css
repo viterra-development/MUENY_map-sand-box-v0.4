@@ -1,5 +1,5 @@
 /* ============================================
-   TERRAVEX Municipal Intelligence Platform
+   MUENY Municipal Intelligence Platform
    Brand Colors:
      Primary Dark:  #0B1F2E
      Near Black:    #2B2B22
@@ -15,7 +15,7 @@ html, body {
     background: #0B1F2E;
 }
 
-/* ---- TERRAVEX Header Bar ---- */
+/* ---- MUENY Header Bar ---- */
 #terravex-header {
     display: flex;
     align-items: center;
@@ -53,7 +53,7 @@ html, body {
 .header-logo {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
-    font-size: 26px;
+    font-size: 22px;
     color: #FFFFFF;
     letter-spacing: 0.35em;
     text-transform: uppercase;
@@ -79,7 +79,7 @@ html, body {
     position: relative;
 }
 
-/* ---- TERRAVEX Loading Screen ---- */
+/* ---- MUENY Loading Screen ---- */
 #terravex-loader {
     display: flex;
     flex-direction: column;
@@ -262,6 +262,208 @@ html, body {
     border: 1px solid rgba(198, 40, 40, 0.25);
 }
 
+/* ---- Willow Park Stats Banner ---- */
+.wp-stats-banner {
+    background: rgba(46, 74, 107, 0.25);
+    border: 1px solid rgba(46, 74, 107, 0.4);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+.wp-stats-banner .stats-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+
+.wp-stats-banner .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+}
+
+.stat-card .stat-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #5ba3dc;
+    line-height: 1.1;
+}
+
+.stat-card .stat-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+    text-transform: uppercase;
+}
+
+/* ---- Layer Group Sections (collapsible) ---- */
+.layer-group {
+    margin-bottom: 4px;
+}
+
+.layer-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 8px;
+}
+
+.layer-group-header:hover .layer-group-title {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.layer-group-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.layer-group-chevron {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.layer-group-chevron.collapsed {
+    transform: rotate(-90deg);
+}
+
+.layer-group-content {
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+}
+
+.layer-group-content.collapsed {
+    max-height: 0 !important;
+}
+
+/* ---- Report Button ---- */
+.report-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 9px 12px;
+    background: linear-gradient(135deg, #1a5c8e 0%, #2E4A6B 100%);
+    color: white;
+    border: 1px solid rgba(91, 163, 220, 0.3);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    margin-bottom: 16px;
+}
+
+.report-btn:hover {
+    background: linear-gradient(135deg, #2272ac 0%, #3a5c80 100%);
+    border-color: rgba(91, 163, 220, 0.6);
+}
+
+.report-btn:active {
+    transform: translateY(1px);
+}
+
+.report-btn svg {
+    flex-shrink: 0;
+}
+
+/* ---- Report generation overlay ---- */
+.report-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.report-modal {
+    background: #0f1a24;
+    border: 1px solid rgba(46, 74, 107, 0.5);
+    border-radius: 8px;
+    padding: 28px 32px;
+    width: 340px;
+    text-align: center;
+}
+
+.report-modal h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 8px 0;
+}
+
+.report-modal p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 20px 0;
+}
+
+.report-modal .report-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.report-modal .report-option-btn {
+    padding: 10px 16px;
+    background: rgba(46, 74, 107, 0.3);
+    border: 1px solid rgba(46, 74, 107, 0.5);
+    border-radius: 4px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s ease;
+}
+
+.report-modal .report-option-btn:hover {
+    background: rgba(46, 74, 107, 0.6);
+}
+
+.report-modal .report-cancel {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+}
+
+.report-modal .report-cancel:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
 /* ---- Legacy Blazor styles ---- */
 h1:focus {
     outline: none;
@@ -431,7 +633,7 @@ code {
     }
 
     .header-logo {
-        font-size: 20px;
+        font-size: 18px;
         letter-spacing: 0.25em;
     }
 
