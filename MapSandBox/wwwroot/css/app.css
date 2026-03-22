@@ -191,20 +191,27 @@ html, body {
 .sidebar-content .layer-toggle {
     display: flex;
     align-items: center;
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
     line-height: 1.4;
+    padding: 2px 0;
 }
 
 .sidebar-content .layer-toggle input[type="checkbox"] {
     margin-right: 8px;
     flex-shrink: 0;
+    accent-color: #5ba3dc;
 }
 
 .sidebar-content .layer-toggle:hover {
     color: #ffffff;
+}
+
+/* Layer toggles inside groups get no extra margin from sidebar-content */
+.layer-group .layer-toggle {
+    margin-bottom: 5px;
 }
 
 .sidebar-content .search-inputs {
@@ -312,36 +319,42 @@ html, body {
 
 /* ---- Layer Group Sections (collapsible) ---- */
 .layer-group {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .layer-group-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 7px 0;
+    padding: 8px 10px;
     cursor: pointer;
     user-select: none;
+    background: rgba(46, 74, 107, 0.3);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    margin-bottom: 8px;
+    transition: background 0.15s ease;
 }
 
-.layer-group-header:hover .layer-group-title {
-    color: rgba(255, 255, 255, 0.7);
+.layer-group-header:hover {
+    background: rgba(46, 74, 107, 0.5);
 }
 
 .layer-group-title {
     font-size: 11px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.45);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
 }
 
 .layer-group-chevron {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.3);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
     transition: transform 0.2s ease;
+    flex-shrink: 0;
 }
 
 .layer-group-chevron.collapsed {
@@ -350,11 +363,13 @@ html, body {
 
 .layer-group-content {
     overflow: hidden;
-    transition: max-height 0.2s ease;
+    transition: max-height 0.25s ease;
+    padding: 6px 10px;
 }
 
 .layer-group-content.collapsed {
     max-height: 0 !important;
+    padding: 0 10px;
 }
 
 /* ---- Report Button ---- */

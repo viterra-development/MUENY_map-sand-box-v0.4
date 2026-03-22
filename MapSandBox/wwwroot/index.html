@@ -304,23 +304,24 @@
             const isCollapsed = content.classList.contains('collapsed');
             if (isCollapsed) {
               content.classList.remove('collapsed');
-              content.style.maxHeight = content.scrollHeight + 'px';
+              content.style.maxHeight = content.scrollHeight + 200 + 'px';
+              chevron.textContent = '▾';
               chevron.classList.remove('collapsed');
             } else {
-              content.style.maxHeight = content.scrollHeight + 'px';
-              requestAnimationFrame(() => {
-                content.classList.add('collapsed');
-                chevron.classList.add('collapsed');
-              });
+              content.classList.add('collapsed');
+              content.style.maxHeight = '0';
+              chevron.textContent = '▸';
+              chevron.classList.add('collapsed');
             }
           });
-          // Set initial maxHeight for open groups
-          const groupId = header.dataset.group;
-          const content = document.getElementById(`content-${groupId}`);
-          if (content) {
-            requestAnimationFrame(() => { content.style.maxHeight = content.scrollHeight + 'px'; });
-          }
         });
+
+        // Set initial maxHeight after DOM paints — use setTimeout to ensure scrollHeight is available
+        setTimeout(() => {
+          panel.querySelectorAll('.layer-group-content').forEach(content => {
+            content.style.maxHeight = content.scrollHeight + 200 + 'px';
+          });
+        }, 50);
 
         // Wire report button
         document.getElementById('generate-report-btn').addEventListener('click', showReportModal);
