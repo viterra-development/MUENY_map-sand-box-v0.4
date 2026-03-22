@@ -93,10 +93,6 @@
             properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
           { id: 'midlothian-parcels-trips', type: 'GeoJson', dataUrl: '/midlothian-parcels-with-trips.geojson', visible: false,
             properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
-          { id: 'aledo-parcels-trips', type: 'GeoJson', dataUrl: '/aledo-parcels-with-trips.geojson', visible: false,
-            properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
-          { id: 'midlothian-parcels-trips', type: 'GeoJson', dataUrl: '/midlothian-parcels-with-trips.geojson', visible: false,
-            properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
           { id: 'soil-clay-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-clay.geojson', visible: false,
             properties: { filled: true, stroked: true, getFillColor: 'getSoilClayColor', getLineColor: [139,69,19,255], getLineWidth: 2, opacity: 0.8, pickable: true, autoHighlight: true, onClick: 'handleSoilUnitClick' }},
           { id: 'soil-ksat-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-ksat.geojson', visible: false,
@@ -106,38 +102,51 @@
 
       // Layer display names for the controls panel
       const layerNames = {
-        'cris-risk-segments': 'Crash Risk Segments',
-        'cris-crashes': 'Crash Points',
-        'cris-intersections': 'High-Risk Intersections',
-        'parker-roads-base': 'Road Network (Base)',
-        'parker-roads-traffic': 'Road Traffic Volumes',
+        'cris-risk-segments':          'Crash Risk Segments',
+        'cris-crashes':                'Crash Points',
+        'cris-intersections':          'High-Risk Intersections',
+        'parker-roads-base':           'Road Network (Base)',
+        'parker-roads-traffic':        'Road Traffic Volumes',
         'parker-roads-traffic-phase1': 'Road Traffic Volumes (IDW)',
-        'txdot-city-boundaries': 'City Boundaries',
-        'wp-parcels-trips': 'Trip Generation — Willow Park',
-        'aledo-parcels-trips': 'Trip Generation — Aledo',
-        'midlothian-parcels-trips': 'Trip Generation — Midlothian',
-        'aledo-parcels-trips': 'Trip Generation — Aledo',
-        'midlothian-parcels-trips': 'Trip Generation — Midlothian',
-        'soil-clay-visualization': 'Soil Clay Content (%)',
-        'soil-ksat-visualization': 'Soil Permeability (Ksat)'
+        'txdot-city-boundaries':       'City Boundaries',
+        'wp-parcels-trips':            'Willow Park',
+        'aledo-parcels-trips':         'Aledo',
+        'midlothian-parcels-trips':    'Midlothian',
+        'soil-clay-visualization':     'Soil Clay Content (%)',
+        'soil-ksat-visualization':     'Soil Permeability (Ksat)',
+        'noaa-rainfall':               'Rainfall Intensity'
       };
 
-      // Layer group definitions for organized sidebar
+      // Layer group definitions — sidebar organized by domain + sub-category
       const layerGroups = [
         {
-          id: 'safety', title: 'Safety', icon: '🔴',
+          id: 'safety',
+          title: 'Safety',
+          icon: '🔴',
           layerIds: ['cris-risk-segments', 'cris-crashes', 'cris-intersections']
         },
         {
-          id: 'traffic', title: 'Traffic', icon: '🚗',
-          layerIds: ['wp-parcels-trips', 'aledo-parcels-trips', 'midlothian-parcels-trips', 'parker-roads-traffic-phase1', 'parker-roads-traffic', 'parker-roads-base']
+          id: 'trip-generation',
+          title: 'Trip Generation',
+          icon: '📍',
+          layerIds: ['wp-parcels-trips', 'aledo-parcels-trips', 'midlothian-parcels-trips']
         },
         {
-          id: 'boundaries', title: 'Boundaries', icon: '🗺',
+          id: 'road-network',
+          title: 'Road Network',
+          icon: '🛣',
+          layerIds: ['parker-roads-traffic-phase1', 'parker-roads-traffic', 'parker-roads-base']
+        },
+        {
+          id: 'boundaries',
+          title: 'Boundaries',
+          icon: '🗺',
           layerIds: ['txdot-city-boundaries']
         },
         {
-          id: 'environment', title: 'Environment', icon: '🌱',
+          id: 'environment',
+          title: 'Environment',
+          icon: '🌱',
           layerIds: ['soil-clay-visualization', 'soil-ksat-visualization']
         }
       ];
