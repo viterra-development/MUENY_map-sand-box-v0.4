@@ -853,6 +853,12 @@ function getLayerProperties(config) {
             properties.autoHighlight = true;
             properties.highlightColor = [255, 255, 255, 128];
             properties.onClick = handleIntersectionRiskClick;
+            properties.onDataLoad = data => {
+                if (Array.isArray(data)) {
+                    _intersectionData = data;
+                    resolveIntersectionRoads();
+                }
+            };
             break;
         case 'txdot-city-boundaries':
             properties.filled = true;
