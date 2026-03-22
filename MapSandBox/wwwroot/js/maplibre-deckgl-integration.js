@@ -866,6 +866,7 @@ function getLayerProperties(config) {
             properties.pickable = true;
             properties.autoHighlight = true;
             properties.onHover = handleCityBoundaryHover;
+            properties.onClick = handleCityBoundaryClick;
             break;
         case 'wp-parcels-trips':
             properties.filled = true;
@@ -1097,31 +1098,34 @@ function firstDefined(obj, keys) {
 }
 
 function handleRoadClick(info) {
-    if (info.object) {
-        const road = info.object;
-        const props = road.properties || road;
-        const name = firstDefined(props, ['fullName', 'FULLNAME', 'FullName', 'road_name', 'ROAD_NAME', 'RoadName', 'NAME', 'name']) || 'Unknown';
-        const typeCode = firstDefined(props, ['roadType', 'RTTYP', 'RoadType', 'rttyp', 'RTE_TYPE_C', 'FCLASS', 'route_type_code']) || '';
-        const mtfcc = firstDefined(props, ['mtfcc', 'MTFCC', 'Mtfcc']) || '';
-        const roadType = getRoadTypeName(typeCode);
+    if (!info.object || !maplibreMap || !info.coordinate) return;
+    const props = info.object.properties || info.object;
+    const name = firstDefined(props, ['fullName', 'FULLNAME', 'FullName', 'road_name', 'ROAD_NAME', 'NAME', 'name']) || 'Unnamed Road';
+    const typeCode = firstDefined(props, ['roadType', 'RTTYP', 'RoadType', 'rttyp']) || '';
+    const mtfcc = firstDefined(props, ['mtfcc', 'MTFCC']) || '';
+    const roadType = getRoadTypeName(typeCode);
+    const mtfccLabel = getMtfccLabel(mtfcc);
+    const classification = props.classification || {};
+    const fcLabel = getFunctionalClassName(classification.hierarchy || classification.functionalClass);
 
-        // Use MapLibre popup instead of alert
-        if (maplibreMap && info.coordinate) {
-            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '280px' })
-                .setLngLat(info.coordinate)
-                .setHTML(`
-                    <div style="font-family: Arial, sans-serif; padding: 4px;">
-                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${name}</div>
-                        <div style="font-size: 12px; color: #555;">
-                            <div><strong>Type:</strong> ${roadType}</div>
-                            ${typeCode ? `<div><strong>Route Type Code:</strong> ${typeCode}</div>` : ''}
-                            ${mtfcc ? `<div><strong>MTFCC:</strong> ${mtfcc}</div>` : ''}
-                        </div>
-                    </div>
-                `)
-                .addTo(maplibreMap);
-        }
-    }
+    const rows = [
+        mtfccLabel ? `<tr><td>Road Class</td><td>${mtfccLabel}</td></tr>` : '',
+        fcLabel    ? `<tr><td>Functional Class</td><td>${fcLabel}</td></tr>` : '',
+        classification.routeDesignation ? `<tr><td>Route</td><td>${classification.routeDesignation}</td></tr>` : '',
+    ].filter(Boolean).join('');
+
+    new maplibregl.Popup({ closeOnClick: true, maxWidth: '300px' })
+        .setLngLat(info.coordinate)
+        .setHTML(`
+            <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
+                <div style="font-weight:700; font-size:14px; margin-bottom:8px; color:#0B1F2E;">${name}</div>
+                <table style="font-size:12px; border-collapse:collapse; width:100%;">
+                    <tr><td style="color:#888;padding:2px 8px 2px 0;">Type</td><td style="color:#333;">${roadType}</td></tr>
+                    ${rows}
+                </table>
+            </div>
+        `)
+        .addTo(maplibreMap);
 }
 
 function handleParcelTripClick(info) {
@@ -1136,9 +1140,45 @@ function getRoadTypeName(rttyp) {
         case 'I': return 'Interstate';
         case 'U': return 'US Highway';
         case 'S': return 'State Highway';
-        case 'M': return 'Minor Road';
-        default: return 'Other';
+        case 'M': return 'Minor / Local Road';
+        case 'O': return 'Other / Undesignated';
+        case 'C': return 'County Road';
+        default:  return rttyp ? `Route Type: ${rttyp}` : 'Local Road';
     }
+}
+
+function getMtfccLabel(mtfcc) {
+    const labels = {
+        'S1100': 'Primary Highway',
+        'S1200': 'Secondary Highway',
+        'S1400': 'Local Road',
+        'S1500': 'Vehicular Trail (4WD)',
+        'S1630': 'Ramp',
+        'S1640': 'Service Drive / Frontage Road',
+        'S1710': 'Walkway / Pedestrian Trail',
+        'S1720': 'Stairway',
+        'S1730': 'Alley',
+        'S1740': 'Private Road',
+        'S1750': 'Internal Census Use',
+        'S1780': 'Parking Lot Road',
+        'S1820': 'Bike Path / Trail',
+        'S1830': 'Bridle Path',
+        'S2000': 'Road Median Strip',
+    };
+    return labels[mtfcc] || (mtfcc ? mtfcc : null);
+}
+
+function getFunctionalClassName(fc) {
+    const names = {
+        1: 'Principal Arterial — Interstate',
+        2: 'Principal Arterial — Other Freeways',
+        3: 'Principal Arterial — Other',
+        4: 'Minor Arterial',
+        5: 'Major Collector',
+        6: 'Minor Collector',
+        7: 'Local',
+    };
+    return names[parseInt(fc)] || (fc ? `Class ${fc}` : null);
 }
 
 // Unified log scale parameters for consistent station and road styling
@@ -1242,64 +1282,75 @@ function getTrafficWidth(feature) {
 }
 
 function handleTrafficRoadClick(info) {
-    if (info.object) {
-        const road = info.object;
-        const props = road.properties || road;
-        const roadName = firstDefined(props, ['fullName', 'FULLNAME', 'FullName', 'RoadName']) || 'Unknown';
-        const roadType = firstDefined(props, ['roadType', 'RTTYP', 'RoadType']) || '';
-        const linearId = firstDefined(props, ['linearId', 'LINEARID', 'LinearId']) || '';
-        const mtfcc = firstDefined(props, ['mtfcc', 'MTFCC', 'Mtfcc']) || '';
-        const roadTypeName = getRoadTypeName(roadType);
+    if (!info.object || !maplibreMap || !info.coordinate) return;
+    const props = info.object.properties || info.object;
+    const roadName = firstDefined(props, ['fullName', 'FULLNAME', 'FullName', 'RoadName']) || 'Unnamed Road';
+    const typeCode = firstDefined(props, ['roadType', 'RTTYP', 'RoadType']) || '';
+    const mtfcc = firstDefined(props, ['mtfcc', 'MTFCC']) || '';
+    const roadTypeName = getRoadTypeName(typeCode);
+    const mtfccLabel = getMtfccLabel(mtfcc);
+    const classification = props.classification || {};
+    const fcLabel = getFunctionalClassName(classification.hierarchy || classification.functionalClass);
 
-        const traffic = props.traffic;
-        if (traffic) {
-            const aadt = traffic.aadt || null;
-            const aadtYear = traffic.aadtYear ? traffic.aadtYear.toString() : null;
-            const dhv30 = traffic.dhv30 || null;
-            const locationId = traffic.locationId || null;
-            const locatedOn = traffic.locatedOn || null;
+    const traffic = props.traffic || {};
+    const trafficMatch = props.trafficMatch || {};
+    const warnings = props.validationWarnings;
 
-            // Call Blazor component method via DotNet.invokeMethodAsync
-            if (window.roadPopupInstance) {
-                const roadData = {
-                    roadName,
-                    roadType,
-                    roadTypeName,
-                    aadt,
-                    aadtYear,
-                    dhv30,
-                    locationId,
-                    locatedOn,
-                    coordinates: info.coordinate,
-                    linearId,
-                    mtfcc
-                };
+    const aadt = traffic.aadt || null;
+    const aadtYear = traffic.aadtYear || null;
+    const source = traffic.source || null;  // 'measured', 'estimated', etc.
+    const matchType = trafficMatch.matchType || null;
+    const matchDist = trafficMatch.distanceMeters ? Math.round(trafficMatch.distanceMeters) + 'm' : null;
 
-                window.roadPopupInstance.invokeMethodAsync('ShowPopupFromJS', roadData);
-            } else if (maplibreMap && info.coordinate) {
-                // Fallback to MapLibre popup
-                const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '320px' })
-                    .setLngLat(info.coordinate)
-                    .setHTML(`
-                        <div style="font-family: Arial, sans-serif; padding: 4px;">
-                            <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${roadName}</div>
-                            <div style="font-size: 12px; color: #555;">
-                                <div><strong>Type:</strong> ${roadTypeName} (${roadType})</div>
-                                ${locationId ? `<div><strong>Traffic Location:</strong> ${locationId}</div>` : ''}
-                                ${locatedOn ? `<div><strong>Located On:</strong> ${locatedOn}</div>` : ''}
-                                <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #eee;">
-                                    <strong>AADT${aadtYear ? ` (${aadtYear})` : ''}:</strong> ${aadt ? aadt.toLocaleString() + ' vehicles/day' : 'No data'}
-                                </div>
-                            </div>
-                        </div>
-                    `)
-                    .addTo(maplibreMap);
-            }
-        } else {
-            // Fallback for roads without traffic data
-            handleRoadClick(info);
-        }
+    // Source badge color
+    const srcColors = { measured: '#2a7a3b', estimated: '#b45309', interpolated: '#1d4ed8' };
+    const srcColor = srcColors[source] || '#666';
+    const srcLabel = source ? source.charAt(0).toUpperCase() + source.slice(1) : null;
+
+    // Data quality note
+    const qualityNote = (!aadt || aadt < 10) ? '⚠️ No observed traffic data for this segment' : null;
+
+    const rows = [
+        mtfccLabel ? `<tr><td>Road Class</td><td>${mtfccLabel}</td></tr>` : '',
+        fcLabel    ? `<tr><td>Functional Class</td><td>${fcLabel}</td></tr>` : '',
+        classification.routeDesignation ? `<tr><td>Route</td><td>${classification.routeDesignation}</td></tr>` : '',
+        classification.isMainlineRoad === false ? `<tr><td></td><td style="color:#888;font-style:italic;">Not a mainline road</td></tr>` : '',
+        matchType  ? `<tr><td>Match Type</td><td>${matchType}${matchDist ? ` (${matchDist})` : ''}</td></tr>` : '',
+    ].filter(Boolean).join('');
+
+    // Use Blazor popup if available, else MapLibre fallback
+    if (window.roadPopupInstance && aadt) {
+        window.roadPopupInstance.invokeMethodAsync('ShowPopupFromJS', {
+            roadName, roadType: typeCode, roadTypeName, aadt, aadtYear: aadtYear?.toString(),
+            locationId: null, locatedOn: null, coordinates: info.coordinate,
+            linearId: props.linearId || '', mtfcc
+        });
+        return;
     }
+
+    new maplibregl.Popup({ closeOnClick: true, maxWidth: '320px' })
+        .setLngLat(info.coordinate)
+        .setHTML(`
+            <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
+                <div style="font-weight:700; font-size:14px; margin-bottom:8px; color:#0B1F2E;">${roadName}</div>
+                <table style="font-size:12px; border-collapse:collapse; width:100%; margin-bottom:8px;">
+                    <tr><td style="color:#888;padding:2px 8px 2px 0;">Type</td><td style="color:#333;">${roadTypeName}</td></tr>
+                    ${rows}
+                </table>
+                <div style="border-top:1px solid #e5e7eb; padding-top:8px;">
+                    <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Traffic Volume</div>
+                    ${aadt && aadt >= 10
+                        ? `<div style="font-size:20px; font-weight:700; color:#2E4A6B;">${aadt.toLocaleString()}</div>
+                           <div style="font-size:11px; color:#888;">vehicles/day${aadtYear ? ` · ${aadtYear}` : ''}
+                           ${srcLabel ? ` · <span style="color:${srcColor};font-weight:600;">${srcLabel}</span>` : ''}</div>`
+                        : `<div style="font-size:12px; color:#b45309;">⚠️ No observed traffic data</div>
+                           ${aadt ? `<div style="font-size:11px;color:#888;">Estimated: ${aadt.toLocaleString()} veh/day</div>` : ''}`
+                    }
+                </div>
+                ${qualityNote ? '' : ''}
+            </div>
+        `)
+        .addTo(maplibreMap);
 }
 
 // Soil visualization color functions (industry-standard soil color schemes)
@@ -1573,6 +1624,41 @@ Persons: ${crashPopupData.personsInvolved}, Vehicles: ${crashPopupData.vehiclesI
     }
 }
 
+function handleCityBoundaryClick(info) {
+    if (!info.object || !maplibreMap || !info.coordinate) return;
+    const city = info.object.properties || {};
+    const name = city.CITY_NM || 'Unknown City';
+
+    // Population trend
+    const pop90 = city.POP1990, pop00 = city.POP2000, pop10 = city.POP2010, pop20 = city.POP2020, pop22 = city.POP2022;
+    const popChange = (pop22 && pop10) ? Math.round(((pop22 - pop10) / pop10) * 100) : null;
+    const popTrend = popChange !== null ? (popChange > 0 ? `▲ ${popChange}% since 2010` : `▼ ${Math.abs(popChange)}% since 2010`) : '';
+    const trendColor = popChange > 0 ? '#2a7a3b' : '#b91c1c';
+
+    const popRows = [
+        pop90 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">1990</td><td>${pop90.toLocaleString()}</td></tr>` : '',
+        pop00 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">2000</td><td>${pop00.toLocaleString()}</td></tr>` : '',
+        pop10 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">2010</td><td>${pop10.toLocaleString()}</td></tr>` : '',
+        pop20 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">2020</td><td>${pop20.toLocaleString()}</td></tr>` : '',
+        pop22 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">2022 est.</td><td><strong>${pop22.toLocaleString()}</strong></td></tr>` : '',
+    ].filter(Boolean).join('');
+
+    new maplibregl.Popup({ closeOnClick: true, maxWidth: '280px' })
+        .setLngLat(info.coordinate)
+        .setHTML(`
+            <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
+                <div style="font-weight:700; font-size:15px; margin-bottom:2px; color:#0B1F2E;">${name}</div>
+                ${popTrend ? `<div style="font-size:11px; color:${trendColor}; font-weight:600; margin-bottom:8px;">${popTrend}</div>` : ''}
+                <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Population</div>
+                <table style="font-size:12px; border-collapse:collapse; width:100%;">
+                    ${popRows}
+                </table>
+                ${city.CNTY_SEAT_FLAG === 'Y' ? `<div style="margin-top:8px; font-size:11px; color:#2E4A6B; font-weight:600;">★ County Seat</div>` : ''}
+            </div>
+        `)
+        .addTo(maplibreMap);
+}
+
 async function handleCityBoundaryHover(info) {
     if (info.object && info.object.properties) {
         const city = info.object.properties;
@@ -1706,18 +1792,46 @@ function handleRiskSegmentClick(info) {
             };
             const riskColor = riskColors[riskLevel] || '#95a5a6';
 
-            const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '320px' })
+            // Environmental risk flags
+            const slope = segment.SlopePercentage || 0;
+            const wetCrashes = segment.WetSurfaceCrashes || 0;
+            const icyCrashes = segment.IcySurfaceCrashes || 0;
+            const fogCrashes = segment.FogRelatedCrashes || 0;
+            const hydro = segment.HydroplaningIncidents || 0;
+            const fatal = segment.FatalCrashes || 0;
+            const injury = segment.InjuryCrashes || 0;
+            const pdo = segment.PropertyDamageCrashes || 0;
+            const segLenMi = segment.SegmentLength ? (segment.SegmentLength / 5280).toFixed(2) : null;
+
+            const envFlags = [
+                slope > 5  ? `⛰ Steep grade (${slope.toFixed(1)}%)` : (slope > 0 ? `Grade: ${slope.toFixed(1)}%` : ''),
+                wetCrashes > 0 ? `🌧 ${wetCrashes} wet-surface crash${wetCrashes>1?'es':''}` : '',
+                icyCrashes > 0 ? `🧊 ${icyCrashes} icy-surface crash${icyCrashes>1?'es':''}` : '',
+                fogCrashes > 0 ? `🌫 ${fogCrashes} fog-related crash${fogCrashes>1?'es':''}` : '',
+                hydro > 0      ? `💧 ${hydro} hydroplaning incident${hydro>1?'s':''}` : '',
+                segment.HasDrainageIssues ? `⚠️ Drainage concern flagged` : '',
+                segment.HasEnvironmentalRisk ? `⚠️ Environmental risk flagged` : '',
+            ].filter(Boolean);
+
+            new maplibregl.Popup({ closeOnClick: true, maxWidth: '340px' })
                 .setLngLat(info.coordinate)
                 .setHTML(`
-                    <div style="font-family: Arial, sans-serif; padding: 4px;">
-                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">${roadName}</div>
-                        <div style="display: inline-block; padding: 2px 8px; border-radius: 3px; background: ${riskColor}; color: white; font-size: 11px; font-weight: bold; margin-bottom: 6px;">${riskLevel}</div>
-                        <div style="font-size: 12px; color: #555;">
-                            <div><strong>Risk Score:</strong> ${riskScore}</div>
-                            <div><strong>Crashes:</strong> ${crashCount}</div>
-                            <div><strong>Crashes/Mile:</strong> ${crashesPerMile}</div>
-                            <div><strong>AADT:</strong> ${typeof aadt === 'number' ? aadt.toLocaleString() : aadt}</div>
-                        </div>
+                    <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
+                        <div style="font-weight:700; font-size:14px; margin-bottom:6px; color:#0B1F2E;">${roadName}</div>
+                        <div style="display:inline-block; padding:2px 10px; border-radius:3px; background:${riskColor}; color:white; font-size:11px; font-weight:700; margin-bottom:10px; letter-spacing:0.04em;">${riskLevel} RISK · ${riskScore}</div>
+                        <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Crash Summary</div>
+                        <table style="font-size:12px; border-collapse:collapse; width:100%; margin-bottom:8px;">
+                            <tr><td style="color:#888;padding:2px 10px 2px 0;">Total Crashes</td><td><strong>${crashCount}</strong>${segLenMi ? ` &nbsp;<span style="color:#888;">(${crashesPerMile}/mi)</span>` : ''}</td></tr>
+                            ${fatal > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Fatal</td><td style="color:#c0392b;font-weight:700;">${fatal}</td></tr>` : ''}
+                            ${injury > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Injury</td><td style="color:#e67e22;">${injury}</td></tr>` : ''}
+                            ${pdo > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Property Damage</td><td>${pdo}</td></tr>` : ''}
+                            <tr><td style="color:#888;padding:2px 10px 2px 0;">AADT</td><td>${typeof aadt === 'number' && aadt > 0 ? aadt.toLocaleString() + ' veh/day' : 'No data'}</td></tr>
+                            ${segLenMi ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Segment</td><td>${segLenMi} mi</td></tr>` : ''}
+                        </table>
+                        ${envFlags.length > 0 ? `
+                        <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Environmental Factors</div>
+                        <div style="font-size:12px; color:#555;">${envFlags.map(f=>`<div>${f}</div>`).join('')}</div>
+                        ` : ''}
                     </div>
                 `)
                 .addTo(maplibreMap);
@@ -1782,37 +1896,48 @@ function handleIntersectionRiskClick(info) {
 }
 
 function showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, crashCount, fatal, injury, pdo, recentCrashes) {
+    if (!maplibreMap || !info.coordinate) return;
     const riskColors = {
         'VeryLow': '#28a745', 'Low': '#27ae60',
         'Moderate': '#f39c12', 'High': '#e74c3c', 'VeryHigh': '#c0392b'
     };
     const riskColor = riskColors[riskLevel] || '#95a5a6';
 
-    const crashRows = recentCrashes.map(c =>
-        `<div style="padding:3px 0;border-bottom:1px solid #eee;font-size:11px;">
-            <span style="font-weight:600">${c.CrashDate || 'N/A'}</span>
-            <span style="margin-left:6px;color:#666">${c.Severity || ''}</span>
-            <span style="margin-left:6px;color:#999">${c.PersonsInvolved || 0} persons</span>
-        </div>`
-    ).join('');
+    const severityLabel = {
+        'K_Fatal': '💀 Fatal', 'A': '🔴 Serious Injury', 'B': '🟠 Minor Injury',
+        'B_NonIncapacitatingInjury': '🟠 Minor Injury', 'C': '🟡 Possible Injury',
+        'O': '⬜ No Injury', 'O_NoInjury': '⬜ No Injury'
+    };
 
-    if (maplibreMap && info.coordinate) {
-        new maplibregl.Popup({ closeOnClick: true, maxWidth: '320px', className: 'cris-intersection-popup' })
-            .setLngLat(info.coordinate)
-            .setHTML(`
-                <div style="font-family:Arial,sans-serif;padding:6px;">
-                    <div style="font-weight:bold;font-size:14px;margin-bottom:6px;">⚠️ ${roadsText}</div>
-                    <div style="display:inline-block;padding:2px 10px;border-radius:3px;background:${riskColor};color:#fff;font-size:11px;font-weight:bold;margin-bottom:8px;">${riskLevel}</div>
-                    <span style="margin-left:8px;font-size:12px;color:#555;">Score: ${riskScore}</span>
-                    <div style="margin-top:8px;font-size:12px;color:#333;">
-                        <strong>Crashes:</strong> ${crashCount}
-                        &nbsp;|&nbsp; Fatal: ${fatal} &nbsp;|&nbsp; Injury: ${injury} &nbsp;|&nbsp; PDO: ${pdo}
-                    </div>
-                    ${recentCrashes.length > 0 ? `<div style="margin-top:8px;"><div style="font-size:11px;font-weight:600;color:#555;margin-bottom:4px;">Recent Crashes</div>${crashRows}</div>` : ''}
-                </div>
-            `)
-            .addTo(maplibreMap);
-    }
+    const crashRows = recentCrashes.slice(0, 3).map(c => {
+        const sev = severityLabel[c.Severity] || c.Severity || '';
+        return `<tr style="font-size:11px;">
+            <td style="padding:2px 8px 2px 0;color:#666;">${c.CrashDate || 'N/A'}</td>
+            <td style="padding:2px 8px 2px 0;">${sev}</td>
+            <td style="color:#888;">${c.PersonsInvolved || 0} persons</td>
+        </tr>`;
+    }).join('');
+
+    new maplibregl.Popup({ closeOnClick: true, maxWidth: '340px' })
+        .setLngLat(info.coordinate)
+        .setHTML(`
+            <div style="font-family:'Helvetica Neue',Arial,sans-serif;padding:6px 2px;">
+                <div style="font-weight:700;font-size:14px;margin-bottom:6px;color:#0B1F2E;">⚠️ ${roadsText}</div>
+                <div style="display:inline-block;padding:2px 10px;border-radius:3px;background:${riskColor};color:#fff;font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:0.04em;">${riskLevel} RISK</div>
+                <table style="font-size:12px;border-collapse:collapse;width:100%;margin-bottom:8px;">
+                    <tr><td style="color:#888;padding:2px 10px 2px 0;">Risk Score</td><td><strong>${riskScore}</strong></td></tr>
+                    <tr><td style="color:#888;padding:2px 10px 2px 0;">Total Crashes</td><td><strong>${crashCount}</strong></td></tr>
+                    ${fatal > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Fatal</td><td style="color:#c0392b;font-weight:700;">💀 ${fatal}</td></tr>` : ''}
+                    ${injury > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Injury</td><td style="color:#e67e22;">${injury}</td></tr>` : ''}
+                    ${pdo > 0   ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Property Damage</td><td>${pdo}</td></tr>` : ''}
+                </table>
+                ${crashRows ? `
+                <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Recent Crashes</div>
+                <table style="border-collapse:collapse;width:100%;">${crashRows}</table>
+                ` : ''}
+            </div>
+        `)
+        .addTo(maplibreMap);
 }
 
 function handleRoadStressClick(info) {
