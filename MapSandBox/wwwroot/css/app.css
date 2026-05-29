@@ -733,3 +733,17 @@ code {
         display: block !important;
     }
 }
+
+/* ============================================
+   MAPLIBRE POPUP STACKING
+   deck.gl runs in overlaid mode (interleaved: false), so its canvas —
+   which draws the road/street layers — sits above the map. MapLibre
+   popups carry no z-index by default, so they render *under* those deck
+   layers. Lift the whole popup (tip + content) above the overlay canvas.
+   Kept below the full-screen Blazor overlays (z-index 2000) and the
+   report overlay (5000). !important guards against maplibre-gl.css
+   loading after app.css.
+   ============================================ */
+.maplibregl-popup {
+    z-index: 1500 !important;
+}
