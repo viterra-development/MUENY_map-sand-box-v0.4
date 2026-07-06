@@ -28,6 +28,19 @@ export function createIntegratedMap(containerId, config) {
     if (config.baseMap?.showControls !== false) {
         maplibreMap.addControl(new maplibregl.NavigationControl());
     }
+
+    // Watch the container so the canvas resizes when the sidebar toggles or the window resizes.
+    // Without this, MapLibre keeps its initial canvas dimensions and the map appears blank or clipped.
+    const containerEl = document.getElementById(containerId);
+    let resizeObserver = null;
+    if (containerEl && typeof ResizeObserver !== 'undefined') {
+        resizeObserver = new ResizeObserver(() => {
+            if (maplibreMap) maplibreMap.resize();
+        });
+        resizeObserver.observe(containerEl);
+    }
+    const windowResizeHandler = () => { if (maplibreMap) maplibreMap.resize(); };
+    window.addEventListener('resize', windowResizeHandler);
     
     // Update zoom level indicator
     function updateZoomIndicator() {
@@ -85,7 +98,9 @@ export function createIntegratedMap(containerId, config) {
     // Store reference for later use (deckOverlay will be added after map loads)
     integratedMapInstance = {
         maplibre: maplibreMap,
-        deckOverlay: null // Will be set after map loads
+        deckOverlay: null, // Will be set after map loads
+        resizeObserver: resizeObserver,
+        windowResizeHandler: windowResizeHandler
     };
 
     return integratedMapInstance;
@@ -208,6 +223,12 @@ export function updateBaseMapStyle(mapInstance, styleUrl) {
 
 export function disposeIntegratedMap(mapInstance) {
     if (mapInstance) {
+        if (mapInstance.resizeObserver) {
+            mapInstance.resizeObserver.disconnect();
+        }
+        if (mapInstance.windowResizeHandler) {
+            window.removeEventListener('resize', mapInstance.windowResizeHandler);
+        }
         if (mapInstance.deckOverlay) {
             // Remove deck.gl overlay
             mapInstance.maplibre.removeControl(mapInstance.deckOverlay);
