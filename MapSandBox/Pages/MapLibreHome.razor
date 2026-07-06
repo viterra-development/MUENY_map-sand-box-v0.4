@@ -32,8 +32,19 @@
         </div>
 
         <div class="control-section">
+            <h3>Trip Generation</h3>
+            <select @onchange="HandleTripGenCityChange" value="@selectedTripGenCityId">
+                <option value="">— Select a city —</option>
+                @foreach (var layer in layerInfo.Where(l => l.Id.EndsWith("-parcels-trips")))
+                {
+                    <option value="@layer.Id">@TripGenCityDisplayName(layer.Name)</option>
+                }
+            </select>
+        </div>
+
+        <div class="control-section">
             <h3>Background Layers</h3>
-            @foreach (var layer in layerInfo.Where(l => !l.Id.StartsWith("cris-")))
+            @foreach (var layer in layerInfo.Where(l => !l.Id.StartsWith("cris-") && !l.Id.EndsWith("-parcels-trips")))
             {
                 <label class="layer-toggle">
                     <input type="checkbox"
@@ -69,8 +80,39 @@
     private List<LayerInfo> layerInfo = new();
     private List<BaseMapStyle> availableStyles = new();
     private string selectedBaseMapId = "voyager";
+    private string selectedTripGenCityId = ""; // Which *-parcels-trips layer is currently active (empty = none)
     private DateTime _lastLayerToggle = DateTime.MinValue;
     private const int LayerToggleDebounceMs = 250;
+
+    private static string TripGenCityDisplayName(string layerName)
+    {
+        // Layer names are formatted "Trip Generation (Willow Park)" — surface just the city.
+        var openParen = layerName.IndexOf('(');
+        var closeParen = layerName.IndexOf(')');
+        if (openParen > 0 && closeParen > openParen)
+        {
+            return layerName.Substring(openParen + 1, closeParen - openParen - 1);
+        }
+        return layerName;
+    }
+
+    private async Task HandleTripGenCityChange(ChangeEventArgs e)
+    {
+        var newCityId = e.Value?.ToString() ?? "";
+        var previousCityId = selectedTripGenCityId;
+        selectedTripGenCityId = newCityId;
+
+        // Toggle previously-selected city off (if any)
+        if (!string.IsNullOrEmpty(previousCityId) && previousCityId != newCityId)
+        {
+            await HandleLayerToggle(new LayerToggleEventArgs(previousCityId, false));
+        }
+        // Toggle new selection on (if not the empty option)
+        if (!string.IsNullOrEmpty(newCityId))
+        {
+            await HandleLayerToggle(new LayerToggleEventArgs(newCityId, true));
+        }
+    }
     
     protected override void OnInitialized()
     {

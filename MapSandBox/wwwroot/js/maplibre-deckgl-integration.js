@@ -220,23 +220,29 @@ export function updateIntegratedMapLayers(mapInstance, layers) {
         });
         console.log(`[MapLibre-JS] Processed ${rasterLayerCount} raster tile layers`);
 
-        // Toggle trip generation UI components based on layer visibility
-        const tripLayer = layers.find(l => l.id === 'wp-parcels-trips');
-        if (tripLayer) {
-            if (tripLayer.visible) {
-                createLegend();
-                // Fetch GeoJSON and create stats panel if not already showing
-                if (!document.getElementById('trip-stats-panel')) {
-                    fetch(tripLayer.dataUrl || '/willow-park-parcels-with-trips.geojson')
-                        .then(r => r.json())
-                        .then(data => createStatsPanel(data))
-                        .catch(err => console.error('Failed to load trip stats:', err));
-                }
-            } else {
-                removeLegend();
-                removeStatsPanel();
-                hideParcelTooltip();
+        // Toggle trip generation UI components based on layer visibility.
+        // Any city trip-gen layer (aledo-parcels-trips, wp-parcels-trips, etc.) triggers the panel.
+        const activeTripLayer = layers.find(l => l.id.endsWith('-parcels-trips') && l.visible);
+        if (activeTripLayer) {
+            createLegend();
+            // Refresh the stats panel if it's missing or points at a different city
+            const existingPanel = document.getElementById('trip-stats-panel');
+            if (!existingPanel || existingPanel.dataset.layerId !== activeTripLayer.id) {
+                if (existingPanel) removeStatsPanel();
+                fetch(activeTripLayer.dataUrl)
+                    .then(r => r.json())
+                    .then(data => {
+                        createStatsPanel(data);
+                        const panel = document.getElementById('trip-stats-panel');
+                        if (panel) panel.dataset.layerId = activeTripLayer.id;
+                    })
+                    .catch(err => console.warn(`[trip-panel] Failed to load ${activeTripLayer.dataUrl}:`, err));
             }
+        } else if (layers.some(l => l.id.endsWith('-parcels-trips'))) {
+            // A city trip layer exists in config but none is currently visible
+            removeLegend();
+            removeStatsPanel();
+            hideParcelTooltip();
         }
 
         console.log('[MapLibre-JS] Layer update completed successfully');
@@ -816,7 +822,36 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
 
 function getLayerProperties(config) {
     const properties = { ...config.properties };
-    
+
+    // Trip-generation parcel layers (any *-parcels-trips) share fill colors + click behaviour.
+    // Match by suffix so Aledo, Azle, Midlothian, Mineral Wells, Reno, Springtown, Weatherford,
+    // and Willow Park all get the same treatment.
+    if (config.id && config.id.endsWith('-parcels-trips')) {
+        properties.filled = true;
+        properties.stroked = true;
+        properties.getFillColor = d => {
+            const owner = (d.properties && d.properties.owner) || '';
+            if (owner.includes('CITY OF ') || owner.includes(' CITY OF')) {
+                return [34, 139, 34, 200];                     // Green - city-owned
+            }
+            const trips = (d.properties && d.properties.daily_trips) || 0;
+            if (trips === 0) return [200, 200, 200, 80];       // Gray - no trips
+            if (trips < 10) return [65, 182, 196, 160];        // Teal - residential
+            if (trips < 50) return [255, 183, 77, 180];        // Orange - moderate
+            if (trips < 200) return [255, 112, 67, 200];       // Red-Orange - high
+            return [211, 47, 47, 220];                          // Red - very high
+        };
+        properties.getLineColor = [50, 50, 50, 200];
+        properties.getLineWidth = 1;
+        properties.lineWidthMinPixels = 1;
+        properties.opacity = 0.75;
+        properties.pickable = true;
+        properties.autoHighlight = true;
+        properties.highlightColor = [255, 255, 255, 150];
+        properties.onClick = handleParcelTripClick;
+        return properties;
+    }
+
     // Handle function properties based on layer type
     switch (config.id) {
         case 'countries':
@@ -938,30 +973,7 @@ function getLayerProperties(config) {
             properties.onHover = handleCityBoundaryHover;
             properties.onClick = handleCityBoundaryClick;
             break;
-        case 'wp-parcels-trips':
-            properties.filled = true;
-            properties.stroked = true;
-            properties.getFillColor = d => {
-                const owner = (d.properties && d.properties.owner) || '';
-                if (owner.includes('CITY OF WILLOW PARK') || owner.includes('WILLOW PARK CITY OF')) {
-                    return [34, 139, 34, 200];                     // Green - city-owned
-                }
-                const trips = (d.properties && d.properties.daily_trips) || 0;
-                if (trips === 0) return [200, 200, 200, 80];      // Gray - no trips
-                if (trips < 10) return [65, 182, 196, 160];       // Teal - residential
-                if (trips < 50) return [255, 183, 77, 180];       // Orange - moderate
-                if (trips < 200) return [255, 112, 67, 200];      // Red-Orange - high
-                return [211, 47, 47, 220];                         // Red - very high
-            };
-            properties.getLineColor = [50, 50, 50, 200];
-            properties.getLineWidth = 1;
-            properties.lineWidthMinPixels = 1;
-            properties.opacity = 0.75;
-            properties.pickable = true;
-            properties.autoHighlight = true;
-            properties.highlightColor = [255, 255, 255, 150];
-            properties.onClick = handleParcelTripClick;
-            break;
+        // wp-parcels-trips and all other *-parcels-trips are handled by the early return above.
         case 'cris-road-stress':
             properties.filled = false;
             properties.stroked = true;
