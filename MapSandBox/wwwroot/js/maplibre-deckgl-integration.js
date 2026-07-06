@@ -6,6 +6,49 @@ let integratedMapInstance = null;
 let maplibreMap = null;
 let deckOverlay = null;
 
+// Popup dispatch helpers — replace silent swallow on missing popup refs.
+// getPopupRef logs a warn when the ref is null so devs see the mount race.
+// waitForPopupRef polls briefly for sites that lack a MapLibre fallback.
+function getPopupRef(name) {
+    const ref = window[name];
+    if (!ref) console.warn(`[popup] ${name} not registered; using fallback`);
+    return ref;
+}
+function waitForPopupRef(name, maxWaitMs = 500) {
+    return new Promise(resolve => {
+        const start = performance.now();
+        const check = () => {
+            const ref = window[name];
+            if (ref && typeof ref.invokeMethodAsync === 'function') return resolve(ref);
+            if (performance.now() - start >= maxWaitMs) {
+                console.warn(`[popup] ${name} still missing after ${maxWaitMs}ms; giving up`);
+                return resolve(null);
+            }
+            setTimeout(check, 50);
+        };
+        check();
+    });
+}
+// Global Escape-to-close: dismisses any registered popup on Esc keypress.
+if (typeof window !== 'undefined' && !window.__mueny_esc_handler) {
+    window.__mueny_esc_handler = true;
+    window.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const names = [
+            'roadPopupInstance', 'soilPopupInstance', 'crashPopupInstance',
+            'crashClusterPopupInstance', 'cityBoundaryPopupInstance',
+            'crisRoadSegmentPopupInstance', 'crisIntersectionPopupInstance',
+            'roadStressPopupInstance'
+        ];
+        for (const n of names) {
+            const ref = window[n];
+            if (ref && typeof ref.invokeMethodAsync === 'function') {
+                ref.invokeMethodAsync('Hide').catch(() => {});
+            }
+        }
+    });
+}
+
 // Initialize error tracking when module loads
 initializeErrorTracking();
 
@@ -1346,12 +1389,13 @@ function handleTrafficRoadClick(info) {
     ].filter(Boolean).join('');
 
     // Use Blazor popup if available, else MapLibre fallback
-    if (window.roadPopupInstance && aadt) {
-        window.roadPopupInstance.invokeMethodAsync('ShowPopupFromJS', {
+    const roadPopup = getPopupRef('roadPopupInstance');
+    if (roadPopup && aadt) {
+        roadPopup.invokeMethodAsync('ShowPopupFromJS', {
             roadName, roadType: typeCode, roadTypeName, aadt, aadtYear: aadtYear?.toString(),
             locationId: null, locatedOn: null, coordinates: info.coordinate,
             linearId: props.linearId || '', mtfcc
-        });
+        }).catch(err => console.warn('[popup] roadPopup.ShowPopupFromJS failed:', err));
         return;
     }
 
@@ -1424,7 +1468,8 @@ function handleSoilUnitClick(info) {
         const ksatValue = typeof props.soil_ksat_um_per_s === 'number' ? props.soil_ksat_um_per_s : null;
 
         // Prefer Blazor interop popup if available
-        if (window.soilPopupInstance && typeof window.soilPopupInstance.invokeMethodAsync === 'function') {
+        const soilPopup = getPopupRef('soilPopupInstance');
+        if (soilPopup) {
             const soilData = {
                 musym: props.musym || null,
                 muname: props.muname || null,
@@ -1433,7 +1478,8 @@ function handleSoilUnitClick(info) {
                 soilKsatUmPerS: ksatValue,
                 coordinates: info.coordinate
             };
-            window.soilPopupInstance.invokeMethodAsync('ShowPopupFromJS', soilData);
+            soilPopup.invokeMethodAsync('ShowPopupFromJS', soilData)
+                .catch(err => console.warn('[popup] soilPopup.ShowPopupFromJS failed:', err));
             return;
         }
 
@@ -1717,8 +1763,8 @@ function handleRiskSegmentClick(info) {
         console.log('Segment data:', segment);
 
         // Try to use Blazor popup if available
-        console.log('Checking for crisRoadSegmentPopupInstance:', window.crisRoadSegmentPopupInstance);
-        if (window.crisRoadSegmentPopupInstance) {
+        const crisSegmentPopup = getPopupRef('crisRoadSegmentPopupInstance');
+        if (crisSegmentPopup) {
             // Convert RiskLevel string to enum integer
             const convertRiskLevel = (riskLevelStr) => {
                 switch(riskLevelStr) {
@@ -1796,10 +1842,8 @@ function handleRiskSegmentClick(info) {
                 recentCrashes: convertCrashRecords(segment.RecentCrashes || [])
             };
 
-            console.log('Calling Blazor popup with data:', segmentData);
-            window.crisRoadSegmentPopupInstance.invokeMethodAsync('ShowPopupFromJS', segmentData)
-                .then(() => console.log('Blazor popup called successfully'))
-                .catch(error => console.error('Error calling Blazor popup:', error));
+            crisSegmentPopup.invokeMethodAsync('ShowPopupFromJS', segmentData)
+                .catch(error => console.warn('[popup] crisRoadSegmentPopup.ShowPopupFromJS failed:', error));
         } else if (maplibreMap && info.coordinate) {
             // Fallback to MapLibre popup
             const riskScore = typeof segment.RiskScore === 'number'
@@ -1885,7 +1929,8 @@ function handleIntersectionRiskClick(info) {
     const roadsText = roads.length > 0 ? roads.join(' & ') : 'Unknown roads';
 
     // Try Blazor popup first
-    if (window.crisIntersectionPopupInstance) {
+    const crisIntersectionPopup = getPopupRef('crisIntersectionPopupInstance');
+    if (crisIntersectionPopup) {
         const convertSeverity = (s) => {
             const map = { 'K_Fatal': 0, 'A_IncapacitatingInjury': 1, 'B_NonIncapacitatingInjury': 2, 'C_PossibleInjury': 3, 'O_NoInjury': 4 };
             return map[s] ?? 5;
@@ -1911,10 +1956,9 @@ function handleIntersectionRiskClick(info) {
                 injuryCount: c.InjuryCount || 0
             }))
         };
-        window.crisIntersectionPopupInstance.invokeMethodAsync('ShowPopupFromJS', popupData)
-            .then(() => console.log('✅ Intersection popup opened via Blazor'))
+        crisIntersectionPopup.invokeMethodAsync('ShowPopupFromJS', popupData)
             .catch(err => {
-                console.error('Blazor intersection popup error:', err);
+                console.warn('[popup] crisIntersectionPopup.ShowPopupFromJS failed:', err);
                 showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, crashCount, fatal, injury, pdo, recentCrashes);
             });
     } else {
@@ -1973,26 +2017,26 @@ function handleRoadStressClick(info) {
     const props = info.object.properties || info.object;
     console.log('handleRoadStressClick:', props);
 
-    if (window.roadStressPopupInstance) {
-        const popupData = {
-            fullName: props.fullName || props.FullName || null,
-            roadStressIndex: parseFloat(props.road_stress_index) || 0,
-            stressTier: props.stress_tier || 'LOW',
-            recV2: parseFloat(props.rec_v2) || 0,
-            trafficDominanceType: props.traffic_dominance_type || 'UNKNOWN',
-            structuralClassScore: parseInt(props.structural_class_score) || 3,
-            measuredAadt: props.measured_aadt != null ? parseFloat(props.measured_aadt) : null,
-            totalDailyTrips: parseFloat(props.total_daily_trips) || 0,
-            parcelCount: parseInt(props.parcel_count) || 0,
-            peakToAverageRatio: parseFloat(props.peak_to_average_ratio) || 0,
-            landUseEntropy: parseFloat(props.land_use_entropy) || 0
-        };
-        window.roadStressPopupInstance.invokeMethodAsync('ShowPopupFromJS', popupData)
-            .then(() => console.log('Road stress popup opened via Blazor'))
-            .catch(err => console.error('Road stress popup error:', err));
-    } else {
-        console.warn('roadStressPopupInstance not available');
-    }
+    // Road Stress has no MapLibre fallback — wait briefly for the popup to register
+    // instead of silently dropping the click.
+    const popupData = {
+        fullName: props.fullName || props.FullName || null,
+        roadStressIndex: parseFloat(props.road_stress_index) || 0,
+        stressTier: props.stress_tier || 'LOW',
+        recV2: parseFloat(props.rec_v2) || 0,
+        trafficDominanceType: props.traffic_dominance_type || 'UNKNOWN',
+        structuralClassScore: parseInt(props.structural_class_score) || 3,
+        measuredAadt: props.measured_aadt != null ? parseFloat(props.measured_aadt) : null,
+        totalDailyTrips: parseFloat(props.total_daily_trips) || 0,
+        parcelCount: parseInt(props.parcel_count) || 0,
+        peakToAverageRatio: parseFloat(props.peak_to_average_ratio) || 0,
+        landUseEntropy: parseFloat(props.land_use_entropy) || 0
+    };
+    waitForPopupRef('roadStressPopupInstance').then(ref => {
+        if (!ref) return;
+        ref.invokeMethodAsync('ShowPopupFromJS', popupData)
+            .catch(err => console.warn('[popup] roadStressPopup.ShowPopupFromJS failed:', err));
+    });
 }
 
 function handleCrashClusterClick(info) {
@@ -2003,8 +2047,8 @@ function handleCrashClusterClick(info) {
         console.log('Cluster data:', cluster);
 
         // Try to use Blazor popup if available
-        console.log('Checking for crashClusterPopupInstance:', window.crashClusterPopupInstance);
-        if (window.crashClusterPopupInstance) {
+        const crashClusterPopup = getPopupRef('crashClusterPopupInstance');
+        if (crashClusterPopup) {
             // Create cluster data for popup - match CrashClusterData format
             const clusterData = {
                 Latitude: cluster.position[1],
@@ -2023,10 +2067,8 @@ function handleCrashClusterClick(info) {
                 }))
             };
 
-            console.log('Calling Blazor popup with cluster data:', clusterData);
-            window.crashClusterPopupInstance.invokeMethodAsync('ShowClusterPopupFromJS', clusterData)
-                .then(() => console.log('Blazor cluster popup called successfully'))
-                .catch(error => console.error('Error calling Blazor cluster popup:', error));
+            crashClusterPopup.invokeMethodAsync('ShowClusterPopupFromJS', clusterData)
+                .catch(error => console.warn('[popup] crashClusterPopup.ShowClusterPopupFromJS failed:', error));
         } else if (maplibreMap && cluster.position) {
             // Fallback to MapLibre popup
             const crashCount = cluster.crashCount || cluster.Crashes?.length || 1;
