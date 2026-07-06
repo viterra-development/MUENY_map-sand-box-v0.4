@@ -210,123 +210,10 @@ public class MapLibreService
                     ["onClick"] = "handleTrafficCountClick"
                 }
             },
-            // Raster TWI tiles generated from DEM workflow (XYZ) - now served from Azure
-            new LayerConfig
-            {
-                Id = "parker-twi",
-                Type = "RasterTile",
-                DataUrl = GetTileUrl("parker-twi"),
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["opacity"] = 0.75,
-                    ["minZoom"] = 8,
-                    ["maxZoom"] = 18,
-                    ["tileSize"] = 256
-                }
-            },
-            // Slope layer (degrees)
-            new LayerConfig
-            {
-                Id = "parker-slope",
-                Type = "RasterTile", 
-                DataUrl = GetTileUrl("parker-slope"),
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["opacity"] = 0.7,
-                    ["minZoom"] = 8,
-                    ["maxZoom"] = 18,
-                    ["tileSize"] = 256
-                }
-            },
-            // Specific Catchment Area layer
-            new LayerConfig  
-            {
-                Id = "parker-sca",
-                Type = "RasterTile",
-                DataUrl = GetTileUrl("parker-sca"), 
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["opacity"] = 0.7,
-                    ["minZoom"] = 8,
-                    ["maxZoom"] = 18,
-                    ["tileSize"] = 256
-                }
-            },
-            // Stream Power Index layer
-            new LayerConfig
-            {
-                Id = "parker-spi", 
-                Type = "RasterTile",
-                DataUrl = GetTileUrl("parker-spi"),
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["opacity"] = 0.7,
-                    ["minZoom"] = 8,
-                    ["maxZoom"] = 18, 
-                    ["tileSize"] = 256
-                }
-            },
-            // Base elevation layer
-            new LayerConfig
-            {
-                Id = "parker-elevation",
-                Type = "RasterTile",
-                DataUrl = GetTileUrl("parker-elevation"),
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["opacity"] = 0.8,
-                    ["minZoom"] = 8,
-                    ["maxZoom"] = 18,
-                    ["tileSize"] = 256
-                }
-            },
-            
-            // SSURGO Soil Map Units - Vector-based from Azure Blob Storage (Industry Standard)
-            new LayerConfig
-            {
-                Id = "soil-clay-visualization",
-                Type = "GeoJson",
-                DataUrl = GetSoilDataUrl("parker-county-clay.geojson"),
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["filled"] = true,
-                    ["stroked"] = true,
-                    ["getFillColor"] = "getSoilClayColor", // JavaScript function for clay % coloring
-                    ["getLineColor"] = new int[] { 139, 69, 19, 255 }, // Brown soil boundary
-                    ["getLineWidth"] = 2,
-                    ["opacity"] = 0.8,
-                    ["pickable"] = true,
-                    ["autoHighlight"] = true,
-                    ["onClick"] = "handleSoilUnitClick"
-                }
-            },
-            
-            // Soil permeability visualization layer
-            new LayerConfig
-            {
-                Id = "soil-ksat-visualization",
-                Type = "GeoJson",
-                DataUrl = GetSoilDataUrl("parker-county-ksat.geojson"),
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["filled"] = true,
-                    ["stroked"] = true,
-                    ["getFillColor"] = "getSoilKsatColor", // JavaScript function for Ksat coloring
-                    ["getLineColor"] = new int[] { 139, 69, 19, 255 },
-                    ["getLineWidth"] = 1,
-                    ["opacity"] = 0.7,
-                    ["pickable"] = true,
-                    ["autoHighlight"] = true,
-                    ["onClick"] = "handleSoilUnitClick"
-                }
-            },
+            // NOTE: TWI, Slope, SCA, SPI, Elevation, Soil Clay, Soil Ksat layers were removed
+            // because their tile/geojson data lived only on Azure and the Azure subscription is
+            // inactive. Restore by rehosting tiles on Cloudflare R2 and re-adding LayerConfig
+            // entries that point at the new URLs.
             new LayerConfig
             {
                 Id = "cris-risk-segments",
@@ -406,6 +293,125 @@ public class MapLibreService
             },
             new LayerConfig
             {
+                Id = "aledo-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/aledo-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "azle-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/azle-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "midlothian-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/midlothian-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "mineral-wells-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/mineral-wells-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "reno-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/reno-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "springtown-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/springtown-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "weatherford-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/weatherford-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
                 Id = "cris-road-stress",
                 Type = "GeoJson",
                 DataUrl = "/cris-data/willow-park-road-stress-map.geojson",
@@ -468,18 +474,18 @@ public class MapLibreService
             new LayerInfo { Id = "parker-roads-traffic-phase1", Name = "Traffic - Phase 1 (Interpolation IDW)", Visible = false },
             new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = false },
             new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = false },
-            new LayerInfo { Id = "parker-twi", Name = "Topographic Wetness Index (TWI)", Visible = false },
-            new LayerInfo { Id = "parker-slope", Name = "Slope (degrees)", Visible = false },
-            new LayerInfo { Id = "parker-sca", Name = "Specific Catchment Area", Visible = false },
-            new LayerInfo { Id = "parker-spi", Name = "Stream Power Index", Visible = false },
-            new LayerInfo { Id = "parker-elevation", Name = "Base Elevation", Visible = false },
-            new LayerInfo { Id = "soil-clay-visualization", Name = "Soil Clay Content (%)", Visible = false },
-            new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Ksat)", Visible = false },
             new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = true },
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },
             new LayerInfo { Id = "cris-intersections", Name = "⚠️ CRIS Intersection Risks", Visible = false },
             new LayerInfo { Id = "txdot-city-boundaries", Name = "City Boundaries (TxDOT)", Visible = false },
-            new LayerInfo { Id = "wp-parcels-trips", Name = "Trip Generation (Willow Park Parcels)", Visible = false },
+            new LayerInfo { Id = "wp-parcels-trips", Name = "Trip Generation (Willow Park)", Visible = false },
+            new LayerInfo { Id = "aledo-parcels-trips", Name = "Trip Generation (Aledo)", Visible = false },
+            new LayerInfo { Id = "azle-parcels-trips", Name = "Trip Generation (Azle)", Visible = false },
+            new LayerInfo { Id = "midlothian-parcels-trips", Name = "Trip Generation (Midlothian)", Visible = false },
+            new LayerInfo { Id = "mineral-wells-parcels-trips", Name = "Trip Generation (Mineral Wells)", Visible = false },
+            new LayerInfo { Id = "reno-parcels-trips", Name = "Trip Generation (Reno)", Visible = false },
+            new LayerInfo { Id = "springtown-parcels-trips", Name = "Trip Generation (Springtown)", Visible = false },
+            new LayerInfo { Id = "weatherford-parcels-trips", Name = "Trip Generation (Weatherford)", Visible = false },
             new LayerInfo { Id = "cris-road-stress", Name = "Road Stress Index", Visible = false }
             // new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "NOAA Rainfall Points", Visible = false },
             // new LayerInfo { Id = "noaa-rainfall-parker-heatmap", Name = "NOAA Rainfall Heatmap", Visible = false }
