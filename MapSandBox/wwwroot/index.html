@@ -56,6 +56,8 @@
 
     <!-- Fallback: if Blazor fails to load, initialize map directly via JS -->
     <script type="module">
+      import './js/report.js';   // registers window.MuenyReport = { showReportModal, generateReport }
+
       const BLAZOR_TIMEOUT_MS = 6000;
       let blazorStarted = false;
       let mapInitialized = false;
@@ -324,8 +326,8 @@
           });
         }, 50);
 
-        // Wire report button
-        document.getElementById('generate-report-btn').addEventListener('click', showReportModal);
+        // Wire report button — delegates to the report.js module
+        document.getElementById('generate-report-btn').addEventListener('click', () => window.MuenyReport.showReportModal());
 
         // Load stats asynchronously
         loadWillowParkStats();
@@ -372,128 +374,7 @@
         } catch(e) { console.warn('[MUENY] Could not load road stats'); }
       }
 
-      // Report generation modal + PDF export
-      function showReportModal() {
-        const overlay = document.createElement('div');
-        overlay.className = 'report-overlay';
-        overlay.id = 'report-overlay';
-        overlay.innerHTML = `
-          <div class="report-modal">
-            <h3>Generate Report</h3>
-            <p>Select a report type for Willow Park</p>
-            <div class="report-options">
-              <button class="report-option-btn" data-report="safety">📊 Safety Summary Report</button>
-              <button class="report-option-btn" data-report="traffic">🚗 Traffic Estimation Report</button>
-              <button class="report-option-btn" data-report="full">📋 Full Municipal Intelligence Report</button>
-            </div>
-            <button class="report-cancel" id="report-cancel-btn">Cancel</button>
-          </div>
-        `;
-        document.body.appendChild(overlay);
-
-        document.getElementById('report-cancel-btn').addEventListener('click', () => {
-          overlay.remove();
-        });
-
-        overlay.querySelectorAll('.report-option-btn').forEach(btn => {
-          btn.addEventListener('click', async () => {
-            const reportType = btn.dataset.report;
-            overlay.remove();
-            await generateReport(reportType);
-          });
-        });
-      }
-
-      async function generateReport(reportType) {
-        const reportTitles = {
-          safety: 'Willow Park — Safety Summary',
-          traffic: 'Willow Park — Traffic Estimation',
-          full: 'Willow Park — Municipal Intelligence Summary'
-        };
-
-        const title = reportTitles[reportType] || 'MUENY Report';
-        const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
-        // Collect current stats
-        const crashes = document.getElementById('stat-crashes')?.textContent || '--';
-        const parcels = document.getElementById('stat-parcels')?.textContent || '--';
-        const trips = document.getElementById('stat-trips')?.textContent || '--';
-        const roads = document.getElementById('stat-roads')?.textContent || '--';
-
-        // Take map screenshot via canvas
-        let mapImageDataUrl = null;
-        try {
-          const canvas = document.querySelector('#maplibre-container canvas');
-          if (canvas) mapImageDataUrl = canvas.toDataURL('image/png');
-        } catch(e) { console.warn('[MUENY] Could not capture map screenshot'); }
-
-        // Build HTML report for printing
-        const reportHTML = `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>${title}</title>
-<style>
-  body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 32px; background: #fff; color: #1a1a2e; }
-  .report-header { border-bottom: 3px solid #2E4A6B; padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end; }
-  .report-brand { font-size: 24px; font-weight: 700; letter-spacing: 0.15em; color: #0B1F2E; }
-  .report-brand span { color: #2E4A6B; }
-  .report-meta { font-size: 11px; color: #888; text-align: right; }
-  .report-title { font-size: 18px; font-weight: 700; color: #0B1F2E; margin-bottom: 4px; }
-  .report-subtitle { font-size: 12px; color: #666; }
-  .stats-row { display: flex; gap: 16px; margin: 24px 0; }
-  .stat-box { flex: 1; background: #f0f4f8; border-radius: 6px; padding: 16px; text-align: center; }
-  .stat-box .val { font-size: 28px; font-weight: 700; color: #2E4A6B; }
-  .stat-box .lbl { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
-  .map-section { margin: 24px 0; }
-  .map-section h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #444; margin-bottom: 12px; }
-  .map-img { width: 100%; border-radius: 6px; border: 1px solid #ddd; }
-  .notes { margin-top: 24px; padding: 16px; background: #f8f9fa; border-radius: 6px; font-size: 11px; color: #666; line-height: 1.6; }
-  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 10px; color: #aaa; display: flex; justify-content: space-between; }
-</style>
-</head>
-<body>
-  <div class="report-header">
-    <div>
-      <div class="report-brand">MUENY <span>Municipal Intelligence</span></div>
-      <div style="font-size:11px; color:#888; margin-top:4px;">Viterra Group</div>
-    </div>
-    <div class="report-meta">
-      <div class="report-title">${title}</div>
-      <div>Generated: ${date}</div>
-    </div>
-  </div>
-
-  <div class="stats-row">
-    <div class="stat-box"><div class="val">${crashes}</div><div class="lbl">Crashes (5yr)</div></div>
-    <div class="stat-box"><div class="val">${parcels}</div><div class="lbl">Parcels Analyzed</div></div>
-    <div class="stat-box"><div class="val">${trips}</div><div class="lbl">Est. Daily Trips</div></div>
-    <div class="stat-box"><div class="val">${roads}</div><div class="lbl">Roads w/ AADT</div></div>
-  </div>
-
-  ${mapImageDataUrl ? `<div class="map-section"><h3>Map View — Willow Park</h3><img class="map-img" src="${mapImageDataUrl}" /></div>` : ''}
-
-  <div class="notes">
-    <strong>Data Sources:</strong> TxDOT CRIS crash records · Parker County Appraisal District parcel data · ITE Trip Generation Manual (11th Edition) · TxDOT AADT traffic counts · TIGER/Line road network<br><br>
-    <strong>Methodology:</strong> Trip generation uses ITE land use codes mapped from Parker County CAD state property type codes. Crash risk segments derived from CRIS crash point spatial analysis. Traffic volumes estimated via IDW interpolation from observed TxDOT counts.<br><br>
-    <em>This report is a screening tool, not a final engineering assessment. Data is provided for planning and grant support purposes. Field verification recommended for engineering decisions.</em>
-  </div>
-
-  <div class="footer">
-    <div>MUENY Municipal Intelligence Platform · Viterra Group</div>
-    <div>${date}</div>
-  </div>
-</body>
-</html>`;
-
-        // Open in new window and trigger print dialog
-        const reportWindow = window.open('', '_blank', 'width=900,height=700');
-        reportWindow.document.write(reportHTML);
-        reportWindow.document.close();
-        reportWindow.onload = () => {
-          setTimeout(() => reportWindow.print(), 500);
-        };
-      }
+      // Report generation lives in js/report.js as MuenyReport.showReportModal/generateReport.
 
       // Try to start Blazor, fall back to direct JS init
       async function tryBlazorThenFallback() {
