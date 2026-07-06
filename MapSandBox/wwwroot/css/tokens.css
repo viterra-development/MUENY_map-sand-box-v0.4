@@ -1,0 +1,93 @@
+/* ============================================
+   MUENY Design Tokens
+   Central palette + spacing + typography. Load BEFORE app.css so downstream
+   rules can reference these values via var(--token-name).
+   To retheme the app, change values here — no other CSS should be touched.
+   ============================================ */
+:root {
+    /* -------- Brand palette -------- */
+    --color-primary-dark:      #0B1F2E;   /* body bg, header gradient start */
+    --color-sidebar-dark:      #0f1a24;   /* sidebar + trip panel + report modal bg */
+    --color-accent-blue:       #2E4A6B;   /* buttons, gradient stop, focus */
+    --color-accent-blue-hover: #3d6490;   /* button hover */
+    --color-highlight-blue:    #5ba3dc;   /* stat values, checkbox accent */
+    --color-report-start:      #1a5c8e;   /* report button gradient start */
+    --color-report-hover-start:#2272ac;
+    --color-report-hover-end:  #3a5c80;
+
+    --color-text-white:        #FFFFFF;
+    --color-text-offwhite:     #e0e0e0;
+    --color-text-inline-code:  #c02d76;
+
+    --color-success:           #6fcf8a;
+    --color-success-bg:        rgba(38, 176, 80, 0.15);
+    --color-success-border:    rgba(38, 176, 80, 0.25);
+    --color-error:             #f09090;
+    --color-error-bg:          rgba(198, 40, 40, 0.15);
+    --color-error-border:      rgba(198, 40, 40, 0.25);
+
+    /* -------- Text on dark background (opacity scale) -------- */
+    --color-text-primary:      rgba(255, 255, 255, 0.75);
+    --color-text-secondary:    rgba(255, 255, 255, 0.55);
+    --color-text-muted:        rgba(255, 255, 255, 0.45);
+    --color-text-faint:        rgba(255, 255, 255, 0.35);
+    --color-text-hint:         rgba(255, 255, 255, 0.30);
+
+    /* -------- Surface tints (white overlays) -------- */
+    --surface-hairline:        rgba(255, 255, 255, 0.06);
+    --surface-border:          rgba(255, 255, 255, 0.08);
+    --surface-input-border:    rgba(255, 255, 255, 0.12);
+    --surface-input-bg:        rgba(255, 255, 255, 0.06);
+    --surface-hover:           rgba(255, 255, 255, 0.10);
+    --surface-card:            rgba(255, 255, 255, 0.02);
+    --surface-card-border:     rgba(255, 255, 255, 0.05);
+
+    /* -------- Accent tints -------- */
+    --accent-glow:             rgba(46, 74, 107, 0.6);
+    --accent-tint-25:          rgba(46, 74, 107, 0.25);
+    --accent-tint-30:          rgba(46, 74, 107, 0.30);
+    --accent-tint-40:          rgba(46, 74, 107, 0.40);
+    --accent-tint-50:          rgba(46, 74, 107, 0.50);
+    --accent-tint-60:          rgba(46, 74, 107, 0.60);
+    --highlight-tint-30:       rgba(91, 163, 220, 0.3);
+    --highlight-tint-60:       rgba(91, 163, 220, 0.6);
+
+    /* -------- Overlays -------- */
+    --overlay-scrim:           rgba(0, 0, 0, 0.5);
+    --overlay-scrim-heavy:     rgba(0, 0, 0, 0.7);
+    --overlay-tooltip:         rgba(0, 0, 0, 0.7);
+
+    /* -------- Typography -------- */
+    --font-display: 'Rajdhani', sans-serif;
+    --font-body:    'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-mono:    ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --letter-loose:    0.05em;
+    --letter-wide:     0.08em;
+    --letter-wider:    0.10em;
+    --letter-widest:   0.15em;
+    --letter-brand:    0.35em;
+
+    /* -------- Size scale -------- */
+    --size-header-desktop: 48px;
+    --size-header-mobile:  44px;
+    --size-sidebar:        260px;
+    --size-trip-panel:     320px;
+
+    /* -------- Radii -------- */
+    --radius-xs: 3px;
+    --radius-sm: 4px;
+    --radius-md: 5px;
+    --radius-lg: 6px;
+    --radius-xl: 8px;
+
+    /* -------- Elevation -------- */
+    --shadow-header:  0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-panel:   0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-glow:    0 0 20px var(--accent-glow);
+
+    /* -------- Motion -------- */
+    --ease-quick: 0.15s ease;
+    --ease-med:   0.20s ease;
+    --ease-slow:  0.25s ease;
+}
