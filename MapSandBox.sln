@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoilDataProcessor", "SoilDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapSandBox.Shared", "MapSandBox.Shared\MapSandBox.Shared.csproj", "{C9D0E234-5678-4D9A-0123-456789012345}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripGenProcessor", "TripGenProcessor\TripGenProcessor.csproj", "{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{C9D0E234-5678-4D9A-0123-456789012345}.Release|x64.Build.0 = Release|Any CPU
 		{C9D0E234-5678-4D9A-0123-456789012345}.Release|x86.ActiveCfg = Release|Any CPU
 		{C9D0E234-5678-4D9A-0123-456789012345}.Release|x86.Build.0 = Release|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Debug|x64.Build.0 = Debug|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Debug|x86.Build.0 = Debug|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Release|x64.ActiveCfg = Release|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Release|x64.Build.0 = Release|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Release|x86.ActiveCfg = Release|Any CPU
+		{33CD3D8F-8ADF-4B35-8C90-4ED8BE76BA1A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

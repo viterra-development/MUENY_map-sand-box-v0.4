@@ -1,0 +1,36 @@
+{
+  "type": "FeatureCollection",
+  "name": "parker-roads-test",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-97.660, 32.763], [-97.640, 32.763]] },
+      "properties": { "LINEARID": "1101234567890", "FULLNAME": "Crown Rd", "MTFCC": "S1200", "AADT": 6800, "aadt_year": 2023 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-97.660, 32.766], [-97.640, 32.766]] },
+      "properties": { "LINEARID": "1101234567891", "FULLNAME": "I-20 Frontage Rd", "MTFCC": "S1100", "AADT": 15000, "aadt_year": 2023 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-97.660, 32.760], [-97.640, 32.760]] },
+      "properties": { "LINEARID": "1101234567892", "FULLNAME": "FM 5", "MTFCC": "S1200", "AADT": 12500, "aadt_year": 2023 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-97.650, 32.758], [-97.650, 32.770]] },
+      "properties": { "LINEARID": "1101234567893", "FULLNAME": "Tim Curry Blvd", "MTFCC": "S1200", "AADT": 8200, "aadt_year": 2023 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-97.645, 32.758], [-97.645, 32.770]] },
+      "properties": { "LINEARID": "1101234567894", "FULLNAME": "Shops at Willow Park Blvd", "MTFCC": "S1400", "AADT": 4500, "aadt_year": 2023 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-97.648, 32.766], [-97.648, 32.770]] },
+      "properties": { "LINEARID": "1101234567895", "FULLNAME": "Industrial Blvd", "MTFCC": "S1400", "AADT": 3200, "aadt_year": 2023 }
+    }
+  ]
+}

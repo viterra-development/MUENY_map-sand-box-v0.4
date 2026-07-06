@@ -1,0 +1,81 @@
+{
+  "type": "FeatureCollection",
+  "name": "willow-park-test-parcels",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.651, 32.764], [-97.650, 32.764], [-97.650, 32.763], [-97.651, 32.763], [-97.651, 32.764]]] },
+      "properties": { "prop_id": "WP-001", "state_cd": "A1", "situs_street": "100 Crown Rd", "situs_city": "Willow Park", "legal_acreage": 0.25, "imprv_sqft": 2200, "total_val": 350000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.652, 32.764], [-97.651, 32.764], [-97.651, 32.763], [-97.652, 32.763], [-97.652, 32.764]]] },
+      "properties": { "prop_id": "WP-002", "state_cd": "A1", "situs_street": "102 Crown Rd", "situs_city": "Willow Park", "legal_acreage": 0.30, "imprv_sqft": 2800, "total_val": 425000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.653, 32.764], [-97.652, 32.764], [-97.652, 32.763], [-97.653, 32.763], [-97.653, 32.764]]] },
+      "properties": { "prop_id": "WP-003", "state_cd": "A1", "situs_street": "104 Crown Rd", "situs_city": "Willow Park", "legal_acreage": 0.28, "imprv_sqft": 1800, "total_val": 310000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.654, 32.764], [-97.653, 32.764], [-97.653, 32.763], [-97.654, 32.763], [-97.654, 32.764]]] },
+      "properties": { "prop_id": "WP-004", "state_cd": "A1", "situs_street": "106 Crown Rd", "situs_city": "Willow Park", "legal_acreage": 0.22, "imprv_sqft": 3100, "total_val": 475000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.648, 32.762], [-97.646, 32.762], [-97.646, 32.760], [-97.648, 32.760], [-97.648, 32.762]]] },
+      "properties": { "prop_id": "WP-005", "state_cd": "B2", "situs_street": "200 I-20 Frontage Rd", "situs_city": "Willow Park", "legal_acreage": 3.5, "imprv_sqft": 45000, "dwelling_units": 48, "total_val": 6200000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.645, 32.763], [-97.643, 32.763], [-97.643, 32.761], [-97.645, 32.761], [-97.645, 32.763]]] },
+      "properties": { "prop_id": "WP-006", "state_cd": "F1", "situs_street": "500 Shops at Willow Park Blvd", "situs_city": "Willow Park", "legal_acreage": 5.0, "imprv_sqft": 65000, "total_val": 12500000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.644, 32.765], [-97.643, 32.765], [-97.643, 32.764], [-97.644, 32.764], [-97.644, 32.765]]] },
+      "properties": { "prop_id": "WP-007", "state_cd": "F1", "situs_street": "301 Tim Curry Blvd", "situs_city": "Willow Park", "legal_acreage": 1.2, "imprv_sqft": 8500, "total_val": 1800000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.647, 32.766], [-97.646, 32.766], [-97.646, 32.765], [-97.647, 32.765], [-97.647, 32.766]]] },
+      "properties": { "prop_id": "WP-008", "state_cd": "F1", "situs_street": "110 E I-20 Frontage", "situs_city": "Willow Park", "legal_acreage": 0.8, "imprv_sqft": 4200, "total_val": 950000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.650, 32.760], [-97.648, 32.760], [-97.648, 32.758], [-97.650, 32.758], [-97.650, 32.760]]] },
+      "properties": { "prop_id": "WP-009", "state_cd": "X4", "situs_street": "1000 Aledo Elementary Dr", "situs_city": "Willow Park", "legal_acreage": 12.0, "imprv_sqft": 75000, "total_val": 8500000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.655, 32.762], [-97.654, 32.762], [-97.654, 32.761], [-97.655, 32.761], [-97.655, 32.762]]] },
+      "properties": { "prop_id": "WP-010", "state_cd": "X3", "situs_street": "450 Church Lane", "situs_city": "Willow Park", "legal_acreage": 2.5, "imprv_sqft": 18000, "total_val": 2200000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.649, 32.768], [-97.647, 32.768], [-97.647, 32.766], [-97.649, 32.766], [-97.649, 32.768]]] },
+      "properties": { "prop_id": "WP-011", "state_cd": "F2", "situs_street": "800 Industrial Blvd", "situs_city": "Willow Park", "legal_acreage": 8.0, "imprv_sqft": 42000, "total_val": 3800000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.646, 32.764], [-97.645, 32.764], [-97.645, 32.763], [-97.646, 32.763], [-97.646, 32.764]]] },
+      "properties": { "prop_id": "WP-012", "state_cd": "C1", "situs_street": "Vacant Lot Crown Rd", "situs_city": "Willow Park", "legal_acreage": 1.0, "imprv_sqft": 0, "total_val": 85000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.656, 32.766], [-97.654, 32.766], [-97.654, 32.763], [-97.656, 32.763], [-97.656, 32.766]]] },
+      "properties": { "prop_id": "WP-013", "state_cd": "D1", "situs_street": "FM 5 Agricultural", "situs_city": "Willow Park", "legal_acreage": 45.0, "imprv_sqft": 0, "total_val": 125000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.643, 32.761], [-97.642, 32.761], [-97.642, 32.760], [-97.643, 32.760], [-97.643, 32.761]]] },
+      "properties": { "prop_id": "WP-014", "state_cd": "A2", "situs_street": "55 Mobile Home Park Ln", "situs_city": "Willow Park", "legal_acreage": 0.15, "imprv_sqft": 960, "total_val": 65000 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[-97.650, 32.766], [-97.649, 32.766], [-97.649, 32.765], [-97.650, 32.765], [-97.650, 32.766]]] },
+      "properties": { "prop_id": "WP-015", "state_cd": "X1", "situs_street": "Willow Park City Hall", "situs_city": "Willow Park", "legal_acreage": 1.5, "imprv_sqft": 12000, "total_val": 3000000 }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Run outputs (regenerated on every run)
+output/*
+!output/.gitkeep
+
+# Large data files that shouldn't be committed
+# Sample files (small, useful for schema reference) are tracked explicitly
+data/*
+!data/county-cad-parcels-willow-park.geojson
+!data/parker-roads-with-traffic.geojson
+
+# Build artifacts
+bin/
+obj/
+appsettings.local.json
