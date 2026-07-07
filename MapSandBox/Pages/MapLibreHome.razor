@@ -119,6 +119,20 @@
         }
     }
 
+    // Approximate city-center coordinates (Parker County, TX unless noted).
+    // Used to recenter the map when a trip-gen city is picked in the dropdown.
+    private static readonly Dictionary<string, (double Lat, double Lng, int Zoom)> CityCoords = new()
+    {
+        ["wp-parcels-trips"]           = (32.7365, -97.6506, 13),
+        ["aledo-parcels-trips"]        = (32.6952, -97.6019, 13),
+        ["azle-parcels-trips"]         = (32.8949, -97.5453, 13),
+        ["midlothian-parcels-trips"]   = (32.4826, -96.9944, 13),
+        ["mineral-wells-parcels-trips"]= (32.8085, -98.1128, 13),
+        ["reno-parcels-trips"]         = (32.9268, -97.5734, 14),
+        ["springtown-parcels-trips"]   = (32.9690, -97.6811, 13),
+        ["weatherford-parcels-trips"]  = (32.7593, -97.7972, 12),
+    };
+
     private async Task HandleTripGenCityChange(ChangeEventArgs e)
     {
         var newCityId = e.Value?.ToString() ?? "";
@@ -130,10 +144,14 @@
         {
             await HandleLayerToggle(new LayerToggleEventArgs(previousCityId, false));
         }
-        // Toggle new selection on (if not the empty option)
+        // Toggle new selection on (if not the empty option) and recenter map
         if (!string.IsNullOrEmpty(newCityId))
         {
             await HandleLayerToggle(new LayerToggleEventArgs(newCityId, true));
+            if (mapComponent != null && CityCoords.TryGetValue(newCityId, out var coords))
+            {
+                await mapComponent.FlyTo(coords.Lat, coords.Lng, coords.Zoom);
+            }
         }
     }
     

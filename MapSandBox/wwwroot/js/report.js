@@ -180,20 +180,14 @@ export function showReportModal() {
     // Avoid duplicates if user clicks twice quickly
     if (document.getElementById('report-overlay')) return;
 
-    const city = detectActiveCity();
     const overlay = document.createElement('div');
     overlay.className = 'report-overlay';
     overlay.id = 'report-overlay';
     overlay.innerHTML = `
       <div class="report-modal">
-        <h3>Generate Report</h3>
-        <p>Select a report type for ${city.name}</p>
-        <div class="report-options">
-          <button class="report-option-btn" data-report="safety">📊 Safety Summary Report</button>
-          <button class="report-option-btn" data-report="traffic">🚗 Traffic Estimation Report</button>
-          <button class="report-option-btn" data-report="full">📋 Full Municipal Intelligence Report</button>
-        </div>
-        <button class="report-cancel" id="report-cancel-btn">Cancel</button>
+        <h3>Complete Regional Reports</h3>
+        <p style="font-size: 14px; color: rgba(255,255,255,0.75); margin: 12px 0 24px 0;">Coming Soon</p>
+        <button class="report-cancel" id="report-cancel-btn">Close</button>
       </div>
     `;
     document.body.appendChild(overlay);
@@ -208,14 +202,6 @@ export function showReportModal() {
     // Click on the scrim (outside the modal) closes
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) closeModal();
-    });
-
-    overlay.querySelectorAll('.report-option-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const reportType = btn.dataset.report;
-            closeModal();
-            await generateReport(reportType);
-        });
     });
 }
 
