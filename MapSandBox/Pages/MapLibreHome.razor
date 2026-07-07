@@ -77,6 +77,12 @@
     <CrisRoadSegmentPopup @ref="roadSegmentPopup" />
 </div>
 
+@* Right-side pop-out for parcel details + trip generation summary.
+   parcelTripUI.js injects into #trip-panel; without this element the
+   click tooltip and city stats silently drop. The trip-panel-visible
+   class expands width from 0 to 320px when there's content. *@
+<div id="trip-panel" class="trip-panel"></div>
+
 
 @code {
     private MapLibreMap? mapComponent;
