@@ -1,6 +1,27 @@
 name = "muenytx-map-sandbox"
 compatibility_date = "2026-01-01"
+main = "src/worker.js"
 
 [assets]
 directory = "./publish/wwwroot"
+binding = "ASSETS"
 not_found_handling = "single-page-application"
+
+# Google Form destination for /api/log-visit. Empty by default; the Worker will
+# skip the Form POST and only console.log until these are populated. Fill after
+# you create the Form: docs.google.com/forms → New form → 9 short-answer fields
+# (IP, Timestamp, Path, User-Agent, Referrer, Country, City, Region, ASN),
+# link Responses to a Sheet, then click three-dot menu → "Get pre-filled link"
+# → fill each field with the field name → "Get link" → the resulting URL
+# contains entry.NNN=... for each question. Paste the numeric IDs here.
+[vars]
+GOOGLE_FORM_ID           = ""
+GOOGLE_FORM_ENTRY_IP     = ""
+GOOGLE_FORM_ENTRY_TS     = ""
+GOOGLE_FORM_ENTRY_PATH   = ""
+GOOGLE_FORM_ENTRY_UA     = ""
+GOOGLE_FORM_ENTRY_REF    = ""
+GOOGLE_FORM_ENTRY_COUNTRY= ""
+GOOGLE_FORM_ENTRY_CITY   = ""
+GOOGLE_FORM_ENTRY_REGION = ""
+GOOGLE_FORM_ENTRY_ASN    = ""

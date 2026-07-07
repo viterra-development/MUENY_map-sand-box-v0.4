@@ -54,6 +54,27 @@
     <!-- Try Blazor WASM first -->
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
 
+    <!-- Passive visit log: fire-and-forget beacon, no user friction. The Worker
+         extracts CF-Connecting-IP server-side; the body just adds path + client
+         hints. sendBeacon survives navigation and doesn't block page load. -->
+    <script>
+      (function () {
+        try {
+          const payload = JSON.stringify({
+            path: location.pathname + location.search,
+            userAgent: navigator.userAgent || '',
+            referrer: document.referrer || ''
+          });
+          if (navigator.sendBeacon) {
+            const blob = new Blob([payload], { type: 'application/json' });
+            navigator.sendBeacon('/api/log-visit', blob);
+          } else {
+            fetch('/api/log-visit', { method: 'POST', keepalive: true, body: payload, headers: { 'content-type': 'application/json' } }).catch(() => {});
+          }
+        } catch (_) { /* never let logging break the page */ }
+      })();
+    </script>
+
     <!-- Fallback: if Blazor fails to load, initialize map directly via JS -->
     <script type="module">
       import './js/report.js';   // registers window.MuenyReport = { showReportModal, generateReport }
