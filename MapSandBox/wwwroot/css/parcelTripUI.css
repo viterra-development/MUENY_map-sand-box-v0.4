@@ -5,7 +5,7 @@
 /* ---------- COLOR LEGEND ---------- */
 #trip-legend {
     position: absolute;
-    bottom: 32px;
+    bottom: 64px;
     left: 16px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
