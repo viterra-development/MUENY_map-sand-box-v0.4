@@ -75,6 +75,8 @@
     <CrashClusterPopup @ref="crashClusterPopup" />
     <CityBoundaryPopup @ref="cityBoundaryPopup" />
     <CrisRoadSegmentPopup @ref="roadSegmentPopup" />
+    <CrisIntersectionPopup @ref="crisIntersectionPopup" />
+    <RoadStressPopup @ref="roadStressPopup" />
 </div>
 
 @* Right-side pop-out for parcel details + trip generation summary.
@@ -92,6 +94,8 @@
     private CrashClusterPopup? crashClusterPopup;
     private CityBoundaryPopup? cityBoundaryPopup;
     private CrisRoadSegmentPopup? roadSegmentPopup;
+    private CrisIntersectionPopup? crisIntersectionPopup;
+    private RoadStressPopup? roadStressPopup;
     private MapLibreConfig mapConfig = new();
     private List<LayerInfo> layerInfo = new();
     private List<BaseMapStyle> availableStyles = new();
