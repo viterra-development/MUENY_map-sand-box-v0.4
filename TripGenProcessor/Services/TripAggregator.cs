@@ -23,8 +23,14 @@ public class TripAggregator
     {
         _logger.LogInformation("Aggregating trips to road segments...");
 
-        // Build road lookup
-        var roadMap = roads.ToDictionary(r => r.LinearId, r => r);
+        // Build road lookup. TIGER LinearId is usually unique but some segments
+        // ship with empty or duplicate ids after preprocessing. Skip duplicates.
+        var roadMap = new Dictionary<string, RoadSegment>(roads.Count);
+        foreach (var r in roads)
+        {
+            if (!string.IsNullOrEmpty(r.LinearId) && !roadMap.ContainsKey(r.LinearId))
+                roadMap[r.LinearId] = r;
+        }
 
         // Reset road totals
         foreach (var road in roads)
@@ -105,21 +111,29 @@ public class TripAggregator
                 });
         summary.ByCategory = byCategory;
 
-        // Top roads by trip volume
-        var topRoads = roads
+        // Top roads by trip volume. LinearIds can duplicate across TIGER exports —
+        // fall back to positional key when a collision occurs.
+        var topRoadCandidates = roads
             .Where(r => r.TotalDailyTrips > 0)
             .OrderByDescending(r => r.TotalDailyTrips)
             .Take(20)
-            .ToDictionary(
-                r => r.LinearId,
-                r => new RoadSummary
-                {
-                    RoadName = r.FullName,
-                    DailyTrips = Math.Round(r.TotalDailyTrips, 0),
-                    Aadt = r.Aadt,
-                    ParcelCount = r.ParcelCount,
-                    VolumeToCapacityRatio = r.VolumeToCapacityRatio
-                });
+            .ToList();
+        var topRoads = new Dictionary<string, RoadSummary>(topRoadCandidates.Count);
+        int idx = 0;
+        foreach (var r in topRoadCandidates)
+        {
+            var key = string.IsNullOrEmpty(r.LinearId) ? $"seg-{idx}" : r.LinearId;
+            while (topRoads.ContainsKey(key)) { idx++; key = $"seg-{idx}"; }
+            topRoads[key] = new RoadSummary
+            {
+                RoadName = r.FullName,
+                DailyTrips = Math.Round(r.TotalDailyTrips, 0),
+                Aadt = r.Aadt,
+                ParcelCount = r.ParcelCount,
+                VolumeToCapacityRatio = r.VolumeToCapacityRatio
+            };
+            idx++;
+        }
         summary.TopRoads = topRoads;
 
         // Warnings

@@ -23,10 +23,21 @@ public class LandUseClassifier
     /// <summary>
     /// Classify a parcel's land use and determine its ITE code.
     /// Returns null if the parcel generates 0 trips.
+    ///
+    /// When state_cd is populated, uses the canonical PCAD→ITE lookup.
+    /// When state_cd is null/empty (as with TxGIO's bulk parcels export),
+    /// falls back to a heuristic ladder using OWNER_NAME markers, LEGAL_DESC
+    /// keywords, IMP_VALUE tiers, and acreage.
     /// </summary>
     public (int? iteCode, string classification, string? notes) Classify(CadParcel parcel)
     {
-        var stateCd = parcel.StateCd.Trim().ToUpperInvariant();
+        var stateCd = (parcel.StateCd ?? "").Trim().ToUpperInvariant();
+
+        // ── No state_cd (TxGIO bulk export path) → run heuristic classifier ──
+        if (string.IsNullOrEmpty(stateCd))
+        {
+            return ClassifyByHeuristics(parcel);
+        }
 
         // Direct lookup
         if (IteRateLookup.CadToIte.TryGetValue(stateCd, out var iteCode))
@@ -71,6 +82,102 @@ public class LandUseClassifier
 
         _skippedCount++;
         return (null, "Unknown", $"Unrecognized state_cd: {stateCd}");
+    }
+
+    /// <summary>
+    /// Heuristic classifier used when state_cd is not populated (TxGIO bulk export).
+    /// Ladder — first match wins:
+    ///   1. Owner-name markers (city/county government, schools, churches)
+    ///   2. Legal-description keywords (commercial, industrial, apartments)
+    ///   3. Improvement value + acreage tiers (residential vs. commercial vs. ag)
+    ///   4. Default: residential single-family if any improvement value, otherwise 0-trip.
+    /// </summary>
+    private (int? iteCode, string classification, string? notes) ClassifyByHeuristics(CadParcel parcel)
+    {
+        var owner  = (parcel.OwnerName ?? "").ToUpperInvariant();
+        var legal  = (parcel.LegalDesc ?? "").ToUpperInvariant();
+        var acres  = parcel.LegalAcreage;
+        var impVal = parcel.ImprvVal;
+
+        // 1a. Government / municipal / county property → General Office (710)
+        if (owner.Contains("CITY OF ") || owner.Contains(" CITY OF") ||
+            owner.Contains("COUNTY OF") || owner.Contains("PARKER COUNTY") ||
+            owner.Contains("TXDOT") || owner.Contains("STATE OF TEXAS"))
+        {
+            _fallbackCount++;
+            return (710, "Institutional", "Heuristic: government owner");
+        }
+        // 1b. Schools → Elementary (520) as default; middle/high refined by name
+        if (owner.Contains("ISD") || owner.Contains("SCHOOL DIST") ||
+            owner.Contains("SCHOOL DISTRICT"))
+        {
+            if (owner.Contains("HIGH")) { _fallbackCount++; return (530, "Institutional", "Heuristic: high school"); }
+            if (owner.Contains("MIDDLE") || owner.Contains("JUNIOR"))
+                                        { _fallbackCount++; return (522, "Institutional", "Heuristic: middle school"); }
+            _fallbackCount++;
+            return (520, "Institutional", "Heuristic: school");
+        }
+        // 1c. Churches / religious → 560
+        if (owner.Contains("CHURCH") || owner.Contains("BAPTIST") ||
+            owner.Contains("METHODIST") || owner.Contains("CATHOLIC") ||
+            owner.Contains("PRESBYTERIAN") || owner.Contains("LUTHERAN") ||
+            owner.Contains("ASSEMBLY OF GOD") || owner.Contains("MINISTRIES"))
+        {
+            _fallbackCount++;
+            return (560, "Institutional", "Heuristic: religious owner");
+        }
+        // 1d. Explicit multi-family / apartments
+        if (owner.Contains("APARTMENTS") || owner.Contains("APT ") ||
+            legal.Contains("APARTMENTS") || legal.Contains("MULTIFAMILY") ||
+            legal.Contains("MULTI-FAMILY") || legal.Contains("DUPLEX"))
+        {
+            _fallbackCount++;
+            return (220, "Residential", "Heuristic: multi-family owner/legal");
+        }
+
+        // 2. Legal-description keywords for commercial / industrial
+        if (legal.Contains("COMMERCIAL") || legal.Contains("RETAIL") ||
+            legal.Contains("BUSINESS") || legal.Contains("STORE") ||
+            legal.Contains("SHOPPING") || legal.Contains("PLAZA"))
+        {
+            _fallbackCount++;
+            return (820, "Commercial", "Heuristic: commercial legal desc");
+        }
+        if (legal.Contains("INDUSTRIAL") || legal.Contains("MANUFACTURING") ||
+            legal.Contains("WAREHOUSE"))
+        {
+            _fallbackCount++;
+            return (110, "Industrial", "Heuristic: industrial legal desc");
+        }
+        if (legal.Contains("OFFICE") || legal.Contains("PROFESSIONAL"))
+        {
+            _fallbackCount++;
+            return (710, "Commercial", "Heuristic: office legal desc");
+        }
+
+        // 3. Value + acreage tiers
+        //    - Zero improvement value → likely vacant / agricultural → 0 trips
+        if (impVal <= 0)
+        {
+            _skippedCount++;
+            return (null, "Vacant", "Heuristic: no improvement value");
+        }
+        //    - Large parcel with modest improvement → agricultural / farmstead → 0 trips
+        if (acres > 20 && impVal < 200_000)
+        {
+            _skippedCount++;
+            return (null, "Agricultural", "Heuristic: large parcel, low improvement");
+        }
+        //    - High-value improvement on small lot → commercial (heuristic)
+        if (impVal > 750_000 && acres > 0 && acres < 5)
+        {
+            _fallbackCount++;
+            return (820, "Commercial", "Heuristic: high-value improvement, small lot");
+        }
+
+        // 4. Default: residential single-family (safest assumption for improved parcels)
+        _fallbackCount++;
+        return (210, "Residential", "Heuristic: default single-family");
     }
 
     /// <summary>

@@ -37,7 +37,13 @@ public class OutputWriter
         _logger.LogInformation("Writing parcel GeoJSON to {Path}", outputPath);
         EnsureDirectory(outputPath);
 
-        var resultMap = results.ToDictionary(r => r.ParcelId, r => r);
+        // First-write-wins guard against duplicate parcel IDs (TxGIO includes ~6.5K
+        // rows with prop_id="0" for rights-of-way + minor dupes).
+        var resultMap = new Dictionary<string, TripGenerationResult>(results.Count);
+        foreach (var r in results)
+        {
+            if (!resultMap.ContainsKey(r.ParcelId)) resultMap[r.ParcelId] = r;
+        }
         var writer = new GeoJsonWriter();
         var fc = new FeatureCollection();
 

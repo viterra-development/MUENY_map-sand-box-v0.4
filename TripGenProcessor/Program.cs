@@ -5,15 +5,38 @@ using TripGenProcessor.Services;
 
 // ═══════════════════════════════════════════════════════════
 // TripGenProcessor — Municipal Trip Generation Pipeline
-// Parker County / Willow Park, TX
-// Follows TCDS.Importer pattern
+// Parker County, TX
+//
+// CLI:
+//   --parcels PATH        Input parcels GeoJSON (overrides appsettings)
+//   --roads PATH          Input roads GeoJSON (overrides appsettings)
+//   --boundary PATH       City boundaries GeoJSON (overrides appsettings)
+//   --output-dir PATH     Directory for {city}-parcels-with-trips.geojson (overrides appsettings)
+//   --city NAME           Single city to process (overrides appsettings CityName)
+//   --cities "N1;N2;..."  Batch mode — process multiple cities in one run
 // ═══════════════════════════════════════════════════════════
 
 Console.WriteLine("═══════════════════════════════════════════════════");
 Console.WriteLine("  TripGenProcessor — ITE Trip Generation Pipeline");
-Console.WriteLine("  Parker County / Willow Park, TX");
 Console.WriteLine("═══════════════════════════════════════════════════");
 Console.WriteLine();
+
+// Parse CLI args
+string? cliParcels = null, cliRoads = null, cliBoundary = null, cliOutDir = null;
+string? cliCity = null, cliCities = null;
+for (int i = 0; i < args.Length; i++)
+{
+    string? Val(int j) => j + 1 < args.Length ? args[j + 1] : null;
+    switch (args[i])
+    {
+        case "--parcels":    cliParcels  = Val(i); i++; break;
+        case "--roads":      cliRoads    = Val(i); i++; break;
+        case "--boundary":   cliBoundary = Val(i); i++; break;
+        case "--output-dir": cliOutDir   = Val(i); i++; break;
+        case "--city":       cliCity     = Val(i); i++; break;
+        case "--cities":     cliCities   = Val(i); i++; break;
+    }
+}
 
 // Configuration
 var config = new ConfigurationBuilder()
@@ -22,25 +45,34 @@ var config = new ConfigurationBuilder()
     .Build();
 
 var settings = config.GetSection("TripGenProcessor");
-var parcelsPath = settings["InputParcelsPath"] ?? "data/county-cad-parcels-willow-park.geojson";
-var roadsPath = settings["InputRoadsPath"] ?? "data/parker-roads-with-traffic.geojson";
-var boundaryPath = settings["InputCityBoundaryPath"] ?? "data/txdot-city-boundaries-filtered.geojson";
-var outputParcelsPath = settings["OutputParcelsPath"] ?? "output/willow-park-parcels-with-trips.geojson";
-var outputRoadsPath = settings["OutputRoadsPath"] ?? "output/parker-roads-with-trip-volumes.geojson";
-var outputSummaryPath = settings["OutputSummaryPath"] ?? "output/trip-generation-summary.json";
-var cityName = settings["CityName"] ?? "Willow Park";
+var parcelsPath  = cliParcels  ?? settings["InputParcelsPath"]      ?? "data/county-cad-parcels-willow-park.geojson";
+var roadsPath    = cliRoads    ?? settings["InputRoadsPath"]        ?? "data/parker-roads-with-traffic.geojson";
+var boundaryPath = cliBoundary ?? settings["InputCityBoundaryPath"] ?? "data/txdot-city-boundaries-filtered.geojson";
+var outputDir    = cliOutDir   ?? "output";
 var maxSnapDistance = double.TryParse(settings["MaxSnapDistanceMeters"], out var sd) ? sd : 500.0;
 var directionalSplit = double.TryParse(settings["DirectionalSplit"], out var ds) ? ds : 0.50;
 var defaultDu = double.TryParse(settings["DefaultDwellingUnitsPerParcel"], out var du) ? du : 1.0;
 var defaultSqft = double.TryParse(settings["DefaultSqftPerAcreFactor"], out var sf) ? sf : 10000.0;
 
+// Determine city list
+var cities = new List<string>();
+if (!string.IsNullOrWhiteSpace(cliCities))
+{
+    cities.AddRange(cliCities.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+}
+else
+{
+    cities.Add(cliCity ?? settings["CityName"] ?? "Willow Park");
+}
+
+Directory.CreateDirectory(outputDir);
+
 // Logging
 using var loggerFactory = LoggerFactory.Create(builder =>
 {
     builder.AddConsole();
-    builder.SetMinimumLevel(LogLevel.Information);
+    builder.SetMinimumLevel(LogLevel.Warning); // reduce noise in batch mode
 });
-
 var logger = loggerFactory.CreateLogger<Program>();
 
 // Validate inputs
@@ -49,174 +81,122 @@ if (!File.Exists(parcelsPath))
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine($"ERROR: Parcel data not found at: {parcelsPath}");
     Console.ResetColor();
-    Console.WriteLine();
-    Console.WriteLine("Expected input files:");
-    Console.WriteLine($"  1. {parcelsPath}  — Parker County CAD parcels (GeoJSON)");
-    Console.WriteLine($"  2. {roadsPath}  — TIGER road segments with AADT (GeoJSON)");
-    Console.WriteLine($"  3. {boundaryPath}  — City boundaries for clipping (GeoJSON)");
-    Console.WriteLine();
-    Console.WriteLine("Data sources for Parker County parcels:");
-    Console.WriteLine("  • TxGIO DataHub: https://tnris.org/stratmap/land-parcels.html");
-    Console.WriteLine("  • Texas County GIS Data: https://texascountygisdata.com/product/parker-county-shapefile-and-property-data/");
-    Console.WriteLine("  • Parker County CAD: https://iswdataclient.azurewebsites.net/webindex.aspx?dbkey=parkercad");
-    Console.WriteLine("  • Koordinates: https://koordinates.com/layer/10039-parker-county-texas-parcels/");
-    Console.WriteLine();
-    Console.WriteLine("Place parcel GeoJSON in the data/ directory and re-run.");
     return 1;
 }
 
 try
 {
-    // ── Step 1: Load Data ──────────────────────────────────
-    Console.WriteLine("▶ Step 1: Loading data...");
-
+    // ── Load parcels + roads ONCE, reuse across all cities ──
+    Console.WriteLine("▶ Loading source data (shared across cities)...");
     var loader = new ParcelDataLoader(loggerFactory.CreateLogger<ParcelDataLoader>());
-
     var allParcels = loader.LoadParcels(parcelsPath);
-    Console.WriteLine($"  Loaded {allParcels.Count} parcels");
+    Console.WriteLine($"  Loaded {allParcels.Count:N0} total parcels");
 
-    List<RoadSegment> roads;
+    List<RoadSegment> roads = new();
     if (File.Exists(roadsPath))
     {
         roads = loader.LoadRoads(roadsPath);
-        Console.WriteLine($"  Loaded {roads.Count} road segments");
+        Console.WriteLine($"  Loaded {roads.Count:N0} road segments");
     }
     else
     {
-        logger.LogWarning("Roads file not found at {Path}. Skipping road linking.", roadsPath);
-        roads = new List<RoadSegment>();
+        Console.WriteLine($"  WARN: Roads file not found at {roadsPath}; skipping road linking for all cities");
     }
 
-    // ── Step 2: Clip to City Boundary ──────────────────────
-    var parcels = allParcels;
-    if (File.Exists(boundaryPath))
-    {
-        Console.WriteLine($"▶ Step 2: Clipping parcels to {cityName} boundary...");
-        var boundary = loader.LoadCityBoundary(boundaryPath, cityName);
-
-        if (boundary != null)
-        {
-            parcels = allParcels.Where(p =>
-                p.Geometry != null && boundary.Contains(p.Centroid ?? p.Geometry.Centroid)
-            ).ToList();
-            Console.WriteLine($"  Clipped: {parcels.Count} parcels within {cityName} (from {allParcels.Count})");
-        }
-        else
-        {
-            Console.WriteLine($"  Warning: No boundary found for '{cityName}', using all parcels");
-        }
-    }
-    else
-    {
-        Console.WriteLine("▶ Step 2: No city boundary file, using all parcels");
-    }
-
-    // ── Step 3: Calculate Trip Generation ──────────────────
-    Console.WriteLine("▶ Step 3: Calculating trip generation...");
-
-    var classifier = new LandUseClassifier(loggerFactory.CreateLogger<LandUseClassifier>());
-    var calculator = new TripCalculator(
-        loggerFactory.CreateLogger<TripCalculator>(),
-        classifier,
-        directionalSplit,
-        defaultDu,
-        defaultSqft
-    );
-
-    var results = calculator.CalculateAll(parcels);
-
-    // ── Step 4: Link Parcels to Roads ──────────────────────
+    // Road linker index is built once and reused across cities
+    RoadLinker? linkerCache = null;
     if (roads.Count > 0)
     {
-        Console.WriteLine("▶ Step 4: Linking parcels to road network...");
-
-        var linker = new RoadLinker(loggerFactory.CreateLogger<RoadLinker>(), maxSnapDistance);
-        linker.BuildIndex(roads);
-        linker.LinkAll(parcels, results);
-    }
-    else
-    {
-        Console.WriteLine("▶ Step 4: Skipped (no road data)");
+        linkerCache = new RoadLinker(loggerFactory.CreateLogger<RoadLinker>(), maxSnapDistance);
+        linkerCache.BuildIndex(roads);
     }
 
-    // ── Step 5: Aggregate Trips to Roads ───────────────────
-    if (roads.Count > 0)
-    {
-        Console.WriteLine("▶ Step 5: Aggregating trips to road segments...");
-
-        var aggregator = new TripAggregator(loggerFactory.CreateLogger<TripAggregator>());
-        aggregator.AggregateToRoads(results, roads);
-    }
-    else
-    {
-        Console.WriteLine("▶ Step 5: Skipped (no road data)");
-    }
-
-    // ── Step 6: Write Outputs ──────────────────────────────
-    Console.WriteLine("▶ Step 6: Writing output files...");
-
-    var writer = new OutputWriter(loggerFactory.CreateLogger<OutputWriter>());
-    writer.WriteParcels(outputParcelsPath, parcels, results);
-
-    if (roads.Count > 0)
-        writer.WriteRoads(outputRoadsPath, roads);
-
-    // Generate and write summary
-    var aggregatorForSummary = new TripAggregator(loggerFactory.CreateLogger<TripAggregator>());
-    var summary = aggregatorForSummary.GenerateSummary(cityName, parcels, results, roads);
-    writer.WriteSummary(outputSummaryPath, summary);
-
-    // ── Print Summary ──────────────────────────────────────
     Console.WriteLine();
-    Console.WriteLine("═══════════════════════════════════════════════════");
-    Console.WriteLine("  TRIP GENERATION SUMMARY");
-    Console.WriteLine("═══════════════════════════════════════════════════");
-    Console.WriteLine($"  City:              {summary.CityName}");
-    Console.WriteLine($"  Total Parcels:     {summary.TotalParcels:N0}");
-    Console.WriteLine($"  Generating Trips:  {summary.ParcelsWithTrips:N0}");
-    Console.WriteLine($"  Skipped (0-trip):  {summary.ParcelsSkipped:N0}");
-    Console.WriteLine($"  ─────────────────────────────────────────────");
-    Console.WriteLine($"  Daily Trips:       {summary.TotalDailyTrips:N0}");
-    Console.WriteLine($"  AM Peak Trips:     {summary.TotalAmPeakTrips:N0}");
-    Console.WriteLine($"  PM Peak Trips:     {summary.TotalPmPeakTrips:N0}");
-    Console.WriteLine($"  Road Links:        {summary.RoadSegmentsLinked:N0}");
+    Console.WriteLine($"▶ Processing {cities.Count} {(cities.Count == 1 ? "city" : "cities")}: {string.Join(", ", cities)}");
     Console.WriteLine();
 
-    if (summary.ByCategory.Any())
+    var overallResults = new List<(string city, int parcels, int withTrips, double dailyTrips)>();
+
+    foreach (var cityName in cities)
     {
-        Console.WriteLine("  BY CATEGORY:");
-        foreach (var (cat, data) in summary.ByCategory.OrderByDescending(c => c.Value.DailyTrips))
+        Console.WriteLine($"══ {cityName} ══");
+
+        // Clip to boundary
+        var parcels = allParcels;
+        if (File.Exists(boundaryPath))
         {
-            Console.WriteLine($"    {cat,-15} {data.ParcelCount,6:N0} parcels  →  {data.DailyTrips,8:N0} daily trips");
+            var boundary = loader.LoadCityBoundary(boundaryPath, cityName);
+            if (boundary != null)
+            {
+                parcels = allParcels.Where(p =>
+                    p.Geometry != null && boundary.Contains(p.Centroid ?? p.Geometry.Centroid)
+                ).ToList();
+                Console.WriteLine($"  Clipped: {parcels.Count:N0} parcels within {cityName}");
+            }
+            else
+            {
+                Console.WriteLine($"  WARN: No boundary for '{cityName}' — SKIPPING");
+                continue;
+            }
         }
-        Console.WriteLine();
-    }
 
-    if (summary.TopRoads.Any())
-    {
-        Console.WriteLine("  TOP ROADS BY GENERATED TRIPS:");
-        foreach (var (_, road) in summary.TopRoads.Take(10))
+        if (parcels.Count == 0)
         {
-            var vcStr = road.VolumeToCapacityRatio.HasValue ? $"V/C: {road.VolumeToCapacityRatio:F2}" : "";
-            Console.WriteLine($"    {road.RoadName,-25} {road.DailyTrips,8:N0} trips  ({road.ParcelCount} parcels)  {vcStr}");
+            Console.WriteLine($"  WARN: 0 parcels for {cityName} — SKIPPING output write");
+            continue;
         }
+
+        // Classify + calculate trips
+        var classifier = new LandUseClassifier(loggerFactory.CreateLogger<LandUseClassifier>());
+        var calculator = new TripCalculator(
+            loggerFactory.CreateLogger<TripCalculator>(),
+            classifier, directionalSplit, defaultDu, defaultSqft);
+        var results = calculator.CalculateAll(parcels);
+
+        // Link to roads (reset per-city aggregation state on the shared road list)
+        // NOTE: We reset the aggregated fields so cities don't accumulate onto each other.
+        foreach (var r in roads)
+        {
+            r.TotalDailyTrips = 0; r.TotalAmPeakTrips = 0; r.TotalPmPeakTrips = 0;
+            r.ParcelCount = 0; r.VolumeToCapacityRatio = null;
+        }
+        if (linkerCache != null)
+        {
+            linkerCache.LinkAll(parcels, results);
+            var aggregator = new TripAggregator(loggerFactory.CreateLogger<TripAggregator>());
+            aggregator.AggregateToRoads(results, roads);
+        }
+
+        // Output paths — derive from city name (lowercase, hyphenated, no punctuation)
+        var slug = Slugify(cityName);
+        var outParcels = Path.Combine(outputDir, $"{slug}-parcels-with-trips.geojson");
+        var outRoads   = Path.Combine(outputDir, $"{slug}-roads-with-trip-volumes.geojson");
+        var outSummary = Path.Combine(outputDir, $"{slug}-summary.json");
+
+        var writer = new OutputWriter(loggerFactory.CreateLogger<OutputWriter>());
+        writer.WriteParcels(outParcels, parcels, results);
+        if (roads.Count > 0) writer.WriteRoads(outRoads, roads);
+
+        var summaryAgg = new TripAggregator(loggerFactory.CreateLogger<TripAggregator>());
+        var summary = summaryAgg.GenerateSummary(cityName, parcels, results, roads);
+        writer.WriteSummary(outSummary, summary);
+
+        Console.WriteLine($"  → {summary.ParcelsWithTrips:N0}/{summary.TotalParcels:N0} generating {summary.TotalDailyTrips:N0} daily trips");
+        Console.WriteLine($"  → {outParcels}");
+        overallResults.Add((cityName, summary.TotalParcels, summary.ParcelsWithTrips, summary.TotalDailyTrips));
         Console.WriteLine();
     }
 
-    if (summary.Warnings.Any())
-    {
-        Console.WriteLine("  WARNINGS:");
-        foreach (var w in summary.Warnings)
-            Console.WriteLine($"    {w}");
-        Console.WriteLine();
-    }
-
-    Console.WriteLine("  OUTPUT FILES:");
-    Console.WriteLine($"    {outputParcelsPath}");
-    if (roads.Count > 0) Console.WriteLine($"    {outputRoadsPath}");
-    Console.WriteLine($"    {outputSummaryPath}");
+    // Final table
     Console.WriteLine("═══════════════════════════════════════════════════");
-
+    Console.WriteLine("  BATCH SUMMARY");
+    Console.WriteLine("═══════════════════════════════════════════════════");
+    Console.WriteLine($"  {"City",-20} {"Parcels",10} {"With Trips",12} {"Daily Trips",14}");
+    foreach (var (city, tp, wt, dt) in overallResults)
+    {
+        Console.WriteLine($"  {city,-20} {tp,10:N0} {wt,12:N0} {dt,14:N0}");
+    }
+    Console.WriteLine("═══════════════════════════════════════════════════");
     return 0;
 }
 catch (Exception ex)
@@ -226,4 +206,18 @@ catch (Exception ex)
     Console.ResetColor();
     logger.LogError(ex, "TripGenProcessor failed");
     return 1;
+}
+
+static string Slugify(string name)
+{
+    // "Willow Park" -> "willow-park", "Reno (Parker)" -> "reno" (strip parenthetical),
+    // "Annetta North" -> "annetta-north". Matches the historical file naming so
+    // wwwroot layer URLs (/willow-park-parcels-with-trips.geojson etc.) keep working.
+    var s = name.ToLowerInvariant();
+    var openParen = s.IndexOf('(');
+    if (openParen > 0) s = s[..openParen];
+    var chars = s.Select(c => char.IsLetterOrDigit(c) ? c : '-').ToArray();
+    var joined = new string(chars);
+    while (joined.Contains("--")) joined = joined.Replace("--", "-");
+    return joined.Trim('-');
 }

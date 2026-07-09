@@ -327,9 +327,60 @@ public class MapLibreService
             },
             new LayerConfig
             {
-                Id = "midlothian-parcels-trips",
+                Id = "hudson-oaks-parcels-trips",
                 Type = "GeoJson",
-                DataUrl = "/midlothian-parcels-with-trips.geojson",
+                DataUrl = "/hudson-oaks-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "annetta-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/annetta-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "annetta-north-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/annetta-north-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                Id = "annetta-south-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/annetta-south-parcels-with-trips.geojson",
                 Visible = false,
                 Properties = new Dictionary<string, object>
                 {
@@ -481,11 +532,14 @@ public class MapLibreService
             new LayerInfo { Id = "wp-parcels-trips", Name = "Trip Generation (Willow Park)", Visible = false },
             new LayerInfo { Id = "aledo-parcels-trips", Name = "Trip Generation (Aledo)", Visible = false },
             new LayerInfo { Id = "azle-parcels-trips", Name = "Trip Generation (Azle)", Visible = false },
-            new LayerInfo { Id = "midlothian-parcels-trips", Name = "Trip Generation (Midlothian)", Visible = false },
             new LayerInfo { Id = "mineral-wells-parcels-trips", Name = "Trip Generation (Mineral Wells)", Visible = false },
             new LayerInfo { Id = "reno-parcels-trips", Name = "Trip Generation (Reno)", Visible = false },
             new LayerInfo { Id = "springtown-parcels-trips", Name = "Trip Generation (Springtown)", Visible = false },
             new LayerInfo { Id = "weatherford-parcels-trips", Name = "Trip Generation (Weatherford)", Visible = false },
+            new LayerInfo { Id = "hudson-oaks-parcels-trips", Name = "Trip Generation (Hudson Oaks)", Visible = false },
+            new LayerInfo { Id = "annetta-parcels-trips", Name = "Trip Generation (Annetta)", Visible = false },
+            new LayerInfo { Id = "annetta-north-parcels-trips", Name = "Trip Generation (Annetta North)", Visible = false },
+            new LayerInfo { Id = "annetta-south-parcels-trips", Name = "Trip Generation (Annetta South)", Visible = false },
             new LayerInfo { Id = "cris-road-stress", Name = "Road Stress Index", Visible = false }
             // new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "NOAA Rainfall Points", Visible = false },
             // new LayerInfo { Id = "noaa-rainfall-parker-heatmap", Name = "NOAA Rainfall Heatmap", Visible = false }

@@ -13,6 +13,7 @@ public class CadParcel
     public string? SitusStreet { get; set; }
     public string? SitusCity { get; set; }
     public string? OwnerName { get; set; }
+    public string? LegalDesc { get; set; }              // Legal description text (subdivision, tract, keywords)
     public double LegalAcreage { get; set; }
     public double ImprvSqft { get; set; }               // Improvement square footage
     public double ImprvVal { get; set; }                 // Improvement value

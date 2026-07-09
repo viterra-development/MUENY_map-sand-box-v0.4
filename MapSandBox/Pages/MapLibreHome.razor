@@ -129,14 +129,17 @@
     // Used to recenter the map when a trip-gen city is picked in the dropdown.
     private static readonly Dictionary<string, (double Lat, double Lng, int Zoom)> CityCoords = new()
     {
-        ["wp-parcels-trips"]           = (32.7365, -97.6506, 13),
-        ["aledo-parcels-trips"]        = (32.6952, -97.6019, 13),
-        ["azle-parcels-trips"]         = (32.8949, -97.5453, 13),
-        ["midlothian-parcels-trips"]   = (32.4826, -96.9944, 13),
-        ["mineral-wells-parcels-trips"]= (32.8085, -98.1128, 13),
-        ["reno-parcels-trips"]         = (32.9268, -97.5734, 14),
-        ["springtown-parcels-trips"]   = (32.9690, -97.6811, 13),
-        ["weatherford-parcels-trips"]  = (32.7593, -97.7972, 12),
+        ["wp-parcels-trips"]            = (32.7365, -97.6506, 13),
+        ["aledo-parcels-trips"]         = (32.6952, -97.6019, 13),
+        ["azle-parcels-trips"]          = (32.8949, -97.5453, 13),
+        ["mineral-wells-parcels-trips"] = (32.8085, -98.1128, 13),
+        ["reno-parcels-trips"]          = (32.9268, -97.5734, 14),
+        ["springtown-parcels-trips"]    = (32.9690, -97.6811, 13),
+        ["weatherford-parcels-trips"]   = (32.7593, -97.7972, 12),
+        ["hudson-oaks-parcels-trips"]   = (32.7563, -97.6989, 14),
+        ["annetta-parcels-trips"]       = (32.6890, -97.6870, 13),
+        ["annetta-north-parcels-trips"] = (32.7241, -97.7196, 14),
+        ["annetta-south-parcels-trips"] = (32.6549, -97.7053, 14),
     };
 
     private async Task HandleTripGenCityChange(ChangeEventArgs e)

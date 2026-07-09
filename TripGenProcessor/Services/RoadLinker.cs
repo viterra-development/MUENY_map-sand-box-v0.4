@@ -102,8 +102,15 @@ public class RoadLinker
             return;
         }
 
-        // Build lookup from parcelId → result
-        var resultMap = results.ToDictionary(r => r.ParcelId, r => r);
+        // Build lookup from parcelId → result. TxGIO's raw parcel export includes
+        // ~6,500 records with prop_id="0" (rights-of-way, road segments) plus assorted
+        // dupes, so we can't use ToDictionary directly. First-write-wins is fine here —
+        // linking is spatial per-parcel, and duplicate IDs are typically the same geometry.
+        var resultMap = new Dictionary<string, TripGenerationResult>(results.Count);
+        foreach (var r in results)
+        {
+            if (!resultMap.ContainsKey(r.ParcelId)) resultMap[r.ParcelId] = r;
+        }
 
         int linked = 0;
         int unlinked = 0;

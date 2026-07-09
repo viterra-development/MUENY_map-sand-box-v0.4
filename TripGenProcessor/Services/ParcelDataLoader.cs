@@ -136,6 +136,7 @@ public class ParcelDataLoader
             SitusStreet = GetAttr(feature, "situs_street", "SITUS_STREET", "situs_addr", "address", "ADDRESS"),
             SitusCity = GetAttr(feature, "situs_city", "SITUS_CITY", "city", "CITY"),
             OwnerName = GetAttr(feature, "owner_name", "OWNER_NAME", "owner", "OWNER"),
+            LegalDesc = GetAttr(feature, "legal_desc", "LEGAL_DESC", "legal_description", "LEGAL_DESCRIPTION"),
             LegalAcreage = GetDouble(feature, "legal_acreage", "LEGAL_ACREAGE", "acreage", "ACREAGE", "acres", "ACRES"),
             ImprvSqft = GetDouble(feature, "imprv_sqft", "IMPRV_SQFT", "bldg_sqft", "BLDG_SQFT", "sqft", "SQFT",
                 "imprv_area", "IMPRV_AREA"),
