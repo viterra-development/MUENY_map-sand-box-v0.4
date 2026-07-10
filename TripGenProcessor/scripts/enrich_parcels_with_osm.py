@@ -191,21 +191,40 @@ def main():
     # Spatial join on ROW INDICES (not prop_id) because TxGIO has ~6,500 parcels
     # with prop_id="0" (rights-of-way, road slivers). Joining by prop_id would
     # broadcast one match to all 6,500 → bogus X4 count.
-    print(f"[join] Spatial join, radius={args.radius}m …")
+    #
+    # Join in TWO passes:
+    #  Pass 1 — POI *inside the parcel polygon*. The strongest possible signal:
+    #    a hospital building node inside an 8-acre hospital campus parcel.
+    #    (A centroid buffer misses these — the centroid of a big parcel can be
+    #    100m+ from the building node.)
+    #  Pass 2 — for parcels with no polygon hit, POI within `radius` meters of
+    #    the parcel centroid. Catches small storefronts whose OSM node was
+    #    dropped on the sidewalk/street outside the lot line.
+    print(f"[join] Pass 1: POI within parcel polygon …")
     t0 = time.time()
-    parcel_centroids = parcels_m.geometry.centroid
-    # meters → feet since EPSG:2276 is in US survey feet
-    parcel_buffers = gpd.GeoDataFrame(
+    parcels_poly = gpd.GeoDataFrame(
         {'_parcel_idx': parcels_m.index},
-        geometry=parcel_centroids.buffer(args.radius * 3.28084),
+        geometry=parcels_m.geometry,
         crs=2276,
     )
-    joined = gpd.sjoin(
-        parcel_buffers,
-        pois_m[['state_cd', 'osm_label', 'name', 'geometry']].rename(columns={'name': 'osm_name'}),
-        how='inner', predicate='intersects',
+    poi_cols = pois_m[['state_cd', 'osm_label', 'name', 'geometry']].rename(columns={'name': 'osm_name'})
+    joined_poly = gpd.sjoin(parcels_poly, poi_cols, how='inner', predicate='contains')
+    print(f"[join] Pass 1: {len(joined_poly):,} POI-in-polygon rows in {time.time()-t0:.1f}s")
+
+    print(f"[join] Pass 2: centroid buffer radius={args.radius}m for the rest …")
+    t0 = time.time()
+    hit_idx = set(joined_poly['_parcel_idx'])
+    remaining = parcels_m.loc[~parcels_m.index.isin(hit_idx)]
+    parcel_buffers = gpd.GeoDataFrame(
+        {'_parcel_idx': remaining.index},
+        geometry=remaining.geometry.centroid.buffer(args.radius * 3.28084),  # meters → survey feet
+        crs=2276,
     )
-    print(f"[join] {len(joined):,} parcel×POI intersection rows in {time.time()-t0:.1f}s")
+    joined_buf = gpd.sjoin(parcel_buffers, poi_cols, how='inner', predicate='intersects')
+    print(f"[join] Pass 2: {len(joined_buf):,} centroid-buffer rows in {time.time()-t0:.1f}s")
+
+    joined = pd.concat([joined_poly, joined_buf], ignore_index=True)
+    print(f"[join] Combined: {len(joined):,} parcel×POI rows")
 
     # Priority: X4 > X3 > F2 > F1 > X1 > B1 so schools beat restaurants on shared campuses.
     priority = {'X4': 6, 'X3': 5, 'F2': 4, 'F1': 3, 'X1': 2, 'B1': 1}
@@ -213,6 +232,36 @@ def main():
     top = (joined.sort_values(['_parcel_idx', 'pri'], ascending=[True, False])
                  .drop_duplicates(subset='_parcel_idx', keep='first')
                  .set_index('_parcel_idx')[['state_cd', 'osm_label', 'osm_name']])
+
+    # Guardrails — drop matches that would misrepresent the parcel:
+    #  1. Government-owned parcels (state parks, city complexes) keep their owner-based
+    #     classification. A camp store inside a 160-acre state park must not turn the
+    #     whole tract into ITE-820 retail (LAKE MINERAL WELLS SP was generating 65K
+    #     daily trips from exactly this).
+    #  2. Commercial tags (F1/F2/B1) on parcels > 40 acres are rejected — one POI node
+    #     is not representative of a tract that size. Institutional campuses (X1/X3/X4:
+    #     schools, churches, hospitals) may legitimately be large, so those pass.
+    GOV_OWNER_MARKERS = ('CITY OF', 'COUNTY OF', 'STATE OF TEXAS', 'PARKS & WILDLIFE',
+                         'PARKS AND WILDLIFE', ' DEPT', 'UNITED STATES', ' USA ',
+                         'ISD', 'SCHOOL DIST', 'RIVER AUTHORITY', 'UTILITY DISTRICT')
+    owner_series = parcels['owner_name'].fillna('').str.upper() if 'owner_name' in parcels else None
+    acreage_series = parcels['legal_acreage'].fillna(0) if 'legal_acreage' in parcels else None
+    dropped_gov = dropped_big = 0
+    keep_rows = []
+    for idx in top.index:
+        code = top.loc[idx, 'state_cd']
+        if owner_series is not None and idx in owner_series.index:
+            o = owner_series.loc[idx]
+            if any(m in o for m in GOV_OWNER_MARKERS):
+                dropped_gov += 1
+                continue
+        if code in ('F1', 'F2', 'B1') and acreage_series is not None and idx in acreage_series.index:
+            if acreage_series.loc[idx] > 40:
+                dropped_big += 1
+                continue
+        keep_rows.append(idx)
+    top = top.loc[keep_rows]
+    print(f"[guard] Dropped {dropped_gov} government-owned + {dropped_big} oversized-commercial matches")
 
     # Merge back by row index, not prop_id.
     parcels['_row_idx'] = parcels.index

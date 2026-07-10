@@ -157,7 +157,8 @@ public class LandUseClassifier
         if (legal.Contains("COMMERCIAL") || legal.Contains("RETAIL") ||
             legal.Contains("BUSINESS") || legal.Contains("STORE") ||
             legal.Contains("SHOPPING") || legal.Contains("PLAZA") ||
-            legal.Contains("STRIP CENTER") || legal.Contains("OUTLET"))
+            legal.Contains("STRIP CENTER") || legal.Contains("OUTLET") ||
+            legal.Contains("BANK") || legal.Contains("SHOPS"))
         {
             _fallbackCount++;
             return (820, "Commercial", "Heuristic: commercial legal desc");
@@ -191,11 +192,31 @@ public class LandUseClassifier
                 return (820, "Commercial", "Heuristic (stopgap): business owner on highway");
             }
             if (owner.Contains("STORAGE") || owner.Contains("RETAIL") ||
-                owner.Contains("OUTLET") || owner.Contains("MART"))
+                owner.Contains("OUTLET") || owner.Contains("MART") ||
+                owner.Contains("SHOPS"))
             {
                 _fallbackCount++;
                 return (820, "Commercial", "Heuristic (stopgap): business + commercial function");
             }
+            // Business entity with a > $1M improvement is a commercial building,
+            // not a house held in an LLC (those are typically < $1M in Parker Co).
+            // Catches THE SHOPS AT CROWN PARK LLC ($6.4M) and WW OLYMPUS
+            // CROWN PARK LP ($24.3M) which previously defaulted to single-family.
+            if (impVal > 1_000_000)
+            {
+                _fallbackCount++;
+                return (820, "Commercial", "Heuristic (stopgap): business owner, $1M+ improvement");
+            }
+        }
+
+        // 5b. Absolute improvement-value ceiling for the single-family default:
+        //     no Parker County house has a $5M+ improvement. A parcel at that
+        //     level with no other signal is a commercial/institutional campus
+        //     (e.g. TEXAS HEALTH RESOURCES hospital at $12.2M).
+        if (impVal > 5_000_000)
+        {
+            _fallbackCount++;
+            return (820, "Commercial", "Heuristic (stopgap): improvement value exceeds residential ceiling");
         }
 
         // 6. Value + acreage tiers — RESTRICTED to acknowledged Notion patterns:
@@ -243,9 +264,10 @@ public class LandUseClassifier
         "TIRE ", "COLLISION", "COLLISION CENTER", "BODY SHOP", "AUTO SALES",
         "USED CARS", "CAR WASH", "CARWASH",
         "MEDICAL CENTER", "DENTAL", "CLINIC", "PHARMACY", "URGENT CARE", "HOSPITAL",
+        "HEALTH RESOURCES", "HEALTH SYSTEM", "HEALTHCARE", "HEALTH CARE",
         "BANK ", " BANK", "CREDIT UNION",
         "REAL ESTATE", "REALTY",
-        "SHOPPING CENTER", "PLAZA",
+        "SHOPPING CENTER", "PLAZA", "SHOPS AT", "THE SHOPS",
         "GAS STATION", "CONVENIENCE STORE", "TRUCK STOP",
         "SELF STORAGE", "MINI STORAGE", "STORAGE ",
         "FITNESS", "GYM ",
@@ -355,11 +377,14 @@ public class LandUseClassifier
         if (parcel.ImprvSqft > 0)
             return parcel.ImprvSqft / 1000.0;
 
-        // Estimate from acreage with a coverage factor
+        // Estimate from acreage with a coverage factor, capped: the 25%-coverage
+        // model breaks down on large tracts (a 160-acre parcel is not a 1.7M-sqft
+        // store). 150K sqft ≈ a large big-box footprint — a sane ceiling when we
+        // have no actual improvement footage.
         if (parcel.LegalAcreage > 0)
         {
-            // Typical commercial: 25% lot coverage, so sqft = acres × 43560 × 0.25
-            var estimatedSqft = parcel.LegalAcreage * 43560.0 * 0.25;
+            var estimatedSqft = Math.Min(parcel.LegalAcreage, 15.0) * 43560.0 * 0.25;
+            estimatedSqft = Math.Min(estimatedSqft, 150_000.0);
             return Math.Max(0.5, estimatedSqft / 1000.0);
         }
 
