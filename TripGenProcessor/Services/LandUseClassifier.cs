@@ -175,67 +175,50 @@ public class LandUseClassifier
             return (710, "Commercial", "Heuristic: office legal desc");
         }
 
-        // 5. Business-form owner (LLC/INC/CORP/LP) combined with signal
-        //    Only classifies as commercial when paired with a NON-residential signal:
-        //    highway address, small lot + high value, or storage/rental keywords.
+        // 5. Business-form owner (LLC/INC/CORP/LP) — signal ONLY.
+        //    Per Notion canonical spec, owner-name inference is not authorized to
+        //    override state_cd; we allow it only when paired with an unambiguous
+        //    second signal (highway address or a commercial-function keyword).
         //    Personal excludes: FAMILY / TRUST / REVOCABLE / LIVING / ETUX / ET UX.
         var isBusinessForm = ContainsAny(owner, BusinessFormMarkers);
         var isPersonal = ContainsAny(owner, PersonalExclusions);
 
         if (isBusinessForm && !isPersonal)
         {
-            // Highway-address commercial
             if (IsHighwayAddress(address))
             {
                 _fallbackCount++;
-                return (820, "Commercial", "Heuristic: business owner on highway");
+                return (820, "Commercial", "Heuristic (stopgap): business owner on highway");
             }
-            // Small lot + reasonable improvement → commercial
-            if (impVal > 200_000 && acres > 0 && acres < 3)
-            {
-                _fallbackCount++;
-                return (820, "Commercial", "Heuristic: business owner, small commercial lot");
-            }
-            // Storage / rental / real estate specific
             if (owner.Contains("STORAGE") || owner.Contains("RETAIL") ||
                 owner.Contains("OUTLET") || owner.Contains("MART"))
             {
                 _fallbackCount++;
-                return (820, "Commercial", "Heuristic: business + commercial function");
+                return (820, "Commercial", "Heuristic (stopgap): business + commercial function");
             }
         }
 
-        // 6. Highway address without an obvious residential owner → commercial
-        //    Any parcel on a major highway with substantial improvement is likely commercial.
-        if (IsHighwayAddress(address) && impVal > 100_000)
-        {
-            _fallbackCount++;
-            return (820, "Commercial", "Heuristic: highway address, improved parcel");
-        }
-
-        // 7. Value + acreage tiers
-        //    - Zero improvement value → likely vacant / agricultural → 0 trips
+        // 6. Value + acreage tiers — RESTRICTED to acknowledged Notion patterns:
+        //    zero-value → vacant/ag (skip), large low-value → ag (skip). We do NOT
+        //    upgrade high-value small-lot parcels to commercial by rule alone —
+        //    that produced ~550 false positives across Aledo subdivisions where a
+        //    $500K house on 1-2 acres is baseline residential, not commercial.
         if (impVal <= 0)
         {
             _skippedCount++;
-            return (null, "Vacant", "Heuristic: no improvement value");
+            return (null, "Vacant", "Heuristic (stopgap): no improvement value");
         }
-        //    - Large parcel with modest improvement → agricultural / farmstead → 0 trips
         if (acres > 20 && impVal < 200_000)
         {
             _skippedCount++;
-            return (null, "Agricultural", "Heuristic: large parcel, low improvement");
-        }
-        //    - Very-high improvement on small lot → commercial (lowered from $750K → $500K)
-        if (impVal > 500_000 && acres > 0 && acres < 3)
-        {
-            _fallbackCount++;
-            return (820, "Commercial", "Heuristic: high-value improvement, small lot");
+            return (null, "Agricultural", "Heuristic (stopgap): large parcel, low improvement");
         }
 
-        // 8. Default: residential single-family
+        // 7. Default: residential single-family. Parker County is majority residential,
+        //    so the safest default when no positive commercial signal fires is a house.
+        //    Correct classification for THIS parcel awaits real state_cd from Parker CAD.
         _fallbackCount++;
-        return (210, "Residential", "Heuristic: default single-family");
+        return (210, "Residential", "Heuristic (stopgap): default single-family — awaits real state_cd from Parker CAD");
     }
 
     // Big-box, franchise, and known local commercial brands. Case-insensitive substring match.
@@ -292,7 +275,10 @@ public class LandUseClassifier
         return false;
     }
 
-    // Highway street name patterns — IH 20, US 180, SH 199, FM 1187, etc.
+    // Highway street name patterns. IH/US/SH/FM prefixes plus " HWY" and " HIGHWAY"
+    // suffixes (Weatherford uses "FT WORTH HWY", "MINERAL WELLS HWY", "RANGER HWY").
+    // Named residential streets like "PALO PINTO ST" don't match — the space before
+    // HWY is significant.
     private static bool IsHighwayAddress(string address)
     {
         if (string.IsNullOrEmpty(address)) return false;
@@ -304,6 +290,8 @@ public class LandUseClassifier
                address.Contains("STATE HWY") || address.Contains("SH ") ||
                address.Contains("STATE HIGHWAY") ||
                address.Contains("FM ") || address.Contains("FM-") ||
+               address.Contains(" HWY") || address.EndsWith("HWY") ||
+               address.Contains(" HIGHWAY") ||
                address.Contains("BUSINESS 80") || address.Contains("BANKHEAD");
     }
 
