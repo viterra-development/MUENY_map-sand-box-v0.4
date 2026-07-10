@@ -43,6 +43,8 @@ POI_JOIN_RADIUS_M = 25                          # spatial-join buffer
 #   X1 → 710 (Government / office / hospital)
 OSM_TO_STATE_CD = [
     # (predicate: tags dict → bool, state_cd, label)
+    (lambda t: t.get('leisure') == 'golf_course'
+            or t.get('golf') == 'course',                              'GOLF', 'Golf Course (OSM)'),
     (lambda t: t.get('amenity') == 'place_of_worship',                 'X3', 'Church (OSM)'),
     (lambda t: t.get('amenity') in ('school', 'kindergarten',
                                      'college', 'university'),          'X4', 'School (OSM)'),
@@ -105,8 +107,9 @@ def fetch_overpass_pois(bbox, cache_path):
       way["landuse"="industrial"]({s},{w},{n},{e});
       way["industrial"]({s},{w},{n},{e});
       way["building"~"apartments|residential"]({s},{w},{n},{e});
-      node["leisure"~"fitness_centre|sports_centre|bowling_alley"]({s},{w},{n},{e});
-      way["leisure"~"fitness_centre|sports_centre|bowling_alley"]({s},{w},{n},{e});
+      node["leisure"~"fitness_centre|sports_centre|bowling_alley|golf_course"]({s},{w},{n},{e});
+      way["leisure"~"fitness_centre|sports_centre|bowling_alley|golf_course"]({s},{w},{n},{e});
+      relation["leisure"="golf_course"]({s},{w},{n},{e});
       node["tourism"~"hotel|motel|guest_house|hostel"]({s},{w},{n},{e});
       way["tourism"~"hotel|motel|guest_house|hostel"]({s},{w},{n},{e});
     );
@@ -226,8 +229,9 @@ def main():
     joined = pd.concat([joined_poly, joined_buf], ignore_index=True)
     print(f"[join] Combined: {len(joined):,} parcel×POI rows")
 
-    # Priority: X4 > X3 > F2 > F1 > X1 > B1 so schools beat restaurants on shared campuses.
-    priority = {'X4': 6, 'X3': 5, 'F2': 4, 'F1': 3, 'X1': 2, 'B1': 1}
+    # Priority: GOLF > X4 > X3 > F2 > F1 > X1 > B1 — a golf course polygon often
+    # contains a clubhouse restaurant/pro-shop POI; the course wins.
+    priority = {'GOLF': 7, 'X4': 6, 'X3': 5, 'F2': 4, 'F1': 3, 'X1': 2, 'B1': 1}
     joined['pri'] = joined['state_cd'].map(priority).fillna(0)
     top = (joined.sort_values(['_parcel_idx', 'pri'], ascending=[True, False])
                  .drop_duplicates(subset='_parcel_idx', keep='first')
@@ -259,9 +263,15 @@ def main():
             if acreage_series.loc[idx] > 40:
                 dropped_big += 1
                 continue
+        # A golf-course polygon overlaps dozens of adjoining house lots; only
+        # parcels with real acreage can actually BE the course.
+        if code == 'GOLF' and acreage_series is not None and idx in acreage_series.index:
+            if acreage_series.loc[idx] < 2:
+                dropped_big += 1
+                continue
         keep_rows.append(idx)
     top = top.loc[keep_rows]
-    print(f"[guard] Dropped {dropped_gov} government-owned + {dropped_big} oversized-commercial matches")
+    print(f"[guard] Dropped {dropped_gov} government-owned + {dropped_big} oversized/undersized matches")
 
     # Merge back by row index, not prop_id.
     parcels['_row_idx'] = parcels.index

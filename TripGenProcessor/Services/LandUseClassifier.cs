@@ -138,6 +138,18 @@ public class LandUseClassifier
             _fallbackCount++;
             return (220, "Residential", "Heuristic: multi-family owner/legal");
         }
+        // 1e. Golf courses / country clubs / recreation associations → ITE 430
+        //     (e.g. LOCKHEED MARTIN REC ASSOCIATION = Squaw Creek Golf Course)
+        //     OWNER markers only — legal descriptions poison this ("LOT 5,
+        //     GOLF COURSE ESTATES" is a house). Acreage >= 2 keeps homes
+        //     bordering the fairway from qualifying.
+        if (acres >= 2 &&
+            (owner.Contains("GOLF") || owner.Contains("COUNTRY CLUB") ||
+             owner.Contains("REC ASSOCIATION") || owner.Contains("RECREATION ASSOC")))
+        {
+            _fallbackCount++;
+            return (430, "Recreation", "Heuristic: golf/recreation owner");
+        }
 
         // 2. Franchise / brand names in legal desc → retail commercial
         if (ContainsAny(legal, KnownFranchises))
@@ -333,6 +345,7 @@ public class LandUseClassifier
             "Student" => EstimateStudents(parcel),
             "Room" => EstimateRooms(parcel),
             "Pump" => EstimatePumps(parcel),
+            "Hole" => EstimateGolfHoles(parcel),
             _ => 1.0
         };
     }
@@ -418,6 +431,16 @@ public class LandUseClassifier
         return 8; // typical gas station
     }
 
+    private double EstimateGolfHoles(CadParcel parcel)
+    {
+        // ~8-10 acres per hole; an 18-hole course runs 120-200 acres.
+        // Golf courses often span multiple parcels, so clamp per-parcel
+        // estimates to 9-18 holes to avoid double counting.
+        if (parcel.LegalAcreage > 0)
+            return Math.Clamp(Math.Round(parcel.LegalAcreage / 9.0), 9, 18);
+        return 18;
+    }
+
     /// <summary>
     /// Refine exempt (X-code) properties using situs address and improvement data.
     /// </summary>
@@ -464,6 +487,7 @@ public class LandUseClassifier
 
     private static string GetCategoryName(string stateCd) => stateCd switch
     {
+        "GOLF" => "Recreation",
         var s when s.StartsWith("A") => "Residential",
         var s when s.StartsWith("B") => "Residential",
         var s when s.StartsWith("C") => "Vacant",

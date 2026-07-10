@@ -51,6 +51,9 @@ public static class IteRateLookup
         [110] = new(110, "Light Industrial", "1000 sqft GFA", 6.97, 0.085, 0.085),
         [140] = new(140, "Manufacturing", "1000 sqft GFA", 3.93, 0.085, 0.085),
         [151] = new(151, "Mini-Warehouse", "1000 sqft GFA", 2.50, 0.070, 0.080),
+
+        // Recreation
+        [430] = new(430, "Golf Course", "Hole", 30.38, 0.074, 0.091),
     };
 
     /// <summary>
@@ -91,5 +94,8 @@ public static class IteRateLookup
         ["X2"] = 710,   // Exempt (government) → General Office
         ["X3"] = 560,   // Exempt (religious) → Church
         ["X4"] = 520,   // Exempt (school) → Elementary (refined in classifier)
+
+        // Pseudo-code emitted by the OSM enrichment step (not a real PCAD code)
+        ["GOLF"] = 430, // Golf course → ITE 430
     };
 }
