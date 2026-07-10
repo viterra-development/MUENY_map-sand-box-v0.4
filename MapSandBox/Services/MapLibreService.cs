@@ -465,7 +465,7 @@ public class MapLibreService
             {
                 Id = "cris-road-stress",
                 Type = "GeoJson",
-                DataUrl = "/cris-data/willow-park-road-stress-map.geojson",
+                DataUrl = "/cris-data/parker-county-road-stress-map.geojson",
                 Visible = false,
                 Properties = new Dictionary<string, object>
                 {
