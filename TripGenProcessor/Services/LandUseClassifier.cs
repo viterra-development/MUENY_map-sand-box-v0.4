@@ -94,25 +94,29 @@ public class LandUseClassifier
     /// </summary>
     private (int? iteCode, string classification, string? notes) ClassifyByHeuristics(CadParcel parcel)
     {
-        var owner  = (parcel.OwnerName ?? "").ToUpperInvariant();
-        var legal  = (parcel.LegalDesc ?? "").ToUpperInvariant();
-        var acres  = parcel.LegalAcreage;
-        var impVal = parcel.ImprvVal;
+        var owner   = (parcel.OwnerName  ?? "").ToUpperInvariant();
+        var legal   = (parcel.LegalDesc  ?? "").ToUpperInvariant();
+        var address = (parcel.SitusStreet ?? "").ToUpperInvariant();
+        var acres   = parcel.LegalAcreage;
+        var impVal  = parcel.ImprvVal;
 
         // 1a. Government / municipal / county property → General Office (710)
         if (owner.Contains("CITY OF ") || owner.Contains(" CITY OF") ||
             owner.Contains("COUNTY OF") || owner.Contains("PARKER COUNTY") ||
-            owner.Contains("TXDOT") || owner.Contains("STATE OF TEXAS"))
+            owner.Contains("TXDOT") || owner.Contains("STATE OF TEXAS") ||
+            owner.Contains("PUBLIC LIBRARY") || owner.Contains("MUNICIPAL"))
         {
             _fallbackCount++;
             return (710, "Institutional", "Heuristic: government owner");
         }
         // 1b. Schools → Elementary (520) as default; middle/high refined by name
         if (owner.Contains("ISD") || owner.Contains("SCHOOL DIST") ||
-            owner.Contains("SCHOOL DISTRICT"))
+            owner.Contains("SCHOOL DISTRICT") || legal.Contains("HIGH SCHOOL") ||
+            legal.Contains("ELEMENTARY") || legal.Contains("MIDDLE SCHOOL"))
         {
-            if (owner.Contains("HIGH")) { _fallbackCount++; return (530, "Institutional", "Heuristic: high school"); }
-            if (owner.Contains("MIDDLE") || owner.Contains("JUNIOR"))
+            var probe = owner + " " + legal;
+            if (probe.Contains("HIGH")) { _fallbackCount++; return (530, "Institutional", "Heuristic: high school"); }
+            if (probe.Contains("MIDDLE") || probe.Contains("JUNIOR"))
                                         { _fallbackCount++; return (522, "Institutional", "Heuristic: middle school"); }
             _fallbackCount++;
             return (520, "Institutional", "Heuristic: school");
@@ -135,27 +139,81 @@ public class LandUseClassifier
             return (220, "Residential", "Heuristic: multi-family owner/legal");
         }
 
-        // 2. Legal-description keywords for commercial / industrial
+        // 2. Franchise / brand names in legal desc → retail commercial
+        if (ContainsAny(legal, KnownFranchises))
+        {
+            _fallbackCount++;
+            return (820, "Commercial", "Heuristic: brand name in legal desc");
+        }
+
+        // 3. Strong commercial owner markers (specific business types)
+        if (ContainsAny(owner, StrongCommercialOwnerMarkers))
+        {
+            _fallbackCount++;
+            return (820, "Commercial", "Heuristic: commercial-specific owner");
+        }
+
+        // 4. Legal-description keywords for commercial / industrial / office
         if (legal.Contains("COMMERCIAL") || legal.Contains("RETAIL") ||
             legal.Contains("BUSINESS") || legal.Contains("STORE") ||
-            legal.Contains("SHOPPING") || legal.Contains("PLAZA"))
+            legal.Contains("SHOPPING") || legal.Contains("PLAZA") ||
+            legal.Contains("STRIP CENTER") || legal.Contains("OUTLET"))
         {
             _fallbackCount++;
             return (820, "Commercial", "Heuristic: commercial legal desc");
         }
         if (legal.Contains("INDUSTRIAL") || legal.Contains("MANUFACTURING") ||
-            legal.Contains("WAREHOUSE"))
+            legal.Contains("WAREHOUSE") || legal.Contains("DISTRIBUTION"))
         {
             _fallbackCount++;
             return (110, "Industrial", "Heuristic: industrial legal desc");
         }
-        if (legal.Contains("OFFICE") || legal.Contains("PROFESSIONAL"))
+        if (legal.Contains("OFFICE") || legal.Contains("PROFESSIONAL BUILDING") ||
+            legal.Contains("MEDICAL BUILDING"))
         {
             _fallbackCount++;
             return (710, "Commercial", "Heuristic: office legal desc");
         }
 
-        // 3. Value + acreage tiers
+        // 5. Business-form owner (LLC/INC/CORP/LP) combined with signal
+        //    Only classifies as commercial when paired with a NON-residential signal:
+        //    highway address, small lot + high value, or storage/rental keywords.
+        //    Personal excludes: FAMILY / TRUST / REVOCABLE / LIVING / ETUX / ET UX.
+        var isBusinessForm = ContainsAny(owner, BusinessFormMarkers);
+        var isPersonal = ContainsAny(owner, PersonalExclusions);
+
+        if (isBusinessForm && !isPersonal)
+        {
+            // Highway-address commercial
+            if (IsHighwayAddress(address))
+            {
+                _fallbackCount++;
+                return (820, "Commercial", "Heuristic: business owner on highway");
+            }
+            // Small lot + reasonable improvement → commercial
+            if (impVal > 200_000 && acres > 0 && acres < 3)
+            {
+                _fallbackCount++;
+                return (820, "Commercial", "Heuristic: business owner, small commercial lot");
+            }
+            // Storage / rental / real estate specific
+            if (owner.Contains("STORAGE") || owner.Contains("RETAIL") ||
+                owner.Contains("OUTLET") || owner.Contains("MART"))
+            {
+                _fallbackCount++;
+                return (820, "Commercial", "Heuristic: business + commercial function");
+            }
+        }
+
+        // 6. Highway address without an obvious residential owner → commercial
+        //    Any parcel on a major highway with substantial improvement is likely commercial.
+        if (IsHighwayAddress(address) && impVal > 100_000)
+        {
+            _fallbackCount++;
+            return (820, "Commercial", "Heuristic: highway address, improved parcel");
+        }
+
+        // 7. Value + acreage tiers
         //    - Zero improvement value → likely vacant / agricultural → 0 trips
         if (impVal <= 0)
         {
@@ -168,16 +226,85 @@ public class LandUseClassifier
             _skippedCount++;
             return (null, "Agricultural", "Heuristic: large parcel, low improvement");
         }
-        //    - High-value improvement on small lot → commercial (heuristic)
-        if (impVal > 750_000 && acres > 0 && acres < 5)
+        //    - Very-high improvement on small lot → commercial (lowered from $750K → $500K)
+        if (impVal > 500_000 && acres > 0 && acres < 3)
         {
             _fallbackCount++;
             return (820, "Commercial", "Heuristic: high-value improvement, small lot");
         }
 
-        // 4. Default: residential single-family (safest assumption for improved parcels)
+        // 8. Default: residential single-family
         _fallbackCount++;
         return (210, "Residential", "Heuristic: default single-family");
+    }
+
+    // Big-box, franchise, and known local commercial brands. Case-insensitive substring match.
+    private static readonly string[] KnownFranchises = new[]
+    {
+        "MCDONALDS", "MCDONALD'S", "WALMART", "WAL-MART", "WAL MART", "TARGET", "STARBUCKS",
+        "H-E-B", "H E B", "HEB", "WALGREENS", "CVS", "DOLLAR GENERAL", "DOLLAR TREE",
+        "FAMILY DOLLAR", "SONIC", "WHATABURGER", "TACO BELL", "CHILIS", "CHILI'S",
+        "WENDYS", "WENDY'S", "SUBWAY", "PIZZA HUT", "APPLEBEES", "APPLEBEE'S", "IHOP",
+        "DENNYS", "DENNY'S", "CRACKER BARREL", "HOME DEPOT", "LOWES", "LOWE'S",
+        "AUTOZONE", "OREILLY", "O'REILLY", "ADVANCE AUTO", "SHELL", "EXXON", "CHEVRON",
+        "TEXACO", "VALERO", "7-ELEVEN", "SEVEN ELEVEN", "CIRCLE K", "QUIKTRIP", "QT",
+        "RACETRAC", "MURPHY USA", "TEXAS RV", "DOMINO", "PAPA JOHN", "CHICK-FIL",
+        "CHICK FIL", "BUC-EE", "BUCEES", "KROGER", "TOM THUMB", "ALBERTSONS", "SAM'S CLUB",
+        "SAMS CLUB", "COSTCO", "WHOLE FOODS", "TRACTOR SUPPLY"
+    };
+
+    // Owner names that specifically indicate a commercial function (not just business form).
+    private static readonly string[] StrongCommercialOwnerMarkers = new[]
+    {
+        "RESTAURANT", "MOTEL", "HOTEL", "HOSPITALITY", "AUTOMOTIVE ",
+        "TIRE ", "COLLISION", "COLLISION CENTER", "BODY SHOP", "AUTO SALES",
+        "USED CARS", "CAR WASH", "CARWASH",
+        "MEDICAL CENTER", "DENTAL", "CLINIC", "PHARMACY", "URGENT CARE", "HOSPITAL",
+        "BANK ", " BANK", "CREDIT UNION",
+        "REAL ESTATE", "REALTY",
+        "SHOPPING CENTER", "PLAZA",
+        "GAS STATION", "CONVENIENCE STORE", "TRUCK STOP",
+        "SELF STORAGE", "MINI STORAGE", "STORAGE ",
+        "FITNESS", "GYM ",
+        "SALON", "BARBERSHOP", "SPA "
+    };
+
+    // Ownership through a business entity form. Signal, not conclusion — must be paired with another marker.
+    private static readonly string[] BusinessFormMarkers = new[]
+    {
+        " LLC", "LLC.", "L.L.C", " INC", "INC.", "INCORPORATED",
+        " CORP", "CORP.", "CORPORATION", " CO ", " CO.", "COMPANY",
+        "PARTNERSHIP", " LP ", " LP.", "L.P.", " LTD", "LTD.",
+        "PROPERTIES", "HOLDINGS", "HOLDING", "INVESTMENT", "CAPITAL",
+        "FUNDING", "MANAGEMENT", "SERVICES", "ENTERPRISES"
+    };
+
+    // Personal / trust ownership — usually a home even if wrapped in an LLC-looking name.
+    private static readonly string[] PersonalExclusions = new[]
+    {
+        "FAMILY ", "TRUST", "REVOCABLE", "LIVING", "ESTATE OF",
+        " ETUX", "ET UX", "ET AL", " ETVIR", "ET VIR"
+    };
+
+    private static bool ContainsAny(string haystack, string[] needles)
+    {
+        foreach (var n in needles) if (haystack.Contains(n)) return true;
+        return false;
+    }
+
+    // Highway street name patterns — IH 20, US 180, SH 199, FM 1187, etc.
+    private static bool IsHighwayAddress(string address)
+    {
+        if (string.IsNullOrEmpty(address)) return false;
+        return address.Contains("IH ") || address.Contains("IH-") ||
+               address.Contains("I 20") || address.Contains("I-20") ||
+               address.Contains("INTERSTATE") ||
+               address.Contains("US HWY") || address.Contains("US-") ||
+               address.Contains("US HIGHWAY") ||
+               address.Contains("STATE HWY") || address.Contains("SH ") ||
+               address.Contains("STATE HIGHWAY") ||
+               address.Contains("FM ") || address.Contains("FM-") ||
+               address.Contains("BUSINESS 80") || address.Contains("BANKHEAD");
     }
 
     /// <summary>

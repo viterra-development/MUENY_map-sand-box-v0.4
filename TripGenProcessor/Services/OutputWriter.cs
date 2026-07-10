@@ -55,9 +55,12 @@ public class OutputWriter
             {
                 { "parcel_id", parcel.ParcelId },
                 { "state_cd", parcel.StateCd },
+                { "owner", parcel.OwnerName ?? "" },
+                { "legal_desc", parcel.LegalDesc ?? "" },
                 { "situs_street", parcel.SitusStreet ?? "" },
                 { "legal_acreage", parcel.LegalAcreage },
                 { "imprv_sqft", parcel.ImprvSqft },
+                { "imprv_val", parcel.ImprvVal },
                 { "total_val", parcel.TotalVal },
             };
 

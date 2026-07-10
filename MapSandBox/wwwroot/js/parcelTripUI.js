@@ -55,15 +55,18 @@ export function showParcelTooltip(properties, x, y) {
 
     const detail = ensureParcelDetail();
     const p = properties;
-    const addr = p.address || 'No address';
+    // Field-name fallbacks accept both the current TxGIO output schema and any legacy variants.
+    const addr = p.address || p.situs_addr || p.situs_street || 'No address';
     const landUse = p.ite_land_use || 'Unknown';
     const iteCode = p.ite_code || 'N/A';
     const daily = p.daily_trips || 0;
     const am = p.am_peak_trips || 0;
     const pm = p.pm_peak_trips || 0;
-    const acres = p.legal_acres || 'N/A';
-    const mkt = p.mkt_value ? '$' + Number(p.mkt_value).toLocaleString() : 'N/A';
-    const owner = p.owner || 'Unknown';
+    const acresRaw = p.legal_acres ?? p.legal_acreage;
+    const acres = (acresRaw != null && acresRaw !== '') ? acresRaw : 'N/A';
+    const mktRaw = p.mkt_value ?? p.total_val;
+    const mkt = mktRaw ? '$' + Number(mktRaw).toLocaleString() : 'N/A';
+    const owner = p.owner || p.owner_name || 'Unknown';
     const stateCd = p.state_cd || 'N/A';
 
     let tripColor = '#c8c8c8';
