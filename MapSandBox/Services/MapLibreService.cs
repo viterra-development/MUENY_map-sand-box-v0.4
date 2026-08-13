@@ -175,22 +175,6 @@ public class MapLibreService
             },
             new LayerConfig
             {
-                Id = "county-cad-parcels",
-                Type = "GeoJson",
-                DataUrl = "/sample-data/county-cad-parcel-test.geojson",
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["filled"] = true,
-                    ["stroked"] = true,
-                    ["getFillColor"] = new int[] { 255, 0, 0, 120 }, // bright red fill, semi-transparent
-                    ["getLineColor"] = new int[] { 255, 0, 0, 255 }, // bright red outline
-                    ["pickable"] = true,
-                    ["autoHighlight"] = true
-                }
-            },
-            new LayerConfig
-            {
                 Id = "traffic-counts",
                 Type = "TileLayer", // Changed to TileLayer type
                 DataUrl = "/tiles/traffic-counts/{z}/{x}/{y}.geojson", // Tile URL template
@@ -523,7 +507,6 @@ public class MapLibreService
             new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = false },
             new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = false },
             new LayerInfo { Id = "parker-roads-traffic-phase1", Name = "Traffic - Phase 1 (Interpolation IDW)", Visible = false },
-            new LayerInfo { Id = "county-cad-parcels", Name = "County CAD Parcels", Visible = false },
             new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = false },
             new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = true },
             new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },

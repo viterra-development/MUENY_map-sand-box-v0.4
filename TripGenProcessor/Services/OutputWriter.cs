@@ -55,7 +55,11 @@ public class OutputWriter
             {
                 { "parcel_id", parcel.ParcelId },
                 { "state_cd", parcel.StateCd },
-                { "owner", parcel.OwnerName ?? "" },
+                // Owner name is deliberately NOT written to output: these files are
+                // served publicly and CAD owner data must stay out of them
+                // (Texas Tax Code sec. 25.025 protected-person addresses).
+                // The map only needs city-ownership as a boolean for styling.
+                { "city_owned", (parcel.OwnerName ?? "").ToUpperInvariant().Contains("CITY OF") },
                 { "legal_desc", parcel.LegalDesc ?? "" },
                 { "situs_street", parcel.SitusStreet ?? "" },
                 { "legal_acreage", parcel.LegalAcreage },

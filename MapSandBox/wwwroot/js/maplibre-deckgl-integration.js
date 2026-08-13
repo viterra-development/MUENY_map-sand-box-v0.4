@@ -830,8 +830,7 @@ function getLayerProperties(config) {
         properties.filled = true;
         properties.stroked = true;
         properties.getFillColor = d => {
-            const owner = (d.properties && d.properties.owner) || '';
-            if (owner.includes('CITY OF ') || owner.includes(' CITY OF')) {
+            if (d.properties && d.properties.city_owned === true) {
                 return [34, 139, 34, 200];                     // Green - city-owned
             }
             const trips = (d.properties && d.properties.daily_trips) || 0;

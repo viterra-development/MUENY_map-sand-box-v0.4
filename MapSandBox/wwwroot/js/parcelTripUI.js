@@ -66,7 +66,6 @@ export function showParcelTooltip(properties, x, y) {
     const acres = (acresRaw != null && acresRaw !== '') ? acresRaw : 'N/A';
     const mktRaw = p.mkt_value ?? p.total_val;
     const mkt = mktRaw ? '$' + Number(mktRaw).toLocaleString() : 'N/A';
-    const owner = p.owner || p.owner_name || 'Unknown';
     const stateCd = p.state_cd || 'N/A';
 
     let tripColor = '#c8c8c8';
@@ -78,7 +77,6 @@ export function showParcelTooltip(properties, x, y) {
     detail.innerHTML = `
         <div class="trip-tip-header">
             <div class="trip-tip-addr">${addr}</div>
-            <div class="trip-tip-owner">${owner}</div>
             <button class="trip-detail-close" aria-label="Close">&times;</button>
         </div>
         <div class="trip-tip-body">
