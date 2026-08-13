@@ -458,3 +458,7 @@ MapSandBox/wwwroot/soil-data/
 
 # Screenshots
 Screenshots/
+# Debug/test artifacts that must never ship
+TestOutput/
+primal-graph-debug.txt
+*.backup
