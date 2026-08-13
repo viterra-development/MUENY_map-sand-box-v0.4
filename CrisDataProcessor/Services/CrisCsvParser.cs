@@ -136,23 +136,23 @@ public class CrisCsvParser
             CrashId = csvRecord.CrashId ?? ""
         };
 
-        // Parse date and time
-        if (DateTime.TryParse($"{csvRecord.CrashDate} {csvRecord.CrashTime}", out var crashDateTime))
+        // Parse date and time (CRIS exports use US-format MM/dd/yyyy regardless of host locale)
+        if (DateTime.TryParse($"{csvRecord.CrashDate} {csvRecord.CrashTime}", CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var crashDateTime))
         {
             crash.CrashDateTime = crashDateTime;
         }
 
         // Parse coordinates (only if both fields have actual values)
         if (!string.IsNullOrWhiteSpace(csvRecord.Latitude) && !string.IsNullOrWhiteSpace(csvRecord.Longitude) &&
-            decimal.TryParse(csvRecord.Latitude, out var lat) &&
-            decimal.TryParse(csvRecord.Longitude, out var lng))
+            decimal.TryParse(csvRecord.Latitude, NumberStyles.Float, CultureInfo.InvariantCulture, out var lat) &&
+            decimal.TryParse(csvRecord.Longitude, NumberStyles.Float, CultureInfo.InvariantCulture, out var lng))
         {
             crash.Latitude = lat;
             crash.Longitude = lng;
         }
         // If coordinates are missing/empty, leave them as 0 but we'll filter these out in validation
 
-        // Parse severity (CRIS uses severity codes like 1=Fatal, 2=Incapacitating, etc.)
         crash.Severity = ParseCrisSeverity(csvRecord.CrashSeverity);
 
         // Parse weather condition with code mapping
@@ -248,13 +248,16 @@ public class CrisCsvParser
 
     private KabcoSeverity ParseCrisSeverity(string? severity)
     {
-        // CRIS uses numeric severity codes
+        // TxDOT CRIS public-extract lookup for Crash_Sev_ID:
+        //   0 = Unknown, 1 = Suspected Serious Injury (A), 2 = Suspected Minor Injury (B),
+        //   3 = Possible Injury (C), 4 = Killed/Fatal (K), 5 = Not Injured (O)
+        // Note: fatal is code 4, NOT code 1.
         return severity switch
         {
-            "1" => KabcoSeverity.K_Fatal,
-            "2" => KabcoSeverity.A_IncapacitatingInjury,
-            "3" => KabcoSeverity.B_NonIncapacitatingInjury,
-            "4" => KabcoSeverity.C_PossibleInjury,
+            "1" => KabcoSeverity.A_IncapacitatingInjury,
+            "2" => KabcoSeverity.B_NonIncapacitatingInjury,
+            "3" => KabcoSeverity.C_PossibleInjury,
+            "4" => KabcoSeverity.K_Fatal,
             "5" => KabcoSeverity.O_NoInjury,
             _ => KabcoSeverity.Unknown
         };
@@ -262,13 +265,14 @@ public class CrisCsvParser
 
     private KabcoSeverity ParseKabcoSeverity(string? severity)
     {
-        // CRIS person injury severity also uses numeric codes
+        // TxDOT CRIS public-extract lookup for Prsn_Injry_Sev_ID (same code order
+        // as Crash_Sev_ID): 1=A, 2=B, 3=C, 4=K (fatal), 5=O, else Unknown.
         return severity switch
         {
-            "1" => KabcoSeverity.K_Fatal,
-            "2" => KabcoSeverity.A_IncapacitatingInjury,
-            "3" => KabcoSeverity.B_NonIncapacitatingInjury,
-            "4" => KabcoSeverity.C_PossibleInjury,
+            "1" => KabcoSeverity.A_IncapacitatingInjury,
+            "2" => KabcoSeverity.B_NonIncapacitatingInjury,
+            "3" => KabcoSeverity.C_PossibleInjury,
+            "4" => KabcoSeverity.K_Fatal,
             "5" => KabcoSeverity.O_NoInjury,
             _ => KabcoSeverity.Unknown
         };
