@@ -18,8 +18,8 @@
     <!-- deck.gl full bundle — keep version + hash in sync with js/map.js loadDeckGL() -->
     <script src="https://unpkg.com/deck.gl@9.3.10/dist.min.js"
             integrity="sha384-ShkZCI1SsjyiuEQSfDaj9OLN9xhntMrIMZsOcAEp1kQhFz1vqAGjN/IhnDY3EZ0I" crossorigin="anonymous"></script>
-    <!-- Custom JS for parcel trip UI -->
-    <script src="js/parcelTripUI.js" defer></script>
+    <!-- Custom JS for parcel trip UI (ES module — a classic script tag throws on its exports) -->
+    <script type="module" src="js/parcelTripUI.js"></script>
     <!-- Google Fonts for MUENY header -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
