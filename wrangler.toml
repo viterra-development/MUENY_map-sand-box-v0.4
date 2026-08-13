@@ -7,21 +7,27 @@ directory = "./publish/wwwroot"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
 
-# Google Form destination for /api/log-visit. Empty by default; the Worker will
-# skip the Form POST and only console.log until these are populated. Fill after
-# you create the Form: docs.google.com/forms → New form → 9 short-answer fields
+# Google Form destination for /api/log-visit. The Worker skips the Form POST
+# and only console.logs until these exist. Configure them as Worker SECRETS,
+# not [vars]: this file is public, and anyone holding the Form + entry IDs can
+# POST junk rows straight to the Form, bypassing the Worker's rate limiting.
+#
+# Setup: docs.google.com/forms → New form → 9 short-answer fields
 # (IP, Timestamp, Path, User-Agent, Referrer, Country, City, Region, ASN),
-# link Responses to a Sheet, then click three-dot menu → "Get pre-filled link"
-# → fill each field with the field name → "Get link" → the resulting URL
-# contains entry.NNN=... for each question. Paste the numeric IDs here.
-[vars]
-GOOGLE_FORM_ID           = ""
-GOOGLE_FORM_ENTRY_IP     = ""
-GOOGLE_FORM_ENTRY_TS     = ""
-GOOGLE_FORM_ENTRY_PATH   = ""
-GOOGLE_FORM_ENTRY_UA     = ""
-GOOGLE_FORM_ENTRY_REF    = ""
-GOOGLE_FORM_ENTRY_COUNTRY= ""
-GOOGLE_FORM_ENTRY_CITY   = ""
-GOOGLE_FORM_ENTRY_REGION = ""
-GOOGLE_FORM_ENTRY_ASN    = ""
+# link Responses to a Sheet, then three-dot menu → "Get pre-filled link" →
+# fill each field with its own name → "Get link" → the URL contains
+# entry.NNN=... for each question. Then run, for each value:
+#
+#   wrangler secret put GOOGLE_FORM_ID
+#   wrangler secret put GOOGLE_FORM_ENTRY_IP
+#   wrangler secret put GOOGLE_FORM_ENTRY_TS
+#   wrangler secret put GOOGLE_FORM_ENTRY_PATH
+#   wrangler secret put GOOGLE_FORM_ENTRY_UA
+#   wrangler secret put GOOGLE_FORM_ENTRY_REF
+#   wrangler secret put GOOGLE_FORM_ENTRY_COUNTRY
+#   wrangler secret put GOOGLE_FORM_ENTRY_CITY
+#   wrangler secret put GOOGLE_FORM_ENTRY_REGION
+#   wrangler secret put GOOGLE_FORM_ENTRY_ASN
+#
+# Also add a Cloudflare WAF rate-limiting rule on POST /api/log-visit — the
+# Worker's in-memory limiter is best-effort only.

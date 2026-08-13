@@ -6,6 +6,18 @@ let integratedMapInstance = null;
 let maplibreMap = null;
 let deckOverlay = null;
 
+// Escape data-derived strings before HTML interpolation. GeoJSON property
+// values come from external pipelines (TIGER, CAD, TxDOT, SSURGO) and must
+// never reach setHTML/innerHTML unescaped.
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Popup dispatch helpers — replace silent swallow on missing popup refs.
 // getPopupRef logs a warn when the ref is null so devs see the mount race.
 // waitForPopupRef polls briefly for sites that lack a MapLibre fallback.
@@ -1190,18 +1202,18 @@ function handleRoadClick(info) {
     const fcLabel = getFunctionalClassName(classification.hierarchy || classification.functionalClass);
 
     const rows = [
-        mtfccLabel ? `<tr><td>Road Class</td><td>${mtfccLabel}</td></tr>` : '',
-        fcLabel    ? `<tr><td>Functional Class</td><td>${fcLabel}</td></tr>` : '',
-        classification.routeDesignation ? `<tr><td>Route</td><td>${classification.routeDesignation}</td></tr>` : '',
+        mtfccLabel ? `<tr><td>Road Class</td><td>${escapeHtml(mtfccLabel)}</td></tr>` : '',
+        fcLabel    ? `<tr><td>Functional Class</td><td>${escapeHtml(fcLabel)}</td></tr>` : '',
+        classification.routeDesignation ? `<tr><td>Route</td><td>${escapeHtml(classification.routeDesignation)}</td></tr>` : '',
     ].filter(Boolean).join('');
 
     new maplibregl.Popup({ closeOnClick: true, maxWidth: '300px' })
         .setLngLat(info.coordinate)
         .setHTML(`
             <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
-                <div style="font-weight:700; font-size:14px; margin-bottom:8px; color:#0B1F2E;">${name}</div>
+                <div style="font-weight:700; font-size:14px; margin-bottom:8px; color:#0B1F2E;">${escapeHtml(name)}</div>
                 <table style="font-size:12px; border-collapse:collapse; width:100%;">
-                    <tr><td style="color:#888;padding:2px 8px 2px 0;">Type</td><td style="color:#333;">${roadType}</td></tr>
+                    <tr><td style="color:#888;padding:2px 8px 2px 0;">Type</td><td style="color:#333;">${escapeHtml(roadType)}</td></tr>
                     ${rows}
                 </table>
             </div>
@@ -1392,11 +1404,11 @@ function handleTrafficRoadClick(info) {
     const qualityNote = (!aadt || aadt < 10) ? '⚠️ No observed traffic data for this segment' : null;
 
     const rows = [
-        mtfccLabel ? `<tr><td>Road Class</td><td>${mtfccLabel}</td></tr>` : '',
-        fcLabel    ? `<tr><td>Functional Class</td><td>${fcLabel}</td></tr>` : '',
-        classification.routeDesignation ? `<tr><td>Route</td><td>${classification.routeDesignation}</td></tr>` : '',
+        mtfccLabel ? `<tr><td>Road Class</td><td>${escapeHtml(mtfccLabel)}</td></tr>` : '',
+        fcLabel    ? `<tr><td>Functional Class</td><td>${escapeHtml(fcLabel)}</td></tr>` : '',
+        classification.routeDesignation ? `<tr><td>Route</td><td>${escapeHtml(classification.routeDesignation)}</td></tr>` : '',
         classification.isMainlineRoad === false ? `<tr><td></td><td style="color:#888;font-style:italic;">Not a mainline road</td></tr>` : '',
-        matchType  ? `<tr><td>Match Type</td><td>${matchType}${matchDist ? ` (${matchDist})` : ''}</td></tr>` : '',
+        matchType  ? `<tr><td>Match Type</td><td>${escapeHtml(matchType)}${matchDist ? ` (${matchDist})` : ''}</td></tr>` : '',
     ].filter(Boolean).join('');
 
     // Use Blazor popup if available, else MapLibre fallback
@@ -1414,17 +1426,17 @@ function handleTrafficRoadClick(info) {
         .setLngLat(info.coordinate)
         .setHTML(`
             <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
-                <div style="font-weight:700; font-size:14px; margin-bottom:8px; color:#0B1F2E;">${roadName}</div>
+                <div style="font-weight:700; font-size:14px; margin-bottom:8px; color:#0B1F2E;">${escapeHtml(roadName)}</div>
                 <table style="font-size:12px; border-collapse:collapse; width:100%; margin-bottom:8px;">
-                    <tr><td style="color:#888;padding:2px 8px 2px 0;">Type</td><td style="color:#333;">${roadTypeName}</td></tr>
+                    <tr><td style="color:#888;padding:2px 8px 2px 0;">Type</td><td style="color:#333;">${escapeHtml(roadTypeName)}</td></tr>
                     ${rows}
                 </table>
                 <div style="border-top:1px solid #e5e7eb; padding-top:8px;">
                     <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Traffic Volume</div>
                     ${aadt && aadt >= 10
                         ? `<div style="font-size:20px; font-weight:700; color:#2E4A6B;">${aadt.toLocaleString()}</div>
-                           <div style="font-size:11px; color:#888;">vehicles/day${aadtYear ? ` · ${aadtYear}` : ''}
-                           ${srcLabel ? ` · <span style="color:${srcColor};font-weight:600;">${srcLabel}</span>` : ''}</div>`
+                           <div style="font-size:11px; color:#888;">vehicles/day${aadtYear ? ` · ${escapeHtml(aadtYear)}` : ''}
+                           ${srcLabel ? ` · <span style="color:${srcColor};font-weight:600;">${escapeHtml(srcLabel)}</span>` : ''}</div>`
                         : `<div style="font-size:12px; color:#b45309;">⚠️ No observed traffic data</div>
                            ${aadt ? `<div style="font-size:11px;color:#888;">Estimated: ${aadt.toLocaleString()} veh/day</div>` : ''}`
                     }
@@ -1503,12 +1515,12 @@ function handleSoilUnitClick(info) {
                 .setLngLat(info.coordinate)
                 .setHTML(`
                     <div style="font-family: Arial, sans-serif; padding: 4px;">
-                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">${props.musym || 'Unknown'}</div>
-                        <div style="font-size: 12px; color: #666; margin-bottom: 6px;">${props.muname || 'Unknown soil type'}</div>
+                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">${escapeHtml(props.musym || 'Unknown')}</div>
+                        <div style="font-size: 12px; color: #666; margin-bottom: 6px;">${escapeHtml(props.muname || 'Unknown soil type')}</div>
                         <div style="font-size: 12px; color: #555;">
                             <div><strong>Clay Content:</strong> ${clayPct}%</div>
                             <div><strong>Permeability:</strong> ${ksat} μm/s</div>
-                            <div style="color: #999; margin-top: 4px;">Map Unit Key: ${props.mukey || 'N/A'}</div>
+                            <div style="color: #999; margin-top: 4px;">Map Unit Key: ${escapeHtml(props.mukey || 'N/A')}</div>
                         </div>
                     </div>
                 `)
@@ -1731,7 +1743,7 @@ function handleCityBoundaryClick(info) {
         .setLngLat(info.coordinate)
         .setHTML(`
             <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
-                <div style="font-weight:700; font-size:15px; margin-bottom:2px; color:#0B1F2E;">${name}</div>
+                <div style="font-weight:700; font-size:15px; margin-bottom:2px; color:#0B1F2E;">${escapeHtml(name)}</div>
                 ${popTrend ? `<div style="font-size:11px; color:${trendColor}; font-weight:600; margin-bottom:8px;">${popTrend}</div>` : ''}
                 <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Population</div>
                 <table style="font-size:12px; border-collapse:collapse; width:100%;">
@@ -1899,8 +1911,8 @@ function handleRiskSegmentClick(info) {
                 .setLngLat(info.coordinate)
                 .setHTML(`
                     <div style="font-family:'Helvetica Neue',Arial,sans-serif; padding:6px 2px;">
-                        <div style="font-weight:700; font-size:14px; margin-bottom:6px; color:#0B1F2E;">${roadName}</div>
-                        <div style="display:inline-block; padding:2px 10px; border-radius:3px; background:${riskColor}; color:white; font-size:11px; font-weight:700; margin-bottom:10px; letter-spacing:0.04em;">${riskLevel} RISK · ${riskScore}</div>
+                        <div style="font-weight:700; font-size:14px; margin-bottom:6px; color:#0B1F2E;">${escapeHtml(roadName)}</div>
+                        <div style="display:inline-block; padding:2px 10px; border-radius:3px; background:${riskColor}; color:white; font-size:11px; font-weight:700; margin-bottom:10px; letter-spacing:0.04em;">${escapeHtml(riskLevel)} RISK · ${escapeHtml(riskScore)}</div>
                         <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Crash Summary</div>
                         <table style="font-size:12px; border-collapse:collapse; width:100%; margin-bottom:8px;">
                             <tr><td style="color:#888;padding:2px 10px 2px 0;">Total Crashes</td><td><strong>${crashCount}</strong>${segLenMi ? ` &nbsp;<span style="color:#888;">(${crashesPerMile}/mi)</span>` : ''}</td></tr>
@@ -1992,9 +2004,9 @@ function showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, cr
     };
 
     const crashRows = recentCrashes.slice(0, 3).map(c => {
-        const sev = severityLabel[c.Severity] || c.Severity || '';
+        const sev = severityLabel[c.Severity] || escapeHtml(c.Severity) || '';
         return `<tr style="font-size:11px;">
-            <td style="padding:2px 8px 2px 0;color:#666;">${c.CrashDate || 'N/A'}</td>
+            <td style="padding:2px 8px 2px 0;color:#666;">${escapeHtml(c.CrashDate || 'N/A')}</td>
             <td style="padding:2px 8px 2px 0;">${sev}</td>
             <td style="color:#888;">${c.PersonsInvolved || 0} persons</td>
         </tr>`;
@@ -2004,10 +2016,10 @@ function showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, cr
         .setLngLat(info.coordinate)
         .setHTML(`
             <div style="font-family:'Helvetica Neue',Arial,sans-serif;padding:6px 2px;">
-                <div style="font-weight:700;font-size:14px;margin-bottom:6px;color:#0B1F2E;">⚠️ ${roadsText}</div>
-                <div style="display:inline-block;padding:2px 10px;border-radius:3px;background:${riskColor};color:#fff;font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:0.04em;">${riskLevel} RISK</div>
+                <div style="font-weight:700;font-size:14px;margin-bottom:6px;color:#0B1F2E;">⚠️ ${escapeHtml(roadsText)}</div>
+                <div style="display:inline-block;padding:2px 10px;border-radius:3px;background:${riskColor};color:#fff;font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:0.04em;">${escapeHtml(riskLevel)} RISK</div>
                 <table style="font-size:12px;border-collapse:collapse;width:100%;margin-bottom:8px;">
-                    <tr><td style="color:#888;padding:2px 10px 2px 0;">Risk Score</td><td><strong>${riskScore}</strong></td></tr>
+                    <tr><td style="color:#888;padding:2px 10px 2px 0;">Risk Score</td><td><strong>${escapeHtml(riskScore)}</strong></td></tr>
                     <tr><td style="color:#888;padding:2px 10px 2px 0;">Total Crashes</td><td><strong>${crashCount}</strong></td></tr>
                     ${fatal > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Fatal</td><td style="color:#c0392b;font-weight:700;">💀 ${fatal}</td></tr>` : ''}
                     ${injury > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Injury</td><td style="color:#e67e22;">${injury}</td></tr>` : ''}
@@ -2097,7 +2109,7 @@ function handleCrashClusterClick(info) {
                         <div style="font-weight: bold; font-size: 14px; margin-bottom: 6px;">Crash Cluster</div>
                         <div style="font-size: 12px; color: #555;">
                             <div><strong>Crashes:</strong> ${crashCount}</div>
-                            <div><strong>Max Severity:</strong> <span style="color: ${sevColor}; font-weight: bold;">${cluster.maxSeverity || 'Unknown'}</span></div>
+                            <div><strong>Max Severity:</strong> <span style="color: ${sevColor}; font-weight: bold;">${escapeHtml(cluster.maxSeverity || 'Unknown')}</span></div>
                         </div>
                     </div>
                 `)

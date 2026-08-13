@@ -5,6 +5,18 @@
  * - Summary stats panel (collapsible, bottom-right)
  */
 
+// Escape data-derived strings before HTML interpolation. GeoJSON property
+// values come from external pipelines (TIGER, CAD, TxDOT, SSURGO) and must
+// never reach setHTML/innerHTML unescaped.
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // ============================================
 // 1. COLOR LEGEND
 // ============================================
@@ -76,17 +88,17 @@ export function showParcelTooltip(properties, x, y) {
 
     detail.innerHTML = `
         <div class="trip-tip-header">
-            <div class="trip-tip-addr">${addr}</div>
+            <div class="trip-tip-addr">${escapeHtml(addr)}</div>
             <button class="trip-detail-close" aria-label="Close">&times;</button>
         </div>
         <div class="trip-tip-body">
             <div class="trip-tip-row">
                 <span class="trip-tip-label">Land Use</span>
-                <span>${landUse} <span class="trip-tip-ite">(ITE ${iteCode})</span></span>
+                <span>${escapeHtml(landUse)} <span class="trip-tip-ite">(ITE ${escapeHtml(iteCode)})</span></span>
             </div>
             <div class="trip-tip-row">
                 <span class="trip-tip-label">CAD Code</span>
-                <span>${stateCd}</span>
+                <span>${escapeHtml(stateCd)}</span>
             </div>
             <div class="trip-tip-divider"></div>
             <div class="trip-tip-trips">
@@ -102,7 +114,7 @@ export function showParcelTooltip(properties, x, y) {
             <div class="trip-tip-divider"></div>
             <div class="trip-tip-row">
                 <span class="trip-tip-label">Acreage</span>
-                <span>${acres}</span>
+                <span>${escapeHtml(acres)}</span>
             </div>
             <div class="trip-tip-row">
                 <span class="trip-tip-label">Market Value</span>
@@ -184,7 +196,7 @@ export function createStatsPanel(geojsonData) {
         const pct = totalDaily > 0 ? ((landUseTrips[lu] / totalDaily) * 100).toFixed(1) : '0.0';
         return `
             <div class="trip-stats-breakdown-row">
-                <span class="trip-stats-lu-name">${lu}</span>
+                <span class="trip-stats-lu-name">${escapeHtml(lu)}</span>
                 <span class="trip-stats-lu-count">${landUseCounts[lu]} parcels</span>
                 <span class="trip-stats-lu-trips">${Math.round(landUseTrips[lu]).toLocaleString()} trips</span>
                 <span class="trip-stats-lu-pct">${pct}%</span>

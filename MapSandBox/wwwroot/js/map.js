@@ -182,7 +182,10 @@ function getRiskLevelColor(riskLevel) {
 }
 
 function loadDeckGL() {
+    // Version + integrity hash must stay in sync with the pinned tag in index.html.
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/deck.gl@^9.1.14/dist.min.js';
+    script.src = 'https://unpkg.com/deck.gl@9.3.10/dist.min.js';
+    script.integrity = 'sha384-ShkZCI1SsjyiuEQSfDaj9OLN9xhntMrIMZsOcAEp1kQhFz1vqAGjN/IhnDY3EZ0I';
+    script.crossOrigin = 'anonymous';
     document.head.appendChild(script);
 } 
