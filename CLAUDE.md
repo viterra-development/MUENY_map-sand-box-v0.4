@@ -4,14 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-MapSandBox is a C# Blazor WebAssembly application that provides interactive mapping capabilities using multiple mapping backends: deck.gl, ArcGIS JavaScript API, and MapLibre GL JS with deck.gl overlay. The application visualizes geospatial data including Natural Earth datasets and local Parker County, Texas geospatial data.
+MapSandBox is a C# Blazor WebAssembly application that provides interactive mapping capabilities using two mapping backends: deck.gl, and MapLibre GL JS with a deck.gl overlay. The application visualizes local Parker County, Texas geospatial data (roads, traffic, crash risk, parcels/trip generation, soil, city boundaries).
 
 ## Architecture
 
 ### Core Technologies
 - **Blazor WebAssembly** (.NET 9.0) - Main application framework
-- **deck.gl** (v9.0.0-beta.2) - Primary mapping library for WebGL-based visualization
-- **ArcGIS JavaScript API** - Enterprise mapping implementation
+- **deck.gl** (v9.3.10, pinned with SRI) - Primary mapping library for WebGL-based visualization
 - **MapLibre GL JS** - Open-source vector tile mapping with deck.gl overlay integration
 - **JavaScript Interop** - Bridge between C# and JavaScript mapping libraries
 
@@ -29,19 +28,16 @@ MapSandBox is a C# Blazor WebAssembly application that provides interactive mapp
 #### JavaScript Integration
 - **map.js** (`wwwroot/js/map.js`) - Pure deck.gl integration with layer management
 - **maplibre-deckgl-integration.js** (`wwwroot/js/maplibre-deckgl-integration.js`) - MapLibre GL JS with deck.gl overlay integration
-- **arcgisInterop.js** (`wwwroot/arcgisInterop.js`) - ArcGIS JavaScript API integration
 - Each JavaScript module handles different mapping backends with shared layer configuration patterns
 
 #### Data Sources
-**Natural Earth (via CloudFront CDN):**
-- Countries: `ne_50m_admin_0_scale_rank.geojson`
-- Rivers: `ne_50m_rivers_lake_centerlines.geojson` 
-- Airports: `ne_10m_airports.geojson`
-- Flight paths: Generated from airport data using great circle routes
-
-**Local Parker County, Texas Data:**
+**Local Parker County, Texas Data (all in `MapSandBox/wwwroot/`):**
 - Parker County Roads: `/parker-county-roads.geojson` (TIGER/Line data)
-- County CAD Parcels: `/sample-data/county-cad-parcel-test.geojson` (test parcel data)
+- Road traffic volumes: `/parker-roads-with-traffic*.geojson`
+- CRIS crash risk layers: `/cris-data/*`
+- Parcel trip generation: `/*-parcels-with-trips.geojson` (owner PII deliberately stripped)
+- Soil: `/soil-data/*`; City boundaries: `/txdot-city-boundaries.geojson`
+See DATA-ATTRIBUTION.md for sources and licensing status.
 
 ## Development Commands
 
@@ -58,7 +54,7 @@ dotnet run --project MapSandBox --launch-profile https
 ```
 
 ### Configuration Setup
-Configuration files are already present in the repository. No additional setup required for basic functionality.
+The web app runs out of the box. The data processors do NOT: CrisDataProcessor and NoaaDataProcessor expect external inputs (CRIS CSV export, DEM raster) at paths configured in their appsettings.json, which are not part of the repository.
 
 ### Development Server
 - **HTTP**: http://localhost:5214
@@ -68,7 +64,7 @@ Configuration files are already present in the repository. No additional setup r
 ## Configuration
 
 ### Environment Setup
-Configuration files are already present in the repository - no additional setup required.
+Web app: no additional setup. Data processors: see each project's appsettings.json for required external input paths (CRIS exports, DEM rasters, parcel source files).
 
 ### Map Configuration
 **deck.gl Configuration (MapService):**
@@ -142,4 +138,4 @@ The project maintains organized documentation to track development evolution and
 - MapLibre GL JS is loaded from CDN with deck.gl overlay integration
 - All mapping systems share similar layer configuration patterns but handle rendering differently
 - MapLibre integration uses `MapboxOverlay` from deck.gl for compatibility
-- We are using deck.gl v9.1.14
+- We are using deck.gl v9.3.10, pinned with an SRI hash in index.html and js/map.js (keep both in sync when upgrading)
