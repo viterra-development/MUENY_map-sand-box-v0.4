@@ -102,7 +102,13 @@ public class GdalCommandLineService : IDisposable
                 return 0;
             }
 
-            process.WaitForExit(5000); // 5 second timeout
+            if (!process.WaitForExit(5000)) // 5 second timeout
+            {
+                try { process.Kill(entireProcessTree: true); } catch { /* process may have just exited */ }
+                _errorSamples++;
+                _logger.LogWarning("gdallocationinfo timed out after 5s for ({Lat}, {Lon}); returning 0", latitude, longitude);
+                return 0;
+            }
 
             if (process.ExitCode != 0)
             {

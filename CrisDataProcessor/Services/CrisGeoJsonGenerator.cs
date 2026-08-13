@@ -176,9 +176,10 @@ public class CrisGeoJsonGenerator
                     severity = c.Severity.ToString(),
                     persons_involved = c.Persons.Count
                 }).ToArray(),
-                ["fatal_crashes"] = intersection.RecentCrashes.Count(c => c.Severity == KabcoSeverity.K_Fatal),
-                ["injury_crashes"] = intersection.RecentCrashes.Count(c => c.Severity != KabcoSeverity.K_Fatal && c.Severity != KabcoSeverity.O_NoInjury),
-                ["property_damage_crashes"] = intersection.RecentCrashes.Count(c => c.Severity == KabcoSeverity.O_NoInjury)
+                // Full counts over ALL crashes at the intersection (RecentCrashes is capped at 10)
+                ["fatal_crashes"] = intersection.FatalCrashCount,
+                ["injury_crashes"] = intersection.InjuryCrashCount,
+                ["property_damage_crashes"] = intersection.PropertyDamageCrashCount
             }
         }).ToList();
 
@@ -335,9 +336,10 @@ public class CrisGeoJsonGenerator
                 SlopePercentage = c.SlopePercentage,
                 SlopeCategory = c.SlopeCategory
             }).ToArray(),
-            FatalCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity == KabcoSeverity.K_Fatal)),
-            InjuryCrashes = intersection.RecentCrashes.Count(c => c.Persons.Any(p => p.InjurySeverity != KabcoSeverity.K_Fatal && p.InjurySeverity != KabcoSeverity.O_NoInjury)),
-            PropertyDamageCrashes = intersection.RecentCrashes.Count(c => c.Persons.All(p => p.InjurySeverity == KabcoSeverity.O_NoInjury)),
+            // Full counts over ALL crashes at the intersection (RecentCrashes is capped at 10)
+            FatalCrashes = intersection.FatalCrashCount,
+            InjuryCrashes = intersection.InjuryCrashCount,
+            PropertyDamageCrashes = intersection.PropertyDamageCrashCount,
             Coordinates = new[] { (double)intersection.Longitude, (double)intersection.Latitude }
         }).ToArray();
 

@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Playwright;
@@ -403,7 +404,14 @@ public class TcdsScrapingService : IAsyncDisposable
 
             // Extract location information
             trafficData.LocationInfo = await ExtractLocationInfoAsync(leftFrame, cancellationToken);
-            trafficData.LocationId = trafficData.LocationInfo.LocationId ?? trafficData.LocationInfo.LocatedOn; // Use Location ID if available, otherwise fall back to Located On
+            // Use Location ID if available; otherwise key on Located On plus coordinates so
+            // distinct stations along the same road can't collide in the master-file merge.
+            var locInfo = trafficData.LocationInfo;
+            trafficData.LocationId = !string.IsNullOrWhiteSpace(locInfo.LocationId)
+                ? locInfo.LocationId
+                : (locInfo.Latitude.HasValue && locInfo.Longitude.HasValue
+                    ? FormattableString.Invariant($"{locInfo.LocatedOn}@{locInfo.Latitude.Value:F5},{locInfo.Longitude.Value:F5}")
+                    : locInfo.LocatedOn);
 
             // Extract AADT data
             trafficData.AadtData = await ExtractAadtDataAsync(leftFrame);
@@ -662,14 +670,14 @@ public class TcdsScrapingService : IAsyncDisposable
                     switch (header)
                     {
                         case "Latitude":
-                            if (decimal.TryParse(data, out decimal latitude))
+                            if (decimal.TryParse(data, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal latitude))
                             {
                                 locationInfo.Latitude = latitude;
                                 _logger.LogDebug("Extracted Latitude: {Latitude}", latitude);
                             }
                             break;
                         case "Longitude":
-                            if (decimal.TryParse(data, out decimal longitude))
+                            if (decimal.TryParse(data, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal longitude))
                             {
                                 locationInfo.Longitude = longitude;
                                 _logger.LogDebug("Extracted Longitude: {Longitude}", longitude);
@@ -787,7 +795,7 @@ public class TcdsScrapingService : IAsyncDisposable
                     var intervalCell = await cells[2].TextContentAsync(); // Interval is in column 3 (index 2)
                     var totalCell = await cells[3].TextContentAsync(); // Total is in column 4 (index 3)
 
-                    if (DateTime.TryParse(dateCell?.Trim(), out DateTime date) &&
+                    if (DateTime.TryParse(dateCell?.Trim(), CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date) &&
                         int.TryParse(intervalCell?.Trim(), out int interval) &&
                         int.TryParse(totalCell?.Trim().Replace(",", ""), out int total))
                     {

@@ -175,7 +175,11 @@ public class IntersectionRisk
     public RiskLevel RiskLevel { get; set; }
     public int CrashCount { get; set; }
     public List<string> IntersectingRoads { get; set; } = new();
+    // Capped (most recent 10) for display; the counts below cover ALL crashes at the intersection.
     public List<CrashRecord> RecentCrashes { get; set; } = new();
+    public int FatalCrashCount { get; set; }
+    public int InjuryCrashCount { get; set; }
+    public int PropertyDamageCrashCount { get; set; }
 }
 
 // GeoJSON output models for CRIS data

@@ -171,7 +171,10 @@ public class Phase1EstimationProcessor
                 roadsEstimated = summary.RoadsEstimated,
                 roadsUnableToEstimate = summary.RoadsUnableToEstimate,
                 averageConfidence = Math.Round(summary.AverageConfidence, 3),
-                estimationRate = Math.Round(summary.RoadsEstimated * 100.0 / (summary.TotalRoads - summary.RoadsWithExistingData), 1)
+                // Guard against 0 roads without data (Infinity is not serializable)
+                estimationRate = summary.TotalRoads - summary.RoadsWithExistingData > 0
+                    ? Math.Round(summary.RoadsEstimated * 100.0 / (summary.TotalRoads - summary.RoadsWithExistingData), 1)
+                    : 0
             },
             estimatedByHierarchy = summary.EstimatedByHierarchy
                 .OrderBy(kvp => kvp.Key)
@@ -241,7 +244,8 @@ public class Phase1EstimationProcessor
         var recommendations = new List<string>();
 
         // Check estimation rate
-        var estimationRate = summary.RoadsEstimated * 100.0 / (summary.TotalRoads - summary.RoadsWithExistingData);
+        var roadsWithoutData = summary.TotalRoads - summary.RoadsWithExistingData;
+        var estimationRate = roadsWithoutData > 0 ? summary.RoadsEstimated * 100.0 / roadsWithoutData : 0;
         if (estimationRate < 80)
         {
             recommendations.Add($"Low estimation rate ({estimationRate:F1}%). Consider increasing MaxSearchRadius or decreasing MinConfidence threshold.");

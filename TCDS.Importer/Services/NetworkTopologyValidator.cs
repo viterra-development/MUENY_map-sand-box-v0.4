@@ -1302,10 +1302,13 @@ public class NetworkTopologyValidator
     /// </summary>
     private void DumpGraphToFile(PrimalGraph graph, List<RoadSegment> allRoads)
     {
-        var outputPath = "/workspaces/map-sand-box/primal-graph-debug.txt";
+        // Debug artifact only — written relative to the current directory, and a failure
+        // to write it must never kill the pipeline.
+        var outputPath = "primal-graph-debug.txt";
 
-        using (var writer = new StreamWriter(outputPath))
+        try
         {
+            using var writer = new StreamWriter(outputPath);
             writer.WriteLine("=".PadRight(100, '='));
             writer.WriteLine("PRIMAL GRAPH DEBUG DUMP");
             writer.WriteLine("=".PadRight(100, '='));
@@ -1418,9 +1421,13 @@ public class NetworkTopologyValidator
             {
                 writer.WriteLine($"... and {components.Count - 10} more components");
             }
-        }
 
-        _logger.LogWarning("⚠️  Graph debug dump written to: {Path}", outputPath);
+            _logger.LogWarning("⚠️  Graph debug dump written to: {Path}", outputPath);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to write graph debug dump to {Path}; continuing", outputPath);
+        }
     }
 
     /// <summary>

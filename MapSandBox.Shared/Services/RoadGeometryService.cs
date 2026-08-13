@@ -2,6 +2,7 @@ using System.Text.Json;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.Index.Strtree;
 using NetTopologySuite.IO;
+using NetTopologySuite.Operation.Distance;
 using MapSandBox.Shared.Models;
 using Microsoft.Extensions.Logging;
 
@@ -48,44 +49,57 @@ public class RoadGeometryService
         int unknownTypes = 0;
 
         // Try to deserialize as enhanced road collection first, fall back to basic if needed
+        EnhancedRoadFeatureCollection? enhancedCollection = null;
         try
         {
-            var enhancedCollection = JsonSerializer.Deserialize<EnhancedRoadFeatureCollection>(geoJsonContent);
-            if (enhancedCollection?.Features != null)
-            {
-                _logger.LogInformation("Loading enhanced road features with traffic data");
-                foreach (var feature in enhancedCollection.Features)
-                {
-                    totalFeatures++;
-                    try
-                    {
-                        var roadFeature = ConvertFromEnhancedFeature(feature);
-                        if (roadFeature != null)
-                        {
-                            _roadFeatures.Add(roadFeature);
-                            _spatialIndex.Insert(roadFeature.Geometry.EnvelopeInternal, roadFeature);
-
-                            // Track quality metrics
-                            if (roadFeature.FullName == "Unnamed Road") unnamedRoads++;
-                            if (roadFeature.RoadType == "U") unknownTypes++;
-                        }
-                        else
-                        {
-                            discardedFeatures++;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogWarning(ex, "Failed to parse enhanced road feature");
-                        discardedFeatures++;
-                    }
-                }
-            }
+            enhancedCollection = JsonSerializer.Deserialize<EnhancedRoadFeatureCollection>(geoJsonContent);
         }
         catch (JsonException)
         {
+            enhancedCollection = null;
+        }
+
+        // A basic-format file deserializes into the enhanced model without error but with
+        // every linearId empty (basic files use LINEARID), so a collection whose features
+        // all lack a LinearId is actually basic format.
+        var isEnhancedFormat = enhancedCollection?.Features != null &&
+                               enhancedCollection.Features.Count > 0 &&
+                               enhancedCollection.Features.Any(f => !string.IsNullOrWhiteSpace(f.Properties?.LinearId));
+
+        if (isEnhancedFormat)
+        {
+            _logger.LogInformation("Detected enhanced road format; loading road features with traffic data");
+            foreach (var feature in enhancedCollection!.Features)
+            {
+                totalFeatures++;
+                try
+                {
+                    var roadFeature = ConvertFromEnhancedFeature(feature);
+                    if (roadFeature != null)
+                    {
+                        _roadFeatures.Add(roadFeature);
+                        _spatialIndex.Insert(roadFeature.Geometry.EnvelopeInternal, roadFeature);
+
+                        // Track quality metrics
+                        if (roadFeature.FullName == "Unnamed Road") unnamedRoads++;
+                        if (roadFeature.RoadType == "U") unknownTypes++;
+                    }
+                    else
+                    {
+                        discardedFeatures++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to parse enhanced road feature");
+                    discardedFeatures++;
+                }
+            }
+        }
+        else
+        {
             // Fall back to basic road collection
-            _logger.LogInformation("Enhanced format failed, trying basic road format");
+            _logger.LogInformation("Detected basic road format; loading basic road features");
             try
             {
                 var basicCollection = JsonSerializer.Deserialize<BasicRoadFeatureCollection>(geoJsonContent);
@@ -213,8 +227,9 @@ public class RoadGeometryService
         }
 
         var point = new Point(longitude, latitude);
-        // Convert tolerance from meters to degrees (rough approximation: 1 degree ≈ 111km)
-        var toleranceDegrees = toleranceMeters / 111000.0;
+        // Convert tolerance from meters to degrees; divide by cos(lat) so the envelope
+        // also covers the tolerance along the longitude axis.
+        var toleranceDegrees = toleranceMeters / (111000.0 * Math.Cos(latitude * Math.PI / 180.0));
         var searchEnvelope = point.Buffer(toleranceDegrees).EnvelopeInternal;
 
         var candidates = _spatialIndex.Query(searchEnvelope).ToList();
@@ -222,9 +237,7 @@ public class RoadGeometryService
 
         foreach (var road in candidates)
         {
-            // Calculate distance in meters (rough approximation)
-            var distanceDegrees = road.Geometry.Distance(point);
-            var distanceMeters = distanceDegrees * 111000.0;
+            var distanceMeters = CalculateDistanceMeters(road.Geometry, point);
 
             if (distanceMeters <= toleranceMeters)
             {
@@ -238,6 +251,19 @@ public class RoadGeometryService
         }
 
         return results.OrderBy(r => r.DistanceMeters).ToList();
+    }
+
+    /// <summary>
+    /// Equirectangular distance in meters between two geometries: the longitude delta is
+    /// corrected by cos(midLat) before converting degrees to meters (1 degree ≈ 111km).
+    /// </summary>
+    private static double CalculateDistanceMeters(Geometry a, Geometry b)
+    {
+        var nearest = DistanceOp.NearestPoints(a, b);
+        var midLatRad = (nearest[0].Y + nearest[1].Y) / 2.0 * (Math.PI / 180.0);
+        var dx = (nearest[0].X - nearest[1].X) * Math.Cos(midLatRad) * 111000.0;
+        var dy = (nearest[0].Y - nearest[1].Y) * 111000.0;
+        return Math.Sqrt(dx * dx + dy * dy);
     }
 
     public RoadMatchResult? FindBestRoadMatch(double latitude, double longitude, double toleranceMeters = 50.0)

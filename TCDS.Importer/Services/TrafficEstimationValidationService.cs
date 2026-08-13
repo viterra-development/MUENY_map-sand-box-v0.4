@@ -54,6 +54,7 @@ public class TrafficEstimationValidationService
             foreach (var testRoad in testSet)
             {
                 var actualAadt = testRoad.ExistingAadt!.Value;
+                if (actualAadt <= 0) continue; // avoid division by zero in percent error
 
                 // Temporarily hide the actual value
                 var tempAadt = testRoad.ExistingAadt;
@@ -128,7 +129,7 @@ public class TrafficEstimationValidationService
         _logger.LogInformation("Validating estimation results");
 
         var segmentsWithActualAndEstimated = segments
-            .Where(s => s.ExistingAadt.HasValue && s.Estimation != null)
+            .Where(s => s.ExistingAadt.HasValue && s.ExistingAadt.Value > 0 && s.Estimation != null)
             .ToList();
 
         if (!segmentsWithActualAndEstimated.Any())

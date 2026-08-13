@@ -56,25 +56,27 @@ public class RoadLinker
 
         var centroid = parcel.Centroid;
 
-        // Create search envelope (buffer in degrees, roughly maxSnapDistance)
-        var bufferDeg = _maxSnapDistanceMeters / MetersPerDegreeLat;
+        // Create search envelope (buffer in degrees, roughly maxSnapDistance per axis)
+        var bufferDegLat = _maxSnapDistanceMeters / MetersPerDegreeLat;
+        var bufferDegLng = _maxSnapDistanceMeters / MetersPerDegreeLng;
         var searchEnv = new Envelope(
-            centroid.X - bufferDeg, centroid.X + bufferDeg,
-            centroid.Y - bufferDeg, centroid.Y + bufferDeg);
+            centroid.X - bufferDegLng, centroid.X + bufferDegLng,
+            centroid.Y - bufferDegLat, centroid.Y + bufferDegLat);
 
         var candidates = _index.Query(searchEnv);
 
         RoadSegment? nearest = null;
-        double minDistDeg = double.MaxValue;
+        double minDistMeters = double.MaxValue;
 
         foreach (var road in candidates)
         {
             if (road.Geometry == null) continue;
 
-            var dist = centroid.Distance(road.Geometry);
-            if (dist < minDistDeg)
+            var nearestPts = DistanceOp.NearestPoints(centroid, road.Geometry);
+            var dist = DistanceMeters(nearestPts[0], nearestPts[1]);
+            if (dist < minDistMeters)
             {
-                minDistDeg = dist;
+                minDistMeters = dist;
                 nearest = road;
             }
         }
@@ -82,13 +84,22 @@ public class RoadLinker
         if (nearest == null)
             return (null, double.MaxValue);
 
-        // Convert degree distance to approximate meters
-        var distMeters = minDistDeg * MetersPerDegreeLat;
+        if (minDistMeters > _maxSnapDistanceMeters)
+            return (null, minDistMeters);
 
-        if (distMeters > _maxSnapDistanceMeters)
-            return (null, distMeters);
+        return (nearest, Math.Round(minDistMeters, 1));
+    }
 
-        return (nearest, Math.Round(distMeters, 1));
+    /// <summary>
+    /// Equirectangular distance in meters: longitude delta is corrected by cos(midLat)
+    /// before converting degrees to meters.
+    /// </summary>
+    private static double DistanceMeters(Coordinate a, Coordinate b)
+    {
+        var midLatRad = (a.Y + b.Y) / 2.0 * (Math.PI / 180.0);
+        var dx = (a.X - b.X) * Math.Cos(midLatRad) * MetersPerDegreeLat;
+        var dy = (a.Y - b.Y) * MetersPerDegreeLat;
+        return Math.Sqrt(dx * dx + dy * dy);
     }
 
     /// <summary>

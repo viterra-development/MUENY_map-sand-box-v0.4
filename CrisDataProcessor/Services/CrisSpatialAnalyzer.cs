@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using NetTopologySuite.Features;
+using NetTopologySuite.Operation.Distance;
 using System.Text.Json;
 
 namespace CrisDataProcessor.Services;
@@ -40,9 +41,7 @@ public class CrisSpatialAnalyzer
 
             if (closestRoad != null)
             {
-                var distance = crashPoint.Distance(closestRoad.Geometry);
-                // Convert degrees to meters (approximate)
-                var distanceMeters = distance * 111320.0; // 1 degree ≈ 111.32 km
+                var distanceMeters = DistanceMeters(crashPoint, closestRoad.Geometry);
 
                 results.Add(new SpatialJoinResult
                 {
@@ -80,27 +79,40 @@ public class CrisSpatialAnalyzer
         var aadtBySegment = new Dictionary<string, int>();
 
         // Try to parse as enhanced road collection first
+        MapSandBox.Shared.Models.EnhancedRoadFeatureCollection? enhancedCollection = null;
         try
         {
-            var enhancedCollection = JsonSerializer.Deserialize<MapSandBox.Shared.Models.EnhancedRoadFeatureCollection>(geoJsonContent);
-            if (enhancedCollection?.Features != null)
-            {
-                _logger.LogInformation("Loading AADT from enhanced road features with traffic data");
-                foreach (var feature in enhancedCollection.Features)
-                {
-                    if (!string.IsNullOrWhiteSpace(feature.Properties.LinearId) &&
-                        feature.Properties.Traffic?.Aadt != null &&
-                        feature.Properties.Traffic.Aadt > 0)
-                    {
-                        aadtBySegment[feature.Properties.LinearId] = feature.Properties.Traffic.Aadt.Value;
-                    }
-                }
-            }
+            enhancedCollection = JsonSerializer.Deserialize<MapSandBox.Shared.Models.EnhancedRoadFeatureCollection>(geoJsonContent);
         }
         catch (JsonException)
         {
+            enhancedCollection = null;
+        }
+
+        // A basic-format file deserializes into the enhanced model without error but with
+        // every linearId empty (basic files use LINEARID), so a collection whose features
+        // all lack a LinearId is actually basic format.
+        var isEnhancedFormat = enhancedCollection?.Features != null &&
+                               enhancedCollection.Features.Count > 0 &&
+                               enhancedCollection.Features.Any(f => !string.IsNullOrWhiteSpace(f.Properties?.LinearId));
+
+        if (isEnhancedFormat)
+        {
+            _logger.LogInformation("Detected enhanced road format; loading AADT from traffic data");
+            foreach (var feature in enhancedCollection!.Features)
+            {
+                if (!string.IsNullOrWhiteSpace(feature.Properties.LinearId) &&
+                    feature.Properties.Traffic?.Aadt != null &&
+                    feature.Properties.Traffic.Aadt > 0)
+                {
+                    aadtBySegment[feature.Properties.LinearId] = feature.Properties.Traffic.Aadt.Value;
+                }
+            }
+        }
+        else
+        {
             // Fall back to old method for backwards compatibility
-            _logger.LogInformation("Enhanced format failed, trying legacy AADT extraction");
+            _logger.LogInformation("Detected basic road format; using legacy AADT extraction");
             var roadFeatures = await LoadRoadFeaturesAsync(roadGeoJsonPath);
             aadtBySegment = roadFeatures
                 .Where(f => f.Aadt.HasValue && f.Aadt > 0)
@@ -128,11 +140,8 @@ public class CrisSpatialAnalyzer
 
         foreach (var crashPoint in crashPoints)
         {
-            var proximityRadiusDegrees = proximityRadiusMeters / 111320.0; // Convert meters to degrees
-            var buffer = crashPoint.Point.Buffer(proximityRadiusDegrees);
-
             var nearbyCluster = intersectionClusters.FirstOrDefault(c =>
-                buffer.Intersects(c.CenterPoint));
+                DistanceMeters(crashPoint.Point, c.CenterPoint) <= proximityRadiusMeters);
 
             if (nearbyCluster != null)
             {
@@ -152,19 +161,27 @@ public class CrisSpatialAnalyzer
 
         var intersectionRisks = intersectionClusters
             .Where(c => c.CrashPoints.Count >= 2)
-            .Select(c => new IntersectionRisk
+            .Select(c =>
             {
-                IntersectionId = c.Id,
-                Latitude = (decimal)c.CenterPoint.Y,
-                Longitude = (decimal)c.CenterPoint.X,
-                CrashCount = c.CrashPoints.Count,
-                RecentCrashes = c.CrashPoints
-                    .Select(cp => cp.Crash)
-                    .OrderByDescending(cr => cr.CrashDateTime)
-                    .Take(10)
-                    .ToList(),
-                RiskScore = CalculateIntersectionRiskScore(c.CrashPoints.Select(cp => cp.Crash).ToList()),
-                RiskLevel = DetermineRiskLevel(CalculateIntersectionRiskScore(c.CrashPoints.Select(cp => cp.Crash).ToList()))
+                var allCrashes = c.CrashPoints.Select(cp => cp.Crash).ToList();
+                return new IntersectionRisk
+                {
+                    IntersectionId = c.Id,
+                    Latitude = (decimal)c.CenterPoint.Y,
+                    Longitude = (decimal)c.CenterPoint.X,
+                    CrashCount = allCrashes.Count,
+                    // RecentCrashes is capped for display; the *CrashCount fields below
+                    // are computed over every crash at the intersection.
+                    RecentCrashes = allCrashes
+                        .OrderByDescending(cr => cr.CrashDateTime)
+                        .Take(10)
+                        .ToList(),
+                    FatalCrashCount = allCrashes.Count(cr => cr.Severity == KabcoSeverity.K_Fatal),
+                    InjuryCrashCount = allCrashes.Count(cr => cr.Severity != KabcoSeverity.K_Fatal && cr.Severity != KabcoSeverity.O_NoInjury),
+                    PropertyDamageCrashCount = allCrashes.Count(cr => cr.Severity == KabcoSeverity.O_NoInjury),
+                    RiskScore = CalculateIntersectionRiskScore(allCrashes),
+                    RiskLevel = DetermineRiskLevel(CalculateIntersectionRiskScore(allCrashes))
+                };
             })
             .OrderByDescending(i => i.RiskScore)
             .ToList();
@@ -225,8 +242,21 @@ public class CrisSpatialAnalyzer
     private RoadFeature? FindClosestRoadSegment(Point crashPoint, List<RoadFeature> roadFeatures)
     {
         return roadFeatures
-            .OrderBy(r => crashPoint.Distance(r.Geometry))
+            .OrderBy(r => DistanceMeters(crashPoint, r.Geometry))
             .FirstOrDefault();
+    }
+
+    /// <summary>
+    /// Equirectangular distance in meters between two geometries: the longitude delta is
+    /// corrected by cos(midLat) before converting degrees to meters (1 degree ≈ 111.32 km).
+    /// </summary>
+    private static double DistanceMeters(Geometry a, Geometry b)
+    {
+        var nearest = DistanceOp.NearestPoints(a, b);
+        var midLatRad = (nearest[0].Y + nearest[1].Y) / 2.0 * (Math.PI / 180.0);
+        var dx = (nearest[0].X - nearest[1].X) * Math.Cos(midLatRad) * 111320.0;
+        var dy = (nearest[0].Y - nearest[1].Y) * 111320.0;
+        return Math.Sqrt(dx * dx + dy * dy);
     }
 
     private decimal CalculateIntersectionRiskScore(List<CrashRecord> crashes)

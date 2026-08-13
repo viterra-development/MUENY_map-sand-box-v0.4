@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using TripGenProcessor.Models;
@@ -49,10 +50,10 @@ var parcelsPath  = cliParcels  ?? settings["InputParcelsPath"]      ?? "data/cou
 var roadsPath    = cliRoads    ?? settings["InputRoadsPath"]        ?? "data/parker-roads-with-traffic.geojson";
 var boundaryPath = cliBoundary ?? settings["InputCityBoundaryPath"] ?? "data/txdot-city-boundaries-filtered.geojson";
 var outputDir    = cliOutDir   ?? "output";
-var maxSnapDistance = double.TryParse(settings["MaxSnapDistanceMeters"], out var sd) ? sd : 500.0;
-var directionalSplit = double.TryParse(settings["DirectionalSplit"], out var ds) ? ds : 0.50;
-var defaultDu = double.TryParse(settings["DefaultDwellingUnitsPerParcel"], out var du) ? du : 1.0;
-var defaultSqft = double.TryParse(settings["DefaultSqftPerAcreFactor"], out var sf) ? sf : 10000.0;
+var maxSnapDistance = double.TryParse(settings["MaxSnapDistanceMeters"], NumberStyles.Float, CultureInfo.InvariantCulture, out var sd) ? sd : 500.0;
+var directionalSplit = double.TryParse(settings["DirectionalSplit"], NumberStyles.Float, CultureInfo.InvariantCulture, out var ds) ? ds : 0.50;
+var defaultDu = double.TryParse(settings["DefaultDwellingUnitsPerParcel"], NumberStyles.Float, CultureInfo.InvariantCulture, out var du) ? du : 1.0;
+var defaultSqft = double.TryParse(settings["DefaultSqftPerAcreFactor"], NumberStyles.Float, CultureInfo.InvariantCulture, out var sf) ? sf : 10000.0;
 
 // Determine city list
 var cities = new List<string>();
@@ -122,23 +123,25 @@ try
         Console.WriteLine($"══ {cityName} ══");
 
         // Clip to boundary
-        var parcels = allParcels;
-        if (File.Exists(boundaryPath))
+        if (!File.Exists(boundaryPath))
         {
-            var boundary = loader.LoadCityBoundary(boundaryPath, cityName);
-            if (boundary != null)
-            {
-                parcels = allParcels.Where(p =>
-                    p.Geometry != null && boundary.Contains(p.Centroid ?? p.Geometry.Centroid)
-                ).ToList();
-                Console.WriteLine($"  Clipped: {parcels.Count:N0} parcels within {cityName}");
-            }
-            else
-            {
-                Console.WriteLine($"  WARN: No boundary for '{cityName}' — SKIPPING");
-                continue;
-            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"  ERROR: City boundary file not found at {boundaryPath} — SKIPPING {cityName}");
+            Console.ResetColor();
+            continue;
         }
+
+        var boundary = loader.LoadCityBoundary(boundaryPath, cityName);
+        if (boundary == null)
+        {
+            Console.WriteLine($"  WARN: No boundary for '{cityName}' — SKIPPING");
+            continue;
+        }
+
+        var parcels = allParcels.Where(p =>
+            p.Geometry != null && boundary.Contains(p.Centroid ?? p.Geometry.Centroid)
+        ).ToList();
+        Console.WriteLine($"  Clipped: {parcels.Count:N0} parcels within {cityName}");
 
         if (parcels.Count == 0)
         {

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using NetTopologySuite.Features;
@@ -195,7 +196,7 @@ public class ParcelDataLoader
     private static double GetDouble(IFeature feature, params string[] names)
     {
         var val = GetAttr(feature, names);
-        if (val != null && double.TryParse(val, out var d))
+        if (val != null && double.TryParse(val, NumberStyles.Float, CultureInfo.InvariantCulture, out var d))
             return d;
         return 0.0;
     }
@@ -203,7 +204,7 @@ public class ParcelDataLoader
     private static int? GetInt(IFeature feature, params string[] names)
     {
         var val = GetAttr(feature, names);
-        if (val != null && int.TryParse(val, out var i))
+        if (val != null && int.TryParse(val, NumberStyles.Integer, CultureInfo.InvariantCulture, out var i))
             return i;
         return null;
     }

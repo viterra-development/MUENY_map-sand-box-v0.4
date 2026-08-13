@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using NetTopologySuite.IO;
 using SoilDataProcessor;
@@ -19,6 +20,7 @@ class Program
         {
             bool useFullCounty = args.Contains("--full-county");
             bool uploadOnly = args.Contains("--upload");
+            bool allowSampleData = args.Contains("--allow-sample-data");
 
             if (uploadOnly)
             {
@@ -74,11 +76,21 @@ class Program
                 Console.WriteLine($"   After boundary trimming: {geoJsonFeatures.Count} features");
             }
 
-            // Fallback to sample data if API fails
+            // Fallback to sample data only when explicitly requested
             if (geoJsonFeatures.Count == 0)
             {
-                Console.WriteLine("   No data returned from API, falling back to sample data...");
-                geoJsonFeatures = CreateSampleSoilData();
+                if (allowSampleData)
+                {
+                    Console.WriteLine("   No data returned from API, falling back to sample data (--allow-sample-data)...");
+                    geoJsonFeatures = CreateSampleSoilData();
+                }
+                else
+                {
+                    Console.WriteLine("ERROR: No soil data returned from the SSURGO API.");
+                    Console.WriteLine("       Re-run with --allow-sample-data to write synthetic sample data instead.");
+                    Environment.ExitCode = 1;
+                    return;
+                }
             }
             
             Console.WriteLine($"2. Created {geoJsonFeatures.Count} sample soil map units");
@@ -119,6 +131,7 @@ class Program
         catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
+            Environment.ExitCode = 1;
         }
     }
     
@@ -713,8 +726,8 @@ class Program
                     }
                     else
                     {
-                        // No geometry found, keep the feature with placeholder geometry
-                        allFeatures.Add(propertiesFeature);
+                        // No geometry found — skip the unit rather than publish the placeholder rectangle
+                        Console.WriteLine($"   Warning: No geometry returned for map unit {mukey}; skipping unit");
                     }
                 }
 
@@ -723,15 +736,15 @@ class Program
             }
             else
             {
-                Console.WriteLine("   Warning: No geometry data returned, keeping placeholder geometry");
-                return propertiesFeatures;
+                Console.WriteLine($"   Warning: No geometry data returned; skipping {propertiesFeatures.Count} map units (placeholder geometry is not published)");
+                return new List<GeoJsonFeature<SoilProperties>>();
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"   Warning: Failed to retrieve geometries: {ex.Message}");
-            Console.WriteLine("   Continuing with placeholder geometry...");
-            return propertiesFeatures;
+            Console.WriteLine($"   Skipping {propertiesFeatures.Count} map units (placeholder geometry is not published)");
+            return new List<GeoJsonFeature<SoilProperties>>();
         }
     }
 
@@ -781,9 +794,9 @@ class Program
                 MuName = row[2],
                 CoKey = row[3],
                 CompName = row[4],
-                ComponentPct = double.TryParse(row[5], out var pct) ? (double?)pct : null,
-                ClayPct = double.TryParse(row[6], out var clay) ? (double?)clay : null,
-                Ksat = double.TryParse(row[7], out var ksat) ? (double?)ksat : null
+                ComponentPct = double.TryParse(row[5], NumberStyles.Float, CultureInfo.InvariantCulture, out var pct) ? (double?)pct : null,
+                ClayPct = double.TryParse(row[6], NumberStyles.Float, CultureInfo.InvariantCulture, out var clay) ? (double?)clay : null,
+                Ksat = double.TryParse(row[7], NumberStyles.Float, CultureInfo.InvariantCulture, out var ksat) ? (double?)ksat : null
             })
             .ToList();
 

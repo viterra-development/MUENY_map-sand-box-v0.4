@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using TripGenProcessor.Models;
 
@@ -152,7 +153,7 @@ public class LandUseClassifier
         }
 
         // 2. Franchise / brand names in legal desc → retail commercial
-        if (ContainsAny(legal, KnownFranchises))
+        if (ContainsFranchise(legal))
         {
             _fallbackCount++;
             return (820, "Commercial", "Heuristic: brand name in legal desc");
@@ -254,7 +255,8 @@ public class LandUseClassifier
         return (210, "Residential", "Heuristic (stopgap): default single-family — awaits real state_cd from Parker CAD");
     }
 
-    // Big-box, franchise, and known local commercial brands. Case-insensitive substring match.
+    // Big-box, franchise, and known local commercial brands. Matched as whole words
+    // (case-insensitive) so "QT" doesn't hit "QTR" and "HEB" doesn't hit "HEBRON".
     private static readonly string[] KnownFranchises = new[]
     {
         "MCDONALDS", "MCDONALD'S", "WALMART", "WAL-MART", "WAL MART", "TARGET", "STARBUCKS",
@@ -302,6 +304,12 @@ public class LandUseClassifier
         "FAMILY ", "TRUST", "REVOCABLE", "LIVING", "ESTATE OF",
         " ETUX", "ET UX", "ET AL", " ETVIR", "ET VIR"
     };
+
+    private static readonly Regex KnownFranchisesRegex = new(
+        @"(?<![A-Za-z0-9])(" + string.Join("|", KnownFranchises.Select(Regex.Escape)) + @")(?![A-Za-z0-9])",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+    private static bool ContainsFranchise(string haystack) => KnownFranchisesRegex.IsMatch(haystack);
 
     private static bool ContainsAny(string haystack, string[] needles)
     {

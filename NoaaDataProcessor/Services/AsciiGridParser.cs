@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Extensions.Logging;
 using NoaaDataProcessor.Models;
 
@@ -46,22 +47,22 @@ public class AsciiGridParser
                 switch (key)
                 {
                     case "ncols":
-                        header.NCols = int.Parse(value);
+                        header.NCols = int.Parse(value, CultureInfo.InvariantCulture);
                         break;
                     case "nrows":
-                        header.NRows = int.Parse(value);
+                        header.NRows = int.Parse(value, CultureInfo.InvariantCulture);
                         break;
                     case "xllcorner":
-                        header.XllCorner = double.Parse(value);
+                        header.XllCorner = double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture);
                         break;
                     case "yllcorner":
-                        header.YllCorner = double.Parse(value);
+                        header.YllCorner = double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture);
                         break;
                     case "cellsize":
-                        header.CellSize = double.Parse(value);
+                        header.CellSize = double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture);
                         break;
                     case "nodata_value":
-                        header.NoDataValue = double.Parse(value);
+                        header.NoDataValue = double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture);
                         break;
                 }
             }
@@ -81,7 +82,7 @@ public class AsciiGridParser
 
             for (int col = 0; col < header.NCols && col < values.Length; col++)
             {
-                if (double.TryParse(values[col], out var value))
+                if (double.TryParse(values[col], NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
                 {
                     var cell = new GridCell
                     {

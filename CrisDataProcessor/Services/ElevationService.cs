@@ -16,24 +16,20 @@ public class ElevationService
         _gdalService = gdalService;
     }
 
+    private bool _noElevationSourceWarningLogged;
+
     public decimal CalculateBasicSlope(double startLat, double startLon, double endLat, double endLon)
     {
-        // Simplified slope calculation for Phase 1
-        // Uses basic coordinate differences to estimate grade
-        var latDiff = Math.Abs(endLat - startLat);
-        var lonDiff = Math.Abs(endLon - startLon);
+        // Slope cannot be derived from horizontal coordinates alone; without a real
+        // elevation source we report 0 (flat) so downstream drainage-risk flags never
+        // fire from fabricated values.
+        if (!_noElevationSourceWarningLogged)
+        {
+            _logger.LogWarning("No elevation data source available; basic slope defaults to 0% for all segments");
+            _noElevationSourceWarningLogged = true;
+        }
 
-        // Simple grade estimation (0-15% typical range for roads)
-        // Scale factor based on coordinate differences
-        var basicSlope = (decimal)((latDiff + lonDiff) * 1000);
-
-        // Cap at reasonable maximum slope for roads (15%)
-        var clampedSlope = Math.Min(basicSlope, 15m);
-
-        _logger.LogDebug("Basic slope calculated: lat_diff={LatDiff}, lon_diff={LonDiff} -> {Slope}%",
-            latDiff, lonDiff, clampedSlope);
-
-        return clampedSlope;
+        return 0m;
     }
 
     public async Task EnhanceRoadSegmentsWithCrashBasedSlope(List<RiskSegment> segments, List<CrashRecord> crashes, Dictionary<string, List<CrashRecord>> crashesBySegment)

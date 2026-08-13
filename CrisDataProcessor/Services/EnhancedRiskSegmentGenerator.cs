@@ -300,16 +300,20 @@ public class EnhancedRiskSegmentGenerator
 
         try
         {
-            // Create LineString geometry from coordinates
             var coordinates = roadMatch.Coordinates
                 .Select(coord => new Coordinate(coord[0], coord[1])) // lon, lat
                 .ToArray();
 
-            var lineString = new LineString(coordinates);
-
-            // Get length in degrees, then convert to miles
-            var lengthDegrees = lineString.Length;
-            var lengthMiles = lengthDegrees * 69.0; // Rough conversion: 1 degree ≈ 69 miles
+            // Sum per-vertex equirectangular distances: longitude deltas are corrected by
+            // cos(midLat) before converting degrees to miles (1 degree ≈ 69.09 miles).
+            double lengthMiles = 0;
+            for (int i = 1; i < coordinates.Length; i++)
+            {
+                var midLatRad = (coordinates[i - 1].Y + coordinates[i].Y) / 2.0 * (Math.PI / 180.0);
+                var dx = (coordinates[i].X - coordinates[i - 1].X) * Math.Cos(midLatRad);
+                var dy = coordinates[i].Y - coordinates[i - 1].Y;
+                lengthMiles += Math.Sqrt(dx * dx + dy * dy) * 69.09;
+            }
 
             return Math.Max((decimal)lengthMiles, 0.01m); // Ensure minimum 0.01 miles
         }

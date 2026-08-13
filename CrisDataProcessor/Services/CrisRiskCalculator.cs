@@ -50,7 +50,7 @@ public class CrisRiskCalculator
         return score;
     }
 
-    public DetailedCrisModelScore CalculateDetailedRiskScore(List<CrashRecord> crashes, RiskSegment segment)
+    public DetailedCrisModelScore CalculateDetailedRiskScore(List<CrashRecord> crashes, RiskSegment segment, decimal yearsOfData)
     {
         _logger.LogDebug("Calculating detailed risk score for segment {SegmentId} with {CrashCount} crashes", segment.SegmentId, crashes.Count);
 
@@ -60,7 +60,7 @@ public class CrisRiskCalculator
         };
 
         // 1. Crash Frequency (Weight: configured)
-        score.CrashFrequencyPerMile = CalculateCrashFrequencyPerMile(crashes, segment.SegmentLength);
+        score.CrashFrequencyPerMile = CalculateCrashFrequencyPerMile(crashes, segment.SegmentLength, yearsOfData);
         score.CrashFrequencyScore = Math.Min(score.CrashFrequencyPerMile / 10m, 1.0m); // Normalize to 0-1
 
         // 2. Severity Index (Weight: configured)
@@ -220,12 +220,10 @@ public class CrisRiskCalculator
         return composite;
     }
 
-    private decimal CalculateCrashFrequencyPerMile(List<CrashRecord> crashes, decimal segmentLengthMiles)
+    private decimal CalculateCrashFrequencyPerMile(List<CrashRecord> crashes, decimal segmentLengthMiles, decimal yearsOfData)
     {
-        if (segmentLengthMiles <= 0) return 0;
+        if (segmentLengthMiles <= 0 || yearsOfData <= 0) return 0;
 
-        // Assume data covers approximately 1 year (could be calculated from crash date range)
-        var yearsOfData = 1.0m; // Could be: CalculateTimeSpanYears(crashes)
         return crashes.Count / (segmentLengthMiles * yearsOfData);
     }
 

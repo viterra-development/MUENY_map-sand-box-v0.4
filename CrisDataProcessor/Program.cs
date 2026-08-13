@@ -129,10 +129,20 @@ public class CrisProcessor
             _environmentalAnalyzer.EnhanceSegmentsWithEnvironmentalAnalysis(riskSegments, crashesBySegment);
 
             // Step 8: Calculate detailed risk scores using configured weights and thresholds
+            // Years covered by the loaded crash data, floored at 0.25 so a tiny date range
+            // can't explode the per-year crash frequencies.
+            var yearsOfData = 1.0m;
+            if (validCrashes.Count > 0)
+            {
+                var minCrashDate = validCrashes.Min(c => c.CrashDateTime);
+                var maxCrashDate = validCrashes.Max(c => c.CrashDateTime);
+                yearsOfData = Math.Max((decimal)(maxCrashDate - minCrashDate).TotalDays / 365.25m, 0.25m);
+            }
+
             foreach (var segment in riskSegments)
             {
                 var segmentCrashes = crashesBySegment.GetValueOrDefault(segment.SegmentId, new List<CrashRecord>());
-                var detailedScore = _riskCalculator.CalculateDetailedRiskScore(segmentCrashes, segment);
+                var detailedScore = _riskCalculator.CalculateDetailedRiskScore(segmentCrashes, segment, yearsOfData);
 
                 // Update segment with detailed metrics and threshold flags
                 segment.CrashesPerMilePerYear = detailedScore.CrashFrequencyPerMile;
