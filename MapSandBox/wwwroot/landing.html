@@ -8,281 +8,405 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #0b1f2e;
-      --ink-soft: #3d4f5e;
-      --paper: #f6f5f1;
-      --card: #ffffff;
-      --accent: #2e4a6b;
-      --accent-bright: #4a7aa8;
-      --safety: #c05238;
-      --growth: #b07a26;
-      --infra: #3e7a4e;
-      --rule: #e2e0d8;
+      --paper: #f2ede2;
+      --paper-deep: #e9e2d2;
+      --card: #faf7ef;
+      --ink: #1c2126;
+      --ink-soft: #4c5258;
+      --line: #cfc6b2;
+      --survey: #c8451f;     /* surveyor's red-orange */
+      --field: #2f5d43;      /* field green */
+      --water: #2b5d8a;      /* hydrology blue */
+      --stamp: #8a2f22;
     }
     * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-      background: var(--paper);
+      background:
+        radial-gradient(1400px 700px at 85% -5%, rgba(200,69,31,0.05), transparent 55%),
+        repeating-linear-gradient(0deg, transparent 0 31px, rgba(28,33,38,0.030) 31px 32px),
+        repeating-linear-gradient(90deg, transparent 0 31px, rgba(28,33,38,0.030) 31px 32px),
+        var(--paper);
       color: var(--ink);
       line-height: 1.6;
     }
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
 
-    /* Header */
-    header {
-      background: var(--ink);
-      color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 50;
+    /* ============ NAV ============ */
+    .nav-bar {
+      position: sticky; top: 0; z-index: 60;
+      background: rgba(242, 237, 226, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1.5px solid var(--ink);
     }
     .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 24px;
-      max-width: 1060px;
-      margin: 0 auto;
+      display: flex; align-items: baseline; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto; padding: 16px 28px;
     }
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: 0.42em;
+    .brand {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 900; font-size: 22px; letter-spacing: 0.06em;
     }
-    .logo small {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      font-size: 9.5px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9db4c8;
+    .brand .tm { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; vertical-align: super; color: var(--ink-soft); }
+    .nav-links { display: flex; gap: 26px; align-items: baseline; }
+    .nav-links a { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--survey); }
+    .nav-cta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+      background: var(--ink); color: var(--paper) !important;
+      padding: 8px 18px; border: 1.5px solid var(--ink);
     }
-    .nav-actions { display: flex; gap: 12px; align-items: center; }
-    .btn {
-      display: inline-block;
-      padding: 9px 20px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      border: 1px solid transparent;
-    }
-    .btn-primary { background: var(--accent-bright); color: #fff; }
-    .btn-primary:hover { background: #3d6a95; }
-    .btn-ghost { color: #d7e2ec; border-color: rgba(255,255,255,0.35); }
-    .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+    .nav-cta:hover { background: var(--survey); border-color: var(--survey); color: #fff !important; }
 
-    /* Hero */
-    .hero {
-      background:
-        radial-gradient(1200px 500px at 75% -10%, rgba(74,122,168,0.35), transparent 60%),
-        linear-gradient(180deg, var(--ink) 0%, #12293c 100%);
-      color: #fff;
-      padding: 84px 0 90px;
+    /* ============ HERO ============ */
+    .hero { position: relative; padding: 96px 0 84px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: center; }
+    .coords {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px; letter-spacing: 0.08em; color: var(--survey);
+      text-transform: uppercase; font-weight: 600;
     }
+    .coords::after { content: ""; display: inline-block; width: 60px; height: 1.5px; background: var(--survey); margin-left: 12px; vertical-align: middle; }
     .hero h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: clamp(34px, 5.5vw, 56px);
-      line-height: 1.08;
-      letter-spacing: 0.01em;
-      max-width: 15ch;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 900;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: 0.98;
+      letter-spacing: -0.015em;
+      margin-top: 18px;
       text-wrap: balance;
     }
-    .hero p.lede {
-      margin-top: 18px;
-      font-size: 18px;
-      color: #c3d2df;
-      max-width: 52ch;
+    .hero h1 em {
+      font-style: italic; font-weight: 600;
+      color: var(--survey);
     }
-    .hero-ctas { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
-    .hero-ctas .btn { font-size: 15px; padding: 12px 26px; }
-    .hero-stats {
-      margin-top: 56px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1px;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 10px;
-      overflow: hidden;
+    .hero .lede {
+      margin-top: 24px; font-size: 18px; color: var(--ink-soft); max-width: 46ch;
     }
-    .stat { background: rgba(11,31,46,0.85); padding: 18px 20px; }
-    .stat b {
-      display: block;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 30px;
-      font-weight: 700;
+    .hero-ctas { margin-top: 36px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-block; text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+      padding: 15px 30px; border: 1.5px solid var(--ink);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .btn-ink {
+      background: var(--ink); color: var(--paper);
+      box-shadow: 5px 5px 0 var(--survey);
+    }
+    .btn-ink:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--survey); }
+    .btn-paper { background: transparent; color: var(--ink); }
+    .btn-paper:hover { background: var(--card); }
+
+    /* Plat-map artwork */
+    .plat {
+      position: relative;
+      background: var(--card);
+      border: 1.5px solid var(--ink);
+      box-shadow: 10px 10px 0 rgba(28,33,38,0.14);
+      padding: 10px;
+    }
+    .plat svg { display: block; width: 100%; height: auto; }
+    .plat-label {
+      position: absolute; bottom: 18px; left: 18px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
+      background: var(--card); padding: 3px 8px; border: 1px solid var(--line);
+    }
+
+    /* Survey-stake stats */
+    .stakes {
+      margin-top: 72px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      border-top: 1.5px solid var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+    }
+    .stake { padding: 22px 24px 20px; border-right: 1px dashed var(--line); }
+    .stake:last-child { border-right: none; }
+    .stake b {
+      display: block; font-family: 'Fraunces', Georgia, serif;
+      font-size: 40px; font-weight: 900; line-height: 1;
       font-variant-numeric: tabular-nums;
     }
-    .stat span { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: #9db4c8; }
+    .stake span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-soft);
+    }
 
-    /* Capabilities */
-    .section { padding: 72px 0; }
-    .kicker {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
+    /* ============ CAPABILITIES ============ */
+    .section { padding: 88px 0; }
+    .sec-head { display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap; }
+    .sec-no {
+      font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600;
+      color: var(--survey); letter-spacing: 0.08em;
     }
     .section h2 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 34px;
-      font-weight: 700;
-      margin-top: 6px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(30px, 4vw, 44px); font-weight: 900; letter-spacing: -0.01em;
       text-wrap: balance;
     }
-    .cards {
-      margin-top: 36px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .card {
+    .sheets { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
+    .sheet {
+      position: relative;
       background: var(--card);
-      border: 1px solid var(--rule);
-      border-top: 4px solid var(--accent);
-      border-radius: 10px;
-      padding: 26px 26px 24px;
+      border: 1.5px solid var(--ink);
+      padding: 30px 28px 26px;
+      box-shadow: 7px 7px 0 rgba(28,33,38,0.12);
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
     }
-    .card.safety { border-top-color: var(--safety); }
-    .card.growth { border-top-color: var(--growth); }
-    .card.infra  { border-top-color: var(--infra); }
-    .card h3 { font-size: 18px; margin-bottom: 8px; }
-    .card p { font-size: 14.5px; color: var(--ink-soft); }
-    .card ul { margin: 12px 0 0 18px; font-size: 13.5px; color: var(--ink-soft); }
-    .card li { margin: 4px 0; }
-
-    /* Data provenance */
-    .provenance { background: #eeece5; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .provenance .section { padding: 48px 0; }
-    .prov-row { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 14px; font-size: 13.5px; color: var(--ink-soft); }
-    .prov-row span::before { content: "— "; color: var(--accent); }
-
-    /* Final CTA */
-    .cta-final { text-align: center; padding: 84px 0; }
-    .cta-final h2 { font-family: 'Rajdhani', sans-serif; font-size: 32px; }
-    .cta-final p { color: var(--ink-soft); margin: 10px auto 26px; max-width: 46ch; }
-    .btn-dark { background: var(--accent); color: #fff; }
-    .btn-dark:hover { background: #24405f; }
-    .btn-outline { color: var(--accent); border-color: var(--accent); }
-    .btn-outline:hover { background: rgba(46,74,107,0.07); }
-
-    footer {
-      background: var(--ink);
-      color: #9db4c8;
-      font-size: 13px;
-      padding: 26px 0;
+    .sheet:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 rgba(28,33,38,0.16); }
+    .sheet .tab {
+      position: absolute; top: -1.5px; left: 24px; transform: translateY(-100%);
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600;
+      letter-spacing: 0.11em; text-transform: uppercase;
+      background: var(--ink); color: var(--paper);
+      padding: 5px 12px 4px;
     }
-    footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; }
-    footer a { color: #c3d2df; }
+    .sheet.safety .tab { background: var(--survey); }
+    .sheet.growth .tab { background: var(--field); }
+    .sheet.infra .tab  { background: var(--water); }
+    .sheet h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px; font-weight: 700; line-height: 1.25; margin-bottom: 10px;
+    }
+    .sheet p { font-size: 14.5px; color: var(--ink-soft); }
+    .sheet ul { margin: 16px 0 0; padding: 0; list-style: none; }
+    .sheet li {
+      font-size: 13.5px; color: var(--ink); padding: 7px 0 6px 22px;
+      border-top: 1px dashed var(--line); position: relative;
+    }
+    .sheet li::before {
+      content: "▸"; position: absolute; left: 2px; color: var(--survey); font-size: 11px; top: 9px;
+    }
 
-    @media (max-width: 640px) {
-      .hero { padding: 56px 0 60px; }
-      .nav-actions .btn-ghost { display: none; }
+    /* ============ PROVENANCE LEDGER ============ */
+    .ledger { background: var(--ink); color: var(--paper); }
+    .ledger .section { padding: 64px 0; }
+    .ledger .sec-no { color: #e8a03e; }
+    .ledger h2 { color: var(--card); }
+    .ledger-rows { margin-top: 34px; border-top: 1px solid rgba(242,237,226,0.25); }
+    .ledger-row {
+      display: grid; grid-template-columns: 100px 1fr auto; gap: 18px; align-items: baseline;
+      padding: 13px 4px; border-bottom: 1px solid rgba(242,237,226,0.18);
+      font-size: 14px;
+    }
+    .ledger-row .no { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #e8a03e; }
+    .ledger-row .src { color: #efe9dc; }
+    .ledger-row .kind { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #9aa5ad; }
+    .ledger-note { margin-top: 22px; font-size: 13px; color: #9aa5ad; max-width: 60ch; }
+
+    /* ============ FINAL CTA ============ */
+    .notice { padding: 100px 0 110px; }
+    .notice-card {
+      position: relative;
+      max-width: 720px; margin: 0 auto; text-align: center;
+      background: var(--card); border: 1.5px solid var(--ink);
+      box-shadow: 10px 10px 0 rgba(28,33,38,0.14);
+      padding: 64px 48px 56px;
+    }
+    .notice-card::before {
+      content: "NO. 2026-MUENY";
+      position: absolute; top: 16px; left: 20px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: var(--ink-soft);
+    }
+    .stamp {
+      position: absolute; top: 22px; right: 26px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--stamp); border: 2px solid var(--stamp); border-radius: 4px;
+      padding: 6px 10px; transform: rotate(6deg); opacity: 0.75;
+    }
+    .notice h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(30px, 4.5vw, 46px); font-weight: 900; letter-spacing: -0.01em;
+    }
+    .notice p { color: var(--ink-soft); margin: 14px auto 34px; max-width: 44ch; }
+
+    footer { border-top: 1.5px solid var(--ink); padding: 26px 0 34px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; align-items: baseline; }
+    footer, footer a { color: var(--ink-soft); font-size: 13px; }
+    footer .mono { font-size: 11.5px; letter-spacing: 0.06em; }
+
+    @media (max-width: 880px) {
+      .hero { padding: 64px 0 60px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .plat { max-width: 480px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .stake { border-right: none; border-bottom: 1px dashed var(--line); }
+      .stake:last-child { border-bottom: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
-  <header>
+  <div class="nav-bar">
     <nav class="nav">
-      <div class="logo">MUENY<small>Municipal Intelligence</small></div>
-      <div class="nav-actions">
-        <a class="btn btn-ghost" href="/map">Sign in</a>
-        <a class="btn btn-primary" href="/map">Open the live map</a>
+      <div class="brand">MUENY<span class="tm">™</span></div>
+      <div class="nav-links">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#record">The record</a>
+        <a href="/map">Sign in</a>
+        <a class="nav-cta" href="/map">Open the map</a>
       </div>
     </nav>
-  </header>
+  </div>
 
-  <section class="hero">
-    <div class="wrap">
-      <h1>See your city the way the data does.</h1>
-      <p class="lede">MUENY turns the public record — crash reports, traffic counts,
-        parcels, soils, rainfall — into one live map your staff can act on.
-        Built on Parker County, Texas. Ready for your city.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="/map">Open the live map</a>
-        <a class="btn btn-ghost" href="mailto:spencer@hodgetx.com?subject=MUENY%20briefing%20request">Request a briefing</a>
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="coords mono">32.7573° N · 97.7654° W — Parker County, Texas</div>
+        <h1>The public record, <em>finally legible.</em></h1>
+        <p class="lede">Crash reports. Traffic counts. Parcels, soils, rainfall.
+          Every city already owns this data — MUENY is the first place it all
+          shows up on one live map your staff can act on.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-ink" href="/map">Open the live map</a>
+          <a class="btn btn-paper" href="mailto:spencer@hodgetx.com?subject=MUENY%20briefing%20request">Request a briefing</a>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><b>4,000+</b><span>Crashes analyzed</span></div>
-        <div class="stat"><b>28,000+</b><span>Parcels classified</span></div>
-        <div class="stat"><b>11</b><span>Cities modeled</span></div>
-        <div class="stat"><b>5</b><span>Data domains fused</span></div>
+      <div class="plat" aria-hidden="true">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" role="img">
+          <rect width="420" height="420" fill="#faf7ef"/>
+          <!-- section grid -->
+          <g stroke="#d8cfba" stroke-width="1">
+            <path d="M70 0V420M140 0V420M210 0V420M280 0V420M350 0V420"/>
+            <path d="M0 70H420M0 140H420M0 210H420M0 280H420M0 350H420"/>
+          </g>
+          <!-- contours -->
+          <g fill="none" stroke="#b9a77e" stroke-width="1.3">
+            <path d="M-10 330 C 80 300, 120 340, 200 310 S 350 320, 430 280"/>
+            <path d="M-10 360 C 90 330, 140 370, 230 340 S 360 350, 430 315"/>
+            <path d="M-10 295 C 70 275, 110 305, 185 285 S 330 290, 430 250"/>
+          </g>
+          <!-- river -->
+          <path d="M40 -10 C 60 80, 20 140, 70 210 S 60 340, 100 430" fill="none" stroke="#2b5d8a" stroke-width="2.2" opacity="0.75"/>
+          <!-- parcels -->
+          <g fill="none" stroke="#1c2126" stroke-width="1.1" stroke-dasharray="5 3">
+            <path d="M140 70 H280 V140 H140 Z"/>
+            <path d="M280 70 H350 V210 H280 Z"/>
+            <path d="M140 140 H210 V210 H140 Z"/>
+            <path d="M210 140 H280 V210 H210 Z"/>
+          </g>
+          <!-- highway -->
+          <path d="M-10 190 C 120 175, 260 215, 430 180" fill="none" stroke="#e8a03e" stroke-width="7" opacity="0.85"/>
+          <path d="M-10 190 C 120 175, 260 215, 430 180" fill="none" stroke="#c8451f" stroke-width="1.6" stroke-dasharray="9 7"/>
+          <!-- crash cluster -->
+          <g fill="#c8451f">
+            <circle cx="212" cy="196" r="6.5" opacity="0.9"/>
+            <circle cx="240" cy="200" r="4.5" opacity="0.75"/>
+            <circle cx="188" cy="189" r="4" opacity="0.7"/>
+            <circle cx="262" cy="204" r="3.4" opacity="0.6"/>
+          </g>
+          <circle cx="212" cy="196" r="15" fill="none" stroke="#c8451f" stroke-width="1.3" stroke-dasharray="3 3"/>
+          <!-- north arrow -->
+          <g transform="translate(378, 44)">
+            <circle r="17" fill="none" stroke="#1c2126" stroke-width="1.2"/>
+            <path d="M0 -11 L4.5 8 L0 4 L-4.5 8 Z" fill="#1c2126"/>
+            <text y="30" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4c5258">N</text>
+          </g>
+          <!-- scale bar -->
+          <g transform="translate(28, 392)">
+            <path d="M0 0 H90" stroke="#1c2126" stroke-width="1.4"/>
+            <path d="M0 -4 V4 M45 -3 V3 M90 -4 V4" stroke="#1c2126" stroke-width="1.2"/>
+            <text x="98" y="3.5" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4c5258">1 MI</text>
+          </g>
+        </svg>
+        <div class="plat-label">Sheet 1 · Crash risk · I-20 corridor</div>
       </div>
+    </div>
+
+    <div class="stakes">
+      <div class="stake"><b>4,023</b><span>Crashes analyzed</span></div>
+      <div class="stake"><b>28,585</b><span>Parcels classified</span></div>
+      <div class="stake"><b>11</b><span>Cities modeled</span></div>
+      <div class="stake"><b>5</b><span>Data domains fused</span></div>
     </div>
   </section>
 
-  <section class="section wrap">
-    <div class="kicker">What MUENY answers</div>
-    <h2>Three questions every city asks — answered on one map.</h2>
-    <div class="cards">
-      <div class="card safety">
+  <section class="section wrap" id="capabilities">
+    <div class="sec-head">
+      <span class="sec-no">SEC. 01</span>
+      <h2>Three questions every city asks.<br/>One map that answers.</h2>
+    </div>
+    <div class="sheets">
+      <div class="sheet safety">
+        <span class="tab">Safety</span>
         <h3>Where will the next serious crash happen?</h3>
-        <p>Crash-risk scoring over every road segment and intersection, built from
-           TxDOT crash records fused with traffic volumes, road grade, and surface conditions.</p>
+        <p>Risk scoring over every road segment and intersection — TxDOT crash
+           records fused with traffic volume, road grade, and surface condition.</p>
         <ul>
           <li>Risk-ranked segments and intersections</li>
-          <li>Weather and drainage risk factors</li>
+          <li>Weather and drainage factors</li>
           <li>Defensible inputs for grant applications</li>
         </ul>
       </div>
-      <div class="card growth">
+      <div class="sheet growth">
+        <span class="tab">Growth</span>
         <h3>What will growth do to our roads?</h3>
-        <p>Parcel-level trip generation for 11 cities — every parcel classified by land
-           use and converted to daily and peak-hour trips on the roads that carry them.</p>
+        <p>Parcel-level trip generation across 11 cities — every parcel classified
+           by land use and converted to daily and peak-hour trips.</p>
         <ul>
-          <li>ITE-based trip estimates per parcel</li>
-          <li>Road stress index: volume vs. capacity</li>
+          <li>Trip estimates on every parcel</li>
+          <li>Road stress: volume vs. capacity</li>
           <li>Scenario-ready for development review</li>
         </ul>
       </div>
-      <div class="card infra">
+      <div class="sheet infra">
+        <span class="tab">Ground truth</span>
         <h3>Which infrastructure is quietly failing?</h3>
-        <p>Soil permeability, rainfall intensity, and slope layered under the road
-           network — the physical context behind drainage complaints and washouts.</p>
+        <p>Soil permeability, rainfall intensity, and slope layered under the
+           road network — the physics behind drainage complaints and washouts.</p>
         <ul>
-          <li>SSURGO soils: clay content and permeability</li>
-          <li>NOAA rainfall design intensities</li>
+          <li>Clay content and permeability, county-wide</li>
+          <li>NOAA design rainfall intensities</li>
           <li>Terrain slope at every crash site</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <div class="provenance">
+  <div class="ledger" id="record">
     <div class="section wrap">
-      <div class="kicker">Built on the public record</div>
-      <h2>No black box — every layer cites its source.</h2>
-      <div class="prov-row">
-        <span>TxDOT CRIS crash records</span>
-        <span>TxDOT traffic counts</span>
-        <span>County appraisal parcels</span>
-        <span>USDA SSURGO soils</span>
-        <span>NOAA Atlas 14 rainfall</span>
-        <span>U.S. Census TIGER roads</span>
-        <span>© OpenStreetMap contributors</span>
+      <div class="sec-head">
+        <span class="sec-no">SEC. 02</span>
+        <h2>No black box. Every layer cites its instrument.</h2>
       </div>
+      <div class="ledger-rows">
+        <div class="ledger-row"><span class="no">REC-001</span><span class="src">TxDOT CRIS crash records</span><span class="kind">Safety</span></div>
+        <div class="ledger-row"><span class="no">REC-002</span><span class="src">TxDOT traffic counts</span><span class="kind">Volume</span></div>
+        <div class="ledger-row"><span class="no">REC-003</span><span class="src">County appraisal parcels</span><span class="kind">Land use</span></div>
+        <div class="ledger-row"><span class="no">REC-004</span><span class="src">USDA SSURGO soil survey</span><span class="kind">Ground</span></div>
+        <div class="ledger-row"><span class="no">REC-005</span><span class="src">NOAA Atlas 14 rainfall</span><span class="kind">Hydrology</span></div>
+        <div class="ledger-row"><span class="no">REC-006</span><span class="src">U.S. Census TIGER roads · © OpenStreetMap contributors</span><span class="kind">Network</span></div>
+      </div>
+      <p class="ledger-note">Owner names and personal information are stripped from
+         every published layer. Sources and licensing are documented in the open.</p>
     </div>
   </div>
 
-  <section class="cta-final wrap">
-    <h2>See it on your county.</h2>
-    <p>The live map is open — explore crash risk, trip generation, and road stress
-       for Parker County now. Sign in to generate briefing reports and save views.</p>
-    <a class="btn btn-dark" href="/map">Open the live map</a>
-    <a class="btn btn-outline" href="mailto:spencer@hodgetx.com?subject=MUENY%20briefing%20request">Request a briefing</a>
+  <section class="notice wrap">
+    <div class="notice-card">
+      <span class="stamp">Filed · Parker Co.</span>
+      <h2>See it on your county.</h2>
+      <p>The live map is open — crash risk, trip generation, and road stress for
+         Parker County, today. Sign in to generate briefing reports and save views.</p>
+      <a class="btn btn-ink" href="/map">Open the live map</a>
+    </div>
   </section>
 
   <footer>
     <div class="wrap">
-      <span>© 2026 MUENY · Viterra Group</span>
+      <span class="mono">MUENY™ · MUNICIPAL INTELLIGENCE · © 2026 VITERRA GROUP</span>
       <span><a href="/privacy">Privacy</a> · <a href="mailto:spencer@hodgetx.com">Contact</a></span>
     </div>
   </footer>
