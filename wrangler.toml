@@ -6,6 +6,17 @@ main = "src/worker.js"
 directory = "./publish/wwwroot"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
+# The worker must run in front of static assets so `/` can serve the landing
+# page and /api/* stays dynamic.
+run_worker_first = true
+
+# Auth + saved-views storage (users, sessions, views — keys are prefixed).
+[[kv_namespaces]]
+binding = "AUTH_KV"
+id = "76b7d02037c4416bb9c8cfcf681b02e7"
+
+# Optional secret (set with `wrangler secret put INVITE_CODE`): when present,
+# registration requires this code; when absent, registration is open.
 
 # Google Form destination for /api/log-visit. The Worker skips the Form POST
 # and only console.logs until these exist. Configure them as Worker SECRETS,

@@ -177,6 +177,15 @@ export async function generateReport(reportType) {
 }
 
 export function showReportModal() {
+    // Report generation is a signed-in feature. MuenyAuth is a plain script
+    // loaded from index.html; when absent (bare dev server) skip the gate.
+    if (window.MuenyAuth && !showReportModal._authed) {
+        window.MuenyAuth.requireAuth(() => {
+            showReportModal._authed = true;
+            try { showReportModal(); } finally { showReportModal._authed = false; }
+        });
+        return;
+    }
     // Avoid duplicates if user clicks twice quickly
     if (document.getElementById('report-overlay')) return;
 

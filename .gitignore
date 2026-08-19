@@ -462,3 +462,4 @@ Screenshots/
 TestOutput/
 primal-graph-debug.txt
 *.backup
+.wrangler/

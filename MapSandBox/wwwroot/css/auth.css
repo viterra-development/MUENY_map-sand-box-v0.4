@@ -1,0 +1,166 @@
+/* MUENY account UI — modal + header chip.
+   Placeholder styling consistent with the current dark header; the Paper
+   design pass will reskin via these same class hooks. */
+
+.mueny-auth-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 16, 24, 0.62);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 16px;
+}
+
+.mueny-auth-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    background: #ffffff;
+    color: #16212b;
+    border-radius: 10px;
+    padding: 28px 28px 22px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.mueny-auth-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: none;
+    background: none;
+    font-size: 22px;
+    line-height: 1;
+    color: #8a94a0;
+    cursor: pointer;
+    padding: 4px;
+}
+.mueny-auth-close:hover { color: #16212b; }
+
+.mueny-auth-logo {
+    font-family: 'Rajdhani', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    font-size: 14px;
+    color: #2e4a6b;
+    margin-bottom: 10px;
+}
+
+.mueny-auth-title {
+    margin: 0 0 4px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.mueny-auth-sub {
+    margin: 0 0 18px;
+    font-size: 13px;
+    color: #5d6570;
+}
+
+.mueny-auth-form { display: flex; flex-direction: column; gap: 12px; }
+
+.mueny-auth-field { display: flex; flex-direction: column; gap: 4px; }
+
+.mueny-auth-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #5d6570;
+}
+
+.mueny-auth-field input {
+    font-size: 14px;
+    padding: 9px 11px;
+    border: 1px solid #cfd6dd;
+    border-radius: 6px;
+    outline: none;
+    color: #16212b;
+    background: #fbfcfd;
+}
+.mueny-auth-field input:focus {
+    border-color: #2e4a6b;
+    box-shadow: 0 0 0 3px rgba(46, 74, 107, 0.15);
+}
+
+.mueny-auth-error {
+    color: #b3362b;
+    font-size: 12.5px;
+    min-height: 1em;
+}
+
+.mueny-auth-submit {
+    margin-top: 2px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #2e4a6b;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.mueny-auth-submit:hover { background: #24405f; }
+.mueny-auth-submit:disabled { opacity: 0.6; cursor: default; }
+.mueny-auth-submit:focus-visible,
+.mueny-auth-close:focus-visible,
+.mueny-auth-link:focus-visible,
+.mueny-account-chip:focus-visible {
+    outline: 2px solid #2e4a6b;
+    outline-offset: 2px;
+}
+
+.mueny-auth-switch {
+    margin: 14px 0 0;
+    font-size: 13px;
+    color: #5d6570;
+    text-align: center;
+}
+
+.mueny-auth-link {
+    border: none;
+    background: none;
+    color: #2e4a6b;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.mueny-account-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-left: 12px;
+    padding: 5px 13px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #e8eef4;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    cursor: pointer;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mueny-account-chip:hover { background: rgba(255, 255, 255, 0.18); }
+
+.mueny-chip-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #57c785;
+    flex: none;
+}
+
+@media (max-width: 640px) {
+    .mueny-auth-card { max-width: 100%; padding: 22px 18px 18px; }
+    .mueny-account-chip { max-width: 120px; }
+}

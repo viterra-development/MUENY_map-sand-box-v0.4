@@ -10,6 +10,7 @@
     <link href="css/app.css" rel="stylesheet" />
     <link href="MapSandBox.styles.css" rel="stylesheet" />
     <link href="css/parcelTripUI.css" rel="stylesheet" />
+    <link href="css/auth.css" rel="stylesheet" />
     <!-- MapLibre GL JS — pinned + SRI so a compromised upstream release can't run here -->
     <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"
           integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
@@ -59,6 +60,9 @@
 
     <!-- Passive visit log (external file so the CSP can forbid inline scripts) -->
     <script src="js/visit-beacon.js"></script>
+
+    <!-- Account/session client — shared by the Blazor and JS-fallback paths -->
+    <script src="js/auth.js"></script>
 
     <!-- Fallback: if Blazor fails to load, initialize map directly via JS -->
     <script type="module" src="js/app-fallback.js"></script>
