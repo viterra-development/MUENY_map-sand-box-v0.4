@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"name": "Parker County (bbox from TIGER roads extent)"}, "geometry": {"type": "Polygon", "coordinates": [[[-98.07672600000001, 32.545351000000004], [-97.534172, 32.545351000000004], [-97.534172, 33.013296], [-98.07672600000001, 33.013296], [-98.07672600000001, 32.545351000000004]]]}}]}

@@ -158,6 +158,9 @@ export function createIntegratedMap(containerId, config) {
         windowResizeHandler: windowResizeHandler
     };
 
+    if (window.MuenyKey && config && Array.isArray(config.layers)) {
+        window.MuenyKey.update(config.layers);
+    }
     return integratedMapInstance;
 }
 
@@ -232,11 +235,14 @@ export function updateIntegratedMapLayers(mapInstance, layers) {
         });
         console.log(`[MapLibre-JS] Processed ${rasterLayerCount} raster tile layers`);
 
+        // Keep the shared map key (bottom-right) in sync with what's visible.
+        if (window.MuenyKey) window.MuenyKey.update(layers);
+
         // Toggle trip generation UI components based on layer visibility.
         // Any city trip-gen layer (aledo-parcels-trips, wp-parcels-trips, etc.) triggers the panel.
+        // (Trip colors now live in the shared map key, not the old bottom-left legend.)
         const activeTripLayer = layers.find(l => l.id.endsWith('-parcels-trips') && l.visible);
         if (activeTripLayer) {
-            createLegend();
             // Refresh the stats panel if it's missing or points at a different city
             const existingPanel = document.getElementById('trip-stats-panel');
             if (!existingPanel || existingPanel.dataset.layerId !== activeTripLayer.id) {
@@ -252,7 +258,6 @@ export function updateIntegratedMapLayers(mapInstance, layers) {
             }
         } else if (layers.some(l => l.id.endsWith('-parcels-trips'))) {
             // A city trip layer exists in config but none is currently visible
-            removeLegend();
             removeStatsPanel();
             hideParcelTooltip();
         }

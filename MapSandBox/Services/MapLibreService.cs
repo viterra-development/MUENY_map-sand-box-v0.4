@@ -460,27 +460,79 @@ public class MapLibreService
                     ["autoHighlight"] = true,
                     ["onClick"] = "handleRoadStressClick"
                 }
+            },
+            new LayerConfig
+            {
+                Id = "midlothian-parcels-trips",
+                Type = "GeoJson",
+                DataUrl = "/midlothian-parcels-with-trips.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.75,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true
+                }
+            },
+            new LayerConfig
+            {
+                // Regenerated from USDA SSURGO into wwwroot/soil-data (2026-08-20)
+                Id = "soil-clay-visualization",
+                Type = "GeoJson",
+                DataUrl = "/soil-data/parker-county-clay.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getFillColor"] = "getSoilClayColor",
+                    ["getLineColor"] = new int[] { 139, 69, 19, 255 },
+                    ["getLineWidth"] = 2,
+                    ["opacity"] = 0.8,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleSoilUnitClick"
+                }
+            },
+            new LayerConfig
+            {
+                Id = "soil-ksat-visualization",
+                Type = "GeoJson",
+                DataUrl = "/soil-data/parker-county-ksat.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["filled"] = true,
+                    ["stroked"] = true,
+                    ["getFillColor"] = "getSoilKsatColor",
+                    ["getLineColor"] = new int[] { 139, 69, 19, 255 },
+                    ["getLineWidth"] = 1,
+                    ["opacity"] = 0.7,
+                    ["pickable"] = true,
+                    ["autoHighlight"] = true,
+                    ["onClick"] = "handleSoilUnitClick"
+                }
+            },
+            new LayerConfig
+            {
+                // The integration module has a dedicated renderer for this id
+                // (radius capped 2-8px, blue gradient by rainfall value).
+                Id = "noaa-rainfall-parker-points",
+                Type = "ScatterplotLayer",
+                DataUrl = "/noaa-rainfall-parker-county.geojson",
+                Visible = false,
+                Properties = new Dictionary<string, object>
+                {
+                    ["radiusMinPixels"] = 2,
+                    ["radiusMaxPixels"] = 8,
+                    ["pickable"] = true,
+                    ["stroked"] = true
+                }
             }
-            // Commented out until scaling issues are resolved
-            // new LayerConfig
-            // {
-            //     Id = "noaa-rainfall-parker-points",
-            //     Type = "ScatterplotLayer",
-            //     DataUrl = "/noaa-rainfall-parker-county.geojson",
-            //     Visible = false,
-            //     Properties = new Dictionary<string, object>
-            //     {
-            //         ["getPosition"] = "getCoordinates",
-            //         ["getRadius"] = "getRainfallRadius",
-            //         ["getFillColor"] = "getRainfallColor",
-            //         ["radiusMinPixels"] = 2,
-            //         ["radiusMaxPixels"] = 8,
-            //         ["pickable"] = true,
-            //         ["stroked"] = true,
-            //         ["getLineColor"] = "[0, 0, 0, 128]",
-            //         ["lineWidthMinPixels"] = 1
-            //     }
-            // },
             // new LayerConfig
             // {
             //     Id = "noaa-rainfall-parker-heatmap",
@@ -508,10 +560,10 @@ public class MapLibreService
             new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = false },
             new LayerInfo { Id = "parker-roads-traffic-phase1", Name = "Traffic - Phase 1 (Interpolation IDW)", Visible = false },
             new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = false },
-            new LayerInfo { Id = "cris-crashes", Name = "CRIS Crash Points", Visible = true },
-            new LayerInfo { Id = "cris-risk-segments", Name = "CRIS Risk Segments", Visible = true },
-            new LayerInfo { Id = "cris-intersections", Name = "⚠️ CRIS Intersection Risks", Visible = false },
-            new LayerInfo { Id = "txdot-city-boundaries", Name = "City Boundaries (TxDOT)", Visible = false },
+            new LayerInfo { Id = "cris-crashes", Name = "Crash Points", Visible = true },
+            new LayerInfo { Id = "cris-risk-segments", Name = "Crash Risk Segments", Visible = true },
+            new LayerInfo { Id = "cris-intersections", Name = "High-Risk Intersections", Visible = false },
+            new LayerInfo { Id = "txdot-city-boundaries", Name = "City Boundaries", Visible = false },
             new LayerInfo { Id = "wp-parcels-trips", Name = "Trip Generation (Willow Park)", Visible = false },
             new LayerInfo { Id = "aledo-parcels-trips", Name = "Trip Generation (Aledo)", Visible = false },
             new LayerInfo { Id = "azle-parcels-trips", Name = "Trip Generation (Azle)", Visible = false },
@@ -523,9 +575,11 @@ public class MapLibreService
             new LayerInfo { Id = "annetta-parcels-trips", Name = "Trip Generation (Annetta)", Visible = false },
             new LayerInfo { Id = "annetta-north-parcels-trips", Name = "Trip Generation (Annetta North)", Visible = false },
             new LayerInfo { Id = "annetta-south-parcels-trips", Name = "Trip Generation (Annetta South)", Visible = false },
-            new LayerInfo { Id = "cris-road-stress", Name = "Road Stress Index", Visible = false }
-            // new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "NOAA Rainfall Points", Visible = false },
-            // new LayerInfo { Id = "noaa-rainfall-parker-heatmap", Name = "NOAA Rainfall Heatmap", Visible = false }
+            new LayerInfo { Id = "midlothian-parcels-trips", Name = "Trip Generation (Midlothian)", Visible = false },
+            new LayerInfo { Id = "cris-road-stress", Name = "Road Stress Index", Visible = false },
+            new LayerInfo { Id = "soil-clay-visualization", Name = "Soil Clay Content", Visible = false },
+            new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Drainage)", Visible = false },
+            new LayerInfo { Id = "noaa-rainfall-parker-points", Name = "Rainfall Intensity", Visible = false }
         };
     }
 }

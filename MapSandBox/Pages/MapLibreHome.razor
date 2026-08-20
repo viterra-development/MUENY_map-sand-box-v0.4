@@ -30,8 +30,21 @@
         </div>
 
         <div class="control-section">
-            <h3>CRIS Layers</h3>
-            @foreach (var layer in layerInfo.Where(l => l.Id.StartsWith("cris-")))
+            <h3>Safety &amp; Risk</h3>
+            @foreach (var layer in LayersIn(SafetyLayerIds))
+            {
+                <label class="layer-toggle">
+                    <input type="checkbox"
+                           checked="@layer.Visible"
+                           @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
+                    @layer.Name
+                </label>
+            }
+        </div>
+
+        <div class="control-section">
+            <h3>Traffic</h3>
+            @foreach (var layer in LayersIn(TrafficLayerIds))
             {
                 <label class="layer-toggle">
                     <input type="checkbox"
@@ -54,8 +67,21 @@
         </div>
 
         <div class="control-section">
-            <h3>Background Layers</h3>
-            @foreach (var layer in layerInfo.Where(l => !l.Id.StartsWith("cris-") && !l.Id.EndsWith("-parcels-trips")))
+            <h3>Environment</h3>
+            @foreach (var layer in LayersIn(EnvironmentLayerIds))
+            {
+                <label class="layer-toggle">
+                    <input type="checkbox"
+                           checked="@layer.Visible"
+                           @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
+                    @layer.Name
+                </label>
+            }
+        </div>
+
+        <div class="control-section">
+            <h3>Base &amp; Boundaries</h3>
+            @foreach (var layer in LayersIn(BaseLayerIds).Concat(UngroupedLayers()))
             {
                 <label class="layer-toggle">
                     <input type="checkbox"
@@ -104,6 +130,22 @@
     private string selectedTripGenCityId = ""; // Which *-parcels-trips layer is currently active (empty = none)
     private DateTime _lastLayerToggle = DateTime.MinValue;
     private const int LayerToggleDebounceMs = 250;
+
+    // Sidebar grouping. Any layer not listed here (and not a *-parcels-trips
+    // city layer) falls through to the Base & Boundaries group so new layers
+    // can never silently disappear from the panel again.
+    private static readonly string[] SafetyLayerIds = { "cris-crashes", "cris-risk-segments", "cris-intersections", "cris-road-stress" };
+    private static readonly string[] TrafficLayerIds = { "parker-roads-traffic-phase1", "parker-roads-traffic", "traffic-counts" };
+    private static readonly string[] EnvironmentLayerIds = { "soil-clay-visualization", "soil-ksat-visualization", "noaa-rainfall-parker-points" };
+    private static readonly string[] BaseLayerIds = { "txdot-city-boundaries", "parker-roads-base" };
+
+    private IEnumerable<LayerInfo> LayersIn(string[] ids) =>
+        ids.Select(id => layerInfo.FirstOrDefault(l => l.Id == id)).Where(l => l != null).Cast<LayerInfo>();
+
+    private IEnumerable<LayerInfo> UngroupedLayers() =>
+        layerInfo.Where(l => !l.Id.EndsWith("-parcels-trips")
+            && !SafetyLayerIds.Contains(l.Id) && !TrafficLayerIds.Contains(l.Id)
+            && !EnvironmentLayerIds.Contains(l.Id) && !BaseLayerIds.Contains(l.Id));
 
     private static string TripGenCityDisplayName(string layerName)
     {

@@ -41,6 +41,8 @@ const defaultConfig = {
       properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
     { id: 'soil-clay-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-clay.geojson', visible: false,
       properties: { filled: true, stroked: true, getFillColor: 'getSoilClayColor', getLineColor: [139,69,19,255], getLineWidth: 2, opacity: 0.8, pickable: true, autoHighlight: true, onClick: 'handleSoilUnitClick' }},
+    { id: 'noaa-rainfall-parker-points', type: 'ScatterplotLayer', dataUrl: '/noaa-rainfall-parker-county.geojson', visible: false,
+        properties: { radiusMinPixels: 2, radiusMaxPixels: 8, pickable: true, stroked: true } },
     { id: 'soil-ksat-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-ksat.geojson', visible: false,
       properties: { filled: true, stroked: true, getFillColor: 'getSoilKsatColor', getLineColor: [139,69,19,255], getLineWidth: 1, opacity: 0.7, pickable: true, autoHighlight: true, onClick: 'handleSoilUnitClick' }}
   ]
@@ -60,7 +62,7 @@ const layerNames = {
   'midlothian-parcels-trips':    'Midlothian',
   'soil-clay-visualization':     'Soil Clay Content (%)',
   'soil-ksat-visualization':     'Soil Permeability (Ksat)',
-  'noaa-rainfall':               'Rainfall Intensity'
+  'noaa-rainfall-parker-points': 'Rainfall Intensity'
 };
 
 // Layer group definitions — sidebar organized by domain + sub-category
@@ -93,7 +95,7 @@ const layerGroups = [
     id: 'environment',
     title: 'Environment',
     icon: '🌱',
-    layerIds: ['soil-clay-visualization', 'soil-ksat-visualization']
+    layerIds: ['soil-clay-visualization', 'soil-ksat-visualization', 'noaa-rainfall-parker-points']
   }
 ];
 

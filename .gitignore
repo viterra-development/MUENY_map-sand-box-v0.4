@@ -463,3 +463,11 @@ TestOutput/
 primal-graph-debug.txt
 *.backup
 .wrangler/
+
+# Soil layers are served from repo assets since 2026-08-20 (Azure CDN copy was gone);
+# regenerable via SoilDataProcessor --full-county
+!MapSandBox/wwwroot/soil-data/
+!MapSandBox/wwwroot/soil-data/*.geojson
+# County boundary input that makes SoilDataProcessor runnable from a fresh clone
+!CrisDataProcessor/Data/
+!CrisDataProcessor/Data/parker-county-boundary.geojson
