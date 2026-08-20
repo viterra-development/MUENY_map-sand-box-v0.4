@@ -72,6 +72,13 @@
             </select>
         </div>
 
+        <button class="fiscal-soon-block" @onclick="ShowFiscalComingSoonAsync"
+                data-layer-tip="The rest of the fiscal suite - net fiscal yield per acre, infrastructure payback period, and impervious burden ratio - is in development.">
+            <span class="fiscal-soon-kicker">Coming soon</span>
+            <span class="fiscal-soon-title">Fiscal Suite</span>
+            <span class="fiscal-soon-sub">Net fiscal yield &middot; Infrastructure payback &middot; Impervious burden</span>
+        </button>
+
         <div class="control-section">
             <h3>Environment</h3>
             @foreach (var layer in LayersIn(EnvironmentLayerIds))
@@ -98,12 +105,6 @@
             }
         </div>
 
-        <button class="fiscal-soon-block" @onclick="ShowFiscalComingSoonAsync"
-                data-layer-tip="The rest of the fiscal suite - net fiscal yield per acre, infrastructure payback period, and impervious burden ratio - is in development.">
-            <span class="fiscal-soon-kicker">Coming soon</span>
-            <span class="fiscal-soon-title">Fiscal Suite</span>
-            <span class="fiscal-soon-sub">Net fiscal yield &middot; Infrastructure payback &middot; Impervious burden</span>
-        </button>
     </div>
 </aside>
 
