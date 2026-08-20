@@ -123,10 +123,10 @@ export function showParcelTooltip(properties, x, y) {
             </div>` : ''}` : '';
 
     let tripColor = '#c8c8c8';
-    if (daily >= 200) tripColor = '#174d58';
-    else if (daily >= 50) tripColor = '#427d80';
-    else if (daily >= 10) tripColor = '#94b1af';
-    else if (daily > 0) tripColor = '#cccbc3';
+    if (daily >= 200) tripColor = '#063542';
+    else if (daily >= 50) tripColor = '#1e6a71';
+    else if (daily >= 10) tripColor = '#76a5a1';
+    else if (daily > 0) tripColor = '#d1cfc6';
 
     detail.innerHTML = `
         <div class="trip-tip-header">

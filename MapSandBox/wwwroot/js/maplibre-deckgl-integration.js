@@ -854,11 +854,11 @@ function getLayerProperties(config) {
             // Quiet-to-saturated ramp: residential stays a neutral warm gray
             // so commercial intensity (petrol) is what the eye finds. Red
             // stays reserved for crash-risk layers.
-            if (trips === 0) return [227, 225, 219, 55];       // Whisper warm gray
-            if (trips < 10) return [204, 203, 195, 105];       // Warm gray - residential
-            if (trips < 50) return [148, 177, 175, 170];       // Muted teal-gray
-            if (trips < 200) return [66, 125, 128, 200];       // Petrol - high
-            return [23, 77, 88, 225];                           // Deep petrol - very high
+            if (trips === 0) return [232, 230, 224, 45];       // Whisper warm gray
+            if (trips < 10) return [209, 207, 198, 115];       // Warm gray - residential
+            if (trips < 50) return [118, 165, 161, 190];       // Teal - moderate
+            if (trips < 200) return [30, 106, 113, 220];       // Petrol - high
+            return [6, 53, 66, 242];                            // Ink petrol - very high
         };
         properties.getLineColor = [40, 45, 50, 55];
         properties.getLineWidth = 0.5;

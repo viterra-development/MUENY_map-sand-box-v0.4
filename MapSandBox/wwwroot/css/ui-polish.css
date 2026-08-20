@@ -124,3 +124,55 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; }
 }
+
+
+/* ---------- Detail popups: centered 900px modals -> right slide-over ----------
+   All five feature popups (road segment, road, crash, cluster, intersection)
+   share .cris-popup-overlay/.cris-popup-card. A map product should never
+   hide its map: the panel docks right, the map stays live underneath. */
+.cris-popup-overlay {
+    background: transparent !important;
+    pointer-events: none;
+    display: block !important;
+}
+.cris-popup-card {
+    pointer-events: auto;
+    position: fixed !important;
+    top: 60px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    left: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+    width: 430px !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: none !important;
+    overflow-y: auto;
+    border-radius: 14px !important;
+    box-shadow: 0 24px 60px rgba(6, 16, 26, 0.42) !important;
+    animation: mueny-slide-in 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+@keyframes mueny-slide-in {
+    from { transform: translateX(26px); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+}
+/* Two-column popup bodies collapse to one readable column at panel width */
+.cris-popup-card .content-grid {
+    display: block !important;
+    grid-template-columns: none !important;
+}
+.cris-popup-card .recent-crashes-section { margin-top: 16px; }
+.cris-popup-card .crash-list-scrollable { max-height: 300px; }
+@media (max-width: 640px) {
+    .cris-popup-card {
+        top: auto !important;
+        left: 8px !important;
+        right: 8px !important;
+        bottom: 8px !important;
+        width: auto !important;
+        max-height: 62vh !important;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cris-popup-card { animation: none; }
+}

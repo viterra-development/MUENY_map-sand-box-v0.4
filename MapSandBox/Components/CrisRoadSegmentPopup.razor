@@ -9,7 +9,7 @@
         <div class="cris-popup-card" @onclick:stopPropagation="true">
             <div class="popup-header">
                 <div class="header-content">
-                    <h4>🛣️ @RoadSegment.RoadName</h4>
+                    <h4>@RoadSegment.RoadName</h4>
                     <div class="segment-id">Segment ID: @RoadSegment.SegmentId</div>
                 </div>
                 <button class="close-btn" @onclick="Close">×</button>
@@ -25,7 +25,7 @@
             <div class="feature-breakdown">
                 <div class="content-grid">
                     <div class="feature-section">
-                        <h5>📊 Risk Assessment Features</h5>
+                        <h5>Risk Assessment Features</h5>
 
                 <div class="feature-item">
                     <div class="feature-header">
@@ -104,7 +104,7 @@
 
                     </div>
                 <div class="recent-crashes-section">
-                    <h5>🚨 All Crashes (@RoadSegment.CrashCount total)</h5>
+                    <h5>All Crashes (@RoadSegment.CrashCount total)</h5>
                     @if (RoadSegment.RecentCrashes.Any())
                     {
                         <div class="crash-list-scrollable">
