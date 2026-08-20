@@ -73,3 +73,15 @@ made public — see RELEASE-CHECKLIST.md.
 - CARTO basemap styles (Voyager/Positron/Dark Matter) and OpenFreeMap Liberty
   are loaded at runtime; their attribution renders in the map control and must
   remain enabled.
+
+## Derived fiscal metrics (computed in-app, no external data)
+- Where: `MapSandBox/wwwroot/js/fiscal.js`, rendered on the parcel layers,
+  parcel detail panel, and city stats panel
+- Taxable value per acre, improvement share, and value per daily trip are
+  derived at render time from the CAD market values, parcel geometry
+  (geodesic area when CAD legal acreage is 0), and ITE trip estimates already
+  shipped in the parcel GeoJSON. Labeled "beta"/"est." in the UI; acreage
+  derived from geometry carries an "(est.)" marker. No new upstream data or
+  licensing obligations. NFYA / IPP / IBR intentionally NOT computed yet —
+  they require city budget inputs and impervious-cover data not in the repo
+  (CAD `imprv_sqft` is 0 for all shipped parcels).

@@ -25,6 +25,8 @@ const defaultConfig = {
       properties: { getPath: 'getCoordinates', getColor: 'getTrafficGradientColor', getWidth: 'getTrafficWidth', widthMinPixels: 1, widthMaxPixels: 6, capRounded: true, jointRounded: true, opacity: 0.9, pickable: true, autoHighlight: true, onClick: 'handleTrafficRoadClick' }},
     { id: 'parker-roads-traffic-phase1', type: 'Path', dataUrl: '/parker-roads-with-traffic-phase1.geojson', visible: false,
       properties: { getPath: 'getCoordinates', getColor: 'getTrafficGradientColor', getWidth: 'getTrafficWidth', widthMinPixels: 1, widthMaxPixels: 6, capRounded: true, jointRounded: true, opacity: 0.9, pickable: true, autoHighlight: true, onClick: 'handleTrafficRoadClick' }},
+    { id: 'traffic-counts', type: 'GeoJson', dataUrl: '/traffic-count-stations.geojson', visible: false,
+        properties: { pickable: true, autoHighlight: true } },
     { id: 'cris-risk-segments', type: 'PathLayer', dataUrl: '/cris-data/parker-county-risk-segments-traffic-deckgl.json', visible: true,
       properties: { widthMinPixels: 1, widthMaxPixels: 8 }},
     { id: 'cris-crashes', type: 'ScatterplotLayer', dataUrl: '/cris-data/parker-county-crashes-clustered-deckgl.json', visible: true,
@@ -46,14 +48,31 @@ const defaultConfig = {
   ]
 };
 
+// Plain-English hover descriptions (mirrors MapLibreHome.razor's LayerTipText)
+const layerTips = {
+  'cris-crashes': 'Every reported crash, colored by the most severe outcome at that spot. Shows where collisions actually happen.',
+  'cris-risk-segments': 'Roads scored for crash risk using crash history, traffic, grade, and surface. Red segments deserve attention first.',
+  'cris-intersections': 'Crossings ranked by crash risk - triangle size and color reflect the score. Click one for its crash record.',
+  'cris-road-stress': 'Where growth-driven traffic demand is approaching or exceeding road capacity.',
+  'parker-roads-traffic-phase1': 'Modeled daily traffic volume for every road, estimated from nearby count stations. Useful where no counter exists.',
+  'parker-roads-traffic': 'Roads with TxDOT-measured daily traffic (AADT). Green = light, red = heavy.',
+  'traffic-counts': 'TxDOT traffic count stations. Dot size and color reflect vehicles per day; click for station history.',
+  'soil-clay-visualization': 'Clay content from the USDA soil survey. High clay swells and shrinks - a driver of pavement and foundation damage.',
+  'soil-ksat-visualization': 'How quickly water drains into the ground. Slow-draining soils mean ponding, washouts, and drainage complaints.',
+  'noaa-rainfall-parker-points': 'Design rainfall intensity from NOAA Atlas 14 - the numbers engineers size culverts and drainage for.',
+  'txdot-city-boundaries': 'Incorporated city limits from TxDOT.',
+  'parker-roads-base': 'Background road network from the U.S. Census (TIGER).'
+};
+
 // Layer display names for the controls panel
 const layerNames = {
   'cris-risk-segments':          'Crash Risk Segments',
   'cris-crashes':                'Crash Points',
   'cris-intersections':          'High-Risk Intersections',
   'parker-roads-base':           'Road Network (Base)',
-  'parker-roads-traffic':        'Road Traffic Volumes',
-  'parker-roads-traffic-phase1': 'Road Traffic Volumes (IDW)',
+  'parker-roads-traffic':        'Traffic Volume (Measured)',
+  'parker-roads-traffic-phase1': 'Traffic Volume (Estimated)',
+  'traffic-counts':              'Traffic Count Locations',
   'txdot-city-boundaries':       'City Boundaries',
   'wp-parcels-trips':            'Willow Park',
   'aledo-parcels-trips':         'Aledo',
@@ -77,7 +96,7 @@ const layerGroups = [
   {
     id: 'road-network',
     title: 'Road Network',
-    layerIds: ['parker-roads-traffic-phase1', 'parker-roads-traffic', 'parker-roads-base']
+    layerIds: ['parker-roads-traffic-phase1', 'parker-roads-traffic', 'traffic-counts', 'parker-roads-base']
   },
   {
     id: 'boundaries',
@@ -185,7 +204,7 @@ function buildLayerControls() {
       <div class="layer-group-content" id="content-${group.id}">`;
     groupLayers.forEach(l => {
       const checked = l.visible ? ' checked' : '';
-      html += `<label class="layer-toggle"><input type="checkbox" data-layer-id="${l.id}"${checked} /> ${layerNames[l.id] || l.id}</label>`;
+      html += `<label class="layer-toggle" data-layer-tip="${(layerTips[l.id] || '').replace(/"/g, '&quot;')}"><input type="checkbox" data-layer-id="${l.id}"${checked} /> ${layerNames[l.id] || l.id}</label>`;
     });
     html += `</div></div>`;
   });

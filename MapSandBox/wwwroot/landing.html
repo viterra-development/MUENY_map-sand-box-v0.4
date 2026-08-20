@@ -199,6 +199,13 @@
     .card.safety .tag { background: rgba(255,92,57,0.16); color: #ff9a82; }
     .card.growth .tag { background: rgba(255,179,71,0.15); color: #ffcb7c; }
     .card.infra  .tag { background: rgba(87,224,160,0.13); color: #8ce6bb; }
+    .card.fiscal .tag { background: rgba(141,110,170,0.2); color: #c9b3e0; }
+    .card .soon {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #c9b3e0; border: 1px solid rgba(141,110,170,0.5);
+      border-radius: 999px; padding: 2px 9px; margin-left: 7px; vertical-align: 2px;
+    }
     .card h3 { font-size: 19px; margin-bottom: 8px; color: #fff; }
     .card p { font-size: 14.5px; color: #b7c6d2; }
     .card ul { margin: 14px 0 0 18px; font-size: 13.5px; color: #b7c6d2; }
@@ -414,7 +421,7 @@
   <div class="caps-bg">
     <section class="section wrap reveal">
       <div class="kicker">What MUENY answers</div>
-      <h2>Three questions every city asks — answered on one map.</h2>
+      <h2>The questions every city asks — answered on one map.</h2>
       <div class="cards">
         <div class="card safety">
           <span class="tag">Safety</span>
@@ -447,6 +454,18 @@
             <li>Clay content and permeability, county-wide</li>
             <li>NOAA rainfall design intensities</li>
             <li>Terrain slope at every crash site</li>
+          </ul>
+        </div>
+        <div class="card fiscal">
+          <span class="tag">Fiscal</span>
+          <h3>Does growth pay for itself?</h3>
+          <p>Taxable value per acre on every parcel — live on the map today — with the
+             full fiscal suite rolling out next.</p>
+          <ul>
+            <li>Value per acre &amp; improvement share — live now</li>
+            <li>Net fiscal yield per acre (NFYA)<span class="soon">Soon</span></li>
+            <li>Infrastructure payback period<span class="soon">Soon</span></li>
+            <li>Impervious burden ratio<span class="soon">Soon</span></li>
           </ul>
         </div>
       </div>

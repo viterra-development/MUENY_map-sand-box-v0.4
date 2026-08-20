@@ -194,7 +194,12 @@ export function showReportModal() {
     overlay.innerHTML = `
       <div class="report-modal">
         <h3>Complete Regional Reports</h3>
-        <p style="font-size: 14px; color: rgba(255,255,255,0.75); margin: 12px 0 24px 0;">Coming Soon</p>
+        <p style="font-size: 14px; color: rgba(255,255,255,0.75); margin: 12px 0 8px 0;">Coming Soon</p>
+        <p style="font-size: 11.5px; color: rgba(255,255,255,0.45); margin: 0 0 24px 0; line-height: 1.5;">
+          Multi-city briefing reports plus the Fiscal Suite &mdash; net fiscal yield per acre,
+          infrastructure payback period, and impervious burden &mdash; are in development.
+          Taxable value per acre is live on the map today.
+        </p>
         <button class="report-cancel" id="report-cancel-btn">Close</button>
       </div>
     `;

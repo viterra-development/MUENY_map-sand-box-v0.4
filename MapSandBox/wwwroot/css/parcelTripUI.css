@@ -278,3 +278,64 @@
     min-width: 36px;
     text-align: right;
 }
+
+/* ============================================
+   Fiscal snapshot — parcel detail + stats panel
+   ============================================ */
+
+.trip-tip-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 2px 0 4px;
+}
+
+.trip-tip-beta {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #c9b3e0;
+    border: 1px solid rgba(141, 110, 170, 0.5);
+    border-radius: 3px;
+    padding: 1px 4px;
+    margin-left: 4px;
+    vertical-align: 1px;
+}
+
+.fiscal-chip {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: -1px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.trip-tip-fine {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.32);
+}
+
+.trip-stats-fiscal {
+    padding: 2px 0;
+}
+
+.trip-stats-fiscal-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 3px 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.trip-stats-fiscal-row b {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}

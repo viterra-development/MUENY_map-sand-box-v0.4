@@ -21,7 +21,7 @@ const CSP = [
     "style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' data: blob: https:",
-    "connect-src 'self' https:",
+    "connect-src 'self' https: data:",
     "worker-src 'self' blob:",
     "child-src 'self' blob:",
     "object-src 'none'",
@@ -70,7 +70,7 @@ export default {
             // The SPA fallback otherwise rewrites them to index.html, which
             // corrupts geojson/wasm parsing in deck.gl and the Blazor loader.
             // (Replaces the legacy _redirects 404 rules wrangler now rejects.)
-            const HARD_404_PREFIXES = ['/tiles/', '/cris-data/', '/soil-data/', '/sample-data/', '/_framework/'];
+            const HARD_404_PREFIXES = ['/tiles/', '/cris-data/', '/soil-data/', '/sample-data/', '/_framework/', '/js/', '/css/'];
             if (HARD_404_PREFIXES.some(p => path.startsWith(p))
                 && (response.headers.get('content-type') || '').includes('text/html')) {
                 response = new Response('Not found', { status: 404, headers: { 'content-type': 'text/plain' } });

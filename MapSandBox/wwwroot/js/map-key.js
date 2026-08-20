@@ -66,15 +66,31 @@
         },
         {
             match: id => id.endsWith('-parcels-trips'),
-            title: 'Parcel trip generation (daily trips)',
-            rows: [
-                { swatch: 'box', color: 'rgb(6,53,66)', label: '200+' },
-                { swatch: 'box', color: 'rgb(30,106,113)', label: '50–199' },
-                { swatch: 'box', color: 'rgb(118,165,161)', label: '10–49' },
-                { swatch: 'box', color: 'rgb(209,207,198)', label: '1–9' },
-                { swatch: 'box', color: 'rgb(232,230,224)', label: '0 / unknown' },
-                { swatch: 'box', color: 'rgb(34,139,34)', label: 'City-owned' },
-            ],
+            // Title + rows resolve at render time: the parcel layer has two
+            // color modes ('trips' | 'value-acre') owned by fiscal.js, and
+            // the key must mirror whichever ramp is actually drawn.
+            title: () => (window.MuenyFiscal && window.MuenyFiscal.getParcelColorMode() === 'value-acre')
+                ? 'Parcel taxable value per acre'
+                : 'Parcel trip generation (daily trips)',
+            note: () => (window.MuenyFiscal && window.MuenyFiscal.getParcelColorMode() === 'value-acre')
+                ? 'Est. from CAD market value ÷ parcel area.'
+                : undefined,
+            rows: () => {
+                if (window.MuenyFiscal && window.MuenyFiscal.getParcelColorMode() === 'value-acre') {
+                    const bins = window.MuenyFiscal.VPA_BINS.map(b => ({ swatch: 'box', color: b.css, label: b.label }));
+                    bins.push({ swatch: 'box', color: window.MuenyFiscal.VPA_NO_DATA.css, label: window.MuenyFiscal.VPA_NO_DATA.label });
+                    bins.push({ swatch: 'box', color: 'rgb(34,139,34)', label: 'City-owned (exempt)' });
+                    return bins;
+                }
+                return [
+                    { swatch: 'box', color: 'rgb(6,53,66)', label: '200+' },
+                    { swatch: 'box', color: 'rgb(30,106,113)', label: '50–199' },
+                    { swatch: 'box', color: 'rgb(118,165,161)', label: '10–49' },
+                    { swatch: 'box', color: 'rgb(209,207,198)', label: '1–9' },
+                    { swatch: 'box', color: 'rgb(232,230,224)', label: '0 / unknown' },
+                    { swatch: 'box', color: 'rgb(34,139,34)', label: 'City-owned' },
+                ];
+            },
         },
         {
             match: id => id === 'soil-clay-visualization',
@@ -196,15 +212,20 @@
         p.style.display = '';
 
         active.forEach(sec => {
+            // title/rows/note may be functions (resolved per render) so
+            // mode-dependent sections stay in sync with the renderer.
+            const title = typeof sec.title === 'function' ? sec.title() : sec.title;
+            const rows = typeof sec.rows === 'function' ? sec.rows() : sec.rows;
+            const note = typeof sec.note === 'function' ? sec.note() : sec.note;
             const secEl = el('div', 'mueny-key-section');
-            secEl.appendChild(el('div', 'mueny-key-sec-title', sec.title));
-            sec.rows.forEach(row => {
+            secEl.appendChild(el('div', 'mueny-key-sec-title', title));
+            rows.forEach(row => {
                 const rowEl = el('div', 'mueny-key-row');
                 rowEl.appendChild(swatchNode(row));
                 rowEl.appendChild(el('span', 'mueny-key-label', row.label));
                 secEl.appendChild(rowEl);
             });
-            if (sec.note) secEl.appendChild(el('div', 'mueny-key-note', sec.note));
+            if (note) secEl.appendChild(el('div', 'mueny-key-note', note));
             body.appendChild(secEl);
         });
     }

@@ -184,3 +184,23 @@ a:focus-visible {
 .feature-threshold { display: flex; align-items: center; gap: 5px; }
 .feature-header { display: flex; align-items: center; gap: 7px; }
 .cris-popup-card h4 { display: flex; align-items: center; gap: 7px; }
+
+
+/* ---------- Layer hover descriptions ---------- */
+.mueny-layer-tip {
+    position: fixed;
+    z-index: 11000;
+    background: rgba(13, 27, 38, 0.96);
+    color: #e8eef4;
+    font-size: 12.5px;
+    line-height: 1.5;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 28px rgba(4, 12, 20, 0.4);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.mueny-layer-tip.visible { opacity: 1; transform: none; }

@@ -176,8 +176,8 @@ public class MapLibreService
             new LayerConfig
             {
                 Id = "traffic-counts",
-                Type = "TileLayer", // Changed to TileLayer type
-                DataUrl = "/tiles/traffic-counts/{z}/{x}/{y}.geojson", // Tile URL template
+                Type = "GeoJson",
+                DataUrl = "/traffic-count-stations.geojson",
                 Visible = false,
                 Properties = new Dictionary<string, object>
                 {
@@ -540,8 +540,8 @@ public class MapLibreService
         return new List<LayerInfo>
         {
             new LayerInfo { Id = "parker-roads-base", Name = "Parker County Roads (Base)", Visible = false },
-            new LayerInfo { Id = "parker-roads-traffic", Name = "Parker County Roads (Traffic)", Visible = false },
-            new LayerInfo { Id = "parker-roads-traffic-phase1", Name = "Traffic - Phase 1 (Interpolation IDW)", Visible = false },
+            new LayerInfo { Id = "parker-roads-traffic", Name = "Traffic Volume (Measured)", Visible = false },
+            new LayerInfo { Id = "parker-roads-traffic-phase1", Name = "Traffic Volume (Estimated)", Visible = false },
             new LayerInfo { Id = "traffic-counts", Name = "Traffic Count Locations", Visible = false },
             new LayerInfo { Id = "cris-crashes", Name = "Crash Points", Visible = true },
             new LayerInfo { Id = "cris-risk-segments", Name = "Crash Risk Segments", Visible = true },

@@ -28,6 +28,9 @@
             integrity="sha384-ShkZCI1SsjyiuEQSfDaj9OLN9xhntMrIMZsOcAEp1kQhFz1vqAGjN/IhnDY3EZ0I" crossorigin="anonymous"></script>
     <!-- Custom JS for parcel trip UI (ES module — a classic script tag throws on its exports) -->
     <script type="module" src="js/parcelTripUI.js"></script>
+    <!-- Fiscal metrics (ES module) — registers window.MuenyFiscal for the
+         sidebar color-mode toggle, map key, and coming-soon modal -->
+    <script type="module" src="js/fiscal.js"></script>
     <!-- Google Fonts for MUENY header -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,6 +77,7 @@
     <!-- Map key + help guide (shared by both paths) -->
     <script src="js/map-key.js"></script>
     <script src="js/help.js"></script>
+    <script src="js/layer-tips.js"></script>
 
     <!-- Fallback: if Blazor fails to load, initialize map directly via JS -->
     <script type="module" src="js/app-fallback.js"></script>

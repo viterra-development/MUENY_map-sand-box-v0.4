@@ -1,10 +1,16 @@
 // MapLibre + deck.gl integration for Blazor
 import { logError, measurePerformance, initializeErrorTracking } from './error-reporting.js';
 import { createLegend, removeLegend, showParcelTooltip, hideParcelTooltip, markTooltipShown, createStatsPanel, removeStatsPanel } from './parcelTripUI.js';
+import { getParcelColorMode, vpaFillColor } from './fiscal.js';
 
 let integratedMapInstance = null;
 let maplibreMap = null;
 let deckOverlay = null;
+
+// White rounded hazard triangle, tinted at runtime by IconLayer (mask: true).
+const INTERSECTION_TRIANGLE_URL = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">' +
+    '<path d="M32 7 C34 7 36 8.4 37.2 10.6 L59 49 C61.4 53.2 58.4 58 53.6 58 H10.4 C5.6 58 2.6 53.2 5 49 L26.8 10.6 C28 8.4 30 7 32 7 Z" fill="white"/></svg>');
 
 // Escape data-derived strings before HTML interpolation. GeoJSON property
 // values come from external pipelines (TIGER, CAD, TxDOT, SSURGO) and must
@@ -308,7 +314,23 @@ export function disposeIntegratedMap(mapInstance) {
     deckOverlay = null;
 }
 
+// Paint order: environment carpets under context, analysis on top, safety topmost.
+function layerPaintOrder(id) {
+    if (id === 'soil-clay-visualization' || id === 'soil-ksat-visualization') return 0;
+    if (id && id.startsWith('noaa-rainfall')) return 1;
+    if (id === 'parker-roads-base' || id === 'txdot-city-boundaries') return 2;
+    if (id && id.endsWith('-parcels-trips')) return 3;
+    if (id === 'parker-roads-traffic' || id === 'parker-roads-traffic-phase1') return 4;
+    if (id === 'traffic-counts') return 5;
+    if (id === 'cris-road-stress') return 6;
+    if (id === 'cris-risk-segments') return 7;
+    if (id === 'cris-crashes') return 8;
+    if (id === 'cris-intersections') return 9;
+    return 5;
+}
+
 function createLayersFromConfig(layerConfigs, maplibreMap = null) {
+    layerConfigs = [...layerConfigs].sort((a, b) => layerPaintOrder(a.id) - layerPaintOrder(b.id));
     console.log('[MapLibre-JS] createLayersFromConfig starting...');
 
     const deckLayers = [];
@@ -360,11 +382,6 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                 }
 
                 // Special handling for traffic-counts layer (uses TileLayer)
-                if (config.id === 'traffic-counts') {
-                    deckLayers.push(createTrafficCountsTileLayer(config));
-                    return;
-                }
-
                 const layerType = config.type.toLowerCase();
                 console.log(`[MapLibre-JS] Processing visible layer ${config.id} with type: ${layerType}`);
 
@@ -531,6 +548,68 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         // Click handling for clusters
                         onClick: handleCrashClusterClick
                     }));
+                } else if (config.id === 'cris-intersections') {
+                    // Hazard-triangle markers: instantly distinguishable from
+                    // circular crash points. Tinted by risk, sized by risk,
+                    // with a white "!" overlay.
+                    deckLayers.push(new deck.IconLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        getPosition: d => [d.Longitude, d.Latitude],
+                        getIcon: () => ({ url: INTERSECTION_TRIANGLE_URL, width: 64, height: 64, anchorY: 40, mask: true }),
+                        getSize: d => ({ 'VeryHigh': 42, 'High': 36, 'Moderate': 30, 'Low': 26, 'VeryLow': 24 })[d.RiskLevel] || 28,
+                        sizeMinPixels: 22,
+                        sizeMaxPixels: 46,
+                        getColor: d => getRiskLevelColor(d.RiskLevel),
+                        pickable: true,
+                        autoHighlight: true,
+                        highlightColor: [255, 255, 255, 90],
+                        onClick: handleIntersectionRiskClick,
+                        onDataLoad: data => {
+                            if (Array.isArray(data)) {
+                                _intersectionData = data;
+                                resolveIntersectionRoads();
+                            }
+                        }
+                    }));
+                    deckLayers.push(new deck.TextLayer({
+                        id: config.id + '-labels',
+                        data: config.dataUrl,
+                        getPosition: d => [d.Longitude, d.Latitude],
+                        getText: () => '!',
+                        getSize: 13,
+                        sizeMinPixels: 10,
+                        sizeMaxPixels: 15,
+                        getPixelOffset: [0, 4],
+                        getColor: [255, 255, 255, 240],
+                        fontFamily: 'Arial',
+                        fontWeight: 'bold',
+                        getTextAnchor: 'middle',
+                        getAlignmentBaseline: 'center',
+                        pickable: false
+                    }));
+                } else if (config.id === 'noaa-rainfall-parker-points') {
+                    deckLayers.push(new deck.ScatterplotLayer({
+                        id: config.id,
+                        data: config.dataUrl,
+                        // File is a bare Feature array; accept FeatureCollection too.
+                        dataTransform: d => (d && d.features) ? d.features : d,
+                        getPosition: d => d.geometry.coordinates,
+                        getRadius: d => 8 + Math.max(0, ((d.properties && d.properties.rainfall) || 458) - 458) * 3,
+                        getFillColor: d => {
+                            const r = (d.properties && d.properties.rainfall) || 0;
+                            if (r < 463) return [0, 100, 255, 220];
+                            if (r < 467) return [0, 150, 255, 220];
+                            if (r < 470) return [50, 200, 255, 220];
+                            return [100, 220, 255, 220];
+                        },
+                        radiusMinPixels: 6,
+                        radiusMaxPixels: 18,
+                        stroked: true,
+                        getLineColor: [255, 255, 255, 180],
+                        lineWidthMinPixels: 1,
+                        pickable: true
+                    }));
                 } else {
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
@@ -668,20 +747,21 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         }
                     }));
                 } else if (config.id === 'cris-intersections') {
-                    deckLayers.push(new deck.ScatterplotLayer({
+                    // Hazard-triangle markers: instantly distinguishable from
+                    // the circular crash points. White triangle sprite tinted
+                    // by risk level, sized by risk, white "!" overlaid.
+                    deckLayers.push(new deck.IconLayer({
                         id: config.id,
                         data: config.dataUrl,
                         getPosition: d => d.Coordinates,
-                        getRadius: 6,
-                        radiusMinPixels: 5,
-                        radiusMaxPixels: 12,
-                        getFillColor: d => getRiskLevelColor(d.RiskLevel),
-                        stroked: true,
-                        getLineColor: [255, 255, 255, 220],
-                        lineWidthMinPixels: 2,
+                        getIcon: () => ({ url: INTERSECTION_TRIANGLE_URL, width: 64, height: 64, anchorY: 40, mask: true }),
+                        getSize: d => ({ 'VeryHigh': 42, 'High': 36, 'Moderate': 30, 'Low': 26, 'VeryLow': 24 })[d.RiskLevel] || 28,
+                        sizeMinPixels: 22,
+                        sizeMaxPixels: 46,
+                        getColor: d => getRiskLevelColor(d.RiskLevel),
                         pickable: true,
                         autoHighlight: true,
-                        highlightColor: [255, 255, 255, 128],
+                        highlightColor: [255, 255, 255, 90],
                         onClick: handleIntersectionRiskClick,
                         onDataLoad: data => {
                             if (Array.isArray(data)) {
@@ -697,9 +777,10 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         data: config.dataUrl,
                         getPosition: d => d.Coordinates,
                         getText: () => '!',
-                        getSize: 14,
-                        sizeMinPixels: 12,
-                        sizeMaxPixels: 18,
+                        getSize: 13,
+                        sizeMinPixels: 10,
+                        sizeMaxPixels: 15,
+                        getPixelOffset: [0, 4],
                         getColor: [255, 255, 255, 240],
                         fontFamily: 'Arial',
                         fontWeight: 'bold',
@@ -717,17 +798,17 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         id: config.id,
                         data: config.dataUrl,
                         getPosition: d => d.geometry.coordinates,
-                        getRadius: d => Math.max(3, (d.properties.rainfall - 458) * 2), // Scale 458-473 to 0-30
+                        getRadius: d => 8 + Math.max(0, (d.properties.rainfall - 458)) * 3,
                         getFillColor: d => {
                             // Blue gradient based on rainfall
                             const rainfall = d.properties.rainfall;
-                            if (rainfall < 463) return [0, 100, 255, 180]; // Dark blue - low
-                            if (rainfall < 467) return [0, 150, 255, 180]; // Medium blue
-                            if (rainfall < 470) return [50, 200, 255, 180]; // Light blue
-                            return [100, 220, 255, 180]; // Very light blue - high
+                            if (rainfall < 463) return [0, 100, 255, 220]; // Dark blue - low
+                            if (rainfall < 467) return [0, 150, 255, 220]; // Medium blue
+                            if (rainfall < 470) return [50, 200, 255, 220]; // Light blue
+                            return [100, 220, 255, 220]; // Very light blue - high
                         },
-                        radiusMinPixels: 2,
-                        radiusMaxPixels: 8,
+                        radiusMinPixels: 6,
+                        radiusMaxPixels: 18,
                         pickable: true,
                         stroked: true,
                         getLineColor: [0, 0, 0, 128],
@@ -846,7 +927,13 @@ function getLayerProperties(config) {
     if (config.id && config.id.endsWith('-parcels-trips')) {
         properties.filled = true;
         properties.stroked = true;
-        properties.getFillColor = d => {
+        // Two color modes share the same layer: 'trips' (default) and
+        // 'value-acre' (fiscal — taxable value per acre, plum ramp). Mode
+        // state lives in fiscal.js; layers rebuild on every UpdateLayers so
+        // reading it here at creation time is enough.
+        properties.getFillColor = getParcelColorMode() === 'value-acre'
+            ? vpaFillColor
+            : d => {
             if (d.properties && d.properties.city_owned === true) {
                 return [34, 139, 34, 200];                     // Green - city-owned
             }
@@ -910,8 +997,18 @@ function getLayerProperties(config) {
             properties.onClick = handleRoadClick;
             break;
         case 'traffic-counts':
-            // Use TileLayer for progressive loading instead of direct GeoJsonLayer
-            return createTrafficCountsTileLayer(config);
+            properties.filled = true;
+            properties.stroked = true;
+            properties.getPointRadius = getTrafficRadius;
+            properties.pointRadiusMinPixels = 4;
+            properties.pointRadiusMaxPixels = 22;
+            properties.getFillColor = getTrafficColor;
+            properties.getLineColor = [255, 255, 255, 210];
+            properties.lineWidthMinPixels = 1;
+            properties.opacity = 0.95;
+            properties.pickable = true;
+            properties.autoHighlight = true;
+            properties.onClick = handleTrafficCountClick;
             break;
         case 'soil-clay-visualization':
             properties.filled = true;
@@ -1030,87 +1127,6 @@ function getLayerProperties(config) {
 }
 
 // Traffic Counts TileLayer factory
-function createTrafficCountsTileLayer(config) {
-    console.log('Creating TileLayer for traffic-counts with config:', config);
-    const tileLayer = new deck.TileLayer({
-        id: config.id,
-        data: '/tiles/traffic-counts/{z}/{x}/{y}.geojson',
-        minZoom: 12,
-        maxZoom: 14,  // Match actual tile coverage (tiles exist for zoom 12-14 only)
-        tileSize: 512,
-        maxCacheSize: 10 * 1024 * 1024, // 10MB cache
-        maxCacheByteSize: 50 * 1024 * 1024, // 50MB total
-        refinementStrategy: 'never',
-        
-        // Enable picking on the TileLayer itself
-        pickable: true,
-        
-        // TileLayer-level event handlers (deck.gl routes sublayer events here)
-        
-        onClick: (info) => {
-            if (info.object) {
-                return handleTrafficCountClick(info);
-            } else {
-                return false;
-            }
-        },
-        
-        // Add data loading callbacks for debugging
-        onTileLoad: (tile) => {
-            console.log('Tile loaded:', tile.index, 'data:', tile.data);
-        },
-        onTileError: (error) => {
-            console.error('Tile loading error:', error);
-        },
-        
-        renderSubLayers: props => {
-            // Strict zoom enforcement using correct tile structure
-            const tileZ = props.tile?.index?.z;
-            if (tileZ < 12 || tileZ > 14) {  // Match actual tile coverage
-                return null;
-            }
-            
-            // Skip rendering if no data is available yet
-            if (!props.data) {
-                return null;
-            }
-            
-            return new deck.GeoJsonLayer({
-                ...props,
-                id: `${props.id}-geojson`,
-                
-                // Styling properties - Enhanced for debugging
-                stroked: true,
-                filled: true,
-                pointRadiusMinPixels: 4,
-                pointRadiusMaxPixels: 50,
-                opacity: 0.9,
-                
-                // Dynamic styling functions
-                getPointRadius: (feature) => {
-                    const radius = getTrafficRadius(feature);
-                    return radius;
-                },
-                getFillColor: (feature) => {
-                    const color = getTrafficColor(feature);
-                    return color;
-                },
-                
-                // Interactions - Let TileLayer handle events (deck.gl routes them up)
-                pickable: true,
-                autoHighlight: true,
-                
-                // Performance optimizations
-                updateTriggers: {
-                    getPointRadius: [],
-                    getFillColor: []
-                }
-            });
-        }
-    });
-    
-    return tileLayer;
-}
 
 // MapLibre Raster Layer Management
 function addMapLibreRasterLayers(map, rasterLayers) {
@@ -1334,7 +1350,9 @@ function handleCityBoundaryClick(info) { resolveStackedClick(info, handleCityBou
 function handleParcelTripClickDirect(info) {
     if (info.object) {
         markTooltipShown();
-        showParcelTooltip(info.object.properties, info.x, info.y);
+        // Pass the whole feature too: the fiscal block needs geometry to
+        // compute acreage when CAD legal_acreage is 0.
+        showParcelTooltip(info.object.properties, info.x, info.y, info.object);
     }
 }
 

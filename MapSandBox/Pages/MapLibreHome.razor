@@ -33,7 +33,7 @@
             <h3>Safety &amp; Risk</h3>
             @foreach (var layer in LayersIn(SafetyLayerIds))
             {
-                <label class="layer-toggle">
+                <label class="layer-toggle" data-layer-tip="@LayerTip(layer.Id)">
                     <input type="checkbox"
                            checked="@layer.Visible"
                            @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
@@ -46,7 +46,7 @@
             <h3>Traffic</h3>
             @foreach (var layer in LayersIn(TrafficLayerIds))
             {
-                <label class="layer-toggle">
+                <label class="layer-toggle" data-layer-tip="@LayerTip(layer.Id)">
                     <input type="checkbox"
                            checked="@layer.Visible"
                            @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
@@ -57,12 +57,18 @@
 
         <div class="control-section">
             <h3>Trip Generation</h3>
-            <select @onchange="HandleTripGenCityChange" value="@selectedTripGenCityId">
+            <select @onchange="HandleTripGenCityChange" value="@selectedTripGenCityId" data-layer-tip="Color every parcel in a city by the daily vehicle trips it produces, with a city-wide summary panel.">
                 <option value="">— Select a city —</option>
                 @foreach (var layer in layerInfo.Where(l => l.Id.EndsWith("-parcels-trips")))
                 {
                     <option value="@layer.Id">@TripGenCityDisplayName(layer.Name)</option>
                 }
+            </select>
+            <label class="parcel-mode-label" for="parcel-color-mode">Color parcels by</label>
+            <select id="parcel-color-mode" @onchange="HandleParcelColorModeChange" value="@selectedParcelColorMode"
+                    data-layer-tip="Switch the parcel coloring between daily vehicle trips and taxable value per acre - the fiscal productivity view of the same parcels.">
+                <option value="trips">Daily trips</option>
+                <option value="value-acre">Value per acre ($)</option>
             </select>
         </div>
 
@@ -70,7 +76,7 @@
             <h3>Environment</h3>
             @foreach (var layer in LayersIn(EnvironmentLayerIds))
             {
-                <label class="layer-toggle">
+                <label class="layer-toggle" data-layer-tip="@LayerTip(layer.Id)">
                     <input type="checkbox"
                            checked="@layer.Visible"
                            @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
@@ -83,7 +89,7 @@
             <h3>Base &amp; Boundaries</h3>
             @foreach (var layer in LayersIn(BaseLayerIds).Concat(UngroupedLayers()))
             {
-                <label class="layer-toggle">
+                <label class="layer-toggle" data-layer-tip="@LayerTip(layer.Id)">
                     <input type="checkbox"
                            checked="@layer.Visible"
                            @onchange="@(e => HandleLayerToggle(new LayerToggleEventArgs(layer.Id, e.Value)))" />
@@ -91,6 +97,13 @@
                 </label>
             }
         </div>
+
+        <button class="fiscal-soon-block" @onclick="ShowFiscalComingSoonAsync"
+                data-layer-tip="The rest of the fiscal suite - net fiscal yield per acre, infrastructure payback period, and impervious burden ratio - is in development.">
+            <span class="fiscal-soon-kicker">Coming soon</span>
+            <span class="fiscal-soon-title">Fiscal Suite</span>
+            <span class="fiscal-soon-sub">Net fiscal yield &middot; Infrastructure payback &middot; Impervious burden</span>
+        </button>
     </div>
 </aside>
 
@@ -128,8 +141,27 @@
     private List<BaseMapStyle> availableStyles = new();
     private string selectedBaseMapId = "voyager";
     private string selectedTripGenCityId = ""; // Which *-parcels-trips layer is currently active (empty = none)
+    private string selectedParcelColorMode = "trips"; // 'trips' | 'value-acre' — mirrored into fiscal.js
     private DateTime _lastLayerToggle = DateTime.MinValue;
     private const int LayerToggleDebounceMs = 250;
+
+    // Plain-English hover descriptions for the sidebar rows (layer-tips.js).
+    private static readonly Dictionary<string, string> LayerTipText = new()
+    {
+        ["cris-crashes"] = "Every reported crash, colored by the most severe outcome at that spot. Shows where collisions actually happen.",
+        ["cris-risk-segments"] = "Roads scored for crash risk using crash history, traffic, grade, and surface. Red segments deserve attention first.",
+        ["cris-intersections"] = "Crossings ranked by crash risk - triangle size and color reflect the score. Click one for its crash record.",
+        ["cris-road-stress"] = "Where growth-driven traffic demand is approaching or exceeding road capacity.",
+        ["parker-roads-traffic-phase1"] = "Modeled daily traffic volume for every road, estimated from nearby count stations. Useful where no counter exists.",
+        ["parker-roads-traffic"] = "Roads with TxDOT-measured daily traffic (AADT). Green = light, red = heavy.",
+        ["traffic-counts"] = "TxDOT traffic count stations. Dot size and color reflect vehicles per day; click for station history.",
+        ["soil-clay-visualization"] = "Clay content from the USDA soil survey. High clay swells and shrinks - a driver of pavement and foundation damage.",
+        ["soil-ksat-visualization"] = "How quickly water drains into the ground. Slow-draining soils mean ponding, washouts, and drainage complaints.",
+        ["noaa-rainfall-parker-points"] = "Design rainfall intensity from NOAA Atlas 14 - the numbers engineers size culverts and drainage for.",
+        ["txdot-city-boundaries"] = "Incorporated city limits from TxDOT.",
+        ["parker-roads-base"] = "Background road network from the U.S. Census (TIGER).",
+    };
+    private static string LayerTip(string id) => LayerTipText.GetValueOrDefault(id, "");
 
     // Sidebar grouping. Any layer not listed here (and not a *-parcels-trips
     // city layer) falls through to the Base & Boundaries group so new layers
@@ -169,6 +201,39 @@
         catch (Exception ex)
         {
             Console.WriteLine($"[MapLibreHome] Failed to open report modal: {ex.Message}");
+        }
+    }
+
+    private async Task ShowFiscalComingSoonAsync()
+    {
+        try
+        {
+            // fiscal.js loads via index.html and registers window.MuenyFiscal.
+            await JS.InvokeVoidAsync("MuenyFiscal.showComingSoonModal");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[MapLibreHome] Failed to open fiscal coming-soon modal: {ex.Message}");
+        }
+    }
+
+    private async Task HandleParcelColorModeChange(ChangeEventArgs e)
+    {
+        var mode = e.Value?.ToString() ?? "trips";
+        selectedParcelColorMode = mode;
+        try
+        {
+            // Set the mode in fiscal.js, then rebuild the deck.gl layers so the
+            // parcel fill accessor (and the map key) pick it up.
+            await JS.InvokeVoidAsync("MuenyFiscal.setParcelColorMode", mode);
+            if (mapComponent != null)
+            {
+                await mapComponent.UpdateLayers(mapConfig.Layers);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[MapLibreHome] Failed to switch parcel color mode: {ex.Message}");
         }
     }
 

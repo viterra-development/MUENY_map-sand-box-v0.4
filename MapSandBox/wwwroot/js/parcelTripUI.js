@@ -4,6 +4,7 @@
  * - Click/hover tooltip (floating card)
  * - Summary stats panel (collapsible, bottom-right)
  */
+import { parcelAcres, valuePerAcre, vpaBin, improvementShare, valuePerDailyTrip, aggregateFiscal, fmtMoney, fmtPct } from './fiscal.js';
 
 // Escape data-derived strings before HTML interpolation. GeoJSON property
 // values come from external pipelines (TIGER, CAD, TxDOT, SSURGO) and must
@@ -75,7 +76,7 @@ function ensureParcelDetail() {
     return parcelDetailElement;
 }
 
-export function showParcelTooltip(properties, x, y) {
+export function showParcelTooltip(properties, x, y, feature) {
     const container = document.getElementById('trip-panel');
     if (!container) return;
 
@@ -91,11 +92,38 @@ export function showParcelTooltip(properties, x, y) {
     const daily = p.daily_trips || 0;
     const am = p.am_peak_trips || 0;
     const pm = p.pm_peak_trips || 0;
+    // Acreage: CAD legal acreage when present, geodesic estimate from the
+    // parcel polygon otherwise (fiscal.js caches this on the feature).
     const acresRaw = p.legal_acres ?? p.legal_acreage;
-    const acres = (typeof acresRaw === 'number' && acresRaw > 0) ? acresRaw.toFixed(2) : '\u2014';
+    const acreInfo = feature ? parcelAcres(feature)
+        : { acres: (typeof acresRaw === 'number' && acresRaw > 0) ? acresRaw : null, estimated: false };
+    const acres = acreInfo.acres ? acreInfo.acres.toFixed(2) + (acreInfo.estimated ? ' (est.)' : '') : '\u2014';
     const mktRaw = p.mkt_value ?? p.total_val;
     const mkt = (typeof mktRaw === 'number' && mktRaw > 0) ? '$' + Number(mktRaw).toLocaleString() : '\u2014';
     const stateCd = p.state_cd || 'N/A';
+
+    // Fiscal snapshot — the live subset of the fiscal suite (NFYA/IPP/IBR
+    // are pending external inputs; see fiscal.js).
+    const vpa = feature ? valuePerAcre(feature) : null;
+    const vpaColor = vpaBin(vpa).css;
+    const imprvShare = improvementShare(p);
+    const valPerTrip = valuePerDailyTrip(p);
+    const fiscalHtml = (vpa !== null || imprvShare !== null || valPerTrip !== null) ? `
+            <div class="trip-tip-divider"></div>
+            <div class="trip-tip-section-label">Fiscal snapshot <span class="trip-tip-beta">beta</span></div>
+            <div class="trip-tip-row">
+                <span class="trip-tip-label">Value per acre</span>
+                <span><span class="fiscal-chip" style="background:${vpaColor}"></span>${vpa !== null ? escapeHtml(fmtMoney(vpa, { compact: true }) + ' /ac') : '—'}</span>
+            </div>
+            <div class="trip-tip-row">
+                <span class="trip-tip-label">Improvement share</span>
+                <span>${escapeHtml(fmtPct(imprvShare))}</span>
+            </div>
+            <div class="trip-tip-row">
+                <span class="trip-tip-label">Value per daily trip</span>
+                <span>${valPerTrip !== null ? escapeHtml(fmtMoney(valPerTrip, { compact: true })) : '—'}</span>
+            </div>
+            <div class="trip-tip-fine">From CAD market value, parcel geometry &amp; ITE trip estimates. Net fiscal yield &amp; payback — coming soon.</div>` : '';
 
     // Ground conditions (joined from USDA SSURGO at build time)
     const soilName = p.soil_muname || null;
@@ -154,6 +182,7 @@ export function showParcelTooltip(properties, x, y) {
                 </div>
             </div>
             ${groundHtml}
+            ${fiscalHtml}
             <div class="trip-tip-divider"></div>
             <div class="trip-tip-row">
                 <span class="trip-tip-label">Acreage</span>
@@ -231,6 +260,31 @@ export function createStatsPanel(geojsonData) {
         landUseTrips[lu] += daily;
     });
 
+    // City-level fiscal rollup (null when no parcel has usable value + area)
+    const fiscal = aggregateFiscal(features);
+    const fiscalRows = fiscal ? `
+            <div class="trip-stats-divider"></div>
+            <div class="trip-stats-section-title">Fiscal Snapshot <span class="trip-tip-beta">beta</span></div>
+            <div class="trip-stats-fiscal">
+                <div class="trip-stats-fiscal-row">
+                    <span>Taxable value</span>
+                    <b>${escapeHtml(fmtMoney(fiscal.totalValue, { compact: true }))}</b>
+                </div>
+                <div class="trip-stats-fiscal-row">
+                    <span>Value per acre</span>
+                    <b>${escapeHtml(fmtMoney(fiscal.valuePerAcre, { compact: true }))} /ac</b>
+                </div>
+                <div class="trip-stats-fiscal-row">
+                    <span>Improvement share</span>
+                    <b>${escapeHtml(fmtPct(fiscal.improvementShare))}</b>
+                </div>
+                <div class="trip-stats-fiscal-row">
+                    <span>Value per daily trip</span>
+                    <b>${fiscal.valuePerDailyTrip !== null ? escapeHtml(fmtMoney(fiscal.valuePerDailyTrip, { compact: true })) : '—'}</b>
+                </div>
+                <div class="trip-tip-fine">${fiscal.parcelCount.toLocaleString()} parcels with CAD value &amp; area. Net fiscal yield &amp; infrastructure payback — coming soon.</div>
+            </div>` : '';
+
     // Sort land uses by trip count descending
     const sortedLU = Object.keys(landUseTrips).sort((a, b) => landUseTrips[b] - landUseTrips[a]);
 
@@ -271,6 +325,7 @@ export function createStatsPanel(geojsonData) {
                     <div class="trip-stats-total-label">PM Peak</div>
                 </div>
             </div>
+            ${fiscalRows}
             <div class="trip-stats-divider"></div>
             <div class="trip-stats-section-title">Breakdown by Land Use</div>
             <div class="trip-stats-breakdown">
