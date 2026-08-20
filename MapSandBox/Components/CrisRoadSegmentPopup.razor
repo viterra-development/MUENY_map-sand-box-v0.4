@@ -29,7 +29,7 @@
 
                 <div class="feature-item">
                     <div class="feature-header">
-                        <span class="feature-icon">🚗</span>
+                        <span class="feature-icon"><Icon Name="car" /></span>
                         <span class="feature-label">Crash Frequency</span>
                         <span class="feature-weight">35%</span>
                     </div>
@@ -37,13 +37,13 @@
                         @RoadSegment.CrashesPerMilePerYear.ToString("F1") crashes/mile/year
                     </div>
                     <div class="feature-threshold @(RoadSegment.MeetsCrashFrequencyThreshold ? "warning" : "safe")">
-                        @(RoadSegment.MeetsCrashFrequencyThreshold ? "⚠️ Above 5.0 threshold" : "✅ Within safe limits")
+                        <Icon Name="@(RoadSegment.MeetsCrashFrequencyThreshold ? "warning" : "check")" Size="13" /> @(RoadSegment.MeetsCrashFrequencyThreshold ? "Above 5.0 threshold" : "Within safe limits")
                     </div>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-header">
-                        <span class="feature-icon">💥</span>
+                        <span class="feature-icon"><Icon Name="impact" /></span>
                         <span class="feature-label">Severity Index</span>
                         <span class="feature-weight">25%</span>
                     </div>
@@ -51,13 +51,13 @@
                         @RoadSegment.FatalCrashCount fatalities, @RoadSegment.SeriousInjuryCrashCount serious injuries
                     </div>
                     <div class="feature-threshold @(RoadSegment.MeetsSeverityThreshold ? "warning" : "safe")">
-                        @(RoadSegment.MeetsSeverityThreshold ? "⚠️ High severity incidents" : "✅ Low severity pattern")
+                        <Icon Name="@(RoadSegment.MeetsSeverityThreshold ? "warning" : "check")" Size="13" /> @(RoadSegment.MeetsSeverityThreshold ? "High severity incidents" : "Low severity pattern")
                     </div>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-header">
-                        <span class="feature-icon">🚦</span>
+                        <span class="feature-icon"><Icon Name="traffic" /></span>
                         <span class="feature-label">Traffic Volume</span>
                         <span class="feature-weight">15%</span>
                     </div>
@@ -65,13 +65,13 @@
                         @(RoadSegment.Aadt?.ToString("N0") ?? "N/A") vehicles/day
                     </div>
                     <div class="feature-threshold @(RoadSegment.MeetsTrafficVolumeThreshold ? "warning" : "safe")">
-                        @(RoadSegment.MeetsTrafficVolumeThreshold ? "⚠️ High volume (>15k)" : "✅ Normal volume")
+                        <Icon Name="@(RoadSegment.MeetsTrafficVolumeThreshold ? "warning" : "check")" Size="13" /> @(RoadSegment.MeetsTrafficVolumeThreshold ? "High volume (>15k)" : "Normal volume")
                     </div>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-header">
-                        <span class="feature-icon">🌧️</span>
+                        <span class="feature-icon"><Icon Name="rain" /></span>
                         <span class="feature-label">Drainage Risk</span>
                         <span class="feature-weight">15%</span>
                     </div>
@@ -83,13 +83,13 @@
                         }
                     </div>
                     <div class="feature-threshold @(RoadSegment.HasDrainageRisk ? "warning" : "safe")">
-                        @(RoadSegment.HasDrainageRisk ? "⚠️ Drainage concerns" : "✅ Good drainage")
+                        <Icon Name="@(RoadSegment.HasDrainageRisk ? "warning" : "check")" Size="13" /> @(RoadSegment.HasDrainageRisk ? "Drainage concerns" : "Good drainage")
                     </div>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-header">
-                        <span class="feature-icon">🌦️</span>
+                        <span class="feature-icon"><Icon Name="weather" /></span>
                         <span class="feature-label">Environmental</span>
                         <span class="feature-weight">10%</span>
                     </div>
@@ -98,7 +98,7 @@
                         @RoadSegment.EnvironmentalFactors.IcySurfaceCrashes icy surface crashes
                     </div>
                     <div class="feature-threshold @(RoadSegment.HasEnvironmentalRisk ? "warning" : "safe")">
-                        @(RoadSegment.HasEnvironmentalRisk ? "⚠️ Weather sensitive" : "✅ Weather stable")
+                        <Icon Name="@(RoadSegment.HasEnvironmentalRisk ? "warning" : "check")" Size="13" /> @(RoadSegment.HasEnvironmentalRisk ? "Weather sensitive" : "Weather stable")
                     </div>
                 </div>
 

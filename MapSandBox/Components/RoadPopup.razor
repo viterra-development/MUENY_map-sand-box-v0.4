@@ -8,7 +8,7 @@
     <div class="cris-popup-overlay" @onclick="Hide">
         <div class="cris-popup-card" @onclick:stopPropagation="true">
             <div class="popup-header">
-                <h4>🛣️ @RoadData.RoadName</h4>
+                <h4>@RoadData.RoadName</h4>
                 <button class="close-btn" @onclick="Hide">×</button>
             </div>
 
@@ -20,12 +20,12 @@
             </div>
 
             <div class="road-breakdown">
-                <h5>🚦 Road Information</h5>
+                <h5>Road Information</h5>
                 @if (RoadData.HasTrafficData)
                 {
                     <div class="detail-item">
                         <div class="detail-header">
-                            <span class="detail-icon">🚦</span>
+                            <span class="detail-icon"><Icon Name="traffic" /></span>
                             <span class="detail-label">Traffic Data</span>
                         </div>
                         <div class="traffic-stats">
@@ -48,7 +48,7 @@
                 {
                     <div class="detail-item">
                         <div class="detail-header">
-                            <span class="detail-icon">📍</span>
+                            <span class="detail-icon"><Icon Name="location" /></span>
                             <span class="detail-label">Traffic Location</span>
                         </div>
                         <div class="detail-value">@RoadData.LocationId</div>
@@ -61,7 +61,7 @@
 
                 <div class="detail-item">
                     <div class="detail-header">
-                        <span class="detail-icon">🔧</span>
+                        <span class="detail-icon"><Icon Name="gear" /></span>
                         <span class="detail-label">Technical Information</span>
                     </div>
                     <div class="technical-details">

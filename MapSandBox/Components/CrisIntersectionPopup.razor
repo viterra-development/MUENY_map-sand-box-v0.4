@@ -9,7 +9,7 @@
         <div class="cris-intersection-card" @onclick:stopPropagation="true">
             <div class="popup-header">
                 <div class="header-content">
-                    <h4>⚠️ @RoadsDisplay</h4>
+                    <h4><Icon Name="warning" Size="16" /> @RoadsDisplay</h4>
                     <div class="intersection-id">@($"{Intersection.Latitude:F5}, {Intersection.Longitude:F5}")</div>
                 </div>
                 <button class="close-btn" @onclick="Close">×</button>
@@ -46,7 +46,7 @@
             @if (Intersection.RecentCrashes.Any())
             {
                 <div class="recent-crashes-section">
-                    <h5>🚨 Recent Crashes</h5>
+                    <h5>Recent Crashes</h5>
                     <div class="crash-list-scrollable">
                         @foreach (var crash in GetSortedCrashes())
                         {

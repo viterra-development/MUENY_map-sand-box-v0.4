@@ -176,3 +176,11 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
     .cris-popup-card { animation: none; }
 }
+
+
+/* ---------- Flat icon set (Icon.razor) ---------- */
+.mueny-icon { vertical-align: -2px; flex: none; }
+.feature-icon .mueny-icon, .detail-icon .mueny-icon { width: 15px; height: 15px; }
+.feature-threshold { display: flex; align-items: center; gap: 5px; }
+.feature-header { display: flex; align-items: center; gap: 7px; }
+.cris-popup-card h4 { display: flex; align-items: center; gap: 7px; }

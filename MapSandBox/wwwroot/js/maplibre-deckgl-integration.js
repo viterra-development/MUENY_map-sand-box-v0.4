@@ -421,7 +421,7 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         onClick: handleTrafficRoadClick,
                         onDataLoad: data => {
                             if (data && data.features) {
-                                console.log(`✅ PathLayer ${config.id} loaded ${data.features.length} features`);
+                                console.log(`PathLayer ${config.id} loaded ${data.features.length} features`);
                             }
                         }
                     });
@@ -473,11 +473,11 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         onClick: handleRiskSegmentClick,
                         onDataLoad: data => {
                             if (Array.isArray(data)) {
-                                console.log(`✅ CRIS Risk Segments loaded ${data.length} features`);
+                                console.log(`CRIS Risk Segments loaded ${data.length} features`);
                                 _riskSegmentData = data;
                                 resolveIntersectionRoads();
                             } else if (data && data.features) {
-                                console.log(`✅ CRIS Risk Segments loaded ${data.features.length} features`);
+                                console.log(`CRIS Risk Segments loaded ${data.features.length} features`);
                                 _riskSegmentData = data.features;
                                 resolveIntersectionRoads();
                             }
@@ -556,7 +556,7 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                                     persons_involved: crash.PersonsInvolved || 1
                                 }));
 
-                                console.log(`✅ CRIS Unique Crashes processed for grid: ${crashes.length} crashes`);
+                                console.log(`CRIS Unique Crashes processed for grid: ${crashes.length} crashes`);
                                 return crashes;
                             } catch (error) {
                                 console.error('Error processing unique crash data for grid:', error);
@@ -685,18 +685,18 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         onClick: handleIntersectionRiskClick,
                         onDataLoad: data => {
                             if (Array.isArray(data)) {
-                                console.log(`✅ CRIS Intersections loaded ${data.length} features`);
+                                console.log(`CRIS Intersections loaded ${data.length} features`);
                                 _intersectionData = data;
                                 resolveIntersectionRoads();
                             }
                         }
                     }));
-                    // Add text overlay for the ⚠ symbol
+                    // Add text overlay for the intersection alert glyph
                     deckLayers.push(new deck.TextLayer({
                         id: config.id + '-labels',
                         data: config.dataUrl,
                         getPosition: d => d.Coordinates,
-                        getText: () => '⚠',
+                        getText: () => '!',
                         getSize: 14,
                         sizeMinPixels: 12,
                         sizeMaxPixels: 18,
@@ -707,12 +707,12 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         getAlignmentBaseline: 'center',
                         pickable: false,
                         onDataLoad: data => {
-                            console.log(`✅ CRIS Intersection labels loaded`);
+                            console.log(`CRIS Intersection labels loaded`);
                         }
                     }));
                 } else if (config.id === 'noaa-rainfall-parker-points') {
-                    console.log(`⚡ ENTERING NOAA ScatterplotLayer case for: ${config.id}`);
-                    console.log(`🔍 NOAA ScatterplotLayer config.dataUrl: ${config.dataUrl}`);
+                    console.log(`ENTERING NOAA ScatterplotLayer case for: ${config.id}`);
+                    console.log(`NOAA ScatterplotLayer config.dataUrl: ${config.dataUrl}`);
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
@@ -733,39 +733,39 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         getLineColor: [0, 0, 0, 128],
                         lineWidthMinPixels: 1,
                         onDataLoad: data => {
-                            console.log(`📊 NOAA ScatterplotLayer data load event:`, typeof data, data);
+                            console.log(`NOAA ScatterplotLayer data load event:`, typeof data, data);
                             if (data && data.features) {
-                                console.log(`✅ ScatterplotLayer ${config.id} loaded ${data.features.length} features`);
+                                console.log(`ScatterplotLayer ${config.id} loaded ${data.features.length} features`);
                                 console.log('Sample rainfall point:', data.features[0]);
                                 const minRainfall = Math.min(...data.features.map(f => f.properties.rainfall));
                                 const maxRainfall = Math.max(...data.features.map(f => f.properties.rainfall));
                                 console.log(`Rainfall range: ${minRainfall} - ${maxRainfall}`);
                             } else {
-                                console.error(`❌ ScatterplotLayer ${config.id} data load failed or no features:`, data);
+                                console.error(`ScatterplotLayer ${config.id} data load failed or no features:`, data);
                             }
                         },
                         onError: error => {
-                            console.error(`❌ ScatterplotLayer ${config.id} error:`, error);
+                            console.error(`ScatterplotLayer ${config.id} error:`, error);
                         }
                     }));
                 } else {
-                    console.log(`⚡ ENTERING Generic ScatterplotLayer case for: ${config.id}`);
-                    console.log(`🔍 Generic ScatterplotLayer case hit for: ${config.id}, dataUrl: ${config.dataUrl}`);
+                    console.log(`ENTERING Generic ScatterplotLayer case for: ${config.id}`);
+                    console.log(`Generic ScatterplotLayer case hit for: ${config.id}, dataUrl: ${config.dataUrl}`);
                     deckLayers.push(new deck.ScatterplotLayer({
                         id: config.id,
                         data: config.dataUrl,
                         ...getLayerProperties(config),
                         onDataLoad: data => {
-                            console.log(`📊 Generic ScatterplotLayer data load event for ${config.id}:`, typeof data, data);
+                            console.log(`Generic ScatterplotLayer data load event for ${config.id}:`, typeof data, data);
                             if (data && data.features) {
-                                console.log(`✅ ScatterplotLayer ${config.id} loaded ${data.features.length} features`);
+                                console.log(`ScatterplotLayer ${config.id} loaded ${data.features.length} features`);
                                 console.log('Sample feature:', data.features[0]);
                             } else {
-                                console.error(`❌ Generic ScatterplotLayer ${config.id} data load failed:`, data);
+                                console.error(`Generic ScatterplotLayer ${config.id} data load failed:`, data);
                             }
                         },
                         onError: error => {
-                            console.error(`❌ Generic ScatterplotLayer ${config.id} error:`, error);
+                            console.error(`Generic ScatterplotLayer ${config.id} error:`, error);
                         }
                     }));
                 }
@@ -773,7 +773,7 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
             case 'heatmaplayer':
                 // Handle NOAA rainfall heatmap
                 if (config.id === 'noaa-rainfall-parker-heatmap') {
-                    console.log(`🔍 NOAA HeatmapLayer config.dataUrl: ${config.dataUrl}`);
+                    console.log(`NOAA HeatmapLayer config.dataUrl: ${config.dataUrl}`);
                     deckLayers.push(new deck.HeatmapLayer({
                         id: config.id,
                         data: config.dataUrl,
@@ -793,19 +793,19 @@ function createLayersFromConfig(layerConfigs, maplibreMap = null) {
                         pickable: false,
                         opacity: 0.8,
                         onDataLoad: data => {
-                            console.log(`🔥 NOAA HeatmapLayer data load event:`, typeof data, data);
+                            console.log(`NOAA HeatmapLayer data load event:`, typeof data, data);
                             if (data && data.features) {
-                                console.log(`✅ HeatmapLayer ${config.id} loaded ${data.features.length} features`);
+                                console.log(`HeatmapLayer ${config.id} loaded ${data.features.length} features`);
                                 console.log('Sample rainfall point:', data.features[0]);
                                 const sample = data.features[0];
                                 const weight = (sample.properties.rainfall - 450) / 50;
                                 console.log(`Weight calculation: ${sample.properties.rainfall} → ${weight}`);
                             } else {
-                                console.error(`❌ HeatmapLayer ${config.id} data load failed or no features:`, data);
+                                console.error(`HeatmapLayer ${config.id} data load failed or no features:`, data);
                             }
                         },
                         onError: error => {
-                            console.error(`❌ HeatmapLayer ${config.id} error:`, error);
+                            console.error(`HeatmapLayer ${config.id} error:`, error);
                         }
                     }));
                 } else {
@@ -1511,7 +1511,7 @@ function handleTrafficRoadClick(info) {
     const srcLabel = source ? source.charAt(0).toUpperCase() + source.slice(1) : null;
 
     // Data quality note
-    const qualityNote = (!aadt || aadt < 10) ? '⚠️ No observed traffic data for this segment' : null;
+    const qualityNote = (!aadt || aadt < 10) ? 'No observed traffic data for this segment' : null;
 
     const rows = [
         mtfccLabel ? `<tr><td>Road Class</td><td>${escapeHtml(mtfccLabel)}</td></tr>` : '',
@@ -1547,7 +1547,7 @@ function handleTrafficRoadClick(info) {
                         ? `<div style="font-size:20px; font-weight:700; color:#2E4A6B;">${aadt.toLocaleString()}</div>
                            <div style="font-size:11px; color:#888;">vehicles/day${aadtYear ? ` · ${escapeHtml(aadtYear)}` : ''}
                            ${srcLabel ? ` · <span style="color:${srcColor};font-weight:600;">${escapeHtml(srcLabel)}</span>` : ''}</div>`
-                        : `<div style="font-size:12px; color:#b45309;">⚠️ No observed traffic data</div>
+                        : `<div style="font-size:12px; color:#b45309;">No observed traffic data</div>
                            ${aadt ? `<div style="font-size:11px;color:#888;">Estimated: ${aadt.toLocaleString()} veh/day</div>` : ''}`
                     }
                 </div>
@@ -1677,7 +1677,7 @@ let _riskSegmentData = null;
 
 function resolveIntersectionRoads() {
     if (!_intersectionData || !_riskSegmentData) return;
-    console.log(`🔍 Resolving road names for ${_intersectionData.length} intersections from ${_riskSegmentData.length} segments`);
+    console.log(`Resolving road names for ${_intersectionData.length} intersections from ${_riskSegmentData.length} segments`);
 
     const THRESHOLD_DEG = 0.0003; // ~33 meters (tighter threshold since we check all vertices)
 
@@ -1706,7 +1706,7 @@ function resolveIntersectionRoads() {
     });
 
     const resolved = _intersectionData.filter(i => i.ResolvedRoads && i.ResolvedRoads.length > 0).length;
-    console.log(`✅ Resolved road names for ${resolved}/${_intersectionData.length} intersections`);
+    console.log(`Resolved road names for ${resolved}/${_intersectionData.length} intersections`);
 }
 
 // Crash points visualization functions
@@ -1859,7 +1859,7 @@ function handleCityBoundaryClickDirect(info) {
                 <table style="font-size:12px; border-collapse:collapse; width:100%;">
                     ${popRows}
                 </table>
-                ${city.CNTY_SEAT_FLAG === 'Y' ? `<div style="margin-top:8px; font-size:11px; color:#2E4A6B; font-weight:600;">★ County Seat</div>` : ''}
+                ${city.CNTY_SEAT_FLAG === 'Y' ? `<div style="margin-top:8px; font-size:11px; color:#2E4A6B; font-weight:600;">County Seat</div>` : ''}
             </div>
         `)
         .addTo(maplibreMap);
@@ -2008,13 +2008,13 @@ function handleRiskSegmentClick(info) {
             const segLenMi = segment.SegmentLength ? (segment.SegmentLength / 5280).toFixed(2) : null;
 
             const envFlags = [
-                slope > 5  ? `⛰ Steep grade (${slope.toFixed(1)}%)` : (slope > 0 ? `Grade: ${slope.toFixed(1)}%` : ''),
-                wetCrashes > 0 ? `🌧 ${wetCrashes} wet-surface crash${wetCrashes>1?'es':''}` : '',
-                icyCrashes > 0 ? `🧊 ${icyCrashes} icy-surface crash${icyCrashes>1?'es':''}` : '',
-                fogCrashes > 0 ? `🌫 ${fogCrashes} fog-related crash${fogCrashes>1?'es':''}` : '',
-                hydro > 0      ? `💧 ${hydro} hydroplaning incident${hydro>1?'s':''}` : '',
-                segment.HasDrainageIssues ? `⚠️ Drainage concern flagged` : '',
-                segment.HasEnvironmentalRisk ? `⚠️ Environmental risk flagged` : '',
+                slope > 5  ? `Steep grade (${slope.toFixed(1)}%)` : (slope > 0 ? `Grade: ${slope.toFixed(1)}%` : ''),
+                wetCrashes > 0 ? `${wetCrashes} wet-surface crash${wetCrashes>1?'es':''}` : '',
+                icyCrashes > 0 ? `${icyCrashes} icy-surface crash${icyCrashes>1?'es':''}` : '',
+                fogCrashes > 0 ? `${fogCrashes} fog-related crash${fogCrashes>1?'es':''}` : '',
+                hydro > 0      ? `${hydro} hydroplaning incident${hydro>1?'s':''}` : '',
+                segment.HasDrainageIssues ? `Drainage concern flagged` : '',
+                segment.HasEnvironmentalRisk ? `Environmental risk flagged` : '',
             ].filter(Boolean);
 
             new maplibregl.Popup({ closeOnClick: true, maxWidth: '340px' })
@@ -2108,9 +2108,9 @@ function showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, cr
     const riskColor = riskColors[riskLevel] || '#95a5a6';
 
     const severityLabel = {
-        'K_Fatal': '💀 Fatal', 'A': '🔴 Serious Injury', 'B': '🟠 Minor Injury',
-        'B_NonIncapacitatingInjury': '🟠 Minor Injury', 'C': '🟡 Possible Injury',
-        'O': '⬜ No Injury', 'O_NoInjury': '⬜ No Injury'
+        'K_Fatal': '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#8b0000;margin-right:5px"></span>Fatal', 'A': '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff4500;margin-right:5px"></span>Serious Injury', 'B': '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff8c00;margin-right:5px"></span>Minor Injury',
+        'B_NonIncapacitatingInjury': '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff8c00;margin-right:5px"></span>Minor Injury', 'C': '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ffd700;margin-right:5px"></span>Possible Injury',
+        'O': '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#32cd32;margin-right:5px"></span>No Injury', 'O_NoInjury': '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#32cd32;margin-right:5px"></span>No Injury'
     };
 
     const crashRows = recentCrashes.slice(0, 3).map(c => {
@@ -2126,12 +2126,12 @@ function showIntersectionFallbackPopup(info, roadsText, riskLevel, riskScore, cr
         .setLngLat(info.coordinate)
         .setHTML(`
             <div style="font-family:'Helvetica Neue',Arial,sans-serif;padding:6px 2px;">
-                <div style="font-weight:700;font-size:14px;margin-bottom:6px;color:#0B1F2E;">⚠️ ${escapeHtml(roadsText)}</div>
+                <div style="font-weight:700;font-size:14px;margin-bottom:6px;color:#0B1F2E;">${escapeHtml(roadsText)}</div>
                 <div style="display:inline-block;padding:2px 10px;border-radius:3px;background:${riskColor};color:#fff;font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:0.04em;">${escapeHtml(riskLevel)} RISK</div>
                 <table style="font-size:12px;border-collapse:collapse;width:100%;margin-bottom:8px;">
                     <tr><td style="color:#888;padding:2px 10px 2px 0;">Risk Score</td><td><strong>${escapeHtml(riskScore)}</strong></td></tr>
                     <tr><td style="color:#888;padding:2px 10px 2px 0;">Total Crashes</td><td><strong>${crashCount}</strong></td></tr>
-                    ${fatal > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Fatal</td><td style="color:#c0392b;font-weight:700;">💀 ${fatal}</td></tr>` : ''}
+                    ${fatal > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Fatal</td><td style="color:#c0392b;font-weight:700;">${fatal}</td></tr>` : ''}
                     ${injury > 0 ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Injury</td><td style="color:#e67e22;">${injury}</td></tr>` : ''}
                     ${pdo > 0   ? `<tr><td style="color:#888;padding:2px 10px 2px 0;">Property Damage</td><td>${pdo}</td></tr>` : ''}
                 </table>

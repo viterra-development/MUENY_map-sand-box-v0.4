@@ -67,7 +67,7 @@
         const body = el('div', 'mueny-help-body');
 
         body.appendChild(section('Getting started', [
-            'Turn layers on and off in the left panel (tap the ☰ button on mobile).',
+            'Turn layers on and off in the left panel (tap the menu button on mobile).',
             'Under Trip Generation, pick a city to see every parcel colored by the daily trips it produces.',
             'Click any road, crash point, intersection, parcel, or soil area for its details.',
             'The Map key (bottom-right of the map) explains every color and symbol currently shown.',

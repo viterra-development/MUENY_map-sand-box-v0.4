@@ -56,11 +56,11 @@
                     <button @onclick="SearchCoordinates" class="search-btn" disabled="@isSearching">
                         @if (isSearching)
                         {
-                            <span>🔍 Searching...</span>
+                            <span>Searching…</span>
                         }
                         else
                         {
-                            <span>📍 Go to Location</span>
+                            <span>Go to Location</span>
                         }
                     </button>
                 </div>
@@ -195,7 +195,7 @@
                 // Fly to the coordinates with appropriate zoom level
                 await mapComponent.FlyTo(searchLatitude.Value, searchLongitude.Value, zoom: 16);
 
-                searchMessage = $"📍 Navigated to {searchLatitude:F6}, {searchLongitude:F6}";
+                searchMessage = $"Navigated to {searchLatitude:F6}, {searchLongitude:F6}";
                 searchMessageClass = "success";
             }
         }

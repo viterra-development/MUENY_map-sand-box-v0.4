@@ -8,7 +8,7 @@
     <div class="cris-popup-overlay" @onclick="Hide">
         <div class="cris-popup-card" @onclick:stopPropagation="true">
             <div class="popup-header">
-                <h4>🚗 Crash Report #@CrashData.CrashId</h4>
+                <h4>Crash Report #@CrashData.CrashId</h4>
                 <button class="close-btn" @onclick="Hide">×</button>
             </div>
 
@@ -20,11 +20,11 @@
             </div>
 
             <div class="crash-breakdown">
-                <h5>📊 Crash Details</h5>
+                <h5>Crash Details</h5>
 
                         <div class="detail-item">
                             <div class="detail-header">
-                                <span class="detail-icon">👥</span>
+                                <span class="detail-icon"><Icon Name="people" /></span>
                                 <span class="detail-label">People & Vehicles</span>
                             </div>
                             <div class="detail-value">
@@ -47,7 +47,7 @@
 
                         <div class="detail-item">
                             <div class="detail-header">
-                                <span class="detail-icon">🌦️</span>
+                                <span class="detail-icon"><Icon Name="weather" /></span>
                                 <span class="detail-label">Conditions</span>
                             </div>
                             <div class="condition-grid">
@@ -70,7 +70,7 @@
                         {
                             <div class="detail-item">
                                 <div class="detail-header">
-                                    <span class="detail-icon">⚠️</span>
+                                    <span class="detail-icon"><Icon Name="warning" /></span>
                                     <span class="detail-label">Contributing Factors</span>
                                 </div>
                                 <div class="factors-list">
@@ -86,7 +86,7 @@
                         {
                             <div class="detail-item">
                                 <div class="detail-header">
-                                    <span class="detail-icon">🏔️</span>
+                                    <span class="detail-icon"><Icon Name="slope" /></span>
                                     <span class="detail-label">Road Slope</span>
                                 </div>
                                 <div class="slope-details">
@@ -105,7 +105,7 @@
 
                         <div class="detail-item">
                             <div class="detail-header">
-                                <span class="detail-icon">📍</span>
+                                <span class="detail-icon"><Icon Name="location" /></span>
                                 <span class="detail-label">Location</span>
                             </div>
                             <div class="location-details">

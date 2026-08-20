@@ -1,12 +1,12 @@
 @using MapSandBox.Models
 
 <div class="cris-dashboard">
-    <h3>🎯 CRIS Risk Assessment Dashboard</h3>
+    <h3>Risk Assessment Dashboard</h3>
 
     @if (ModelWeights != null)
     {
         <div class="model-weights-section">
-            <h4>📊 Model Weights</h4>
+            <h4>Model Weights</h4>
             <div class="weight-controls">
                 <div class="weight-item">
                     <label>Crash Frequency (currently @ModelWeights.CrashFrequency.ToString("P0")):</label>
@@ -42,7 +42,7 @@
                     Total Weight: @GetTotalWeight().ToString("P0")
                     @if (GetTotalWeight() != 1.0m)
                     {
-                        <span class="weight-warning">⚠️ Should equal 100%</span>
+                        <span class="weight-warning"><Icon Name="warning" Size="12" /> Should equal 100%</span>
                     }
                 </div>
             </div>
@@ -52,7 +52,7 @@
     @if (TopRiskSegments.Any())
     {
         <div class="top-risks-section">
-            <h4>🚨 Top Risk Locations</h4>
+            <h4>Top Risk Locations</h4>
             <div class="risk-list">
                 @foreach (var segment in TopRiskSegments.Take(5))
                 {
@@ -78,7 +78,7 @@
     @if (SeverityBreakdown.Any())
     {
         <div class="severity-breakdown-section">
-            <h4>📈 Severity Breakdown</h4>
+            <h4>Severity Breakdown</h4>
             <div class="severity-chart">
                 @foreach (var severity in SeverityBreakdown)
                 {
@@ -99,9 +99,9 @@
     }
 
     <div class="dashboard-actions">
-        <button class="btn btn-primary" @onclick="ExportData">📊 Export Data</button>
-        <button class="btn btn-secondary" @onclick="ResetFilters">🔄 Reset Filters</button>
-        <button class="btn btn-info" @onclick="ShowHelp">❓ Help</button>
+        <button class="btn btn-primary" @onclick="ExportData">Export Data</button>
+        <button class="btn btn-secondary" @onclick="ResetFilters">Reset Filters</button>
+        <button class="btn btn-info" @onclick="ShowHelp">Help</button>
     </div>
 </div>
 

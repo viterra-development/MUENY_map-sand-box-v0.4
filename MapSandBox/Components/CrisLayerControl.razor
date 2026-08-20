@@ -1,7 +1,7 @@
 @using MapSandBox.Models
 
 <div class="cris-layer-controls">
-    <h3>📊 CRIS Layers</h3>
+    <h3>CRIS Layers</h3>
 
     @foreach (var layer in CrisLayers)
     {
@@ -30,7 +30,7 @@
     @if (Statistics != null)
     {
         <div class="cris-statistics">
-            <h4>📈 Statistics</h4>
+            <h4>Statistics</h4>
             <div class="stat-item">
                 <span class="stat-label">Total Crashes:</span>
                 <span class="stat-value">@Statistics.TotalCrashes</span>
@@ -175,11 +175,11 @@
     {
         return layer.LayerType switch
         {
-            CrisLayerType.CrashPoints => "🔴 Crash Points",
-            CrisLayerType.RiskSegments => "🛣️ Risk Segments",
-            CrisLayerType.RiskHeatmap => "🔥 Risk Heatmap",
-            CrisLayerType.IntersectionRisks => "⚠️ Intersection Risks",
-            CrisLayerType.ModelDashboard => "📊 Model Dashboard",
+            CrisLayerType.CrashPoints => "Crash Points",
+            CrisLayerType.RiskSegments => "Risk Segments",
+            CrisLayerType.RiskHeatmap => "Risk Heatmap",
+            CrisLayerType.IntersectionRisks => "Intersection Risks",
+            CrisLayerType.ModelDashboard => "Model Dashboard",
             _ => layer.Id
         };
     }

@@ -67,31 +67,26 @@ const layerGroups = [
   {
     id: 'safety',
     title: 'Safety',
-    icon: '🔴',
     layerIds: ['cris-risk-segments', 'cris-crashes', 'cris-intersections']
   },
   {
     id: 'trip-generation',
     title: 'Trip Generation',
-    icon: '📍',
     layerIds: ['wp-parcels-trips', 'aledo-parcels-trips']
   },
   {
     id: 'road-network',
     title: 'Road Network',
-    icon: '🛣',
     layerIds: ['parker-roads-traffic-phase1', 'parker-roads-traffic', 'parker-roads-base']
   },
   {
     id: 'boundaries',
     title: 'Boundaries',
-    icon: '🗺',
     layerIds: ['txdot-city-boundaries']
   },
   {
     id: 'environment',
     title: 'Environment',
-    icon: '🌱',
     layerIds: ['soil-clay-visualization', 'soil-ksat-visualization', 'noaa-rainfall-parker-points']
   }
 ];
@@ -184,7 +179,7 @@ function buildLayerControls() {
 
     html += `<div class="layer-group" id="group-${group.id}">
       <div class="layer-group-header" data-group="${group.id}">
-        <span class="layer-group-title">${group.icon} ${group.title}</span>
+        <span class="layer-group-title">${group.title}</span>
         <span class="layer-group-chevron" id="chevron-${group.id}">▾</span>
       </div>
       <div class="layer-group-content" id="content-${group.id}">`;
@@ -201,7 +196,7 @@ function buildLayerControls() {
     <div class="search-inputs">
       <input type="number" step="any" placeholder="Latitude (32.7365)" id="search-lat" class="coord-input" />
       <input type="number" step="any" placeholder="Longitude (-97.6506)" id="search-lng" class="coord-input" />
-      <button id="search-btn" class="search-btn">📍 Go to Location</button>
+      <button id="search-btn" class="search-btn">Go to Location</button>
     </div>
   </div>`;
 

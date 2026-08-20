@@ -9,7 +9,7 @@
         <div class="cris-popup-card" @onclick:stopPropagation="true">
             <div class="popup-header">
                 <div class="header-content">
-                    <h4>🚗 @ClusterData.Crashes.Count Crashes at this Location</h4>
+                    <h4>@ClusterData.Crashes.Count Crashes at this Location</h4>
                     <div class="location-coordinates">@ClusterData.FormattedCoordinates</div>
                 </div>
                 <button class="close-btn" @onclick="Hide">×</button>
@@ -24,7 +24,7 @@
 
             <div class="feature-breakdown">
                 <div class="recent-crashes-section">
-                    <h5>🚨 All Crashes (@ClusterData.TotalCrashes total)</h5>
+                    <h5>All Crashes (@ClusterData.TotalCrashes total)</h5>
                     <div class="crash-list-scrollable">
                         @foreach (var crash in GetSortedCrashes())
                         {
@@ -35,7 +35,7 @@
                                 @if (crash.SlopeAtLocation > 0)
                                 {
                                     <div class="crash-slope">
-                                        🏔️ @crash.SlopeAtLocation.ToString("F1")° (@crash.SlopePercentage.ToString("F1")%) - @crash.SlopeCategory
+                                        <Icon Name="slope" Size="12" /> @crash.SlopeAtLocation.ToString("F1")° (@crash.SlopePercentage.ToString("F1")%) - @crash.SlopeCategory
                                     </div>
                                 }
                                 @if (crash.FatalCount > 0 || crash.InjuryCount > 0)

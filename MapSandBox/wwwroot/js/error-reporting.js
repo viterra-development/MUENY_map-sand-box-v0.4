@@ -26,7 +26,7 @@ export function logError(source, error, context = {}) {
     }
 
     // Log to console with formatting
-    console.group(`🚨 [${source}] Error Report`);
+    console.group(`[${source}] Error Report`);
     console.error('Error:', error);
     console.log('Context:', context);
     console.log('Timestamp:', errorEntry.timestamp);
