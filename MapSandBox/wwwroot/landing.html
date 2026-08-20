@@ -12,185 +12,235 @@
   <style>
     :root {
       --ink: #0b1f2e;
+      --ink-2: #0e2638;
       --ink-soft: #3d4f5e;
       --paper: #f6f5f1;
       --card: #ffffff;
       --accent: #2e4a6b;
       --accent-bright: #4a7aa8;
+      --glow: #56b3e8;
+      --risk: #ff5c39;
+      --amber: #ffb347;
       --safety: #c05238;
       --growth: #b07a26;
       --infra: #3e7a4e;
       --rule: #e2e0d8;
     }
     * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       background: var(--paper);
       color: var(--ink);
       line-height: 1.6;
     }
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-    /* Header */
-    header {
-      background: var(--ink);
+    /* ---------- Header ---------- */
+    header.site {
+      background: rgba(11, 31, 46, 0.92);
+      backdrop-filter: blur(8px);
       color: #fff;
       position: sticky;
       top: 0;
       z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 24px;
-      max-width: 1060px;
-      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; max-width: 1100px; margin: 0 auto;
     }
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: 0.42em;
-    }
+    .logo { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.42em; }
     .logo small {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      font-size: 9.5px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9db4c8;
+      display: block; font-family: 'Inter', sans-serif; font-weight: 500;
+      font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #9db4c8;
     }
     .nav-actions { display: flex; gap: 12px; align-items: center; }
     .btn {
-      display: inline-block;
-      padding: 9px 20px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      border: 1px solid transparent;
+      display: inline-block; padding: 10px 22px; border-radius: 7px;
+      font-weight: 600; font-size: 14px; text-decoration: none; border: 1px solid transparent;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
     }
-    .btn-primary { background: var(--accent-bright); color: #fff; }
-    .btn-primary:hover { background: #3d6a95; }
+    .btn-primary {
+      background: linear-gradient(180deg, #5688b8, var(--accent-bright));
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(74,122,168,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(74,122,168,0.45); }
     .btn-ghost { color: #d7e2ec; border-color: rgba(255,255,255,0.35); }
     .btn-ghost:hover { background: rgba(255,255,255,0.08); }
 
-    /* Hero */
+    /* ---------- Hero ---------- */
     .hero {
+      position: relative;
       background:
-        radial-gradient(1200px 500px at 75% -10%, rgba(74,122,168,0.35), transparent 60%),
-        linear-gradient(180deg, var(--ink) 0%, #12293c 100%);
+        radial-gradient(1100px 540px at 20% -10%, rgba(86,179,232,0.16), transparent 60%),
+        radial-gradient(900px 500px at 95% 15%, rgba(255,92,57,0.10), transparent 55%),
+        linear-gradient(180deg, var(--ink) 0%, #10293d 78%, var(--paper) 78.2%);
       color: #fff;
-      padding: 84px 0 90px;
-    }
-    .hero h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: clamp(34px, 5.5vw, 56px);
-      line-height: 1.08;
-      letter-spacing: 0.01em;
-      max-width: 15ch;
-      text-wrap: balance;
-    }
-    .hero p.lede {
-      margin-top: 18px;
-      font-size: 18px;
-      color: #c3d2df;
-      max-width: 52ch;
-    }
-    .hero-ctas { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
-    .hero-ctas .btn { font-size: 15px; padding: 12px 26px; }
-    .hero-stats {
-      margin-top: 56px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1px;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 10px;
+      padding: 78px 0 0;
       overflow: hidden;
     }
-    .stat { background: rgba(11,31,46,0.85); padding: 18px 20px; }
+    .hero-copy { max-width: 720px; margin: 0 auto; text-align: center; }
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #9fd8ff; border: 1px solid rgba(86,179,232,0.4); border-radius: 999px;
+      padding: 6px 14px; background: rgba(86,179,232,0.08);
+    }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #57e0a0; animation: pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(87,224,160,0.5);} 55% { box-shadow: 0 0 0 7px rgba(87,224,160,0);} }
+    .hero h1 {
+      font-family: 'Rajdhani', sans-serif; font-weight: 700;
+      font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: 0.01em;
+      margin-top: 22px; text-wrap: balance;
+    }
+    .hero h1 .glow { color: var(--glow); text-shadow: 0 0 34px rgba(86,179,232,0.45); }
+    .hero p.lede { margin: 18px auto 0; font-size: 18px; color: #c3d2df; max-width: 54ch; }
+    .hero-ctas { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .hero-ctas .btn { font-size: 15px; padding: 13px 28px; }
+
+    /* Product frame */
+    .product {
+      position: relative;
+      max-width: 960px; margin: 56px auto 0;
+      border-radius: 12px 12px 0 0;
+      background: #0d2233;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-bottom: none;
+      box-shadow: 0 -2px 80px rgba(86,179,232,0.18), 0 30px 90px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    .chrome {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 14px; background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.22); }
+    .urlbar {
+      flex: 1; max-width: 340px; margin: 0 auto;
+      font-size: 11.5px; color: #8fa5b5; background: rgba(0,0,0,0.28);
+      border-radius: 6px; padding: 4px 12px; text-align: center;
+    }
+    .product svg { display: block; width: 100%; height: auto; }
+    @keyframes riskpulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+    .risk-anim { animation: riskpulse 2.6s ease-in-out infinite; }
+    @keyframes dash { to { stroke-dashoffset: -26; } }
+    .flow-anim { animation: dash 1.6s linear infinite; }
+
+    /* Stats under hero */
+    .hero-stats {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      background: var(--card);
+      border: 1px solid var(--rule); border-top: none;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 18px 45px rgba(11,31,46,0.10);
+      position: relative; z-index: 2;
+    }
+    .stat { padding: 22px 24px; border-right: 1px solid var(--rule); }
+    .stat:last-child { border-right: none; }
     .stat b {
-      display: block;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 30px;
-      font-weight: 700;
+      display: block; font-family: 'Rajdhani', sans-serif;
+      font-size: 34px; font-weight: 700; color: var(--ink);
       font-variant-numeric: tabular-nums;
     }
-    .stat span { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: #9db4c8; }
+    .stat span { font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+
+    /* ---------- Cities strip ---------- */
+    .cities { padding: 46px 0 6px; text-align: center; }
+    .cities .label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+    .city-chips { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: center; }
+    .chip {
+      font-size: 13px; font-weight: 500; color: var(--accent);
+      background: #fff; border: 1px solid var(--rule); border-radius: 999px; padding: 5px 14px;
+    }
+
+    /* ---------- Sections ---------- */
+    .section { padding: 76px 0; }
+    .kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .section h2 {
+      font-family: 'Rajdhani', sans-serif; font-size: clamp(38px, 4vw, 44px); font-weight: 700;
+      margin-top: 6px; text-wrap: balance;
+    }
+
+    /* How it works */
+    .steps { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .step {
+      position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 12px;
+      padding: 28px 26px 24px;
+    }
+    .step .n {
+      display: inline-grid; place-items: center;
+      width: 34px; height: 34px; border-radius: 50%;
+      font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px;
+      background: var(--ink); color: #fff; margin-bottom: 14px;
+    }
+    .step h3 { font-size: 17px; margin-bottom: 6px; }
+    .step p { font-size: 14px; color: var(--ink-soft); }
 
     /* Capabilities */
-    .section { padding: 72px 0; }
-    .kicker {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .section h2 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 34px;
-      font-weight: 700;
-      margin-top: 6px;
-      text-wrap: balance;
-    }
-    .cards {
-      margin-top: 36px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
+    .caps-bg { background: var(--ink); color: #fff; }
+    .caps-bg .kicker { color: #9fd8ff; }
+    .caps-bg h2 { color: #fff; }
+    .cards { margin-top: 38px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .card {
-      background: var(--card);
-      border: 1px solid var(--rule);
-      border-top: 4px solid var(--accent);
-      border-radius: 10px;
-      padding: 26px 26px 24px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 12px; padding: 28px 26px 24px;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
     }
-    .card.safety { border-top-color: var(--safety); }
-    .card.growth { border-top-color: var(--growth); }
-    .card.infra  { border-top-color: var(--infra); }
-    .card h3 { font-size: 18px; margin-bottom: 8px; }
-    .card p { font-size: 14.5px; color: var(--ink-soft); }
-    .card ul { margin: 12px 0 0 18px; font-size: 13.5px; color: var(--ink-soft); }
-    .card li { margin: 4px 0; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.07); }
+    .card .tag {
+      display: inline-block; font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 11px; border-radius: 999px; margin-bottom: 14px;
+    }
+    .card.safety .tag { background: rgba(255,92,57,0.16); color: #ff9a82; }
+    .card.growth .tag { background: rgba(255,179,71,0.15); color: #ffcb7c; }
+    .card.infra  .tag { background: rgba(87,224,160,0.13); color: #8ce6bb; }
+    .card h3 { font-size: 19px; margin-bottom: 8px; color: #fff; }
+    .card p { font-size: 14.5px; color: #b7c6d2; }
+    .card ul { margin: 14px 0 0 18px; font-size: 13.5px; color: #b7c6d2; }
+    .card li { margin: 5px 0; }
 
-    /* Data provenance */
+    /* Provenance */
     .provenance { background: #eeece5; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .provenance .section { padding: 48px 0; }
     .prov-row { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 14px; font-size: 13.5px; color: var(--ink-soft); }
     .prov-row span::before { content: "— "; color: var(--accent); }
 
     /* Final CTA */
-    .cta-final { text-align: center; padding: 84px 0; }
-    .cta-final h2 { font-family: 'Rajdhani', sans-serif; font-size: 32px; }
-    .cta-final p { color: var(--ink-soft); margin: 10px auto 26px; max-width: 46ch; }
+    .cta-final { text-align: center; padding: 88px 0 96px; }
+    .cta-final h2 { font-family: 'Rajdhani', sans-serif; font-size: clamp(30px, 4vw, 40px); }
+    .cta-final p { color: var(--ink-soft); margin: 10px auto 28px; max-width: 46ch; }
     .btn-dark { background: var(--accent); color: #fff; }
-    .btn-dark:hover { background: #24405f; }
+    .btn-dark:hover { background: #24405f; transform: translateY(-1px); }
     .btn-outline { color: var(--accent); border-color: var(--accent); }
     .btn-outline:hover { background: rgba(46,74,107,0.07); }
 
-    footer {
-      background: var(--ink);
-      color: #9db4c8;
-      font-size: 13px;
-      padding: 26px 0;
-    }
-    footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; }
-    footer a { color: #c3d2df; }
+    footer.site { background: var(--ink); color: #9db4c8; font-size: 13px; padding: 26px 0; }
+    footer.site .wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; }
+    footer.site a { color: #c3d2df; }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
 
     @media (max-width: 640px) {
-      .hero { padding: 56px 0 60px; }
+      .hero { padding-top: 54px; }
       .nav-actions .btn-ghost { display: none; }
+      .stat b { font-size: 27px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
-  <header>
+  <header class="site">
     <nav class="nav">
       <div class="logo">MUENY<small>Municipal Intelligence</small></div>
       <div class="nav-actions">
@@ -202,62 +252,209 @@
 
   <section class="hero">
     <div class="wrap">
-      <h1>See your city the way the data does.</h1>
-      <p class="lede">MUENY turns the public record — crash reports, traffic counts,
-        parcels, soils, rainfall — into one live map your staff can act on.
-        Built on Parker County, Texas. Ready for your city.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="/map">Open the live map</a>
-        <a class="btn btn-ghost" href="mailto:spencer@hodgetx.com?subject=MUENY%20briefing%20request">Request a briefing</a>
+      <div class="hero-copy">
+        <span class="live-badge"><span class="live-dot"></span>Live · Parker County, Texas</span>
+        <h1>See your city the way <span class="glow">the data</span> does.</h1>
+        <p class="lede">Crash records, traffic counts, parcels, soils, and rainfall —
+          fused into one live map your staff can act on in the first meeting.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="/map">Open the live map</a>
+          <a class="btn btn-ghost" href="mailto:spencer@hodgetx.com?subject=MUENY%20briefing%20request">Request a briefing</a>
+        </div>
       </div>
+
+      <div class="product">
+        <div class="chrome" aria-hidden="true">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="urlbar">mueny.com/map</span>
+        </div>
+        <svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MUENY live map showing crash risk on the I-20 corridor">
+          <defs>
+            <linearGradient id="mapbg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#10293d"/>
+              <stop offset="1" stop-color="#0c2032"/>
+            </linearGradient>
+            <radialGradient id="hot" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#ff5c39" stop-opacity="0.55"/>
+              <stop offset="1" stop-color="#ff5c39" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="soften" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="5"/>
+            </filter>
+          </defs>
+          <rect width="960" height="470" fill="url(#mapbg)"/>
+
+          <!-- street grid -->
+          <g stroke="#1d3c55" stroke-width="1.4">
+            <path d="M0 90 H960 M0 170 H960 M0 260 H960 M0 350 H960 M0 425 H960"/>
+            <path d="M120 0 V470 M260 0 V470 M420 0 V470 M600 0 V470 M760 0 V470 M880 0 V470"/>
+          </g>
+          <g stroke="#234763" stroke-width="2.2">
+            <path d="M0 210 C 180 200, 300 235, 470 222 S 800 205, 960 218"/>
+            <path d="M330 0 C 340 130, 310 260, 350 470"/>
+            <path d="M680 0 C 665 150, 700 300, 675 470"/>
+          </g>
+
+          <!-- water -->
+          <path d="M40 0 C 70 90, 20 170, 65 260 S 55 400, 95 470" fill="none" stroke="#2b5d8a" stroke-width="9" opacity="0.5"/>
+
+          <!-- parcels -->
+          <g fill="#57e0a0" opacity="0.13">
+            <rect x="430" y="240" width="52" height="38" rx="2"/>
+            <rect x="490" y="248" width="40" height="30" rx="2"/>
+            <rect x="536" y="240" width="58" height="44" rx="2"/>
+            <rect x="430" y="286" width="70" height="36" rx="2"/>
+            <rect x="506" y="286" width="46" height="40" rx="2"/>
+          </g>
+          <g fill="none" stroke="#57e0a0" opacity="0.35" stroke-width="1">
+            <rect x="430" y="240" width="52" height="38" rx="2"/>
+            <rect x="490" y="248" width="40" height="30" rx="2"/>
+            <rect x="536" y="240" width="58" height="44" rx="2"/>
+            <rect x="430" y="286" width="70" height="36" rx="2"/>
+            <rect x="506" y="286" width="46" height="40" rx="2"/>
+          </g>
+
+          <!-- I-20 corridor: amber base + risk glow -->
+          <ellipse cx="500" cy="150" rx="260" ry="70" fill="url(#hot)" class="risk-anim" filter="url(#soften)"/>
+          <path d="M0 165 C 200 138, 420 172, 640 148 S 870 130, 960 142" fill="none" stroke="#ffb347" stroke-width="9" opacity="0.9"/>
+          <path d="M0 165 C 200 138, 420 172, 640 148 S 870 130, 960 142" fill="none" stroke="#ff5c39" stroke-width="3.5" class="risk-anim"/>
+          <path d="M0 165 C 200 138, 420 172, 640 148 S 870 130, 960 142" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-dasharray="14 12" opacity="0.55" class="flow-anim"/>
+
+          <!-- secondary risk road -->
+          <path d="M330 0 C 340 130, 310 260, 350 470" fill="none" stroke="#ff8a3d" stroke-width="3" opacity="0.65" class="risk-anim"/>
+
+          <!-- crash points -->
+          <g fill="#ff5c39">
+            <circle cx="472" cy="158" r="7" class="risk-anim"/>
+            <circle cx="519" cy="152" r="5" opacity="0.85"/>
+            <circle cx="438" cy="164" r="4.4" opacity="0.75"/>
+            <circle cx="560" cy="147" r="4" opacity="0.7"/>
+            <circle cx="342" cy="212" r="4.4" opacity="0.75"/>
+            <circle cx="676" cy="122" r="4" opacity="0.65"/>
+          </g>
+          <circle cx="472" cy="158" r="17" fill="none" stroke="#ff5c39" stroke-width="1.4" opacity="0.7" class="risk-anim"/>
+
+          <!-- popup card -->
+          <g transform="translate(608, 208)">
+            <rect width="248" height="150" rx="9" fill="#f8fafc" stroke="#c9d4dd"/>
+            <rect x="0" y="0" width="248" height="34" rx="9" fill="#e9eef3"/>
+            <rect x="0" y="18" width="248" height="16" fill="#e9eef3"/>
+            <text x="16" y="23" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0b1f2e">I-20 Svc Rd · Segment 118330</text>
+            <rect x="16" y="48" width="86" height="20" rx="10" fill="#ffe3db"/>
+            <text x="27" y="62" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#c8451f">HIGH RISK</text>
+            <text x="16" y="92" font-family="Inter, sans-serif" font-size="12" fill="#3d4f5e">Crashes (12 mo)</text>
+            <text x="232" y="92" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0b1f2e" text-anchor="end">9</text>
+            <text x="16" y="112" font-family="Inter, sans-serif" font-size="12" fill="#3d4f5e">Traffic volume</text>
+            <text x="232" y="112" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0b1f2e" text-anchor="end">21,400 / day</text>
+            <text x="16" y="132" font-family="Inter, sans-serif" font-size="12" fill="#3d4f5e">Risk percentile</text>
+            <text x="232" y="132" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#c8451f" text-anchor="end">Top 2%</text>
+          </g>
+          <path d="M560 180 L 612 226" stroke="#8fa5b5" stroke-width="1.3" stroke-dasharray="4 4"/>
+
+          <!-- layer panel hint -->
+          <g transform="translate(20, 24)">
+            <rect width="172" height="128" rx="9" fill="rgba(11,31,46,0.82)" stroke="rgba(255,255,255,0.14)"/>
+            <text x="16" y="27" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.5" fill="#9db4c8">LAYERS</text>
+            <rect x="16" y="40" width="11" height="11" rx="2.5" fill="#56b3e8"/>
+            <text x="34" y="50" font-family="Inter, sans-serif" font-size="11.5" fill="#e8eef4">Crash risk</text>
+            <rect x="16" y="62" width="11" height="11" rx="2.5" fill="#56b3e8"/>
+            <text x="34" y="72" font-family="Inter, sans-serif" font-size="11.5" fill="#e8eef4">Traffic volumes</text>
+            <rect x="16" y="84" width="11" height="11" rx="2.5" fill="#57e0a0"/>
+            <text x="34" y="94" font-family="Inter, sans-serif" font-size="11.5" fill="#e8eef4">Trip generation</text>
+            <rect x="16" y="106" width="11" height="11" rx="2.5" fill="rgba(255,255,255,0.25)"/>
+            <text x="34" y="116" font-family="Inter, sans-serif" font-size="11.5" fill="#9db4c8">Soils &amp; drainage</text>
+          </g>
+        </svg>
+      </div>
+
       <div class="hero-stats">
-        <div class="stat"><b>4,000+</b><span>Crashes analyzed</span></div>
-        <div class="stat"><b>28,000+</b><span>Parcels classified</span></div>
-        <div class="stat"><b>11</b><span>Cities modeled</span></div>
-        <div class="stat"><b>5</b><span>Data domains fused</span></div>
+        <div class="stat"><b class="count" data-target="4023">0</b><span>Crashes analyzed</span></div>
+        <div class="stat"><b class="count" data-target="28585">0</b><span>Parcels classified</span></div>
+        <div class="stat"><b class="count" data-target="11">0</b><span>Cities modeled</span></div>
+        <div class="stat"><b class="count" data-target="5">0</b><span>Data domains fused</span></div>
       </div>
     </div>
   </section>
 
-  <section class="section wrap">
-    <div class="kicker">What MUENY answers</div>
-    <h2>Three questions every city asks — answered on one map.</h2>
-    <div class="cards">
-      <div class="card safety">
-        <h3>Where will the next serious crash happen?</h3>
-        <p>Crash-risk scoring over every road segment and intersection, built from
-           TxDOT crash records fused with traffic volumes, road grade, and surface conditions.</p>
-        <ul>
-          <li>Risk-ranked segments and intersections</li>
-          <li>Weather and drainage risk factors</li>
-          <li>Defensible inputs for grant applications</li>
-        </ul>
+  <section class="cities wrap reveal">
+    <div class="label">Modeled today</div>
+    <div class="city-chips">
+      <span class="chip">Willow Park</span><span class="chip">Weatherford</span><span class="chip">Aledo</span>
+      <span class="chip">Azle</span><span class="chip">Springtown</span><span class="chip">Mineral Wells</span>
+      <span class="chip">Hudson Oaks</span><span class="chip">Reno</span><span class="chip">Annetta</span>
+      <span class="chip">Annetta North</span><span class="chip">Annetta South</span>
+    </div>
+  </section>
+
+  <section class="section wrap reveal">
+    <div class="kicker">How it works</div>
+    <h2>From public record to first decision in one sitting.</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">1</span>
+        <h3>We pull the record</h3>
+        <p>TxDOT crash files, traffic counts, county parcels, USDA soils, NOAA rainfall —
+           the data your city already owns but has never seen in one place.</p>
       </div>
-      <div class="card growth">
-        <h3>What will growth do to our roads?</h3>
-        <p>Parcel-level trip generation for 11 cities — every parcel classified by land
-           use and converted to daily and peak-hour trips on the roads that carry them.</p>
-        <ul>
-          <li>ITE-based trip estimates per parcel</li>
-          <li>Road stress index: volume vs. capacity</li>
-          <li>Scenario-ready for development review</li>
-        </ul>
+      <div class="step">
+        <span class="n">2</span>
+        <h3>The model fuses it</h3>
+        <p>Every road segment scored for crash risk. Every parcel classified and converted
+           to trips. Every drainage complaint matched to its soil and slope.</p>
       </div>
-      <div class="card infra">
-        <h3>Which infrastructure is quietly failing?</h3>
-        <p>Soil permeability, rainfall intensity, and slope layered under the road
-           network — the physical context behind drainage complaints and washouts.</p>
-        <ul>
-          <li>SSURGO soils: clay content and permeability</li>
-          <li>NOAA rainfall design intensities</li>
-          <li>Terrain slope at every crash site</li>
-        </ul>
+      <div class="step">
+        <span class="n">3</span>
+        <h3>Your staff acts on it</h3>
+        <p>A live map anyone on staff can open, plus briefing reports for council packets
+           and grant applications — signed, sourced, and defensible.</p>
       </div>
     </div>
   </section>
+
+  <div class="caps-bg">
+    <section class="section wrap reveal">
+      <div class="kicker">What MUENY answers</div>
+      <h2>Three questions every city asks — answered on one map.</h2>
+      <div class="cards">
+        <div class="card safety">
+          <span class="tag">Safety</span>
+          <h3>Where will the next serious crash happen?</h3>
+          <p>Crash-risk scoring over every road segment and intersection, fused from
+             crash records, traffic volumes, road grade, and surface conditions.</p>
+          <ul>
+            <li>Risk-ranked segments and intersections</li>
+            <li>Weather and drainage risk factors</li>
+            <li>Defensible inputs for grant applications</li>
+          </ul>
+        </div>
+        <div class="card growth">
+          <span class="tag">Growth</span>
+          <h3>What will growth do to our roads?</h3>
+          <p>Parcel-level trip generation for 11 cities — every parcel classified by land
+             use and converted to daily and peak-hour trips.</p>
+          <ul>
+            <li>Trip estimates on every parcel</li>
+            <li>Road stress index: volume vs. capacity</li>
+            <li>Scenario-ready for development review</li>
+          </ul>
+        </div>
+        <div class="card infra">
+          <span class="tag">Ground truth</span>
+          <h3>Which infrastructure is quietly failing?</h3>
+          <p>Soil permeability, rainfall intensity, and slope layered under the road
+             network — the physics behind drainage complaints and washouts.</p>
+          <ul>
+            <li>Clay content and permeability, county-wide</li>
+            <li>NOAA rainfall design intensities</li>
+            <li>Terrain slope at every crash site</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <div class="provenance">
-    <div class="section wrap">
+    <div class="section wrap reveal">
       <div class="kicker">Built on the public record</div>
       <h2>No black box — every layer cites its source.</h2>
       <div class="prov-row">
@@ -272,7 +469,7 @@
     </div>
   </div>
 
-  <section class="cta-final wrap">
+  <section class="cta-final wrap reveal">
     <h2>See it on your county.</h2>
     <p>The live map is open — explore crash risk, trip generation, and road stress
        for Parker County now. Sign in to generate briefing reports and save views.</p>
@@ -280,11 +477,13 @@
     <a class="btn btn-outline" href="mailto:spencer@hodgetx.com?subject=MUENY%20briefing%20request">Request a briefing</a>
   </section>
 
-  <footer>
+  <footer class="site">
     <div class="wrap">
       <span>© 2026 MUENY · Viterra Group</span>
       <span><a href="/privacy">Privacy</a> · <a href="mailto:spencer@hodgetx.com">Contact</a></span>
     </div>
   </footer>
+
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>
