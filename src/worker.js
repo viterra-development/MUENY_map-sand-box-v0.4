@@ -66,6 +66,15 @@ export default {
             response = await handleApi(request, env, ctx, url);
         } else {
             response = await env.ASSETS.fetch(request);
+            // Data & framework paths must return a real 404 when missing.
+            // The SPA fallback otherwise rewrites them to index.html, which
+            // corrupts geojson/wasm parsing in deck.gl and the Blazor loader.
+            // (Replaces the legacy _redirects 404 rules wrangler now rejects.)
+            const HARD_404_PREFIXES = ['/tiles/', '/cris-data/', '/soil-data/', '/sample-data/', '/_framework/'];
+            if (HARD_404_PREFIXES.some(p => path.startsWith(p))
+                && (response.headers.get('content-type') || '').includes('text/html')) {
+                response = new Response('Not found', { status: 404, headers: { 'content-type': 'text/plain' } });
+            }
         }
         return withSecurityHeaders(response);
     },

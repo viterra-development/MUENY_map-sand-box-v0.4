@@ -8,7 +8,6 @@ const CITY_STAT_SOURCES = {
     'wp-parcels-trips':          { name: 'Willow Park',    url: '/willow-park-parcels-with-trips.geojson' },
     'aledo-parcels-trips':       { name: 'Aledo',          url: '/aledo-parcels-with-trips.geojson' },
     'azle-parcels-trips':        { name: 'Azle',           url: '/azle-parcels-with-trips.geojson' },
-    'midlothian-parcels-trips':  { name: 'Midlothian',     url: '/midlothian-parcels-with-trips.geojson' },
     'mineral-wells-parcels-trips': { name: 'Mineral Wells', url: '/mineral-wells-parcels-with-trips.geojson' },
     'reno-parcels-trips':        { name: 'Reno',           url: '/reno-parcels-with-trips.geojson' },
     'springtown-parcels-trips':  { name: 'Springtown',     url: '/springtown-parcels-with-trips.geojson' },

@@ -1226,7 +1226,103 @@ function handleRoadClick(info) {
         .addTo(maplibreMap);
 }
 
-function handleParcelTripClick(info) {
+
+// ============================================
+// Stacked-click resolver — when a click lands on several overlapping
+// polygon layers (soil under city limits under parcels), deck.gl only
+// fires the topmost handler. These wrappers pick EVERY object under the
+// cursor and, when more than one domain is hit, show a "What's here?"
+// chooser so nothing is unreachable.
+// ============================================
+function stackSpecFor(layerId) {
+    if (!layerId) return null;
+    if (layerId.endsWith('-parcels-trips')) {
+        return { key: 'parcel', order: 1, icon: '\u25A6',
+            label: p => 'Parcel \u00B7 ' + (p.situs_street || p.address || p.parcel_id || 'unaddressed'),
+            handler: handleParcelTripClickDirect };
+    }
+    if (layerId === 'soil-clay-visualization' || layerId === 'soil-ksat-visualization') {
+        return { key: 'soil', order: 3, icon: '\u25A3',
+            label: p => 'Soil \u00B7 ' + (p.muname || p.musym || 'map unit'),
+            handler: handleSoilUnitClickDirect };
+    }
+    if (layerId === 'txdot-city-boundaries') {
+        return { key: 'city', order: 2, icon: '\u2302',
+            label: p => (p.CITY_NM || 'City') + ' \u2014 city limits',
+            handler: handleCityBoundaryClickDirect };
+    }
+    return null;
+}
+
+function resolveStackedClick(info, direct) {
+    if (info && info._stackResolved) { direct(info); return; }
+    let picks = [];
+    try {
+        if (deckOverlay && typeof deckOverlay.pickMultipleObjects === 'function' &&
+            typeof info.x === 'number' && typeof info.y === 'number') {
+            picks = deckOverlay.pickMultipleObjects({ x: info.x, y: info.y, radius: 2, depth: 8 }) || [];
+        }
+    } catch (e) {
+        console.warn('[stacked-click] pickMultipleObjects failed:', e);
+    }
+    const entries = [];
+    const seen = new Set();
+    for (const p of picks) {
+        const spec = stackSpecFor(p.layer && p.layer.id);
+        if (!spec || seen.has(spec.key) || !p.object) continue;
+        seen.add(spec.key);
+        entries.push({ spec, pick: p });
+    }
+    if (entries.length <= 1) { direct(info); return; }
+    entries.sort((a, b) => a.spec.order - b.spec.order);
+    showWhatsHereChooser(info, entries);
+}
+
+function showWhatsHereChooser(info, entries) {
+    if (!maplibreMap || !info.coordinate) { entries[0].spec.handler(info); return; }
+    const wrap = document.createElement('div');
+    wrap.style.cssText = "font-family:'Helvetica Neue',Arial,sans-serif;padding:4px 2px;min-width:200px;";
+    const title = document.createElement('div');
+    title.textContent = entries.length + ' things here';
+    title.style.cssText = 'font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:7px;';
+    wrap.appendChild(title);
+
+    const popup = new maplibregl.Popup({ closeOnClick: true, maxWidth: '280px' });
+    entries.forEach(({ spec, pick }) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.style.cssText = 'display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:#f5f7f9;border:1px solid #dde3e8;border-radius:6px;padding:8px 10px;margin:3px 0;font-size:12.5px;color:#0B1F2E;cursor:pointer;';
+        const icon = document.createElement('span');
+        icon.textContent = spec.icon;
+        icon.style.cssText = 'flex:none;color:#2E4A6B;';
+        const text = document.createElement('span');
+        text.textContent = spec.label(pick.object.properties || pick.object || {});
+        btn.appendChild(icon);
+        btn.appendChild(text);
+        btn.addEventListener('mouseenter', () => { btn.style.background = '#e9eef3'; });
+        btn.addEventListener('mouseleave', () => { btn.style.background = '#f5f7f9'; });
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            popup.remove();
+            // Defer past the current click event so popups opened by the
+            // handler don't get closed by this same click's bubble phase.
+            setTimeout(() => spec.handler({
+                object: pick.object,
+                coordinate: info.coordinate,
+                x: info.x, y: info.y,
+                _stackResolved: true,
+            }), 60);
+        });
+        wrap.appendChild(btn);
+    });
+    popup.setLngLat(info.coordinate).setDOMContent(wrap).addTo(maplibreMap);
+}
+
+function handleParcelTripClick(info) { resolveStackedClick(info, handleParcelTripClickDirect); }
+function handleSoilUnitClick(info) { resolveStackedClick(info, handleSoilUnitClickDirect); }
+function handleCityBoundaryClick(info) { resolveStackedClick(info, handleCityBoundaryClickDirect); }
+
+function handleParcelTripClickDirect(info) {
     if (info.object) {
         markTooltipShown();
         showParcelTooltip(info.object.properties, info.x, info.y);
@@ -1488,7 +1584,7 @@ function getSeverityColor(severityCode) {
 }
 
 // Handle soil unit clicks (industry standard popup)
-function handleSoilUnitClick(info) {
+function handleSoilUnitClickDirect(info) {
     if (info.object) {
         const props = info.object.properties;
 
@@ -1725,7 +1821,7 @@ Persons: ${crashPopupData.personsInvolved}, Vehicles: ${crashPopupData.vehiclesI
     }
 }
 
-function handleCityBoundaryClick(info) {
+function handleCityBoundaryClickDirect(info) {
     if (!info.object || !maplibreMap || !info.coordinate) return;
     const city = info.object.properties || {};
     const name = city.CITY_NM || 'Unknown City';

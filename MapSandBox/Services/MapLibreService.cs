@@ -463,23 +463,6 @@ public class MapLibreService
             },
             new LayerConfig
             {
-                Id = "midlothian-parcels-trips",
-                Type = "GeoJson",
-                DataUrl = "/midlothian-parcels-with-trips.geojson",
-                Visible = false,
-                Properties = new Dictionary<string, object>
-                {
-                    ["filled"] = true,
-                    ["stroked"] = true,
-                    ["getLineColor"] = new int[] { 50, 50, 50, 200 },
-                    ["getLineWidth"] = 1,
-                    ["opacity"] = 0.75,
-                    ["pickable"] = true,
-                    ["autoHighlight"] = true
-                }
-            },
-            new LayerConfig
-            {
                 // Regenerated from USDA SSURGO into wwwroot/soil-data (2026-08-20)
                 Id = "soil-clay-visualization",
                 Type = "GeoJson",
@@ -575,7 +558,6 @@ public class MapLibreService
             new LayerInfo { Id = "annetta-parcels-trips", Name = "Trip Generation (Annetta)", Visible = false },
             new LayerInfo { Id = "annetta-north-parcels-trips", Name = "Trip Generation (Annetta North)", Visible = false },
             new LayerInfo { Id = "annetta-south-parcels-trips", Name = "Trip Generation (Annetta South)", Visible = false },
-            new LayerInfo { Id = "midlothian-parcels-trips", Name = "Trip Generation (Midlothian)", Visible = false },
             new LayerInfo { Id = "cris-road-stress", Name = "Road Stress Index", Visible = false },
             new LayerInfo { Id = "soil-clay-visualization", Name = "Soil Clay Content", Visible = false },
             new LayerInfo { Id = "soil-ksat-visualization", Name = "Soil Permeability (Drainage)", Visible = false },

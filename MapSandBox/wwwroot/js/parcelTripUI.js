@@ -80,6 +80,31 @@ export function showParcelTooltip(properties, x, y) {
     const mkt = mktRaw ? '$' + Number(mktRaw).toLocaleString() : 'N/A';
     const stateCd = p.state_cd || 'N/A';
 
+    // Ground conditions (joined from USDA SSURGO at build time)
+    const soilName = p.soil_muname || null;
+    const clayPct = (typeof p.soil_clay_pct === 'number') ? p.soil_clay_pct.toFixed(1) + '%' : null;
+    const ksat = (typeof p.soil_ksat_um_per_s === 'number') ? p.soil_ksat_um_per_s : null;
+    const drainage = ksat === null ? null
+        : ksat > 10 ? { label: 'Drains well', color: '#2a7a3b' }
+        : ksat > 5  ? { label: 'Moderate drainage', color: '#5c8a3a' }
+        : ksat > 1  ? { label: 'Fair drainage', color: '#b07a26' }
+        : ksat > 0.1 ? { label: 'Poor drainage', color: '#c05238' }
+        : { label: 'Very poor drainage', color: '#b3362b' };
+    const groundHtml = soilName ? `
+            <div class="trip-tip-divider"></div>
+            <div class="trip-tip-row">
+                <span class="trip-tip-label">Soil</span>
+                <span>${escapeHtml(soilName)}</span>
+            </div>
+            <div class="trip-tip-row">
+                <span class="trip-tip-label">Clay content</span>
+                <span>${escapeHtml(clayPct || 'N/A')}</span>
+            </div>
+            ${drainage ? `<div class="trip-tip-row">
+                <span class="trip-tip-label">Drainage</span>
+                <span style="color:${drainage.color};font-weight:600;">${escapeHtml(drainage.label)}</span>
+            </div>` : ''}` : '';
+
     let tripColor = '#c8c8c8';
     if (daily >= 200) tripColor = '#d32f2f';
     else if (daily >= 50) tripColor = '#ff7043';
@@ -111,6 +136,7 @@ export function showParcelTooltip(properties, x, y) {
                     <div><span class="trip-tip-peak-val">${pm}</span> <span class="trip-tip-small">PM peak</span></div>
                 </div>
             </div>
+            ${groundHtml}
             <div class="trip-tip-divider"></div>
             <div class="trip-tip-row">
                 <span class="trip-tip-label">Acreage</span>

@@ -37,8 +37,6 @@ const defaultConfig = {
       properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
     { id: 'aledo-parcels-trips', type: 'GeoJson', dataUrl: '/aledo-parcels-with-trips.geojson', visible: false,
       properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
-    { id: 'midlothian-parcels-trips', type: 'GeoJson', dataUrl: '/midlothian-parcels-with-trips.geojson', visible: false,
-      properties: { filled: true, stroked: true, getLineColor: [50,50,50,200], getLineWidth: 1, opacity: 0.75, pickable: true, autoHighlight: true }},
     { id: 'soil-clay-visualization', type: 'GeoJson', dataUrl: '/soil-data/parker-county-clay.geojson', visible: false,
       properties: { filled: true, stroked: true, getFillColor: 'getSoilClayColor', getLineColor: [139,69,19,255], getLineWidth: 2, opacity: 0.8, pickable: true, autoHighlight: true, onClick: 'handleSoilUnitClick' }},
     { id: 'noaa-rainfall-parker-points', type: 'ScatterplotLayer', dataUrl: '/noaa-rainfall-parker-county.geojson', visible: false,
@@ -59,8 +57,7 @@ const layerNames = {
   'txdot-city-boundaries':       'City Boundaries',
   'wp-parcels-trips':            'Willow Park',
   'aledo-parcels-trips':         'Aledo',
-  'midlothian-parcels-trips':    'Midlothian',
-  'soil-clay-visualization':     'Soil Clay Content (%)',
+    'soil-clay-visualization':     'Soil Clay Content (%)',
   'soil-ksat-visualization':     'Soil Permeability (Ksat)',
   'noaa-rainfall-parker-points': 'Rainfall Intensity'
 };
@@ -77,7 +74,7 @@ const layerGroups = [
     id: 'trip-generation',
     title: 'Trip Generation',
     icon: '📍',
-    layerIds: ['wp-parcels-trips', 'aledo-parcels-trips', 'midlothian-parcels-trips']
+    layerIds: ['wp-parcels-trips', 'aledo-parcels-trips']
   },
   {
     id: 'road-network',
