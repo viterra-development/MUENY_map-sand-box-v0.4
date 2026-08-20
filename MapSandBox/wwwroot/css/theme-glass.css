@@ -1,0 +1,162 @@
+/* MUENY theme: "Ethereal Glass" (taste-skill soft pack)
+   Swappable theme layer — loads after ui-polish.css and only overrides.
+   To revert to the base look, remove this stylesheet from index.html.
+   Vibe: deep ink glass, white hairlines, diffused ambient shadows,
+   spring-like motion. Map data colors untouched (semantic). */
+
+:root {
+    --glass-ease: cubic-bezier(0.32, 0.72, 0, 1);
+    --glass-bg: rgba(9, 22, 33, 0.78);
+    --glass-bg-deep: rgba(7, 17, 26, 0.88);
+    --hairline: rgba(255, 255, 255, 0.10);
+    --hairline-strong: rgba(255, 255, 255, 0.16);
+    --ui-font: 'Plus Jakarta Sans', 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+/* ---------- Header: glass bar with hairline ---------- */
+#terravex-header {
+    background: rgba(9, 22, 33, 0.72) !important;
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border-bottom: 1px solid var(--hairline);
+    box-shadow: none;
+}
+
+/* ---------- Sidebar: floating glass panel ---------- */
+.layer-sidebar,
+#layer-sidebar {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(22px) saturate(1.3);
+    -webkit-backdrop-filter: blur(22px) saturate(1.3);
+    border-right: 1px solid var(--hairline);
+}
+
+.control-section h3 {
+    letter-spacing: 0.2em;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(210, 226, 240, 0.6);
+}
+
+.layer-toggle {
+    border-radius: 8px;
+    transition: background 0.35s var(--glass-ease), transform 0.35s var(--glass-ease);
+}
+.layer-toggle:hover {
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateX(2px);
+}
+
+.control-section select {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--hairline);
+    border-radius: 9px;
+    transition: border-color 0.3s var(--glass-ease), background 0.3s var(--glass-ease);
+}
+.control-section select:hover { border-color: var(--hairline-strong); }
+
+/* ---------- Buttons: pill + pressed physics ---------- */
+.report-btn,
+.mueny-auth-submit,
+.mueny-help-footer button {
+    border-radius: 999px;
+    transition: transform 0.4s var(--glass-ease), box-shadow 0.4s var(--glass-ease), background 0.3s var(--glass-ease);
+}
+.report-btn {
+    border: 1px solid var(--hairline-strong);
+    background: linear-gradient(180deg, rgba(86, 136, 184, 0.9), rgba(58, 100, 142, 0.9));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 8px 24px rgba(4, 12, 20, 0.45);
+}
+.report-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.22), 0 12px 30px rgba(4, 12, 20, 0.55);
+}
+.report-btn:active { transform: scale(0.98); }
+
+.mueny-account-chip {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--hairline);
+    backdrop-filter: blur(8px);
+    transition: background 0.3s var(--glass-ease), transform 0.3s var(--glass-ease);
+}
+.mueny-account-chip:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-1px); }
+
+.mueny-help-btn {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--hairline);
+    transition: background 0.3s var(--glass-ease), transform 0.3s var(--glass-ease);
+}
+.mueny-help-btn:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-1px); }
+
+/* ---------- Map key: nested glass card ---------- */
+.mueny-key {
+    background: var(--glass-bg-deep);
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 18px 44px rgba(4, 12, 20, 0.5);
+}
+.mueny-key-head { transition: background 0.3s var(--glass-ease); }
+
+/* ---------- Trip panel: glass slab, inner bezel ---------- */
+#trip-panel {
+    background: var(--glass-bg-deep) !important;
+    backdrop-filter: blur(22px) saturate(1.3);
+    -webkit-backdrop-filter: blur(22px) saturate(1.3);
+    border-left: 1px solid var(--hairline);
+}
+#trip-parcel-detail,
+#trip-stats-panel {
+    border-radius: 14px;
+    border: 1px solid var(--hairline);
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.07);
+    margin: 10px;
+}
+.trip-stats-total-item {
+    border-radius: 11px;
+    border: 1px solid var(--hairline);
+    background: rgba(255, 255, 255, 0.05);
+    transition: background 0.35s var(--glass-ease), transform 0.35s var(--glass-ease);
+}
+.trip-stats-total-item:hover { background: rgba(255, 255, 255, 0.09); transform: translateY(-2px); }
+
+/* ---------- Popups (light content islands) ---------- */
+.maplibregl-popup-content {
+    border-radius: 14px;
+    border: 1px solid rgba(11, 31, 46, 0.06);
+    box-shadow: 0 24px 60px rgba(6, 16, 26, 0.35), 0 2px 8px rgba(6, 16, 26, 0.12);
+}
+
+/* ---------- Auth & help modals: concentric bezel ---------- */
+.mueny-auth-card,
+.mueny-help-card {
+    border-radius: 18px;
+    border: 1px solid rgba(11, 31, 46, 0.07);
+    box-shadow: 0 32px 80px rgba(4, 12, 20, 0.5);
+}
+.mueny-auth-overlay,
+.mueny-help-overlay {
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+}
+.mueny-auth-field input { border-radius: 9px; }
+
+/* ---------- Zoom indicator + maplibre controls ---------- */
+.zoom-indicator {
+    background: var(--glass-bg-deep) !important;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.maplibregl-ctrl-group {
+    border-radius: 11px !important;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(6, 16, 26, 0.25) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
