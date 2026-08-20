@@ -43,10 +43,10 @@ export function createLegend() {
     legendElement.id = 'trip-legend';
     legendElement.innerHTML = `
         <div class="trip-legend-title">Daily Trips</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(42,56,140)"></span> 200+</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(88,108,190)"></span> 50–199</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(141,160,220)"></span> 10–49</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(199,210,240)"></span> 1–9</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(23,77,88)"></span> 200+</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(66,125,128)"></span> 50–199</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(148,177,175)"></span> 10–49</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(204,203,195)"></span> 1–9</div>
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(200,200,200)"></span> 0 / Unknown</div>
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(34,139,34)"></span> City-Owned</div>
     `;
@@ -123,10 +123,10 @@ export function showParcelTooltip(properties, x, y) {
             </div>` : ''}` : '';
 
     let tripColor = '#c8c8c8';
-    if (daily >= 200) tripColor = '#2a388c';
-    else if (daily >= 50) tripColor = '#586cbe';
-    else if (daily >= 10) tripColor = '#8da0dc';
-    else if (daily > 0) tripColor = '#c7d2f0';
+    if (daily >= 200) tripColor = '#174d58';
+    else if (daily >= 50) tripColor = '#427d80';
+    else if (daily >= 10) tripColor = '#94b1af';
+    else if (daily > 0) tripColor = '#cccbc3';
 
     detail.innerHTML = `
         <div class="trip-tip-header">

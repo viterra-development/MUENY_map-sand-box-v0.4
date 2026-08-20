@@ -13,8 +13,11 @@
     <link href="css/auth.css" rel="stylesheet" />
     <link href="css/map-key.css" rel="stylesheet" />
     <link href="css/ui-polish.css" rel="stylesheet" />
-    <!-- Swappable taste theme (remove this line to revert to base look) -->
-    <link href="css/theme-glass.css" rel="stylesheet" />
+    <!-- Swappable taste themes — js/theme-switcher.js enables exactly one.
+         Pick with ?theme=glass|minimal|base (persists per browser). -->
+    <link id="theme-glass" href="css/theme-glass.css" rel="stylesheet" />
+    <link id="theme-minimal" href="css/theme-minimal.css" rel="stylesheet" disabled />
+    <script src="js/theme-switcher.js"></script>
     <!-- MapLibre GL JS — pinned + SRI so a compromised upstream release can't run here -->
     <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"
           integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
@@ -39,7 +42,7 @@
         </button>
         <span class="header-logo">MUENY</span>
       </div>
-      <div class="header-subtitle">Municipal Intelligence Platform</div>
+      <div class="header-subtitle">Civic Intelligence</div>
       <button id="trip-panel-toggle" class="trip-panel-toggle" aria-label="Toggle trip summary">
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="6" height="5" rx="1" fill="white"/><rect x="2" y="10" width="6" height="7" rx="1" fill="white"/><rect x="10" y="3" width="8" height="14" rx="1" fill="white" opacity="0.5"/></svg>
       </button>

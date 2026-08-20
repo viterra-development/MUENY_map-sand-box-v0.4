@@ -92,7 +92,7 @@ function buildReportHtml(reportType, city, stats, mapImageDataUrl) {
     const titles = {
         safety:  `${city.name} — Safety Summary`,
         traffic: `${city.name} — Traffic Estimation`,
-        full:    `${city.name} — Municipal Intelligence Summary`
+        full:    `${city.name} — Civic Intelligence Summary`
     };
     const title = titles[reportType] || `${city.name} — MUENY Report`;
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -124,7 +124,7 @@ function buildReportHtml(reportType, city, stats, mapImageDataUrl) {
 <body>
   <div class="report-header">
     <div>
-      <div class="report-brand">MUENY <span>Municipal Intelligence</span></div>
+      <div class="report-brand">MUENY <span>Civic Intelligence</span></div>
       <div style="font-size:11px; color:#888; margin-top:4px;">Viterra Group</div>
     </div>
     <div class="report-meta">
@@ -149,7 +149,7 @@ function buildReportHtml(reportType, city, stats, mapImageDataUrl) {
   </div>
 
   <div class="footer">
-    <div>MUENY Municipal Intelligence Platform · Viterra Group</div>
+    <div>MUENY Civic Intelligence · Viterra Group</div>
     <div>${date}</div>
   </div>
 </body>

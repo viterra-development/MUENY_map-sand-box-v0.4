@@ -1,0 +1,178 @@
+/* MUENY theme: "Editorial Minimal" (taste-skill minimalist pack)
+   Swappable theme layer — warm bone document-style chrome, hairline
+   #EAEAEA structure, near-zero shadows, ink text. Map colors untouched.
+   Activated by js/theme-switcher.js (?theme=minimal). */
+
+:root {
+    --min-bone: #f7f6f3;
+    --min-surface: #ffffff;
+    --min-line: #eaeaea;
+    --min-ink: #2f3437;
+    --min-muted: #787774;
+    --min-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ui-font: 'SF Pro Display', -apple-system, 'Helvetica Neue', 'Segoe UI', sans-serif;
+}
+
+/* ---------- Header: white document bar ---------- */
+#terravex-header {
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--min-line);
+    box-shadow: none;
+}
+#terravex-header .header-logo,
+#terravex-header .header-subtitle { color: var(--min-ink) !important; }
+#terravex-header .header-subtitle { color: var(--min-muted) !important; }
+#terravex-header svg rect { fill: var(--min-ink); }
+
+.mueny-account-chip {
+    background: var(--min-surface);
+    border: 1px solid var(--min-line);
+    color: var(--min-ink);
+    transition: background 0.2s var(--min-ease);
+}
+.mueny-account-chip:hover { background: var(--min-bone); }
+.mueny-help-btn {
+    background: var(--min-surface);
+    border: 1px solid var(--min-line);
+    color: var(--min-ink);
+}
+.mueny-help-btn:hover { background: var(--min-bone); }
+
+/* ---------- Sidebar: bone document panel ---------- */
+.layer-sidebar,
+#layer-sidebar,
+.sidebar-content {
+    background: var(--min-bone) !important;
+    color: var(--min-ink) !important;
+    border-right: 1px solid var(--min-line);
+    backdrop-filter: none;
+}
+.control-section h3 {
+    color: var(--min-muted) !important;
+    letter-spacing: 0.09em;
+    font-size: 11px;
+    font-weight: 600;
+}
+.layer-toggle {
+    color: var(--min-ink) !important;
+    border-radius: 6px;
+    transition: background 0.2s var(--min-ease);
+}
+.layer-toggle:hover { background: rgba(0, 0, 0, 0.04); transform: none; }
+.layer-toggle input[type="checkbox"] { accent-color: #111111; }
+
+.control-section select {
+    background-color: var(--min-surface);
+    color: var(--min-ink);
+    border: 1px solid var(--min-line);
+    border-radius: 6px;
+}
+
+/* ---------- Buttons: solid ink, crisp radius ---------- */
+.report-btn,
+.mueny-auth-submit,
+.mueny-help-footer button {
+    background: #111111;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    transition: background 0.2s var(--min-ease), transform 0.15s var(--min-ease);
+}
+.report-btn:hover,
+.mueny-auth-submit:hover,
+.mueny-help-footer button:hover {
+    background: #333333;
+    transform: none;
+    box-shadow: none;
+}
+.report-btn:active { transform: scale(0.98); }
+
+/* ---------- Map key: flat white card ---------- */
+.mueny-key {
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--min-ink);
+    border: 1px solid var(--min-line);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.mueny-key-title, .mueny-key-chevron { color: var(--min-muted); }
+.mueny-key-sec-title { color: var(--min-ink); }
+.mueny-key-row { color: #4c5156; }
+.mueny-key-note { color: var(--min-muted); }
+.mueny-key-head:hover { background: rgba(0, 0, 0, 0.03); }
+
+/* ---------- Trip panel: white document ---------- */
+#trip-panel {
+    background: var(--min-bone) !important;
+    color: var(--min-ink);
+    border-left: 1px solid var(--min-line);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+#trip-parcel-detail,
+#trip-stats-panel {
+    background: var(--min-surface);
+    color: var(--min-ink);
+    border: 1px solid var(--min-line);
+    border-radius: 10px;
+    box-shadow: none;
+    margin: 10px;
+}
+#trip-panel .trip-tip-label { color: var(--min-muted); }
+#trip-panel .trip-tip-addr,
+#trip-panel .trip-stats-header { color: var(--min-ink); }
+.trip-stats-total-item {
+    background: var(--min-bone);
+    border: 1px solid var(--min-line);
+    border-radius: 8px;
+    box-shadow: none;
+}
+.trip-stats-total-item:hover { background: #f1efe9; transform: none; }
+#trip-panel .trip-stats-total-val { color: var(--min-ink); }
+#trip-panel .trip-stats-total-label,
+#trip-panel .trip-stats-lu-count,
+#trip-panel .trip-stats-lu-pct { color: var(--min-muted); }
+#trip-panel .trip-stats-lu-name,
+#trip-panel .trip-stats-lu-trips,
+#trip-panel .trip-stats-breakdown-row,
+#trip-panel .trip-tip-ite { color: var(--min-ink); }
+#trip-panel .trip-stats-breakdown-row { border-color: var(--min-line); }
+#trip-panel .trip-tip-divider { background: var(--min-line); border-color: var(--min-line); }
+#trip-panel .trip-tip-body, #trip-panel .trip-stats-content { color: #4c5156; }
+#trip-panel .trip-tip-big, #trip-panel .trip-tip-peak-val { color: var(--min-ink); }
+
+/* ---------- Popups & modals: flat, hairline ---------- */
+.maplibregl-popup-content {
+    border-radius: 10px;
+    border: 1px solid var(--min-line);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.mueny-auth-card,
+.mueny-help-card {
+    border-radius: 12px;
+    border: 1px solid var(--min-line);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+}
+.mueny-auth-overlay,
+.mueny-help-overlay {
+    background: rgba(47, 52, 55, 0.4);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.zoom-indicator {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: var(--min-ink) !important;
+    border: 1px solid var(--min-line);
+    border-radius: 6px;
+    backdrop-filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
