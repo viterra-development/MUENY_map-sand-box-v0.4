@@ -851,15 +851,17 @@ function getLayerProperties(config) {
                 return [34, 139, 34, 200];                     // Green - city-owned
             }
             const trips = (d.properties && d.properties.daily_trips) || 0;
-            if (trips === 0) return [200, 200, 200, 80];       // Gray - no trips
-            if (trips < 10) return [65, 182, 196, 160];        // Teal - residential
-            if (trips < 50) return [255, 183, 77, 180];        // Orange - moderate
-            if (trips < 200) return [255, 112, 67, 200];       // Red-Orange - high
-            return [211, 47, 47, 220];                          // Red - very high
+            // Sequential indigo ramp: trip volume is intensity, not danger —
+            // red stays reserved for crash risk layers.
+            if (trips === 0) return [206, 208, 206, 70];       // Gray - no trips
+            if (trips < 10) return [199, 210, 240, 150];       // Pale indigo - residential
+            if (trips < 50) return [141, 160, 220, 175];       // Light indigo - moderate
+            if (trips < 200) return [88, 108, 190, 200];       // Indigo - high
+            return [42, 56, 140, 220];                          // Deep indigo - very high
         };
-        properties.getLineColor = [50, 50, 50, 200];
-        properties.getLineWidth = 1;
-        properties.lineWidthMinPixels = 1;
+        properties.getLineColor = [40, 45, 50, 55];
+        properties.getLineWidth = 0.5;
+        properties.lineWidthMinPixels = 0.5;
         properties.opacity = 0.75;
         properties.pickable = true;
         properties.autoHighlight = true;
@@ -1238,7 +1240,13 @@ function stackSpecFor(layerId) {
     if (!layerId) return null;
     if (layerId.endsWith('-parcels-trips')) {
         return { key: 'parcel', order: 1, icon: '\u25A6',
-            label: p => 'Parcel \u00B7 ' + (p.situs_street || p.address || p.parcel_id || 'unaddressed'),
+            label: p => {
+                const raw = (p.situs_street || p.address || '');
+                const s = raw.replace(/,\s*(?=,|$)/g, '').replace(/,?\s*TX\s*0*(\s|$)/i, ' ')
+                    .replace(/\s{2,}/g, ' ').replace(/^[,\s]+|[,\s]+$/g, '').trim();
+                const good = s && !/^\d+$/.test(s) ? s : null;
+                return 'Parcel \u00B7 ' + (good || p.parcel_id || 'unaddressed');
+            },
             handler: handleParcelTripClickDirect };
     }
     if (layerId === 'soil-clay-visualization' || layerId === 'soil-ksat-visualization') {

@@ -17,6 +17,20 @@ function escapeHtml(value) {
         .replace(/'/g, '&#39;');
 }
 
+// Normalize a CAD situs string: drop empty comma components and the
+// trailing "TX 00000" filler; return null when nothing meaningful remains.
+function cleanSitusAddress(raw) {
+    if (!raw || typeof raw !== 'string') return null;
+    let s = raw
+        .replace(/,\s*(?=,|$)/g, '')                 // empty comma components
+        .replace(/,?\s*TX\s*0*(\s|$)/i, ' ')       // ", TX 000000" filler
+        .replace(/\s{2,}/g, ' ')
+        .replace(/^[,\s]+|[,\s]+$/g, '')
+        .trim();
+    if (!s || /^0+$/.test(s) || /^\d+$/.test(s)) return null;   // bare/zero house number
+    return s;
+}
+
 // ============================================
 // 1. COLOR LEGEND
 // ============================================
@@ -29,10 +43,10 @@ export function createLegend() {
     legendElement.id = 'trip-legend';
     legendElement.innerHTML = `
         <div class="trip-legend-title">Daily Trips</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(211,47,47)"></span> 200+</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(255,112,67)"></span> 50–199</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(255,183,77)"></span> 10–49</div>
-        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(65,182,196)"></span> 1–9</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(42,56,140)"></span> 200+</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(88,108,190)"></span> 50–199</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(141,160,220)"></span> 10–49</div>
+        <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(199,210,240)"></span> 1–9</div>
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(200,200,200)"></span> 0 / Unknown</div>
         <div class="trip-legend-row"><span class="trip-swatch" style="background:rgb(34,139,34)"></span> City-Owned</div>
     `;
@@ -68,16 +82,19 @@ export function showParcelTooltip(properties, x, y) {
     const detail = ensureParcelDetail();
     const p = properties;
     // Field-name fallbacks accept both the current TxGIO output schema and any legacy variants.
-    const addr = p.address || p.situs_addr || p.situs_street || 'No address';
-    const landUse = p.ite_land_use || 'Unknown';
-    const iteCode = p.ite_code || 'N/A';
+    // CAD situs strings arrive as raw concatenations ("0   , , TX 000000") —
+    // strip the empty components and fall back to the parcel id.
+    const addr = cleanSitusAddress(p.address || p.situs_addr || p.situs_street)
+        || (p.parcel_id ? 'Parcel ' + p.parcel_id : 'Unaddressed parcel');
+    const landUse = p.ite_land_use || p.classification || 'Unclassified';
+    const iteCode = p.ite_code || null;
     const daily = p.daily_trips || 0;
     const am = p.am_peak_trips || 0;
     const pm = p.pm_peak_trips || 0;
     const acresRaw = p.legal_acres ?? p.legal_acreage;
-    const acres = (acresRaw != null && acresRaw !== '') ? acresRaw : 'N/A';
+    const acres = (typeof acresRaw === 'number' && acresRaw > 0) ? acresRaw.toFixed(2) : '\u2014';
     const mktRaw = p.mkt_value ?? p.total_val;
-    const mkt = mktRaw ? '$' + Number(mktRaw).toLocaleString() : 'N/A';
+    const mkt = (typeof mktRaw === 'number' && mktRaw > 0) ? '$' + Number(mktRaw).toLocaleString() : '\u2014';
     const stateCd = p.state_cd || 'N/A';
 
     // Ground conditions (joined from USDA SSURGO at build time)
@@ -106,10 +123,10 @@ export function showParcelTooltip(properties, x, y) {
             </div>` : ''}` : '';
 
     let tripColor = '#c8c8c8';
-    if (daily >= 200) tripColor = '#d32f2f';
-    else if (daily >= 50) tripColor = '#ff7043';
-    else if (daily >= 10) tripColor = '#ffb74d';
-    else if (daily > 0) tripColor = '#41b6c4';
+    if (daily >= 200) tripColor = '#2a388c';
+    else if (daily >= 50) tripColor = '#586cbe';
+    else if (daily >= 10) tripColor = '#8da0dc';
+    else if (daily > 0) tripColor = '#c7d2f0';
 
     detail.innerHTML = `
         <div class="trip-tip-header">
@@ -119,12 +136,12 @@ export function showParcelTooltip(properties, x, y) {
         <div class="trip-tip-body">
             <div class="trip-tip-row">
                 <span class="trip-tip-label">Land Use</span>
-                <span>${escapeHtml(landUse)} <span class="trip-tip-ite">(ITE ${escapeHtml(iteCode)})</span></span>
+                <span>${escapeHtml(landUse)}${iteCode ? ` <span class="trip-tip-ite">(ITE ${escapeHtml(iteCode)})</span>` : ''}</span>
             </div>
-            <div class="trip-tip-row">
+            ${(p.state_cd || '').trim() ? `<div class="trip-tip-row">
                 <span class="trip-tip-label">CAD Code</span>
-                <span>${escapeHtml(stateCd)}</span>
-            </div>
+                <span>${escapeHtml(p.state_cd)}</span>
+            </div>` : ''}
             <div class="trip-tip-divider"></div>
             <div class="trip-tip-trips">
                 <div class="trip-tip-daily" style="border-left: 4px solid ${tripColor}">

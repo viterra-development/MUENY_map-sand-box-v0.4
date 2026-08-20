@@ -247,9 +247,9 @@ public class MapLibreService
                 {
                     ["filled"] = true,
                     ["stroked"] = true,
-                    ["getFillColor"] = new int[] { 100, 150, 200, 30 },  // Light blue, semi-transparent
-                    ["getLineColor"] = new int[] { 0, 100, 200, 255 },   // Darker blue border
-                    ["getLineWidth"] = 2,
+                    ["getFillColor"] = new int[] { 100, 150, 200, 14 },  // Whisper fill; the line carries the boundary
+                    ["getLineColor"] = new int[] { 20, 90, 170, 235 },
+                    ["getLineWidth"] = 1.5,
                     ["lineWidthMinPixels"] = 1,
                     ["lineWidthMaxPixels"] = 3,
                     ["opacity"] = 0.6,
@@ -473,8 +473,8 @@ public class MapLibreService
                     ["filled"] = true,
                     ["stroked"] = true,
                     ["getFillColor"] = "getSoilClayColor",
-                    ["getLineColor"] = new int[] { 139, 69, 19, 255 },
-                    ["getLineWidth"] = 2,
+                    ["getLineColor"] = new int[] { 92, 64, 34, 60 },
+                    ["getLineWidth"] = 0.5,
                     ["opacity"] = 0.8,
                     ["pickable"] = true,
                     ["autoHighlight"] = true,
@@ -492,8 +492,8 @@ public class MapLibreService
                     ["filled"] = true,
                     ["stroked"] = true,
                     ["getFillColor"] = "getSoilKsatColor",
-                    ["getLineColor"] = new int[] { 139, 69, 19, 255 },
-                    ["getLineWidth"] = 1,
+                    ["getLineColor"] = new int[] { 92, 64, 34, 60 },
+                    ["getLineWidth"] = 0.5,
                     ["opacity"] = 0.7,
                     ["pickable"] = true,
                     ["autoHighlight"] = true,
