@@ -170,7 +170,7 @@
         if (!chip) {
             chip = el('button', 'mueny-account-chip');
             chip.id = 'mueny-account-chip';
-            header.appendChild(chip);
+            (header.querySelector('.header-right') || header).appendChild(chip);
         }
         chip.replaceChildren();
         if (cachedUser) {

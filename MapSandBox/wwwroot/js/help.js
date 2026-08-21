@@ -125,7 +125,8 @@
         btn.title = 'How to use the map';
         btn.setAttribute('aria-label', 'Help and instructions');
         btn.addEventListener('click', open);
-        header.appendChild(btn);
+        // Right cluster, just left of the Sign in chip (which mounts after).
+        (header.querySelector('.header-right') || header).appendChild(btn);
     }
 
     function init() {

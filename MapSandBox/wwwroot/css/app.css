@@ -36,6 +36,19 @@ html, body {
     gap: 10px;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Subtitle rides beside the logo, separated by a hairline */
+.header-left .header-subtitle {
+    margin-left: 6px;
+    padding-left: 16px;
+    border-left: 1px solid rgba(255, 255, 255, 0.22);
+}
+
 .sidebar-toggle {
     display: none; /* hidden on desktop by default */
     background: none;
