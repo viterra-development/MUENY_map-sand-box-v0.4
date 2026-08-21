@@ -134,7 +134,7 @@ html, body {
 }
 
 .sidebar-content {
-    padding: 16px;
+    padding: 8px 16px 24px;
 }
 
 #map-wrapper {
@@ -692,45 +692,18 @@ code {
         width: 100%;
     }
 
+    /* Zoom readout is desktop debug chrome — on a phone it overlapped the
+       required basemap attribution. */
     .zoom-indicator {
-        bottom: 8px;
-        left: 8px;
-        font-size: 12px;
-        padding: 5px 8px;
-    }
-
-    /* Show trip panel mobile toggle when panel has content */
-    .trip-panel-toggle {
         display: none;
     }
 
-    .trip-panel.trip-panel-visible ~ .trip-panel-toggle,
-    body:has(.trip-panel.trip-panel-visible) .trip-panel-toggle {
-        display: block;
-    }
-
-    /* Hide right panel on mobile by default */
-    .trip-panel,
-    .trip-panel.trip-panel-visible {
+    /* The mobile experience is its own reduced UI (css/mobile.css +
+       js/mobile-ui.js): full-screen map, a bottom view bar with curated
+       presets, and the trip panel re-styled as a bottom sheet. The header
+       trip-panel toggle is superseded by that sheet — keep it hidden. */
+    .trip-panel-toggle {
         display: none !important;
-        position: fixed;
-        top: 44px;
-        right: 0;
-        width: 100%;
-        min-width: unset;
-        height: auto;
-        max-height: 70vh;
-        overflow-y: auto;
-        z-index: 1000;
-        border-left: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        transition: none;
-    }
-
-    /* Show when mobile-toggled open */
-    .trip-panel.trip-panel-visible.mobile-open {
-        display: block !important;
     }
 }
 
@@ -769,6 +742,7 @@ code {
     display: block;
     width: 100%;
     margin-top: 16px;
+    margin-bottom: 18px;
     padding: 12px 12px 11px;
     text-align: left;
     background: rgba(141, 110, 170, 0.08);
